@@ -83,6 +83,16 @@ pass.
 - Update `docs/DECISIONS.md` after consequential product or technical decisions.
 - Update `AGENTS.md` only when durable instructions for future work change.
 
+When the project owner explicitly answers a product-vision question, approves a
+durable product decision, or confirms an implementation or evaluation finding,
+update the affected repository documents and GitHub issue priorities or
+dependencies without waiting for a separate documentation request.
+
+Do not independently invent or materially change the product vision, scoring
+philosophy, major workflows, or priorities. When implementation evidence suggests
+an unapproved product-direction change, propose it for owner review instead of
+silently adopting it.
+
 Avoid routine documentation edits for changes that do not affect these areas.
 
 ## Verification
