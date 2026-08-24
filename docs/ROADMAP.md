@@ -3,6 +3,9 @@
 This roadmap records outcomes and priorities, not fixed delivery dates. Update it
 as evidence changes.
 
+GitHub Issues are the executable backlog. This file remains the source of truth
+for milestone goals, ordering, and overall progress.
+
 ## Current state
 
 The end-to-end ticker search has been manually confirmed. The application still

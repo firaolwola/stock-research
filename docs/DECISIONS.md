@@ -48,3 +48,19 @@ position-sizing, or price-target recommendations.
 **Why:** The immediate product problem is faster evidence gathering. Investment
 advice introduces a different product promise and additional safety, legal, and
 trust considerations.
+
+## 2026-08-24 — Use GitHub Issues as the executable backlog
+
+**Status:** Accepted
+
+**Decision:** Keep milestone direction in `docs/ROADMAP.md` and manage bounded,
+actionable work as GitHub Issues. Each implementation issue should define its
+outcome, scope, acceptance criteria, exclusions, dependencies, and verification.
+
+**Why:** Issues can be selected and launched from a phone, discussed without
+changing the repository, and linked directly to branches, commits, and pull
+requests. Separating them from the roadmap avoids maintaining two detailed
+backlogs.
+
+**Consequence:** Material changes to milestone progress must still be reflected
+in the roadmap when the corresponding issues are completed.

@@ -36,6 +36,21 @@ Keep the architecture simple while the product is still being validated.
 - Update documentation when product behavior, scope, architecture, or operating
   rules materially change.
 
+## GitHub issue workflow
+
+- Treat `docs/ROADMAP.md` as the milestone-level plan and GitHub Issues as the
+  executable backlog.
+- When asked to complete an issue, read the full issue and related issues before
+  editing code.
+- Work on one issue per branch unless the issue explicitly requires otherwise.
+- Use a `codex/` branch name that includes the issue number and a short topic.
+- Stay within the issue scope. Record useful follow-up work as a separate issue
+  instead of expanding the current task.
+- Reference the issue in the commit or pull request and include verification
+  results in the pull-request description.
+- Do not close an issue until its acceptance criteria are satisfied. Update the
+  roadmap when completing work that changes milestone status.
+
 ## Documentation ownership
 
 - Update `docs/PRODUCT.md` when the user, problem, scope, or success criteria

@@ -1,0 +1,66 @@
+name: Implementation task
+description: A bounded unit of product or engineering work
+title: ""
+labels:
+  - task
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What should be observably true when this ticket is complete?
+      placeholder: Describe the user or system outcome, not just the code change.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: List the specific work included in this ticket.
+      placeholder: |
+        - Included behavior
+        - Relevant files or systems
+        - Required error handling
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Add testable completion conditions using Markdown checkboxes.
+      placeholder: |
+        - [ ] Observable requirement
+        - [ ] Error case handled
+        - [ ] Tests added or updated
+        - [ ] Documentation updated if needed
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: State what must not be added or changed in this ticket.
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Link blocking issues or write "None."
+      placeholder: "Blocked by #123"
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: List the automated commands and manual checks required.
+      placeholder: |
+        - Automated command
+        - Manual behavior to verify
+    validations:
+      required: true
