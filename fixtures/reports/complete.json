@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "report-acme-fast-2026-08-24",
+  "metadata": {
+    "as_of": "2026-08-24T15:00:00Z",
+    "generated_at": "2026-08-24T15:00:02Z",
+    "stage": "fast",
+    "completion_status": "complete",
+    "research_windows": [
+      { "topic": "reverse_splits", "start": "2021-08-24", "end": "2026-08-24" },
+      { "topic": "dilution_and_warnings", "start": "2023-08-24", "end": "2026-08-24" },
+      { "topic": "recent_news", "start": "2026-07-25", "end": "2026-08-24" }
+    ],
+    "coverage_limitations": []
+  },
+  "security": { "ticker": "ACME", "name": "Acme Common Stock", "security_type": "common_stock", "listing_venue": "Nasdaq", "listing_status": "active", "evidence_state": "confirmed", "claim_ids": ["claim-identity"] },
+  "issuer": {
+    "legal_name": "Acme Holdings, Inc.", "cik": "0001234567", "identity_state": "confirmed", "identity_confidence": "high", "claim_ids": ["claim-identity"],
+    "prior_identities": [{ "name": "Old Acme Corp.", "ticker": "OLDA", "effective_from": "2018-01-01", "effective_to": "2022-06-30", "linkage_state": "confirmed", "linkage_confidence": "high", "claim_ids": ["claim-lineage"] }]
+  },
+  "sections": {
+    "reverse_splits": { "state": "not_found", "summary": "No reverse split was found in the defined five-year window; this is not proof that none occurred outside the reviewed evidence.", "coverage_notes": [], "items": [], "claim_ids": ["claim-splits"] },
+    "dilution": { "state": "confirmed", "summary": "A registered offering occurred in 2025.", "coverage_notes": [], "items": [{ "id": "dilution-1", "kind": "offering", "title": "Registered offering", "state": "confirmed", "summary": "$20 million registered offering.", "event_date": "2025-04-10", "value": 20000000, "unit": "USD", "claim_ids": ["claim-dilution"] }], "claim_ids": ["claim-dilution"] },
+    "dividends": { "state": "confirmed", "summary": "The issuer declared a current quarterly cash dividend.", "coverage_notes": [], "items": [{ "id": "dividend-1", "kind": "dividend", "title": "Quarterly dividend", "state": "confirmed", "summary": "$0.05 per common share.", "event_date": "2026-08-01", "value": 0.05, "unit": "USD per common share", "claim_ids": ["claim-dividend"] }], "claim_ids": ["claim-dividend"] },
+    "compliance_and_warnings": { "state": "not_found", "summary": "No material exchange-compliance, going-concern, SEC, or accounting warning was found in the defined window; absence is not proven.", "coverage_notes": [], "items": [], "claim_ids": ["claim-warnings"] },
+    "financial_context": { "state": "confirmed", "summary": "The latest filing reports positive operating cash flow and manageable debt.", "coverage_notes": [], "items": [{ "id": "financial-1", "kind": "free_cash_flow", "title": "Liquidity", "state": "confirmed", "summary": "Cash and operating cash flow were positive for the reported period.", "event_date": "2026-06-30", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }], "claim_ids": ["claim-financial"] },
+    "catalysts_and_news": { "state": "confirmed", "summary": "The current catalyst is a newly announced customer contract.", "coverage_notes": [], "items": [{ "id": "news-1", "kind": "catalyst", "title": "Customer contract", "state": "confirmed", "summary": "The company announced a material multi-year customer contract.", "event_date": "2026-08-23", "claim_ids": ["claim-catalyst"] }], "claim_ids": ["claim-catalyst"] }
+  },
+  "scores": {
+    "dilution_historical_severity": { "state": "confirmed", "value": 5, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Past three years", "explanation": "One material registered offering was confirmed.", "claim_ids": ["claim-dilution"] },
+    "dilution_future_likelihood": { "state": "confirmed", "value": 4, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "Current liquidity reduces but does not eliminate financing risk.", "claim_ids": ["claim-dilution", "claim-financial"] },
+    "dilution_potential_impact": { "state": "confirmed", "value": 4, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "The prior offering indicates moderate potential shareholder impact.", "claim_ids": ["claim-dilution"] },
+    "reverse_split_risk": { "state": "confirmed", "value": 2, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "No split was found in-window and the active listing is confirmed; the score does not assert historical absence.", "claim_ids": ["claim-splits", "claim-identity"] },
+    "financial_health": { "state": "confirmed", "value": 7, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Latest reported period and next twelve months", "explanation": "Positive cash flow and manageable debt support the assessment.", "claim_ids": ["claim-financial"] },
+    "long_term_company_quality": { "state": "confirmed", "value": 6, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Multi-year", "explanation": "Financial evidence is favorable, tempered by prior dilution.", "claim_ids": ["claim-financial", "claim-dilution"] },
+    "catalyst_strength": { "state": "confirmed", "value": 8, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Current catalyst", "explanation": "The company reported a specific, recent contract.", "claim_ids": ["claim-catalyst"] },
+    "near_term_setup_quality": { "state": "confirmed", "value": 7, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Next five trading days", "explanation": "The recent catalyst is favorable; this is not a trade recommendation.", "claim_ids": ["claim-catalyst"] }
+  },
+  "claims": [
+    { "id": "claim-identity", "text": "ACME is active Nasdaq common stock issued by Acme Holdings, Inc.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
+    { "id": "claim-lineage", "text": "Acme Holdings previously operated as Old Acme Corp. under OLDA.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
+    { "id": "claim-splits", "text": "The defined search found no reverse split in the five-year window.", "materiality": "high", "state": "not_found", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
+    { "id": "claim-dilution", "text": "The issuer completed a $20 million registered offering on April 10, 2025.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-offering"] },
+    { "id": "claim-dividend", "text": "The issuer declared a $0.05 quarterly cash dividend.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-dividend"] },
+    { "id": "claim-warnings", "text": "The defined search found no material compliance or accounting warning in-window.", "materiality": "high", "state": "not_found", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
+    { "id": "claim-financial", "text": "The latest quarterly filing reports positive operating cash flow and manageable debt.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
+    { "id": "claim-catalyst", "text": "The issuer announced a material multi-year customer contract on August 23, 2026.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-news"] }
+  ],
+  "sources": [
+    { "id": "source-sec", "title": "Acme Holdings Form 10-Q", "url": "https://www.sec.gov/Archives/example/acme-10q", "published_date": "2026-08-05", "source_type": "sec_filing", "confidence": "high", "retrieved_at": "2026-08-24T14:58:00Z", "supported_claim_ids": ["claim-identity", "claim-lineage", "claim-splits", "claim-warnings", "claim-financial"] },
+    { "id": "source-offering", "title": "Acme Holdings Form 8-K — Registered Offering", "url": "https://www.sec.gov/Archives/example/acme-offering", "published_date": "2025-04-10", "source_type": "sec_filing", "confidence": "high", "retrieved_at": "2026-08-24T14:58:30Z", "supported_claim_ids": ["claim-dilution"] },
+    { "id": "source-dividend", "title": "Acme Declares Quarterly Dividend", "url": "https://investors.example.com/acme/dividend", "published_date": "2026-08-01", "source_type": "company_release", "confidence": "high", "retrieved_at": "2026-08-24T14:59:00Z", "supported_claim_ids": ["claim-dividend"] },
+    { "id": "source-news", "title": "Acme Announces Multi-Year Customer Contract", "url": "https://investors.example.com/acme/contract", "published_date": "2026-08-23", "source_type": "company_release", "confidence": "high", "retrieved_at": "2026-08-24T14:59:30Z", "supported_claim_ids": ["claim-catalyst"] }
+  ]
+}

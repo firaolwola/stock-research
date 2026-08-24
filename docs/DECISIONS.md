@@ -3,6 +3,24 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Version reports with an explicit JSON Schema contract
+
+**Status:** Accepted
+
+**Decision:** Use JSON Schema Draft 2020-12 and a semantic validation pass for
+stock-report contract version 1.0.0. Keep all initial report sections present,
+make evidence states explicit, require null values for unscored states, preserve
+distinct scoring constructs and horizons, and use bidirectional claim/source
+references.
+
+**Why:** The server, prompt, frontend, comparison, and saved-history work need a
+stable boundary that cannot confuse missing evidence with low risk or confirmed
+absence.
+
+**Consequence:** Breaking semantic or required-field changes require a major
+contract version. Schema-valid output still requires factual, evidence-quality,
+and calibration evaluation in later issues.
+
 ## 2026-08-24 — Keep planning documentation in the repository
 
 **Status:** Accepted

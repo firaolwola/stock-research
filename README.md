@@ -56,5 +56,6 @@ Never commit `.env` or an API key.
 
 - [Product definition](docs/PRODUCT.md)
 - [Roadmap](docs/ROADMAP.md)
+- [Stock report contract](docs/REPORT_SCHEMA.md)
 - [Decision log](docs/DECISIONS.md)
 - [Repository instructions](AGENTS.md)
