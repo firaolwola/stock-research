@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Stock Research</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #eee;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        input {
+            flex: 1;
+            padding: 14px;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        button {
+            padding: 14px 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #status {
+            margin-top: 25px;
+            font-size: 18px;
+        }
+
+        #results {
+            white-space: pre-wrap;
+            background: #1d1d1d;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <h1>Stock Research</h1>
+
+    <p>
+        Check company history, dilution, reverse splits,
+        dividends and recent news.
+    </p>
+
+
+    <div class="search-box">
+
+        <input
+            id="ticker"
+            placeholder="Enter ticker... Example: BULL"
+        >
+
+        <button onclick="analyzeStock()">
+            Analyze
+        </button>
+
+    </div>
+
+
+    <div id="status"></div>
+
+    <div id="results"></div>
+
+
+    <script>
+
+        async function analyzeStock() {
+
+            const tickerInput =
+                document.getElementById("ticker");
+
+            const status =
+                document.getElementById("status");
+
+            const results =
+                document.getElementById("results");
+
+
+            const ticker =
+                tickerInput.value.trim().toUpperCase();
+
+
+            if (!ticker) {
+
+                status.textContent =
+                    "Enter a stock ticker.";
+
+                return;
+            }
+
+
+            status.textContent =
+                "Researching " + ticker + "...";
+
+            results.textContent = "";
+
+
+            try {
+
+                const response = await fetch(
+                    "/api/analyze?ticker="
+                    + encodeURIComponent(ticker)
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error || "Something went wrong."
+                    );
+                }
+
+
+                status.textContent =
+                    ticker + " research complete.";
+
+                results.textContent =
+                    data.answer;
+
+
+            } catch (error) {
+
+                status.textContent =
+                    "Error";
+
+                results.textContent =
+                    error.message;
+            }
+        }
+
+
+        // Allow Enter key to search
+        document
+            .getElementById("ticker")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+                    analyzeStock();
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
