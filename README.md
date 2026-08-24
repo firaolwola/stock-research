@@ -1,9 +1,14 @@
 # Stock Research
 
-Stock Research is an early-stage web application that produces a focused,
-evidence-backed risk report for a stock ticker. It currently researches reverse
-splits, dilution, dividends, exchange-compliance issues, and recent news using
-the OpenAI Responses API with web search.
+Stock Research is an early-stage personal due-diligence application. After an
+external screener identifies a moving or news-relevant ticker, it is intended to
+produce a fast, evidence-backed view of the catalyst, company context, and
+material risks before deeper research.
+
+The current prototype researches reverse splits, dilution, dividends,
+exchange-compliance issues, and recent news using the OpenAI Responses API with
+web search. Broader financial, issuer-lineage, catalyst, and comparison work is
+planned but not yet implemented.
 
 This application is a research aid, not financial advice.
 

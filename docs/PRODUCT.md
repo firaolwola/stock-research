@@ -1,58 +1,162 @@
 # Product definition
 
+**Last reviewed:** 2026-08-24
+
 ## Product statement
 
-Stock Research helps an individual trader quickly identify dilution,
-reverse-split, exchange-compliance, dividend, and recent-news risks before
-researching a stock more deeply. It provides evidence and risk signals, not
-investment advice.
+Stock Research is a personal, decision-focused stock research and due-diligence
+tool. After an external screener identifies a moving or news-relevant ticker, it
+helps the user rapidly assess the current catalyst, historical company risks,
+and financial context before deciding whether the setup deserves deeper
+consideration.
 
-## Initial user
+It provides evidence, uncertainty, and risk signals. It does not execute trades,
+recommend entries or exits, provide personalized investment advice, or function
+as a trading platform.
 
-The initial user is an individual, self-directed trader who wants a fast first
-pass on a ticker, especially when evaluating unfamiliar or higher-risk stocks.
+## Current product intent
 
-The product is currently a personal/local tool. Public or multi-user operation
-is outside the initial MVP and would require authentication, abuse prevention,
-privacy review, and cost controls.
+The current priority is optimizing the tool for the owner's personal research
+workflow. A public product may be considered only after research quality is
+reliably demonstrated. Public access would additionally require authentication,
+abuse prevention, privacy review, cost controls, and deployment safeguards.
 
-## User problem
+## Primary workflow
 
-Important warning signs are scattered across SEC filings, exchange notices,
-company announcements, and news coverage. Finding and reconciling them manually
-is slow, and a basic quote page rarely explains financing or listing risk.
+1. A separate screener identifies a ticker with unusual volume, a rapid change
+   in volume, a price move, or a possible catalyst.
+2. The user enters the ticker in Stock Research.
+3. The tool returns a fast, decision-focused view of material red flags,
+   catalyst strength, company context, evidence quality, and unknowns.
+4. The user rejects the setup or continues with deeper research.
 
-The application should reduce that initial research time while keeping every
-important conclusion traceable to evidence.
+Stock discovery and screening are outside this product. The product is a
+post-screening due-diligence gate.
 
-## Primary user outcome
+## Product principles
 
-After reading a report, the user should understand:
+### Prefer risk recall over false reassurance
 
-- whether recent dilution or financing creates material risk;
-- whether reverse splits have occurred and appear likely to recur;
-- whether the company currently pays a dividend;
-- whether material Nasdaq or NYSE compliance issues exist;
-- which recent news items are most relevant; and
-- which claims are confirmed, uncertain, or unsupported by available evidence.
+Missing a material risk is worse than displaying an additional warning or
+`Unknown`. Warnings must still be ranked by materiality so critical findings are
+not buried beneath minor concerns. Missing evidence must never be interpreted as
+low risk or proof that an event did not occur.
 
-The report should help the user decide whether to reject the idea, investigate
-it more deeply, or add it to a watchlist. It must not tell the user to buy or
-sell.
+### Keep distinct concepts separate
 
-## MVP scope
+Do not compress unlike concepts into an opaque score. In particular:
 
-Every completed report should contain:
+- dilution history, likelihood of future dilution, and likely shareholder
+  impact must remain visible as separate components;
+- near-term catalyst or setup quality must remain separate from longer-term
+  company quality and risk; and
+- an optional roll-up score must preserve its component values, evidence, and
+  explanation.
 
-1. Reverse splits from the last five years.
-2. Major offerings or other material dilution from the last three years.
-3. Current dividend status.
-4. Major Nasdaq or NYSE compliance issues from the last three years.
-5. The three most important news items from the last 30 days.
-6. Dilution and reverse-split risk scores with short explanations.
-7. An overall recent-news sentiment label.
-8. Dates and clickable sources for material claims.
-9. Explicit unknown or not-found states where evidence is incomplete.
+A weak company can have a strong short-term catalyst, and a strong company can
+have an unfavorable near-term setup.
+
+### Follow the issuer, not only the ticker
+
+Material history should follow the underlying issuer across reliably linked
+ticker changes, corporate-name changes, and rebrands. Reports should identify
+previous names and tickers with effective dates and state the confidence and
+evidence supporting each linkage. Uncertain identity relationships must not be
+treated as confirmed.
+
+### Make evidence inspectable
+
+Every material factual claim must be traceable to evidence. Important claims
+and scores should link directly to their sources or to numbered references in a
+clearly organized source list.
+
+### Optimize for fast decisions without hiding incompleteness
+
+The first result should emphasize the most decision-relevant conclusions rather
+than reproduce a long research memo. Deeper research may take longer, but the
+interface must clearly show which checks are complete, limited, pending, or
+unknown.
+
+## Supported security universe
+
+Nasdaq- and NYSE-listed common stocks are the reliability priority, regardless
+of market capitalization. The product should support OTC securities, ADRs,
+ETFs, warrants, preferred shares, foreign listings, and delisted tickers when
+reliable evidence is available.
+
+Every report should identify the security type, issuer, listing venue and
+status, and coverage limitations. Sections that do not apply to a security type
+should be `Not applicable`; sections with inadequate evidence should be
+`Unknown` or `Limited coverage` rather than guessed.
+
+## Report experience
+
+### Fast decision view
+
+Target a normal response time of approximately 3–10 seconds. Present a compact
+dashboard containing:
+
+- the most material red flags and unknowns, ranked by importance;
+- dilution-risk components and reverse-split risk;
+- financial-health and longer-term company-quality context;
+- current catalyst strength and near-term setup assessment;
+- evidence confidence and coverage status; and
+- short explanations with inspectable source references.
+
+The assessment may use probability-style language, but must avoid false
+precision and must show the favorable evidence, unfavorable evidence, evidence
+quality, and uncertainty behind it. It must not be presented as a personalized
+trade recommendation.
+
+### Deep research view
+
+A deeper report may take longer or be explicitly requested. It should expand
+the evidence, history, financial analysis, comparable prior catalysts, and
+source detail without changing the meaning of the fast-view scores.
+
+## Research coverage direction
+
+The complete product direction includes:
+
+- dilution, offerings, warrants, convertibles, and capital-structure risk;
+- reverse splits and issuer history;
+- cash burn, revenue and profitability trends, free cash flow, debt, and
+  going-concern warnings;
+- exchange compliance, SEC and accounting issues;
+- management behavior and insider activity;
+- valuation metrics and dividend history;
+- historical price and market-cap behavior;
+- recent news and catalysts; and
+- historical reactions to similar company news or catalysts.
+
+These capabilities should be delivered in bounded, testable stages. Breadth
+must not come at the expense of source traceability, risk recall, latency, or
+clear uncertainty.
+
+## Initial trustworthy-report scope
+
+The initial dependable report should establish the shared foundation needed by
+both fast and deep views:
+
+1. Security and issuer identity, security type, listing status, and known prior
+   names or tickers.
+2. Reverse splits from at least the last five years, following reliably linked
+   issuer identities.
+3. Major offerings and other material dilution from at least the last three
+   years, including relevant warrants or convertibles when found.
+4. Current dividend status.
+5. Major exchange-compliance, going-concern, SEC, or accounting warnings found
+   within the defined search scope.
+6. The most important recent catalyst and news items, with a clear as-of time
+   and search window.
+7. Separate risk and quality components with concise evidence-based
+   explanations.
+8. Dates and claim-linked sources for material conclusions.
+9. Explicit `Confirmed`, `Not found`, `Unknown`, `Not applicable`, and
+   `Limited coverage` states.
+
+The exact time windows and score calibration must be versioned and documented
+in the report contract rather than implied only by prompts.
 
 ## Source standard
 
@@ -63,36 +167,62 @@ Use sources in this order when available:
 3. Reputable original news reporting.
 4. Secondary aggregators only when a stronger source is unavailable.
 
-The report must not claim that an event never occurred merely because search did
-not find it. It should state the search scope and uncertainty instead.
+Secondary evidence must be labeled and carry lower confidence. A material claim
+that cannot be reasonably verified must be `Unknown`.
 
-## Out of scope for the first MVP
+Each source record should include document title, source type, publication or
+filing date, direct URL, retrieval or verification time when useful, and the
+claims it supports.
+
+## Out of scope
 
 - Personalized investment recommendations
-- Price targets or trade signals
+- Entry, exit, position-sizing, or price-target instructions
 - Automated trading or brokerage integration
+- Initial stock discovery or screening
 - Portfolio management
-- Real-time quotes or charts
-- Comprehensive fundamental valuation
-- Social-media sentiment
-- Public accounts, billing, and team collaboration
+- Public accounts, billing, or team collaboration during the personal-tool phase
 
-## MVP success criteria
+## Success criteria
 
-The MVP is usable when:
+The MVP is successful when:
 
-- the application returns a consistent structured report for valid US tickers;
-- material claims have working sources and dates;
-- invalid, unavailable, and incomplete results are explained clearly;
-- a representative ticker test set produces factually acceptable results;
+- it is repeatedly useful during real trading sessions after screener alerts;
+- a normal fast report is produced in approximately 3–10 seconds;
+- normal API cost is kept near or below $0.10 per completed report, with
+  deliberate exceptions for unusually complex research;
+- every material conclusion has supporting evidence or is clearly marked
+  `Unknown`;
+- a dated representative evaluation set achieves approximately 95% or better
+  recall of known material risks overall and reports recall by risk category;
+- issuer-lineage cases do not appear to have a clean history merely because of a
+  ticker or name change;
+- invalid, unavailable, partial, and unsupported results are explained clearly;
 - API errors do not break the page or expose sensitive details; and
-- the application has basic automated coverage for validation and response
-  handling.
+- the workflow reduces several minutes of fragmented manual research to a report
+  the user trusts and uses before deeper consideration.
+
+## Follow-on workflow priority
+
+After the trustworthy fast report:
+
+1. Add decision-focused side-by-side ticker comparison.
+2. Add saved report history.
+3. Add automatic refresh and change detection.
+4. Consider watchlists and export when they support demonstrated workflows.
+
+Comparison should emphasize normalized, decision-relevant differences rather
+than display complete reports beside one another.
 
 ## Open product questions
 
-- Should the product remain a personal research tool or become public?
-- Which securities beyond US-listed common stocks should be supported?
-- How should risk scores be calibrated and explained consistently?
-- Should completed reports be saved, compared, or exported first?
-- What response time and per-search cost are acceptable?
+- How should each risk and quality component be calibrated and validated?
+- What exact outcome and time horizon should the near-term setup assessment
+  describe?
+- Which research can reliably complete in the fast stage, and which checks must
+  continue into the deep stage?
+- What source-age and evidence-strength rules should produce `Limited coverage`
+  versus `Unknown`?
+- What normal and exceptional cost limits should trigger a deeper-search prompt?
+- When, if ever, has research quality become reliable enough to reconsider
+  public access?

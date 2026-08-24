@@ -82,3 +82,91 @@ secrets, authentication or authorization, billing, destructive data or
 infrastructure operations, unapproved production dependencies, and material
 scope expansion. Failed checks, incomplete acceptance criteria, or unresolved
 ambiguity block an autonomous merge.
+
+## 2026-08-24 — Optimize for a personal post-screening research workflow
+
+**Status:** Accepted
+
+**Decision:** Build Stock Research primarily as a personal, post-screening
+due-diligence tool. It should help the owner investigate a ticker flagged by an
+external volume or catalyst screener and decide whether to reject it or continue
+deeper research. It will not discover stocks, execute trades, or recommend
+entries and exits.
+
+**Why:** The time-sensitive problem is not finding candidates. It is rapidly
+reconciling catalyst quality, company history, financial context, and material
+risks after a candidate appears.
+
+## 2026-08-24 — Prefer material-risk recall and explicit uncertainty
+
+**Status:** Accepted
+
+**Decision:** Optimize research behavior to avoid missing material risks. Prefer
+an additional ranked warning, `Unknown`, or `Limited coverage` over false
+reassurance. Require material factual conclusions to be traceable to evidence.
+
+**Why:** Missing dilution, reverse-split patterns, going-concern warnings,
+compliance trouble, accounting issues, or comparable material risks is more
+harmful than requiring the user to inspect an additional warning.
+
+## 2026-08-24 — Separate scoring dimensions and time horizons
+
+**Status:** Accepted
+
+**Decision:** Keep historical severity, future likelihood, and potential impact
+as visible risk components. Keep near-term catalyst or setup quality separate
+from longer-term company quality. Optional roll-ups must preserve components,
+evidence, uncertainty, and explanations.
+
+**Why:** Combining unlike concepts hides important tradeoffs and can produce
+misleading confidence. Weak companies can have strong short-term catalysts, and
+strong companies can have poor near-term setups.
+
+## 2026-08-24 — Follow issuer history across identity changes
+
+**Status:** Accepted
+
+**Decision:** When reliable evidence connects prior and current identities,
+carry material issuer history across ticker changes, company-name changes, and
+rebrands. Show prior identities, effective dates, evidence, and linkage
+confidence.
+
+**Why:** A company must not appear to have a clean history merely because its
+public identifier changed.
+
+## 2026-08-24 — Use a fast view with optional deeper research
+
+**Status:** Accepted
+
+**Decision:** Target a compact decision view in approximately 3–10 seconds and
+near or below $0.10 for a normal completed report. Allow deeper research to take
+longer or cost more when the user requests it or the case is unusually complex.
+
+**Why:** The tool is used in fast-moving situations, while comprehensive issuer
+history and evidence reconciliation may not reliably fit into one synchronous
+request.
+
+## 2026-08-24 — Prioritize comparison after trustworthy reports
+
+**Status:** Accepted
+
+**Decision:** After the trustworthy fast report, prioritize decision-focused
+side-by-side ticker comparison, followed by saved report history and automatic
+refresh or change detection.
+
+**Why:** The external screener can surface several candidates simultaneously.
+Normalized comparison of their most important differences is more valuable than
+placing complete reports side by side.
+
+## 2026-08-24 — Maintain approved product context autonomously
+
+**Status:** Accepted
+
+**Decision:** Codex should automatically record explicit owner decisions and
+confirmed implementation or evaluation findings in the appropriate repository
+documents and GitHub issue priorities or dependencies. Codex must request review
+before adopting an unapproved material change to vision, scoring philosophy,
+major workflows, or priorities.
+
+**Why:** The repository should remain aligned without requiring separate
+documentation requests, while product direction remains owner-controlled.
