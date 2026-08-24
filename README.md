@@ -52,6 +52,19 @@ reliably sourced. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 Never commit `.env` or an API key.
 
+## Testing
+
+Run the isolated backend and report-contract tests with:
+
+```powershell
+npm test
+```
+
+The suite uses Node's built-in test runner, injected fake research clients, and
+local fixtures. It does not require `OPENAI_API_KEY` and does not make live
+OpenAI calls. Run `npm run validate:reports` when you only need to validate the
+complete and partial report fixtures.
+
 ## Project documentation
 
 - [Product definition](docs/PRODUCT.md)
