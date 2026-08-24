@@ -64,3 +64,21 @@ backlogs.
 
 **Consequence:** Material changes to milestone progress must still be reflected
 in the roadmap when the corresponding issues are completed.
+
+## 2026-08-24 — Autonomously merge routine completed tickets
+
+**Status:** Accepted
+
+**Decision:** Codex may implement a bounded issue on a dedicated branch, verify
+it, review the completed diff, open a pull request, and merge it without manual
+review when all acceptance criteria and checks pass.
+
+**Why:** The project owner wants work to continue remotely without needing to
+approve every routine code change. A pull request still provides an audit trail
+and a clean rollback point.
+
+**Exceptions:** Manual approval remains required for production deployment,
+secrets, authentication or authorization, billing, destructive data or
+infrastructure operations, unapproved production dependencies, and material
+scope expansion. Failed checks, incomplete acceptance criteria, or unresolved
+ambiguity block an autonomous merge.

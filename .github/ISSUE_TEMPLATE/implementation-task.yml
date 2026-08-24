@@ -64,3 +64,15 @@ body:
         - Manual behavior to verify
     validations:
       required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Codex completion policy
+
+        Follow `AGENTS.md`. Work on a dedicated `codex/` branch. When every
+        acceptance criterion is satisfied and all required checks pass, review
+        the complete diff, open and merge the pull request, close the issue, and
+        update project progress without waiting for routine manual approval.
+        Stop at an open pull request when an `AGENTS.md` manual-approval boundary
+        applies or verification is incomplete.

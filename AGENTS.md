@@ -48,8 +48,32 @@ Keep the architecture simple while the product is still being validated.
   instead of expanding the current task.
 - Reference the issue in the commit or pull request and include verification
   results in the pull-request description.
-- Do not close an issue until its acceptance criteria are satisfied. Update the
-  roadmap when completing work that changes milestone status.
+- After implementation, run all relevant checks and review the complete diff
+  against the issue acceptance criteria.
+- When every acceptance criterion is satisfied and all required checks pass,
+  push the branch, open a pull request, merge it into `main`, close the issue,
+  and update the roadmap when milestone status changes. Routine completion does
+  not require manual approval.
+- Do not merge or close the issue when a required check fails, acceptance
+  criteria remain incomplete, or the implementation contains unresolved
+  uncertainty. Leave the branch and pull request available and report the exact
+  blocker.
+
+## Manual approval boundaries
+
+Require explicit user approval before merging changes that:
+
+- deploy to a production or publicly accessible environment;
+- add, rotate, expose, or change handling of secrets or credentials;
+- change authentication, authorization, billing, payments, or account access;
+- perform destructive or irreversible data or infrastructure operations;
+- materially expand product scope beyond the selected issue; or
+- add a production dependency whose need and risk were not already accepted in
+  the issue.
+
+Documentation, tests, internal refactors, and ordinary in-scope application
+changes may be merged autonomously when their checks and acceptance criteria
+pass.
 
 ## Documentation ownership
 
