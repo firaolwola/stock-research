@@ -2,7 +2,7 @@ name: Implementation task
 description: A bounded unit of product or engineering work
 title: ""
 labels:
-  - task
+  - enhancement
 body:
   - type: textarea
     id: outcome
