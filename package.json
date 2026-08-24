@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "validate:reports": "node scripts/validate-report-fixtures.js",
+    "test": "npm run validate:reports"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +16,9 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "openai": "^7.5.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
   }
 }

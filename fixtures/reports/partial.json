@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "report-xyz-deep-partial-2026-08-24",
+  "metadata": {
+    "as_of": "2026-08-24T16:00:00Z", "generated_at": "2026-08-24T16:00:03Z", "stage": "deep", "completion_status": "partial",
+    "research_windows": [{ "topic": "initial_trustworthy_report", "start": "2021-08-24", "end": "2026-08-24" }],
+    "coverage_limitations": [{ "code": "issuer-lineage-unresolved", "explanation": "Available records did not reliably connect a possible predecessor issuer.", "affected_sections": ["issuer", "reverse_splits", "dilution"] }]
+  },
+  "security": { "ticker": "XYZ", "name": "XYZ Depositary Receipt", "security_type": "adr", "listing_venue": "NYSE", "listing_status": "active", "evidence_state": "confirmed", "claim_ids": ["claim-xyz-identity"] },
+  "issuer": { "legal_name": "XYZ International plc", "cik": null, "identity_state": "limited_coverage", "identity_confidence": "low", "prior_identities": [{ "name": "XYZ Legacy Ltd.", "ticker": null, "effective_from": null, "effective_to": null, "linkage_state": "unknown", "linkage_confidence": "unknown", "claim_ids": [] }], "claim_ids": ["claim-xyz-identity"] },
+  "sections": {
+    "reverse_splits": { "state": "limited_coverage", "summary": "Current-ticker records were reviewed, but unresolved issuer lineage limits the five-year history.", "coverage_notes": ["Potential predecessor records were not treated as confirmed."], "items": [], "claim_ids": [] },
+    "dilution": { "state": "unknown", "summary": "Evidence is insufficient to characterize historical dilution or financing instruments.", "coverage_notes": ["Foreign filings were not consistently available."], "items": [], "claim_ids": [] },
+    "dividends": { "state": "confirmed", "summary": "A current distribution was confirmed for the depositary receipt.", "coverage_notes": [], "items": [{ "id": "dividend-xyz", "kind": "dividend", "title": "ADR distribution", "state": "confirmed", "summary": "The depositary announced a current distribution.", "event_date": "2026-08-10", "claim_ids": ["claim-xyz-dividend"] }], "claim_ids": ["claim-xyz-dividend"] },
+    "compliance_and_warnings": { "state": "limited_coverage", "summary": "NYSE notices were reviewed, but foreign accounting-warning coverage is incomplete.", "coverage_notes": ["Home-market records remain pending."], "items": [], "claim_ids": [] },
+    "financial_context": { "state": "limited_coverage", "summary": "Only stale financial data was available, so no current health conclusion is given.", "coverage_notes": ["Latest comparable statements were unavailable."], "items": [], "claim_ids": [] },
+    "catalysts_and_news": { "state": "unknown", "summary": "No sufficiently supported current catalyst was identified; this does not establish that none exists.", "coverage_notes": ["Research is pending for non-English primary sources."], "items": [], "claim_ids": [] }
+  },
+  "scores": {
+    "dilution_historical_severity": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Past three years", "explanation": "Insufficient evidence prevents scoring; unknown is not low risk.", "claim_ids": [] },
+    "dilution_future_likelihood": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "Financing evidence is incomplete.", "claim_ids": [] },
+    "dilution_potential_impact": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "Potential instruments and share counts are unknown.", "claim_ids": [] },
+    "reverse_split_risk": { "state": "limited_coverage", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "Unresolved lineage prevents a reliable risk value.", "claim_ids": [] },
+    "financial_health": { "state": "limited_coverage", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Latest reported period and next twelve months", "explanation": "Stale statements cannot support a current assessment.", "claim_ids": [] },
+    "long_term_company_quality": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Multi-year", "explanation": "Issuer history and financial evidence are incomplete.", "claim_ids": [] },
+    "catalyst_strength": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Current catalyst", "explanation": "No sufficiently supported catalyst was identified.", "claim_ids": [] },
+    "near_term_setup_quality": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Next five trading days", "explanation": "Unknown catalyst evidence cannot produce a favorable setup score.", "claim_ids": [] }
+  },
+  "claims": [
+    { "id": "claim-xyz-identity", "text": "XYZ is an active NYSE-listed ADR associated with XYZ International plc, with limited lineage confidence.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T16:00:00Z", "source_ids": ["source-xyz-exchange"] },
+    { "id": "claim-xyz-dividend", "text": "The depositary announced a current distribution on August 10, 2026.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T16:00:00Z", "source_ids": ["source-xyz-dividend"] }
+  ],
+  "sources": [
+    { "id": "source-xyz-exchange", "title": "NYSE XYZ Listing Record", "url": "https://www.nyse.com/quote/example-xyz", "published_date": "2026-08-24", "source_type": "exchange_notice", "confidence": "high", "retrieved_at": "2026-08-24T15:58:00Z", "supported_claim_ids": ["claim-xyz-identity"] },
+    { "id": "source-xyz-dividend", "title": "XYZ Depositary Distribution Notice", "url": "https://depositary.example.com/xyz/distribution", "published_date": "2026-08-10", "source_type": "other_primary", "confidence": "medium", "retrieved_at": "2026-08-24T15:59:00Z", "supported_claim_ids": ["claim-xyz-dividend"] }
+  ]
+}
