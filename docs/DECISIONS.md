@@ -3,6 +3,22 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Isolate backend tests through dependency injection
+
+**Status:** Accepted
+
+**Decision:** Create the Express application separately from process startup,
+inject the research client, use Node's built-in test runner, and expose report
+validation and fixture loaders as reusable modules.
+
+**Why:** Backend behavior must be testable without API credentials, paid calls,
+external network access, or lingering server processes. The built-in runner is
+sufficient and avoids another test dependency.
+
+**Consequence:** Later endpoint tickets should pass fakes through the research
+client boundary and use the shared report fixtures and validator. Actual timeout
+and provider-error policy remains owned by its dedicated issue.
+
 ## 2026-08-24 — Version reports with an explicit JSON Schema contract
 
 **Status:** Accepted

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "validate:reports": "node scripts/validate-report-fixtures.js",
-    "test": "npm run validate:reports"
+    "test": "node --test \"test/*.test.js\""
   },
   "keywords": [],
   "author": "",
