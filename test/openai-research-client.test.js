@@ -31,11 +31,16 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   const options = [];
   const adapter = adapterFor({
     status: "completed",
-    output: [],
-    output_text: JSON.stringify(completeReport)
+    output: [{ type: "web_search_call" }, { type: "web_search_call" }],
+    output_text: JSON.stringify(completeReport),
+    usage: { input_tokens: 10000, output_tokens: 4000, total_tokens: 14000, input_tokens_details: { cached_tokens: 2000 } }
   }, requests, options);
 
-  assert.deepEqual(await adapter.researchTicker("ACME"), completeReport);
+  const result = await adapter.researchTicker("ACME");
+  assert.deepEqual(result.report, completeReport);
+  assert.equal(result.operations.stage, "fast");
+  assert.equal(result.operations.estimated_cost_usd, 0.07025);
+  assert.equal(result.operations.web_search_calls, 2);
   assert.equal(requests.length, 1);
   assert.deepEqual(options, [{ timeout: FAST_RESEARCH_TIMEOUT_MS, maxRetries: 0 }]);
   assert.match(requests[0].input, /ACME/);
@@ -90,7 +95,7 @@ test("OpenAI adapter preserves parseable structured output from an incomplete re
     output_text: JSON.stringify(partialReport)
   });
 
-  assert.deepEqual(await adapter.researchTicker("XYZ"), partialReport);
+  assert.deepEqual((await adapter.researchTicker("XYZ", { stage: "deep" })).report, partialReport);
 });
 
 test("OpenAI adapter classifies representative SDK and HTTP failures", async () => {

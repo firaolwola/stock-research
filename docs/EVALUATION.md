@@ -17,7 +17,9 @@ The cases are evidence expectations, not investment recommendations. Time-sensit
 - **Source quality and factual support:** primary-source share, source appropriateness, and whether each detected claim is supported.
 - **Issuer lineage:** prior ticker/name history is carried forward only when linkage is evidenced.
 - **Uncertainty:** expected `unknown`, `limited_coverage`, and `not_applicable` states are preserved.
-- **Operations and clarity:** latency distribution, estimated cost, and a reviewer clarity rating from 1 through 5 accompany quality results.
+- **Operations and clarity:** p50/p95 latency, token use, web-search calls,
+  average/maximum estimated cost, budget status, and a reviewer clarity rating
+  from 1 through 5 accompany coverage and recall results.
 - **Score calibration:** deterministic expected state/value checks are reported
   overall and by material-risk category; unresolved expected inputs must remain
   null rather than pass by becoming favorable numbers.
@@ -31,8 +33,17 @@ npm run evaluate:dry
 npm test
 ```
 
-The dry sample uses only `evaluation/samples/mock-results.json`. It makes no OpenAI call; its latency and zero-cost values are illustrative. Review every scenario and source date when changing the set. The validator rejects incomplete coverage and post-cutoff evidence.
+The dry sample uses only `evaluation/samples/mock-results.json`. It makes no
+OpenAI call. Its synthetic operating values exercise the budget logic; they are
+not live performance claims. Review every scenario and source date when changing
+the set. The validator rejects incomplete coverage and post-cutoff evidence.
 
 ## Paid live evaluation boundary
 
-A paid evaluation must never run automatically or as part of routine tests. It requires explicit owner approval for that run. Before requesting approval, record the date, model/configuration, exact case IDs (at most five), maximum budget, and output location. After an approved run, record token or web-search usage where available, estimated cost, per-case latency, app failures, and the full rubric results. Redact credentials and do not commit sensitive provider payloads.
+A paid evaluation must never run automatically or as part of routine tests. It
+requires explicit owner approval for that run. Before requesting approval,
+record the date, model/configuration, exact case IDs (at most five), maximum
+budget, and output location. After an approved run, record input/output tokens,
+web-search calls, estimated cost, per-case latency, app failures, and the full
+rubric results. The evaluator rejects missing approval or measurement fields.
+Redact credentials and do not commit sensitive provider payloads.

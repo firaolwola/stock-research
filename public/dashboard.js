@@ -144,6 +144,21 @@ function renderCoverage(view) {
   } else panel.append(element("p", "empty-note", "No structured coverage limitations were reported."));
   return panel;
 }
+function renderOperations(operations) {
+  const panel = element("section", "panel operations-panel");
+  panel.append(element("h2", "", "Research budget & stage"));
+  if (!operations) {
+    panel.append(element("p", "empty-note", "Provider usage and cost telemetry were unavailable; cost is unknown, not zero."));
+    return panel;
+  }
+  const cost = operations.estimated_cost_usd === null ? "Cost unknown" : `Estimated cost $${operations.estimated_cost_usd.toFixed(4)}`;
+  panel.append(element("p", "", `${formatLabel(operations.stage)} · ${(operations.latency_ms / 1000).toFixed(1)}s · ${cost}`));
+  panel.append(element("p", "muted", `${operations.input_tokens ?? "Unknown"} input tokens · ${operations.output_tokens ?? "Unknown"} output tokens · ${operations.web_search_calls} web searches`));
+  if (operations.stage === "fast" && operations.within_latency_target === false) panel.append(element("p", "coverage-note", "This report was outside the 3–10 second normal latency target."));
+  if (operations.stage === "fast" && operations.within_cost_target === false) panel.append(element("p", "coverage-note", "This report exceeded the approximately $0.10 normal cost target."));
+  panel.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
+  return panel;
+}
 function renderFindings(view) {
   const panel = element("section", "panel");
   const heading = element("div", "panel-heading");
@@ -297,9 +312,9 @@ function renderSources(view) {
     item.append(link, element("p", "source-meta", `${formatDate(source.published_date)} · ${formatLabel(source.source_type)} · ${formatLabel(source.confidence)} confidence`)); list.append(item);
   }); panel.append(list); return panel;
 }
-export function renderDashboard(container, report) {
+export function renderDashboard(container, report, operations = null) {
   const view = buildDashboardView(report);
-  container.replaceChildren(renderHeader(view), renderCoverage(view), renderFindings(view), renderFinancialAssessment(view), renderCatalystAssessment(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
+  container.replaceChildren(renderHeader(view), renderOperations(operations), renderCoverage(view), renderFindings(view), renderFinancialAssessment(view), renderCatalystAssessment(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
 }
 async function showRuntimeMode() {
   try {
@@ -310,7 +325,7 @@ async function showRuntimeMode() {
   } catch (_error) { /* Search remains available if runtime metadata cannot load. */ }
 }
 export function initializeDashboard() {
-  const form = document.getElementById("research-form"); const tickerInput = document.getElementById("ticker"); const analyzeButton = document.getElementById("analyze-button"); const status = document.getElementById("status"); const results = document.getElementById("results"); let submitting = false;
+  const form = document.getElementById("research-form"); const tickerInput = document.getElementById("ticker"); const analyzeButton = document.getElementById("analyze-button"); const deepButton = document.getElementById("deep-analyze-button"); const status = document.getElementById("status"); const results = document.getElementById("results"); let submitting = false;
   tickerInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -320,12 +335,12 @@ export function initializeDashboard() {
   form.addEventListener("submit", async (event) => {
     event.preventDefault(); if (submitting) return; const validation = validateTickerInput(tickerInput.value);
     if (!validation.valid) { status.textContent = validation.message; status.dataset.kind = "error"; results.replaceChildren(); results.hidden = true; return; }
-    const ticker = validation.ticker; tickerInput.value = ticker; submitting = true; analyzeButton.disabled = true; analyzeButton.textContent = "Researching…"; status.textContent = `Researching ${ticker}…`; status.dataset.kind = "loading"; results.setAttribute("aria-busy", "true"); results.replaceChildren(); results.hidden = true;
+    const stage = event.submitter?.value === "deep" ? "deep" : "fast"; const ticker = validation.ticker; tickerInput.value = ticker; submitting = true; analyzeButton.disabled = true; deepButton.disabled = true; status.textContent = `${stage === "deep" ? "Running deeper research" : "Researching"} ${ticker}…`; status.dataset.kind = "loading"; results.setAttribute("aria-busy", "true"); results.replaceChildren(); results.hidden = true;
     try {
-      const response = await fetch(`/api/analyze?ticker=${encodeURIComponent(ticker)}`); const data = await response.json(); if (!response.ok) throw new Error(data.error || "Something went wrong.");
-      renderDashboard(results, data.report); status.textContent = `${ticker} research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.`; status.dataset.kind = "success";
+      const response = await fetch(`/api/analyze?ticker=${encodeURIComponent(ticker)}&stage=${stage}`); const data = await response.json(); if (!response.ok) throw new Error(data.error || "Something went wrong.");
+      renderDashboard(results, data.report, data.operations); status.textContent = `${ticker} ${formatLabel(stage).toLowerCase()} research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.`; status.dataset.kind = "success";
     } catch (error) { status.textContent = "Research could not be completed."; status.dataset.kind = "error"; results.replaceChildren(element("div", "panel", error.message)); results.hidden = false; }
-    finally { submitting = false; analyzeButton.disabled = false; analyzeButton.textContent = "Analyze"; results.setAttribute("aria-busy", "false"); }
+    finally { submitting = false; analyzeButton.disabled = false; deepButton.disabled = false; results.setAttribute("aria-busy", "false"); }
   });
   showRuntimeMode();
 }

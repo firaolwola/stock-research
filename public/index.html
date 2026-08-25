@@ -22,9 +22,11 @@
         <label for="ticker">Ticker</label>
         <div class="search-controls">
           <input id="ticker" name="ticker" placeholder="Example: ACME" maxlength="15" autocomplete="off" spellcheck="false" required>
-          <button id="analyze-button" type="submit">Analyze</button>
+          <button id="analyze-button" type="submit" name="stage" value="fast">Fast report</button>
+          <button id="deep-analyze-button" type="submit" name="stage" value="deep">Deeper research</button>
         </div>
       </form>
+      <p class="muted">Fast reports use the normal time and cost budget. Deeper research is a deliberate, potentially slower and more expensive request for complex cases.</p>
       <p id="status" class="request-status" role="status" aria-live="polite"></p>
     </section>
     <section id="results" class="dashboard" aria-live="polite" aria-busy="false" hidden></section>

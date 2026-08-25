@@ -51,6 +51,21 @@ test("analyze normalizes a ticker and returns a validated complete report", asyn
   assert.deepEqual(calls, ["ACME"]);
 });
 
+test("analyze defaults to fast research and requires deliberate supported stages", async () => {
+  const calls = [];
+  const app = buildApp({ async researchTicker(ticker, options) { calls.push({ ticker, options }); const report = structuredClone(completeReport); report.metadata.stage = options.stage; return { report, operations: { stage: options.stage } }; } });
+  await withTestServer(app, async (baseUrl) => {
+    assert.equal((await fetch(`${baseUrl}/api/analyze?ticker=ACME`)).status, 200);
+    const deep = await fetch(`${baseUrl}/api/analyze?ticker=ACME&stage=deep`);
+    assert.equal(deep.status, 200);
+    assert.equal((await deep.json()).report.metadata.stage, "deep");
+    const invalid = await fetch(`${baseUrl}/api/analyze?ticker=ACME&stage=automatic`);
+    assert.equal(invalid.status, 400);
+    assert.deepEqual(await invalid.json(), { code: "INVALID_RESEARCH_STAGE", error: "Research stage must be fast or deep." });
+  });
+  assert.deepEqual(calls.map((call) => call.options.stage), ["fast", "deep"]);
+});
+
 test("analyze replaces provider-authored score values deterministically", async () => {
   const providerReport = structuredClone(completeReport);
   providerReport.scores.dilution_historical_severity.value = 10;

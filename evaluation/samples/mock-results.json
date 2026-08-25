@@ -22,7 +22,7 @@
         { "score_key": "catalyst_strength", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
         { "score_key": "near_term_setup_quality", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null }
       ],
-      "latency_ms": 12, "estimated_cost_usd": 0, "clarity_rating": 5
+      "latency_ms": 4200, "input_tokens": 12000, "output_tokens": 4500, "web_search_calls": 2, "estimated_cost_usd": 0.08, "clarity_rating": 5
     },
     {
       "case_id": "mock-xyz-partial", "result_kind": "research_report",
@@ -37,7 +37,7 @@
         { "score_key": "catalyst_strength", "category": "catalysts_news", "expected_state": "unknown", "expected_value": null, "actual_state": "unknown", "actual_value": null },
         { "score_key": "near_term_setup_quality", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null }
       ],
-      "latency_ms": 9, "estimated_cost_usd": 0, "clarity_rating": 4
+      "latency_ms": 8500, "input_tokens": 10000, "output_tokens": 3500, "web_search_calls": 2, "estimated_cost_usd": 0.0675, "clarity_rating": 4
     },
     { "case_id": "invalid-empty", "result_kind": "deterministic_app_result", "status": 400, "code": "TICKER_REQUIRED" },
     { "case_id": "invalid-punctuation", "result_kind": "deterministic_app_result", "status": 400, "code": "INVALID_TICKER" },

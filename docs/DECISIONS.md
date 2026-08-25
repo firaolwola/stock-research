@@ -411,3 +411,21 @@ major workflows, or priorities.
 
 **Why:** The repository should remain aligned without requiring separate
 documentation requests, while product direction remains owner-controlled.
+# 2026-08-25 — Keep deep research deliberate and report operations separately
+
+**Status:** Accepted
+
+**Decision:** Default to a bounded fast request and require an explicit user
+action for the larger deep-stage budget. Return latency, provider usage,
+web-search count, estimated cost, and budget status outside the versioned report
+contract. Keep completion and coverage states authoritative for research
+completeness.
+
+**Why:** Automatic escalation can silently increase latency and spend, while an
+operationally cheap response is not necessarily evidence-complete. Separate
+telemetry makes both dimensions inspectable.
+
+**Consequence:** Fast reports use a 15-second failure deadline and 5,000 output
+tokens; deep reports use 60 seconds and 10,000. Neither retries automatically.
+Costs use a dated pricing snapshot and become unknown when provider usage is
+missing. Live calibration remains subject to explicit bounded approval.

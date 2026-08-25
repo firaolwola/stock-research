@@ -9,6 +9,18 @@ token-free mock research clients now return this object shape, and the server
 validates both JSON Schema and cross-record semantics before responding. Reports
 are research aids, not personalized investment advice.
 
+Operational telemetry is intentionally outside this contract. A successful
+`/api/analyze` response contains `{ ticker, report, operations }`; `operations`
+records stage, latency, tokens, web-search calls, estimated cost, pricing
+version, and fast-budget status. This keeps performance metadata from changing
+the meaning or validity of a stored report. See [PERFORMANCE.md](PERFORMANCE.md).
+
+Operational telemetry is intentionally outside this contract. A successful
+`/api/analyze` response contains `{ ticker, report, operations }`; `operations`
+records stage, latency, tokens, web-search calls, estimated cost, pricing
+version, and fast-budget status. This keeps performance metadata from changing
+the meaning or validity of a stored report. See [PERFORMANCE.md](PERFORMANCE.md).
+
 ## Versioning
 
 Every report must include `schema_version: "4.0.0"`. The schema `$id` also ends

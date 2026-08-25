@@ -9,9 +9,10 @@ test("ACME always returns the same deterministic fixture-backed report", async (
   const first = await client.researchTicker(DEMO_TICKER);
   const second = await client.researchTicker(DEMO_TICKER);
 
-  assert.deepEqual(first, report);
-  assert.deepEqual(second, report);
-  assert.notEqual(first, second);
+  assert.deepEqual(first.report, report);
+  assert.deepEqual(second.report, report);
+  assert.notEqual(first.report, second.report);
+  assert.equal(first.operations.estimated_cost_usd, 0);
 });
 
 test("mock client rejects unsupported tickers", async () => {
@@ -28,6 +29,6 @@ test("mock client serves deterministic complete, partial, and pending reports", 
   const client = createMockResearchClient([complete, partial, pending]);
 
   assert.deepEqual(DEMO_TICKERS, ["ACME", "XYZ", "PENDING"]);
-  assert.equal((await client.researchTicker("XYZ")).metadata.completion_status, "partial");
-  assert.equal((await client.researchTicker("PENDING")).metadata.completion_status, "pending");
+  assert.equal((await client.researchTicker("XYZ")).report.metadata.completion_status, "partial");
+  assert.equal((await client.researchTicker("PENDING")).report.metadata.completion_status, "pending");
 });
