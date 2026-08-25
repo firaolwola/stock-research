@@ -1,4 +1,5 @@
 import express from "express";
+import { validateTicker } from "./ticker-validation.js";
 
 export function createApp({ researchClient, logger = console, runtime = { mode: "live", demoTicker: null } } = {}) {
   if (!researchClient || typeof researchClient.researchTicker !== "function") {
@@ -13,8 +14,11 @@ export function createApp({ researchClient, logger = console, runtime = { mode: 
   });
 
   app.get("/api/analyze", async (req, res) => {
-    const ticker = String(req.query.ticker || "").trim().toUpperCase();
-    if (!ticker) return res.status(400).json({ error: "Please enter a ticker." });
+    const validation = validateTicker(req.query.ticker);
+    if (!validation.valid) {
+      return res.status(400).json({ code: validation.error.code, error: validation.error.message });
+    }
+    const { ticker } = validation;
 
     try {
       const answer = await researchClient.researchTicker(ticker);
@@ -23,7 +27,7 @@ export function createApp({ researchClient, logger = console, runtime = { mode: 
       }
       return res.json({ ticker, answer });
     } catch (error) {
-      logger.error(`Research failed for ${ticker}:`, error);
+      logger.error(`Research request failed for ${ticker}.`);
       return res.status(500).json({ error: "Research failed. Please try again." });
     }
   });

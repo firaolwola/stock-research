@@ -86,6 +86,8 @@
         <input
             id="ticker"
             placeholder="Enter ticker... Example: BULL"
+            maxlength="15"
+            autocomplete="off"
         >
 
         <button onclick="analyzeStock()">
@@ -101,6 +103,23 @@
 
 
     <script>
+
+        const tickerPattern = /^[A-Z0-9]+(?:[.-][A-Z0-9]+)*$/;
+
+        function validateTickerInput(value) {
+            const ticker = String(value || "").trim().toUpperCase();
+            if (!ticker) {
+                return { valid: false, ticker, message: "Please enter a ticker." };
+            }
+            if (ticker.length > 15 || !tickerPattern.test(ticker)) {
+                return {
+                    valid: false,
+                    ticker,
+                    message: "Ticker must be 1–15 letters or numbers, with single periods or hyphens between segments."
+                };
+            }
+            return { valid: true, ticker, message: "" };
+        }
 
         async function showRuntimeMode() {
             try {
@@ -135,17 +154,22 @@
                 document.getElementById("results");
 
 
-            const ticker =
-                tickerInput.value.trim().toUpperCase();
+            const validation =
+                validateTickerInput(tickerInput.value);
 
 
-            if (!ticker) {
+            if (!validation.valid) {
 
                 status.textContent =
-                    "Enter a stock ticker.";
+                    validation.message;
+
+                results.textContent = "";
 
                 return;
             }
+
+            const ticker = validation.ticker;
+            tickerInput.value = ticker;
 
 
             status.textContent =

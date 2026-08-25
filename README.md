@@ -40,7 +40,13 @@ reliably sourced. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
    ```text
    OPENAI_API_KEY=your_key_here
+   PORT=3000
    ```
+
+   `OPENAI_API_KEY` is required for the real application. Startup fails before
+   listening when it is missing or blank. `PORT` is optional and defaults to
+   `3000`; set it to an integer from `1` through `65535` to override the real
+   app's listening port.
 
 3. Start the application:
 
@@ -72,6 +78,17 @@ OpenAI client.
 
 The real application remains on <http://localhost:3000>, so both commands can
 run in separate terminals at the same time without a port conflict.
+
+## Ticker input syntax
+
+Ticker input is normalized to uppercase after trimming surrounding whitespace.
+The server accepts 1–15 letters or digits with optional single periods or
+hyphens between segments, such as `ACME`, `BRK.B`, `BF-B`, or `7203`. Leading,
+trailing, repeated, or other punctuation and embedded whitespace are rejected
+with a stable validation error.
+
+Passing syntax validation only means the identifier is well formed. It does not
+prove the security exists, is listed, or is supported by available research.
 
 ## Testing
 
