@@ -3,6 +3,25 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Require explicit evidence when carrying issuer history
+
+**Status:** Accepted
+
+**Decision:** Resolve the current security and issuer before historical research.
+Treat prior ticker/name identities as confirmed only when sourced confirmed
+claims provide bounded effective dates and high or medium linkage confidence.
+Require dated split, dilution, offering, compliance, and warning items within a
+prior-identity period to reference that linkage claim.
+
+**Why:** Searching only the current ticker can hide material history, while
+automatically joining a merely similar predecessor can attach another issuer's
+risks. The report must make both the history and the join evidence inspectable.
+
+**Consequence:** The server rejects carried history with missing or unresolved
+lineage. Ambiguous predecessors remain `unknown` or `limited_coverage`, and the
+live research prompt follows the same rule. No new provider or schema version is
+required.
+
 ## 2026-08-24 — Keep evidence states semantically distinct
 
 **Status:** Accepted

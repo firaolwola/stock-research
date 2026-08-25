@@ -1,0 +1,6 @@
+{
+  "description": "A possible predecessor remains unresolved and cannot carry its event history.",
+  "prior_identity": { "name": "Possible Acme Predecessor", "ticker": "PACM", "effective_from": null, "effective_to": null, "linkage_state": "unknown", "linkage_confidence": "unknown" },
+  "event": { "section": "dilution", "kind": "offering", "event_date": "2020-04-10" },
+  "expected_section_state": "unknown"
+}

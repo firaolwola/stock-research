@@ -8,8 +8,10 @@ material risks before deeper research.
 The current prototype requests a validated, versioned stock-report object from
 the OpenAI Responses API with web search. The report contract covers identity,
 reverse splits, dilution, dividends, warnings, financial context, catalysts,
-scores, claims, and sources. Evidence population, issuer resolution, scoring
-calibration, dashboard rendering, and comparison remain active roadmap work.
+scores, claims, and sources. Issuer identity now follows confirmed prior names
+and tickers so dated material history is not lost across renames or rebrands.
+Scoring calibration, dashboard rendering, and comparison remain active roadmap
+work.
 
 This application is a research aid, not financial advice.
 
@@ -24,6 +26,10 @@ The first end-to-end prototype is working:
    carry reduced confidence, and conflicting evidence remains unknown or limited.
    Unavailable evidence is distinct from a bounded search that found nothing,
    while security-specific inapplicability is reported without implying a gap.
+   Confirmed prior identities require sourced linkage claims, effective dates,
+   and meaningful confidence. Historical split, dilution, offering, compliance,
+   and warning items from those periods reference the linkage explicitly;
+   ambiguous predecessors remain unknown or limited coverage.
 4. The fast-stage OpenAI request has a 15-second timeout and no automatic
    retries. Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
@@ -31,8 +37,8 @@ The first end-to-end prototype is working:
 5. The application displays the resulting report as formatted JSON until the
    dashboard issue is completed.
 
-The current development priority is making reports structured, traceable, and
-reliably sourced. See [docs/ROADMAP.md](docs/ROADMAP.md).
+The current development priority is rendering the validated report as a fast
+decision dashboard. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Requirements
 
@@ -110,9 +116,10 @@ npm test
 ```
 
 The suite uses Node's built-in test runner, injected fake research clients, and
-local fixtures. It does not require `OPENAI_API_KEY` and does not make live
-OpenAI calls. Run `npm run validate:reports` when you only need to validate the
-complete and partial report fixtures.
+local fixtures, including ticker-change, company-rename, rebrand, delisted, and
+ambiguous-lineage cases. It does not require `OPENAI_API_KEY` and does not make
+live OpenAI calls. Run `npm run validate:reports` when you only need to validate
+the complete and partial report fixtures.
 
 Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.

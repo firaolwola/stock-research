@@ -47,6 +47,10 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.match(requests[0].input, /not_found means a documented, bounded search/);
   assert.match(requests[0].input, /not_applicable means the check does not apply/);
   assert.match(requests[0].input, /A safe partial report is preferable to guessing/);
+  assert.match(requests[0].input, /Resolve identity before researching history/);
+  assert.match(requests[0].input, /Add the relevant lineage claim ID/);
+  assert.match(requests[0].input, /Never carry an event through an unknown or limited-coverage predecessor relationship/);
+  assert.match(requests[0].input, /add a structured issuer coverage limitation/);
   assert.match(requests[0].input, /Keep all wording non-advisory/);
   assert.deepEqual(requests[0].text.format, {
     type: "json_schema",

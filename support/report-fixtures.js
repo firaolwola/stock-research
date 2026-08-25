@@ -16,3 +16,9 @@ export function loadReportFixture(name) {
   if (!new Set(["complete", "partial"]).has(name)) throw new TypeError(`Unknown report fixture: ${name}`);
   return loadJson("fixtures", "reports", `${name}.json`);
 }
+
+export function loadLineageFixture(name) {
+  const supported = new Set(["ticker-change", "company-rename", "rebrand", "delisted", "ambiguous"]);
+  if (!supported.has(name)) throw new TypeError(`Unknown lineage fixture: ${name}`);
+  return loadJson("fixtures", "lineage", `${name}.json`);
+}
