@@ -5,10 +5,11 @@ external screener identifies a moving or news-relevant ticker, it is intended to
 produce a fast, evidence-backed view of the catalyst, company context, and
 material risks before deeper research.
 
-The current prototype researches reverse splits, dilution, dividends,
-exchange-compliance issues, and recent news using the OpenAI Responses API with
-web search. Broader financial, issuer-lineage, catalyst, and comparison work is
-planned but not yet implemented.
+The current prototype requests a validated, versioned stock-report object from
+the OpenAI Responses API with web search. The report contract covers identity,
+reverse splits, dilution, dividends, warnings, financial context, catalysts,
+scores, claims, and sources. Evidence population, issuer resolution, scoring
+calibration, dashboard rendering, and comparison remain active roadmap work.
 
 This application is a research aid, not financial advice.
 
@@ -17,8 +18,10 @@ This application is a research aid, not financial advice.
 The first end-to-end prototype is working:
 
 1. A user enters a ticker in the browser.
-2. The Express server sends a focused research request to OpenAI.
-3. The application displays the resulting report.
+2. The Express server requests JSON Schema output from OpenAI.
+3. The server validates the schema and cross-record semantics.
+4. The application displays the resulting report as formatted JSON until the
+   dashboard issue is completed.
 
 The current development priority is making reports structured, traceable, and
 reliably sourced. See [docs/ROADMAP.md](docs/ROADMAP.md).
@@ -69,7 +72,7 @@ npm run dev-test
 
 Open <http://localhost:3001>. The page displays a **Mock testing mode** banner
 and tells you to enter the dummy ticker `ACME`. Submitting `ACME` always returns
-the same deterministic report derived from the validated complete schema
+the same deterministic structured report derived from the validated complete schema
 fixture. Other tickers are intentionally unsupported in this mode.
 
 Press `Ctrl+C` in the terminal to stop the mock server. Use `npm start` for the

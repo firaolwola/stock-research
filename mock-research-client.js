@@ -12,12 +12,10 @@ export function createMockResearchClient(report) {
     throw new TypeError(`Mock report must use ticker ${DEMO_TICKER}`);
   }
 
-  const deterministicAnswer = JSON.stringify(report, null, 2);
-
   return {
     async researchTicker(ticker) {
       if (ticker !== DEMO_TICKER) throw new UnsupportedDemoTickerError(ticker);
-      return deterministicAnswer;
+      return structuredClone(report);
     }
   };
 }

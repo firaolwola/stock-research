@@ -7,12 +7,13 @@ delivery dates. GitHub Issues are the executable backlog.
 
 ## Current state
 
-The end-to-end ticker search works locally, but it returns an unstructured text
-report. A versioned stock-report contract and representative fixtures now define
-the target structure; live structured-output integration remains incomplete.
-Source population, issuer resolution, scoring calibration, broader automated
-tests, latency controls, and production safeguards also remain incomplete. A
-token-free mock mode supports repeatable manual frontend and integration checks.
+The end-to-end ticker search now requests and validates the versioned structured
+stock-report contract before returning a complete or safe partial report. The
+browser temporarily displays structured reports as formatted JSON until the fast
+dashboard is implemented. Source population, issuer resolution, scoring
+calibration, broader automated tests, latency controls, and production safeguards
+remain incomplete. A token-free mock mode supports repeatable manual frontend and
+integration checks.
 
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
@@ -35,17 +36,16 @@ after an external screener identifies a moving or news-relevant ticker.
 
 ### Priority order
 
-1. [#2 — Return validated structured research from the server](https://github.com/firaolwola/stock-research/issues/2)
-2. [#9 — Add request timeouts and upstream API error handling](https://github.com/firaolwola/stock-research/issues/9)
-3. [#3 — Attach dated, typed sources to material claims](https://github.com/firaolwola/stock-research/issues/3)
-4. [#5 — Handle unknown, unavailable, incomplete, and inapplicable evidence](https://github.com/firaolwola/stock-research/issues/5)
-5. [#11 — Resolve issuer identity and prior ticker/name lineage](https://github.com/firaolwola/stock-research/issues/11)
-6. [#4 — Render the fast decision dashboard](https://github.com/firaolwola/stock-research/issues/4)
-7. [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8)
-8. [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12)
-9. [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13)
-10. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
-11. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
+1. [#9 — Add request timeouts and upstream API error handling](https://github.com/firaolwola/stock-research/issues/9)
+2. [#3 — Attach dated, typed sources to material claims](https://github.com/firaolwola/stock-research/issues/3)
+3. [#5 — Handle unknown, unavailable, incomplete, and inapplicable evidence](https://github.com/firaolwola/stock-research/issues/5)
+4. [#11 — Resolve issuer identity and prior ticker/name lineage](https://github.com/firaolwola/stock-research/issues/11)
+5. [#4 — Render the fast decision dashboard](https://github.com/firaolwola/stock-research/issues/4)
+6. [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8)
+7. [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12)
+8. [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13)
+9. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
+10. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
 
 Issues with satisfied dependencies may be reordered when implementation evidence
 supports it, but dependency changes must remain explicit in the affected issues.
@@ -110,6 +110,7 @@ and place in the fast or deep stage are clear.
 ## Completed
 
 - [x] [#1 — Define the structured stock-report schema](https://github.com/firaolwola/stock-research/issues/1).
+- [x] [#2 — Return validated structured research from the server](https://github.com/firaolwola/stock-research/issues/2).
 - [x] [#6 — Add ticker validation and startup configuration checks](https://github.com/firaolwola/stock-research/issues/6).
 - [x] [#7 — Create the isolated backend test foundation](https://github.com/firaolwola/stock-research/issues/7).
 - [x] [#22 — Add a manual mock/demo testing mode](https://github.com/firaolwola/stock-research/issues/22).
