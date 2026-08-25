@@ -38,8 +38,9 @@ The first end-to-end prototype is working:
    all research sections, coverage and issuer context, and claim-linked sources
    in a responsive dashboard.
 
-The current development priority is building the representative ticker
-evaluation set. See [docs/ROADMAP.md](docs/ROADMAP.md).
+The repository now includes a dated representative ticker evaluation set and a
+token-free calibration run. Scoring calibration remains active roadmap work.
+See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Requirements
 
@@ -131,6 +132,12 @@ not require `OPENAI_API_KEY` and does not make live OpenAI calls. Run
 `npm run validate:reports` when you only need to validate the complete and
 partial report fixtures.
 
+Run `npm run evaluate:dry` to validate and score the checked-in token-free
+evaluation sample. The cases, rubric, date rules, and explicit approval boundary
+for any bounded paid run are documented in
+[docs/EVALUATION.md](docs/EVALUATION.md). Routine tests and dry runs never make
+OpenAI calls.
+
 Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
@@ -140,5 +147,6 @@ Retry a failed search manually after the displayed error when appropriate.
 - [Product definition](docs/PRODUCT.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Stock report contract](docs/REPORT_SCHEMA.md)
+- [Research evaluation set](docs/EVALUATION.md)
 - [Decision log](docs/DECISIONS.md)
 - [Repository instructions](AGENTS.md)

@@ -1,0 +1,139 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-08-25",
+  "purpose": "Dated expectations for evaluating research quality; not investment advice and not brittle full-answer snapshots.",
+  "live_evaluation_policy": {
+    "requires_explicit_approval": true,
+    "max_cases_per_approved_run": 5,
+    "automatic_or_recurring_runs": false,
+    "require_predeclared_case_ids": true,
+    "require_recorded_token_web_search_costs": true
+  },
+  "rubric": {
+    "material_risk_recall": { "target": 0.95, "report_by_category": true, "unit": "known high- or medium-materiality facts" },
+    "completeness": { "measure": "expected evidence categories explicitly addressed" },
+    "source_quality": { "measure": "primary-source share and source metadata quality" },
+    "factual_support": { "measure": "detected claims supported by cited evidence" },
+    "lineage": { "measure": "confirmed predecessor facts carried only through supported identity links" },
+    "uncertainty": { "measure": "expected unknown, limited-coverage, or not-applicable states preserved without favorable inference" },
+    "latency": { "measure": "per-case milliseconds; report distribution only for approved live samples" },
+    "cost": { "measure": "per-case estimated USD from recorded usage and web searches" },
+    "clarity": { "measure": "manual 1–5 rating for concise, non-advisory, decision-focused wording" },
+    "failure_partition": { "measure": "application/transport failures reported separately from research misses" }
+  },
+  "cases": [
+    {
+      "id": "mock-acme-complete", "kind": "research_quality", "ticker": "ACME", "as_of": "2026-08-24", "size_bucket": "not_applicable", "security_type": "common_stock", "listing_profile": "listed", "catalyst_profile": "strong",
+      "why": "Token-free calibration case for a complete report with issuer lineage, dilution, dividend, financial context, and a strong but partly conflicting catalyst.",
+      "expected_evidence": ["security_and_listing", "issuer_lineage", "reverse_splits", "dilution_offerings", "dividends", "compliance", "financial_context", "catalysts_news", "uncertainty"],
+      "known_material_facts": [
+        { "id": "acme-lineage", "category": "issuer_lineage", "description": "The fixture links Old Acme Corp. and OLDA to the current issuer.", "materiality": "medium", "expected_state": "confirmed", "sources": [{ "title": "Validated complete report fixture", "url": "https://stock-research.local/fixtures/reports/complete.json", "published_date": "2026-08-24", "source_type": "other_primary" }] },
+        { "id": "acme-offering", "category": "dilution_offerings", "description": "The fixture contains a material registered offering.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Validated complete report fixture", "url": "https://stock-research.local/fixtures/reports/complete.json", "published_date": "2026-08-24", "source_type": "other_primary" }] },
+        { "id": "acme-catalyst-conflict", "category": "uncertainty", "description": "Conflicting contract-value evidence remains unknown while the contract catalyst is confirmed.", "materiality": "medium", "expected_state": "unknown", "sources": [] }
+      ]
+    },
+    {
+      "id": "mock-xyz-partial", "kind": "research_quality", "ticker": "XYZ", "as_of": "2026-08-24", "size_bucket": "not_applicable", "security_type": "warrant", "listing_profile": "listed", "catalyst_profile": "weak",
+      "why": "Token-free calibration case for a nonstandard security whose lineage, financial, catalyst, and historical evidence remains incomplete.",
+      "expected_evidence": ["security_and_listing", "issuer_lineage", "reverse_splits", "dilution_offerings", "warrants_convertibles", "dividends", "compliance", "going_concern_accounting", "financial_context", "catalysts_news", "uncertainty"],
+      "known_material_facts": [
+        { "id": "xyz-warrant", "category": "security_and_listing", "description": "The instrument is a listed warrant rather than common stock.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Validated partial report fixture", "url": "https://stock-research.local/fixtures/reports/partial.json", "published_date": "2026-08-24", "source_type": "other_primary" }] },
+        { "id": "xyz-lineage-gap", "category": "issuer_lineage", "description": "The possible predecessor relationship is unresolved.", "materiality": "high", "expected_state": "limited_coverage", "sources": [] },
+        { "id": "xyz-catalyst-gap", "category": "catalysts_news", "description": "No sufficiently supported catalyst conclusion can be made from the fixture evidence.", "materiality": "medium", "expected_state": "unknown", "sources": [] }
+      ]
+    },
+    {
+      "id": "aapl-large-baseline", "kind": "research_quality", "ticker": "AAPL", "as_of": "2026-05-15", "size_bucket": "large", "security_type": "common_stock", "listing_profile": "listed", "catalyst_profile": "strong",
+      "why": "Large-cap baseline for current dividend, financial filing, listing identity, and a clearly dated earnings catalyst without manufacturing red flags.",
+      "expected_evidence": ["security_and_listing", "dividends", "financial_context", "catalysts_news", "reverse_splits", "dilution_offerings", "compliance"],
+      "known_material_facts": [
+        { "id": "aapl-dividend-2026q2", "category": "dividends", "description": "Apple declared a $0.27 regular cash dividend on April 30, 2026, payable May 14, 2026.", "materiality": "medium", "expected_state": "confirmed", "sources": [{ "title": "Apple Dividend History", "url": "https://investor.apple.com/dividend-history/default.aspx", "published_date": "2026-04-30", "source_type": "company_release" }] }
+      ]
+    },
+    {
+      "id": "amc-mid-dilution", "kind": "research_quality", "ticker": "AMC", "as_of": "2024-07-25", "size_bucket": "mid", "security_type": "common_stock", "listing_profile": "listed", "catalyst_profile": "weak",
+      "why": "Mid-cap case where debt refinancing must not obscure material equity issuance and dilution history.",
+      "expected_evidence": ["security_and_listing", "dilution_offerings", "warrants_convertibles", "financial_context", "catalysts_news"],
+      "known_material_facts": [
+        { "id": "amc-debt-equity-exchange", "category": "dilution_offerings", "description": "AMC agreed to issue 23,280,295 common shares for approximately $163.85 million principal amount of second-lien notes.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "AMC May 15, 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1411579/000110465924061550/tm2414552d1_8k.htm", "published_date": "2024-05-15", "source_type": "sec_filing" }] },
+        { "id": "amc-refinancing-2024", "category": "financial_context", "description": "AMC completed transactions refinancing about $1.6 billion of 2026 debt to later maturities.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "AMC July 24, 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1411579/000110465924081453/tm2419663d1_8k.htm", "published_date": "2024-07-24", "source_type": "sec_filing" }] }
+      ]
+    },
+    {
+      "id": "bior-small-lineage", "kind": "research_quality", "ticker": "BIOR", "as_of": "2024-10-29", "size_bucket": "small", "security_type": "common_stock", "listing_profile": "listed", "catalyst_profile": "weak",
+      "why": "Small-cap rename and ticker-lineage case with repeated reverse splits, an offering, and concurrent warrants.",
+      "expected_evidence": ["security_and_listing", "issuer_lineage", "reverse_splits", "dilution_offerings", "warrants_convertibles", "financial_context"],
+      "known_material_facts": [
+        { "id": "bior-progenity-lineage", "category": "issuer_lineage", "description": "Biora Therapeutics was formerly Progenity, Inc.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Biora Therapeutics 2022 Annual Report", "url": "https://www.sec.gov/Archives/edgar/data/1580063/000119312523122388/d463897dars.pdf", "published_date": "2023-04-27", "source_type": "sec_filing" }] },
+        { "id": "bior-reverse-splits", "category": "reverse_splits", "description": "The issuer effected 1-for-25 and later 1-for-10 reverse stock splits within the evaluation history.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Biora October 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1580063/000119312524246602/d899591d8k.htm", "published_date": "2024-10-29", "source_type": "sec_filing" }] },
+        { "id": "bior-offering-warrants", "category": "warrants_convertibles", "description": "The October 2024 financing combined a registered direct common-stock offering with unregistered warrants.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Biora October 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1580063/000119312524246602/d899591d8k.htm", "published_date": "2024-10-29", "source_type": "sec_filing" }] }
+      ]
+    },
+    {
+      "id": "muln-micro-compound-risk", "kind": "research_quality", "ticker": "MULN", "as_of": "2025-06-03", "size_bucket": "micro", "security_type": "common_stock", "listing_profile": "listed", "catalyst_profile": "weak",
+      "why": "Micro-cap compound-risk case spanning repeated reverse splits, listing compliance, convertible notes, and warrants.",
+      "expected_evidence": ["security_and_listing", "reverse_splits", "dilution_offerings", "warrants_convertibles", "compliance", "financial_context", "catalysts_news"],
+      "known_material_facts": [
+        { "id": "muln-reverse-split-2025", "category": "reverse_splits", "description": "Mullen effected a 1-for-100 reverse stock split on June 2, 2025 after earlier reverse splits.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Mullen June 2025 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1499961/000182912625004146/mullenautomotive_8k.htm", "published_date": "2025-06-02", "source_type": "sec_filing" }] },
+        { "id": "muln-listing-compliance", "category": "compliance", "description": "Nasdaq notified Mullen of continued-listing deficiencies, including the market-value requirement.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Mullen February 2025 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1499961/000182912625001345/mullenautomotive_8k.htm", "published_date": "2025-02-28", "source_type": "sec_filing" }] },
+        { "id": "muln-notes-warrants", "category": "warrants_convertibles", "description": "Mullen issued secured convertible notes with five-year common-stock warrants in May 2025.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Mullen June 2025 Financing Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1499961/000182912625004199/mullenautomotive_8k.htm", "published_date": "2025-06-03", "source_type": "sec_filing" }] }
+      ]
+    },
+    {
+      "id": "nio-mid-adr", "kind": "research_quality", "ticker": "NIO", "as_of": "2025-04-08", "size_bucket": "mid", "security_type": "adr", "listing_profile": "listed", "catalyst_profile": "unknown",
+      "why": "Foreign-issuer ADR case requiring correct security type, home-market/SEC evidence boundaries, and explicit limited coverage where sources are not comparable.",
+      "expected_evidence": ["security_and_listing", "financial_context", "catalysts_news", "uncertainty", "compliance"],
+      "known_material_facts": [
+        { "id": "nio-adr-context", "category": "security_and_listing", "description": "The NYSE-listed NIO instrument is an American depositary share representing Class A ordinary shares.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "NIO 2024 Annual Report", "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925035522/nio-20241231x20f.htm", "published_date": "2025-04-08", "source_type": "sec_filing" }] },
+        { "id": "nio-cross-market-coverage", "category": "uncertainty", "description": "Any unavailable home-market or non-English evidence must remain limited coverage rather than be inferred favorable.", "materiality": "medium", "expected_state": "limited_coverage", "sources": [] }
+      ]
+    },
+    {
+      "id": "djt-small-rebrand-warrant", "kind": "research_quality", "ticker": "DJTWW", "as_of": "2024-03-26", "size_bucket": "small", "security_type": "warrant", "listing_profile": "listed", "catalyst_profile": "strong",
+      "why": "Nonstandard warrant plus SPAC-to-operating-company name/ticker lineage and business-combination catalyst.",
+      "expected_evidence": ["security_and_listing", "issuer_lineage", "warrants_convertibles", "catalysts_news", "financial_context"],
+      "known_material_facts": [
+        { "id": "djt-dwac-lineage", "category": "issuer_lineage", "description": "Digital World Acquisition Corp. became Trump Media & Technology Group Corp. after the business combination.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Trump Media March 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1849635/000114036124016719/ef20025342_8k.htm", "published_date": "2024-03-26", "source_type": "sec_filing" }] },
+        { "id": "djt-public-warrant", "category": "warrants_convertibles", "description": "DJTWW represented public redeemable warrants exercisable for common stock at $11.50 per whole warrant.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Trump Media March 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1849635/000119312524077711/d715908d8k.htm", "published_date": "2024-03-26", "source_type": "sec_filing" }] },
+        { "id": "djt-business-combination", "category": "catalysts_news", "description": "Completion of the business combination and start of DJT/DJTWW trading was a specific confirmed catalyst.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Business Combination Completion Release", "url": "https://www.sec.gov/Archives/edgar/data/1849635/000119312524076188/d817032dex991.htm", "published_date": "2024-03-25", "source_type": "company_release" }] }
+      ]
+    },
+    {
+      "id": "tqqq-etf-applicability", "kind": "research_quality", "ticker": "TQQQ", "as_of": "2026-08-25", "size_bucket": "not_applicable", "security_type": "etf", "listing_profile": "listed", "catalyst_profile": "not_applicable",
+      "why": "ETF applicability case ensuring operating-company lineage and corporate financing checks are not presented as missing or favorable evidence.",
+      "expected_evidence": ["security_and_listing", "dividends", "financial_context", "uncertainty"],
+      "known_material_facts": [
+        { "id": "tqqq-etf-type", "category": "security_and_listing", "description": "TQQQ is an exchange-traded fund, not operating-company common stock.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "ProShares UltraPro QQQ Fund Page", "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/tqqq", "published_date": "2026-08-25", "source_type": "company_filing" }] },
+        { "id": "tqqq-company-checks-na", "category": "uncertainty", "description": "Issuer operating-company dilution and catalyst constructs that do not apply must be not_applicable, not unknown or low risk.", "materiality": "high", "expected_state": "not_applicable", "sources": [] }
+      ]
+    },
+    {
+      "id": "tupbq-delisted-going-concern", "kind": "research_quality", "ticker": "TUPBQ", "as_of": "2024-11-27", "size_bucket": "micro", "security_type": "common_stock", "listing_profile": "otc", "catalyst_profile": "weak",
+      "why": "OTC/delisted bankruptcy case combining ticker transition, going-concern risk, and exchange removal.",
+      "expected_evidence": ["security_and_listing", "issuer_lineage", "compliance", "going_concern_accounting", "financial_context", "catalysts_news"],
+      "known_material_facts": [
+        { "id": "tup-tupbq-lineage", "category": "issuer_lineage", "description": "After NYSE suspension, Tupperware common stock traded on the OTC Expert Market as TUPBQ.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Tupperware November 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1008654/000119312524268115/d869890d8k.htm", "published_date": "2024-11-27", "source_type": "sec_filing" }] },
+        { "id": "tup-delisting", "category": "compliance", "description": "NYSE removed Tupperware common stock following the Chapter 11 filing and suspension.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "NYSE Tupperware Form 25 Notice", "url": "https://www.sec.gov/Archives/edgar/data/876661/000087666124000918/ruleprovisionnotice.htm", "published_date": "2024-10-04", "source_type": "exchange_notice" }] },
+        { "id": "tup-going-concern-bankruptcy", "category": "going_concern_accounting", "description": "The issuer entered Chapter 11 and disclosed substantial uncertainty about funding operations and continuing as a going concern.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Tupperware November 2024 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1008654/000119312524268115/d869890d8k.htm", "published_date": "2024-11-27", "source_type": "sec_filing" }] }
+      ]
+    },
+    {
+      "id": "smci-large-accounting", "kind": "research_quality", "ticker": "SMCI", "as_of": "2025-02-26", "size_bucket": "large", "security_type": "common_stock", "listing_profile": "listed", "catalyst_profile": "weak",
+      "why": "Large-cap accounting/compliance case ensuring filing delays and auditor-related uncertainty are not buried by operating catalysts.",
+      "expected_evidence": ["security_and_listing", "compliance", "going_concern_accounting", "financial_context", "catalysts_news", "uncertainty"],
+      "known_material_facts": [
+        { "id": "smci-delinquent-reports", "category": "compliance", "description": "Super Micro received a Nasdaq noncompliance notice because its annual and quarterly reports were delayed, before regaining filing compliance.", "materiality": "high", "expected_state": "confirmed", "sources": [{ "title": "Super Micro February 2025 Form 8-K", "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536525000007/smci-20250221.htm", "published_date": "2025-02-26", "source_type": "sec_filing" }] },
+        { "id": "smci-auditor-uncertainty", "category": "going_concern_accounting", "description": "The accounting review and former auditor's resignation required explicit accounting-risk treatment rather than an unsupported clean conclusion.", "materiality": "high", "expected_state": "limited_coverage", "sources": [] }
+      ]
+    },
+    {
+      "id": "invalid-empty", "kind": "deterministic_app", "ticker": "", "as_of": "2026-08-25", "why": "Separates an empty-input boundary failure from research-quality recall.", "expected_app_result": { "status": 400, "code": "TICKER_REQUIRED" }
+    },
+    {
+      "id": "invalid-punctuation", "kind": "deterministic_app", "ticker": "A/B", "as_of": "2026-08-25", "why": "Separates malformed punctuation rejection from an unknown or unsupported security.", "expected_app_result": { "status": 400, "code": "INVALID_TICKER" }
+    },
+    {
+      "id": "invalid-too-long", "kind": "deterministic_app", "ticker": "ABCDEFGHIJKLMNOP", "as_of": "2026-08-25", "why": "Exercises the deterministic 15-character server boundary.", "expected_app_result": { "status": 400, "code": "INVALID_TICKER" }
+    }
+  ]
+}

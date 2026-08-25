@@ -337,6 +337,21 @@ refresh or change detection.
 Normalized comparison of their most important differences is more valuable than
 placing complete reports side by side.
 
+## 2026-08-25 — Evaluate dated facts and app reliability separately
+
+**Status:** Accepted
+
+**Decision:** Maintain a versioned representative set of dated, fact-level
+evidence expectations rather than exact report prose. Report material-risk
+recall overall and by category with source quality, factual support, issuer
+lineage, uncertainty, clarity, latency, and cost. Track deterministic application
+failures separately from successful reports that miss research facts. Paid live
+runs require explicit approval and a predeclared bound; token-free fixtures are
+the routine calibration path.
+
+**Why:** Stable evidence expectations can reveal regressions without rewarding
+one phrasing or hiding operational failures inside research-quality scores.
+
 ## 2026-08-24 — Maintain approved product context autonomously
 
 **Status:** Accepted
