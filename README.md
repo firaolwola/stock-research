@@ -61,7 +61,7 @@ OpenAI tokens:
 npm run dev-test
 ```
 
-Open <http://localhost:3000>. The page displays a **Mock testing mode** banner
+Open <http://localhost:3001>. The page displays a **Mock testing mode** banner
 and tells you to enter the dummy ticker `ACME`. Submitting `ACME` always returns
 the same deterministic report derived from the validated complete schema
 fixture. Other tickers are intentionally unsupported in this mode.
@@ -69,6 +69,9 @@ fixture. Other tickers are intentionally unsupported in this mode.
 Press `Ctrl+C` in the terminal to stop the mock server. Use `npm start` for the
 normal OpenAI-backed application; mock mode never imports or constructs the
 OpenAI client.
+
+The real application remains on <http://localhost:3000>, so both commands can
+run in separate terminals at the same time without a port conflict.
 
 ## Testing
 

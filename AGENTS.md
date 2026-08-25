@@ -100,8 +100,9 @@ Avoid routine documentation edits for changes that do not affect these areas.
 - Run the relevant automated tests after code changes when tests exist.
 - Manually verify the main ticker-search flow after frontend or integration
   changes.
-- Use `npm run dev-test` with ticker `ACME` for manual frontend and integration
-  checks that do not require live research. This mode must remain token-free.
+- Use `npm run dev-test` at <http://localhost:3001> with ticker `ACME` for manual
+  frontend and integration checks that do not require live research. This mode
+  must remain token-free; the real app stays on <http://localhost:3000>.
 - Add or update tests when changing backend behavior.
 - Do not make a live paid API call solely for verification unless it is necessary
   and within the user's requested scope.

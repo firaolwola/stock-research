@@ -113,6 +113,7 @@ and place in the fast or deep stage are clear.
 - [x] [#1 — Define the structured stock-report schema](https://github.com/firaolwola/stock-research/issues/1).
 - [x] [#7 — Create the isolated backend test foundation](https://github.com/firaolwola/stock-research/issues/7).
 - [x] [#22 — Add a manual mock/demo testing mode](https://github.com/firaolwola/stock-research/issues/22).
+- [x] [#24 — Run manual mock mode on port 3001](https://github.com/firaolwola/stock-research/issues/24).
 - [x] Create the initial Express server and static frontend.
 - [x] Connect the server to the OpenAI Responses API with web search.
 - [x] Confirm the end-to-end ticker search works locally.
