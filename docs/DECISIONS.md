@@ -3,6 +3,21 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Preserve periods and applicability in financial context
+
+**Status:** Accepted
+
+**Decision:** Version the report contract at 3.0.0 and require decision-focused
+financial context for cash, cash burn, revenue, profitability, free cash flow,
+debt, and going-concern evidence. Confirmed values retain units and statement
+periods; trends retain comparison periods. Material liquidity, burn, leverage,
+and going-concern warnings carry severity and rank prominently. Missing,
+non-comparable, or security-inapplicable data stays null and unscored.
+
+**Why:** Financial numbers without their period or comparison basis can mislead,
+while absent operating-company data—especially for nonstandard securities—must
+not look like low risk or healthy finances.
+
 ## 2026-08-25 — Keep catalyst evidence structured and comparisons bounded
 
 **Status:** Accepted

@@ -23,6 +23,10 @@ const catalystFactorLabels = Object.freeze({
   recency: "Recency", specificity: "Specificity", credibility: "Credibility",
   novelty: "Novelty", potential_significance: "Potential significance"
 });
+const financialMetricLabels = Object.freeze({
+  cash: "Cash", cash_burn: "Cash burn", revenue: "Revenue", profitability: "Profitability",
+  free_cash_flow: "Free cash flow", debt: "Debt"
+});
 
 export function validateTickerInput(value) {
   const ticker = String(value || "").trim().toUpperCase();
@@ -47,8 +51,16 @@ export function buildPriorityFindings(report) {
       state: section.state,
       claim_ids: section.claim_ids
     }));
-  return [...claimFindings, ...unresolvedSections]
-    .sort((a, b) => (stateRank[a.state] - stateRank[b.state]) || (materialityRank[a.materiality] - materialityRank[b.materiality]) || a.id.localeCompare(b.id));
+  const financialWarnings = report.financial_assessment.material_warnings.map((warning) => ({
+    id: `financial-${warning.id}`,
+    text: `${warning.title}: ${warning.summary}`,
+    materiality: ["critical", "high"].includes(warning.severity) ? "high" : warning.severity === "medium" ? "medium" : "low",
+    state: warning.state,
+    priority: ["critical", "high"].includes(warning.severity) ? 0 : 1,
+    claim_ids: warning.claim_ids
+  }));
+  return [...financialWarnings, ...claimFindings, ...unresolvedSections]
+    .sort((a, b) => (stateRank[a.state] - stateRank[b.state]) || (materialityRank[a.materiality] - materialityRank[b.materiality]) || ((a.priority ?? 1) - (b.priority ?? 1)) || a.id.localeCompare(b.id));
 }
 export function buildDashboardView(report) {
   const sourcesById = new Map(report.sources.map((source) => [source.id, source]));
@@ -215,6 +227,44 @@ function renderCatalystAssessment(view) {
   appendSourceLinks(implication, view.sourcesForClaims(assessment.near_term_implication.claim_ids)); panel.append(implication);
   return panel;
 }
+function renderFinancialAssessment(view) {
+  const assessment = view.report.financial_assessment;
+  const panel = element("section", "panel financial-assessment");
+  const heading = element("div", "panel-heading");
+  heading.append(element("h2", "", "Financial health context"), badge(assessment.state));
+  panel.append(heading, element("p", "muted", `${assessment.as_of ? `As of ${formatDate(assessment.as_of)}` : "Date unavailable"}${assessment.reporting_currency ? ` · ${assessment.reporting_currency}` : ""}`), element("p", "", assessment.summary));
+  assessment.coverage_notes.forEach((note) => panel.append(element("p", "coverage-note", `Coverage note: ${note}`)));
+
+  const metrics = element("div", "financial-grid");
+  Object.entries(assessment.metrics).forEach(([key, metric]) => {
+    const card = element("article", "section-card");
+    const title = element("div", "section-title"); title.append(element("h3", "", financialMetricLabels[key]), badge(metric.state)); card.append(title);
+    if (metric.value === null) card.append(element("p", "score-state", formatLabel(metric.state)));
+    else card.append(element("p", "financial-value", `${metric.value.toLocaleString()} ${metric.unit}`));
+    const period = metric.period_start && metric.period_end ? `${formatDate(metric.period_start)}–${formatDate(metric.period_end)}` : "Period unavailable";
+    const comparison = metric.comparison_period_start && metric.comparison_period_end ? ` · compared with ${formatDate(metric.comparison_period_start)}–${formatDate(metric.comparison_period_end)}` : "";
+    card.append(element("p", "muted", `${period} · ${formatLabel(metric.trend)}${comparison}`), element("p", "", metric.summary));
+    appendSourceLinks(card, view.sourcesForClaims(metric.claim_ids)); metrics.append(card);
+  });
+  panel.append(metrics);
+
+  const goingConcern = element("article", "section-card");
+  const goingTitle = element("div", "section-title"); goingTitle.append(element("h3", "", "Going concern"), badge(assessment.going_concern.state));
+  goingConcern.append(goingTitle, element("p", "muted", assessment.going_concern.as_of ? `As of ${formatDate(assessment.going_concern.as_of)}` : "Date unavailable"), element("p", "", assessment.going_concern.summary));
+  appendSourceLinks(goingConcern, view.sourcesForClaims(assessment.going_concern.claim_ids)); panel.append(goingConcern);
+
+  if (assessment.material_warnings.length) {
+    const warnings = element("div", "financial-warnings");
+    assessment.material_warnings.forEach((warning) => {
+      const card = element("article", "finding"); card.dataset.priority = ["critical", "high"].includes(warning.severity) ? "high" : warning.severity;
+      const title = element("div", "section-title"); title.append(element("h3", "", warning.title), badge(warning.state));
+      card.append(title, element("p", "muted", `${formatLabel(warning.severity)} severity · ${warning.as_of ? formatDate(warning.as_of) : "Date unavailable"}`), element("p", "", warning.summary));
+      appendSourceLinks(card, view.sourcesForClaims(warning.claim_ids)); warnings.append(card);
+    });
+    panel.append(warnings);
+  }
+  return panel;
+}
 function renderSections(view) {
   const panel = element("section", "panel"); panel.append(element("h2", "", "Research sections")); const grid = element("div", "section-grid");
   view.sections.forEach((section) => {
@@ -239,7 +289,7 @@ function renderSources(view) {
 }
 export function renderDashboard(container, report) {
   const view = buildDashboardView(report);
-  container.replaceChildren(renderHeader(view), renderCoverage(view), renderFindings(view), renderCatalystAssessment(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
+  container.replaceChildren(renderHeader(view), renderCoverage(view), renderFindings(view), renderFinancialAssessment(view), renderCatalystAssessment(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
 }
 async function showRuntimeMode() {
   try {

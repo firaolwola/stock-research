@@ -7,7 +7,7 @@ material risks before deeper research.
 
 The current prototype requests a validated, versioned stock-report object from
 the OpenAI Responses API with web search. The report contract covers identity,
-reverse splits, dilution, dividends, warnings, financial context, structured
+reverse splits, dilution, dividends, warnings, dated financial metrics and trends, structured
 catalyst factors and historical analogues, scores, claims, and sources. Catalyst
 history includes explicit comparison limits and dated reaction windows, or an
 unknown result when no reliable analogue is available. Issuer identity now follows confirmed prior names
@@ -36,7 +36,9 @@ The first end-to-end prototype is working:
    retries. Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
-5. The application renders ranked warnings and unknowns, a dedicated catalyst
+5. The application renders ranked warnings and unknowns, a financial-health
+   panel with period-aligned metrics and prominent liquidity/debt/going-concern
+   warnings, a dedicated catalyst
    assessment with favorable/unfavorable evidence and historical comparisons,
    distinct score groups, all research sections, coverage and issuer context,
    and claim-linked sources in a responsive dashboard.

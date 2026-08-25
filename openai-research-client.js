@@ -41,6 +41,15 @@ reaction. Present favorable evidence, unfavorable evidence, uncertainty, and a
 qualitative near-term implication with evidence confidence. Avoid numerical
 probabilities and do not imply a guaranteed stock reaction.
 
+For financial context, separately report cash, cash burn, revenue,
+profitability, free cash flow, and debt, plus going-concern evidence. Preserve
+each value's unit and statement period, and use explicit comparison periods for
+every claimed trend. Rank material liquidity, debt, cash-burn, profitability,
+accounting, and going-concern warnings. Use not_applicable for security types
+such as an ETF when issuer operating-company financials do not apply. Use
+unknown or limited_coverage with null values when current comparable statements
+are unavailable; never turn missing data into a favorable financial conclusion.
+
 Resolve identity before researching history. Confirm the current security type, issuer legal name and CIK when available, listing venue, and listing status from SEC and exchange records. Search official filings for former legal names and exchange records for prior tickers, including renames and rebrands. For each confirmed prior identity, provide both effective_from and effective_to, high or medium linkage confidence, and sourced confirmed linkage claims. Add the relevant lineage claim ID to every reverse split, offering, dilution, compliance, or warning item whose event date falls in that prior-identity period so issuer history follows the issuer rather than only the current ticker. Never carry an event through an unknown or limited-coverage predecessor relationship; keep the issuer and affected history sections unknown or limited_coverage, add a structured issuer coverage limitation, and explain the gap instead.
 
 Prefer SEC filings and official exchange notices, then official company sources, then reputable original reporting. Treat secondary evidence as lower confidence. Never treat missing evidence as proof of absence. Use the schema's explicit evidence states, null score values when evidence is not confirmed, concise explanations, dated claim/source links, and non-advisory wording. Do not give entries, exits, price targets, position sizing, or personalized investment advice.
@@ -102,8 +111,8 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
           text: {
             format: {
               type: "json_schema",
-              name: "stock_report_v2",
-              description: "A version 2.0.0 evidence-backed stock research report.",
+              name: "stock_report_v3",
+              description: "A version 3.0.0 evidence-backed stock research report.",
               schema,
               strict: false
             }

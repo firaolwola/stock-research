@@ -19,6 +19,11 @@ test("dashboard exposes catalyst factors, analogue limits, reactions, and confid
   }
 });
 
+test("dashboard exposes financial periods, trends, going concern, and warnings", async () => {
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  for (const text of ["Financial health context", "Cash burn", "Free cash flow", "Going concern", "compared with", "financial-warnings"]) assert.match(source, new RegExp(text));
+});
+
 test("priority findings rank unknowns before material confirmed risk evidence", async () => {
   const report = await loadReportFixture("complete");
   const findings = buildPriorityFindings(report);
