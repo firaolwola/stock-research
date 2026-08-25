@@ -1,6 +1,6 @@
 # Product definition
 
-**Last reviewed:** 2026-08-24
+**Last reviewed:** 2026-08-25
 
 ## Product statement
 
@@ -107,6 +107,11 @@ The assessment may use probability-style language, but must avoid false
 precision and must show the favorable evidence, unfavorable evidence, evidence
 quality, and uncertainty behind it. It must not be presented as a personalized
 trade recommendation.
+
+Near-term setup quality describes the strength and limitations of evidence over
+the next five trading days. It is not a predicted return or numeric probability.
+Its catalyst, qualitative implication, and bounded historical-reaction inputs
+remain visible and separate from multi-year company quality.
 
 ### Deep research view
 
@@ -216,9 +221,6 @@ than display complete reports beside one another.
 
 ## Open product questions
 
-- How should each risk and quality component be calibrated and validated?
-- What exact outcome and time horizon should the near-term setup assessment
-  describe?
 - Which research can reliably complete in the fast stage, and which checks must
   continue into the deep stage?
 - What source-age and evidence-strength rules should produce `Limited coverage`

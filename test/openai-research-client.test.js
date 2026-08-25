@@ -54,8 +54,8 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.match(requests[0].input, /Keep all wording non-advisory/);
   assert.deepEqual(requests[0].text.format, {
     type: "json_schema",
-    name: "stock_report_v3",
-    description: "A version 3.0.0 evidence-backed stock research report.",
+    name: "stock_report_v4",
+    description: "A version 4.0.0 evidence-backed stock research report; server-side scoring replaces provider score values.",
     schema,
     strict: false
   });

@@ -28,7 +28,10 @@ show bounded issuer analogues with dated reactions or explicit unknowns.
 Decision-focused financial context now preserves sourced periods, units, and
 comparison windows across cash, burn, revenue, profitability, free cash flow,
 and debt, while prominent warnings and security-aware gaps remain explicit.
-Scoring calibration, broader automated tests, live
+Component scores now use documented deterministic methodology with visible
+inputs, weights, confidence, conservative unknown propagation, and a five-day
+near-term evidence horizon separate from multi-year company quality. Token-free
+calibration reports score checks by material-risk category. Broader automated tests, live
 latency-budget measurement, and production safeguards remain incomplete.
 Fast-stage requests now terminate after a defined
 timeout and map major provider failures to controlled responses. A token-free
@@ -55,8 +58,7 @@ after an external screener identifies a moving or news-relevant ticker.
 
 ### Priority order
 
-1. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
-2. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
+1. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
 
 Issues with satisfied dependencies may be reordered when implementation evidence
 supports it, but dependency changes must remain explicit in the affected issues.
@@ -120,6 +122,7 @@ and place in the fast or deep stage are clear.
 
 ## Completed
 
+- [x] [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14).
 - [x] [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13).
 - [x] [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12).
 - [x] [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8).

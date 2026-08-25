@@ -13,7 +13,8 @@ history includes explicit comparison limits and dated reaction windows, or an
 unknown result when no reliable analogue is available. Issuer identity now follows confirmed prior names
 and tickers so dated material history is not lost across renames or rebrands.
 The browser renders the validated report as a responsive fast-decision
-dashboard. Scoring calibration and comparison remain active roadmap work.
+dashboard. Scores are now recalculated server-side with documented deterministic
+methodology; latency/cost validation and comparison remain active roadmap work.
 
 This application is a research aid, not financial advice.
 
@@ -44,8 +45,8 @@ The first end-to-end prototype is working:
    and claim-linked sources in a responsive dashboard.
 
 The repository now includes a dated representative ticker evaluation set and a
-token-free calibration run. Scoring calibration remains active roadmap work.
-See [docs/ROADMAP.md](docs/ROADMAP.md).
+token-free score-calibration run. Latency and cost validation remain active
+roadmap work. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Requirements
 
@@ -153,5 +154,6 @@ Retry a failed search manually after the displayed error when appropriate.
 - [Roadmap](docs/ROADMAP.md)
 - [Stock report contract](docs/REPORT_SCHEMA.md)
 - [Research evaluation set](docs/EVALUATION.md)
+- [Score methodology](docs/SCORING.md)
 - [Decision log](docs/DECISIONS.md)
 - [Repository instructions](AGENTS.md)

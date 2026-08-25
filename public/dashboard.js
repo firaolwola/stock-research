@@ -167,7 +167,17 @@ function renderScores(view) {
       const card = element("article", "score-card"); const title = element("div", "section-title"); title.append(element("h3", "", score.label), badge(score.state)); card.append(title);
       if (score.value === null) card.append(element("p", "score-state", formatLabel(score.state)));
       else { const value = element("div", "score-value"); value.append(element("strong", "", String(score.value)), element("span", "", `/ ${score.scale_max}`)); card.append(value); }
-      card.append(element("p", "score-direction", `${formatLabel(score.direction)} · ${score.time_horizon}`), element("p", "", score.explanation));
+      card.append(element("p", "score-direction", `${formatLabel(score.direction)} · ${score.time_horizon} · ${formatLabel(score.confidence)} confidence · method ${score.methodology_version}`), element("p", "", score.explanation));
+      if (score.components.length) {
+        const details = element("details", "score-components");
+        const list = element("ul", "section-items");
+        score.components.forEach((component) => {
+          const item = element("li", "section-item");
+          item.append(element("strong", "", formatLabel(component.key)), element("p", "muted", `${formatLabel(component.state)} · ${component.value === null ? "Unscored" : `${component.value} / 10`} · weight ${component.weight}`), element("p", "", component.explanation));
+          appendSourceLinks(item, view.sourcesForClaims(component.claim_ids)); list.append(item);
+        });
+        details.append(element("summary", "", `${score.components.length} scoring inputs`), list); card.append(details);
+      }
       appendSourceLinks(card, view.sourcesForClaims(score.claim_ids)); grid.append(card);
     });
     section.append(grid); groups.append(section);

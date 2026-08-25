@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-research.local/schema/stock-report/3.0.0",
+  "$id": "https://stock-research.local/schema/stock-report/4.0.0",
   "title": "Stock Research Report",
-  "description": "Version 3.0.0 contract for fast and deep stock-research reports. Scores describe evidence, risk, or quality; they are not investment advice.",
+  "description": "Version 4.0.0 contract for fast and deep stock-research reports. Scores use deterministic methodology and are not investment advice.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "report_id", "metadata", "security", "issuer", "sections", "financial_assessment", "catalyst_assessment", "scores", "claims", "sources"],
   "properties": {
-    "schema_version": { "const": "3.0.0" },
+    "schema_version": { "const": "4.0.0" },
     "report_id": { "$ref": "#/$defs/nonEmptyString" },
     "metadata": { "$ref": "#/$defs/metadata" },
     "security": { "$ref": "#/$defs/security" },
@@ -282,12 +282,25 @@
         "near_term_implication": { "$ref": "#/$defs/nearTermImplication" }
       }
     },
+    "scoreComponent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["key", "state", "value", "weight", "explanation", "claim_ids"],
+      "properties": {
+        "key": { "$ref": "#/$defs/nonEmptyString" },
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "value": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "explanation": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
     "score": {
       "type": "object", "additionalProperties": false,
-      "required": ["state", "value", "scale_min", "scale_max", "direction", "time_horizon", "explanation", "claim_ids"],
+      "required": ["state", "value", "scale_min", "scale_max", "direction", "time_horizon", "explanation", "claim_ids", "confidence", "methodology_version", "components"],
       "properties": {
         "state": { "$ref": "#/$defs/evidenceState" }, "value": { "type": ["number", "null"], "minimum": 0, "maximum": 10 }, "scale_min": { "const": 0 }, "scale_max": { "const": 10 },
-        "direction": { "enum": ["higher_is_more_risk", "higher_is_better"] }, "time_horizon": { "$ref": "#/$defs/nonEmptyString" }, "explanation": { "$ref": "#/$defs/nonEmptyString" }, "claim_ids": { "$ref": "#/$defs/claimIds" }
+        "direction": { "enum": ["higher_is_more_risk", "higher_is_better"] }, "time_horizon": { "$ref": "#/$defs/nonEmptyString" }, "explanation": { "$ref": "#/$defs/nonEmptyString" }, "claim_ids": { "$ref": "#/$defs/claimIds" },
+        "confidence": { "$ref": "#/$defs/confidence" }, "methodology_version": { "const": "1.0.0" }, "components": { "type": "array", "items": { "$ref": "#/$defs/scoreComponent" } }
       },
       "allOf": [
         { "if": { "properties": { "state": { "enum": ["unknown", "not_applicable", "limited_coverage", "not_found"] } }, "required": ["state"] }, "then": { "properties": { "value": { "type": "null" } } } },

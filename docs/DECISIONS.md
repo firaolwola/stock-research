@@ -3,6 +3,22 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Recalculate scores deterministically at the server boundary
+
+**Status:** Accepted
+
+**Decision:** Version the report contract at 4.0.0 and replace upstream score
+values with scoring methodology 1.0.0 before final validation. Every score shows
+its construct, direction, horizon, confidence, components, weights, explanation,
+and evidence links. Required uncertainty leaves a score null. Near-term setup
+uses a five-trading-day evidence horizon and excludes long-term company quality.
+Optional roll-ups may combine only same-direction scores, expose all components,
+and become null when any component is unresolved.
+
+**Why:** Model-authored numbers are not reproducible. Deterministic components
+make changes testable and prevent missing evidence or mixed horizons from being
+hidden inside a persuasive number.
+
 ## 2026-08-25 — Preserve periods and applicability in financial context
 
 **Status:** Accepted

@@ -1,6 +1,6 @@
 # Stock report contract
 
-**Contract version:** 3.0.0
+**Contract version:** 4.0.0
 
 **JSON Schema:** [`schema/stock-report.schema.json`](../schema/stock-report.schema.json)
 
@@ -11,9 +11,10 @@ are research aids, not personalized investment advice.
 
 ## Versioning
 
-Every report must include `schema_version: "3.0.0"`. The schema `$id` also ends
-in `3.0.0`. Version 3 makes structured financial assessment required; versions
-1 and 2 remain identifiable but are not accepted by the current endpoint. Additive
+Every report must include `schema_version: "4.0.0"`. The schema `$id` also ends
+in `4.0.0`. Version 4 makes score methodology, confidence, and visible input
+components required; earlier versions remain identifiable but are not accepted
+by the current endpoint. Additive
 optional changes increment the minor version. Removing a
 field, changing a field's meaning, making an optional field required, or changing
 an enum incompatibly increments the major version. Saved reports retain the
@@ -98,12 +99,14 @@ numeric score.
 
 ## Scores
 
-All scores use an explicit 0–10 scale, direction, time horizon, explanation, and
-supporting claim IDs. Risk constructs use `higher_is_more_risk`; quality
-constructs use `higher_is_better`. Values are contract placeholders until the
-separate calibration work is completed. Consumers must display the construct,
-direction, horizon, evidence state, explanation, and claims alongside a value.
-They must not calculate an opaque roll-up from unlike dimensions.
+All scores use an explicit 0–10 scale, direction, time horizon, explanation,
+confidence, methodology version, visible components, and supporting claim IDs.
+Risk constructs use `higher_is_more_risk`; quality constructs use
+`higher_is_better`. The server deterministically replaces upstream score values
+using [the documented methodology](SCORING.md) before validating and returning a
+report. Consumers must display the construct, direction, horizon, state,
+confidence, explanation, components, and claims alongside a value. They must not
+calculate an opaque roll-up from unlike dimensions.
 
 ## Claims and sources
 

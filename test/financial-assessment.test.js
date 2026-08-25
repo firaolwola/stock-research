@@ -24,7 +24,7 @@ function makeScenario(spec) {
       material_warnings: []
     };
     report.sections.financial_context = { state: "not_applicable", summary: "Operating-company financial context is not applicable to this ETF.", coverage_notes: [], items: [], claim_ids: [] };
-    for (const scoreName of ["financial_health", "long_term_company_quality"]) report.scores[scoreName] = { ...report.scores[scoreName], state: "not_applicable", value: null, explanation: "Operating-company assessment is not applicable to this ETF.", claim_ids: [] };
+    for (const scoreName of ["financial_health", "long_term_company_quality"]) report.scores[scoreName] = { ...report.scores[scoreName], state: "not_applicable", value: null, explanation: "Operating-company assessment is not applicable to this ETF.", claim_ids: [], confidence: "unknown", components: [] };
     return report;
   }
   if (!spec.claim_text) return report;

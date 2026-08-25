@@ -1,6 +1,7 @@
 import express from "express";
 import { validateTicker } from "./ticker-validation.js";
 import { RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
+import { calibrateReportScores } from "./lib/scoring.js";
 
 const controlledResearchErrors = Object.freeze({
   [RESEARCH_ERROR_CODES.timeout]: Object.freeze({ status: 504, code: "RESEARCH_TIMEOUT", error: "Research took too long. Please try again." }),
@@ -36,7 +37,15 @@ export function createApp({ researchClient, reportValidator, logger = console, r
     const { ticker } = validation;
 
     try {
-      const report = await researchClient.researchTicker(ticker);
+      const researchedReport = await researchClient.researchTicker(ticker);
+      let report;
+      try {
+        report = calibrateReportScores(researchedReport);
+      } catch {
+        logger.error(`Research provider returned an unscorable report for ${ticker}.`);
+        const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
+        return res.status(502).json({ code: controlledError.code, error: controlledError.error });
+      }
       const validationResult = reportValidator(report);
       if (!validationResult.valid) {
         logger.error(`Research provider returned an invalid report for ${ticker}.`);
