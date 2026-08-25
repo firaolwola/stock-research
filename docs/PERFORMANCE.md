@@ -5,14 +5,27 @@
 ## Stage policy
 
 The default `fast` stage is one Responses API request with no automatic retry,
-a 15-second provider timeout, and a 5,000-token output ceiling. Its normal
-evaluation targets are 3–10 seconds end to end and approximately $0.10 or less.
-The timeout is a failure boundary, not the latency target. Required evidence is
-never discarded merely to meet a budget: unfinished work must produce a
-`partial` or `pending` report with named coverage limitations.
+at most four low-context web-search calls, a 30-second hard provider timeout,
+and a 5,000-token output ceiling. Its normal evaluation targets remain 3–10
+seconds end to end and approximately $0.10 or less. The lifecycle is tiered:
+10 seconds is the target boundary, the next bounded 20 seconds are an
+over-budget grace period, and 30 seconds is the hard cancellation boundary. A
+valid response returned during the grace period remains usable but records
+`within_latency_target=false`.
+
+The hard timeout is a failure boundary, not a claim that the latency target was
+met. The OpenAI SDK timeout covers the complete synchronous request, including
+hosted web search, generation, and response-body parsing. If it aborts before
+`responses.create` resolves, the application receives no provider response
+object and cannot inspect partial output or usage. A provider-returned
+`incomplete` response can still be inspected and accepted when it contains a
+parseable partial/pending report. Required evidence is never guessed merely to
+meet a budget: unfinished work must produce a `partial` or `pending` report
+with named coverage limitations.
 
 The `deep` stage is requested deliberately with the **Deeper research** control
-or `stage=deep`. It has a 60-second timeout and 10,000-token output ceiling and
+or `stage=deep`. It permits at most ten medium-context web-search calls, has a
+60-second timeout and 10,000-token output ceiling, and
 does not claim the fast-stage time or cost targets. It expands named gaps but
 does not guarantee completeness. The server never escalates automatically.
 
@@ -25,6 +38,15 @@ therefore `partial` or `pending` relative to the full v4 contract rather than
 claiming false global completeness. Deep mode may include
 up to three analogues and four reaction windows per analogue and uses larger—but
 still bounded—claim, source, history, and warning collections.
+
+Fast work is intentionally narrower than Deep. It establishes the current
+security and catalyst, combines material split/dilution/compliance/accounting/
+going-concern checks around primary SEC and exchange records, and uses the
+latest relevant filing for concise financial context. Exhaustive predecessor
+discovery, secondary-source corroboration, detailed financial history, and all
+catalyst analogues are deferred with visible coverage limitations. This keeps
+material-risk checks in Fast without asking it to complete the Deep research
+plan.
 
 The complete fixture is approximately 5,846 compact JSON tokens under the old
 provider contract, including approximately 2,206 tokens of discarded provider
@@ -60,15 +82,21 @@ maximum $0.08, 22,000 input tokens, 8,000 output tokens, four searches, full
 fixture coverage, and 100% fixture recall. These values test budget logic; they
 are not evidence that live provider performance meets the targets.
 
-No paid live sample was run for Issue #15 because the owner prohibited paid
-calls solely for verification. A future actual measurement requires explicit
+The owner later observed a live SWVL Fast request reach the former 15-second
+hard timeout with `APIConnectionTimeoutError` during `openai_request` and
+`response_received=false`. This proves the synchronous search-and-generation
+operation exceeded that cutoff; it does not identify one particular provider
+search call or prove that generation had completed. The former cutoff allowed
+only five seconds beyond the target and the prompt did not cap hosted searches.
+The revised workload and 30-second bound are verified with mocks only, so live
+latency remains uncalibrated. A future actual measurement requires explicit
 approval and a predeclared sample of at most five case IDs, date, model/config,
 maximum budget, output location, and complete operational fields. The evaluator
 rejects unapproved, unbounded, or incompletely measured live samples.
 
 ## Exceptional behavior
 
-- A fast report outside either target remains usable when valid, but the budget
+- A fast report over 10 seconds but within the hard bound remains usable when valid, but the budget
   miss is visible and must be reviewed with coverage and recall.
 - A timeout or provider failure returns the existing controlled error and does
   not retry automatically.

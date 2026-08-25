@@ -3,6 +3,29 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Separate the Fast latency target from hard cancellation
+
+**Status:** Accepted
+
+**Decision:** Keep 3–10 seconds as the Fast latency target, mark valid later
+responses over budget, allow a bounded 20-second grace period, and cancel at 30
+seconds. Cap Fast at four low-context hosted web searches and defer exhaustive
+lineage discovery, corroboration, detailed financial history, and catalyst
+analogues to Deep with explicit partial/pending limitations. Preserve the
+5,000-token output ceiling and zero automatic retries.
+
+**Why:** A live SWVL request reached the former 15-second SDK timeout during
+`responses.create` with no response object. That timeout covered the complete
+hosted search, generation, and body-read operation, while Fast still had an
+unbounded search plan spanning seven evidence domains. Five seconds of grace
+beyond the product target was not a reliable failure boundary.
+
+**Consequence:** Returning between 10 and 30 seconds does not falsely satisfy
+the target: operations metadata records `within_latency_target=false`. An SDK
+abort still cannot salvage provider partial output because no response object
+has crossed the application boundary. Deep remains deliberate and separately
+bounded at 60 seconds and ten medium-context searches.
+
 ## 2026-08-25 — Bound provider output by stage and derive scores server-side
 
 **Status:** Accepted

@@ -8,6 +8,8 @@ test("research stages keep fast and deliberate deep budgets separate", () => {
   assert.equal(parseResearchStage("automatic").valid, false);
   assert.ok(RESEARCH_STAGES.deep.timeout_ms > RESEARCH_STAGES.fast.timeout_ms);
   assert.ok(RESEARCH_STAGES.deep.max_output_tokens > RESEARCH_STAGES.fast.max_output_tokens);
+  assert.equal(RESEARCH_STAGES.fast.timeout_ms, RESEARCH_STAGES.fast.target_latency_ms.max + RESEARCH_STAGES.fast.grace_ms);
+  assert.ok(RESEARCH_STAGES.fast.max_tool_calls < RESEARCH_STAGES.deep.max_tool_calls);
 });
 
 test("cost estimation accounts for tokens, caching, and every web search", () => {
@@ -23,5 +25,11 @@ test("missing provider usage remains unknown instead of reporting zero cost", ()
   const measured = buildResearchOperations({ stage: "fast", latencyMs: 2_000, usage: null, webSearchCalls: 0 });
   assert.equal(measured.estimated_cost_usd, null);
   assert.equal(measured.within_cost_target, null);
+  assert.equal(measured.within_latency_target, true);
+});
+
+test("over-target but usable Fast work is recorded as a latency miss", () => {
+  const measured = buildResearchOperations({ stage: "fast", latencyMs: 18_000, usage: null, webSearchCalls: 4 });
+  assert.equal(measured.latency_ms, 18_000);
   assert.equal(measured.within_latency_target, false);
 });

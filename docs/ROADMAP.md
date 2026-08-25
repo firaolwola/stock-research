@@ -41,6 +41,12 @@ incomplete.
 Fast-stage requests now terminate after a defined
 timeout and map major provider failures to controlled responses. A token-free
 mock mode supports repeatable manual frontend and integration checks.
+Live evidence showed the original 15-second Fast hard cutoff aborting the full
+Responses API web-search/generation operation before a response object arrived.
+Fast now bounds hosted research to four low-context searches, defers named Deep
+work explicitly, records responses over 10 seconds as latency misses, and uses a
+bounded 20-second grace period before a 30-second hard cancellation. Live
+performance after this correction remains to be calibrated by an approved run.
 
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
