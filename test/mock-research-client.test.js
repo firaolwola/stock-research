@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createMockResearchClient, DEMO_TICKER, UnsupportedDemoTickerError } from "../mock-research-client.js";
+import { createMockResearchClient, DEMO_TICKER, DEMO_TICKERS, UnsupportedDemoTickerError } from "../mock-research-client.js";
 import { loadReportFixture } from "../support/report-fixtures.js";
 
 test("ACME always returns the same deterministic fixture-backed report", async () => {
@@ -17,4 +17,17 @@ test("ACME always returns the same deterministic fixture-backed report", async (
 test("mock client rejects unsupported tickers", async () => {
   const client = createMockResearchClient(await loadReportFixture("complete"));
   await assert.rejects(client.researchTicker("MSFT"), UnsupportedDemoTickerError);
+});
+
+test("mock client serves deterministic complete, partial, and pending reports", async () => {
+  const complete = await loadReportFixture("complete");
+  const partial = await loadReportFixture("partial");
+  const pending = structuredClone(partial);
+  pending.security.ticker = "PENDING";
+  pending.metadata.completion_status = "pending";
+  const client = createMockResearchClient([complete, partial, pending]);
+
+  assert.deepEqual(DEMO_TICKERS, ["ACME", "XYZ", "PENDING"]);
+  assert.equal((await client.researchTicker("XYZ")).metadata.completion_status, "partial");
+  assert.equal((await client.researchTicker("PENDING")).metadata.completion_status, "pending");
 });

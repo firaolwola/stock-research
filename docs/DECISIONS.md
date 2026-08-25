@@ -3,6 +3,25 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Group the fast dashboard by decision meaning
+
+**Status:** Accepted
+
+**Decision:** Lead the dashboard with coverage and ranked material findings,
+then keep capital-structure risk, longer-term company context, and near-term
+catalyst/setup scores in explicitly named groups. Always show state labels and
+explanations in text, render all report sections, and resolve claim references
+to dated source links.
+
+**Why:** A compact result must speed review without hiding uncertainty or
+collapsing unlike score concepts into a visually persuasive but ambiguous
+summary.
+
+**Consequence:** Color is supplemental rather than the only state signal.
+Unknown, limited, pending, and not-applicable results remain readable and
+unscored. The dependency-free browser renderer uses the existing validated
+report contract and safe external-link attributes.
+
 ## 2026-08-25 — Require explicit evidence when carrying issuer history
 
 **Status:** Accepted
