@@ -221,10 +221,11 @@ than display complete reports beside one another.
 
 ## Open product questions
 
-- Which research can reliably complete in the fast stage, and which checks must
-  continue into the deep stage?
+- Which checks most often require deliberate deep-stage expansion in approved
+  live evaluation?
 - What source-age and evidence-strength rules should produce `Limited coverage`
   versus `Unknown`?
-- What normal and exceptional cost limits should trigger a deeper-search prompt?
+- Should observed live results support changing the explicit deep-stage control
+  or the normal fast budgets?
 - When, if ever, has research quality become reliable enough to reconsider
   public access?

@@ -14,7 +14,8 @@ unknown result when no reliable analogue is available. Issuer identity now follo
 and tickers so dated material history is not lost across renames or rebrands.
 The browser renders the validated report as a responsive fast-decision
 dashboard. Scores are now recalculated server-side with documented deterministic
-methodology; latency/cost validation and comparison remain active roadmap work.
+methodology. Fast/deep stage budgets and per-report usage telemetry are now
+implemented; comparison remains active roadmap work.
 
 This application is a research aid, not financial advice.
 
@@ -45,8 +46,9 @@ The first end-to-end prototype is working:
    and claim-linked sources in a responsive dashboard.
 
 The repository now includes a dated representative ticker evaluation set and a
-token-free score-calibration run. Latency and cost validation remain active
-roadmap work. See [docs/ROADMAP.md](docs/ROADMAP.md).
+token-free score and operating-budget calibration run. Actual live latency and
+cost remain unmeasured because no paid verification run was authorized. See
+[docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Requirements
 
@@ -96,9 +98,9 @@ Open <http://localhost:3001>. The page displays a **Mock testing mode** banner.
 Use these deterministic dummy tickers:
 
 - `ACME` — complete fast report;
-- `XYZ` — partial deep report with unknown, limited-coverage, and
+- `XYZ` — partial report with unknown, limited-coverage, and
   not-applicable states; and
-- `PENDING` — pending deep report.
+- `PENDING` — pending report.
 
 These reports are fixture-backed and make no OpenAI request. Other tickers are
 intentionally unsupported in this mode.
@@ -148,6 +150,12 @@ Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
 
+The default action runs the fast stage. **Deeper research** is a deliberate
+second-stage request with a larger timeout/output budget; the server never
+escalates automatically. Successful responses show latency, token use,
+web-search calls, estimated cost, and budget status without replacing report
+coverage or unknown states. See [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+
 ## Project documentation
 
 - [Product definition](docs/PRODUCT.md)
@@ -155,5 +163,6 @@ Retry a failed search manually after the displayed error when appropriate.
 - [Stock report contract](docs/REPORT_SCHEMA.md)
 - [Research evaluation set](docs/EVALUATION.md)
 - [Score methodology](docs/SCORING.md)
+- [Performance and stage budgets](docs/PERFORMANCE.md)
 - [Decision log](docs/DECISIONS.md)
 - [Repository instructions](AGENTS.md)

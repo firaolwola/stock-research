@@ -31,8 +31,13 @@ and debt, while prominent warnings and security-aware gaps remain explicit.
 Component scores now use documented deterministic methodology with visible
 inputs, weights, confidence, conservative unknown propagation, and a five-day
 near-term evidence horizon separate from multi-year company quality. Token-free
-calibration reports score checks by material-risk category. Broader automated tests, live
-latency-budget measurement, and production safeguards remain incomplete.
+calibration reports score checks by material-risk category. Fast and deep
+requests now have separate explicit budgets; successful responses expose
+latency, tokens, web searches, estimated cost, and target status without
+replacing report coverage. Dry evaluation reports p50/p95 and cost distributions
+beside coverage and recall. Actual provider performance remains unmeasured
+because no paid verification run was authorized. Production safeguards remain
+incomplete.
 Fast-stage requests now terminate after a defined
 timeout and map major provider failures to controlled responses. A token-free
 mock mode supports repeatable manual frontend and integration checks.
@@ -58,7 +63,8 @@ after an external screener identifies a moving or news-relevant ticker.
 
 ### Priority order
 
-1. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
+The trustworthy fast-report implementation issues are complete. Approved live
+use should continue calibrating operational and research-quality targets.
 
 Issues with satisfied dependencies may be reordered when implementation evidence
 supports it, but dependency changes must remain explicit in the affected issues.
@@ -122,6 +128,7 @@ and place in the fast or deep stage are clear.
 
 ## Completed
 
+- [x] [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15).
 - [x] [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14).
 - [x] [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13).
 - [x] [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12).

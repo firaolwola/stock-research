@@ -9,7 +9,9 @@ export const RESEARCH_ERROR_CODES = Object.freeze({
   unusable: "UPSTREAM_UNUSABLE"
 });
 
-export const FAST_RESEARCH_TIMEOUT_MS = 15_000;
+import { buildResearchOperations, RESEARCH_STAGES } from "./lib/research-budget.js";
+
+export const FAST_RESEARCH_TIMEOUT_MS = RESEARCH_STAGES.fast.timeout_ms;
 
 export class ResearchResponseError extends Error {
   constructor(code) {
@@ -19,8 +21,9 @@ export class ResearchResponseError extends Error {
   }
 }
 
-const researchPrompt = (ticker) => `
-Create a fast stock-research report for ticker "${ticker}" as of the current time.
+const researchPrompt = (ticker, stage) => `
+Create a ${stage} stock-research report for ticker "${ticker}" as of the current time.
+The report metadata stage must be "${stage}". In fast mode, prioritize the required material-risk checks and explicitly mark unfinished or deferred checks partial/pending with structured coverage limitations. In deep mode, deliberately expand those named gaps; never imply that deep research guarantees completeness.
 
 Research every section required by the supplied stock-report schema:
 - current security and issuer identity, listing context, and known prior identities;
@@ -102,13 +105,16 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
   }
 
   return {
-    async researchTicker(ticker) {
+    async researchTicker(ticker, { stage = "fast" } = {}) {
+      const budget = RESEARCH_STAGES[stage];
+      if (!budget) throw new TypeError(`Unsupported research stage: ${stage}`);
+      const startedAt = performance.now();
       let response;
       try {
         response = await openai.responses.create({
           model: "gpt-5.1",
           reasoning: { effort: "none" },
-          max_output_tokens: 5000,
+          max_output_tokens: budget.max_output_tokens,
           tools: [{ type: "web_search" }],
           include: ["web_search_call.action.sources"],
           text: {
@@ -120,9 +126,9 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
               strict: false
             }
           },
-          input: researchPrompt(ticker)
+          input: researchPrompt(ticker, stage)
         }, {
-          timeout: FAST_RESEARCH_TIMEOUT_MS,
+          timeout: budget.timeout_ms,
           maxRetries: 0
         });
       } catch (error) {
@@ -146,10 +152,12 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
 
       try {
         const report = JSON.parse(response.output_text);
+        if (report?.metadata?.stage !== stage) throw new ResearchResponseError(RESEARCH_ERROR_CODES.invalid);
         if (upstreamIncomplete && !["partial", "pending"].includes(report?.metadata?.completion_status)) {
           throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
         }
-        return report;
+        const webSearchCalls = Array.isArray(response.output) ? response.output.filter((item) => item?.type === "web_search_call").length : 0;
+        return { report, operations: buildResearchOperations({ stage, latencyMs: performance.now() - startedAt, usage: response.usage, webSearchCalls }) };
       } catch {
         if (upstreamIncomplete) throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
         throw new ResearchResponseError(

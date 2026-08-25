@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { evaluateSample, MATERIAL_RISK_CATEGORIES, validateEvaluationSet } from "../lib/evaluation.js";
+import { evaluateSample, MATERIAL_RISK_CATEGORIES, validateEvaluationSample, validateEvaluationSet } from "../lib/evaluation.js";
 
 const loadJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 
@@ -23,7 +23,16 @@ test("the token-free calibration sample reports category recall separately from 
   assert.equal(result.research_quality.material_risk_recall, 1);
   assert.equal(result.research_quality.meets_target, true);
   assert.equal(result.research_quality.uncertainty_accuracy, 1);
-  assert.equal(result.operations.estimated_cost_usd, 0);
+  assert.equal(result.operations.latency_p50_ms, 4200);
+  assert.equal(result.operations.latency_p95_ms, 8500);
+  assert.ok(Math.abs(result.operations.average_cost_usd - 0.07375) < 1e-9);
+  assert.equal(result.operations.maximum_cost_usd, 0.08);
+  assert.equal(result.operations.input_tokens, 22000);
+  assert.equal(result.operations.output_tokens, 8000);
+  assert.equal(result.operations.web_search_calls, 4);
+  assert.equal(result.operations.meets_latency_target, true);
+  assert.equal(result.operations.meets_cost_target, true);
+  assert.equal(result.operations.coverage_and_recall_reported_together, true);
   assert.deepEqual(result.research_quality.score_calibration, {
     evaluated: 13,
     passed: 13,
@@ -63,4 +72,17 @@ test("validation requires explicit approval and a bounded paid run", async () =>
   assert.equal(result.valid, false);
   assert.ok(result.errors.includes("paid live evaluation must require explicit approval"));
   assert.ok(result.errors.includes("paid live evaluation must have a positive case bound"));
+});
+
+test("live samples require bounded approval and complete operational measurements", async () => {
+  const evaluationSet = await loadJson("../evaluation/cases.json");
+  const sample = { live_calls: true, runs: [{ case_id: "mock-acme-complete", result_kind: "research_report", latency_ms: 5000 }] };
+  const invalid = validateEvaluationSample(evaluationSet, sample);
+  assert.equal(invalid.valid, false);
+  assert.ok(invalid.errors.includes("live samples require an explicit approval record"));
+  assert.ok(invalid.errors.some((error) => error.includes("must record latency, cost, tokens, and web searches")));
+
+  sample.runs[0] = { ...sample.runs[0], estimated_cost_usd: 0.08, input_tokens: 10000, output_tokens: 4000, web_search_calls: 2 };
+  sample.approval_record = { approved: true, run_date: "2026-08-25", model_configuration: "gpt-5.1 / no reasoning / fast", max_budget_usd: 0.10, output_location: "evaluation/results/example.json", case_ids: ["mock-acme-complete"] };
+  assert.deepEqual(validateEvaluationSample(evaluationSet, sample), { valid: true, errors: [] });
 });

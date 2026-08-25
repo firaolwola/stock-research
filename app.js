@@ -2,6 +2,7 @@ import express from "express";
 import { validateTicker } from "./ticker-validation.js";
 import { RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
 import { calibrateReportScores } from "./lib/scoring.js";
+import { parseResearchStage } from "./lib/research-budget.js";
 
 const controlledResearchErrors = Object.freeze({
   [RESEARCH_ERROR_CODES.timeout]: Object.freeze({ status: 504, code: "RESEARCH_TIMEOUT", error: "Research took too long. Please try again." }),
@@ -35,9 +36,14 @@ export function createApp({ researchClient, reportValidator, logger = console, r
       return res.status(400).json({ code: validation.error.code, error: validation.error.message });
     }
     const { ticker } = validation;
+    const stageValidation = parseResearchStage(req.query.stage);
+    if (!stageValidation.valid) return res.status(400).json({ code: "INVALID_RESEARCH_STAGE", error: "Research stage must be fast or deep." });
+    const { stage } = stageValidation;
 
     try {
-      const researchedReport = await researchClient.researchTicker(ticker);
+      const researchResult = await researchClient.researchTicker(ticker, { stage });
+      const researchedReport = researchResult?.report ?? researchResult;
+      const operations = researchResult?.report ? researchResult.operations : null;
       let report;
       try {
         report = calibrateReportScores(researchedReport);
@@ -52,7 +58,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
         const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
         return res.status(502).json({ code: controlledError.code, error: controlledError.error });
       }
-      return res.json({ ticker, report });
+      return res.json({ ticker, report, ...(operations ? { operations } : {}) });
     } catch (error) {
       if (error instanceof ResearchResponseError && controlledResearchErrors[error.code]) {
         logger.error(`Research provider response could not be used for ${ticker} (${error.code}).`);
