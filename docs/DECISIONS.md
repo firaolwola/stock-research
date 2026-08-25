@@ -3,6 +3,24 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Enforce claim-linked source quality at the report boundary
+
+**Status:** Accepted
+
+**Decision:** Require confirmed and bounded `not_found` report records and scores
+to reference sourced atomic claims. Keep claim/source links bidirectional; reject
+malformed or impossible source metadata and high-confidence secondary evidence.
+Represent materially conflicting evidence as `unknown` or `limited_coverage`
+rather than choosing an unsupported conclusion.
+
+**Why:** Schema-shaped citations are not sufficient unless each conclusion is
+traceable to dated, typed, inspectable evidence with source quality visible.
+
+**Consequence:** Live output that omits evidence or overstates secondary evidence
+fails server validation. The prompt prefers SEC and exchange evidence, requests
+web-search source metadata, and instructs the model not to fabricate missing
+citations. Automated fact checking remains outside this issue.
+
 ## 2026-08-24 — Bound fast-stage provider requests without automatic retries
 
 **Status:** Accepted

@@ -32,6 +32,13 @@ Research every section required by the supplied stock-report schema:
 - the most important catalysts and news from the last 30 days.
 
 Prefer SEC filings and official exchange notices, then official company sources, then reputable original reporting. Treat secondary evidence as lower confidence. Never treat missing evidence as proof of absence. Use the schema's explicit evidence states, null score values when evidence is not confirmed, concise explanations, dated claim/source links, and non-advisory wording. Do not give entries, exits, price targets, position sizing, or personalized investment advice.
+
+For every material factual conclusion and every evidence-based score:
+- create atomic claims and attach their IDs to the exact report section, item, identity record, or score they support;
+- populate each source with a useful document title, direct HTTPS URL, publication or filing date, source type, confidence, retrieval time, and bidirectional supported claim IDs;
+- use SEC filings and exchange notices before company sources, original news, or aggregators when available;
+- never give secondary evidence high confidence; and
+- when evidence is missing, malformed, or materially conflicting, use unknown or limited coverage and do not invent a claim, source, date, URL, or favorable score.
 `;
 
 function containsRefusal(output) {
@@ -71,6 +78,7 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
           reasoning: { effort: "none" },
           max_output_tokens: 5000,
           tools: [{ type: "web_search" }],
+          include: ["web_search_call.action.sources"],
           text: {
             format: {
               type: "json_schema",

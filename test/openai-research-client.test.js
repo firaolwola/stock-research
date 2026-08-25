@@ -39,6 +39,10 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.deepEqual(options, [{ timeout: FAST_RESEARCH_TIMEOUT_MS, maxRetries: 0 }]);
   assert.match(requests[0].input, /ACME/);
   assert.deepEqual(requests[0].tools, [{ type: "web_search" }]);
+  assert.deepEqual(requests[0].include, ["web_search_call.action.sources"]);
+  assert.match(requests[0].input, /SEC filings and exchange notices before company sources/);
+  assert.match(requests[0].input, /never give secondary evidence high confidence/);
+  assert.match(requests[0].input, /materially conflicting, use unknown or limited coverage/);
   assert.deepEqual(requests[0].text.format, {
     type: "json_schema",
     name: "stock_report_v1",
