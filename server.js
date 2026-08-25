@@ -2,20 +2,23 @@ import dotenv from "dotenv";
 import OpenAI from "openai";
 import { createApp } from "./app.js";
 import { createOpenAIResearchClient } from "./openai-research-client.js";
-import { REAL_APP_PORT } from "./local-ports.js";
+import { loadRealAppConfig, StartupConfigurationError } from "./startup-config.js";
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
-const port = REAL_APP_PORT;
+try {
+    const config = loadRealAppConfig();
 
-// Connect to OpenAI using the key from .env
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
-const app = createApp({ researchClient: createOpenAIResearchClient(openai) });
+    const openai = new OpenAI({ apiKey: config.apiKey });
+    const app = createApp({ researchClient: createOpenAIResearchClient(openai) });
 
-
-// Start our local server
-app.listen(port, () => {
-    console.log(`Stock Research running at http://localhost:${port}`);
-});
+    app.listen(config.port, () => {
+        console.log(`Stock Research running at http://localhost:${config.port}`);
+    });
+} catch (error) {
+    const message = error instanceof StartupConfigurationError
+        ? error.message
+        : "Unexpected startup error.";
+    console.error(`Stock Research failed to start: ${message}`);
+    process.exitCode = 1;
+}

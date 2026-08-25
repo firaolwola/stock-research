@@ -3,6 +3,24 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Validate ticker syntax and real-app configuration at boundaries
+
+**Status:** Accepted
+
+**Decision:** Accept normalized ticker identifiers containing 1–15 letters or
+digits with single period or hyphen separators. Treat this as syntax only, not
+proof of listing or support. Require a nonblank `OPENAI_API_KEY` before real-app
+startup and allow its default port 3000 to be overridden by a validated `PORT`.
+Keep token-free mock mode independently fixed at port 3001.
+
+**Why:** Predictable boundary validation prevents malformed requests and
+apparently healthy but unusable startup while preserving the broad security
+universe and simultaneous mock testing.
+
+**Consequence:** Later identity research must distinguish valid-but-unknown
+securities from malformed input. Startup and request errors must remain stable
+and must never echo credentials.
+
 ## 2026-08-24 — Keep manual mock mode separate from OpenAI startup
 
 **Status:** Accepted
