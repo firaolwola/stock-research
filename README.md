@@ -22,6 +22,8 @@ The first end-to-end prototype is working:
 3. The server validates the schema and cross-record semantics.
    Material report records must link to dated, typed evidence; secondary sources
    carry reduced confidence, and conflicting evidence remains unknown or limited.
+   Unavailable evidence is distinct from a bounded search that found nothing,
+   while security-specific inapplicability is reported without implying a gap.
 4. The fast-stage OpenAI request has a 15-second timeout and no automatic
    retries. Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
