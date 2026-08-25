@@ -20,7 +20,11 @@ The first end-to-end prototype is working:
 1. A user enters a ticker in the browser.
 2. The Express server requests JSON Schema output from OpenAI.
 3. The server validates the schema and cross-record semantics.
-4. The application displays the resulting report as formatted JSON until the
+4. The fast-stage OpenAI request has a 15-second timeout and no automatic
+   retries. Stable errors distinguish timeouts, rate limits, provider
+   authentication/configuration failures, refusals, malformed responses, and
+   temporary service failures without exposing provider details.
+5. The application displays the resulting report as formatted JSON until the
    dashboard issue is completed.
 
 The current development priority is making reports structured, traceable, and
@@ -105,6 +109,10 @@ The suite uses Node's built-in test runner, injected fake research clients, and
 local fixtures. It does not require `OPENAI_API_KEY` and does not make live
 OpenAI calls. Run `npm run validate:reports` when you only need to validate the
 complete and partial report fixtures.
+
+Automatic SDK retries are disabled for research requests so a failed attempt
+cannot silently multiply paid web-search work or extend the defined deadline.
+Retry a failed search manually after the displayed error when appropriate.
 
 ## Project documentation
 
