@@ -1,17 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-research.local/schema/stock-report/1.0.0",
+  "$id": "https://stock-research.local/schema/stock-report/2.0.0",
   "title": "Stock Research Report",
-  "description": "Version 1.0.0 contract for fast and deep stock-research reports. Scores describe evidence, risk, or quality; they are not investment advice.",
+  "description": "Version 2.0.0 contract for fast and deep stock-research reports. Scores describe evidence, risk, or quality; they are not investment advice.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "report_id", "metadata", "security", "issuer", "sections", "scores", "claims", "sources"],
+  "required": ["schema_version", "report_id", "metadata", "security", "issuer", "sections", "catalyst_assessment", "scores", "claims", "sources"],
   "properties": {
-    "schema_version": { "const": "1.0.0" },
+    "schema_version": { "const": "2.0.0" },
     "report_id": { "$ref": "#/$defs/nonEmptyString" },
     "metadata": { "$ref": "#/$defs/metadata" },
     "security": { "$ref": "#/$defs/security" },
     "issuer": { "$ref": "#/$defs/issuer" },
+    "catalyst_assessment": { "$ref": "#/$defs/catalystAssessment" },
     "sections": {
       "type": "object",
       "additionalProperties": false,
@@ -119,6 +120,100 @@
       "type": "object", "additionalProperties": false,
       "required": ["state", "summary", "coverage_notes", "items", "claim_ids"],
       "properties": { "state": { "$ref": "#/$defs/evidenceState" }, "summary": { "$ref": "#/$defs/nonEmptyString" }, "coverage_notes": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } }, "items": { "type": "array", "items": { "$ref": "#/$defs/sectionItem" } }, "claim_ids": { "$ref": "#/$defs/claimIds" } }
+    },
+    "assessmentFactor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rating", "explanation", "claim_ids"],
+      "properties": {
+        "rating": { "enum": ["high", "medium", "low", "unknown", "not_applicable"] },
+        "explanation": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "currentCatalyst": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "classification", "title", "event_date", "summary", "confidence", "claim_ids", "factors"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "classification": { "enum": ["earnings", "product", "regulatory", "financing", "contract", "corporate_action", "legal", "management", "macro_industry", "other", "unknown", "not_applicable"] },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "event_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" },
+        "factors": {
+          "type": "object", "additionalProperties": false,
+          "required": ["recency", "specificity", "credibility", "novelty", "potential_significance"],
+          "properties": {
+            "recency": { "$ref": "#/$defs/assessmentFactor" },
+            "specificity": { "$ref": "#/$defs/assessmentFactor" },
+            "credibility": { "$ref": "#/$defs/assessmentFactor" },
+            "novelty": { "$ref": "#/$defs/assessmentFactor" },
+            "potential_significance": { "$ref": "#/$defs/assessmentFactor" }
+          }
+        }
+      }
+    },
+    "reactionWindow": {
+      "type": "object", "additionalProperties": false,
+      "required": ["label", "start", "end", "price_change_percent", "state", "summary", "claim_ids"],
+      "properties": {
+        "label": { "$ref": "#/$defs/nonEmptyString" },
+        "start": { "$ref": "#/$defs/date" },
+        "end": { "$ref": "#/$defs/date" },
+        "price_change_percent": { "type": ["number", "null"] },
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "historicalAnalogue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "state", "event_date", "comparison_basis", "comparison_limitations", "reaction_windows", "claim_ids"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "event_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "comparison_basis": { "$ref": "#/$defs/nonEmptyString" },
+        "comparison_limitations": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+        "reaction_windows": { "type": "array", "items": { "$ref": "#/$defs/reactionWindow" } },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "historicalAnalogueAssessment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "summary", "coverage_notes", "items", "claim_ids"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "coverage_notes": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/historicalAnalogue" } },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "nearTermImplication": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "direction", "summary", "confidence", "claim_ids"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "direction": { "enum": ["strengthens", "mixed", "weakens", "neutral", "unknown", "not_applicable"] },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "catalystAssessment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["current", "historical_analogues", "favorable_evidence_claim_ids", "unfavorable_evidence_claim_ids", "uncertainty", "near_term_implication"],
+      "properties": {
+        "current": { "$ref": "#/$defs/currentCatalyst" },
+        "historical_analogues": { "$ref": "#/$defs/historicalAnalogueAssessment" },
+        "favorable_evidence_claim_ids": { "$ref": "#/$defs/claimIds" },
+        "unfavorable_evidence_claim_ids": { "$ref": "#/$defs/claimIds" },
+        "uncertainty": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+        "near_term_implication": { "$ref": "#/$defs/nearTermImplication" }
+      }
     },
     "score": {
       "type": "object", "additionalProperties": false,

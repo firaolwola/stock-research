@@ -1,6 +1,6 @@
 # Stock report contract
 
-**Contract version:** 1.0.0
+**Contract version:** 2.0.0
 
 **JSON Schema:** [`schema/stock-report.schema.json`](../schema/stock-report.schema.json)
 
@@ -11,8 +11,10 @@ are research aids, not personalized investment advice.
 
 ## Versioning
 
-Every report must include `schema_version: "1.0.0"`. The schema `$id` also ends
-in `1.0.0`. Additive optional changes increment the minor version. Removing a
+Every report must include `schema_version: "2.0.0"`. The schema `$id` also ends
+in `2.0.0`. Version 2 makes the catalyst assessment required; version 1 reports
+remain identifiable but are not accepted by the current endpoint. Additive
+optional changes increment the minor version. Removing a
 field, changing a field's meaning, making an optional field required, or changing
 an enum incompatibly increments the major version. Saved reports retain the
 version with which they were produced.
@@ -39,6 +41,13 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   accounting warnings, financial measures, catalysts, and news. They provide
   dated event summaries and claim references, with optional periods and paired
   numeric value/unit fields where those facts are useful.
+- `catalyst_assessment` identifies the current catalyst and classifies its
+  recency, specificity, credibility, novelty, and potential significance. It
+  keeps favorable evidence, unfavorable evidence, uncertainty, and a
+  confidence-qualified near-term implication visible. Issuer-specific historical
+  analogues state why they are comparable, their limitations, and sourced stock
+  reactions over explicit date windows. When no reliable analogue is available,
+  the analogue state is `unknown` with no invented item or reaction.
 - `scores` keeps dilution historical severity, future likelihood, and potential
   impact separate. Reverse-split risk, financial health, long-term company
   quality, catalyst strength, and near-term setup quality are also separate.
@@ -161,3 +170,10 @@ server validator; API formatting alone is never treated as sufficient.
 The request also includes `web_search_call.action.sources` so provider search
 source metadata remains available while the model constructs the contract's
 typed, dated, claim-linked source records.
+
+Catalyst validation additionally requires confirmed catalysts to have a date,
+classification, sourced claims, and meaningful confidence. Confirmed analogues
+must include a date, comparison limitations, and valid reaction windows;
+unresolved reaction windows cannot contain a numeric price change. The server
+rejects unsupported numerical probability language and advisory wording in the
+catalyst assessment.

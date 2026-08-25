@@ -31,6 +31,16 @@ Research every section required by the supplied stock-report schema:
 - decision-focused financial context; and
 - the most important catalysts and news from the last 30 days.
 
+For the current material catalyst, classify it and assess recency, specificity,
+credibility, novelty, and potential significance separately. Find prior events
+from this issuer only when they are reliably comparable. For each analogue,
+state why it is comparable, where the comparison is weak, and any sourced stock
+reaction using explicit dates and windows. If no reliable analogue is found,
+return an unknown historical-analogue assessment with no invented event or
+reaction. Present favorable evidence, unfavorable evidence, uncertainty, and a
+qualitative near-term implication with evidence confidence. Avoid numerical
+probabilities and do not imply a guaranteed stock reaction.
+
 Resolve identity before researching history. Confirm the current security type, issuer legal name and CIK when available, listing venue, and listing status from SEC and exchange records. Search official filings for former legal names and exchange records for prior tickers, including renames and rebrands. For each confirmed prior identity, provide both effective_from and effective_to, high or medium linkage confidence, and sourced confirmed linkage claims. Add the relevant lineage claim ID to every reverse split, offering, dilution, compliance, or warning item whose event date falls in that prior-identity period so issuer history follows the issuer rather than only the current ticker. Never carry an event through an unknown or limited-coverage predecessor relationship; keep the issuer and affected history sections unknown or limited_coverage, add a structured issuer coverage limitation, and explain the gap instead.
 
 Prefer SEC filings and official exchange notices, then official company sources, then reputable original reporting. Treat secondary evidence as lower confidence. Never treat missing evidence as proof of absence. Use the schema's explicit evidence states, null score values when evidence is not confirmed, concise explanations, dated claim/source links, and non-advisory wording. Do not give entries, exits, price targets, position sizing, or personalized investment advice.
@@ -92,8 +102,8 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
           text: {
             format: {
               type: "json_schema",
-              name: "stock_report_v1",
-              description: "A version 1.0.0 evidence-backed stock research report.",
+              name: "stock_report_v2",
+              description: "A version 2.0.0 evidence-backed stock research report.",
               schema,
               strict: false
             }

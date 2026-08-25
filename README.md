@@ -7,8 +7,10 @@ material risks before deeper research.
 
 The current prototype requests a validated, versioned stock-report object from
 the OpenAI Responses API with web search. The report contract covers identity,
-reverse splits, dilution, dividends, warnings, financial context, catalysts,
-scores, claims, and sources. Issuer identity now follows confirmed prior names
+reverse splits, dilution, dividends, warnings, financial context, structured
+catalyst factors and historical analogues, scores, claims, and sources. Catalyst
+history includes explicit comparison limits and dated reaction windows, or an
+unknown result when no reliable analogue is available. Issuer identity now follows confirmed prior names
 and tickers so dated material history is not lost across renames or rebrands.
 The browser renders the validated report as a responsive fast-decision
 dashboard. Scoring calibration and comparison remain active roadmap work.
@@ -34,9 +36,10 @@ The first end-to-end prototype is working:
    retries. Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
-5. The application renders ranked warnings and unknowns, distinct score groups,
-   all research sections, coverage and issuer context, and claim-linked sources
-   in a responsive dashboard.
+5. The application renders ranked warnings and unknowns, a dedicated catalyst
+   assessment with favorable/unfavorable evidence and historical comparisons,
+   distinct score groups, all research sections, coverage and issuer context,
+   and claim-linked sources in a responsive dashboard.
 
 The repository now includes a dated representative ticker evaluation set and a
 token-free calibration run. Scoring calibration remains active roadmap work.

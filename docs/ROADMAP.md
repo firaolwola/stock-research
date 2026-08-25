@@ -22,7 +22,9 @@ as confirmed history. A dated representative evaluation set now spans the
 capitalization bands, nonstandard securities, issuer lineage, core risk
 categories, catalysts, uncertainty, and deterministic failures. Its token-free
 dry run reports category and overall recall with source, support, latency, cost,
-and clarity measures. Scoring calibration, broader automated tests, live
+and clarity measures. Reports now assess current catalyst recency, specificity,
+credibility, novelty, and significance separately from company quality, and
+show bounded issuer analogues with dated reactions or explicit unknowns. Scoring calibration, broader automated tests, live
 latency-budget measurement, and production safeguards remain incomplete.
 Fast-stage requests now terminate after a defined
 timeout and map major provider failures to controlled responses. A token-free
@@ -49,10 +51,9 @@ after an external screener identifies a moving or news-relevant ticker.
 
 ### Priority order
 
-1. [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12)
-2. [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13)
-3. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
-4. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
+1. [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13)
+2. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
+3. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
 
 Issues with satisfied dependencies may be reordered when implementation evidence
 supports it, but dependency changes must remain explicit in the affected issues.
@@ -116,6 +117,7 @@ and place in the fast or deep stage are clear.
 
 ## Completed
 
+- [x] [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12).
 - [x] [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8).
 - [x] [#4 — Render the fast decision dashboard](https://github.com/firaolwola/stock-research/issues/4).
 - [x] [#11 — Resolve issuer identity and prior ticker/name lineage](https://github.com/firaolwola/stock-research/issues/11).

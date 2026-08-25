@@ -81,3 +81,7 @@ footer { padding: 26px 0 40px; font-size: .84rem; }
   .panel, .search-panel, .report-header { padding: 15px; }
   .panel-heading > *, .section-title > * { min-width: 0; }
 }
+.factor-grid, .evidence-grid { display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-top: 1rem; }
+.factor-card { border: 1px solid var(--line); border-radius: 0.75rem; padding: 0.85rem; }
+.factor-card h4, .analogue h4 { margin: 0; }
+.analogue { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: 1rem; }

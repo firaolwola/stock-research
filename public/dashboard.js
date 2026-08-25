@@ -19,6 +19,10 @@ const stateLabels = Object.freeze({
   confirmed: "Confirmed", not_found: "Not found in window", unknown: "Unknown", not_applicable: "Not applicable",
   limited_coverage: "Limited coverage", complete: "Complete", partial: "Partial", pending: "Pending", fast: "Fast report", deep: "Deep report"
 });
+const catalystFactorLabels = Object.freeze({
+  recency: "Recency", specificity: "Specificity", credibility: "Credibility",
+  novelty: "Novelty", potential_significance: "Potential significance"
+});
 
 export function validateTickerInput(value) {
   const ticker = String(value || "").trim().toUpperCase();
@@ -158,6 +162,59 @@ function renderScores(view) {
   });
   panel.append(groups); return panel;
 }
+function renderCatalystAssessment(view) {
+  const assessment = view.report.catalyst_assessment;
+  const panel = element("section", "panel catalyst-assessment");
+  const heading = element("div", "panel-heading");
+  heading.append(element("h2", "", "Catalyst assessment"), badge(assessment.current.state));
+  panel.append(heading);
+
+  const current = element("article", "section-card");
+  current.append(element("h3", "", assessment.current.title));
+  current.append(element("p", "muted", `${formatLabel(assessment.current.classification)} · ${assessment.current.event_date ? formatDate(assessment.current.event_date) : "Date unavailable"} · ${formatLabel(assessment.current.confidence)} confidence`));
+  current.append(element("p", "", assessment.current.summary));
+  appendSourceLinks(current, view.sourcesForClaims(assessment.current.claim_ids));
+  const factors = element("div", "factor-grid");
+  Object.entries(assessment.current.factors).forEach(([key, factor]) => {
+    const card = element("article", "factor-card");
+    const title = element("div", "section-title");
+    title.append(element("h4", "", catalystFactorLabels[key]), badge(factor.rating));
+    card.append(title, element("p", "", factor.explanation));
+    appendSourceLinks(card, view.sourcesForClaims(factor.claim_ids));
+    factors.append(card);
+  });
+  current.append(factors);
+  panel.append(current);
+
+  const evidence = element("div", "evidence-grid");
+  [["Favorable evidence", assessment.favorable_evidence_claim_ids], ["Unfavorable evidence", assessment.unfavorable_evidence_claim_ids]].forEach(([title, claimIds]) => {
+    const card = element("article", "section-card"); card.append(element("h3", "", title));
+    if (!claimIds.length) card.append(element("p", "empty-note", "No supported evidence reported."));
+    claimIds.forEach((claimId) => card.append(element("p", "", view.report.claims.find((claim) => claim.id === claimId)?.text || claimId)));
+    appendSourceLinks(card, view.sourcesForClaims(claimIds)); evidence.append(card);
+  });
+  panel.append(evidence);
+
+  const analogues = element("article", "section-card");
+  const analogueTitle = element("div", "section-title"); analogueTitle.append(element("h3", "", "Historical analogues"), badge(assessment.historical_analogues.state));
+  analogues.append(analogueTitle, element("p", "", assessment.historical_analogues.summary));
+  assessment.historical_analogues.coverage_notes.forEach((note) => analogues.append(element("p", "coverage-note", `Coverage note: ${note}`)));
+  assessment.historical_analogues.items.forEach((item) => {
+    const detail = element("div", "analogue");
+    detail.append(element("h4", "", item.title), element("p", "muted", item.event_date ? formatDate(item.event_date) : "Date unavailable"), element("p", "", `Comparable because: ${item.comparison_basis}`));
+    item.comparison_limitations.forEach((limit) => detail.append(element("p", "coverage-note", `Comparison limit: ${limit}`)));
+    item.reaction_windows.forEach((window) => detail.append(element("p", "", `${window.label} (${formatDate(window.start)}–${formatDate(window.end)}): ${window.summary}`)));
+    appendSourceLinks(detail, view.sourcesForClaims(item.claim_ids)); analogues.append(detail);
+  });
+  appendSourceLinks(analogues, view.sourcesForClaims(assessment.historical_analogues.claim_ids)); panel.append(analogues);
+
+  const implication = element("article", "section-card");
+  const implicationTitle = element("div", "section-title"); implicationTitle.append(element("h3", "", "Near-term evidence implication"), badge(assessment.near_term_implication.state));
+  implication.append(implicationTitle, element("p", "muted", `${formatLabel(assessment.near_term_implication.direction)} · ${formatLabel(assessment.near_term_implication.confidence)} confidence`), element("p", "", assessment.near_term_implication.summary));
+  assessment.uncertainty.forEach((note) => implication.append(element("p", "coverage-note", `Uncertainty: ${note}`)));
+  appendSourceLinks(implication, view.sourcesForClaims(assessment.near_term_implication.claim_ids)); panel.append(implication);
+  return panel;
+}
 function renderSections(view) {
   const panel = element("section", "panel"); panel.append(element("h2", "", "Research sections")); const grid = element("div", "section-grid");
   view.sections.forEach((section) => {
@@ -182,7 +239,7 @@ function renderSources(view) {
 }
 export function renderDashboard(container, report) {
   const view = buildDashboardView(report);
-  container.replaceChildren(renderHeader(view), renderCoverage(view), renderFindings(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
+  container.replaceChildren(renderHeader(view), renderCoverage(view), renderFindings(view), renderCatalystAssessment(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
 }
 async function showRuntimeMode() {
   try {
