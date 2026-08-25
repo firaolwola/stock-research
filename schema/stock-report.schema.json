@@ -1,17 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-research.local/schema/stock-report/2.0.0",
+  "$id": "https://stock-research.local/schema/stock-report/3.0.0",
   "title": "Stock Research Report",
-  "description": "Version 2.0.0 contract for fast and deep stock-research reports. Scores describe evidence, risk, or quality; they are not investment advice.",
+  "description": "Version 3.0.0 contract for fast and deep stock-research reports. Scores describe evidence, risk, or quality; they are not investment advice.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "report_id", "metadata", "security", "issuer", "sections", "catalyst_assessment", "scores", "claims", "sources"],
+  "required": ["schema_version", "report_id", "metadata", "security", "issuer", "sections", "financial_assessment", "catalyst_assessment", "scores", "claims", "sources"],
   "properties": {
-    "schema_version": { "const": "2.0.0" },
+    "schema_version": { "const": "3.0.0" },
     "report_id": { "$ref": "#/$defs/nonEmptyString" },
     "metadata": { "$ref": "#/$defs/metadata" },
     "security": { "$ref": "#/$defs/security" },
     "issuer": { "$ref": "#/$defs/issuer" },
+    "financial_assessment": { "$ref": "#/$defs/financialAssessment" },
     "catalyst_assessment": { "$ref": "#/$defs/catalystAssessment" },
     "sections": {
       "type": "object",
@@ -120,6 +121,72 @@
       "type": "object", "additionalProperties": false,
       "required": ["state", "summary", "coverage_notes", "items", "claim_ids"],
       "properties": { "state": { "$ref": "#/$defs/evidenceState" }, "summary": { "$ref": "#/$defs/nonEmptyString" }, "coverage_notes": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } }, "items": { "type": "array", "items": { "$ref": "#/$defs/sectionItem" } }, "claim_ids": { "$ref": "#/$defs/claimIds" } }
+    },
+    "financialMetric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "label", "value", "unit", "period_start", "period_end", "trend", "comparison_period_start", "comparison_period_end", "summary", "claim_ids"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "label": { "$ref": "#/$defs/nonEmptyString" },
+        "value": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"], "minLength": 1 },
+        "period_start": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "period_end": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "trend": { "enum": ["improving", "stable", "deteriorating", "mixed", "unknown", "not_applicable"] },
+        "comparison_period_start": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "comparison_period_end": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "financialWarning": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "state", "severity", "title", "as_of", "summary", "claim_ids"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "kind": { "enum": ["liquidity", "cash_burn", "debt", "going_concern", "profitability", "accounting", "other"] },
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "severity": { "enum": ["critical", "high", "medium", "low", "unknown"] },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "as_of": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "goingConcernAssessment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "as_of", "summary", "claim_ids"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "as_of": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "financialAssessment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "as_of", "reporting_currency", "summary", "coverage_notes", "metrics", "going_concern", "material_warnings"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "as_of": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "reporting_currency": { "type": ["string", "null"], "minLength": 3 },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "coverage_notes": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+        "metrics": {
+          "type": "object", "additionalProperties": false,
+          "required": ["cash", "cash_burn", "revenue", "profitability", "free_cash_flow", "debt"],
+          "properties": {
+            "cash": { "$ref": "#/$defs/financialMetric" },
+            "cash_burn": { "$ref": "#/$defs/financialMetric" },
+            "revenue": { "$ref": "#/$defs/financialMetric" },
+            "profitability": { "$ref": "#/$defs/financialMetric" },
+            "free_cash_flow": { "$ref": "#/$defs/financialMetric" },
+            "debt": { "$ref": "#/$defs/financialMetric" }
+          }
+        },
+        "going_concern": { "$ref": "#/$defs/goingConcernAssessment" },
+        "material_warnings": { "type": "array", "items": { "$ref": "#/$defs/financialWarning" } }
+      }
     },
     "assessmentFactor": {
       "type": "object", "additionalProperties": false,

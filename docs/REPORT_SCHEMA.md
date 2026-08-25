@@ -1,6 +1,6 @@
 # Stock report contract
 
-**Contract version:** 2.0.0
+**Contract version:** 3.0.0
 
 **JSON Schema:** [`schema/stock-report.schema.json`](../schema/stock-report.schema.json)
 
@@ -11,9 +11,9 @@ are research aids, not personalized investment advice.
 
 ## Versioning
 
-Every report must include `schema_version: "2.0.0"`. The schema `$id` also ends
-in `2.0.0`. Version 2 makes the catalyst assessment required; version 1 reports
-remain identifiable but are not accepted by the current endpoint. Additive
+Every report must include `schema_version: "3.0.0"`. The schema `$id` also ends
+in `3.0.0`. Version 3 makes structured financial assessment required; versions
+1 and 2 remain identifiable but are not accepted by the current endpoint. Additive
 optional changes increment the minor version. Removing a
 field, changing a field's meaning, making an optional field required, or changing
 an enum incompatibly increments the major version. Saved reports retain the
@@ -48,6 +48,13 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   analogues state why they are comparable, their limitations, and sourced stock
   reactions over explicit date windows. When no reliable analogue is available,
   the analogue state is `unknown` with no invented item or reaction.
+- `financial_assessment` preserves a dated reporting currency, cash, cash burn,
+  revenue, profitability, free cash flow, and debt. Confirmed metrics include a
+  value, unit, statement period, and sourced claim. A claimed trend also includes
+  the comparison period. Going-concern evidence is explicit, and material
+  liquidity, burn, leverage, profitability, accounting, or going-concern
+  warnings carry severity and dates for priority ranking. Operating-company
+  metrics may be `not_applicable` for securities such as ETFs.
 - `scores` keeps dilution historical severity, future likelihood, and potential
   impact separate. Reverse-split risk, financial health, long-term company
   quality, catalyst strength, and near-term setup quality are also separate.
@@ -164,7 +171,7 @@ source quality, scoring calibration, or research completeness. Those remain
 separate implementation and evaluation responsibilities.
 
 The OpenAI request supplies this contract as a JSON Schema response format with
-API-level strict mode disabled because contract v1 uses Draft 2020-12 features
+API-level strict mode disabled because the contract uses Draft 2020-12 features
 beyond the API strict subset. Successful output must still pass the complete
 server validator; API formatting alone is never treated as sufficient.
 The request also includes `web_search_call.action.sources` so provider search
@@ -177,3 +184,10 @@ must include a date, comparison limitations, and valid reaction windows;
 unresolved reaction windows cannot contain a numeric price change. The server
 rejects unsupported numerical probability language and advisory wording in the
 catalyst assessment.
+
+Financial validation rejects confirmed metrics without values, units, periods,
+or sourced claims; invalid period ordering; unresolved metrics containing
+numeric values; and confirmed financial-health scores built from an unresolved
+assessment. Confirmed going-concern evidence must also appear as a dated material
+warning. A wholly inapplicable assessment contains no dates, currency, evidence,
+or warnings and marks every financial component `not_applicable`.

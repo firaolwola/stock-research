@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.0",
+  "schema_version": "3.0.0",
   "report_id": "report-xyz-deep-partial-2026-08-24",
   "metadata": {
     "as_of": "2026-08-24T16:00:00Z", "generated_at": "2026-08-24T16:00:03Z", "stage": "deep", "completion_status": "partial",
@@ -15,6 +15,19 @@
     "compliance_and_warnings": { "state": "limited_coverage", "summary": "NYSE notices were reviewed, but foreign accounting-warning coverage is incomplete.", "coverage_notes": ["Home-market records remain pending."], "items": [], "claim_ids": [] },
     "financial_context": { "state": "limited_coverage", "summary": "Only stale financial data was available, so no current health conclusion is given.", "coverage_notes": ["Latest comparable statements were unavailable."], "items": [], "claim_ids": [] },
     "catalysts_and_news": { "state": "unknown", "summary": "No sufficiently supported current catalyst was identified; this does not establish that none exists.", "coverage_notes": ["Research is pending for non-English primary sources."], "items": [], "claim_ids": [] }
+  },
+  "financial_assessment": {
+    "state": "limited_coverage", "as_of": null, "reporting_currency": null, "summary": "Current comparable statements are unavailable, so financial health remains unscored.", "coverage_notes": ["Only stale and non-comparable financial data was available."],
+    "metrics": {
+      "cash": { "state": "limited_coverage", "label": "Cash and cash equivalents", "value": null, "unit": null, "period_start": null, "period_end": null, "trend": "unknown", "comparison_period_start": null, "comparison_period_end": null, "summary": "Current cash could not be established.", "claim_ids": [] },
+      "cash_burn": { "state": "unknown", "label": "Cash burn", "value": null, "unit": null, "period_start": null, "period_end": null, "trend": "unknown", "comparison_period_start": null, "comparison_period_end": null, "summary": "Cash consumption could not be established.", "claim_ids": [] },
+      "revenue": { "state": "limited_coverage", "label": "Revenue", "value": null, "unit": null, "period_start": null, "period_end": null, "trend": "unknown", "comparison_period_start": null, "comparison_period_end": null, "summary": "Comparable revenue periods were unavailable.", "claim_ids": [] },
+      "profitability": { "state": "unknown", "label": "Profitability", "value": null, "unit": null, "period_start": null, "period_end": null, "trend": "unknown", "comparison_period_start": null, "comparison_period_end": null, "summary": "Current profitability could not be established.", "claim_ids": [] },
+      "free_cash_flow": { "state": "unknown", "label": "Free cash flow", "value": null, "unit": null, "period_start": null, "period_end": null, "trend": "unknown", "comparison_period_start": null, "comparison_period_end": null, "summary": "Free cash flow could not be established.", "claim_ids": [] },
+      "debt": { "state": "limited_coverage", "label": "Debt", "value": null, "unit": null, "period_start": null, "period_end": null, "trend": "unknown", "comparison_period_start": null, "comparison_period_end": null, "summary": "Current debt and maturity data were unavailable.", "claim_ids": [] }
+    },
+    "going_concern": { "state": "unknown", "as_of": null, "summary": "Available filings do not support a current going-concern conclusion.", "claim_ids": [] },
+    "material_warnings": []
   },
   "catalyst_assessment": {
     "current": {

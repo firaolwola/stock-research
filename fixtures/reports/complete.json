@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.0",
+  "schema_version": "3.0.0",
   "report_id": "report-acme-fast-2026-08-24",
   "metadata": {
     "as_of": "2026-08-24T15:00:00Z",
@@ -26,6 +26,19 @@
     "compliance_and_warnings": { "state": "not_found", "summary": "No material exchange-compliance, going-concern, SEC, or accounting warning was found in the defined window; absence is not proven.", "coverage_notes": [], "items": [], "claim_ids": ["claim-warnings"] },
     "financial_context": { "state": "confirmed", "summary": "The latest filing reports positive operating cash flow and manageable debt.", "coverage_notes": [], "items": [{ "id": "financial-1", "kind": "free_cash_flow", "title": "Liquidity", "state": "confirmed", "summary": "Cash and operating cash flow were positive for the reported period.", "event_date": "2026-06-30", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }], "claim_ids": ["claim-financial"] },
     "catalysts_and_news": { "state": "confirmed", "summary": "The current catalyst is a newly announced customer contract; reported contract-value details conflict.", "coverage_notes": ["The contract exists, but conflicting value estimates were not treated as confirmed."], "items": [{ "id": "news-1", "kind": "catalyst", "title": "Customer contract", "state": "confirmed", "summary": "The company announced a material multi-year customer contract; its value remains unknown.", "event_date": "2026-08-23", "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] }], "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] }
+  },
+  "financial_assessment": {
+    "state": "confirmed", "as_of": "2026-06-30", "reporting_currency": "USD", "summary": "The latest quarter shows positive operating cash generation, positive free cash flow, profitability, and moderate debt.", "coverage_notes": [],
+    "metrics": {
+      "cash": { "state": "confirmed", "label": "Cash and cash equivalents", "value": 48.2, "unit": "USD millions", "period_start": "2026-06-30", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2026-03-31", "comparison_period_end": "2026-03-31", "summary": "Quarter-end cash increased from the prior quarter.", "claim_ids": ["claim-financial"] },
+      "cash_burn": { "state": "confirmed", "label": "Quarterly cash burn", "value": -8.4, "unit": "USD millions per quarter", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2026-01-01", "comparison_period_end": "2026-03-31", "summary": "Negative burn denotes $8.4 million of operating cash generation rather than cash consumption.", "claim_ids": ["claim-financial"] },
+      "revenue": { "state": "confirmed", "label": "Quarterly revenue", "value": 125.0, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2025-04-01", "comparison_period_end": "2025-06-30", "summary": "Revenue increased from the comparable prior-year quarter.", "claim_ids": ["claim-financial"] },
+      "profitability": { "state": "confirmed", "label": "Quarterly net income", "value": 6.2, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2025-04-01", "comparison_period_end": "2025-06-30", "summary": "The issuer was profitable and improved versus the prior-year quarter.", "claim_ids": ["claim-financial"] },
+      "free_cash_flow": { "state": "confirmed", "label": "Quarterly free cash flow", "value": 7.1, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2025-04-01", "comparison_period_end": "2025-06-30", "summary": "Free cash flow was positive and improved year over year.", "claim_ids": ["claim-financial"] },
+      "debt": { "state": "confirmed", "label": "Total debt", "value": 31.0, "unit": "USD millions", "period_start": "2026-06-30", "period_end": "2026-06-30", "trend": "stable", "comparison_period_start": "2026-03-31", "comparison_period_end": "2026-03-31", "summary": "Debt was broadly stable from the prior quarter and below quarter-end cash.", "claim_ids": ["claim-financial"] }
+    },
+    "going_concern": { "state": "not_found", "as_of": "2026-08-05", "summary": "The defined review of the latest quarterly filing found no going-concern warning; this does not prove one never existed.", "claim_ids": ["claim-warnings"] },
+    "material_warnings": []
   },
   "catalyst_assessment": {
     "current": {
@@ -64,7 +77,7 @@
     { "id": "claim-dilution", "text": "The issuer completed a $20 million registered offering on April 10, 2025.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-offering"] },
     { "id": "claim-dividend", "text": "The issuer declared a $0.05 quarterly cash dividend.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-dividend"] },
     { "id": "claim-warnings", "text": "The defined search found no material compliance or accounting warning in-window.", "materiality": "high", "state": "not_found", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec", "source-exchange"] },
-    { "id": "claim-financial", "text": "The latest quarterly filing reports positive operating cash flow and manageable debt.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
+    { "id": "claim-financial", "text": "For the quarter ended June 30, 2026, the issuer reported $48.2 million cash, $8.4 million operating cash generation, $125.0 million revenue, $6.2 million net income, $7.1 million free cash flow, and $31.0 million total debt, with the stated trends based on the specified comparison periods.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
     { "id": "claim-catalyst", "text": "The issuer announced a material multi-year customer contract on August 23, 2026.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-news", "source-original-news"] },
     { "id": "claim-catalyst-value-conflict", "text": "Primary and secondary reports conflict about the contract value, so the value is unknown.", "materiality": "medium", "state": "unknown", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-news", "source-original-news", "source-secondary"] },
     { "id": "claim-analogue-event", "text": "The issuer announced another multi-year customer contract on May 10, 2025.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-prior-contract"] },
