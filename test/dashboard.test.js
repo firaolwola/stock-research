@@ -12,6 +12,13 @@ test("dashboard exposes every report section and keeps score concepts grouped", 
   assert.deepEqual(scoreGroups[2].keys, ["catalyst_strength", "near_term_setup_quality"]);
 });
 
+test("dashboard exposes catalyst factors, analogue limits, reactions, and confidence", async () => {
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  for (const text of ["Catalyst assessment", "Potential significance", "Historical analogues", "Comparison limit", "Near-term evidence implication", "confidence"]) {
+    assert.match(source, new RegExp(text));
+  }
+});
+
 test("priority findings rank unknowns before material confirmed risk evidence", async () => {
   const report = await loadReportFixture("complete");
   const findings = buildPriorityFindings(report);

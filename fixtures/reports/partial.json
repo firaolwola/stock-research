@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "report_id": "report-xyz-deep-partial-2026-08-24",
   "metadata": {
     "as_of": "2026-08-24T16:00:00Z", "generated_at": "2026-08-24T16:00:03Z", "stage": "deep", "completion_status": "partial",
@@ -15,6 +15,22 @@
     "compliance_and_warnings": { "state": "limited_coverage", "summary": "NYSE notices were reviewed, but foreign accounting-warning coverage is incomplete.", "coverage_notes": ["Home-market records remain pending."], "items": [], "claim_ids": [] },
     "financial_context": { "state": "limited_coverage", "summary": "Only stale financial data was available, so no current health conclusion is given.", "coverage_notes": ["Latest comparable statements were unavailable."], "items": [], "claim_ids": [] },
     "catalysts_and_news": { "state": "unknown", "summary": "No sufficiently supported current catalyst was identified; this does not establish that none exists.", "coverage_notes": ["Research is pending for non-English primary sources."], "items": [], "claim_ids": [] }
+  },
+  "catalyst_assessment": {
+    "current": {
+      "state": "unknown", "classification": "unknown", "title": "Current material catalyst unresolved", "event_date": null, "summary": "Available evidence does not support a current material catalyst.", "confidence": "unknown", "claim_ids": [],
+      "factors": {
+        "recency": { "rating": "unknown", "explanation": "No supported catalyst date is available.", "claim_ids": [] },
+        "specificity": { "rating": "unknown", "explanation": "No supported catalyst terms are available.", "claim_ids": [] },
+        "credibility": { "rating": "unknown", "explanation": "Primary evidence is incomplete.", "claim_ids": [] },
+        "novelty": { "rating": "unknown", "explanation": "The current event and comparable history are unresolved.", "claim_ids": [] },
+        "potential_significance": { "rating": "unknown", "explanation": "Significance cannot be inferred without a supported event.", "claim_ids": [] }
+      }
+    },
+    "historical_analogues": { "state": "unknown", "summary": "No reliably comparable prior issuer event was established; no historical reaction is inferred.", "coverage_notes": ["Non-English primary sources and price history were not sufficiently available."], "items": [], "claim_ids": [] },
+    "favorable_evidence_claim_ids": [], "unfavorable_evidence_claim_ids": [],
+    "uncertainty": ["The current catalyst and issuer-specific analogues remain unresolved."],
+    "near_term_implication": { "state": "unknown", "direction": "unknown", "summary": "Insufficient catalyst and analogue evidence prevents a near-term implication; unknown is not unfavorable or favorable.", "confidence": "unknown", "claim_ids": [] }
   },
   "scores": {
     "dilution_historical_severity": { "state": "unknown", "value": null, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Past three years", "explanation": "Insufficient evidence prevents scoring; unknown is not low risk.", "claim_ids": [] },

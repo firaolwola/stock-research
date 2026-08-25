@@ -3,6 +3,22 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Keep catalyst evidence structured and comparisons bounded
+
+**Status:** Accepted
+
+**Decision:** Version the report contract at 2.0.0 and require a catalyst
+assessment that separates recency, specificity, credibility, novelty, and
+potential significance from long-term company quality. Historical analogues are
+issuer-specific, explain both comparison basis and limitations, and use sourced
+reaction windows. No reliable analogue produces an explicit unknown with no
+invented history. Near-term implications remain qualitative and confidence
+qualified; numeric probability predictions and trade instructions are rejected.
+
+**Why:** A prior price reaction can inform context without establishing a
+repeatable outcome. Keeping inputs, limitations, and uncertainty visible avoids
+turning a weak comparison into false predictive precision.
+
 ## 2026-08-25 — Group the fast dashboard by decision meaning
 
 **Status:** Accepted
