@@ -27,7 +27,11 @@ export class ResearchResponseError extends Error {
 
 const stageInstructions = Object.freeze({
   fast: `Fast-stage constraints:
-- prioritize identity/listing, three-year dilution, five-year reverse splits, material compliance/going-concern warnings, current financial health, and the current 30-day catalyst;
+- use at most four focused web-search calls, combining related checks and preferring primary sources;
+- establish current identity/listing and the current 30-day catalyst;
+- use SEC and exchange records to check material three-year dilution, five-year reverse splits, compliance, accounting, and going-concern risks together;
+- use only the latest relevant financial filing for decision-focused cash, burn, revenue, profitability, free-cash-flow, and debt context;
+- defer exhaustive prior-identity discovery, secondary-source corroboration, detailed financial history, and all historical catalyst analogues to Deep; identify every deferred check in coverage limitations;
 - do not research or emit historical catalyst analogue items or reaction windows; mark that deep-stage check limited_coverage and name it in coverage limitations;
 - include only material claims and the strongest direct source for each claim; reuse claim/source IDs instead of duplicating facts;
 - keep every title, summary, explanation, and coverage note concise; and
@@ -44,7 +48,10 @@ The report metadata stage must be "${stage}". In fast mode, prioritize the requi
 
 ${stageInstructions[stage]}
 
-Research every section required by the supplied stock-report schema:
+Populate every section required by the supplied stock-report schema, using
+explicit unknown, limited_coverage, or pending states for work that the selected
+stage deliberately defers. Research these required evidence domains within the
+stage constraints:
 - current security and issuer identity, listing context, and known prior identities;
 - reverse splits in the last five years;
 - major offerings and other material dilution in the last three years, including warrants or convertibles when found;
@@ -123,12 +130,12 @@ function safeDiagnosticValue(value) {
   return typeof value === "string" && /^[A-Za-z0-9_.-]{1,80}$/.test(value) ? value : null;
 }
 
-export function getSafeUpstreamDiagnostics(error, { stage = null, phase = null, startedAt = null, response = null } = {}) {
+export function getSafeUpstreamDiagnostics(error, { stage = null, phase = null, startedAt = null, response = null, now = () => performance.now() } = {}) {
   const usage = response?.usage;
   return {
     stage: safeDiagnosticValue(stage),
     phase: safeDiagnosticValue(phase),
-    elapsed_ms: Number.isFinite(startedAt) ? Math.max(0, Math.round(performance.now() - startedAt)) : null,
+    elapsed_ms: Number.isFinite(startedAt) ? Math.max(0, Math.round(now() - startedAt)) : null,
     error_constructor: safeDiagnosticValue(error?.constructor?.name),
     status: Number.isInteger(error?.status) ? error.status : null,
     provider_code: safeDiagnosticValue(error?.code),
@@ -146,7 +153,7 @@ export function getSafeUpstreamDiagnostics(error, { stage = null, phase = null, 
   };
 }
 
-export function createOpenAIResearchClient(openai, { schema } = {}) {
+export function createOpenAIResearchClient(openai, { schema, now = () => performance.now() } = {}) {
   if (!openai?.responses || typeof openai.responses.create !== "function") {
     throw new TypeError("A compatible OpenAI client is required");
   }
@@ -157,12 +164,12 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
     async researchTicker(ticker, { stage = "fast" } = {}) {
       const budget = RESEARCH_STAGES[stage];
       if (!budget) throw new TypeError(`Unsupported research stage: ${stage}`);
-      const startedAt = performance.now();
+      const startedAt = now();
       let outputSchema;
       try {
         outputSchema = createOpenAIOutputSchema(schema, { stage });
       } catch (error) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unexpected, getSafeUpstreamDiagnostics(error, { stage, phase: "request_preparation", startedAt, response: null }));
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unexpected, getSafeUpstreamDiagnostics(error, { stage, phase: "request_preparation", startedAt, response: null, now }));
       }
       let response;
       try {
@@ -170,7 +177,8 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
           model: "gpt-5.1",
           reasoning: { effort: "none" },
           max_output_tokens: budget.max_output_tokens,
-          tools: [{ type: "web_search" }],
+          max_tool_calls: budget.max_tool_calls,
+          tools: [{ type: "web_search", search_context_size: budget.search_context_size }],
           include: ["web_search_call.action.sources"],
           text: {
             format: {
@@ -188,7 +196,7 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
         });
       } catch (error) {
         const code = classifyUpstreamError(error);
-        const diagnostics = getSafeUpstreamDiagnostics(error, { stage, phase: "openai_request", startedAt, response: null });
+        const diagnostics = getSafeUpstreamDiagnostics(error, { stage, phase: "openai_request", startedAt, response: null, now });
         if (code) throw new ResearchResponseError(code, diagnostics);
         throw new ResearchResponseError(RESEARCH_ERROR_CODES.unexpected, diagnostics);
       }
@@ -197,25 +205,25 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
       try {
         responseOutput = response.output;
       } catch (error) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "response_output_read", startedAt, response }));
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "response_output_read", startedAt, response, now }));
       }
       if (containsRefusal(responseOutput)) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.refused, getSafeUpstreamDiagnostics(null, { stage, phase: "response_inspection", startedAt, response }));
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.refused, getSafeUpstreamDiagnostics(null, { stage, phase: "response_inspection", startedAt, response, now }));
       }
       const upstreamIncomplete = response.status === "incomplete";
       if (response.status !== "completed" && !upstreamIncomplete) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(null, { stage, phase: "response_status", startedAt, response }));
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(null, { stage, phase: "response_status", startedAt, response, now }));
       }
       let outputText;
       try {
         outputText = response.output_text;
       } catch (error) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "output_text_read", startedAt, response }));
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "output_text_read", startedAt, response, now }));
       }
       if (typeof outputText !== "string" || outputText.trim() === "") {
         throw new ResearchResponseError(
           upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.unusable,
-          getSafeUpstreamDiagnostics(null, { stage, phase: upstreamIncomplete ? "incomplete_response" : "output_text_read", startedAt, response })
+          getSafeUpstreamDiagnostics(null, { stage, phase: upstreamIncomplete ? "incomplete_response" : "output_text_read", startedAt, response, now })
         );
       }
 
@@ -223,15 +231,15 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
       try {
         report = JSON.parse(outputText);
       } catch (error) {
-        throw new ResearchResponseError(upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.invalid, getSafeUpstreamDiagnostics(error, { stage, phase: "json_parse", startedAt, response }));
+        throw new ResearchResponseError(upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.invalid, getSafeUpstreamDiagnostics(error, { stage, phase: "json_parse", startedAt, response, now }));
       }
-      if (report?.metadata?.stage !== stage) throw new ResearchResponseError(RESEARCH_ERROR_CODES.invalid, getSafeUpstreamDiagnostics(null, { stage, phase: "report_conversion", startedAt, response }));
-      if (upstreamIncomplete && !["partial", "pending"].includes(report?.metadata?.completion_status)) throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete, getSafeUpstreamDiagnostics(null, { stage, phase: "incomplete_response", startedAt, response }));
+      if (report?.metadata?.stage !== stage) throw new ResearchResponseError(RESEARCH_ERROR_CODES.invalid, getSafeUpstreamDiagnostics(null, { stage, phase: "report_conversion", startedAt, response, now }));
+      if (upstreamIncomplete && !["partial", "pending"].includes(report?.metadata?.completion_status)) throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete, getSafeUpstreamDiagnostics(null, { stage, phase: "incomplete_response", startedAt, response, now }));
       try {
         const webSearchCalls = Array.isArray(responseOutput) ? responseOutput.filter((item) => item?.type === "web_search_call").length : 0;
-        return { report, operations: buildResearchOperations({ stage, latencyMs: performance.now() - startedAt, usage: response.usage, webSearchCalls }) };
+        return { report, operations: buildResearchOperations({ stage, latencyMs: now() - startedAt, usage: response.usage, webSearchCalls }) };
       } catch (error) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "operations_measurement", startedAt, response }));
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "operations_measurement", startedAt, response, now }));
       }
     }
   };

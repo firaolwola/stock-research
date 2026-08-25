@@ -14,7 +14,7 @@ const schema = await loadReportSchema();
 const completeReport = await loadReportFixture("complete");
 const partialReport = await loadReportFixture("partial");
 
-function adapterFor(responseOrError, requests = [], options = []) {
+function adapterFor(responseOrError, requests = [], options = [], clientOptions = {}) {
   const openai = {
     responses: {
       async create(request, requestOptions) {
@@ -25,7 +25,7 @@ function adapterFor(responseOrError, requests = [], options = []) {
       }
     }
   };
-  return createOpenAIResearchClient(openai, { schema });
+  return createOpenAIResearchClient(openai, { schema, ...clientOptions });
 }
 
 test("OpenAI adapter requests JSON Schema output and parses a completed report", async () => {
@@ -46,7 +46,8 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.equal(requests.length, 1);
   assert.deepEqual(options, [{ timeout: FAST_RESEARCH_TIMEOUT_MS, maxRetries: 0 }]);
   assert.match(requests[0].input, /ACME/);
-  assert.deepEqual(requests[0].tools, [{ type: "web_search" }]);
+  assert.equal(requests[0].max_tool_calls, 4);
+  assert.deepEqual(requests[0].tools, [{ type: "web_search", search_context_size: "low" }]);
   assert.deepEqual(requests[0].include, ["web_search_call.action.sources"]);
   assert.match(requests[0].input, /SEC filings and exchange notices before company sources/);
   assert.match(requests[0].input, /never give secondary evidence high confidence/);
@@ -61,6 +62,8 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.match(requests[0].input, /Keep all wording non-advisory/);
   assert.match(requests[0].input, /Do not emit scores/);
   assert.match(requests[0].input, /do not research or emit historical catalyst analogue items/);
+  assert.match(requests[0].input, /use at most four focused web-search calls/);
+  assert.match(requests[0].input, /defer exhaustive prior-identity discovery/);
   assert.deepEqual(requests[0].text.format, {
     type: "json_schema",
     name: "stock_report_v4",
@@ -71,6 +74,44 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.ok(findUnsupportedOpenAIKeywords(schema).length > 0);
   assert.deepEqual(findUnsupportedOpenAIKeywords(requests[0].text.format.schema), []);
   assert.ok("allOf" in schema.$defs.score, "the server schema must retain its stricter semantic constraint");
+});
+
+test("Fast operations distinguish within-target and over-target usable responses", async () => {
+  for (const [latencyMs, expected] of [[8_000, true], [18_000, false]]) {
+    const ticks = [0, latencyMs];
+    const adapter = adapterFor({
+      status: "completed",
+      output: [{ type: "web_search_call" }],
+      output_text: JSON.stringify(completeReport),
+      usage: { input_tokens: 100, output_tokens: 100, total_tokens: 200 }
+    }, [], [], { now: () => ticks.shift() });
+    const result = await adapter.researchTicker("ACME");
+    assert.equal(result.operations.latency_ms, latencyMs);
+    assert.equal(result.operations.within_latency_target, expected);
+  }
+});
+
+test("Fast hard timeout is bounded and reports that no response was received", async () => {
+  const requests = [];
+  const options = [];
+  const ticks = [0, 30_001];
+  const adapter = adapterFor(new APIConnectionTimeoutError(), requests, options, { now: () => ticks.shift() });
+  await assert.rejects(adapter.researchTicker("SWVL"), (error) => {
+    assert.equal(error.code, RESEARCH_ERROR_CODES.timeout);
+    assert.equal(error.diagnostics.phase, "openai_request");
+    assert.equal(error.diagnostics.elapsed_ms, 30_001);
+    assert.equal(error.diagnostics.response_received, false);
+    return true;
+  });
+  assert.deepEqual(options, [{ timeout: 30_000, maxRetries: 0 }]);
+});
+
+test("Deep retains a separate larger search budget", async () => {
+  const requests = [];
+  await adapterFor({ status: "completed", output: [], output_text: JSON.stringify(partialReport) }, requests)
+    .researchTicker("XYZ", { stage: "deep" });
+  assert.equal(requests[0].max_tool_calls, 10);
+  assert.deepEqual(requests[0].tools, [{ type: "web_search", search_context_size: "medium" }]);
 });
 
 test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable output", async () => {

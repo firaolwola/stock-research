@@ -34,8 +34,11 @@ The first end-to-end prototype is working:
    and meaningful confidence. Historical split, dilution, offering, compliance,
    and warning items from those periods reference the linkage explicitly;
    ambiguous predecessors remain unknown or limited coverage.
-4. The fast-stage OpenAI request has a 15-second timeout and no automatic
-   retries. Stable errors distinguish timeouts, rate limits, provider
+4. The fast-stage OpenAI request targets 3–10 seconds, permits a bounded
+   over-budget grace period, and hard-stops at 30 seconds with no automatic
+   retries. It uses at most four low-context web searches and deliberately
+   returns visible partial/pending coverage instead of expanding into Deep.
+   Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
 5. The application renders ranked warnings and unknowns, a financial-health
@@ -149,6 +152,14 @@ OpenAI calls.
 Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
+
+Fast latency is measured independently from its hard timeout. A usable Fast
+report received after 10 seconds is returned with
+`within_latency_target=false`; the synchronous provider request is cancelled at
+30 seconds if no response object has arrived. Fast keeps its 5,000-token output
+ceiling, caps hosted search calls at four, and defers detailed lineage,
+financial history, corroboration, and historical catalyst analogues to Deep
+with explicit limitations.
 
 The default action runs the fast stage. **Deeper research** is a deliberate
 second-stage request with a larger timeout/output budget; the server never
