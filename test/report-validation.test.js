@@ -189,9 +189,9 @@ test("invalid evidence-state combinations are rejected", async () => {
     },
     {
       mutate(report) {
-        report.scores.catalyst_strength.claim_ids.push("claim-catalyst-value-conflict");
+        report.scores.financial_health.claim_ids.push("claim-catalyst-value-conflict");
       },
-      message: "score catalyst_strength cannot use unresolved claim-catalyst-value-conflict"
+      message: "score financial_health cannot use unresolved claim-catalyst-value-conflict"
     },
     {
       mutate(report) {

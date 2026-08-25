@@ -1,5 +1,5 @@
 {
-  "schema_version": "3.0.0",
+  "schema_version": "4.0.0",
   "report_id": "report-acme-fast-2026-08-24",
   "metadata": {
     "as_of": "2026-08-24T15:00:00Z",
@@ -7,91 +7,1064 @@
     "stage": "fast",
     "completion_status": "complete",
     "research_windows": [
-      { "topic": "reverse_splits", "start": "2021-08-24", "end": "2026-08-24" },
-      { "topic": "dilution_and_warnings", "start": "2023-08-24", "end": "2026-08-24" },
-      { "topic": "recent_news", "start": "2026-07-25", "end": "2026-08-24" }
-      ,{ "topic": "comparable_catalysts", "start": "2023-08-24", "end": "2026-08-24" }
+      {
+        "topic": "reverse_splits",
+        "start": "2021-08-24",
+        "end": "2026-08-24"
+      },
+      {
+        "topic": "dilution_and_warnings",
+        "start": "2023-08-24",
+        "end": "2026-08-24"
+      },
+      {
+        "topic": "recent_news",
+        "start": "2026-07-25",
+        "end": "2026-08-24"
+      },
+      {
+        "topic": "comparable_catalysts",
+        "start": "2023-08-24",
+        "end": "2026-08-24"
+      }
     ],
     "coverage_limitations": []
   },
-  "security": { "ticker": "ACME", "name": "Acme Common Stock", "security_type": "common_stock", "listing_venue": "Nasdaq", "listing_status": "active", "evidence_state": "confirmed", "claim_ids": ["claim-identity"] },
+  "security": {
+    "ticker": "ACME",
+    "name": "Acme Common Stock",
+    "security_type": "common_stock",
+    "listing_venue": "Nasdaq",
+    "listing_status": "active",
+    "evidence_state": "confirmed",
+    "claim_ids": [
+      "claim-identity"
+    ]
+  },
   "issuer": {
-    "legal_name": "Acme Holdings, Inc.", "cik": "0001234567", "identity_state": "confirmed", "identity_confidence": "high", "claim_ids": ["claim-identity"],
-    "prior_identities": [{ "name": "Old Acme Corp.", "ticker": "OLDA", "effective_from": "2018-01-01", "effective_to": "2022-06-30", "linkage_state": "confirmed", "linkage_confidence": "high", "claim_ids": ["claim-lineage"] }]
+    "legal_name": "Acme Holdings, Inc.",
+    "cik": "0001234567",
+    "identity_state": "confirmed",
+    "identity_confidence": "high",
+    "claim_ids": [
+      "claim-identity"
+    ],
+    "prior_identities": [
+      {
+        "name": "Old Acme Corp.",
+        "ticker": "OLDA",
+        "effective_from": "2018-01-01",
+        "effective_to": "2022-06-30",
+        "linkage_state": "confirmed",
+        "linkage_confidence": "high",
+        "claim_ids": [
+          "claim-lineage"
+        ]
+      }
+    ]
   },
   "sections": {
-    "reverse_splits": { "state": "not_found", "summary": "No reverse split was found in the defined five-year window; this is not proof that none occurred outside the reviewed evidence.", "coverage_notes": [], "items": [], "claim_ids": ["claim-splits"] },
-    "dilution": { "state": "confirmed", "summary": "A registered offering occurred in 2025.", "coverage_notes": [], "items": [{ "id": "dilution-1", "kind": "offering", "title": "Registered offering", "state": "confirmed", "summary": "$20 million registered offering.", "event_date": "2025-04-10", "value": 20000000, "unit": "USD", "claim_ids": ["claim-dilution"] }], "claim_ids": ["claim-dilution"] },
-    "dividends": { "state": "confirmed", "summary": "The issuer declared a current quarterly cash dividend.", "coverage_notes": [], "items": [{ "id": "dividend-1", "kind": "dividend", "title": "Quarterly dividend", "state": "confirmed", "summary": "$0.05 per common share.", "event_date": "2026-08-01", "value": 0.05, "unit": "USD per common share", "claim_ids": ["claim-dividend"] }], "claim_ids": ["claim-dividend"] },
-    "compliance_and_warnings": { "state": "not_found", "summary": "No material exchange-compliance, going-concern, SEC, or accounting warning was found in the defined window; absence is not proven.", "coverage_notes": [], "items": [], "claim_ids": ["claim-warnings"] },
-    "financial_context": { "state": "confirmed", "summary": "The latest filing reports positive operating cash flow and manageable debt.", "coverage_notes": [], "items": [{ "id": "financial-1", "kind": "free_cash_flow", "title": "Liquidity", "state": "confirmed", "summary": "Cash and operating cash flow were positive for the reported period.", "event_date": "2026-06-30", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }], "claim_ids": ["claim-financial"] },
-    "catalysts_and_news": { "state": "confirmed", "summary": "The current catalyst is a newly announced customer contract; reported contract-value details conflict.", "coverage_notes": ["The contract exists, but conflicting value estimates were not treated as confirmed."], "items": [{ "id": "news-1", "kind": "catalyst", "title": "Customer contract", "state": "confirmed", "summary": "The company announced a material multi-year customer contract; its value remains unknown.", "event_date": "2026-08-23", "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] }], "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] }
+    "reverse_splits": {
+      "state": "not_found",
+      "summary": "No reverse split was found in the defined five-year window; this is not proof that none occurred outside the reviewed evidence.",
+      "coverage_notes": [],
+      "items": [],
+      "claim_ids": [
+        "claim-splits"
+      ]
+    },
+    "dilution": {
+      "state": "confirmed",
+      "summary": "A registered offering occurred in 2025.",
+      "coverage_notes": [],
+      "items": [
+        {
+          "id": "dilution-1",
+          "kind": "offering",
+          "title": "Registered offering",
+          "state": "confirmed",
+          "summary": "$20 million registered offering.",
+          "event_date": "2025-04-10",
+          "value": 20000000,
+          "unit": "USD",
+          "claim_ids": [
+            "claim-dilution"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "claim-dilution"
+      ]
+    },
+    "dividends": {
+      "state": "confirmed",
+      "summary": "The issuer declared a current quarterly cash dividend.",
+      "coverage_notes": [],
+      "items": [
+        {
+          "id": "dividend-1",
+          "kind": "dividend",
+          "title": "Quarterly dividend",
+          "state": "confirmed",
+          "summary": "$0.05 per common share.",
+          "event_date": "2026-08-01",
+          "value": 0.05,
+          "unit": "USD per common share",
+          "claim_ids": [
+            "claim-dividend"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "claim-dividend"
+      ]
+    },
+    "compliance_and_warnings": {
+      "state": "not_found",
+      "summary": "No material exchange-compliance, going-concern, SEC, or accounting warning was found in the defined window; absence is not proven.",
+      "coverage_notes": [],
+      "items": [],
+      "claim_ids": [
+        "claim-warnings"
+      ]
+    },
+    "financial_context": {
+      "state": "confirmed",
+      "summary": "The latest filing reports positive operating cash flow and manageable debt.",
+      "coverage_notes": [],
+      "items": [
+        {
+          "id": "financial-1",
+          "kind": "free_cash_flow",
+          "title": "Liquidity",
+          "state": "confirmed",
+          "summary": "Cash and operating cash flow were positive for the reported period.",
+          "event_date": "2026-06-30",
+          "period_start": "2026-04-01",
+          "period_end": "2026-06-30",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "claim-financial"
+      ]
+    },
+    "catalysts_and_news": {
+      "state": "confirmed",
+      "summary": "The current catalyst is a newly announced customer contract; reported contract-value details conflict.",
+      "coverage_notes": [
+        "The contract exists, but conflicting value estimates were not treated as confirmed."
+      ],
+      "items": [
+        {
+          "id": "news-1",
+          "kind": "catalyst",
+          "title": "Customer contract",
+          "state": "confirmed",
+          "summary": "The company announced a material multi-year customer contract; its value remains unknown.",
+          "event_date": "2026-08-23",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-catalyst-value-conflict"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict"
+      ]
+    }
   },
   "financial_assessment": {
-    "state": "confirmed", "as_of": "2026-06-30", "reporting_currency": "USD", "summary": "The latest quarter shows positive operating cash generation, positive free cash flow, profitability, and moderate debt.", "coverage_notes": [],
+    "state": "confirmed",
+    "as_of": "2026-06-30",
+    "reporting_currency": "USD",
+    "summary": "The latest quarter shows positive operating cash generation, positive free cash flow, profitability, and moderate debt.",
+    "coverage_notes": [],
     "metrics": {
-      "cash": { "state": "confirmed", "label": "Cash and cash equivalents", "value": 48.2, "unit": "USD millions", "period_start": "2026-06-30", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2026-03-31", "comparison_period_end": "2026-03-31", "summary": "Quarter-end cash increased from the prior quarter.", "claim_ids": ["claim-financial"] },
-      "cash_burn": { "state": "confirmed", "label": "Quarterly cash burn", "value": -8.4, "unit": "USD millions per quarter", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2026-01-01", "comparison_period_end": "2026-03-31", "summary": "Negative burn denotes $8.4 million of operating cash generation rather than cash consumption.", "claim_ids": ["claim-financial"] },
-      "revenue": { "state": "confirmed", "label": "Quarterly revenue", "value": 125.0, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2025-04-01", "comparison_period_end": "2025-06-30", "summary": "Revenue increased from the comparable prior-year quarter.", "claim_ids": ["claim-financial"] },
-      "profitability": { "state": "confirmed", "label": "Quarterly net income", "value": 6.2, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2025-04-01", "comparison_period_end": "2025-06-30", "summary": "The issuer was profitable and improved versus the prior-year quarter.", "claim_ids": ["claim-financial"] },
-      "free_cash_flow": { "state": "confirmed", "label": "Quarterly free cash flow", "value": 7.1, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "trend": "improving", "comparison_period_start": "2025-04-01", "comparison_period_end": "2025-06-30", "summary": "Free cash flow was positive and improved year over year.", "claim_ids": ["claim-financial"] },
-      "debt": { "state": "confirmed", "label": "Total debt", "value": 31.0, "unit": "USD millions", "period_start": "2026-06-30", "period_end": "2026-06-30", "trend": "stable", "comparison_period_start": "2026-03-31", "comparison_period_end": "2026-03-31", "summary": "Debt was broadly stable from the prior quarter and below quarter-end cash.", "claim_ids": ["claim-financial"] }
+      "cash": {
+        "state": "confirmed",
+        "label": "Cash and cash equivalents",
+        "value": 48.2,
+        "unit": "USD millions",
+        "period_start": "2026-06-30",
+        "period_end": "2026-06-30",
+        "trend": "improving",
+        "comparison_period_start": "2026-03-31",
+        "comparison_period_end": "2026-03-31",
+        "summary": "Quarter-end cash increased from the prior quarter.",
+        "claim_ids": [
+          "claim-financial"
+        ]
+      },
+      "cash_burn": {
+        "state": "confirmed",
+        "label": "Quarterly cash burn",
+        "value": -8.4,
+        "unit": "USD millions per quarter",
+        "period_start": "2026-04-01",
+        "period_end": "2026-06-30",
+        "trend": "improving",
+        "comparison_period_start": "2026-01-01",
+        "comparison_period_end": "2026-03-31",
+        "summary": "Negative burn denotes $8.4 million of operating cash generation rather than cash consumption.",
+        "claim_ids": [
+          "claim-financial"
+        ]
+      },
+      "revenue": {
+        "state": "confirmed",
+        "label": "Quarterly revenue",
+        "value": 125,
+        "unit": "USD millions",
+        "period_start": "2026-04-01",
+        "period_end": "2026-06-30",
+        "trend": "improving",
+        "comparison_period_start": "2025-04-01",
+        "comparison_period_end": "2025-06-30",
+        "summary": "Revenue increased from the comparable prior-year quarter.",
+        "claim_ids": [
+          "claim-financial"
+        ]
+      },
+      "profitability": {
+        "state": "confirmed",
+        "label": "Quarterly net income",
+        "value": 6.2,
+        "unit": "USD millions",
+        "period_start": "2026-04-01",
+        "period_end": "2026-06-30",
+        "trend": "improving",
+        "comparison_period_start": "2025-04-01",
+        "comparison_period_end": "2025-06-30",
+        "summary": "The issuer was profitable and improved versus the prior-year quarter.",
+        "claim_ids": [
+          "claim-financial"
+        ]
+      },
+      "free_cash_flow": {
+        "state": "confirmed",
+        "label": "Quarterly free cash flow",
+        "value": 7.1,
+        "unit": "USD millions",
+        "period_start": "2026-04-01",
+        "period_end": "2026-06-30",
+        "trend": "improving",
+        "comparison_period_start": "2025-04-01",
+        "comparison_period_end": "2025-06-30",
+        "summary": "Free cash flow was positive and improved year over year.",
+        "claim_ids": [
+          "claim-financial"
+        ]
+      },
+      "debt": {
+        "state": "confirmed",
+        "label": "Total debt",
+        "value": 31,
+        "unit": "USD millions",
+        "period_start": "2026-06-30",
+        "period_end": "2026-06-30",
+        "trend": "stable",
+        "comparison_period_start": "2026-03-31",
+        "comparison_period_end": "2026-03-31",
+        "summary": "Debt was broadly stable from the prior quarter and below quarter-end cash.",
+        "claim_ids": [
+          "claim-financial"
+        ]
+      }
     },
-    "going_concern": { "state": "not_found", "as_of": "2026-08-05", "summary": "The defined review of the latest quarterly filing found no going-concern warning; this does not prove one never existed.", "claim_ids": ["claim-warnings"] },
+    "going_concern": {
+      "state": "not_found",
+      "as_of": "2026-08-05",
+      "summary": "The defined review of the latest quarterly filing found no going-concern warning; this does not prove one never existed.",
+      "claim_ids": [
+        "claim-warnings"
+      ]
+    },
     "material_warnings": []
   },
   "catalyst_assessment": {
     "current": {
-      "state": "confirmed", "classification": "contract", "title": "Multi-year customer contract", "event_date": "2026-08-23", "summary": "A recent, specific contract is confirmed, but its value is unresolved.", "confidence": "medium", "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"],
+      "state": "confirmed",
+      "classification": "contract",
+      "title": "Multi-year customer contract",
+      "event_date": "2026-08-23",
+      "summary": "A recent, specific contract is confirmed, but its value is unresolved.",
+      "confidence": "medium",
+      "claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict"
+      ],
       "factors": {
-        "recency": { "rating": "high", "explanation": "Announced one day before the report cutoff.", "claim_ids": ["claim-catalyst"] },
-        "specificity": { "rating": "medium", "explanation": "The customer relationship and multi-year term are specific, while value is undisclosed and disputed.", "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] },
-        "credibility": { "rating": "high", "explanation": "The issuer announcement is corroborated by original reporting.", "claim_ids": ["claim-catalyst"] },
-        "novelty": { "rating": "medium", "explanation": "The contract is new, but the issuer announced another customer contract in 2025.", "claim_ids": ["claim-catalyst", "claim-analogue-event"] },
-        "potential_significance": { "rating": "unknown", "explanation": "Conflicting value reports prevent a supported significance estimate.", "claim_ids": ["claim-catalyst-value-conflict"] }
+        "recency": {
+          "rating": "high",
+          "explanation": "Announced one day before the report cutoff.",
+          "claim_ids": [
+            "claim-catalyst"
+          ]
+        },
+        "specificity": {
+          "rating": "medium",
+          "explanation": "The customer relationship and multi-year term are specific, while value is undisclosed and disputed.",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-catalyst-value-conflict"
+          ]
+        },
+        "credibility": {
+          "rating": "high",
+          "explanation": "The issuer announcement is corroborated by original reporting.",
+          "claim_ids": [
+            "claim-catalyst"
+          ]
+        },
+        "novelty": {
+          "rating": "medium",
+          "explanation": "The contract is new, but the issuer announced another customer contract in 2025.",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-analogue-event"
+          ]
+        },
+        "potential_significance": {
+          "rating": "unknown",
+          "explanation": "Conflicting value reports prevent a supported significance estimate.",
+          "claim_ids": [
+            "claim-catalyst-value-conflict"
+          ]
+        }
       }
     },
     "historical_analogues": {
-      "state": "confirmed", "summary": "One prior issuer contract announcement has a sourced short-window reaction, with material comparability limits.", "coverage_notes": ["Only issuer-specific contract announcements in the three-year window were reviewed."], "claim_ids": ["claim-analogue-event", "claim-analogue-reaction"],
-      "items": [{ "id": "analogue-contract-2025", "title": "2025 customer contract", "state": "confirmed", "event_date": "2025-05-10", "comparison_basis": "Both events were issuer-announced multi-year customer contracts.", "comparison_limitations": ["The customers differ.", "Neither announcement provides a reliably comparable contract value.", "One observation cannot establish a repeatable reaction."], "reaction_windows": [{ "label": "Announcement through two trading days", "start": "2025-05-10", "end": "2025-05-14", "price_change_percent": 12.4, "state": "confirmed", "summary": "The stock rose 12.4% over the stated window; this historical move does not predict the current reaction.", "claim_ids": ["claim-analogue-reaction"] }], "claim_ids": ["claim-analogue-event", "claim-analogue-reaction"] }]
+      "state": "confirmed",
+      "summary": "One prior issuer contract announcement has a sourced short-window reaction, with material comparability limits.",
+      "coverage_notes": [
+        "Only issuer-specific contract announcements in the three-year window were reviewed."
+      ],
+      "claim_ids": [
+        "claim-analogue-event",
+        "claim-analogue-reaction"
+      ],
+      "items": [
+        {
+          "id": "analogue-contract-2025",
+          "title": "2025 customer contract",
+          "state": "confirmed",
+          "event_date": "2025-05-10",
+          "comparison_basis": "Both events were issuer-announced multi-year customer contracts.",
+          "comparison_limitations": [
+            "The customers differ.",
+            "Neither announcement provides a reliably comparable contract value.",
+            "One observation cannot establish a repeatable reaction."
+          ],
+          "reaction_windows": [
+            {
+              "label": "Announcement through two trading days",
+              "start": "2025-05-10",
+              "end": "2025-05-14",
+              "price_change_percent": 12.4,
+              "state": "confirmed",
+              "summary": "The stock rose 12.4% over the stated window; this historical move does not predict the current reaction.",
+              "claim_ids": [
+                "claim-analogue-reaction"
+              ]
+            }
+          ],
+          "claim_ids": [
+            "claim-analogue-event",
+            "claim-analogue-reaction"
+          ]
+        }
+      ]
     },
-    "favorable_evidence_claim_ids": ["claim-catalyst", "claim-analogue-reaction"],
-    "unfavorable_evidence_claim_ids": ["claim-catalyst-value-conflict", "claim-analogue-event"],
-    "uncertainty": ["Contract value is unresolved.", "The single prior event differs in customer and disclosed economics."],
-    "near_term_implication": { "state": "confirmed", "direction": "strengthens", "summary": "The recent confirmed contract and one favorable prior reaction modestly strengthen the near-term evidence, but the unresolved value and weak comparability limit confidence; this is not a trade recommendation.", "confidence": "medium", "claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict", "claim-analogue-event", "claim-analogue-reaction"] }
+    "favorable_evidence_claim_ids": [
+      "claim-catalyst",
+      "claim-analogue-reaction"
+    ],
+    "unfavorable_evidence_claim_ids": [
+      "claim-catalyst-value-conflict",
+      "claim-analogue-event"
+    ],
+    "uncertainty": [
+      "Contract value is unresolved.",
+      "The single prior event differs in customer and disclosed economics."
+    ],
+    "near_term_implication": {
+      "state": "confirmed",
+      "direction": "strengthens",
+      "summary": "The recent confirmed contract and one favorable prior reaction modestly strengthen the near-term evidence, but the unresolved value and weak comparability limit confidence; this is not a trade recommendation.",
+      "confidence": "medium",
+      "claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict",
+        "claim-analogue-event",
+        "claim-analogue-reaction"
+      ]
+    }
   },
   "scores": {
-    "dilution_historical_severity": { "state": "confirmed", "value": 5, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Past three years", "explanation": "One material registered offering was confirmed.", "claim_ids": ["claim-dilution"] },
-    "dilution_future_likelihood": { "state": "confirmed", "value": 4, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "Current liquidity reduces but does not eliminate financing risk.", "claim_ids": ["claim-dilution", "claim-financial"] },
-    "dilution_potential_impact": { "state": "confirmed", "value": 4, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "The prior offering indicates moderate potential shareholder impact.", "claim_ids": ["claim-dilution"] },
-    "reverse_split_risk": { "state": "confirmed", "value": 2, "scale_min": 0, "scale_max": 10, "direction": "higher_is_more_risk", "time_horizon": "Next twelve months", "explanation": "No split was found in-window and the active listing is confirmed; the score does not assert historical absence.", "claim_ids": ["claim-splits", "claim-identity"] },
-    "financial_health": { "state": "confirmed", "value": 7, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Latest reported period and next twelve months", "explanation": "Positive cash flow and manageable debt support the assessment.", "claim_ids": ["claim-financial"] },
-    "long_term_company_quality": { "state": "confirmed", "value": 6, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Multi-year", "explanation": "Financial evidence is favorable, tempered by prior dilution.", "claim_ids": ["claim-financial", "claim-dilution"] },
-    "catalyst_strength": { "state": "confirmed", "value": 8, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Current catalyst", "explanation": "The company reported a specific, recent contract.", "claim_ids": ["claim-catalyst"] },
-    "near_term_setup_quality": { "state": "confirmed", "value": 7, "scale_min": 0, "scale_max": 10, "direction": "higher_is_better", "time_horizon": "Next five trading days", "explanation": "The recent catalyst and limited historical analogue are favorable, but do not predict a repeat reaction; this is not a trade recommendation.", "claim_ids": ["claim-catalyst", "claim-analogue-event", "claim-analogue-reaction"] }
+    "dilution_historical_severity": {
+      "state": "confirmed",
+      "value": 2,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_more_risk",
+      "time_horizon": "Past three years",
+      "explanation": "Counts confirmed in-window offerings and instruments using fixed severity weights; a bounded not-found search scores 0 without asserting lifetime absence.",
+      "claim_ids": [
+        "claim-dilution"
+      ],
+      "confidence": "high",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "confirmed_dilution_events",
+          "state": "confirmed",
+          "value": 2,
+          "weight": 1,
+          "explanation": "1 in-window dilution event(s) contributed by documented instrument type.",
+          "claim_ids": [
+            "claim-dilution"
+          ]
+        }
+      ]
+    },
+    "dilution_future_likelihood": {
+      "state": "confirmed",
+      "value": 2.3,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_more_risk",
+      "time_horizon": "Next twelve months",
+      "explanation": "Weighted evidence estimate for the next twelve months; it is not a probability forecast.",
+      "claim_ids": [
+        "claim-dilution",
+        "claim-financial"
+      ],
+      "confidence": "high",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "historical_dilution",
+          "state": "confirmed",
+          "value": 2,
+          "weight": 0.4,
+          "explanation": "Prior dilution raises—but does not determine—future financing likelihood.",
+          "claim_ids": [
+            "claim-dilution"
+          ]
+        },
+        {
+          "key": "cash_flow_pressure",
+          "state": "confirmed",
+          "value": 2,
+          "weight": 0.35,
+          "explanation": "Positive cash burn or negative free cash flow raises financing pressure.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "debt_and_instruments",
+          "state": "confirmed",
+          "value": 3,
+          "weight": 0.25,
+          "explanation": "Debt above cash and outstanding warrants or convertibles raise financing pressure.",
+          "claim_ids": [
+            "claim-financial",
+            "claim-dilution"
+          ]
+        }
+      ]
+    },
+    "dilution_potential_impact": {
+      "state": "confirmed",
+      "value": 3.1,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_more_risk",
+      "time_horizon": "Next twelve months",
+      "explanation": "Contextualizes known financing size and instrument overhang; missing share-count terms keep this conservative and are stated in the components.",
+      "claim_ids": [
+        "claim-dilution",
+        "claim-financial"
+      ],
+      "confidence": "high",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "offering_size_vs_cash",
+          "state": "confirmed",
+          "value": 4.1,
+          "weight": 0.75,
+          "explanation": "Documented offering value is normalized to reported cash; this is not an ownership-dilution percentage.",
+          "claim_ids": [
+            "claim-dilution",
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "instrument_overhang",
+          "state": "confirmed",
+          "value": 0,
+          "weight": 0.25,
+          "explanation": "Confirmed warrants and convertibles add potential issuance overhang.",
+          "claim_ids": [
+            "claim-dilution"
+          ]
+        }
+      ]
+    },
+    "reverse_split_risk": {
+      "state": "confirmed",
+      "value": 1,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_more_risk",
+      "time_horizon": "Next twelve months",
+      "explanation": "Combines five-year split history with current listing pressure; it does not predict a corporate action.",
+      "claim_ids": [
+        "claim-splits",
+        "claim-warnings"
+      ],
+      "confidence": "high",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "split_history",
+          "state": "confirmed",
+          "value": 1,
+          "weight": 0.65,
+          "explanation": "Each confirmed in-window reverse split adds fixed severity; bounded not-found retains a baseline of 1.",
+          "claim_ids": [
+            "claim-splits"
+          ]
+        },
+        {
+          "key": "listing_pressure",
+          "state": "confirmed",
+          "value": 1,
+          "weight": 0.35,
+          "explanation": "Confirmed listing-compliance pressure increases near-term split risk.",
+          "claim_ids": [
+            "claim-warnings"
+          ]
+        }
+      ]
+    },
+    "financial_health": {
+      "state": "confirmed",
+      "value": 9.1,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_better",
+      "time_horizon": "Latest reported period and next twelve months",
+      "explanation": "A trend-based baseline with explicit profitability, cash-flow, leverage, and going-concern adjustments.",
+      "claim_ids": [
+        "claim-financial",
+        "claim-warnings"
+      ],
+      "confidence": "high",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "cash",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.167,
+          "explanation": "Quarter-end cash increased from the prior quarter.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "cash_burn",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.167,
+          "explanation": "Negative burn denotes $8.4 million of operating cash generation rather than cash consumption.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "revenue",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.167,
+          "explanation": "Revenue increased from the comparable prior-year quarter.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "profitability",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.167,
+          "explanation": "The issuer was profitable and improved versus the prior-year quarter.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "free_cash_flow",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.167,
+          "explanation": "Free cash flow was positive and improved year over year.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "debt",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.167,
+          "explanation": "Debt was broadly stable from the prior quarter and below quarter-end cash.",
+          "claim_ids": [
+            "claim-financial"
+          ]
+        },
+        {
+          "key": "going_concern_and_liquidity_warnings",
+          "state": "confirmed",
+          "value": 7,
+          "weight": 0,
+          "explanation": "Going-concern and material financial warnings apply fixed downward adjustments.",
+          "claim_ids": [
+            "claim-warnings"
+          ]
+        }
+      ]
+    },
+    "long_term_company_quality": {
+      "state": "confirmed",
+      "value": 8.7,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_better",
+      "time_horizon": "Multi-year",
+      "explanation": "Combines financial health, dilution resilience, and compliance evidence; catalyst/setup inputs are excluded.",
+      "claim_ids": [
+        "claim-financial",
+        "claim-warnings",
+        "claim-dilution"
+      ],
+      "confidence": "high",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "financial_health",
+          "state": "confirmed",
+          "value": 9.1,
+          "weight": 0.6,
+          "explanation": "Current financial health is the largest longer-term input.",
+          "claim_ids": [
+            "claim-financial",
+            "claim-warnings"
+          ]
+        },
+        {
+          "key": "dilution_resilience",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.2,
+          "explanation": "Lower historical dilution severity supports resilience.",
+          "claim_ids": [
+            "claim-dilution"
+          ]
+        },
+        {
+          "key": "compliance_quality",
+          "state": "confirmed",
+          "value": 8,
+          "weight": 0.2,
+          "explanation": "Bounded absence of material compliance warnings is favorable but not proof of lifetime absence.",
+          "claim_ids": [
+            "claim-warnings"
+          ]
+        }
+      ]
+    },
+    "catalyst_strength": {
+      "state": "limited_coverage",
+      "value": null,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_better",
+      "time_horizon": "Current catalyst",
+      "explanation": "One or more required catalyst factors are unknown, so strength remains unscored.",
+      "claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict",
+        "claim-analogue-event"
+      ],
+      "confidence": "unknown",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "Announced one day before the report cutoff.",
+          "claim_ids": [
+            "claim-catalyst"
+          ]
+        },
+        {
+          "key": "specificity",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.2,
+          "explanation": "The customer relationship and multi-year term are specific, while value is undisclosed and disputed.",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-catalyst-value-conflict"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The issuer announcement is corroborated by original reporting.",
+          "claim_ids": [
+            "claim-catalyst"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.2,
+          "explanation": "The contract is new, but the issuer announced another customer contract in 2025.",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-analogue-event"
+          ]
+        },
+        {
+          "key": "potential_significance",
+          "state": "unknown",
+          "value": null,
+          "weight": 0.2,
+          "explanation": "Conflicting value reports prevent a supported significance estimate.",
+          "claim_ids": [
+            "claim-catalyst-value-conflict"
+          ]
+        }
+      ]
+    },
+    "near_term_setup_quality": {
+      "state": "limited_coverage",
+      "value": null,
+      "scale_min": 0,
+      "scale_max": 10,
+      "direction": "higher_is_better",
+      "time_horizon": "Next five trading days",
+      "explanation": "Confirmed catalyst strength and a supported near-term implication are required for setup scoring.",
+      "claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict",
+        "claim-analogue-event"
+      ],
+      "confidence": "unknown",
+      "methodology_version": "1.0.0",
+      "components": [
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "Announced one day before the report cutoff.",
+          "claim_ids": [
+            "claim-catalyst"
+          ]
+        },
+        {
+          "key": "specificity",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.2,
+          "explanation": "The customer relationship and multi-year term are specific, while value is undisclosed and disputed.",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-catalyst-value-conflict"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The issuer announcement is corroborated by original reporting.",
+          "claim_ids": [
+            "claim-catalyst"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.2,
+          "explanation": "The contract is new, but the issuer announced another customer contract in 2025.",
+          "claim_ids": [
+            "claim-catalyst",
+            "claim-analogue-event"
+          ]
+        },
+        {
+          "key": "potential_significance",
+          "state": "unknown",
+          "value": null,
+          "weight": 0.2,
+          "explanation": "Conflicting value reports prevent a supported significance estimate.",
+          "claim_ids": [
+            "claim-catalyst-value-conflict"
+          ]
+        }
+      ]
+    }
   },
   "claims": [
-    { "id": "claim-identity", "text": "ACME is active Nasdaq common stock issued by Acme Holdings, Inc.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec", "source-exchange"] },
-    { "id": "claim-lineage", "text": "Acme Holdings previously operated as Old Acme Corp. under OLDA.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
-    { "id": "claim-splits", "text": "The defined search found no reverse split in the five-year window.", "materiality": "high", "state": "not_found", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec", "source-exchange"] },
-    { "id": "claim-dilution", "text": "The issuer completed a $20 million registered offering on April 10, 2025.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-offering"] },
-    { "id": "claim-dividend", "text": "The issuer declared a $0.05 quarterly cash dividend.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-dividend"] },
-    { "id": "claim-warnings", "text": "The defined search found no material compliance or accounting warning in-window.", "materiality": "high", "state": "not_found", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec", "source-exchange"] },
-    { "id": "claim-financial", "text": "For the quarter ended June 30, 2026, the issuer reported $48.2 million cash, $8.4 million operating cash generation, $125.0 million revenue, $6.2 million net income, $7.1 million free cash flow, and $31.0 million total debt, with the stated trends based on the specified comparison periods.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-sec"] },
-    { "id": "claim-catalyst", "text": "The issuer announced a material multi-year customer contract on August 23, 2026.", "materiality": "high", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-news", "source-original-news"] },
-    { "id": "claim-catalyst-value-conflict", "text": "Primary and secondary reports conflict about the contract value, so the value is unknown.", "materiality": "medium", "state": "unknown", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-news", "source-original-news", "source-secondary"] },
-    { "id": "claim-analogue-event", "text": "The issuer announced another multi-year customer contract on May 10, 2025.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-prior-contract"] },
-    { "id": "claim-analogue-reaction", "text": "ACME common stock rose 12.4% from May 10 through May 14, 2025.", "materiality": "medium", "state": "confirmed", "as_of": "2026-08-24T15:00:00Z", "source_ids": ["source-price-record"] }
+    {
+      "id": "claim-identity",
+      "text": "ACME is active Nasdaq common stock issued by Acme Holdings, Inc.",
+      "materiality": "high",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-sec",
+        "source-exchange"
+      ]
+    },
+    {
+      "id": "claim-lineage",
+      "text": "Acme Holdings previously operated as Old Acme Corp. under OLDA.",
+      "materiality": "medium",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-sec"
+      ]
+    },
+    {
+      "id": "claim-splits",
+      "text": "The defined search found no reverse split in the five-year window.",
+      "materiality": "high",
+      "state": "not_found",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-sec",
+        "source-exchange"
+      ]
+    },
+    {
+      "id": "claim-dilution",
+      "text": "The issuer completed a $20 million registered offering on April 10, 2025.",
+      "materiality": "high",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-offering"
+      ]
+    },
+    {
+      "id": "claim-dividend",
+      "text": "The issuer declared a $0.05 quarterly cash dividend.",
+      "materiality": "medium",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-dividend"
+      ]
+    },
+    {
+      "id": "claim-warnings",
+      "text": "The defined search found no material compliance or accounting warning in-window.",
+      "materiality": "high",
+      "state": "not_found",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-sec",
+        "source-exchange"
+      ]
+    },
+    {
+      "id": "claim-financial",
+      "text": "For the quarter ended June 30, 2026, the issuer reported $48.2 million cash, $8.4 million operating cash generation, $125.0 million revenue, $6.2 million net income, $7.1 million free cash flow, and $31.0 million total debt, with the stated trends based on the specified comparison periods.",
+      "materiality": "high",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-sec"
+      ]
+    },
+    {
+      "id": "claim-catalyst",
+      "text": "The issuer announced a material multi-year customer contract on August 23, 2026.",
+      "materiality": "high",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-news",
+        "source-original-news"
+      ]
+    },
+    {
+      "id": "claim-catalyst-value-conflict",
+      "text": "Primary and secondary reports conflict about the contract value, so the value is unknown.",
+      "materiality": "medium",
+      "state": "unknown",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-news",
+        "source-original-news",
+        "source-secondary"
+      ]
+    },
+    {
+      "id": "claim-analogue-event",
+      "text": "The issuer announced another multi-year customer contract on May 10, 2025.",
+      "materiality": "medium",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-prior-contract"
+      ]
+    },
+    {
+      "id": "claim-analogue-reaction",
+      "text": "ACME common stock rose 12.4% from May 10 through May 14, 2025.",
+      "materiality": "medium",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": [
+        "source-price-record"
+      ]
+    }
   ],
   "sources": [
-    { "id": "source-sec", "title": "Acme Holdings Form 10-Q", "url": "https://www.sec.gov/Archives/example/acme-10q", "published_date": "2026-08-05", "source_type": "sec_filing", "confidence": "high", "retrieved_at": "2026-08-24T14:58:00Z", "supported_claim_ids": ["claim-identity", "claim-lineage", "claim-splits", "claim-warnings", "claim-financial"] },
-    { "id": "source-exchange", "title": "Nasdaq ACME Listing and Compliance Record", "url": "https://www.nasdaq.com/market-activity/stocks/acme", "published_date": "2026-08-24", "source_type": "exchange_notice", "confidence": "high", "retrieved_at": "2026-08-24T14:58:15Z", "supported_claim_ids": ["claim-identity", "claim-splits", "claim-warnings"] },
-    { "id": "source-offering", "title": "Acme Holdings Form 8-K — Registered Offering", "url": "https://www.sec.gov/Archives/example/acme-offering", "published_date": "2025-04-10", "source_type": "sec_filing", "confidence": "high", "retrieved_at": "2026-08-24T14:58:30Z", "supported_claim_ids": ["claim-dilution"] },
-    { "id": "source-dividend", "title": "Acme Declares Quarterly Dividend", "url": "https://investors.example.com/acme/dividend", "published_date": "2026-08-01", "source_type": "company_release", "confidence": "high", "retrieved_at": "2026-08-24T14:59:00Z", "supported_claim_ids": ["claim-dividend"] },
-    { "id": "source-news", "title": "Acme Announces Multi-Year Customer Contract", "url": "https://investors.example.com/acme/contract", "published_date": "2026-08-23", "source_type": "company_release", "confidence": "high", "retrieved_at": "2026-08-24T14:59:30Z", "supported_claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] },
-    { "id": "source-original-news", "title": "Acme Confirms New Customer Contract, Value Undisclosed", "url": "https://news.example.com/acme-contract-report", "published_date": "2026-08-23", "source_type": "original_news", "confidence": "medium", "retrieved_at": "2026-08-24T14:59:40Z", "supported_claim_ids": ["claim-catalyst", "claim-catalyst-value-conflict"] },
-    { "id": "source-secondary", "title": "ACME Contract Estimate", "url": "https://aggregator.example.com/acme-contract-estimate", "published_date": "2026-08-23", "source_type": "secondary_aggregator", "confidence": "low", "retrieved_at": "2026-08-24T14:59:50Z", "supported_claim_ids": ["claim-catalyst-value-conflict"] },
-    { "id": "source-prior-contract", "title": "Acme Announces 2025 Customer Contract", "url": "https://investors.example.com/acme/2025-contract", "published_date": "2025-05-10", "source_type": "company_release", "confidence": "high", "retrieved_at": "2026-08-24T14:59:55Z", "supported_claim_ids": ["claim-analogue-event"] },
-    { "id": "source-price-record", "title": "Nasdaq ACME Historical Price Record", "url": "https://www.nasdaq.com/market-activity/stocks/acme/historical", "published_date": "2025-05-14", "source_type": "exchange_notice", "confidence": "high", "retrieved_at": "2026-08-24T14:59:58Z", "supported_claim_ids": ["claim-analogue-reaction"] }
+    {
+      "id": "source-sec",
+      "title": "Acme Holdings Form 10-Q",
+      "url": "https://www.sec.gov/Archives/example/acme-10q",
+      "published_date": "2026-08-05",
+      "source_type": "sec_filing",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:58:00Z",
+      "supported_claim_ids": [
+        "claim-identity",
+        "claim-lineage",
+        "claim-splits",
+        "claim-warnings",
+        "claim-financial"
+      ]
+    },
+    {
+      "id": "source-exchange",
+      "title": "Nasdaq ACME Listing and Compliance Record",
+      "url": "https://www.nasdaq.com/market-activity/stocks/acme",
+      "published_date": "2026-08-24",
+      "source_type": "exchange_notice",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:58:15Z",
+      "supported_claim_ids": [
+        "claim-identity",
+        "claim-splits",
+        "claim-warnings"
+      ]
+    },
+    {
+      "id": "source-offering",
+      "title": "Acme Holdings Form 8-K — Registered Offering",
+      "url": "https://www.sec.gov/Archives/example/acme-offering",
+      "published_date": "2025-04-10",
+      "source_type": "sec_filing",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:58:30Z",
+      "supported_claim_ids": [
+        "claim-dilution"
+      ]
+    },
+    {
+      "id": "source-dividend",
+      "title": "Acme Declares Quarterly Dividend",
+      "url": "https://investors.example.com/acme/dividend",
+      "published_date": "2026-08-01",
+      "source_type": "company_release",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:59:00Z",
+      "supported_claim_ids": [
+        "claim-dividend"
+      ]
+    },
+    {
+      "id": "source-news",
+      "title": "Acme Announces Multi-Year Customer Contract",
+      "url": "https://investors.example.com/acme/contract",
+      "published_date": "2026-08-23",
+      "source_type": "company_release",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:59:30Z",
+      "supported_claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict"
+      ]
+    },
+    {
+      "id": "source-original-news",
+      "title": "Acme Confirms New Customer Contract, Value Undisclosed",
+      "url": "https://news.example.com/acme-contract-report",
+      "published_date": "2026-08-23",
+      "source_type": "original_news",
+      "confidence": "medium",
+      "retrieved_at": "2026-08-24T14:59:40Z",
+      "supported_claim_ids": [
+        "claim-catalyst",
+        "claim-catalyst-value-conflict"
+      ]
+    },
+    {
+      "id": "source-secondary",
+      "title": "ACME Contract Estimate",
+      "url": "https://aggregator.example.com/acme-contract-estimate",
+      "published_date": "2026-08-23",
+      "source_type": "secondary_aggregator",
+      "confidence": "low",
+      "retrieved_at": "2026-08-24T14:59:50Z",
+      "supported_claim_ids": [
+        "claim-catalyst-value-conflict"
+      ]
+    },
+    {
+      "id": "source-prior-contract",
+      "title": "Acme Announces 2025 Customer Contract",
+      "url": "https://investors.example.com/acme/2025-contract",
+      "published_date": "2025-05-10",
+      "source_type": "company_release",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:59:55Z",
+      "supported_claim_ids": [
+        "claim-analogue-event"
+      ]
+    },
+    {
+      "id": "source-price-record",
+      "title": "Nasdaq ACME Historical Price Record",
+      "url": "https://www.nasdaq.com/market-activity/stocks/acme/historical",
+      "published_date": "2025-05-14",
+      "source_type": "exchange_notice",
+      "confidence": "high",
+      "retrieved_at": "2026-08-24T14:59:58Z",
+      "supported_claim_ids": [
+        "claim-analogue-reaction"
+      ]
+    }
   ]
 }

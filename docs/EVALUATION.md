@@ -18,6 +18,9 @@ The cases are evidence expectations, not investment recommendations. Time-sensit
 - **Issuer lineage:** prior ticker/name history is carried forward only when linkage is evidenced.
 - **Uncertainty:** expected `unknown`, `limited_coverage`, and `not_applicable` states are preserved.
 - **Operations and clarity:** latency distribution, estimated cost, and a reviewer clarity rating from 1 through 5 accompany quality results.
+- **Score calibration:** deterministic expected state/value checks are reported
+  overall and by material-risk category; unresolved expected inputs must remain
+  null rather than pass by becoming favorable numbers.
 
 Syntax errors, timeouts, configuration failures, malformed upstream responses, and other deterministic application failures are app reliability results. They are reported separately and never counted as missed research facts. A successful report that omits an expected fact is a research-quality miss.
 

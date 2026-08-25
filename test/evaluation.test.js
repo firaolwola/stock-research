@@ -24,6 +24,17 @@ test("the token-free calibration sample reports category recall separately from 
   assert.equal(result.research_quality.meets_target, true);
   assert.equal(result.research_quality.uncertainty_accuracy, 1);
   assert.equal(result.operations.estimated_cost_usd, 0);
+  assert.deepEqual(result.research_quality.score_calibration, {
+    evaluated: 13,
+    passed: 13,
+    pass_rate: 1,
+    by_category: {
+      dilution_offerings: { evaluated: 4, passed: 4, pass_rate: 1 },
+      reverse_splits: { evaluated: 2, passed: 2, pass_rate: 1 },
+      financial_context: { evaluated: 3, passed: 3, pass_rate: 1 },
+      catalysts_news: { evaluated: 4, passed: 4, pass_rate: 1 }
+    }
+  });
   assert.deepEqual(result.deterministic_app_checks, { evaluated: 3, failures: [] });
   assert.deepEqual(result.research_quality.deterministic_app_failures, []);
 });

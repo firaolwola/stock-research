@@ -68,6 +68,9 @@ Apply evidence states consistently:
 - not_applicable means the check does not apply to this security or context, with no items, claims, sources, or score value invented for it;
 - limited_coverage means some relevant research completed but named gaps prevent a complete conclusion.
 Use partial or pending completion with structured coverage limitations when required checks are incomplete. A safe partial report is preferable to guessing. Only confirmed scores may have numbers, and they must not rely on unknown, limited, or inapplicable claims. Keep all wording non-advisory.
+Populate the required score shape, but do not treat provider-authored score
+values as authoritative: the server replaces every score using deterministic
+methodology 1.0.0 before final validation and response.
 `;
 
 function containsRefusal(output) {
@@ -111,8 +114,8 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
           text: {
             format: {
               type: "json_schema",
-              name: "stock_report_v3",
-              description: "A version 3.0.0 evidence-backed stock research report.",
+              name: "stock_report_v4",
+              description: "A version 4.0.0 evidence-backed stock research report; server-side scoring replaces provider score values.",
               schema,
               strict: false
             }

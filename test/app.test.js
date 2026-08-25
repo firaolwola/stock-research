@@ -51,6 +51,21 @@ test("analyze normalizes a ticker and returns a validated complete report", asyn
   assert.deepEqual(calls, ["ACME"]);
 });
 
+test("analyze replaces provider-authored score values deterministically", async () => {
+  const providerReport = structuredClone(completeReport);
+  providerReport.scores.dilution_historical_severity.value = 10;
+  providerReport.scores.dilution_historical_severity.explanation = "Provider-authored placeholder.";
+  const app = buildApp({ async researchTicker() { return providerReport; } });
+  await withTestServer(app, async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/analyze?ticker=ACME`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.report.scores.dilution_historical_severity.value, 2);
+    assert.equal(body.report.scores.dilution_historical_severity.methodology_version, "1.0.0");
+    assert.notEqual(body.report.scores.dilution_historical_severity.explanation, "Provider-authored placeholder.");
+  });
+});
+
 test("analyze returns a validated partial report as a successful result", async () => {
   const app = buildApp({ async researchTicker() { return structuredClone(partialReport); } });
   await withTestServer(app, async (baseUrl) => {
