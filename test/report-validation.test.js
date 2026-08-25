@@ -131,3 +131,88 @@ test("conflicting primary and secondary evidence remains explicit and unscored",
 
   assert.deepEqual(validateReport(report), { valid: true, errors: [] });
 });
+
+test("fixtures exercise every evidence state and a mixed safe partial report", async () => {
+  const reports = [await loadReportFixture("complete"), await loadReportFixture("partial")];
+  const states = new Set();
+  for (const report of reports) {
+    states.add(report.security.evidence_state);
+    states.add(report.issuer.identity_state);
+    Object.values(report.sections).forEach((section) => states.add(section.state));
+    Object.values(report.scores).forEach((score) => states.add(score.state));
+    report.claims.forEach((claim) => states.add(claim.state));
+  }
+  assert.deepEqual(
+    [...states].sort(),
+    ["confirmed", "limited_coverage", "not_applicable", "not_found", "unknown"]
+  );
+
+  const partial = reports[1];
+  assert.equal(partial.metadata.completion_status, "partial");
+  assert.ok(partial.metadata.coverage_limitations.length > 0);
+  assert.equal(partial.security.security_type, "warrant");
+  assert.deepEqual(partial.sections.dividends, {
+    state: "not_applicable",
+    summary: "Common-share dividend status does not apply to this listed warrant; this is not missing evidence about the issuer's common shares.",
+    coverage_notes: [],
+    items: [],
+    claim_ids: []
+  });
+});
+
+test("invalid evidence-state combinations are rejected", async () => {
+  const cases = [
+    {
+      mutate(report) { report.sections.reverse_splits.items.push(structuredClone(report.sections.dilution.items[0])); },
+      message: "section reverse_splits cannot contain items when not_found"
+    },
+    {
+      mutate(report) {
+        report.sections.dividends.state = "not_applicable";
+        report.sections.dividends.items = [];
+      },
+      message: "section dividends cannot contain items or claims when not_applicable"
+    },
+    {
+      mutate(report) {
+        report.sections.dilution.state = "limited_coverage";
+        report.sections.dilution.coverage_notes = [];
+      },
+      message: "section dilution must explain limited coverage"
+    },
+    {
+      mutate(report) {
+        report.metadata.completion_status = "partial";
+        report.metadata.coverage_limitations = [];
+      },
+      message: "partial reports must declare coverage limitations"
+    },
+    {
+      mutate(report) {
+        report.scores.catalyst_strength.claim_ids.push("claim-catalyst-value-conflict");
+      },
+      message: "score catalyst_strength cannot use unresolved claim-catalyst-value-conflict"
+    },
+    {
+      mutate(report) {
+        report.scores.catalyst_strength.state = "not_applicable";
+        report.scores.catalyst_strength.value = null;
+      },
+      message: "score catalyst_strength cannot cite claims when not_applicable"
+    },
+    {
+      mutate(report) {
+        report.claims.find((claim) => claim.id === "claim-splits").text = "No reverse split ever occurred.";
+      },
+      message: "claim-splits overstates a not_found search as proven absence"
+    }
+  ];
+
+  for (const { mutate, message } of cases) {
+    const report = await loadReportFixture("complete");
+    mutate(report);
+    const result = validateReport(report);
+    assert.equal(result.valid, false, message);
+    assert.ok(result.errors.some((error) => error.message === message), message);
+  }
+});

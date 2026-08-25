@@ -3,6 +3,24 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Keep evidence states semantically distinct
+
+**Status:** Accepted
+
+**Decision:** Treat `not_found` as the result of a bounded evidence search,
+`unknown` as unavailable, inadequate, conflicting, or unresolved evidence,
+`not_applicable` as a security/context-specific exclusion, and
+`limited_coverage` as completed work with named gaps. Require partial and pending
+reports to declare structured limitations. Numeric scores may use only sourced
+confirmed or bounded-not-found claims.
+
+**Why:** Missing or inapplicable evidence must not be presented as historical
+absence, zero risk, favorable quality, or false completeness.
+
+**Consequence:** The server rejects invalid state combinations and unsafe score
+inputs while accepting semantically valid partial reports. The prompt carries
+the same definitions and prefers an explicit partial result to guessing.
+
 ## 2026-08-24 — Enforce claim-linked source quality at the report boundary
 
 **Status:** Accepted

@@ -56,9 +56,28 @@ The following states apply to sections, items, claims, identity, and scores:
 - `limited_coverage`: some relevant research was possible, but stated gaps make
   a complete conclusion unsafe.
 
+`unknown` is the state for unavailable, inadequate, conflicting, or unresolved
+evidence. It is not interchangeable with `not_found`: that state requires a
+documented, bounded search and must never be worded as proof that an event never
+occurred. `not_applicable` is contextual, normally based on the identified
+security type; it contains no invented items, claims, sources, or score value.
+Every `limited_coverage` section names its coverage gap.
+
+Reports are immutable snapshots, but later research may produce a new report
+with a changed state. An initial `unknown` may become `confirmed`, bounded
+`not_found`, `not_applicable`, or `limited_coverage` as evidence and applicability
+become clear. `confirmed` or `not_found` may be downgraded to `unknown` or
+`limited_coverage` when conflict or a coverage gap is discovered.
+`not_applicable` changes only when the security or context classification changes.
+Consumers must compare report timestamps and evidence; they must not infer that
+one state silently transitions in place.
+
 Unknown, not-found, not-applicable, and limited-coverage scores must have a
 `null` value. Only `confirmed` scores carry a numeric value. Consequently,
 missing evidence cannot silently become zero risk or favorable quality.
+Every claim supporting a confirmed score must itself be sourced and either
+`confirmed` or bounded `not_found`; unresolved claims cannot help produce a
+numeric score.
 
 ## Scores
 
@@ -107,8 +126,17 @@ between complete status and coverage limitations.
 The complete fixture demonstrates all initial trustworthy-report sections,
 confirmed lineage, dated SEC, exchange, company, original-news, and secondary
 evidence, an explicit unresolved source conflict, and distinct score dimensions.
-The partial fixture demonstrates an ADR, deep/partial status, unresolved lineage,
-limited coverage, unknown evidence, and deliberately null scores.
+The partial fixture demonstrates a listed warrant, deep/partial status,
+unresolved lineage, limited coverage, unknown evidence, a security-specific
+`not_applicable` dividend check, and deliberately null scores. Partial and
+pending reports must include at
+least one structured coverage limitation; they remain valid and usable when all
+other semantic checks pass.
+
+An upstream Responses API result marked `incomplete` may still contain a safe,
+parseable partial report. Such output proceeds through the same full server
+validator and is returned only if the contract and semantic checks pass. Empty,
+malformed, or unsafe incomplete output remains a controlled failure.
 
 Schema validation is necessary but does not establish factual correctness,
 source quality, scoring calibration, or research completeness. Those remain

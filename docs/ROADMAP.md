@@ -12,8 +12,10 @@ stock-report contract before returning a complete or safe partial report. The
 browser temporarily displays structured reports as formatted JSON until the fast
 dashboard is implemented. Structured material claims now require dated, typed,
 bidirectionally linked sources with primary-source preference and explicit
-conflict handling. Issuer resolution, scoring calibration, broader automated
-tests, latency-budget measurement, and production
+conflict handling. Evidence states now distinguish bounded absence searches,
+unavailable evidence, security-specific inapplicability, and named coverage gaps
+without converting unknowns into favorable scores. Issuer resolution, scoring
+calibration, broader automated tests, latency-budget measurement, and production
 safeguards remain incomplete. Fast-stage requests now terminate after a defined
 timeout and map major provider failures to controlled responses. A token-free
 mock mode supports repeatable manual frontend and integration checks.
@@ -39,14 +41,13 @@ after an external screener identifies a moving or news-relevant ticker.
 
 ### Priority order
 
-1. [#5 — Handle unknown, unavailable, incomplete, and inapplicable evidence](https://github.com/firaolwola/stock-research/issues/5)
-2. [#11 — Resolve issuer identity and prior ticker/name lineage](https://github.com/firaolwola/stock-research/issues/11)
-3. [#4 — Render the fast decision dashboard](https://github.com/firaolwola/stock-research/issues/4)
-4. [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8)
-5. [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12)
-6. [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13)
-7. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
-8. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
+1. [#11 — Resolve issuer identity and prior ticker/name lineage](https://github.com/firaolwola/stock-research/issues/11)
+2. [#4 — Render the fast decision dashboard](https://github.com/firaolwola/stock-research/issues/4)
+3. [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8)
+4. [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12)
+5. [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13)
+6. [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14)
+7. [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15)
 
 Issues with satisfied dependencies may be reordered when implementation evidence
 supports it, but dependency changes must remain explicit in the affected issues.
@@ -110,6 +111,7 @@ and place in the fast or deep stage are clear.
 
 ## Completed
 
+- [x] [#5 — Handle unknown, unavailable, incomplete, and inapplicable evidence](https://github.com/firaolwola/stock-research/issues/5).
 - [x] [#3 — Attach dated, typed sources to material claims](https://github.com/firaolwola/stock-research/issues/3).
 - [x] [#9 — Add request timeouts and upstream API error handling](https://github.com/firaolwola/stock-research/issues/9).
 - [x] [#1 — Define the structured stock-report schema](https://github.com/firaolwola/stock-research/issues/1).

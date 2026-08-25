@@ -10,6 +10,7 @@ import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.
 
 const schema = await loadReportSchema();
 const completeReport = await loadReportFixture("complete");
+const partialReport = await loadReportFixture("partial");
 
 function adapterFor(responseOrError, requests = [], options = []) {
   const openai = {
@@ -43,6 +44,10 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.match(requests[0].input, /SEC filings and exchange notices before company sources/);
   assert.match(requests[0].input, /never give secondary evidence high confidence/);
   assert.match(requests[0].input, /materially conflicting, use unknown or limited coverage/);
+  assert.match(requests[0].input, /not_found means a documented, bounded search/);
+  assert.match(requests[0].input, /not_applicable means the check does not apply/);
+  assert.match(requests[0].input, /A safe partial report is preferable to guessing/);
+  assert.match(requests[0].input, /Keep all wording non-advisory/);
   assert.deepEqual(requests[0].text.format, {
     type: "json_schema",
     name: "stock_report_v1",
@@ -58,7 +63,9 @@ test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable outpu
       response: { status: "completed", output_text: "", output: [{ type: "message", content: [{ type: "refusal", refusal: "No" }] }] },
       code: RESEARCH_ERROR_CODES.refused
     },
-    { response: { status: "incomplete", output: [], output_text: "{}" }, code: RESEARCH_ERROR_CODES.incomplete },
+    { response: { status: "incomplete", output: [], output_text: "" }, code: RESEARCH_ERROR_CODES.incomplete },
+    { response: { status: "incomplete", output: [], output_text: "not json" }, code: RESEARCH_ERROR_CODES.incomplete },
+    { response: { status: "incomplete", output: [], output_text: JSON.stringify(completeReport) }, code: RESEARCH_ERROR_CODES.incomplete },
     { response: { status: "completed", output: [], output_text: "not json" }, code: RESEARCH_ERROR_CODES.invalid },
     { response: { status: "failed", output: [], output_text: "{}" }, code: RESEARCH_ERROR_CODES.unusable },
     { response: { status: "completed", output: [], output_text: "" }, code: RESEARCH_ERROR_CODES.unusable }
@@ -70,6 +77,16 @@ test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable outpu
       (error) => error instanceof ResearchResponseError && error.code === code
     );
   }
+});
+
+test("OpenAI adapter preserves parseable structured output from an incomplete response", async () => {
+  const adapter = adapterFor({
+    status: "incomplete",
+    output: [],
+    output_text: JSON.stringify(partialReport)
+  });
+
+  assert.deepEqual(await adapter.researchTicker("XYZ"), partialReport);
 });
 
 test("OpenAI adapter classifies representative SDK and HTTP failures", async () => {

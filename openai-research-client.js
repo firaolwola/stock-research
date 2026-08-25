@@ -39,6 +39,14 @@ For every material factual conclusion and every evidence-based score:
 - use SEC filings and exchange notices before company sources, original news, or aggregators when available;
 - never give secondary evidence high confidence; and
 - when evidence is missing, malformed, or materially conflicting, use unknown or limited coverage and do not invent a claim, source, date, URL, or favorable score.
+
+Apply evidence states consistently:
+- confirmed means sufficient evidence supports the specific conclusion;
+- not_found means a documented, bounded search found no evidence, never that the event is proven absent;
+- unknown means evidence is unavailable, inadequate, conflicting, or unresolved;
+- not_applicable means the check does not apply to this security or context, with no items, claims, sources, or score value invented for it;
+- limited_coverage means some relevant research completed but named gaps prevent a complete conclusion.
+Use partial or pending completion with structured coverage limitations when required checks are incomplete. A safe partial report is preferable to guessing. Only confirmed scores may have numbers, and they must not rely on unknown, limited, or inapplicable claims. Keep all wording non-advisory.
 `;
 
 function containsRefusal(output) {
@@ -102,20 +110,27 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
       if (containsRefusal(response.output)) {
         throw new ResearchResponseError(RESEARCH_ERROR_CODES.refused);
       }
-      if (response.status === "incomplete") {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
-      }
-      if (response.status !== "completed") {
+      const upstreamIncomplete = response.status === "incomplete";
+      if (response.status !== "completed" && !upstreamIncomplete) {
         throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable);
       }
       if (typeof response.output_text !== "string" || response.output_text.trim() === "") {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable);
+        throw new ResearchResponseError(
+          upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.unusable
+        );
       }
 
       try {
-        return JSON.parse(response.output_text);
+        const report = JSON.parse(response.output_text);
+        if (upstreamIncomplete && !["partial", "pending"].includes(report?.metadata?.completion_status)) {
+          throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
+        }
+        return report;
       } catch {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.invalid);
+        if (upstreamIncomplete) throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
+        throw new ResearchResponseError(
+          RESEARCH_ERROR_CODES.invalid
+        );
       }
     }
   };
