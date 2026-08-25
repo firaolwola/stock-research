@@ -3,6 +3,10 @@ import { validateTicker } from "./ticker-validation.js";
 import { RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
 
 const controlledResearchErrors = Object.freeze({
+  [RESEARCH_ERROR_CODES.timeout]: Object.freeze({ status: 504, code: "RESEARCH_TIMEOUT", error: "Research took too long. Please try again." }),
+  [RESEARCH_ERROR_CODES.rateLimit]: Object.freeze({ status: 503, code: "RESEARCH_RATE_LIMITED", error: "Research is temporarily rate limited. Please try again later." }),
+  [RESEARCH_ERROR_CODES.authentication]: Object.freeze({ status: 502, code: "RESEARCH_CONFIGURATION_ERROR", error: "Research is temporarily unavailable." }),
+  [RESEARCH_ERROR_CODES.temporary]: Object.freeze({ status: 503, code: "RESEARCH_SERVICE_UNAVAILABLE", error: "The research service is temporarily unavailable." }),
   [RESEARCH_ERROR_CODES.refused]: Object.freeze({ code: "RESEARCH_REFUSED", error: "The research request was refused." }),
   [RESEARCH_ERROR_CODES.incomplete]: Object.freeze({ code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." }),
   [RESEARCH_ERROR_CODES.invalid]: Object.freeze({ code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." }),
@@ -36,13 +40,15 @@ export function createApp({ researchClient, reportValidator, logger = console, r
       const validationResult = reportValidator(report);
       if (!validationResult.valid) {
         logger.error(`Research provider returned an invalid report for ${ticker}.`);
-        return res.status(502).json(controlledResearchErrors[RESEARCH_ERROR_CODES.invalid]);
+        const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
+        return res.status(502).json({ code: controlledError.code, error: controlledError.error });
       }
       return res.json({ ticker, report });
     } catch (error) {
       if (error instanceof ResearchResponseError && controlledResearchErrors[error.code]) {
         logger.error(`Research provider response could not be used for ${ticker} (${error.code}).`);
-        return res.status(502).json(controlledResearchErrors[error.code]);
+        const controlledError = controlledResearchErrors[error.code];
+        return res.status(controlledError.status ?? 502).json({ code: controlledError.code, error: controlledError.error });
       }
       logger.error(`Research request failed for ${ticker}.`);
       return res.status(502).json({ code: "RESEARCH_UNAVAILABLE", error: "Research is temporarily unavailable." });

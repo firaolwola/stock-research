@@ -1,9 +1,15 @@
 export const RESEARCH_ERROR_CODES = Object.freeze({
+  timeout: "UPSTREAM_TIMEOUT",
+  rateLimit: "UPSTREAM_RATE_LIMIT",
+  authentication: "UPSTREAM_AUTHENTICATION",
+  temporary: "UPSTREAM_TEMPORARY_FAILURE",
   refused: "UPSTREAM_REFUSED",
   incomplete: "UPSTREAM_INCOMPLETE",
   invalid: "INVALID_RESEARCH_RESPONSE",
   unusable: "UPSTREAM_UNUSABLE"
 });
+
+export const FAST_RESEARCH_TIMEOUT_MS = 15_000;
 
 export class ResearchResponseError extends Error {
   constructor(code) {
@@ -35,6 +41,19 @@ function containsRefusal(output) {
   );
 }
 
+function classifyUpstreamError(error) {
+  const name = error?.name;
+  const status = error?.status;
+
+  if (name === "APITimeoutError" || status === 408) return RESEARCH_ERROR_CODES.timeout;
+  if (name === "RateLimitError" || status === 429) return RESEARCH_ERROR_CODES.rateLimit;
+  if (name === "AuthenticationError" || status === 401 || status === 403) return RESEARCH_ERROR_CODES.authentication;
+  if (name === "APIConnectionError" || status === 409 || (status >= 500 && status <= 599)) {
+    return RESEARCH_ERROR_CODES.temporary;
+  }
+  return null;
+}
+
 export function createOpenAIResearchClient(openai, { schema } = {}) {
   if (!openai?.responses || typeof openai.responses.create !== "function") {
     throw new TypeError("A compatible OpenAI client is required");
@@ -45,22 +64,32 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
 
   return {
     async researchTicker(ticker) {
-      const response = await openai.responses.create({
-        model: "gpt-5.1",
-        reasoning: { effort: "none" },
-        max_output_tokens: 5000,
-        tools: [{ type: "web_search" }],
-        text: {
-          format: {
-            type: "json_schema",
-            name: "stock_report_v1",
-            description: "A version 1.0.0 evidence-backed stock research report.",
-            schema,
-            strict: false
-          }
-        },
-        input: researchPrompt(ticker)
-      });
+      let response;
+      try {
+        response = await openai.responses.create({
+          model: "gpt-5.1",
+          reasoning: { effort: "none" },
+          max_output_tokens: 5000,
+          tools: [{ type: "web_search" }],
+          text: {
+            format: {
+              type: "json_schema",
+              name: "stock_report_v1",
+              description: "A version 1.0.0 evidence-backed stock research report.",
+              schema,
+              strict: false
+            }
+          },
+          input: researchPrompt(ticker)
+        }, {
+          timeout: FAST_RESEARCH_TIMEOUT_MS,
+          maxRetries: 0
+        });
+      } catch (error) {
+        const code = classifyUpstreamError(error);
+        if (code) throw new ResearchResponseError(code);
+        throw error;
+      }
 
       if (containsRefusal(response.output)) {
         throw new ResearchResponseError(RESEARCH_ERROR_CODES.refused);

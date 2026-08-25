@@ -90,7 +90,7 @@
             autocomplete="off"
         >
 
-        <button onclick="analyzeStock()">
+        <button id="analyze-button" onclick="analyzeStock()">
             Analyze
         </button>
 
@@ -144,6 +144,11 @@
 
         async function analyzeStock() {
 
+            const analyzeButton =
+                document.getElementById("analyze-button");
+
+            if (analyzeButton.disabled) return;
+
             const tickerInput =
                 document.getElementById("ticker");
 
@@ -176,6 +181,7 @@
                 "Researching " + ticker + "...";
 
             results.textContent = "";
+            analyzeButton.disabled = true;
 
 
             try {
@@ -212,6 +218,9 @@
 
                 results.textContent =
                     error.message;
+            } finally {
+
+                analyzeButton.disabled = false;
             }
         }
 

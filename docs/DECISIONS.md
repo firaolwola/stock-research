@@ -3,6 +3,23 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Bound fast-stage provider requests without automatic retries
+
+**Status:** Accepted
+
+**Decision:** Apply a 15-second timeout and zero automatic SDK retries to the
+current synchronous fast-stage Responses API call. Map timeout, rate-limit,
+authentication, connection/service, refusal, malformed, and unusable outcomes
+to stable non-sensitive application errors. No deep-stage request exists yet.
+
+**Why:** A finite deadline keeps the page recoverable, while automatic retries
+can extend latency and duplicate paid model and web-search work without knowing
+whether the first attempt was charged or still running.
+
+**Consequence:** Users may manually retry after a controlled error. Issue #15
+will measure representative latency and cost before changing stage budgets or
+introducing any explicitly bounded retry policy.
+
 ## 2026-08-24 — Validate structured research at the server boundary
 
 **Status:** Accepted

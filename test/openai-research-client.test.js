@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   createOpenAIResearchClient,
+  FAST_RESEARCH_TIMEOUT_MS,
   RESEARCH_ERROR_CODES,
   ResearchResponseError
 } from "../openai-research-client.js";
@@ -10,11 +11,12 @@ import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.
 const schema = await loadReportSchema();
 const completeReport = await loadReportFixture("complete");
 
-function adapterFor(responseOrError, requests = []) {
+function adapterFor(responseOrError, requests = [], options = []) {
   const openai = {
     responses: {
-      async create(request) {
+      async create(request, requestOptions) {
         requests.push(request);
+        options.push(requestOptions);
         if (responseOrError instanceof Error) throw responseOrError;
         return responseOrError;
       }
@@ -25,14 +27,16 @@ function adapterFor(responseOrError, requests = []) {
 
 test("OpenAI adapter requests JSON Schema output and parses a completed report", async () => {
   const requests = [];
+  const options = [];
   const adapter = adapterFor({
     status: "completed",
     output: [],
     output_text: JSON.stringify(completeReport)
-  }, requests);
+  }, requests, options);
 
   assert.deepEqual(await adapter.researchTicker("ACME"), completeReport);
   assert.equal(requests.length, 1);
+  assert.deepEqual(options, [{ timeout: FAST_RESEARCH_TIMEOUT_MS, maxRetries: 0 }]);
   assert.match(requests[0].input, /ACME/);
   assert.deepEqual(requests[0].tools, [{ type: "web_search" }]);
   assert.deepEqual(requests[0].text.format, {
@@ -64,7 +68,24 @@ test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable outpu
   }
 });
 
-test("OpenAI adapter exposes injected SDK failures to the app boundary", async () => {
+test("OpenAI adapter classifies representative SDK and HTTP failures", async () => {
+  const cases = [
+    { error: Object.assign(new Error("timeout detail"), { name: "APITimeoutError" }), code: RESEARCH_ERROR_CODES.timeout },
+    { error: Object.assign(new Error("rate detail"), { status: 429 }), code: RESEARCH_ERROR_CODES.rateLimit },
+    { error: Object.assign(new Error("auth detail"), { name: "AuthenticationError" }), code: RESEARCH_ERROR_CODES.authentication },
+    { error: Object.assign(new Error("service detail"), { status: 503 }), code: RESEARCH_ERROR_CODES.temporary },
+    { error: Object.assign(new Error("network detail"), { name: "APIConnectionError" }), code: RESEARCH_ERROR_CODES.temporary }
+  ];
+
+  for (const { error, code } of cases) {
+    await assert.rejects(
+      adapterFor(error).researchTicker("ACME"),
+      (actual) => actual instanceof ResearchResponseError && actual.code === code && !actual.message.includes("detail")
+    );
+  }
+});
+
+test("OpenAI adapter exposes unclassified SDK failures to the app boundary", async () => {
   const upstreamError = new Error("mock failure");
   await assert.rejects(adapterFor(upstreamError).researchTicker("ACME"), upstreamError);
 });

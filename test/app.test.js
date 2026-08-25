@@ -114,6 +114,10 @@ test("invalid structured data never reaches the browser as success", async () =>
 });
 
 for (const scenario of [
+  { code: RESEARCH_ERROR_CODES.timeout, status: 504, expected: { code: "RESEARCH_TIMEOUT", error: "Research took too long. Please try again." } },
+  { code: RESEARCH_ERROR_CODES.rateLimit, status: 503, expected: { code: "RESEARCH_RATE_LIMITED", error: "Research is temporarily rate limited. Please try again later." } },
+  { code: RESEARCH_ERROR_CODES.authentication, status: 502, expected: { code: "RESEARCH_CONFIGURATION_ERROR", error: "Research is temporarily unavailable." } },
+  { code: RESEARCH_ERROR_CODES.temporary, status: 503, expected: { code: "RESEARCH_SERVICE_UNAVAILABLE", error: "The research service is temporarily unavailable." } },
   { code: RESEARCH_ERROR_CODES.refused, expected: { code: "RESEARCH_REFUSED", error: "The research request was refused." } },
   { code: RESEARCH_ERROR_CODES.incomplete, expected: { code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." } },
   { code: RESEARCH_ERROR_CODES.invalid, expected: { code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." } },
@@ -123,7 +127,7 @@ for (const scenario of [
     const app = buildApp({ async researchTicker() { throw new ResearchResponseError(scenario.code); } });
     await withTestServer(app, async (baseUrl) => {
       const response = await fetch(`${baseUrl}/api/analyze?ticker=ACME`);
-      assert.equal(response.status, 502);
+      assert.equal(response.status, scenario.status ?? 502);
       assert.deepEqual(await response.json(), scenario.expected);
     });
   });
