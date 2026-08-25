@@ -6,18 +6,21 @@ export const RESEARCH_ERROR_CODES = Object.freeze({
   refused: "UPSTREAM_REFUSED",
   incomplete: "UPSTREAM_INCOMPLETE",
   invalid: "INVALID_RESEARCH_RESPONSE",
-  unusable: "UPSTREAM_UNUSABLE"
+  unusable: "UPSTREAM_UNUSABLE",
+  badRequest: "UPSTREAM_BAD_REQUEST"
 });
 
 import { buildResearchOperations, RESEARCH_STAGES } from "./lib/research-budget.js";
+import { createOpenAIOutputSchema } from "./lib/openai-output-schema.js";
 
 export const FAST_RESEARCH_TIMEOUT_MS = RESEARCH_STAGES.fast.timeout_ms;
 
 export class ResearchResponseError extends Error {
-  constructor(code) {
+  constructor(code, diagnostics = {}) {
     super(code);
     this.name = "ResearchResponseError";
     this.code = code;
+    this.diagnostics = diagnostics;
   }
 }
 
@@ -87,6 +90,7 @@ function classifyUpstreamError(error) {
   const name = error?.name;
   const status = error?.status;
 
+  if (name === "BadRequestError" || status === 400 || status === 422) return RESEARCH_ERROR_CODES.badRequest;
   if (name === "APITimeoutError" || status === 408) return RESEARCH_ERROR_CODES.timeout;
   if (name === "RateLimitError" || status === 429) return RESEARCH_ERROR_CODES.rateLimit;
   if (name === "AuthenticationError" || status === 401 || status === 403) return RESEARCH_ERROR_CODES.authentication;
@@ -96,6 +100,18 @@ function classifyUpstreamError(error) {
   return null;
 }
 
+function safeDiagnosticValue(value) {
+  return typeof value === "string" && /^[A-Za-z0-9_.-]{1,80}$/.test(value) ? value : null;
+}
+
+export function getSafeUpstreamDiagnostics(error) {
+  return {
+    status: Number.isInteger(error?.status) ? error.status : null,
+    provider_code: safeDiagnosticValue(error?.code),
+    error_type: safeDiagnosticValue(error?.name)
+  };
+}
+
 export function createOpenAIResearchClient(openai, { schema } = {}) {
   if (!openai?.responses || typeof openai.responses.create !== "function") {
     throw new TypeError("A compatible OpenAI client is required");
@@ -103,6 +119,7 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
   if (!schema || typeof schema !== "object") {
     throw new TypeError("The stock-report JSON schema is required");
   }
+  const outputSchema = createOpenAIOutputSchema(schema);
 
   return {
     async researchTicker(ticker, { stage = "fast" } = {}) {
@@ -122,7 +139,7 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
               type: "json_schema",
               name: "stock_report_v4",
               description: "A version 4.0.0 evidence-backed stock research report; server-side scoring replaces provider score values.",
-              schema,
+              schema: outputSchema,
               strict: false
             }
           },
@@ -133,7 +150,7 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
         });
       } catch (error) {
         const code = classifyUpstreamError(error);
-        if (code) throw new ResearchResponseError(code);
+        if (code) throw new ResearchResponseError(code, getSafeUpstreamDiagnostics(error));
         throw error;
       }
 

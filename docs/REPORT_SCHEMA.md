@@ -15,6 +15,12 @@ records stage, latency, tokens, web-search calls, estimated cost, pricing
 version, and fast-budget status. This keeps performance metadata from changing
 the meaning or validity of a stored report. See [PERFORMANCE.md](PERFORMANCE.md).
 
+The live OpenAI request uses a derived provider schema that removes Structured
+Outputs composition keywords the Responses API does not support. The repository
+schema remains the authoritative contract: the server still applies its full
+Draft 2020-12 and semantic validation after parsing, so provider compatibility
+does not weaken the application boundary.
+
 Operational telemetry is intentionally outside this contract. A successful
 `/api/analyze` response contains `{ ticker, report, operations }`; `operations`
 records stage, latency, tokens, web-search calls, estimated cost, pricing

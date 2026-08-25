@@ -151,7 +151,8 @@ for (const scenario of [
   { code: RESEARCH_ERROR_CODES.refused, expected: { code: "RESEARCH_REFUSED", error: "The research request was refused." } },
   { code: RESEARCH_ERROR_CODES.incomplete, expected: { code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." } },
   { code: RESEARCH_ERROR_CODES.invalid, expected: { code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." } },
-  { code: RESEARCH_ERROR_CODES.unusable, expected: { code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." } }
+  { code: RESEARCH_ERROR_CODES.unusable, expected: { code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." } },
+  { code: RESEARCH_ERROR_CODES.badRequest, expected: { code: "RESEARCH_REQUEST_REJECTED", error: "The research request configuration was rejected." } }
 ]) {
   test(`analyze maps ${scenario.code} to a controlled response`, async () => {
     const app = buildApp({ async researchTicker() { throw new ResearchResponseError(scenario.code); } });
@@ -180,4 +181,19 @@ test("unexpected upstream details do not appear in logs or responses", async () 
     assert.equal(body.includes(secret), false);
   });
   assert.equal(logMessages.join(" ").includes(secret), false);
+});
+
+test("safe upstream diagnostics retain category, status, and code without provider messages", async () => {
+  const logMessages = [];
+  const app = createApp({
+    researchClient: { async researchTicker() { throw new ResearchResponseError(RESEARCH_ERROR_CODES.badRequest, { status: 400, provider_code: "invalid_json_schema", error_type: "BadRequestError" }); } },
+    reportValidator,
+    logger: { error(...values) { logMessages.push(values.join(" ")); } }
+  });
+  await withTestServer(app, async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/analyze?ticker=ACME`);
+    assert.equal(response.status, 502);
+    assert.equal((await response.json()).code, "RESEARCH_REQUEST_REJECTED");
+  });
+  assert.match(logMessages[0], /UPSTREAM_BAD_REQUEST; status=400; provider_code=invalid_json_schema; type=BadRequestError/);
 });
