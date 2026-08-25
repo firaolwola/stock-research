@@ -7,6 +7,7 @@ import {
   ResearchResponseError
 } from "../openai-research-client.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
+import { createOpenAIOutputSchema, findUnsupportedOpenAIKeywords } from "../lib/openai-output-schema.js";
 
 const schema = await loadReportSchema();
 const completeReport = await loadReportFixture("complete");
@@ -61,9 +62,12 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
     type: "json_schema",
     name: "stock_report_v4",
     description: "A version 4.0.0 evidence-backed stock research report; server-side scoring replaces provider score values.",
-    schema,
+    schema: createOpenAIOutputSchema(schema),
     strict: false
   });
+  assert.ok(findUnsupportedOpenAIKeywords(schema).length > 0);
+  assert.deepEqual(findUnsupportedOpenAIKeywords(requests[0].text.format.schema), []);
+  assert.ok("allOf" in schema.$defs.score, "the server schema must retain its stricter semantic constraint");
 });
 
 test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable output", async () => {
@@ -104,7 +108,8 @@ test("OpenAI adapter classifies representative SDK and HTTP failures", async () 
     { error: Object.assign(new Error("rate detail"), { status: 429 }), code: RESEARCH_ERROR_CODES.rateLimit },
     { error: Object.assign(new Error("auth detail"), { name: "AuthenticationError" }), code: RESEARCH_ERROR_CODES.authentication },
     { error: Object.assign(new Error("service detail"), { status: 503 }), code: RESEARCH_ERROR_CODES.temporary },
-    { error: Object.assign(new Error("network detail"), { name: "APIConnectionError" }), code: RESEARCH_ERROR_CODES.temporary }
+    { error: Object.assign(new Error("network detail"), { name: "APIConnectionError" }), code: RESEARCH_ERROR_CODES.temporary },
+    { error: Object.assign(new Error("schema detail"), { name: "BadRequestError", status: 400, code: "invalid_json_schema" }), code: RESEARCH_ERROR_CODES.badRequest }
   ];
 
   for (const { error, code } of cases) {

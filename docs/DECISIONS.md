@@ -3,6 +3,23 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Separate provider output constraints from server validation
+
+**Status:** Accepted
+
+**Decision:** Derive the Responses API output schema from the authoritative
+report schema by removing composition keywords unsupported by OpenAI Structured
+Outputs. Continue validating returned reports against the unchanged full JSON
+Schema and semantic rules at the Express boundary.
+
+**Why:** Passing the expanded v4 domain schema directly caused live-only request
+rejection, while fixture-backed mock mode bypassed provider schema processing.
+
+**Consequence:** Provider compatibility cannot silently relax application
+validation. Safe terminal diagnostics retain only error category, numeric HTTP
+status, provider code, and error type; provider messages and request data remain
+excluded.
+
 ## 2026-08-25 — Recalculate scores deterministically at the server boundary
 
 **Status:** Accepted

@@ -1,6 +1,6 @@
 import express from "express";
 import { validateTicker } from "./ticker-validation.js";
-import { RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
+import { getSafeUpstreamDiagnostics, RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
 import { calibrateReportScores } from "./lib/scoring.js";
 import { parseResearchStage } from "./lib/research-budget.js";
 
@@ -12,8 +12,16 @@ const controlledResearchErrors = Object.freeze({
   [RESEARCH_ERROR_CODES.refused]: Object.freeze({ code: "RESEARCH_REFUSED", error: "The research request was refused." }),
   [RESEARCH_ERROR_CODES.incomplete]: Object.freeze({ code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." }),
   [RESEARCH_ERROR_CODES.invalid]: Object.freeze({ code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." }),
-  [RESEARCH_ERROR_CODES.unusable]: Object.freeze({ code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." })
+  [RESEARCH_ERROR_CODES.unusable]: Object.freeze({ code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." }),
+  [RESEARCH_ERROR_CODES.badRequest]: Object.freeze({ code: "RESEARCH_REQUEST_REJECTED", error: "The research request configuration was rejected." })
 });
+
+function diagnosticSuffix(diagnostics = {}) {
+  const fields = [["status", diagnostics.status], ["provider_code", diagnostics.provider_code], ["type", diagnostics.error_type]]
+    .filter(([, value]) => value !== null && value !== undefined)
+    .map(([key, value]) => `${key}=${value}`);
+  return fields.length ? `; ${fields.join("; ")}` : "";
+}
 
 export function createApp({ researchClient, reportValidator, logger = console, runtime = { mode: "live", demoTicker: null } } = {}) {
   if (!researchClient || typeof researchClient.researchTicker !== "function") {
@@ -61,11 +69,11 @@ export function createApp({ researchClient, reportValidator, logger = console, r
       return res.json({ ticker, report, ...(operations ? { operations } : {}) });
     } catch (error) {
       if (error instanceof ResearchResponseError && controlledResearchErrors[error.code]) {
-        logger.error(`Research provider response could not be used for ${ticker} (${error.code}).`);
+        logger.error(`Research provider response could not be used for ${ticker} (${error.code}${diagnosticSuffix(error.diagnostics)}).`);
         const controlledError = controlledResearchErrors[error.code];
         return res.status(controlledError.status ?? 502).json({ code: controlledError.code, error: controlledError.error });
       }
-      logger.error(`Research request failed for ${ticker}.`);
+      logger.error(`Research request failed for ${ticker} (UNCLASSIFIED${diagnosticSuffix(getSafeUpstreamDiagnostics(error))}).`);
       return res.status(502).json({ code: "RESEARCH_UNAVAILABLE", error: "Research is temporarily unavailable." });
     }
   });
