@@ -21,6 +21,12 @@ schema remains the authoritative contract: the server still applies its full
 Draft 2020-12 and semantic validation after parsing, so provider compatibility
 does not weaken the application boundary.
 
+That derived schema also omits `scores`: provider-authored scores were redundant
+because the server always replaces them. Fast and Deep use separate collection
+bounds, and Fast deliberately represents historical catalyst analogues as a
+named deep-stage coverage gap. After research, deterministic scoring restores
+the required full v4 shape before authoritative validation and browser delivery.
+
 Operational telemetry is intentionally outside this contract. A successful
 `/api/analyze` response contains `{ ticker, report, operations }`; `operations`
 records stage, latency, tokens, web-search calls, estimated cost, pricing

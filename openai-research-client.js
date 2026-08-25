@@ -7,7 +7,8 @@ export const RESEARCH_ERROR_CODES = Object.freeze({
   incomplete: "UPSTREAM_INCOMPLETE",
   invalid: "INVALID_RESEARCH_RESPONSE",
   unusable: "UPSTREAM_UNUSABLE",
-  badRequest: "UPSTREAM_BAD_REQUEST"
+  badRequest: "UPSTREAM_BAD_REQUEST",
+  unexpected: "UPSTREAM_UNEXPECTED"
 });
 
 import { buildResearchOperations, RESEARCH_STAGES } from "./lib/research-budget.js";
@@ -24,9 +25,24 @@ export class ResearchResponseError extends Error {
   }
 }
 
+const stageInstructions = Object.freeze({
+  fast: `Fast-stage constraints:
+- prioritize identity/listing, three-year dilution, five-year reverse splits, material compliance/going-concern warnings, current financial health, and the current 30-day catalyst;
+- do not research or emit historical catalyst analogue items or reaction windows; mark that deep-stage check limited_coverage and name it in coverage limitations;
+- include only material claims and the strongest direct source for each claim; reuse claim/source IDs instead of duplicating facts;
+- keep every title, summary, explanation, and coverage note concise; and
+- return partial or pending rather than expanding research beyond these bounds.`,
+  deep: `Deep-stage constraints:
+- expand named fast-stage gaps, including up to three reliable issuer-specific catalyst analogues and four reaction windows per analogue;
+- include only evidence that changes or supports a material conclusion; reuse claim/source IDs instead of duplicating facts; and
+- keep prose concise even when coverage expands.`
+});
+
 const researchPrompt = (ticker, stage) => `
 Create a ${stage} stock-research report for ticker "${ticker}" as of the current time.
 The report metadata stage must be "${stage}". In fast mode, prioritize the required material-risk checks and explicitly mark unfinished or deferred checks partial/pending with structured coverage limitations. In deep mode, deliberately expand those named gaps; never imply that deep research guarantees completeness.
+
+${stageInstructions[stage]}
 
 Research every section required by the supplied stock-report schema:
 - current security and issuer identity, listing context, and known prior identities;
@@ -39,7 +55,7 @@ Research every section required by the supplied stock-report schema:
 
 For the current material catalyst, classify it and assess recency, specificity,
 credibility, novelty, and potential significance separately. Find prior events
-from this issuer only when they are reliably comparable. For each analogue,
+from this issuer only in deep mode and only when they are reliably comparable. For each analogue,
 state why it is comparable, where the comparison is weak, and any sourced stock
 reaction using explicit dates and windows. If no reliable analogue is found,
 return an unknown historical-analogue assessment with no invented event or
@@ -74,9 +90,8 @@ Apply evidence states consistently:
 - not_applicable means the check does not apply to this security or context, with no items, claims, sources, or score value invented for it;
 - limited_coverage means some relevant research completed but named gaps prevent a complete conclusion.
 Use partial or pending completion with structured coverage limitations when required checks are incomplete. A safe partial report is preferable to guessing. Only confirmed scores may have numbers, and they must not rely on unknown, limited, or inapplicable claims. Keep all wording non-advisory.
-Populate the required score shape, but do not treat provider-authored score
-values as authoritative: the server replaces every score using deterministic
-methodology 1.0.0 before final validation and response.
+Do not emit scores. The server derives every score and component using
+deterministic methodology 1.0.0 after receiving the evidence report.
 `;
 
 function containsRefusal(output) {
@@ -88,13 +103,17 @@ function containsRefusal(output) {
 
 function classifyUpstreamError(error) {
   const name = error?.name;
+  const constructorName = error?.constructor?.name;
+  const causeName = error?.cause?.name;
+  const causeConstructorName = error?.cause?.constructor?.name;
   const status = error?.status;
 
-  if (name === "BadRequestError" || status === 400 || status === 422) return RESEARCH_ERROR_CODES.badRequest;
-  if (name === "APITimeoutError" || status === 408) return RESEARCH_ERROR_CODES.timeout;
-  if (name === "RateLimitError" || status === 429) return RESEARCH_ERROR_CODES.rateLimit;
-  if (name === "AuthenticationError" || status === 401 || status === 403) return RESEARCH_ERROR_CODES.authentication;
-  if (name === "APIConnectionError" || status === 409 || (status >= 500 && status <= 599)) {
+  const types = new Set([name, constructorName, causeName, causeConstructorName]);
+  if (types.has("BadRequestError") || status === 400 || status === 422) return RESEARCH_ERROR_CODES.badRequest;
+  if (["APITimeoutError", "APIConnectionTimeoutError", "TimeoutError"].some((type) => types.has(type)) || status === 408) return RESEARCH_ERROR_CODES.timeout;
+  if (types.has("RateLimitError") || status === 429) return RESEARCH_ERROR_CODES.rateLimit;
+  if (types.has("AuthenticationError") || status === 401 || status === 403) return RESEARCH_ERROR_CODES.authentication;
+  if (types.has("APIConnectionError") || status === 409 || (status >= 500 && status <= 599)) {
     return RESEARCH_ERROR_CODES.temporary;
   }
   return null;
@@ -104,11 +123,26 @@ function safeDiagnosticValue(value) {
   return typeof value === "string" && /^[A-Za-z0-9_.-]{1,80}$/.test(value) ? value : null;
 }
 
-export function getSafeUpstreamDiagnostics(error) {
+export function getSafeUpstreamDiagnostics(error, { stage = null, phase = null, startedAt = null, response = null } = {}) {
+  const usage = response?.usage;
   return {
+    stage: safeDiagnosticValue(stage),
+    phase: safeDiagnosticValue(phase),
+    elapsed_ms: Number.isFinite(startedAt) ? Math.max(0, Math.round(performance.now() - startedAt)) : null,
+    error_constructor: safeDiagnosticValue(error?.constructor?.name),
     status: Number.isInteger(error?.status) ? error.status : null,
     provider_code: safeDiagnosticValue(error?.code),
-    error_type: safeDiagnosticValue(error?.name)
+    error_type: safeDiagnosticValue(error?.name),
+    cause_constructor: safeDiagnosticValue(error?.cause?.constructor?.name),
+    cause_name: safeDiagnosticValue(error?.cause?.name),
+    cause_status: Number.isInteger(error?.cause?.status) ? error.cause.status : null,
+    cause_code: safeDiagnosticValue(error?.cause?.code),
+    response_received: response !== null,
+    response_status: safeDiagnosticValue(response?.status),
+    incomplete_reason: safeDiagnosticValue(response?.incomplete_details?.reason),
+    input_tokens: Number.isFinite(usage?.input_tokens) ? usage.input_tokens : null,
+    output_tokens: Number.isFinite(usage?.output_tokens) ? usage.output_tokens : null,
+    total_tokens: Number.isFinite(usage?.total_tokens) ? usage.total_tokens : null
   };
 }
 
@@ -119,13 +153,17 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
   if (!schema || typeof schema !== "object") {
     throw new TypeError("The stock-report JSON schema is required");
   }
-  const outputSchema = createOpenAIOutputSchema(schema);
-
   return {
     async researchTicker(ticker, { stage = "fast" } = {}) {
       const budget = RESEARCH_STAGES[stage];
       if (!budget) throw new TypeError(`Unsupported research stage: ${stage}`);
       const startedAt = performance.now();
+      let outputSchema;
+      try {
+        outputSchema = createOpenAIOutputSchema(schema, { stage });
+      } catch (error) {
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unexpected, getSafeUpstreamDiagnostics(error, { stage, phase: "request_preparation", startedAt, response: null }));
+      }
       let response;
       try {
         response = await openai.responses.create({
@@ -150,36 +188,50 @@ export function createOpenAIResearchClient(openai, { schema } = {}) {
         });
       } catch (error) {
         const code = classifyUpstreamError(error);
-        if (code) throw new ResearchResponseError(code, getSafeUpstreamDiagnostics(error));
-        throw error;
+        const diagnostics = getSafeUpstreamDiagnostics(error, { stage, phase: "openai_request", startedAt, response: null });
+        if (code) throw new ResearchResponseError(code, diagnostics);
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unexpected, diagnostics);
       }
 
-      if (containsRefusal(response.output)) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.refused);
+      let responseOutput;
+      try {
+        responseOutput = response.output;
+      } catch (error) {
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "response_output_read", startedAt, response }));
+      }
+      if (containsRefusal(responseOutput)) {
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.refused, getSafeUpstreamDiagnostics(null, { stage, phase: "response_inspection", startedAt, response }));
       }
       const upstreamIncomplete = response.status === "incomplete";
       if (response.status !== "completed" && !upstreamIncomplete) {
-        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable);
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(null, { stage, phase: "response_status", startedAt, response }));
       }
-      if (typeof response.output_text !== "string" || response.output_text.trim() === "") {
+      let outputText;
+      try {
+        outputText = response.output_text;
+      } catch (error) {
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "output_text_read", startedAt, response }));
+      }
+      if (typeof outputText !== "string" || outputText.trim() === "") {
         throw new ResearchResponseError(
-          upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.unusable
+          upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.unusable,
+          getSafeUpstreamDiagnostics(null, { stage, phase: upstreamIncomplete ? "incomplete_response" : "output_text_read", startedAt, response })
         );
       }
 
+      let report;
       try {
-        const report = JSON.parse(response.output_text);
-        if (report?.metadata?.stage !== stage) throw new ResearchResponseError(RESEARCH_ERROR_CODES.invalid);
-        if (upstreamIncomplete && !["partial", "pending"].includes(report?.metadata?.completion_status)) {
-          throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
-        }
-        const webSearchCalls = Array.isArray(response.output) ? response.output.filter((item) => item?.type === "web_search_call").length : 0;
+        report = JSON.parse(outputText);
+      } catch (error) {
+        throw new ResearchResponseError(upstreamIncomplete ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.invalid, getSafeUpstreamDiagnostics(error, { stage, phase: "json_parse", startedAt, response }));
+      }
+      if (report?.metadata?.stage !== stage) throw new ResearchResponseError(RESEARCH_ERROR_CODES.invalid, getSafeUpstreamDiagnostics(null, { stage, phase: "report_conversion", startedAt, response }));
+      if (upstreamIncomplete && !["partial", "pending"].includes(report?.metadata?.completion_status)) throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete, getSafeUpstreamDiagnostics(null, { stage, phase: "incomplete_response", startedAt, response }));
+      try {
+        const webSearchCalls = Array.isArray(responseOutput) ? responseOutput.filter((item) => item?.type === "web_search_call").length : 0;
         return { report, operations: buildResearchOperations({ stage, latencyMs: performance.now() - startedAt, usage: response.usage, webSearchCalls }) };
-      } catch {
-        if (upstreamIncomplete) throw new ResearchResponseError(RESEARCH_ERROR_CODES.incomplete);
-        throw new ResearchResponseError(
-          RESEARCH_ERROR_CODES.invalid
-        );
+      } catch (error) {
+        throw new ResearchResponseError(RESEARCH_ERROR_CODES.unusable, getSafeUpstreamDiagnostics(error, { stage, phase: "operations_measurement", startedAt, response }));
       }
     }
   };

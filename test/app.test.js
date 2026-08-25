@@ -152,7 +152,8 @@ for (const scenario of [
   { code: RESEARCH_ERROR_CODES.incomplete, expected: { code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." } },
   { code: RESEARCH_ERROR_CODES.invalid, expected: { code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." } },
   { code: RESEARCH_ERROR_CODES.unusable, expected: { code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." } },
-  { code: RESEARCH_ERROR_CODES.badRequest, expected: { code: "RESEARCH_REQUEST_REJECTED", error: "The research request configuration was rejected." } }
+  { code: RESEARCH_ERROR_CODES.badRequest, expected: { code: "RESEARCH_REQUEST_REJECTED", error: "The research request configuration was rejected." } },
+  { code: RESEARCH_ERROR_CODES.unexpected, expected: { code: "RESEARCH_UNAVAILABLE", error: "Research is temporarily unavailable." } }
 ]) {
   test(`analyze maps ${scenario.code} to a controlled response`, async () => {
     const app = buildApp({ async researchTicker() { throw new ResearchResponseError(scenario.code); } });
@@ -195,5 +196,44 @@ test("safe upstream diagnostics retain category, status, and code without provid
     assert.equal(response.status, 502);
     assert.equal((await response.json()).code, "RESEARCH_REQUEST_REJECTED");
   });
-  assert.match(logMessages[0], /UPSTREAM_BAD_REQUEST; status=400; provider_code=invalid_json_schema; type=BadRequestError/);
+  assert.match(logMessages[0], /UPSTREAM_BAD_REQUEST; type=BadRequestError; status=400; provider_code=invalid_json_schema/);
+});
+
+test("lifecycle diagnostics expose safe timeout context without provider content", async () => {
+  const logs = [];
+  const diagnostics = { stage: "fast", phase: "openai_request", elapsed_ms: 15002, error_constructor: "APIConnectionTimeoutError", error_type: "Error", cause_constructor: "DOMException", cause_name: "AbortError", cause_code: "ABORT_ERR", response_received: false };
+  const app = createApp({ researchClient: { async researchTicker() { throw new ResearchResponseError(RESEARCH_ERROR_CODES.timeout, diagnostics); } }, reportValidator, logger: { error(value) { logs.push(value); } } });
+  await withTestServer(app, async (baseUrl) => assert.equal((await fetch(`${baseUrl}/api/analyze?ticker=SWVL&stage=fast`)).status, 504));
+  assert.match(logs[0], /stage=fast; phase=openai_request; elapsed_ms=15002; constructor=APIConnectionTimeoutError; type=Error/);
+  assert.match(logs[0], /cause_constructor=DOMException; cause_name=AbortError; cause_code=ABORT_ERR; response_received=false/);
+  assert.equal(logs[0].includes("provider content"), false);
+});
+
+test("server derives scores when the provider omits redundant score output", async () => {
+  const providerReport = structuredClone(completeReport);
+  delete providerReport.scores;
+  const app = buildApp({ async researchTicker() { return { report: providerReport, operations: { stage: "fast", input_tokens: 10000, output_tokens: 3200, total_tokens: 13200 } }; } });
+  await withTestServer(app, async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/analyze?ticker=ACME&stage=fast`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.report.scores.dilution_historical_severity.value, 2);
+    assert.equal(body.report.scores.catalyst_strength.state, "limited_coverage");
+  });
+});
+
+test("bounded fast provider report preserves explicit pending evidence and validates after scoring", async () => {
+  const providerReport = structuredClone(partialReport);
+  providerReport.metadata.stage = "fast";
+  delete providerReport.scores;
+  const app = buildApp({ async researchTicker() { return { report: providerReport, operations: { stage: "fast", input_tokens: 9000, output_tokens: 1700, total_tokens: 10700 } }; } });
+  await withTestServer(app, async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/analyze?ticker=XYZ&stage=fast`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.report.metadata.completion_status, "partial");
+    assert.equal(body.report.catalyst_assessment.historical_analogues.state, "unknown");
+    assert.ok(body.report.metadata.coverage_limitations.length > 0);
+    assert.ok(body.report.scores);
+  });
 });

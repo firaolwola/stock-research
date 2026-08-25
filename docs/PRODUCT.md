@@ -113,6 +113,12 @@ the next five trading days. It is not a predicted return or numeric probability.
 Its catalyst, qualitative implication, and bounded historical-reaction inputs
 remain visible and separate from multi-year company quality.
 
+Fast research may defer detailed issuer-specific catalyst analogues and reaction
+windows when they do not fit the normal budget. That gap must be visible as
+limited or pending coverage, so the full-contract completion status remains
+`partial` or `pending`; deliberate Deep research may expand it. Current
+catalyst evidence and material-risk checks remain part of Fast.
+
 ### Deep research view
 
 A deeper report may take longer or be explicitly requested. It should expand
