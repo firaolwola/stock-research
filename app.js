@@ -1,9 +1,20 @@
 import express from "express";
 import { validateTicker } from "./ticker-validation.js";
+import { RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
 
-export function createApp({ researchClient, logger = console, runtime = { mode: "live", demoTicker: null } } = {}) {
+const controlledResearchErrors = Object.freeze({
+  [RESEARCH_ERROR_CODES.refused]: Object.freeze({ code: "RESEARCH_REFUSED", error: "The research request was refused." }),
+  [RESEARCH_ERROR_CODES.incomplete]: Object.freeze({ code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." }),
+  [RESEARCH_ERROR_CODES.invalid]: Object.freeze({ code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." }),
+  [RESEARCH_ERROR_CODES.unusable]: Object.freeze({ code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." })
+});
+
+export function createApp({ researchClient, reportValidator, logger = console, runtime = { mode: "live", demoTicker: null } } = {}) {
   if (!researchClient || typeof researchClient.researchTicker !== "function") {
     throw new TypeError("createApp requires a researchClient with researchTicker(ticker)");
+  }
+  if (typeof reportValidator !== "function") {
+    throw new TypeError("createApp requires a reportValidator(report)");
   }
 
   const app = express();
@@ -21,14 +32,20 @@ export function createApp({ researchClient, logger = console, runtime = { mode: 
     const { ticker } = validation;
 
     try {
-      const answer = await researchClient.researchTicker(ticker);
-      if (typeof answer !== "string" || answer.trim().length === 0) {
-        throw new TypeError("Research client returned an invalid response");
+      const report = await researchClient.researchTicker(ticker);
+      const validationResult = reportValidator(report);
+      if (!validationResult.valid) {
+        logger.error(`Research provider returned an invalid report for ${ticker}.`);
+        return res.status(502).json(controlledResearchErrors[RESEARCH_ERROR_CODES.invalid]);
       }
-      return res.json({ ticker, answer });
+      return res.json({ ticker, report });
     } catch (error) {
+      if (error instanceof ResearchResponseError && controlledResearchErrors[error.code]) {
+        logger.error(`Research provider response could not be used for ${ticker} (${error.code}).`);
+        return res.status(502).json(controlledResearchErrors[error.code]);
+      }
       logger.error(`Research request failed for ${ticker}.`);
-      return res.status(500).json({ error: "Research failed. Please try again." });
+      return res.status(502).json({ code: "RESEARCH_UNAVAILABLE", error: "Research is temporarily unavailable." });
     }
   });
 

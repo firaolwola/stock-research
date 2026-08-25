@@ -3,6 +3,25 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-24 — Validate structured research at the server boundary
+
+**Status:** Accepted
+
+**Decision:** Request stock report version 1.0.0 through the Responses API JSON
+Schema format with API strict mode disabled, then require the repository's full
+Draft 2020-12 and semantic validator before returning success. Represent
+refused, incomplete, malformed, and otherwise unusable provider output with
+stable non-sensitive application errors.
+
+**Why:** Contract v1 uses schema features beyond the API strict subset, while
+the server, browser, comparison, and saved-history work still require one
+authoritative validated object boundary.
+
+**Consequence:** Both real and mock research clients return report objects, not
+display strings. The browser renders temporary formatted JSON until the fast
+dashboard is implemented. Later source-quality and evidence-state issues refine
+report contents without changing this validation boundary.
+
 ## 2026-08-24 — Validate ticker syntax and real-app configuration at boundaries
 
 **Status:** Accepted

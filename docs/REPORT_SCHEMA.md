@@ -4,9 +4,10 @@
 
 **JSON Schema:** [`schema/stock-report.schema.json`](../schema/stock-report.schema.json)
 
-This contract is the shared boundary for fast and deep reports. It defines data
-semantics only; the live OpenAI response and browser are not yet integrated.
-Reports are research aids, not personalized investment advice.
+This contract is the shared boundary for fast and deep reports. The real and
+token-free mock research clients now return this object shape, and the server
+validates both JSON Schema and cross-record semantics before responding. Reports
+are research aids, not personalized investment advice.
 
 ## Versioning
 
@@ -102,3 +103,8 @@ limited coverage, unknown evidence, and deliberately null scores.
 Schema validation is necessary but does not establish factual correctness,
 source quality, scoring calibration, or research completeness. Those remain
 separate implementation and evaluation responsibilities.
+
+The OpenAI request supplies this contract as a JSON Schema response format with
+API-level strict mode disabled because contract v1 uses Draft 2020-12 features
+beyond the API strict subset. Successful output must still pass the complete
+server validator; API formatting alone is never treated as sufficient.

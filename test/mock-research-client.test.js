@@ -9,8 +9,9 @@ test("ACME always returns the same deterministic fixture-backed report", async (
   const first = await client.researchTicker(DEMO_TICKER);
   const second = await client.researchTicker(DEMO_TICKER);
 
-  assert.equal(first, second);
-  assert.deepEqual(JSON.parse(first), report);
+  assert.deepEqual(first, report);
+  assert.deepEqual(second, report);
+  assert.notEqual(first, second);
 });
 
 test("mock client rejects unsupported tickers", async () => {

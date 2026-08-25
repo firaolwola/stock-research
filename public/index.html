@@ -202,7 +202,7 @@
                     ticker + " research complete.";
 
                 results.textContent =
-                    data.answer;
+                    JSON.stringify(data.report, null, 2);
 
 
             } catch (error) {
