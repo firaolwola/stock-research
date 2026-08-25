@@ -25,7 +25,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
   app.use(express.static("public"));
 
   app.get("/api/runtime", (_req, res) => {
-    return res.json({ mode: runtime.mode, demoTicker: runtime.demoTicker });
+    return res.json({ mode: runtime.mode, demoTicker: runtime.demoTicker, demoTickers: runtime.demoTickers });
   });
 
   app.get("/api/analyze", async (req, res) => {

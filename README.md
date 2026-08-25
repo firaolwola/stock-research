@@ -10,8 +10,8 @@ the OpenAI Responses API with web search. The report contract covers identity,
 reverse splits, dilution, dividends, warnings, financial context, catalysts,
 scores, claims, and sources. Issuer identity now follows confirmed prior names
 and tickers so dated material history is not lost across renames or rebrands.
-Scoring calibration, dashboard rendering, and comparison remain active roadmap
-work.
+The browser renders the validated report as a responsive fast-decision
+dashboard. Scoring calibration and comparison remain active roadmap work.
 
 This application is a research aid, not financial advice.
 
@@ -34,11 +34,12 @@ The first end-to-end prototype is working:
    retries. Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
-5. The application displays the resulting report as formatted JSON until the
-   dashboard issue is completed.
+5. The application renders ranked warnings and unknowns, distinct score groups,
+   all research sections, coverage and issuer context, and claim-linked sources
+   in a responsive dashboard.
 
-The current development priority is rendering the validated report as a fast
-decision dashboard. See [docs/ROADMAP.md](docs/ROADMAP.md).
+The current development priority is building the representative ticker
+evaluation set. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Requirements
 
@@ -84,10 +85,16 @@ OpenAI tokens:
 npm run dev-test
 ```
 
-Open <http://localhost:3001>. The page displays a **Mock testing mode** banner
-and tells you to enter the dummy ticker `ACME`. Submitting `ACME` always returns
-the same deterministic structured report derived from the validated complete schema
-fixture. Other tickers are intentionally unsupported in this mode.
+Open <http://localhost:3001>. The page displays a **Mock testing mode** banner.
+Use these deterministic dummy tickers:
+
+- `ACME` — complete fast report;
+- `XYZ` — partial deep report with unknown, limited-coverage, and
+  not-applicable states; and
+- `PENDING` — pending deep report.
+
+These reports are fixture-backed and make no OpenAI request. Other tickers are
+intentionally unsupported in this mode.
 
 Press `Ctrl+C` in the terminal to stop the mock server. Use `npm start` for the
 normal OpenAI-backed application; mock mode never imports or constructs the
@@ -117,9 +124,12 @@ npm test
 
 The suite uses Node's built-in test runner, injected fake research clients, and
 local fixtures, including ticker-change, company-rename, rebrand, delisted, and
-ambiguous-lineage cases. It does not require `OPENAI_API_KEY` and does not make
-live OpenAI calls. Run `npm run validate:reports` when you only need to validate
-the complete and partial report fixtures.
+ambiguous-lineage cases. Dashboard tests cover complete, partial, limited,
+pending, not-applicable, score grouping, finding priority, source references,
+keyboard-compatible form submission, and narrow-screen styling. The suite does
+not require `OPENAI_API_KEY` and does not make live OpenAI calls. Run
+`npm run validate:reports` when you only need to validate the complete and
+partial report fixtures.
 
 Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.

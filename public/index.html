@@ -1,245 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <title>Stock Research</title>
-
-    <style>
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #111;
-            color: #eee;
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        h1 {
-            margin-bottom: 5px;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
-        }
-
-        input {
-            flex: 1;
-            padding: 14px;
-            font-size: 20px;
-            text-transform: uppercase;
-        }
-
-        button {
-            padding: 14px 25px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        #status {
-            margin-top: 25px;
-            font-size: 18px;
-        }
-
-        #results {
-            white-space: pre-wrap;
-            background: #1d1d1d;
-            padding: 25px;
-            margin-top: 20px;
-            border-radius: 8px;
-            line-height: 1.6;
-        }
-
-        #mock-banner {
-            background: #3a2f00;
-            border: 1px solid #d7ad22;
-            border-radius: 8px;
-            color: #fff2b2;
-            margin-top: 20px;
-            padding: 14px;
-        }
-
-    </style>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Research</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
-
-
 <body>
-
-    <h1>Stock Research</h1>
-
-    <p>
-        Check company history, dilution, reverse splits,
-        dividends and recent news.
-    </p>
-
-    <div id="mock-banner" hidden role="status"></div>
-
-
-    <div class="search-box">
-
-        <input
-            id="ticker"
-            placeholder="Enter ticker... Example: BULL"
-            maxlength="15"
-            autocomplete="off"
-        >
-
-        <button id="analyze-button" onclick="analyzeStock()">
-            Analyze
-        </button>
-
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Evidence-backed due diligence</p>
+      <h1>Stock Research</h1>
+      <p class="lede">A fast view of material risks, unknowns, company context, and catalysts—not financial advice.</p>
     </div>
-
-
-    <div id="status"></div>
-
-    <div id="results"></div>
-
-
-    <script>
-
-        const tickerPattern = /^[A-Z0-9]+(?:[.-][A-Z0-9]+)*$/;
-
-        function validateTickerInput(value) {
-            const ticker = String(value || "").trim().toUpperCase();
-            if (!ticker) {
-                return { valid: false, ticker, message: "Please enter a ticker." };
-            }
-            if (ticker.length > 15 || !tickerPattern.test(ticker)) {
-                return {
-                    valid: false,
-                    ticker,
-                    message: "Ticker must be 1–15 letters or numbers, with single periods or hyphens between segments."
-                };
-            }
-            return { valid: true, ticker, message: "" };
-        }
-
-        async function showRuntimeMode() {
-            try {
-                const response = await fetch("/api/runtime");
-                if (!response.ok) return;
-
-                const runtime = await response.json();
-                if (runtime.mode !== "mock") return;
-
-                const banner = document.getElementById("mock-banner");
-                banner.textContent =
-                    "Mock testing mode — enter " + runtime.demoTicker
-                    + " for the deterministic demo report. No OpenAI tokens are used.";
-                banner.hidden = false;
-
-                const tickerInput = document.getElementById("ticker");
-                tickerInput.placeholder = "Enter demo ticker: " + runtime.demoTicker;
-            } catch (_error) {
-                // The search flow remains available if runtime metadata cannot load.
-            }
-        }
-
-        async function analyzeStock() {
-
-            const analyzeButton =
-                document.getElementById("analyze-button");
-
-            if (analyzeButton.disabled) return;
-
-            const tickerInput =
-                document.getElementById("ticker");
-
-            const status =
-                document.getElementById("status");
-
-            const results =
-                document.getElementById("results");
-
-
-            const validation =
-                validateTickerInput(tickerInput.value);
-
-
-            if (!validation.valid) {
-
-                status.textContent =
-                    validation.message;
-
-                results.textContent = "";
-
-                return;
-            }
-
-            const ticker = validation.ticker;
-            tickerInput.value = ticker;
-
-
-            status.textContent =
-                "Researching " + ticker + "...";
-
-            results.textContent = "";
-            analyzeButton.disabled = true;
-
-
-            try {
-
-                const response = await fetch(
-                    "/api/analyze?ticker="
-                    + encodeURIComponent(ticker)
-                );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.error || "Something went wrong."
-                    );
-                }
-
-
-                status.textContent =
-                    ticker + " research complete.";
-
-                results.textContent =
-                    JSON.stringify(data.report, null, 2);
-
-
-            } catch (error) {
-
-                status.textContent =
-                    "Error";
-
-                results.textContent =
-                    error.message;
-            } finally {
-
-                analyzeButton.disabled = false;
-            }
-        }
-
-
-        // Allow Enter key to search
-        document
-            .getElementById("ticker")
-            .addEventListener("keydown", function(event) {
-
-                if (event.key === "Enter") {
-                    analyzeStock();
-                }
-
-            });
-
-        showRuntimeMode();
-
-    </script>
-
+  </header>
+  <main>
+    <section class="search-panel" aria-labelledby="search-heading">
+      <h2 id="search-heading" class="visually-hidden">Research a ticker</h2>
+      <div id="mock-banner" class="mock-banner" hidden role="status"></div>
+      <form id="research-form" class="search-form" novalidate>
+        <label for="ticker">Ticker</label>
+        <div class="search-controls">
+          <input id="ticker" name="ticker" placeholder="Example: ACME" maxlength="15" autocomplete="off" spellcheck="false" required>
+          <button id="analyze-button" type="submit">Analyze</button>
+        </div>
+      </form>
+      <p id="status" class="request-status" role="status" aria-live="polite"></p>
+    </section>
+    <section id="results" class="dashboard" aria-live="polite" aria-busy="false" hidden></section>
+  </main>
+  <footer><p>Use this report as a research aid. Verify material evidence before making decisions.</p></footer>
+  <script type="module" src="/dashboard.js"></script>
 </body>
-
 </html>
