@@ -1,0 +1,5 @@
+{
+  "description": "A prior ticker for the same legal issuer carries a reverse split into current history.",
+  "prior_identity": { "name": "Acme Holdings, Inc.", "ticker": "OLDA", "effective_from": "2018-01-01", "effective_to": "2022-06-30", "linkage_state": "confirmed", "linkage_confidence": "high" },
+  "event": { "section": "reverse_splits", "kind": "reverse_split", "event_date": "2021-06-15" }
+}

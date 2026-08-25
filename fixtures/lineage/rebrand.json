@@ -1,0 +1,5 @@
+{
+  "description": "A former name and ticker linked by official evidence carries a compliance event.",
+  "prior_identity": { "name": "Legacy Devices Corp.", "ticker": "LEGC", "effective_from": "2017-02-01", "effective_to": "2022-06-30", "linkage_state": "confirmed", "linkage_confidence": "medium" },
+  "event": { "section": "compliance_and_warnings", "kind": "exchange_compliance", "event_date": "2020-09-01" }
+}

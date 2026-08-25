@@ -1,0 +1,4 @@
+{
+  "description": "A delisted current common stock retains explicit security and listing context.",
+  "security": { "security_type": "common_stock", "listing_status": "delisted" }
+}

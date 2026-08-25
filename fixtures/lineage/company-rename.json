@@ -1,0 +1,5 @@
+{
+  "description": "A former legal name under the current ticker carries an offering into current history.",
+  "prior_identity": { "name": "Old Acme Corp.", "ticker": "ACME", "effective_from": "2019-01-01", "effective_to": "2022-06-30", "linkage_state": "confirmed", "linkage_confidence": "high" },
+  "event": { "section": "dilution", "kind": "offering", "event_date": "2021-04-10" }
+}

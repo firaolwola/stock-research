@@ -29,9 +29,10 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
 - `security` records the current ticker, display name, security type, listing
   venue/status, evidence state, and supporting claims.
 - `issuer` records legal identity, optional CIK, identity confidence, and prior
-  names/tickers. A prior identity includes effective dates when known, linkage
-  state and confidence, and evidence claims. An uncertain relationship remains
-  `unknown`; it must not be used as confirmed lineage.
+  names/tickers. Confirmed prior identities require both effective dates,
+  `high` or `medium` linkage confidence, and sourced confirmed linkage claims.
+  An uncertain relationship remains `unknown` or `limited_coverage`; it must not
+  be used as confirmed lineage.
 - `sections` always contains reverse splits, dilution, dividends, compliance and
   warnings, financial context, and catalysts/news. Section items use a required
   `kind` to distinguish offerings, warrants, convertibles, compliance and
@@ -108,6 +109,12 @@ are rejected at the server boundary. When available sources materially conflict,
 the conclusion remains `unknown` or `limited_coverage` and any score remains
 unscored rather than selecting or inventing a favorable conclusion.
 
+For reverse splits, dilution and offerings, exchange compliance, and warnings,
+a dated item inside a confirmed prior-identity period must reference that
+identity's linkage claim. This makes the carried history inspectable. A
+confirmed item may not reference an unresolved predecessor linkage. Invalid or
+reversed effective-date ranges are rejected.
+
 ## Validation
 
 Install dependencies and run:
@@ -132,6 +139,11 @@ unresolved lineage, limited coverage, unknown evidence, a security-specific
 pending reports must include at
 least one structured coverage limitation; they remain valid and usable when all
 other semantic checks pass.
+
+The isolated lineage fixtures and tests cover a ticker change, company rename,
+combined name/ticker rebrand, delisted common stock, and ambiguous predecessor.
+They verify both successful carried history and rejection when the linkage is
+missing or unresolved.
 
 An upstream Responses API result marked `incomplete` may still contain a safe,
 parseable partial report. Such output proceeds through the same full server

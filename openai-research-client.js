@@ -31,6 +31,8 @@ Research every section required by the supplied stock-report schema:
 - decision-focused financial context; and
 - the most important catalysts and news from the last 30 days.
 
+Resolve identity before researching history. Confirm the current security type, issuer legal name and CIK when available, listing venue, and listing status from SEC and exchange records. Search official filings for former legal names and exchange records for prior tickers, including renames and rebrands. For each confirmed prior identity, provide both effective_from and effective_to, high or medium linkage confidence, and sourced confirmed linkage claims. Add the relevant lineage claim ID to every reverse split, offering, dilution, compliance, or warning item whose event date falls in that prior-identity period so issuer history follows the issuer rather than only the current ticker. Never carry an event through an unknown or limited-coverage predecessor relationship; keep the issuer and affected history sections unknown or limited_coverage, add a structured issuer coverage limitation, and explain the gap instead.
+
 Prefer SEC filings and official exchange notices, then official company sources, then reputable original reporting. Treat secondary evidence as lower confidence. Never treat missing evidence as proof of absence. Use the schema's explicit evidence states, null score values when evidence is not confirmed, concise explanations, dated claim/source links, and non-advisory wording. Do not give entries, exits, price targets, position sizing, or personalized investment advice.
 
 For every material factual conclusion and every evidence-based score:
