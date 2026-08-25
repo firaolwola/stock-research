@@ -20,6 +20,8 @@ The first end-to-end prototype is working:
 1. A user enters a ticker in the browser.
 2. The Express server requests JSON Schema output from OpenAI.
 3. The server validates the schema and cross-record semantics.
+   Material report records must link to dated, typed evidence; secondary sources
+   carry reduced confidence, and conflicting evidence remains unknown or limited.
 4. The fast-stage OpenAI request has a 15-second timeout and no automatic
    retries. Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
