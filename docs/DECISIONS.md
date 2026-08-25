@@ -7,14 +7,15 @@ entries short and append new decisions rather than rewriting history.
 
 **Status:** Accepted
 
-**Decision:** Run manual mock testing through `npm run dev-test`, a dedicated
-entry point that injects the validated `ACME` fixture and never imports or
-constructs the OpenAI client. Expose non-sensitive runtime metadata so the UI can
-identify mock mode and its supported ticker.
+**Decision:** Run manual mock testing through `npm run dev-test` on local port
+3001, a dedicated entry point that injects the validated `ACME` fixture and never
+imports or constructs the OpenAI client. Keep the real application on local port
+3000, and expose non-sensitive runtime metadata so the UI can identify mock mode
+and its supported ticker.
 
 **Why:** Frontend and integration work needs a deterministic browser flow that
-cannot spend tokens accidentally and clearly communicates that its data is
-fictional test data.
+cannot spend tokens accidentally, can run beside the real server, and clearly
+communicates that its data is fictional test data.
 
 **Consequence:** Future response-contract changes must keep the `ACME` demo path
 aligned with the live endpoint shape while preserving strict startup separation.
