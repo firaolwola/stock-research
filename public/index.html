@@ -55,6 +55,15 @@
             line-height: 1.6;
         }
 
+        #mock-banner {
+            background: #3a2f00;
+            border: 1px solid #d7ad22;
+            border-radius: 8px;
+            color: #fff2b2;
+            margin-top: 20px;
+            padding: 14px;
+        }
+
     </style>
 
 </head>
@@ -68,6 +77,8 @@
         Check company history, dilution, reverse splits,
         dividends and recent news.
     </p>
+
+    <div id="mock-banner" hidden role="status"></div>
 
 
     <div class="search-box">
@@ -90,6 +101,27 @@
 
 
     <script>
+
+        async function showRuntimeMode() {
+            try {
+                const response = await fetch("/api/runtime");
+                if (!response.ok) return;
+
+                const runtime = await response.json();
+                if (runtime.mode !== "mock") return;
+
+                const banner = document.getElementById("mock-banner");
+                banner.textContent =
+                    "Mock testing mode — enter " + runtime.demoTicker
+                    + " for the deterministic demo report. No OpenAI tokens are used.";
+                banner.hidden = false;
+
+                const tickerInput = document.getElementById("ticker");
+                tickerInput.placeholder = "Enter demo ticker: " + runtime.demoTicker;
+            } catch (_error) {
+                // The search flow remains available if runtime metadata cannot load.
+            }
+        }
 
         async function analyzeStock() {
 
@@ -170,6 +202,8 @@
                 }
 
             });
+
+        showRuntimeMode();
 
     </script>
 

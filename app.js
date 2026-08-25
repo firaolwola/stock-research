@@ -1,12 +1,16 @@
 import express from "express";
 
-export function createApp({ researchClient, logger = console } = {}) {
+export function createApp({ researchClient, logger = console, runtime = { mode: "live", demoTicker: null } } = {}) {
   if (!researchClient || typeof researchClient.researchTicker !== "function") {
     throw new TypeError("createApp requires a researchClient with researchTicker(ticker)");
   }
 
   const app = express();
   app.use(express.static("public"));
+
+  app.get("/api/runtime", (_req, res) => {
+    return res.json({ mode: runtime.mode, demoTicker: runtime.demoTicker });
+  });
 
   app.get("/api/analyze", async (req, res) => {
     const ticker = String(req.query.ticker || "").trim().toUpperCase();

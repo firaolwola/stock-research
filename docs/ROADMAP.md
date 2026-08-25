@@ -11,7 +11,8 @@ The end-to-end ticker search works locally, but it returns an unstructured text
 report. A versioned stock-report contract and representative fixtures now define
 the target structure; live structured-output integration remains incomplete.
 Source population, issuer resolution, scoring calibration, broader automated
-tests, latency controls, and production safeguards also remain incomplete.
+tests, latency controls, and production safeguards also remain incomplete. A
+token-free mock mode supports repeatable manual frontend and integration checks.
 
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
@@ -111,6 +112,7 @@ and place in the fast or deep stage are clear.
 
 - [x] [#1 — Define the structured stock-report schema](https://github.com/firaolwola/stock-research/issues/1).
 - [x] [#7 — Create the isolated backend test foundation](https://github.com/firaolwola/stock-research/issues/7).
+- [x] [#22 — Add a manual mock/demo testing mode](https://github.com/firaolwola/stock-research/issues/22).
 - [x] Create the initial Express server and static frontend.
 - [x] Connect the server to the OpenAI Responses API with web search.
 - [x] Confirm the end-to-end ticker search works locally.
