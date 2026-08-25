@@ -52,6 +52,24 @@ reliably sourced. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 Never commit `.env` or an API key.
 
+## Manual mock mode
+
+Use mock mode for manual browser and integration checks without an API key or
+OpenAI tokens:
+
+```powershell
+npm run dev-test
+```
+
+Open <http://localhost:3000>. The page displays a **Mock testing mode** banner
+and tells you to enter the dummy ticker `ACME`. Submitting `ACME` always returns
+the same deterministic report derived from the validated complete schema
+fixture. Other tickers are intentionally unsupported in this mode.
+
+Press `Ctrl+C` in the terminal to stop the mock server. Use `npm start` for the
+normal OpenAI-backed application; mock mode never imports or constructs the
+OpenAI client.
+
 ## Testing
 
 Run the isolated backend and report-contract tests with:

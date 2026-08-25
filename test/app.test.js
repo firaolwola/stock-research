@@ -9,6 +9,23 @@ test("createApp requires an explicit research client", () => {
   assert.throws(() => createApp(), /requires a researchClient/);
 });
 
+test("runtime metadata distinguishes live and mock apps", async () => {
+  const researchClient = { async researchTicker() { return "unused"; } };
+  const cases = [
+    { runtime: undefined, expected: { mode: "live", demoTicker: null } },
+    { runtime: { mode: "mock", demoTicker: "ACME" }, expected: { mode: "mock", demoTicker: "ACME" } }
+  ];
+
+  for (const { runtime, expected } of cases) {
+    const app = createApp({ researchClient, logger: quietLogger, runtime });
+    await withTestServer(app, async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/runtime`);
+      assert.equal(response.status, 200);
+      assert.deepEqual(await response.json(), expected);
+    });
+  }
+});
+
 test("analyze normalizes a ticker and returns mocked research", async () => {
   const calls = [];
   const app = createApp({

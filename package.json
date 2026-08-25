@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "dev-test": "node dev-test-server.js",
     "validate:reports": "node scripts/validate-report-fixtures.js",
     "test": "node --test \"test/*.test.js\""
   },
