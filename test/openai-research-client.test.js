@@ -8,6 +8,7 @@ import {
 } from "../openai-research-client.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { createOpenAIOutputSchema, findUnsupportedOpenAIKeywords } from "../lib/openai-output-schema.js";
+import { APIConnectionTimeoutError } from "openai";
 
 const schema = await loadReportSchema();
 const completeReport = await loadReportFixture("complete");
@@ -58,6 +59,8 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.match(requests[0].input, /Never carry an event through an unknown or limited-coverage predecessor relationship/);
   assert.match(requests[0].input, /add a structured issuer coverage limitation/);
   assert.match(requests[0].input, /Keep all wording non-advisory/);
+  assert.match(requests[0].input, /Do not emit scores/);
+  assert.match(requests[0].input, /do not research or emit historical catalyst analogue items/);
   assert.deepEqual(requests[0].text.format, {
     type: "json_schema",
     name: "stock_report_v4",
@@ -102,6 +105,49 @@ test("OpenAI adapter preserves parseable structured output from an incomplete re
   assert.deepEqual((await adapter.researchTicker("XYZ", { stage: "deep" })).report, partialReport);
 });
 
+test("max-output exhaustion retains response phase, reason, and token usage", async () => {
+  const adapter = adapterFor({
+    status: "incomplete",
+    incomplete_details: { reason: "max_output_tokens" },
+    output: [],
+    output_text: "{\"truncated\":",
+    usage: { input_tokens: 23000, output_tokens: 5000, total_tokens: 28000 }
+  });
+  await assert.rejects(adapter.researchTicker("SWVL"), (error) => {
+    assert.equal(error.code, RESEARCH_ERROR_CODES.incomplete);
+    assert.equal(error.diagnostics.phase, "json_parse");
+    assert.equal(error.diagnostics.response_received, true);
+    assert.equal(error.diagnostics.response_status, "incomplete");
+    assert.equal(error.diagnostics.incomplete_reason, "max_output_tokens");
+    assert.equal(error.diagnostics.output_tokens, 5000);
+    return true;
+  });
+});
+
+test("installed SDK timeout is classified by constructor even though its name is Error", async () => {
+  const sdkTimeout = new APIConnectionTimeoutError();
+  assert.equal(sdkTimeout.name, "Error");
+  await assert.rejects(adapterFor(sdkTimeout).researchTicker("SWVL", { stage: "deep" }), (error) => {
+    assert.equal(error.code, RESEARCH_ERROR_CODES.timeout);
+    assert.equal(error.diagnostics.stage, "deep");
+    assert.equal(error.diagnostics.phase, "openai_request");
+    assert.equal(error.diagnostics.error_constructor, "APIConnectionTimeoutError");
+    assert.equal(error.diagnostics.response_received, false);
+    return true;
+  });
+});
+
+test("response output access failures retain the post-response lifecycle phase", async () => {
+  const response = { status: "completed", output_text: JSON.stringify(completeReport), usage: null };
+  Object.defineProperty(response, "output", { get() { throw new Error("hidden output failure"); } });
+  await assert.rejects(adapterFor(response).researchTicker("ACME"), (error) => {
+    assert.equal(error.code, RESEARCH_ERROR_CODES.unusable);
+    assert.equal(error.diagnostics.phase, "response_output_read");
+    assert.equal(error.diagnostics.response_received, true);
+    return true;
+  });
+});
+
 test("OpenAI adapter classifies representative SDK and HTTP failures", async () => {
   const cases = [
     { error: Object.assign(new Error("timeout detail"), { name: "APITimeoutError" }), code: RESEARCH_ERROR_CODES.timeout },
@@ -120,7 +166,7 @@ test("OpenAI adapter classifies representative SDK and HTTP failures", async () 
   }
 });
 
-test("OpenAI adapter exposes unclassified SDK failures to the app boundary", async () => {
+test("OpenAI adapter wraps unclassified SDK failures with safe lifecycle diagnostics", async () => {
   const upstreamError = new Error("mock failure");
-  await assert.rejects(adapterFor(upstreamError).researchTicker("ACME"), upstreamError);
+  await assert.rejects(adapterFor(upstreamError).researchTicker("ACME"), (error) => error instanceof ResearchResponseError && error.code === RESEARCH_ERROR_CODES.unexpected && error.diagnostics.phase === "openai_request");
 });

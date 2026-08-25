@@ -16,4 +16,15 @@ test("provider schema removes unsupported composition while server schema remain
   assert.equal("$schema" in providerSchema, false);
   assert.equal("$id" in providerSchema, false);
   assert.deepEqual(serverSchema, before);
+  assert.equal(providerSchema.required.includes("scores"), false);
+  assert.equal("scores" in providerSchema.properties, false);
+  assert.equal(providerSchema.$defs.historicalAnalogueAssessment.properties.items.maxItems, 0);
+  assert.deepEqual(providerSchema.$defs.metadata.properties.stage, { const: "fast" });
+  assert.deepEqual(providerSchema.$defs.metadata.properties.completion_status, { enum: ["partial", "pending"] });
+
+  const deepSchema = createOpenAIOutputSchema(serverSchema, { stage: "deep" });
+  assert.equal(deepSchema.required.includes("scores"), false);
+  assert.equal(deepSchema.$defs.historicalAnalogueAssessment.properties.items.maxItems, 3);
+  assert.deepEqual(deepSchema.$defs.metadata.properties.stage, { const: "deep" });
+  assert.ok(deepSchema.properties.claims.maxItems > providerSchema.properties.claims.maxItems);
 });

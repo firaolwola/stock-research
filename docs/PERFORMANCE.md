@@ -16,6 +16,24 @@ or `stage=deep`. It has a 60-second timeout and 10,000-token output ceiling and
 does not claim the fast-stage time or cost targets. It expands named gaps but
 does not guarantee completeness. The server never escalates automatically.
 
+The provider contracts are stage-aware. Neither stage asks the provider to emit
+the eight deterministic scores or their components; the server derives them
+from evidence after the response. Fast mode limits evidence collections, keeps
+only material claims and strongest sources, and defers historical catalyst
+analogues/reaction windows with explicit limited coverage. Fast responses are
+therefore `partial` or `pending` relative to the full v4 contract rather than
+claiming false global completeness. Deep mode may include
+up to three analogues and four reaction windows per analogue and uses larger—but
+still bounded—claim, source, history, and warning collections.
+
+The complete fixture is approximately 5,846 compact JSON tokens under the old
+provider contract, including approximately 2,206 tokens of discarded provider
+scores. Under the new contract it is approximately 3,449 tokens in Fast and
+3,638 in Deep before the server restores scores. Real reports vary with evidence;
+the expected normal ranges are roughly 3,000–4,500 Fast output tokens and
+4,000–7,500 Deep output tokens. The existing 5,000/10,000 ceilings remain failure
+bounds, not output targets.
+
 ## Per-report measurement
 
 Successful API responses include an `operations` object outside the validated
@@ -59,3 +77,7 @@ rejects unapproved, unbounded, or incompletely measured live samples.
   against fast-stage targets.
 - Performance work must not silently improve a metric by weakening evidence,
   material-risk recall, source quality, or uncertainty handling.
+- Safe server diagnostics identify stage, lifecycle phase, elapsed time, error
+  constructor/name, status/code and nested cause, response receipt/status,
+  incomplete reason, and token usage when available. They never log prompts,
+  provider messages, response bodies, credentials, or authorization data.

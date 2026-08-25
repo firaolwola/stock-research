@@ -3,6 +3,26 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Bound provider output by stage and derive scores server-side
+
+**Status:** Accepted
+
+**Decision:** Do not request provider-authored score objects. Bound claim,
+source, history, warning, and prose volume in both stages. Fast research defers
+detailed catalyst analogues and reaction windows explicitly; Deep may expand
+them within larger limits. Preserve the 5,000/10,000 output ceilings.
+
+**Why:** Three failed SWVL requests consumed 19,960 of a possible 20,000 output
+tokens. The old complete fixture itself required about 5,846 compact JSON tokens,
+including about 2,206 score tokens that the server discarded. The installed SDK
+also exposes timeout subclasses with `.name === "Error"`, defeating name-only
+classification.
+
+**Consequence:** Normal Fast output is expected around 3,000–4,500 tokens and
+Deep around 4,000–7,500, while full deterministic scores remain present in the
+validated browser report. Diagnostics classify SDK timeouts by constructor and
+record safe lifecycle/response/usage fields without logging provider content.
+
 ## 2026-08-25 — Separate provider output constraints from server validation
 
 **Status:** Accepted

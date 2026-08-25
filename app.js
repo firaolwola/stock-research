@@ -13,11 +13,18 @@ const controlledResearchErrors = Object.freeze({
   [RESEARCH_ERROR_CODES.incomplete]: Object.freeze({ code: "RESEARCH_INCOMPLETE", error: "The research response was incomplete." }),
   [RESEARCH_ERROR_CODES.invalid]: Object.freeze({ code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." }),
   [RESEARCH_ERROR_CODES.unusable]: Object.freeze({ code: "RESEARCH_UNUSABLE", error: "The research provider returned an unusable response." }),
-  [RESEARCH_ERROR_CODES.badRequest]: Object.freeze({ code: "RESEARCH_REQUEST_REJECTED", error: "The research request configuration was rejected." })
+  [RESEARCH_ERROR_CODES.badRequest]: Object.freeze({ code: "RESEARCH_REQUEST_REJECTED", error: "The research request configuration was rejected." }),
+  [RESEARCH_ERROR_CODES.unexpected]: Object.freeze({ code: "RESEARCH_UNAVAILABLE", error: "Research is temporarily unavailable." })
 });
 
 function diagnosticSuffix(diagnostics = {}) {
-  const fields = [["status", diagnostics.status], ["provider_code", diagnostics.provider_code], ["type", diagnostics.error_type]]
+  const fields = [
+    ["stage", diagnostics.stage], ["phase", diagnostics.phase], ["elapsed_ms", diagnostics.elapsed_ms],
+    ["constructor", diagnostics.error_constructor], ["type", diagnostics.error_type], ["status", diagnostics.status], ["provider_code", diagnostics.provider_code],
+    ["cause_constructor", diagnostics.cause_constructor], ["cause_name", diagnostics.cause_name], ["cause_status", diagnostics.cause_status], ["cause_code", diagnostics.cause_code],
+    ["response_received", diagnostics.response_received], ["response_status", diagnostics.response_status], ["incomplete_reason", diagnostics.incomplete_reason],
+    ["input_tokens", diagnostics.input_tokens], ["output_tokens", diagnostics.output_tokens], ["total_tokens", diagnostics.total_tokens]
+  ]
     .filter(([, value]) => value !== null && value !== undefined)
     .map(([key, value]) => `${key}=${value}`);
   return fields.length ? `; ${fields.join("; ")}` : "";
@@ -47,6 +54,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
     const stageValidation = parseResearchStage(req.query.stage);
     if (!stageValidation.valid) return res.status(400).json({ code: "INVALID_RESEARCH_STAGE", error: "Research stage must be fast or deep." });
     const { stage } = stageValidation;
+    const requestStartedAt = performance.now();
 
     try {
       const researchResult = await researchClient.researchTicker(ticker, { stage });
@@ -55,14 +63,14 @@ export function createApp({ researchClient, reportValidator, logger = console, r
       let report;
       try {
         report = calibrateReportScores(researchedReport);
-      } catch {
-        logger.error(`Research provider returned an unscorable report for ${ticker}.`);
+      } catch (error) {
+        logger.error(`Research provider returned an unscorable report for ${ticker} (INVALID_RESEARCH_RESPONSE${diagnosticSuffix({ stage, phase: "report_conversion", elapsed_ms: Math.round(performance.now() - requestStartedAt), error_constructor: error?.constructor?.name, error_type: error?.name, response_received: true, input_tokens: operations?.input_tokens, output_tokens: operations?.output_tokens, total_tokens: operations?.total_tokens })}).`);
         const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
         return res.status(502).json({ code: controlledError.code, error: controlledError.error });
       }
       const validationResult = reportValidator(report);
       if (!validationResult.valid) {
-        logger.error(`Research provider returned an invalid report for ${ticker}.`);
+        logger.error(`Research provider returned an invalid report for ${ticker} (INVALID_RESEARCH_RESPONSE${diagnosticSuffix({ stage, phase: "report_validation", elapsed_ms: Math.round(performance.now() - requestStartedAt), response_received: true, input_tokens: operations?.input_tokens, output_tokens: operations?.output_tokens, total_tokens: operations?.total_tokens })}).`);
         const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
         return res.status(502).json({ code: controlledError.code, error: controlledError.error });
       }
