@@ -3,6 +3,29 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Size Fast domains from compact evidence fixtures
+
+**Status:** Accepted implementation refinement
+
+**Decision:** Keep the parallel identity-gated domains and 20-second hard bound.
+Remove repeated full identity objects outside Capital, construct duplicated
+catalyst/news and financial-context sections server-side, cap each domain at
+four sources, and set output ceilings of 1,800 Capital, 2,200 Catalyst, and
+2,000 Financial tokens. Record per-domain usage, searches, and estimated cost,
+including incomplete responses that cannot be parsed.
+
+**Why:** The first live parallel run returned Capital and Financial at exactly
+1,200 tokens with `max_output_tokens`, while Catalyst timed out. Representative
+compact fragments are roughly 774, 1,424, and 1,245 serialized tokens, leaving
+35–57% headroom. The API ceiling includes visible and reasoning output, so a
+ceiling equal to expected JSON size is unsafe.
+
+**Consequence:** The combined 6,000-token ceiling is a failure boundary, not a
+target; normal visible output is expected around 2,500–4,000. Missing,
+truncated, timed-out, and identity-conflicting domains remain Pending/Unknown.
+Catalyst stays bounded at 20 seconds; one slow hosted search may remain Pending,
+and Deep remains the deliberate enrichment path.
+
 ## 2026-08-25 — Assemble Fast from independent identity-gated domains
 
 **Status:** Accepted by product owner
@@ -25,7 +48,7 @@ discarded every otherwise useful domain.
 
 **Consequence:** Fast makes three provider requests and may cost slightly more
 in fixed/search overhead, but gains parallelism, fault isolation, progressive
-results, and explicit domain coverage. Its combined output ceilings total 3,400
+results, and explicit domain coverage. Its initial combined output ceilings totaled 3,400
 tokens across at most five hosted searches. Deep remains the broader full-report
 workflow for exhaustive lineage, detailed financial history, corroboration,
 analogues/reactions, and conflict resolution. Live latency/cost still require an

@@ -159,8 +159,10 @@ Retry a failed search manually after the displayed error when appropriate.
 Fast measures first-useful latency separately from full domain completion. The
 first validated domain assembly targets 3–10 seconds; all three domains target
 approximately 15–20 seconds and each request is cancelled at 20 seconds. The
-three compact schemas permit at most 3,400 combined output tokens and five
-hosted searches. Detailed lineage, financial history, corroboration, historical
+three compact schemas permit at most 6,000 combined output tokens as a failure
+bound and five hosted searches. Normal visible output is expected around
+2,500–4,000 tokens because the server constructs duplicated v4 sections.
+Detailed lineage, financial history, corroboration, historical
 catalyst analogues, reaction windows, and conflict resolution remain Deep work.
 
 The default action runs the fast stage. **Deeper research** is a deliberate

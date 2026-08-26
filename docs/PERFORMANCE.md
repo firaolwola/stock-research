@@ -9,11 +9,11 @@ parallel with no automatic retries:
 
 - `capital`: identity, necessary lineage, five-year reverse splits, and
   three-year offerings/dilution/warrants/convertibles; at most two searches and
-  1,200 output tokens;
+  1,800 output tokens;
 - `catalyst`: current 30-day catalyst, listing/compliance, and major recent
-  SEC/accounting warnings; at most one search and 1,000 output tokens; and
+  SEC/accounting warnings; at most one search and 2,200 output tokens; and
 - `financial`: latest-filing immediate financial risk, going concern, and
-  dividend applicability/status; at most two searches and 1,200 output tokens.
+  dividend applicability/status; at most two searches and 2,000 output tokens.
 
 Each request has a 20-second hard timeout. First useful validated output targets
 3–10 seconds; all Fast domains target approximately 15–20 seconds. Operations
@@ -36,8 +36,11 @@ does not guarantee completeness. The server never escalates automatically.
 The provider contracts are stage-aware. Neither stage asks the provider to emit
 the eight deterministic scores or their components; the server derives them
 from evidence after the response. Fast uses compact per-domain contracts, keeps
-only material claims and strongest sources, and defers historical catalyst
-analogues/reaction windows with explicit limited coverage. Fast responses are
+only material claims and at most four strongest sources per domain, and defers
+historical catalyst analogues/reaction windows with explicit limited coverage.
+Each domain returns an identity fingerprint; Capital alone returns the full
+security/issuer objects. The server derives catalyst/news and financial-context
+sections instead of asking the provider to repeat that evidence. Fast responses are
 therefore `partial` or `pending` relative to the full v4 contract rather than
 claiming false global completeness. Deep mode may include
 up to three analogues and four reaction windows per analogue and uses larger—but
@@ -55,15 +58,19 @@ plan.
 The complete fixture is approximately 5,846 compact JSON tokens under the old
 provider contract, including approximately 2,206 tokens of discarded provider
 scores. The monolithic compact Fast contract was still approximately 3,449
-tokens. The domain architecture caps combined Fast provider output at 3,400
-tokens, with a normal expectation of roughly 1,800–3,000. Deep remains roughly
+tokens. Representative compact fragments measure approximately 774 rough
+serialized tokens for Capital, 1,424 for Catalyst, and 1,245 for Financial.
+Their ceilings retain approximately 57%, 35%, and 38% headroom because
+`max_output_tokens` also includes reasoning output. The combined 6,000-token
+ceiling is a failure bound, with normal visible output expected around
+2,500–4,000 tokens. Deep remains roughly
 4,000–7,500 under a 10,000-token ceiling. These are failure bounds, not targets.
 
 ## Per-report measurement
 
 Successful API responses include an `operations` object outside the validated
 research report. It records stage, first-useful and complete latency, per-domain
-status and latency, aggregate input/output/total tokens, counted web-search
+status, latency, token/search/cost telemetry, aggregate input/output/total tokens, counted web-search
 calls, estimated cost, pricing version, and target status. Missing provider
 usage produces unknown cost, not zero. The dashboard displays these values next
 to the report's independent coverage and completion states.
@@ -92,7 +99,13 @@ operation exceeded those cutoffs; it does not identify one particular provider
 search call or prove that generation had completed. The second failure occurred
 after output and search bounds were tightened, establishing that the monolithic
 architecture itself was not a reliable Fast boundary. The parallel domain
-architecture is verified with mocks only, so live latency remains uncalibrated.
+architecture then completed safely in one live SWVL run, but Capital and
+Financial exhausted their 1,200-token limits and Catalyst reached its 20-second
+timeout. The received responses used roughly 12k input tokens each. Local
+prompts are only about 0.9–1.0k characters and revised schemas about 5.6–6.5k
+characters, so hosted-search evidence and provider context—not prompt prose
+alone—account for most observed input. Catalyst and Financial schemas are now
+approximately 26% and 21% smaller. Live completion remains uncalibrated.
 A future actual measurement requires explicit
 approval and a predeclared sample of at most five case IDs, date, model/config,
 maximum budget, output location, and complete operational fields. The evaluator

@@ -18,10 +18,12 @@ const partialReport = await loadReportFixture("partial");
 const reportValidator = createReportValidator(schema);
 
 function fragmentFor(domain, report = completeReport) {
-  const common = { domain, security: report.security, issuer: { ...report.issuer, prior_identities: domain === "capital" ? report.issuer.prior_identities : [] }, claims: report.claims, sources: report.sources };
+  const common = { domain, identity: { ticker: report.security.ticker, issuer_legal_name: report.issuer.legal_name, cik: report.issuer.cik }, claims: report.claims, sources: report.sources };
+  if (domain === "capital") Object.assign(common, { security: report.security, issuer: report.issuer });
   if (domain === "capital") return { ...common, reverse_splits: report.sections.reverse_splits, dilution: report.sections.dilution };
-  if (domain === "financial") return { ...common, dividends: report.sections.dividends, financial_context: report.sections.financial_context, financial_assessment: report.financial_assessment };
-  return { ...common, compliance_and_warnings: report.sections.compliance_and_warnings, catalysts_and_news: report.sections.catalysts_and_news, catalyst_assessment: { ...report.catalyst_assessment, historical_analogues: { state: "limited_coverage", summary: "Deferred to Deep.", coverage_notes: ["Deep only."], items: [], claim_ids: [] } } };
+  if (domain === "financial") return { ...common, dividends: report.sections.dividends, financial_assessment: report.financial_assessment };
+  const { historical_analogues, ...catalystAssessment } = report.catalyst_assessment;
+  return { ...common, compliance_and_warnings: report.sections.compliance_and_warnings, catalyst_assessment: catalystAssessment };
 }
 
 function domainResponse(request) {
@@ -55,9 +57,14 @@ test("OpenAI adapter requests JSON Schema output and parses a completed report",
   assert.equal(result.report.metadata.completion_status, "partial");
   assert.deepEqual(result.report.sections.dilution, completeReport.sections.dilution);
   assert.deepEqual(result.report.financial_assessment, completeReport.financial_assessment);
-  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+  const validation = reportValidator(calibrateReportScores(result.report));
+  assert.equal(validation.valid, true, JSON.stringify(validation.errors));
   assert.equal(result.operations.stage, "fast");
   assert.equal(result.operations.web_search_calls, 3);
+  assert.equal(result.operations.domains.capital.input_tokens, 1000);
+  assert.equal(result.operations.domains.capital.output_tokens, 700);
+  assert.equal(result.operations.domains.capital.web_search_calls, 1);
+  assert.equal(typeof result.operations.domains.capital.estimated_cost_usd, "number");
   assert.equal(progress.length, 3);
   assert.equal(progress.at(-1).final, true);
   assert.equal(requests.length, 3);
@@ -99,6 +106,33 @@ test("Fast starts every domain before waiting and preserves successful domains",
   assert.equal(result.operations.domains.financial.status, "pending");
   assert.deepEqual(result.report.sections.dilution, completeReport.sections.dilution);
   assert.equal(result.report.financial_assessment.state, "unknown");
+});
+
+test("a truncated Fast domain stays Pending and retains its usage telemetry", async () => {
+  const adapter = adapterFor((request) => {
+    const domain = request.text.format.name.match(/^fast_(.+)_evidence$/)[1];
+    if (domain !== "capital") return domainResponse(request);
+    return { status: "incomplete", incomplete_details: { reason: "max_output_tokens" }, output: [{ type: "web_search_call" }], output_text: "{\"domain\":", usage: { input_tokens: 11846, output_tokens: 1200, total_tokens: 13046 } };
+  });
+  const result = await adapter.researchTicker("ACME");
+  assert.equal(result.operations.domains.capital.status, "pending");
+  assert.equal(result.operations.domains.capital.error_code, RESEARCH_ERROR_CODES.incomplete);
+  assert.equal(result.operations.domains.capital.output_tokens, 1200);
+  assert.equal(result.operations.domains.capital.web_search_calls, 1);
+  assert.equal(result.operations.input_tokens, 13846);
+  assert.equal(result.report.sections.dilution.state, "unknown");
+  assert.equal(result.report.financial_assessment.state, completeReport.financial_assessment.state);
+});
+
+test("one timed-out Fast domain does not discard completed domain evidence", async () => {
+  const adapter = adapterFor((request) => request.text.format.name.includes("catalyst") ? new APIConnectionTimeoutError() : domainResponse(request));
+  const result = await adapter.researchTicker("ACME");
+  assert.equal(result.operations.domains.catalyst.status, "pending");
+  assert.equal(result.operations.domains.catalyst.error_code, RESEARCH_ERROR_CODES.timeout);
+  assert.equal(result.operations.domains.capital.status, "completed");
+  assert.deepEqual(result.report.sections.dilution, completeReport.sections.dilution);
+  assert.deepEqual(result.report.financial_assessment, completeReport.financial_assessment);
+  assert.equal(result.report.catalyst_assessment.current.state, "unknown");
 });
 
 test("Deep retains a separate larger search budget", async () => {

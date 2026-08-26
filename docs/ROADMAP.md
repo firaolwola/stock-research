@@ -55,6 +55,13 @@ Pending/Unknown. Fast targets first useful evidence in 3–10 seconds and all
 domains by 15–20 seconds with a 20-second hard bound. Deep retains the broader
 research workflow. Live performance of the new architecture remains unmeasured.
 
+The first live parallel SWVL run safely returned a partial report but exposed
+undersized domain contracts: Capital and Financial reached their 1,200-token
+ceilings, and Catalyst reached its 20-second bound. Fast now removes duplicated
+provider structures, sizes domain ceilings from representative compact fixtures
+with headroom, and reports response usage per domain. An approved live run is
+still needed to measure completion after this refinement.
+
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
 
