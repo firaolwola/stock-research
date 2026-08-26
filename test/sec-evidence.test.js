@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createSecEvidenceClient } from "../lib/sec-evidence.js";
+import { createSecEvidenceClient, getSafeSecDiagnostics } from "../lib/sec-evidence.js";
 import { calibrateReportScores } from "../lib/scoring.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { loadReportSchema } from "../support/report-fixtures.js";
@@ -62,4 +62,29 @@ test("unresolved ticker stays Pending without favorable evidence", async () => {
   const result = await client.researchTicker("UNKNOWN"); const calibrated = calibrateReportScores(result.report);
   assert.equal(calibrated.security.evidence_state, "unknown");
   assert.equal(calibrated.scores.dilution_historical_severity.value, null);
+});
+
+test("ticker-map HTTP failure logs safe lifecycle diagnostics and stays Pending", async () => {
+  const messages = [];
+  const client = createSecEvidenceClient({
+    fetchImpl: async () => ({ ok: false, status: 403, async text() { throw new Error("response body must not be read"); } }),
+    now: (() => { let value = 1_000; return () => value += 25; })(), minRequestIntervalMs: 0,
+    logger: { error(message) { messages.push(message); } }
+  });
+  const result = await client.researchTicker("SWVL");
+  const diagnostic = result.operations.retrieval.failures[0];
+  assert.deepEqual(diagnostic, { phase: "sec_ticker_map_request", endpoint_category: "ticker_map", elapsed_ms: 25, status: 403, constructor: "SecRetrievalError", name: "SecRetrievalError", code: null, cause_constructor: null, cause_name: null, cause_code: null, response_received: true, cache_state: "miss", request_count: 1 });
+  assert.equal(result.operations.retrieval.status, "unavailable");
+  assert.equal(result.report.security.evidence_state, "unknown");
+  assert.equal(messages.length, 1); assert.match(messages[0], /"status":403/); assert.doesNotMatch(messages[0], /response body|authorization|User-Agent/i);
+});
+
+test("network failure reports its safe nested cause without exposing messages", async () => {
+  const cause = Object.assign(new AggregateError([], "private provider detail"), { code: "EACCES" });
+  const failure = new TypeError("fetch failed", { cause }); const messages = [];
+  const client = createSecEvidenceClient({ fetchImpl: async () => { throw failure; }, minRequestIntervalMs: 0, logger: { error(message) { messages.push(message); } } });
+  const result = await client.researchTicker("SWVL"); const diagnostic = result.operations.retrieval.failures[0];
+  assert.equal(diagnostic.constructor, "TypeError"); assert.equal(diagnostic.cause_constructor, "AggregateError"); assert.equal(diagnostic.cause_code, "EACCES");
+  assert.equal(diagnostic.response_received, false); assert.doesNotMatch(messages[0], /fetch failed|private provider detail/);
+  assert.deepEqual(getSafeSecDiagnostics(failure).status, null);
 });

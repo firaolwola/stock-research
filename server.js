@@ -17,7 +17,7 @@ try {
 
     const openai = new OpenAI({ apiKey: config.apiKey });
     const deepClient = createOpenAIResearchClient(openai, { schema });
-    const researchClient = createEvidenceFirstResearchClient({ secClient: createSecEvidenceClient(), openai, deepClient });
+    const researchClient = createEvidenceFirstResearchClient({ secClient: createSecEvidenceClient({ userAgent: config.secUserAgent }), openai, deepClient });
     const app = createApp({ researchClient, reportValidator });
 
     app.listen(config.port, () => {
