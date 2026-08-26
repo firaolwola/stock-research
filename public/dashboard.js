@@ -154,7 +154,9 @@ function renderOperations(operations) {
   const cost = operations.estimated_cost_usd === null ? "Cost unknown" : `Estimated cost $${operations.estimated_cost_usd.toFixed(4)}`;
   panel.append(element("p", "", `${formatLabel(operations.stage)} · ${(operations.latency_ms / 1000).toFixed(1)}s · ${cost}`));
   panel.append(element("p", "muted", `${operations.input_tokens ?? "Unknown"} input tokens · ${operations.output_tokens ?? "Unknown"} output tokens · ${operations.web_search_calls} web searches`));
-  if (operations.stage === "fast" && operations.within_latency_target === false) panel.append(element("p", "coverage-note", "This report was outside the 3–10 second normal latency target."));
+  if (operations.stage === "fast" && operations.within_first_useful_target === false) panel.append(element("p", "coverage-note", "The first usable Fast domain arrived outside the 3–10 second target."));
+  if (operations.stage === "fast" && operations.within_latency_target === false) panel.append(element("p", "coverage-note", "Fast domain collection exceeded the 20-second hard operating target."));
+  if (operations.stage === "fast" && operations.domains) panel.append(element("p", "muted", Object.entries(operations.domains).map(([name, value]) => `${formatLabel(name)}: ${formatLabel(value.status)}`).join(" · ")));
   if (operations.stage === "fast" && operations.within_cost_target === false) panel.append(element("p", "coverage-note", "This report exceeded the approximately $0.10 normal cost target."));
   panel.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
   return panel;
@@ -337,8 +339,23 @@ export function initializeDashboard() {
     if (!validation.valid) { status.textContent = validation.message; status.dataset.kind = "error"; results.replaceChildren(); results.hidden = true; return; }
     const stage = event.submitter?.value === "deep" ? "deep" : "fast"; const ticker = validation.ticker; tickerInput.value = ticker; submitting = true; analyzeButton.disabled = true; deepButton.disabled = true; status.textContent = `${stage === "deep" ? "Running deeper research" : "Researching"} ${ticker}…`; status.dataset.kind = "loading"; results.setAttribute("aria-busy", "true"); results.replaceChildren(); results.hidden = true;
     try {
-      const response = await fetch(`/api/analyze?ticker=${encodeURIComponent(ticker)}&stage=${stage}`); const data = await response.json(); if (!response.ok) throw new Error(data.error || "Something went wrong.");
-      renderDashboard(results, data.report, data.operations); status.textContent = `${ticker} ${formatLabel(stage).toLowerCase()} research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.`; status.dataset.kind = "success";
+      if (stage === "fast") {
+        const response = await fetch(`/api/analyze-stream?ticker=${encodeURIComponent(ticker)}`); if (!response.ok) { const data = await response.json(); throw new Error(data.error || "Something went wrong."); }
+        const reader = response.body.getReader(); const decoder = new TextDecoder(); let buffer = ""; let received = false;
+        while (true) {
+          const { value, done } = await reader.read(); buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+          const lines = buffer.split("\n"); buffer = done ? "" : lines.pop();
+          for (const line of lines) {
+            if (!line.trim()) continue; const data = JSON.parse(line); if (data.type === "error") throw new Error(data.error);
+            if (data.type === "report") { received = true; renderDashboard(results, data.report, data.operations); status.textContent = data.final ? `${ticker} fast research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.` : `${ticker}: showing completed Fast domains while remaining checks continue…`; status.dataset.kind = data.final ? "success" : "loading"; }
+          }
+          if (done) break;
+        }
+        if (!received) throw new Error("Research returned no usable Fast domains.");
+      } else {
+        const response = await fetch(`/api/analyze?ticker=${encodeURIComponent(ticker)}&stage=${stage}`); const data = await response.json(); if (!response.ok) throw new Error(data.error || "Something went wrong.");
+        renderDashboard(results, data.report, data.operations); status.textContent = `${ticker} ${formatLabel(stage).toLowerCase()} research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.`; status.dataset.kind = "success";
+      }
     } catch (error) { status.textContent = "Research could not be completed."; status.dataset.kind = "error"; results.replaceChildren(element("div", "panel", error.message)); results.hidden = false; }
     finally { submitting = false; analyzeButton.disabled = false; deepButton.disabled = false; results.setAttribute("aria-busy", "false"); }
   });

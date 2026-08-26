@@ -30,6 +30,8 @@ test("the token-free calibration sample reports category recall separately from 
   assert.equal(result.operations.input_tokens, 22000);
   assert.equal(result.operations.output_tokens, 8000);
   assert.equal(result.operations.web_search_calls, 4);
+  assert.deepEqual(result.operations.fast_first_useful_target_ms, { min: 3000, max: 10000 });
+  assert.deepEqual(result.operations.fast_complete_target_ms, { min: 15000, max: 20000 });
   assert.equal(result.operations.meets_latency_target, true);
   assert.equal(result.operations.meets_cost_target, true);
   assert.equal(result.operations.coverage_and_recall_reported_together, true);

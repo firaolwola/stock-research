@@ -8,7 +8,8 @@ test("research stages keep fast and deliberate deep budgets separate", () => {
   assert.equal(parseResearchStage("automatic").valid, false);
   assert.ok(RESEARCH_STAGES.deep.timeout_ms > RESEARCH_STAGES.fast.timeout_ms);
   assert.ok(RESEARCH_STAGES.deep.max_output_tokens > RESEARCH_STAGES.fast.max_output_tokens);
-  assert.equal(RESEARCH_STAGES.fast.timeout_ms, RESEARCH_STAGES.fast.target_latency_ms.max + RESEARCH_STAGES.fast.grace_ms);
+  assert.equal(RESEARCH_STAGES.fast.timeout_ms, RESEARCH_STAGES.fast.target_latency_ms.max);
+  assert.equal(RESEARCH_STAGES.fast.first_useful_target_ms.max, 10_000);
   assert.ok(RESEARCH_STAGES.fast.max_tool_calls < RESEARCH_STAGES.deep.max_tool_calls);
 });
 
@@ -28,8 +29,9 @@ test("missing provider usage remains unknown instead of reporting zero cost", ()
   assert.equal(measured.within_latency_target, true);
 });
 
-test("over-target but usable Fast work is recorded as a latency miss", () => {
-  const measured = buildResearchOperations({ stage: "fast", latencyMs: 18_000, usage: null, webSearchCalls: 4 });
+test("Fast records first-useful and complete latency targets separately", () => {
+  const measured = buildResearchOperations({ stage: "fast", latencyMs: 18_000, firstUsefulLatencyMs: 12_000, usage: null, webSearchCalls: 4 });
   assert.equal(measured.latency_ms, 18_000);
-  assert.equal(measured.within_latency_target, false);
+  assert.equal(measured.within_latency_target, true);
+  assert.equal(measured.within_first_useful_target, false);
 });

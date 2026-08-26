@@ -9,10 +9,25 @@ import {
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { createOpenAIOutputSchema, findUnsupportedOpenAIKeywords } from "../lib/openai-output-schema.js";
 import { APIConnectionTimeoutError } from "openai";
+import { calibrateReportScores } from "../lib/scoring.js";
+import { createReportValidator } from "../lib/report-validation.js";
 
 const schema = await loadReportSchema();
 const completeReport = await loadReportFixture("complete");
 const partialReport = await loadReportFixture("partial");
+const reportValidator = createReportValidator(schema);
+
+function fragmentFor(domain, report = completeReport) {
+  const common = { domain, security: report.security, issuer: { ...report.issuer, prior_identities: domain === "capital" ? report.issuer.prior_identities : [] }, claims: report.claims, sources: report.sources };
+  if (domain === "capital") return { ...common, reverse_splits: report.sections.reverse_splits, dilution: report.sections.dilution };
+  if (domain === "financial") return { ...common, dividends: report.sections.dividends, financial_context: report.sections.financial_context, financial_assessment: report.financial_assessment };
+  return { ...common, compliance_and_warnings: report.sections.compliance_and_warnings, catalysts_and_news: report.sections.catalysts_and_news, catalyst_assessment: { ...report.catalyst_assessment, historical_analogues: { state: "limited_coverage", summary: "Deferred to Deep.", coverage_notes: ["Deep only."], items: [], claim_ids: [] } } };
+}
+
+function domainResponse(request) {
+  const domain = request.text.format.name.match(/^fast_(.+)_evidence$/)?.[1];
+  return { status: "completed", output: [{ type: "web_search_call" }], output_text: JSON.stringify(fragmentFor(domain)), usage: { input_tokens: 1000, output_tokens: 700, total_tokens: 1700 } };
+}
 
 function adapterFor(responseOrError, requests = [], options = [], clientOptions = {}) {
   const openai = {
@@ -20,8 +35,9 @@ function adapterFor(responseOrError, requests = [], options = [], clientOptions 
       async create(request, requestOptions) {
         requests.push(request);
         options.push(requestOptions);
-        if (responseOrError instanceof Error) throw responseOrError;
-        return responseOrError;
+        const result = typeof responseOrError === "function" ? responseOrError(request, requestOptions) : responseOrError;
+        if (result instanceof Error) throw result;
+        return result;
       }
     }
   };
@@ -31,79 +47,58 @@ function adapterFor(responseOrError, requests = [], options = [], clientOptions 
 test("OpenAI adapter requests JSON Schema output and parses a completed report", async () => {
   const requests = [];
   const options = [];
-  const adapter = adapterFor({
-    status: "completed",
-    output: [{ type: "web_search_call" }, { type: "web_search_call" }],
-    output_text: JSON.stringify(completeReport),
-    usage: { input_tokens: 10000, output_tokens: 4000, total_tokens: 14000, input_tokens_details: { cached_tokens: 2000 } }
-  }, requests, options);
+  const adapter = adapterFor(domainResponse, requests, options);
+  const progress = [];
 
-  const result = await adapter.researchTicker("ACME");
-  assert.deepEqual(result.report, completeReport);
+  const result = await adapter.researchTicker("ACME", { onProgress(value) { progress.push(value); } });
+  assert.equal(result.report.metadata.stage, "fast");
+  assert.equal(result.report.metadata.completion_status, "partial");
+  assert.deepEqual(result.report.sections.dilution, completeReport.sections.dilution);
+  assert.deepEqual(result.report.financial_assessment, completeReport.financial_assessment);
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
   assert.equal(result.operations.stage, "fast");
-  assert.equal(result.operations.estimated_cost_usd, 0.07025);
-  assert.equal(result.operations.web_search_calls, 2);
-  assert.equal(requests.length, 1);
-  assert.deepEqual(options, [{ timeout: FAST_RESEARCH_TIMEOUT_MS, maxRetries: 0 }]);
-  assert.match(requests[0].input, /ACME/);
-  assert.equal(requests[0].max_tool_calls, 4);
-  assert.deepEqual(requests[0].tools, [{ type: "web_search", search_context_size: "low" }]);
-  assert.deepEqual(requests[0].include, ["web_search_call.action.sources"]);
-  assert.match(requests[0].input, /SEC filings and exchange notices before company sources/);
-  assert.match(requests[0].input, /never give secondary evidence high confidence/);
-  assert.match(requests[0].input, /materially conflicting, use unknown or limited coverage/);
-  assert.match(requests[0].input, /not_found means a documented, bounded search/);
-  assert.match(requests[0].input, /not_applicable means the check does not apply/);
-  assert.match(requests[0].input, /A safe partial report is preferable to guessing/);
-  assert.match(requests[0].input, /Resolve identity before researching history/);
-  assert.match(requests[0].input, /Add the relevant lineage claim ID/);
-  assert.match(requests[0].input, /Never carry an event through an unknown or limited-coverage predecessor relationship/);
-  assert.match(requests[0].input, /add a structured issuer coverage limitation/);
-  assert.match(requests[0].input, /Keep all wording non-advisory/);
-  assert.match(requests[0].input, /Do not emit scores/);
-  assert.match(requests[0].input, /do not research or emit historical catalyst analogue items/);
-  assert.match(requests[0].input, /use at most four focused web-search calls/);
-  assert.match(requests[0].input, /defer exhaustive prior-identity discovery/);
-  assert.deepEqual(requests[0].text.format, {
-    type: "json_schema",
-    name: "stock_report_v4",
-    description: "A version 4.0.0 evidence-backed stock research report; server-side scoring replaces provider score values.",
-    schema: createOpenAIOutputSchema(schema),
-    strict: false
-  });
-  assert.ok(findUnsupportedOpenAIKeywords(schema).length > 0);
-  assert.deepEqual(findUnsupportedOpenAIKeywords(requests[0].text.format.schema), []);
+  assert.equal(result.operations.web_search_calls, 3);
+  assert.equal(progress.length, 3);
+  assert.equal(progress.at(-1).final, true);
+  assert.equal(requests.length, 3);
+  assert.ok(options.every((option) => option.timeout === FAST_RESEARCH_TIMEOUT_MS && option.maxRetries === 0));
+  assert.deepEqual(new Set(requests.map((request) => request.text.format.name)), new Set(["fast_capital_evidence", "fast_catalyst_evidence", "fast_financial_evidence"]));
+  assert.ok(requests.every((request) => request.tools[0].search_context_size === "low" && /ACME/.test(request.input)));
+  assert.deepEqual(requests.map((request) => request.max_tool_calls).sort(), [1, 2, 2]);
+  assert.ok(requests.every((request) => findUnsupportedOpenAIKeywords(request.text.format.schema).length === 0));
   assert.ok("allOf" in schema.$defs.score, "the server schema must retain its stricter semantic constraint");
 });
 
-test("Fast operations distinguish within-target and over-target usable responses", async () => {
-  for (const [latencyMs, expected] of [[8_000, true], [18_000, false]]) {
-    const ticks = [0, latencyMs];
-    const adapter = adapterFor({
-      status: "completed",
-      output: [{ type: "web_search_call" }],
-      output_text: JSON.stringify(completeReport),
-      usage: { input_tokens: 100, output_tokens: 100, total_tokens: 200 }
-    }, [], [], { now: () => ticks.shift() });
-    const result = await adapter.researchTicker("ACME");
-    assert.equal(result.operations.latency_ms, latencyMs);
-    assert.equal(result.operations.within_latency_target, expected);
-  }
-});
-
-test("Fast hard timeout is bounded and reports that no response was received", async () => {
+test("Fast launches three operations and reports failures as Pending instead of favorable evidence", async () => {
   const requests = [];
   const options = [];
-  const ticks = [0, 30_001];
-  const adapter = adapterFor(new APIConnectionTimeoutError(), requests, options, { now: () => ticks.shift() });
-  await assert.rejects(adapter.researchTicker("SWVL"), (error) => {
-    assert.equal(error.code, RESEARCH_ERROR_CODES.timeout);
-    assert.equal(error.diagnostics.phase, "openai_request");
-    assert.equal(error.diagnostics.elapsed_ms, 30_001);
-    assert.equal(error.diagnostics.response_received, false);
-    return true;
-  });
-  assert.deepEqual(options, [{ timeout: 30_000, maxRetries: 0 }]);
+  const result = await adapterFor(new APIConnectionTimeoutError(), requests, options).researchTicker("SWVL");
+  assert.equal(requests.length, 3);
+  assert.ok(options.every((option) => option.timeout === 20_000));
+  assert.equal(result.report.metadata.completion_status, "pending");
+  assert.equal(result.report.sections.dilution.state, "unknown");
+  assert.equal(result.report.financial_assessment.state, "unknown");
+  assert.equal(result.report.catalyst_assessment.current.state, "unknown");
+  assert.ok(Object.values(result.operations.domains).every((domain) => domain.status === "pending" && domain.error_code === RESEARCH_ERROR_CODES.timeout));
+});
+
+test("Fast starts every domain before waiting and preserves successful domains", async () => {
+  const pending = [];
+  const openai = { responses: { create(request) { return new Promise((resolve) => pending.push({ request, resolve })); } } };
+  const research = createOpenAIResearchClient(openai, { schema }).researchTicker("ACME");
+  await Promise.resolve();
+  assert.equal(pending.length, 3);
+  for (const item of pending) {
+    const domain = item.request.text.format.name.match(/^fast_(.+)_evidence$/)[1];
+    if (domain === "financial") item.resolve({ status: "failed", output: [], output_text: "" });
+    else item.resolve(domainResponse(item.request));
+  }
+  const result = await research;
+  assert.equal(result.operations.domains.capital.status, "completed");
+  assert.equal(result.operations.domains.catalyst.status, "completed");
+  assert.equal(result.operations.domains.financial.status, "pending");
+  assert.deepEqual(result.report.sections.dilution, completeReport.sections.dilution);
+  assert.equal(result.report.financial_assessment.state, "unknown");
 });
 
 test("Deep retains a separate larger search budget", async () => {
@@ -122,7 +117,7 @@ test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable outpu
     },
     { response: { status: "incomplete", output: [], output_text: "" }, code: RESEARCH_ERROR_CODES.incomplete },
     { response: { status: "incomplete", output: [], output_text: "not json" }, code: RESEARCH_ERROR_CODES.incomplete },
-    { response: { status: "incomplete", output: [], output_text: JSON.stringify(completeReport) }, code: RESEARCH_ERROR_CODES.incomplete },
+    { response: { status: "incomplete", output: [], output_text: JSON.stringify({ ...completeReport, metadata: { ...completeReport.metadata, stage: "deep" } }) }, code: RESEARCH_ERROR_CODES.incomplete },
     { response: { status: "completed", output: [], output_text: "not json" }, code: RESEARCH_ERROR_CODES.invalid },
     { response: { status: "failed", output: [], output_text: "{}" }, code: RESEARCH_ERROR_CODES.unusable },
     { response: { status: "completed", output: [], output_text: "" }, code: RESEARCH_ERROR_CODES.unusable }
@@ -130,7 +125,7 @@ test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable outpu
 
   for (const { response, code } of cases) {
     await assert.rejects(
-      adapterFor(response).researchTicker("ACME"),
+      adapterFor(response).researchTicker("ACME", { stage: "deep" }),
       (error) => error instanceof ResearchResponseError && error.code === code
     );
   }
@@ -154,7 +149,7 @@ test("max-output exhaustion retains response phase, reason, and token usage", as
     output_text: "{\"truncated\":",
     usage: { input_tokens: 23000, output_tokens: 5000, total_tokens: 28000 }
   });
-  await assert.rejects(adapter.researchTicker("SWVL"), (error) => {
+  await assert.rejects(adapter.researchTicker("SWVL", { stage: "deep" }), (error) => {
     assert.equal(error.code, RESEARCH_ERROR_CODES.incomplete);
     assert.equal(error.diagnostics.phase, "json_parse");
     assert.equal(error.diagnostics.response_received, true);
@@ -181,7 +176,7 @@ test("installed SDK timeout is classified by constructor even though its name is
 test("response output access failures retain the post-response lifecycle phase", async () => {
   const response = { status: "completed", output_text: JSON.stringify(completeReport), usage: null };
   Object.defineProperty(response, "output", { get() { throw new Error("hidden output failure"); } });
-  await assert.rejects(adapterFor(response).researchTicker("ACME"), (error) => {
+  await assert.rejects(adapterFor(response).researchTicker("ACME", { stage: "deep" }), (error) => {
     assert.equal(error.code, RESEARCH_ERROR_CODES.unusable);
     assert.equal(error.diagnostics.phase, "response_output_read");
     assert.equal(error.diagnostics.response_received, true);
@@ -201,7 +196,7 @@ test("OpenAI adapter classifies representative SDK and HTTP failures", async () 
 
   for (const { error, code } of cases) {
     await assert.rejects(
-      adapterFor(error).researchTicker("ACME"),
+      adapterFor(error).researchTicker("ACME", { stage: "deep" }),
       (actual) => actual instanceof ResearchResponseError && actual.code === code && !actual.message.includes("detail")
     );
   }
@@ -209,5 +204,5 @@ test("OpenAI adapter classifies representative SDK and HTTP failures", async () 
 
 test("OpenAI adapter wraps unclassified SDK failures with safe lifecycle diagnostics", async () => {
   const upstreamError = new Error("mock failure");
-  await assert.rejects(adapterFor(upstreamError).researchTicker("ACME"), (error) => error instanceof ResearchResponseError && error.code === RESEARCH_ERROR_CODES.unexpected && error.diagnostics.phase === "openai_request");
+  await assert.rejects(adapterFor(upstreamError).researchTicker("ACME", { stage: "deep" }), (error) => error instanceof ResearchResponseError && error.code === RESEARCH_ERROR_CODES.unexpected && error.diagnostics.phase === "openai_request");
 });

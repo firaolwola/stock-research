@@ -197,13 +197,16 @@ Schema validation is necessary but does not establish factual correctness,
 source quality, scoring calibration, or research completeness. Those remain
 separate implementation and evaluation responsibilities.
 
-The OpenAI request supplies this contract as a JSON Schema response format with
-API-level strict mode disabled because the contract uses Draft 2020-12 features
-beyond the API strict subset. Successful output must still pass the complete
-server validator; API formatting alone is never treated as sufficient.
-The request also includes `web_search_call.action.sources` so provider search
-source metadata remains available while the model constructs the contract's
-typed, dated, claim-linked source records.
+Deep supplies this contract as a JSON Schema response format with API-level
+strict mode disabled because the contract uses Draft 2020-12 features beyond
+the API strict subset. Fast instead requests three compact domain schemas and
+assembles this same v4 contract server-side. Separate Fast fragments are merged
+only when ticker, issuer legal name, and CIK agree; failed or conflicting domains
+produce explicit pending/unknown placeholders. Every progressive and final
+assembly must pass the complete server validator, so API formatting alone is
+never treated as sufficient. Requests include
+`web_search_call.action.sources` so provider search metadata remains available
+while typed, dated, claim-linked source records are constructed.
 
 Catalyst validation additionally requires confirmed catalysts to have a date,
 classification, sourced claims, and meaningful confidence. Confirmed analogues
