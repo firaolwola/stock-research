@@ -1,7 +1,121 @@
 # Decision log
 
 Record consequential decisions here so future work preserves their context. Keep
-entries short and append new decisions rather than rewriting history.
+entries short, place the newest decisions first, and mark superseded decisions
+rather than erasing history.
+
+## 2026-08-26 — Make Fast an evidence-backed seven-score report
+
+**Status:** Accepted by product owner
+
+**Decision:** Fast supports the owner's reject-or-continue research decision by
+presenting seven separate priority scores: historical dilution severity, future
+dilution likelihood, potential dilution impact, reverse-split risk, financial
+health, catalyst strength, and near-term setup quality. It does not produce an
+automatic combined verdict. Long-term company quality may remain primarily a
+Deep-stage score.
+
+Each numeric score requires sufficient trustworthy evidence. A progressive card
+shows `Researching` while work continues and settles as scored, `Unscored`, or
+`Limited`; provisional numbers are prohibited.
+
+**Why:** Evidence alone confirmed useful red flags in live work, but the owner
+primarily needs concise, trustworthy component scores. A combined verdict would
+prematurely encode an unapproved weighting philosophy.
+
+## 2026-08-26 — Preserve detailed scores and simplify Fast presentation
+
+**Status:** Accepted by product owner
+
+**Decision:** Keep the internal report and methodology on a 0–10 scale. Convert
+Fast cards to a 0–5 star display, including half-stars when useful. More stars
+mean more risk on risk cards and stronger quality on financial, catalyst, and
+setup cards. Each card leads with a short evidence-based reason; detailed
+calculations and sources remain inspectable below.
+
+**Why:** The internal scale preserves calibration and comparison precision while
+the star presentation makes the Fast dashboard quickly scannable without
+rewriting the report contract solely for visual design.
+
+## 2026-08-26 — Bound the complete Fast pipeline by cost and elapsed time
+
+**Status:** Accepted by product owner
+
+**Decision:** Terminate Fast at the earlier of a 20-second end-to-end ceiling or
+the applicable cost ceiling. Target approximately $0.01–$0.03 normally, use
+$0.03 as the normal maximum, and allow up to approximately $0.05 for a difficult
+ticker. Unfinished components settle unresolved. First-result latency remains a
+measured usability signal, not a milestone gate.
+
+**Why:** Predictable spend, trustworthy evidence, and reliable settlement matter
+more than forcing a score to appear within a few seconds. The previous limits
+did not cover the full evidence-first pipeline.
+
+## 2026-08-26 — Use bounded non-SEC discovery without weakening evidence
+
+**Status:** Accepted by product owner
+
+**Decision:** Keep SEC evidence primary for filing-based risks, but allow bounded
+exchange, company, original-newswire, financial-news, search-discovery, and
+market-context sources when they improve current catalyst and score coverage.
+Discovery services and AI summaries cannot be the sole evidence for a material
+score. Evaluate providers for speed, coverage, feed/API availability,
+reliability, attribution, cost, licensing, and integration effort before making
+a recommendation. Provider selection, payment, scraping, or integration
+requires explicit owner approval.
+
+**Why:** SEC-only Fast cannot reliably establish the current catalyst, price
+context, or several priority scores, while open-ended web scavenging conflicts
+with the approved time and cost limits.
+
+## 2026-08-26 — Recalibrate scoring against evidence and relative risk
+
+**Status:** Accepted by product owner
+
+**Decision:** Treat deterministic methodology 1.0.0 as a historical baseline,
+not a fixed scoring philosophy. Redesign formulas around Fast's purpose and
+evidence limits, then validate material-fact recall, interpretation, explanation
+fidelity, owner-reviewed score ranges, and relative ordering across real
+tickers. Exact numeric agreement is not required.
+
+The reliability gate is approximately 95% overall material-risk recall,
+approximately 90% recall in every adequately sampled critical category, and no
+known severe misleading miss. Sparse categories report sample size and
+uncertainty.
+
+**Why:** Several initial formulas use convenient proxies or evidence requirements
+that do not represent the intended risk construct or fit bounded Fast research.
+
+## 2026-08-26 — Make Deep extend Fast and reorder comparison
+
+**Status:** Accepted by product owner
+
+**Decision:** Deep automatically builds the Fast foundation when needed, reuses
+completed Fast evidence, and prioritizes unresolved or low-confidence work.
+Comparison remains planned but moves behind a Fast reliability milestone that
+establishes stable evidence and scoring behavior.
+
+**Why:** Repeating Fast work wastes time and cost, while building comparison on
+provisional scores would harden untrusted semantics into later workflows.
+
+## 2026-08-25 — Keep deep research deliberate and report operations separately
+
+**Status:** Accepted; Fast operating limits superseded on 2026-08-26
+
+**Decision:** Default to a bounded fast request and require an explicit user
+action for the larger deep-stage budget. Return latency, provider usage,
+web-search count, estimated cost, and budget status outside the versioned report
+contract. Keep completion and coverage states authoritative for research
+completeness.
+
+**Why:** Automatic escalation can silently increase latency and spend, while an
+operationally cheap response is not necessarily evidence-complete. Separate
+telemetry makes both dimensions inspectable.
+
+**Consequence:** The original 15-second/5,000-token Fast limits are historical.
+The approved Fast policy now covers the complete pipeline and terminates at the
+earlier of 20 seconds or its cost ceiling. Deep remains deliberate, but must
+build and extend Fast rather than start independently.
 
 ## 2026-08-25 — Add bounded filing-text extraction to evidence-first Fast
 
@@ -47,7 +161,7 @@ parser or data-provider decision. The 95% recall target remains unclaimed.
 
 ## 2026-08-25 — Size Fast domains from compact evidence fixtures
 
-**Status:** Accepted implementation refinement
+**Status:** Superseded on 2026-08-25 by evidence-first Fast
 
 **Decision:** Keep the parallel identity-gated domains and 20-second hard bound.
 Remove repeated full identity objects outside Capital, construct duplicated
@@ -70,7 +184,7 @@ and Deep remains the deliberate enrichment path.
 
 ## 2026-08-25 — Assemble Fast from independent identity-gated domains
 
-**Status:** Accepted by product owner
+**Status:** Superseded on 2026-08-25 by evidence-first Fast
 
 **Decision:** Replace the single Fast Responses API request with three parallel,
 independently bounded evidence calls: identity/capital history,
@@ -98,7 +212,7 @@ approved measured run.
 
 ## 2026-08-25 — Separate the Fast latency target from hard cancellation
 
-**Status:** Accepted
+**Status:** Superseded by the 2026-08-26 end-to-end Fast budget decision
 
 **Decision:** Keep 3–10 seconds as the Fast latency target, mark valid later
 responses over budget, allow a bounded 20-second grace period, and cancel at 30
@@ -515,7 +629,7 @@ public identifier changed.
 
 ## 2026-08-24 — Use a fast view with optional deeper research
 
-**Status:** Accepted
+**Status:** Superseded by the 2026-08-26 Fast operating policy
 
 **Decision:** Target a compact decision view in approximately 3–10 seconds and
 near or below $0.10 for a normal completed report. Allow deeper research to take
@@ -527,7 +641,7 @@ request.
 
 ## 2026-08-24 — Prioritize comparison after trustworthy reports
 
-**Status:** Accepted
+**Status:** Refined on 2026-08-26; comparison remains next after Fast reliability
 
 **Decision:** After the trustworthy fast report, prioritize decision-focused
 side-by-side ticker comparison, followed by saved report history and automatic
@@ -564,21 +678,3 @@ major workflows, or priorities.
 
 **Why:** The repository should remain aligned without requiring separate
 documentation requests, while product direction remains owner-controlled.
-# 2026-08-25 — Keep deep research deliberate and report operations separately
-
-**Status:** Accepted
-
-**Decision:** Default to a bounded fast request and require an explicit user
-action for the larger deep-stage budget. Return latency, provider usage,
-web-search count, estimated cost, and budget status outside the versioned report
-contract. Keep completion and coverage states authoritative for research
-completeness.
-
-**Why:** Automatic escalation can silently increase latency and spend, while an
-operationally cheap response is not necessarily evidence-complete. Separate
-telemetry makes both dimensions inspectable.
-
-**Consequence:** Fast reports use a 15-second failure deadline and 5,000 output
-tokens; deep reports use 60 seconds and 10,000. Neither retries automatically.
-Costs use a dated pricing snapshot and become unknown when provider usage is
-missing. Live calibration remains subject to explicit bounded approval.

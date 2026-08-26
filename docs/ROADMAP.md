@@ -1,135 +1,109 @@
 # Roadmap
 
-**Last reviewed:** 2026-08-25
+**Last reviewed:** 2026-08-26
 
-This roadmap records outcomes, ordering, and milestone progress rather than fixed
-delivery dates. GitHub Issues are the executable backlog.
+This roadmap records outcomes, dependencies, and milestone progress rather than
+fixed delivery dates. GitHub Issues are the executable backlog. `PRODUCT.md` is
+the running product-vision source of truth.
 
 ## Current state
 
-The end-to-end ticker search now requests and validates the versioned structured
-stock-report contract before returning a complete or safe partial report. The
-browser now renders a responsive fast dashboard with ranked material findings,
-distinct score groups, visible evidence states and coverage, every report
-section, and safe claim-linked sources. Structured material claims require dated, typed,
-bidirectionally linked sources with primary-source preference and explicit
-conflict handling. Evidence states now distinguish bounded absence searches,
-unavailable evidence, security-specific inapplicability, and named coverage gaps
-without converting unknowns into favorable scores. Current security context and
-confirmed prior ticker/name lineage now carry dated material issuer history
-forward with sourced linkage confidence; unresolved predecessors cannot be used
-as confirmed history. A dated representative evaluation set now spans the
-capitalization bands, nonstandard securities, issuer lineage, core risk
-categories, catalysts, uncertainty, and deterministic failures. Its token-free
-dry run reports category and overall recall with source, support, latency, cost,
-and clarity measures. Reports now assess current catalyst recency, specificity,
-credibility, novelty, and significance separately from company quality, and
-show bounded issuer analogues with dated reactions or explicit unknowns.
-Decision-focused financial context now preserves sourced periods, units, and
-comparison windows across cash, burn, revenue, profitability, free cash flow,
-and debt, while prominent warnings and security-aware gaps remain explicit.
-Component scores now use documented deterministic methodology with visible
-inputs, weights, confidence, conservative unknown propagation, and a five-day
-near-term evidence horizon separate from multi-year company quality. Token-free
-calibration reports score checks by material-risk category. Fast and deep
-requests now have separate explicit budgets; successful responses expose
-latency, tokens, web searches, estimated cost, and target status without
-replacing report coverage. Dry evaluation reports p50/p95 and cost distributions
-beside coverage and recall. Actual provider performance remains unmeasured
-because no paid verification run was authorized. Production safeguards remain
-incomplete.
-Fast-stage requests now terminate after a defined
-timeout and map major provider failures to controlled responses. A token-free
-mock mode supports repeatable manual frontend and integration checks.
-Live evidence showed the original 15-second and revised 30-second Fast cutoffs
-both aborting the monolithic Responses API web-search/generation operation
-before a response object arrived. Those findings motivated the domain redesign
-below rather than another timeout increase.
+The application has a strong deterministic foundation: a versioned report
+contract, semantic validation, claim-linked sources, distinct evidence states,
+deterministic score calculation, a responsive dashboard, token-free mock mode,
+and isolated tests.
 
-A subsequent clean SWVL run also reached the revised 30-second boundary with no
-provider response object. The owner therefore approved replacing the monolithic
-Fast request with three parallel, independently bounded domain-evidence calls.
-The server now identity-gates domain merging, assembles and scores the report
-deterministically, streams validated partial progress, and leaves failed domains
-Pending/Unknown. Fast targets first useful evidence in 3–10 seconds and all
-domains by 15–20 seconds with a 20-second hard bound. Deep retains the broader
-research workflow. Live performance of the new architecture remains unmeasured.
+Production Fast has evolved substantially. It now retrieves SEC identity,
+submissions, Company Facts, and a bounded selection of filing documents before
+optional tool-disabled synthesis. It streams valid partial reports and preserves
+deterministic evidence when retrieval or synthesis fails. One free SWVL
+structural run completed six SEC requests and produced a valid report quickly,
+but this does not establish real-ticker recall or trustworthy score coverage.
 
-The first live parallel SWVL run safely returned a partial report but exposed
-undersized domain contracts: Capital and Financial reached their 1,200-token
-ceilings, and Catalyst reached its 20-second bound. Fast now removes duplicated
-provider structures, sizes domain ceilings from representative compact fixtures
-with headroom, and reports response usage per domain. An approved live run is
-still needed to measure completion after this refinement.
+The current implementation is not yet the approved Fast product contract:
 
-A later clean SWVL run showed all three compact hosted-search domains timing out
-at 20 seconds without response objects. The owner approved evidence-first Fast:
-direct SEC retrieval and progressive deterministic reports now precede optional
-tool-disabled synthesis, while Deep keeps hosted web research. Initial fixture
-verification proves the architecture but does not establish live latency or the
-95% recall target.
+- the full SEC and provider pipeline is not hard-bounded end to end;
+- current Fast evidence normally leaves important scores unresolved;
+- current-news and market-context coverage is incomplete;
+- known financial and identity semantics require correction;
+- scoring methodology 1.0.0 is a provisional baseline rather than a trusted
+  final philosophy; and
+- checked-in evaluation results are synthetic calibration, not evidence-first
+  Fast reliability results on real tickers.
 
-An approved Fast-depth hardening pass now opens a bounded set of selected SEC
-filing documents and an optional directly linked material exhibit. Explicit
-reverse-split ratios, actual issuance versus registration capacity,
-warrants/convertibles, going-concern/accounting language, exchange compliance,
-and recent filing-event substance become sourced deterministic evidence when
-matched. Financial periods older than 180 days receive a prominent warning.
-Coverage remains Limited because Fast does not crawl filing history or interpret
-ambiguous document structures.
+Comparison therefore moves behind a new Fast reliability milestone. Public
+deployment remains outside the current personal-tool priority.
 
-The product is currently a personal post-screening due-diligence tool. Public
-deployment is not a current milestone.
+## Approved operating and quality targets
 
-## Operating targets
+- Complete Fast pipeline ceiling: 20 seconds.
+- Ideal normal Fast cost: approximately $0.01–$0.03.
+- Normal Fast maximum: approximately $0.03.
+- Difficult-ticker ceiling: approximately $0.05.
+- Overall material-risk recall: approximately 95% or better.
+- Adequately sampled critical-category recall: approximately 90% or better.
+- Severe misleading misses: none unresolved at milestone completion.
+- Numeric scores: emitted only with sufficient trustworthy evidence.
+- First-result latency: measured for usability, not a milestone acceptance gate.
 
-- First useful Fast result: approximately 3–10 seconds.
-- Normal evidence-first Fast completion: approximately 4–10 seconds; optional
-  synthesis is independently bounded at eight seconds.
-- Normal completed-report API cost: near or below $0.10.
-- Material claims: sourced or explicitly `Unknown`.
-- Material-risk recall: approximately 95% or better overall on the dated
-  evaluation set, with results also reported by risk category.
-- Risk posture: prefer a ranked warning or uncertainty over false reassurance.
+Fast stops when either its time or cost ceiling is reached. Unfinished work
+settles as `Unscored` or `Limited` rather than continuing open ended.
 
-These are evaluation targets, not claims about current behavior.
+## Current milestone: Fast reliability
 
-## Current milestone: trustworthy fast reports
+Goal: make the seven priority Fast score components trustworthy enough to guide
+the owner's reject-or-continue research decision without producing an automatic
+verdict.
 
-Goal: produce a compact, evidence-backed report that can be used repeatedly
-after an external screener identifies a moving or news-relevant ticker.
+### Ordered implementation dependencies
 
-### Priority order
+1. [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
+2. [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
+3. [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
+4. [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). Provider selection, payment, scraping, integration, and new production dependencies require explicit owner approval.
+5. [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52).
+6. [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53).
+7. [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
+8. [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
-The trustworthy fast-report implementation issues are complete. Approved live
-use should continue calibrating operational and research-quality targets.
+[#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
+is bounded technical cleanup that can be scheduled after #48 when it minimizes
+conflict with milestone implementation.
 
-Issues with satisfied dependencies may be reordered when implementation evidence
-supports it, but dependency changes must remain explicit in the affected issues.
+The source-strategy and evidence-contract decision is the next implementation
+dependency because orchestration, scoring sufficiency, provider budgets, and
+calibration all depend on which evidence can be obtained reliably and legally
+within Fast's limits.
 
 ### Milestone acceptance criteria
 
-- Security type, issuer, listing status, and coverage limits are explicit.
-- Reliably linked ticker and name changes carry material issuer history forward.
-- Material claims and score explanations are traceable to inspectable sources.
-- Primary sources are preferred; secondary evidence is labeled and lower
-  confidence.
-- Historical severity, future likelihood, and potential impact remain distinct.
-- Near-term setup quality remains separate from longer-term company quality.
-- Unknown evidence never silently becomes a favorable conclusion.
-- The fast dashboard ranks important red flags without hiding partial coverage.
-- Category-level evaluation identifies material-risk recall gaps.
-- Latency and cost measurements are reported alongside coverage and recall.
+- Current security and issuer identity do not mix evidence across securities.
+- Seven priority Fast scores are attempted independently and shown only when
+  their evidence thresholds are satisfied.
+- Progressive cards distinguish `Researching`, scored, `Unscored`, and `Limited`
+  without provisional numbers.
+- Material claims and score explanations remain traceable to dated evidence.
+- Source discovery does not become sole evidence for a material score.
+- The complete pipeline terminates at the earlier of 20 seconds or its cost
+  ceiling.
+- Overall and category recall gates pass with sample sizes and uncertainty
+  disclosed.
+- Misses identify retrieval, interpretation, or unavailable-evidence causes.
+- Explanations match the evidence and relative scoring is directionally sensible.
+- No known severe milestone-blocking miss remains unresolved.
+- Deep reuses Fast and prioritizes unresolved work, including when invoked
+  directly.
 
 ## Next milestone: compare researched candidates
 
-Goal: compare multiple screener-identified tickers by their most
-decision-relevant differences rather than reading full reports side by side.
+Goal: compare several screener-identified tickers by stable,
+decision-relevant component differences rather than full reports side by side.
 
 - [#16 — Compare tickers by decision-relevant differences](https://github.com/firaolwola/stock-research/issues/16)
 
-Comparison must preserve score definitions, time horizons, evidence references,
-security-type context, and unknown states.
+Issue #16 remains planned but is blocked by successful Fast reliability
+calibration. Comparison must preserve score direction, methodology version,
+evidence references, security context, and unresolved states.
 
 ## Later personal-workflow milestone
 
@@ -137,55 +111,31 @@ Goal: preserve research context and show what materially changed.
 
 - [#17 — Add local saved report history](https://github.com/firaolwola/stock-research/issues/17)
 - [#18 — Add report refresh and material change detection](https://github.com/firaolwola/stock-research/issues/18)
-- Improve accessibility and responsive behavior based on observed use.
-- Consider watchlists and Markdown or PDF export only when they support a
-  demonstrated workflow.
+
+Consider watchlists and Markdown or PDF export only when demonstrated workflow
+evidence supports them.
 
 ## Public-readiness milestone
 
-Public access remains optional and requires an explicit owner decision after
+Public access remains optional and requires a separate owner decision after
 research quality is reliable.
 
 - [#10 — Add rate limiting and deployment safeguards](https://github.com/firaolwola/stock-research/issues/10)
-- Define authentication, privacy, budget monitoring, logging, and rollback.
-- Do not expose the application publicly before the safeguards and approval
-  boundaries in `AGENTS.md` are satisfied.
 
-## Broader research direction
+Do not expose the application publicly before authentication, privacy, budget,
+logging, rollback, and deployment safeguards are approved and implemented.
 
-After the trustworthy-report foundation, expand coverage in bounded issues for:
+## Completed foundation
 
-- warrants, convertibles, and deeper capital-structure analysis;
-- management behavior and insider activity;
-- valuation metrics and dividend history;
-- historical price and market-cap behavior; and
-- deeper financial and accounting analysis.
+- Structured stock-report schema and semantic validation (#1, #2).
+- Claim-linked source quality and evidence states (#3, #5).
+- Ticker/configuration boundaries and isolated tests (#6, #7).
+- Provider timeout/error handling for the prior hosted workflow (#9).
+- Issuer-lineage representation and fixtures (#11).
+- Catalyst, financial, score, and evaluation scaffolding (#8, #12–#15).
+- Fast dashboard and token-free mock mode (#4, #22, #24).
+- Provider-schema, output-bound, timeout, parallel-domain, evidence-first,
+  diagnostic, and bounded filing-extraction work delivered through PRs #38–#46.
 
-Create these tickets only when their outcome, evidence standard, dependencies,
-and place in the fast or deep stage are clear.
-
-## Completed
-
-- [x] [#15 — Meet fast-report latency and cost budgets](https://github.com/firaolwola/stock-research/issues/15).
-- [x] [#14 — Calibrate component scores and near-term setup assessment](https://github.com/firaolwola/stock-research/issues/14).
-- [x] [#13 — Add decision-focused financial health context](https://github.com/firaolwola/stock-research/issues/13).
-- [x] [#12 — Add catalyst strength and historical-reaction assessment](https://github.com/firaolwola/stock-research/issues/12).
-- [x] [#8 — Create a representative ticker evaluation set](https://github.com/firaolwola/stock-research/issues/8).
-- [x] [#4 — Render the fast decision dashboard](https://github.com/firaolwola/stock-research/issues/4).
-- [x] [#11 — Resolve issuer identity and prior ticker/name lineage](https://github.com/firaolwola/stock-research/issues/11).
-- [x] [#5 — Handle unknown, unavailable, incomplete, and inapplicable evidence](https://github.com/firaolwola/stock-research/issues/5).
-- [x] [#3 — Attach dated, typed sources to material claims](https://github.com/firaolwola/stock-research/issues/3).
-- [x] [#9 — Add request timeouts and upstream API error handling](https://github.com/firaolwola/stock-research/issues/9).
-- [x] [#1 — Define the structured stock-report schema](https://github.com/firaolwola/stock-research/issues/1).
-- [x] [#2 — Return validated structured research from the server](https://github.com/firaolwola/stock-research/issues/2).
-- [x] [#6 — Add ticker validation and startup configuration checks](https://github.com/firaolwola/stock-research/issues/6).
-- [x] [#7 — Create the isolated backend test foundation](https://github.com/firaolwola/stock-research/issues/7).
-- [x] [#22 — Add a manual mock/demo testing mode](https://github.com/firaolwola/stock-research/issues/22).
-- [x] [#24 — Run manual mock mode on port 3001](https://github.com/firaolwola/stock-research/issues/24).
-- [x] Create the initial Express server and static frontend.
-- [x] Connect the server to the OpenAI Responses API with web search.
-- [x] Confirm the end-to-end ticker search works locally.
-- [x] Establish repository product, roadmap, decision, and agent documentation.
-- [x] Establish GitHub Issues as the executable backlog.
-- [x] Record the owner-approved product vision, quality targets, and workflow
-      priorities.
+These completed items are foundations and historical implementation results;
+they do not by themselves satisfy the current Fast reliability milestone.

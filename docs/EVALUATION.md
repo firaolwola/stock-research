@@ -1,6 +1,6 @@
 # Research evaluation set
 
-**Last reviewed:** 2026-08-25
+**Last reviewed:** 2026-08-26
 
 The versioned evaluation set in `evaluation/cases.json` measures whether fast reports surface material risks without prescribing a brittle full answer. Each scenario records why it matters, an explicit `as_of` cutoff, the evidence areas to investigate, and dated known facts that a report should find or handle with the stated uncertainty. Evidence published after the cutoff is invalid for that scenario.
 
@@ -12,7 +12,10 @@ The cases are evidence expectations, not investment recommendations. Time-sensit
 
 ## Rubric
 
-- **Material-risk recall:** detected known material facts divided by expected known material facts, reported overall and for every evaluated risk category. The target is approximately 95%; it is not a claim about current performance.
+- **Material-risk recall:** detected known material facts divided by expected
+  known material facts. Fast reliability requires approximately 95% overall and
+  approximately 90% in every adequately sampled critical category; these are
+  targets, not claims about current performance.
 - **Completeness:** expected evidence areas visibly addressed, including explicit unknown or inapplicable results.
 - **Source quality and factual support:** primary-source share, source appropriateness, and whether each detected claim is supported.
 - **Issuer lineage:** prior ticker/name history is carried forward only when linkage is evidenced.
@@ -23,6 +26,12 @@ The cases are evidence expectations, not investment recommendations. Time-sensit
 - **Score calibration:** deterministic expected state/value checks are reported
   overall and by material-risk category; unresolved expected inputs must remain
   null rather than pass by becoming favorable numbers.
+
+Score calibration for the redesigned methodology does not require one exact
+ground-truth number. Review whether material facts were found and interpreted
+correctly, the short explanation matches the evidence, the score lies within an
+owner-reviewed reasonable range, and clearly riskier cases generally score worse
+than cleaner cases.
 
 Syntax errors, timeouts, configuration failures, malformed upstream responses, and other deterministic application failures are app reliability results. They are reported separately and never counted as missed research facts. A successful report that omits an expected fact is a research-quality miss.
 
@@ -35,8 +44,53 @@ npm test
 
 The dry sample uses only `evaluation/samples/mock-results.json`. It makes no
 OpenAI call. Its synthetic operating values exercise the budget logic; they are
-not live performance claims. Review every scenario and source date when changing
-the set. The validator rejects incomplete coverage and post-cutoff evidence.
+not live performance claims. The current sample evaluates two fictional research
+reports plus three deterministic invalid-input cases; it does not run the real
+ticker scenarios through production evidence-first Fast. Review every scenario
+and source date when changing the set. The validator rejects incomplete coverage
+and post-cutoff evidence.
+
+## Fast reliability gate
+
+Critical Fast categories are:
+
+- current security and listing identity;
+- reverse splits;
+- dilution and offerings;
+- warrants and convertibles;
+- exchange compliance;
+- going-concern and accounting warnings;
+- financial context;
+- catalysts and news; and
+- uncertainty handling.
+
+Deeper issuer lineage remains evaluated, but exhaustive predecessor research is
+not subject to the same Fast category gate. Current issuer resolution and obvious
+recent identity changes remain critical.
+
+For every category, report detected and expected fact counts, recall, sample
+size, important misses, and whether each miss arose from retrieval,
+interpretation, or unavailable evidence. A sparse category must disclose its
+uncertainty and gather more cases before being declared reliable.
+
+The milestone does not pass when:
+
+- overall recall is below approximately 95%;
+- an adequately sampled critical category is below approximately 90%; or
+- a known severe misleading miss remains unresolved.
+
+Severe milestone-blocking misses include:
+
+- wrong-issuer or wrong-security evidence;
+- false or misattributed current catalyst or news;
+- missed recent material dilution, offering, warrant, or convertible overhang;
+- missed meaningful reverse-split history relevant to current risk;
+- missed active exchange deficiency or delisting risk;
+- missed going-concern, restatement, non-reliance, or major accounting warning;
+- materially wrong cash, debt, runway, or freshness context that makes an issuer
+  appear safer;
+- missing or uncertain evidence converted into a favorable score; and
+- a scoring or explanation error that materially reverses risk direction.
 
 ## Evidence-first Fast phase-one result
 

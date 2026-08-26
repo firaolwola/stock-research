@@ -2,8 +2,9 @@
 
 ## Product
 
-Stock Research helps an individual trader identify important stock risks before
-doing deeper research. It is a research aid, not financial advice.
+Stock Research helps an individual trader identify important stock risks and
+trustworthy component scores before doing deeper research. It is a research aid,
+not financial advice, and does not produce an automatic combined verdict.
 
 Read `docs/PRODUCT.md` and `docs/ROADMAP.md` before making material product or
 architecture changes.
@@ -12,7 +13,9 @@ architecture changes.
 
 - Node.js and Express backend in `server.js`
 - Static HTML, CSS, and browser JavaScript in `public/`
-- OpenAI Responses API with web search
+- Evidence-first Fast retrieval through SEC data and bounded filing extraction
+- Optional tool-disabled Fast classification over server-supplied evidence
+- OpenAI Responses API with broader web search for deliberate Deep research
 - Secrets loaded from `.env` and kept on the server
 
 Keep the architecture simple while the product is still being validated.
@@ -24,12 +27,34 @@ Keep the architecture simple while the product is still being validated.
   supports them.
 - Do not treat missing evidence as proof that an event did not happen.
 - Clearly distinguish confirmed facts, reasonable inferences, and unknowns.
+- Do not emit a numeric Fast score until its evidence threshold is satisfied;
+  unfinished or inadequate work remains Researching, Unscored, or Limited.
+- Fast is SEC-first but not SEC-only. Discovery services and AI-generated search
+  summaries must not be the sole evidence for a material score.
 - Do not present output as personalized investment advice.
+
+## Fast operating and reliability rules
+
+- Treat the complete 20-second pipeline ceiling, approximately $0.03 normal
+  maximum, and approximately $0.05 difficult-ticker ceiling as approved product
+  requirements. Implementation is incomplete until these are enforced across
+  every source, synthesis, scoring, and finalization step.
+- Preserve separate score constructs and the 0–10 internal scale. The Fast UI
+  may convert trustworthy scores to a 0–5 star presentation.
+- Do not add an automatic reject/continue, buy/sell, or combined score verdict
+  without explicit owner approval.
+- Deep must build and reuse Fast evidence, prioritize unresolved components, and
+  avoid needless duplicate retrieval.
+- Fast reliability requires approximately 95% overall material-risk recall,
+  approximately 90% in every adequately sampled critical category, and no known
+  severe misleading miss. Report sparse-category sample sizes and uncertainty.
 
 ## Working agreements
 
 - Never commit `.env`, API keys, or other secrets.
 - Explain the need before adding a production dependency.
+- Require explicit owner approval before selecting, paying for, scraping, or
+  integrating a news, research, or market-data provider.
 - Keep API credentials and OpenAI calls server-side.
 - Validate untrusted input at the server boundary.
 - Preserve unrelated user changes in the working tree.
@@ -77,6 +102,9 @@ pass.
 
 ## Documentation ownership
 
+- Treat `docs/PRODUCT.md` as the running product-vision source of truth; do not
+  create a second vision document unless coordination needs demonstrably outgrow
+  this structure.
 - Update `docs/PRODUCT.md` when the user, problem, scope, or success criteria
   change.
 - Update `docs/ROADMAP.md` when priorities, milestones, or task status change.

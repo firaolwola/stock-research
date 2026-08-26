@@ -1,123 +1,112 @@
-# Fast-report stages and operating budgets
+# Fast-report operating budgets
 
-**Last reviewed:** 2026-08-25
+**Last reviewed:** 2026-08-26
 
-## Stage policy
+## Approved policy
 
-The default `fast` stage no longer launches hosted-web-search requests. It
-retrieves three SEC resources on a cold issuer lookup:
+Fast is bounded by cost and complete-pipeline elapsed time. It terminates when
+either limit is reached:
 
-- SEC ticker/CIK/exchange associations;
-- issuer submissions and recent filing metadata; and
-- SEC Company Facts.
+- end-to-end elapsed-time ceiling: 20 seconds;
+- ideal normal cost: approximately $0.01–$0.03;
+- normal maximum cost: approximately $0.03; and
+- difficult-ticker ceiling: approximately $0.05.
 
-After discovery, Fast opens at most four selected primary documents: the newest
-8-K/6-K in 45 days, one three-year financing form, the newest annual/quarterly
-report, and one five-year 3.01/4.02/5.03 event filing, with accession
-deduplication. It may open one directly linked material exhibit when a recent
-8-K/6-K is only a wrapper. It does not crawl filing history.
-Text inspection is capped at two million characters per document; content beyond
-that bound remains outside Fast coverage.
+The limits cover SEC retrieval, news or provider lookup, market and price
+context, synthesis, scoring, and finalization. They are ceilings rather than
+spending or latency targets. Fast should finish earlier and cheaper when the
+required evidence is already available.
 
-The ticker map is cached for six hours; issuer data and filing documents are
-cached for five minutes. Concurrent requests share in-flight work. Requests
-declare a User-Agent and are paced at no more than eight starts per second. Cold
-Fast normally makes up to seven free SEC requests, or eight with the optional
-exhibit; a warm same-issuer request makes zero.
+When a limit is reached, completed trustworthy scores remain available and
+unfinished components settle as `Unscored` or `Limited`. The application must
+not emit a provisional numeric score or continue open-ended work.
 
-Identity is streamed as the first deterministic report, followed by filing and
-financial evidence. Optional synthesis uses no tools, has an eight-second bound,
-and is limited to 900 output tokens. The deterministic report survives synthesis
-failure. First useful evidence still targets 3–10 seconds.
+First-useful and per-component latency remain useful telemetry, but no strict
+few-second first-score target is an acceptance requirement.
 
-All normalized records carry the resolved ticker, issuer name, and CIK before
-they are assembled. The server derives scores and validates each progressive
-report. Missing or conflicting retrieval remains Pending/Unknown.
+## Current implementation
 
-The `deep` stage is requested deliberately with the **Deeper research** control
-or `stage=deep`. It permits at most ten medium-context web-search calls, has a
-60-second timeout and 10,000-token output ceiling, and
-does not claim the fast-stage time or cost targets. It expands named gaps but
-does not guarantee completeness. The server never escalates automatically.
+Production Fast currently retrieves:
 
-Neither stage asks the provider to emit deterministic scores. Fast synthesis
-returns only prioritized evidence IDs and bounded category classifications; it
-cannot add claims or sources to the report. Fast therefore remains `partial` or
-`pending` relative to the full v4 contract. Deep may include up to three
-analogues and four reaction windows per analogue.
+- SEC ticker, CIK, and exchange associations;
+- issuer submissions and recent filing metadata;
+- SEC Company Facts;
+- at most four selected primary filing documents; and
+- at most one directly linked material exhibit.
 
-Fast confirms SEC identity/CIK, former-name metadata with bounded dates, recent
-filing discovery, standardized financial facts, and explicit material language
-found in selected documents. Confirmed items may now include reverse-split
-ratios, actual/agreed issuance, warrants/convertibles, compliance,
-going-concern/accounting warnings, and current filing events. The containing
-sections remain Limited when unopened history, ambiguous tables, dividends,
-non-SEC catalysts, or broader corroboration are unresolved.
+It caches the ticker map for six hours and issuer data or filing documents for
+five minutes, coalesces concurrent requests, declares a User-Agent, and paces SEC
+request starts. It then optionally performs an eight-second tool-disabled
+classification over supplied evidence IDs. Deep uses the broader hosted-search
+report workflow.
 
-Fast synthesis is expected to send roughly 3,000–6,000 input tokens after bounded
-extraction and return 500–900 output tokens, for an estimated normal cost near
-$0.008–$0.02. These are unverified projections. Deep remains bounded at 10,000
-output tokens.
+This implementation does **not** yet enforce the approved policy end to end.
+Individual SEC fetches lack a shared cancellation deadline, the complete
+pipeline is not governed by one cost/time controller, and provider costs outside
+the current OpenAI estimate are not represented. The Fast reliability backlog
+owns these gaps.
 
-## Per-report measurement
+## Required budget behavior
 
-Successful API responses include an `operations` object outside the validated
-research report. It records first-useful/complete latency, retrieval status,
-SEC network count/cache state, synthesis status, tokens, estimated cost, and
-target status. Missing provider
-usage produces unknown cost, not zero. The dashboard displays these values next
-to the report's independent coverage and completion states.
+The implementation milestone must provide:
 
-Cost is estimated from versioned model and tool-call rates in
-`lib/research-budget.js`. The 2026-08-25 snapshot uses the configured `gpt-5.1`
-rates and $0.01 per web-search call. Pricing must be checked against the
-[official OpenAI pricing page](https://developers.openai.com/api/docs/pricing)
-before interpreting a new paid run. Estimates may differ from invoices because
-provider billing, cached/search-content tokens, or rates can change.
+- one monotonic deadline shared across every Fast operation;
+- per-operation remaining-time propagation and cancellation;
+- a shared cost ledger covering every paid provider;
+- a normal-versus-difficult budget policy that cannot silently escalate;
+- explicit stopped-by-time and stopped-by-cost outcomes;
+- progressive completion that preserves already validated evidence;
+- final settlement of every score card; and
+- measurements outside the immutable report contract.
 
-## Evaluation and current finding
+Unknown provider usage produces unknown cost, not zero. A path whose cost cannot
+be bounded must not be enabled as normal Fast behavior.
 
-`npm run evaluate:dry` reports p50 and p95 latency, average and maximum per-case
-cost, input/output tokens, web-search calls, coverage, material-risk recall, and
-score calibration together. The checked-in two-report calibration is entirely
-synthetic and token-free: p50 4.2 seconds, p95 8.5 seconds, average $0.07375,
-maximum $0.08, 22,000 input tokens, 8,000 output tokens, four searches, full
-fixture coverage, and 100% fixture recall. These values test budget logic; they
-are not evidence that live provider performance meets the targets.
+## Measurement
 
-The owner observed clean live SWVL Fast requests reach both 15-second and
-30-second hard timeouts with `APIConnectionTimeoutError` during `openai_request` and
-`response_received=false`. This proves the synchronous search-and-generation
-operation exceeded those cutoffs; it does not identify one particular provider
-search call or prove that generation had completed. The second failure occurred
-after output and search bounds were tightened, establishing that the monolithic
-architecture itself was not a reliable Fast boundary. The parallel domain
-architecture then completed safely in one live SWVL run, but Capital and
-Financial exhausted their 1,200-token limits and Catalyst reached its 20-second
-timeout. The received responses used roughly 12k input tokens each. Local
-prompts are only about 0.9–1.0k characters and revised schemas about 5.6–6.5k
-characters, so hosted-search evidence and provider context—not prompt prose
-alone—account for most observed input. Catalyst and Financial schemas are now
-approximately 26% and 21% smaller. A later clean run then timed out all three
-parallel domains at 20 seconds without response objects. This established the
-hosted-search mechanism as the remaining bottleneck and led to evidence-first
-Fast. Live performance of the new path remains uncalibrated.
-A future actual measurement requires explicit
-approval and a predeclared sample of at most five case IDs, date, model/config,
-maximum budget, output location, and complete operational fields. The evaluator
-rejects unapproved, unbounded, or incompletely measured live samples.
+Successful responses should report, when available:
 
-## Exceptional behavior
+- complete-pipeline latency;
+- first trustworthy score latency;
+- per-source or per-domain latency and status;
+- SEC request and cache activity;
+- provider requests or searches;
+- input and output tokens;
+- estimated provider and total cost;
+- applicable cost ceiling;
+- whether time or cost stopped the run; and
+- score completion, limited, and unscored counts.
 
-- A progressive report appears after identity resolution and expands as filing
-  and Company Facts retrieval settles.
-- A retrieval or synthesis failure preserves completed deterministic evidence.
-- A complex or incomplete case may be rerun in the deep stage only through an
-  explicit user action. Deep-stage latency and cost are reported, not judged
-  against fast-stage targets.
-- Performance work must not silently improve a metric by weakening evidence,
-  material-risk recall, source quality, or uncertainty handling.
-- Safe server diagnostics identify stage, lifecycle phase, elapsed time, error
-  constructor/name, status/code and nested cause, response receipt/status,
-  incomplete reason, and token usage when available. They never log prompts,
-  provider messages, response bodies, credentials, or authorization data.
+Operations metadata remains separate from the versioned research report so
+budget behavior cannot change the meaning of stored evidence.
+
+## Current evidence
+
+The checked-in dry evaluation uses fictional reports and synthetic operational
+values. Its latency, token, search, cost, coverage, and recall numbers validate
+the evaluator and budget calculations only; they are not evidence that the
+production evidence-first pipeline meets current targets.
+
+Historical live findings established:
+
+- monolithic and parallel hosted-search Fast designs did not reliably return
+  within their former bounds;
+- evidence-first SEC retrieval produced a valid free SWVL structural result;
+  and
+- one bounded filing-extraction run completed six SEC requests and produced 18
+  evidence records in roughly 1.2 seconds without a paid OpenAI call.
+
+That one run does not establish normal latency, cost, score completion, or
+material-risk recall. Future real-ticker calibration must record the full policy
+fields and use only owner-approved paid bounds.
+
+## Pricing and provider review
+
+`lib/research-budget.js` contains the executable historical OpenAI pricing
+snapshot. Pricing and tool fees can change and must be checked against official
+provider terms before interpreting or approving a new measured run.
+
+A news or market-data provider must be evaluated for speed, coverage,
+availability, reliability, source attribution, total cost, licensing, and
+integration effort. Evaluation may recommend an option; selecting, paying for,
+scraping, or integrating it requires explicit owner approval.
