@@ -26,5 +26,6 @@ export function loadRealAppConfig(env = process.env) {
     throw new StartupConfigurationError("OPENAI_API_KEY is required to start the real application.");
   }
 
-  return Object.freeze({ apiKey, port: parsePort(env.PORT) });
+  const secUserAgent = typeof env.SEC_USER_AGENT === "string" && env.SEC_USER_AGENT.trim() ? env.SEC_USER_AGENT.trim() : undefined;
+  return Object.freeze({ apiKey, port: parsePort(env.PORT), secUserAgent });
 }

@@ -72,12 +72,16 @@ cost remain unmeasured because no paid verification run was authorized. See
    ```text
    OPENAI_API_KEY=your_key_here
    PORT=3000
+   SEC_USER_AGENT=stock-research your-name your-contact-email@example.com
    ```
 
    `OPENAI_API_KEY` is required for the real application. Startup fails before
    listening when it is missing or blank. `PORT` is optional and defaults to
    `3000`; set it to an integer from `1` through `65535` to override the real
-   app's listening port.
+   app's listening port. Set `SEC_USER_AGENT` to an application name and a
+   monitored contact address. The SEC may return HTTP 403 when it cannot
+   identify or permit a client; Fast then keeps affected evidence
+   Pending/Unknown and logs only safe request metadata.
 
 3. Start the application:
 
