@@ -157,6 +157,8 @@ function renderOperations(operations) {
   if (operations.stage === "fast" && operations.within_first_useful_target === false) panel.append(element("p", "coverage-note", "The first usable Fast domain arrived outside the 3–10 second target."));
   if (operations.stage === "fast" && operations.within_latency_target === false) panel.append(element("p", "coverage-note", "Fast domain collection exceeded the 20-second hard operating target."));
   if (operations.stage === "fast" && operations.domains) panel.append(element("p", "muted", Object.entries(operations.domains).map(([name, value]) => `${formatLabel(name)}: ${formatLabel(value.status)}`).join(" · ")));
+  if (operations.stage === "fast" && operations.synthesis) panel.append(element("p", "muted", `AI synthesis: ${formatLabel(operations.synthesis.status)}${operations.synthesis.priority_evidence_ids ? ` · ${operations.synthesis.priority_evidence_ids.length} evidence records prioritized` : ""}. Deterministic evidence remains authoritative.`));
+  if (operations.stage === "fast" && operations.retrieval) panel.append(element("p", "muted", `SEC retrieval: ${formatLabel(operations.retrieval.status)} · ${operations.retrieval.sec_request_count ?? "Unknown"} network requests`));
   if (operations.stage === "fast" && operations.within_cost_target === false) panel.append(element("p", "coverage-note", "This report exceeded the approximately $0.10 normal cost target."));
   panel.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
   return panel;

@@ -38,6 +38,23 @@ OpenAI call. Its synthetic operating values exercise the budget logic; they are
 not live performance claims. Review every scenario and source date when changing
 the set. The validator rejects incomplete coverage and post-cutoff evidence.
 
+## Evidence-first Fast phase-one result
+
+Token-free SEC fixtures verify architecture coverage, not real-ticker recall:
+
+- security/listing identity and CIK: confirmed;
+- former-name lineage with bounded SEC dates: confirmed when present;
+- recent financing-form discovery: limited coverage;
+- standardized cash and revenue facts: confirmed in the fixture;
+- recent 8-K/6-K catalyst discovery: limited coverage; and
+- reverse-split terms, warrants/convertibles, compliance text,
+  going-concern/accounting language, dividends, and non-SEC news: unknown or
+  limited coverage.
+
+These results do not establish the 95% recall target. The existing dry evaluator
+continues to measure its checked-in report samples. A future approved dated
+evaluation must measure the new retrieval path against real case facts.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

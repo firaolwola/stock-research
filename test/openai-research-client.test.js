@@ -43,7 +43,7 @@ function adapterFor(responseOrError, requests = [], options = [], clientOptions 
       }
     }
   };
-  return createOpenAIResearchClient(openai, { schema, ...clientOptions });
+  return createOpenAIResearchClient(openai, { schema, enableLegacyFast: true, ...clientOptions });
 }
 
 test("OpenAI adapter requests JSON Schema output and parses a completed report", async () => {
@@ -92,7 +92,7 @@ test("Fast launches three operations and reports failures as Pending instead of 
 test("Fast starts every domain before waiting and preserves successful domains", async () => {
   const pending = [];
   const openai = { responses: { create(request) { return new Promise((resolve) => pending.push({ request, resolve })); } } };
-  const research = createOpenAIResearchClient(openai, { schema }).researchTicker("ACME");
+  const research = createOpenAIResearchClient(openai, { schema, enableLegacyFast: true }).researchTicker("ACME");
   await Promise.resolve();
   assert.equal(pending.length, 3);
   for (const item of pending) {
@@ -141,6 +141,12 @@ test("Deep retains a separate larger search budget", async () => {
     .researchTicker("XYZ", { stage: "deep" });
   assert.equal(requests[0].max_tool_calls, 10);
   assert.deepEqual(requests[0].tools, [{ type: "web_search", search_context_size: "medium" }]);
+});
+
+test("Deep prompt receives completed Fast evidence as authoritative seed", async () => {
+  const requests = []; const seed = { identity: { ticker: "XYZ", cik: "0000000001" }, records: [{ id: "evidence-1", text: "SEC fact" }] };
+  await adapterFor({ status: "completed", output: [], output_text: JSON.stringify(partialReport) }, requests).researchTicker("XYZ", { stage: "deep", seedEvidence: seed });
+  assert.match(requests[0].input, /evidence-1/); assert.match(requests[0].input, /search only to expand named gaps/);
 });
 
 test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable output", async () => {
