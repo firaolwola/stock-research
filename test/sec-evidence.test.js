@@ -7,7 +7,7 @@ import { loadReportSchema } from "../support/report-fixtures.js";
 
 const schema = await loadReportSchema(); const validate = createReportValidator(schema);
 const tickerMap = { fields: ["cik", "name", "ticker", "exchange"], data: [[123456, "Example Corp.", "ACME", "Nasdaq"]] };
-const submissions = { name: "Example Corp.", formerNames: [{ name: "Old Example Corp.", from: "2020-01-01", to: "2022-01-01" }], filings: { recent: {
+const submissions = { name: "Example Corp.", formerNames: [{ name: "Old Example Corp.", from: "2020-01-01T05:00:00.000Z", to: "2022-01-01T05:00:00.000Z" }], filings: { recent: {
   accessionNumber: ["0000123456-26-000003", "0000123456-26-000002", "0000123456-26-000001"],
   form: ["8-K", "S-3", "10-Q"], filingDate: ["2026-08-24", "2026-08-20", "2026-08-15"], reportDate: ["2026-08-24", "2026-08-20", "2026-06-30"], primaryDocument: ["event.htm", "s3.htm", "q.htm"], items: ["8.01", "", ""]
 } } };
@@ -39,6 +39,8 @@ test("SEC Fast pipeline emits identity first, normalizes evidence, and validates
   assert.ok(result.evidence_records.some((record) => record.category === "issuer_lineage"));
   assert.ok(result.evidence_records.some((record) => record.category === "dilution_offerings"));
   assert.ok(result.evidence_records.some((record) => record.category === "financial_context"));
+  assert.deepEqual(result.report.issuer.prior_identities.map(({ effective_from, effective_to }) => ({ effective_from, effective_to })), [{ effective_from: "2020-01-01", effective_to: "2022-01-01" }]);
+  assert.equal(progress[0].operations.retrieval.status, "in_progress");
   assert.equal(result.operations.web_search_calls, 0);
   assert.equal(result.report.financial_assessment.metrics.cash.value, 5000000);
 });

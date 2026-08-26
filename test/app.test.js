@@ -112,6 +112,24 @@ test("Fast streaming emits progressive validated reports and a final result", as
   });
 });
 
+test("streaming rejection logs safe validation context without the report", async () => {
+  const logs = []; const invalid = structuredClone(partialReport);
+  invalid.issuer.prior_identities = [{ name: "private issuer text", ticker: null, effective_from: "2020-01-01T05:00:00.000Z", effective_to: "2022-01-01T05:00:00.000Z", linkage_state: "confirmed", linkage_confidence: "high", claim_ids: [] }];
+  const operations = { stage: "fast", domains: { capital: { status: "completed" }, catalyst: { status: "pending" }, financial: { status: "pending" } }, retrieval: { status: "completed" }, synthesis: { status: "pending" } };
+  const app = buildApp({ async researchTicker(_ticker, options) { const value = { report: invalid, operations, evidence_records: [{ id: "private evidence" }] }; await options.onProgress(value); return value; } }, { logger: { error(message) { logs.push(message); } } });
+  await withTestServer(app, async (baseUrl) => { const messages = (await (await fetch(`${baseUrl}/api/analyze-stream?ticker=SWVL`)).text()).trim().split("\n").map(JSON.parse); assert.equal(messages.at(-1).code, "INVALID_RESEARCH_RESPONSE"); });
+  assert.equal(logs.length, 2); assert.match(logs[0], /"phase":"report_validation"/); assert.match(logs[0], /"report_kind":"intermediate"/); assert.match(logs[1], /"report_kind":"final"/);
+  assert.match(logs[0], /"capital":"completed"/); assert.match(logs[0], /"sec_retrieval_status":"completed"/); assert.match(logs[0], /"synthesis_status":"pending"/); assert.match(logs[0], /"evidence_records_retrieved":true/); assert.match(logs[0], /effective_from/); assert.match(logs[0], /"keyword":"format"/);
+  assert.doesNotMatch(logs.join(" "), /private issuer text|private evidence/);
+});
+
+test("streaming conversion failure logs only safe error metadata", async () => {
+  const logs = []; const operations = { domains: { capital: { status: "pending" } }, retrieval: { status: "limited" }, synthesis: { status: "unavailable" } };
+  const app = buildApp({ async researchTicker() { return { report: null, operations, evidence_records: [] }; } }, { logger: { error(message) { logs.push(message); } } });
+  await withTestServer(app, async (baseUrl) => { await fetch(`${baseUrl}/api/analyze-stream?ticker=SWVL`); });
+  assert.equal(logs.length, 1); assert.match(logs[0], /"phase":"report_conversion"/); assert.match(logs[0], /"error_constructor":"TypeError"/); assert.match(logs[0], /"evidence_records_retrieved":false/);
+});
+
 test("analyze rejects empty and malformed tickers without calling research", async () => {
   let called = false;
   const app = buildApp({ async researchTicker() { called = true; return completeReport; } });

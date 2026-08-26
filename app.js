@@ -30,6 +30,22 @@ function diagnosticSuffix(diagnostics = {}) {
   return fields.length ? `; ${fields.join("; ")}` : "";
 }
 
+function safeStreamContext(ticker, researchResult, final, phase, startedAt, extra = {}) {
+  const domains = Object.fromEntries(Object.entries(researchResult?.operations?.domains ?? {}).map(([key, value]) => [key, value?.status ?? "unknown"]));
+  return {
+    ticker, report_kind: final ? "final" : "intermediate", phase,
+    domains, sec_retrieval_status: researchResult?.operations?.retrieval?.status ?? null,
+    synthesis_status: researchResult?.operations?.synthesis?.status ?? researchResult?.synthesis?.status ?? null,
+    elapsed_ms: Math.round(performance.now() - startedAt),
+    evidence_records_retrieved: Array.isArray(researchResult?.evidence_records) && researchResult.evidence_records.length > 0,
+    ...extra
+  };
+}
+
+function safeValidationErrors(errors = []) {
+  return errors.slice(0, 12).map((error) => ({ type: error?.type ?? "unknown", path: error?.path || "/", keyword: error?.keyword ?? (error?.type === "semantic" ? "semantic" : "unknown") }));
+}
+
 export function createApp({ researchClient, reportValidator, logger = console, runtime = { mode: "live", demoTicker: null } } = {}) {
   if (!researchClient || typeof researchClient.researchTicker !== "function") {
     throw new TypeError("createApp requires a researchClient with researchTicker(ticker)");
@@ -57,13 +73,22 @@ export function createApp({ researchClient, reportValidator, logger = console, r
     res.setHeader("X-Content-Type-Options", "nosniff");
     let emitted = 0;
     let finalProgressEmitted = false;
+    const requestStartedAt = performance.now();
     const emit = async (researchResult, final = false) => {
+      let report;
       try {
-        const report = calibrateReportScores(researchResult.report);
-        if (!reportValidator(report).valid) return;
-        res.write(`${JSON.stringify({ type: "report", ticker, report, operations: researchResult.operations, final })}\n`);
-        emitted += 1;
-      } catch {}
+        report = calibrateReportScores(researchResult.report);
+      } catch (error) {
+        logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_conversion", requestStartedAt, { error_constructor: error?.constructor?.name ?? null, error_name: error?.name ?? null }))}`);
+        return;
+      }
+      const validationResult = reportValidator(report);
+      if (!validationResult.valid) {
+        logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_validation", requestStartedAt, { validation_errors: safeValidationErrors(validationResult.errors) }))}`);
+        return;
+      }
+      res.write(`${JSON.stringify({ type: "report", ticker, report, operations: researchResult.operations, final })}\n`);
+      emitted += 1;
     };
     try {
       const result = await researchClient.researchTicker(ticker, { stage: "fast", onProgress: (progress) => { finalProgressEmitted ||= progress.final === true; return emit(progress, progress.final === true); } });
