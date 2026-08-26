@@ -11,10 +11,19 @@ retrieves three SEC resources on a cold issuer lookup:
 - issuer submissions and recent filing metadata; and
 - SEC Company Facts.
 
-The ticker map is cached for six hours; submissions and Company Facts are cached
-for five minutes. Concurrent requests share in-flight work. Requests declare a
-User-Agent and are paced at no more than eight starts per second. Cold Fast
-normally makes three free SEC requests; a warm same-issuer request makes zero.
+After discovery, Fast opens at most four selected primary documents: the newest
+8-K/6-K in 45 days, one three-year financing form, the newest annual/quarterly
+report, and one five-year 3.01/4.02/5.03 event filing, with accession
+deduplication. It may open one directly linked material exhibit when a recent
+8-K/6-K is only a wrapper. It does not crawl filing history.
+Text inspection is capped at two million characters per document; content beyond
+that bound remains outside Fast coverage.
+
+The ticker map is cached for six hours; issuer data and filing documents are
+cached for five minutes. Concurrent requests share in-flight work. Requests
+declare a User-Agent and are paced at no more than eight starts per second. Cold
+Fast normally makes up to seven free SEC requests, or eight with the optional
+exhibit; a warm same-issuer request makes zero.
 
 Identity is streamed as the first deterministic report, followed by filing and
 financial evidence. Optional synthesis uses no tools, has an eight-second bound,
@@ -38,14 +47,17 @@ cannot add claims or sources to the report. Fast therefore remains `partial` or
 analogues and four reaction windows per analogue.
 
 Fast confirms SEC identity/CIK, former-name metadata with bounded dates, recent
-filing discovery, financing-form candidates, and standardized financial facts.
-Reverse-split terms, completed issuance, warrant/convertible terms, compliance
-text, going-concern/accounting language, dividends, and non-SEC catalysts remain
-Limited/Unknown until filing parsing or broader retrieval is approved.
+filing discovery, standardized financial facts, and explicit material language
+found in selected documents. Confirmed items may now include reverse-split
+ratios, actual/agreed issuance, warrants/convertibles, compliance,
+going-concern/accounting warnings, and current filing events. The containing
+sections remain Limited when unopened history, ambiguous tables, dividends,
+non-SEC catalysts, or broader corroboration are unresolved.
 
-Fast synthesis is expected to send roughly 3,000–8,000 input tokens and return
-500–900 output tokens, for an estimated normal cost near $0.01–$0.03. These are
-unverified projections. Deep remains bounded at 10,000 output tokens.
+Fast synthesis is expected to send roughly 3,000–6,000 input tokens after bounded
+extraction and return 500–900 output tokens, for an estimated normal cost near
+$0.008–$0.02. These are unverified projections. Deep remains bounded at 10,000
+output tokens.
 
 ## Per-report measurement
 

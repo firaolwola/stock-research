@@ -69,6 +69,15 @@ tool-disabled synthesis, while Deep keeps hosted web research. Initial fixture
 verification proves the architecture but does not establish live latency or the
 95% recall target.
 
+An approved Fast-depth hardening pass now opens a bounded set of selected SEC
+filing documents and an optional directly linked material exhibit. Explicit
+reverse-split ratios, actual issuance versus registration capacity,
+warrants/convertibles, going-concern/accounting language, exchange compliance,
+and recent filing-event substance become sourced deterministic evidence when
+matched. Financial periods older than 180 days receive a prominent warning.
+Coverage remains Limited because Fast does not crawl filing history or interpret
+ambiguous document structures.
+
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
 

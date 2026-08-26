@@ -122,7 +122,11 @@ catalyst evidence and material-risk checks remain part of Fast.
 Fast is evidence-first. The server retrieves SEC ticker/CIK associations,
 submissions metadata, recent filing metadata, and standardized Company Facts
 directly with fair-access caching, normalizes dated evidence records, and
-renders validated deterministic progress before optional AI synthesis. Fast AI
+opens at most four selected material filing documents plus one directly linked
+material exhibit. Conservative deterministic extraction confirms only explicit
+split, financing-instrument, warning, compliance, and event language. Financial
+periods older than 180 days are prominently warned as stale. Unmatched text
+remains Limited/Unknown. Fast AI
 uses no hosted tools and may only classify supplied evidence IDs. A synthesis
 failure leaves deterministic evidence intact and marks synthesis unavailable.
 Missing retrieval coverage remains Limited/Unknown and cannot produce favorable

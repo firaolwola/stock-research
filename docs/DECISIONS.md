@@ -3,6 +3,26 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Add bounded filing-text extraction to evidence-first Fast
+
+**Status:** Accepted by product owner
+
+**Decision:** After submissions discovery, open at most four selected primary
+SEC filing documents and at most one directly linked material exhibit. Use the
+existing stack to normalize HTML text and confirm only explicit material-risk
+phrases and terms. Distinguish actual/agreed issuance from shelf registration
+capacity, and warn when the newest standardized financial period is over 180
+days old.
+
+**Why:** Live SWVL evidence showed that metadata-only discovery was fast and
+cheap but left the most decision-relevant filing substance unresolved.
+
+**Consequence:** Cold Fast normally makes up to seven SEC requests, or eight
+when a wrapper filing requires one material exhibit. Ambiguous phrasing,
+unopened history, complex tables, custom XBRL, and attachment relationships stay
+Limited/Unknown. No parser dependency was added and the 95% recall target remains
+unclaimed.
+
 ## 2026-08-25 — Make Fast evidence-first and keep AI non-authoritative
 
 **Status:** Accepted by product owner

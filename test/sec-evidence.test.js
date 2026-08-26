@@ -15,12 +15,17 @@ const facts = { facts: { "us-gaap": {
   CashAndCashEquivalentsAtCarryingValue: { label: "Cash", units: { USD: [{ val: 5000000, end: "2026-06-30", filed: "2026-08-15", file: "2026-08-15", accn: "0000123456-26-000001", form: "10-Q" }] } },
   RevenueFromContractWithCustomerExcludingAssessedTax: { label: "Revenue", units: { USD: [{ val: 8000000, start: "2026-04-01", end: "2026-06-30", filed: "2026-08-15", file: "2026-08-15", accn: "0000123456-26-000001", form: "10-Q" }] } }
 } } };
+const documentText = {
+  "event.htm": "The Company entered into a material supply contract with an initial committed value of $20 million.",
+  "s3.htm": "The registrant may offer and sell from time to time up to $250 million of common stock and other securities.",
+  "q.htm": "These conditions raise substantial doubt about the Company's ability to continue as a going concern."
+};
 
-function fetchFixture(requests) {
+function fetchFixture(requests, factsBody = facts) {
   return async (url, options) => {
     requests.push({ url, options });
-    const body = url.includes("company_tickers") ? tickerMap : url.includes("submissions") ? submissions : facts;
-    return { ok: true, status: 200, async json() { return structuredClone(body); } };
+    const name = new URL(url).pathname.split("/").at(-1); const body = url.includes("company_tickers") ? tickerMap : url.includes("submissions") ? submissions : factsBody;
+    return { ok: true, status: 200, async json() { return structuredClone(body); }, async text() { return documentText[name] ?? "No material statement."; } };
   };
 }
 
@@ -31,7 +36,7 @@ test("SEC Fast pipeline emits identity first, normalizes evidence, and validates
   const validation = validate(calibrateReportScores(result.report));
   assert.equal(validation.valid, true, JSON.stringify(validation.errors));
   for (const item of progress) { const progressive = validate(calibrateReportScores(item.report)); assert.equal(progressive.valid, true, JSON.stringify(progressive.errors)); }
-  assert.equal(requests.length, 3, JSON.stringify(requests.map((item) => item.url)));
+  assert.equal(requests.length, 6, JSON.stringify(requests.map((item) => item.url)));
   assert.ok(requests.every((request) => request.options.headers["User-Agent"].includes("stock-research")));
   assert.equal(progress[0].report.security.ticker, "ACME");
   assert.equal(progress[0].report.sections.dilution.state, "limited_coverage");
@@ -43,20 +48,33 @@ test("SEC Fast pipeline emits identity first, normalizes evidence, and validates
   assert.equal(progress[0].operations.retrieval.status, "in_progress");
   assert.equal(result.operations.web_search_calls, 0);
   assert.equal(result.report.financial_assessment.metrics.cash.value, 5000000);
+  assert.equal(result.report.catalyst_assessment.current.state, "confirmed");
+  assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
 });
 
 test("concurrent SEC requests share in-flight cache fetches", async () => {
   const requests = []; const client = createSecEvidenceClient({ fetchImpl: fetchFixture(requests), now: () => Date.parse("2026-08-25T12:00:00Z"), minRequestIntervalMs: 0 });
   await Promise.all([client.researchTicker("ACME"), client.researchTicker("ACME")]);
-  assert.equal(requests.length, 3);
+  assert.equal(requests.length, 6);
 });
 
 test("SEC cache avoids repeated network requests within TTL", async () => {
   const requests = []; const client = createSecEvidenceClient({ fetchImpl: fetchFixture(requests), now: () => Date.parse("2026-08-25T12:00:00Z"), minRequestIntervalMs: 0 });
   await client.researchTicker("ACME"); await client.researchTicker("ACME");
-  assert.equal(requests.length, 3);
-  assert.deepEqual(client.getPacket("ACME").cache, { tickers: "hit", submissions: "hit", companyfacts: "hit" });
+  assert.equal(requests.length, 6);
+  assert.equal(client.getPacket("ACME").cache.tickers, "hit"); assert.equal(client.getPacket("ACME").cache.submissions, "hit"); assert.equal(client.getPacket("ACME").cache.companyfacts, "hit");
+  assert.ok(client.getPacket("ACME").cache.documents.every((document) => document.state === "hit"));
   assert.equal(client.getPacket("ACME").sec_request_count, 0);
+});
+
+test("stale Company Facts periods produce a prominent sourced warning", async () => {
+  const staleFacts = structuredClone(facts);
+  for (const concept of Object.values(staleFacts.facts["us-gaap"])) for (const entries of Object.values(concept.units)) for (const fact of entries) { fact.start = fact.start ? "2025-10-01" : undefined; fact.end = "2025-12-31"; fact.filed = "2026-02-15"; }
+  const client = createSecEvidenceClient({ fetchImpl: fetchFixture([], staleFacts), now: () => Date.parse("2026-08-25T12:00:00Z"), minRequestIntervalMs: 0 });
+  const result = await client.researchTicker("ACME"); const calibrated = calibrateReportScores(result.report); const validation = validate(calibrated);
+  assert.equal(validation.valid, true, JSON.stringify(validation.errors));
+  assert.ok(result.report.financial_assessment.material_warnings.some((warning) => warning.id === "financial-stale-period" && warning.severity === "high"));
+  assert.match(result.report.financial_assessment.coverage_notes.join(" "), /days before this Fast report/);
 });
 
 test("unresolved ticker stays Pending without favorable evidence", async () => {
