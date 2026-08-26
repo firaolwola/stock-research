@@ -154,7 +154,7 @@ export function getSafeUpstreamDiagnostics(error, { stage = null, phase = null, 
   };
 }
 
-export function createOpenAIResearchClient(openai, { schema, now = () => performance.now() } = {}) {
+export function createOpenAIResearchClient(openai, { schema, now = () => performance.now(), enableLegacyFast = false } = {}) {
   if (!openai?.responses || typeof openai.responses.create !== "function") {
     throw new TypeError("A compatible OpenAI client is required");
   }
@@ -234,10 +234,13 @@ export function createOpenAIResearchClient(openai, { schema, now = () => perform
   }
 
   return {
-    async researchTicker(ticker, { stage = "fast", onProgress } = {}) {
+    async researchTicker(ticker, { stage = "fast", onProgress, seedEvidence = null } = {}) {
       const budget = RESEARCH_STAGES[stage];
       if (!budget) throw new TypeError(`Unsupported research stage: ${stage}`);
-      if (stage === "fast") return researchFast(ticker, { onProgress });
+      if (stage === "fast") {
+        if (!enableLegacyFast) throw new TypeError("Hosted-web-search Fast is disabled; use the evidence-first client");
+        return researchFast(ticker, { onProgress });
+      }
       const startedAt = now();
       let outputSchema;
       try {
@@ -263,7 +266,7 @@ export function createOpenAIResearchClient(openai, { schema, now = () => perform
               strict: false
             }
           },
-          input: researchPrompt(ticker, stage)
+          input: `${researchPrompt(ticker, stage)}${seedEvidence ? `\nFast evidence already collected by the server follows. Use it as authoritative seed evidence, cite its source URLs, and search only to expand named gaps or conflicts rather than repeating completed retrieval.\n${JSON.stringify(seedEvidence)}` : ""}`
         }, {
           timeout: budget.timeout_ms,
           maxRetries: 0

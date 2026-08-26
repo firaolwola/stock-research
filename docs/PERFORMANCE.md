@@ -4,28 +4,26 @@
 
 ## Stage policy
 
-The default `fast` stage launches three low-context Responses API requests in
-parallel with no automatic retries:
+The default `fast` stage no longer launches hosted-web-search requests. It
+retrieves three SEC resources on a cold issuer lookup:
 
-- `capital`: identity, necessary lineage, five-year reverse splits, and
-  three-year offerings/dilution/warrants/convertibles; at most two searches and
-  1,800 output tokens;
-- `catalyst`: current 30-day catalyst, listing/compliance, and major recent
-  SEC/accounting warnings; at most one search and 2,200 output tokens; and
-- `financial`: latest-filing immediate financial risk, going concern, and
-  dividend applicability/status; at most two searches and 2,000 output tokens.
+- SEC ticker/CIK/exchange associations;
+- issuer submissions and recent filing metadata; and
+- SEC Company Facts.
 
-Each request has a 20-second hard timeout. First useful validated output targets
-3–10 seconds; all Fast domains target approximately 15–20 seconds. Operations
-record both first-useful and complete latency status plus each domain's
-completed or pending state.
+The ticker map is cached for six hours; submissions and Company Facts are cached
+for five minutes. Concurrent requests share in-flight work. Requests declare a
+User-Agent and are paced at no more than eight starts per second. Cold Fast
+normally makes three free SEC requests; a warm same-issuer request makes zero.
 
-The SDK timeout covers search, generation, and response parsing for each
-individual request. One domain timeout no longer discards the other two.
-Completed fragments are assembled server-side only when their current ticker,
-issuer name, and CIK agree. The server derives scores, validates each progressive
-report, and streams it as newline-delimited JSON. Missing or conflicting domains
-stay Pending/Unknown; they never become favorable evidence.
+Identity is streamed as the first deterministic report, followed by filing and
+financial evidence. Optional synthesis uses no tools, has an eight-second bound,
+and is limited to 900 output tokens. The deterministic report survives synthesis
+failure. First useful evidence still targets 3–10 seconds.
+
+All normalized records carry the resolved ticker, issuer name, and CIK before
+they are assembled. The server derives scores and validates each progressive
+report. Missing or conflicting retrieval remains Pending/Unknown.
 
 The `deep` stage is requested deliberately with the **Deeper research** control
 or `stage=deep`. It permits at most ten medium-context web-search calls, has a
@@ -33,45 +31,28 @@ or `stage=deep`. It permits at most ten medium-context web-search calls, has a
 does not claim the fast-stage time or cost targets. It expands named gaps but
 does not guarantee completeness. The server never escalates automatically.
 
-The provider contracts are stage-aware. Neither stage asks the provider to emit
-the eight deterministic scores or their components; the server derives them
-from evidence after the response. Fast uses compact per-domain contracts, keeps
-only material claims and at most four strongest sources per domain, and defers
-historical catalyst analogues/reaction windows with explicit limited coverage.
-Each domain returns an identity fingerprint; Capital alone returns the full
-security/issuer objects. The server derives catalyst/news and financial-context
-sections instead of asking the provider to repeat that evidence. Fast responses are
-therefore `partial` or `pending` relative to the full v4 contract rather than
-claiming false global completeness. Deep mode may include
-up to three analogues and four reaction windows per analogue and uses larger—but
-still bounded—claim, source, history, and warning collections.
+Neither stage asks the provider to emit deterministic scores. Fast synthesis
+returns only prioritized evidence IDs and bounded category classifications; it
+cannot add claims or sources to the report. Fast therefore remains `partial` or
+`pending` relative to the full v4 contract. Deep may include up to three
+analogues and four reaction windows per analogue.
 
-Fast work is intentionally narrower than Deep. It establishes the current
-security and catalyst, combines material split/dilution/compliance/accounting/
-going-concern checks around primary SEC and exchange records, and uses the
-latest relevant filing for concise financial context. Exhaustive predecessor
-discovery, secondary-source corroboration, detailed financial history, and all
-catalyst analogues are deferred with visible coverage limitations. This keeps
-material-risk checks in Fast without asking it to complete the Deep research
-plan.
+Fast confirms SEC identity/CIK, former-name metadata with bounded dates, recent
+filing discovery, financing-form candidates, and standardized financial facts.
+Reverse-split terms, completed issuance, warrant/convertible terms, compliance
+text, going-concern/accounting language, dividends, and non-SEC catalysts remain
+Limited/Unknown until filing parsing or broader retrieval is approved.
 
-The complete fixture is approximately 5,846 compact JSON tokens under the old
-provider contract, including approximately 2,206 tokens of discarded provider
-scores. The monolithic compact Fast contract was still approximately 3,449
-tokens. Representative compact fragments measure approximately 774 rough
-serialized tokens for Capital, 1,424 for Catalyst, and 1,245 for Financial.
-Their ceilings retain approximately 57%, 35%, and 38% headroom because
-`max_output_tokens` also includes reasoning output. The combined 6,000-token
-ceiling is a failure bound, with normal visible output expected around
-2,500–4,000 tokens. Deep remains roughly
-4,000–7,500 under a 10,000-token ceiling. These are failure bounds, not targets.
+Fast synthesis is expected to send roughly 3,000–8,000 input tokens and return
+500–900 output tokens, for an estimated normal cost near $0.01–$0.03. These are
+unverified projections. Deep remains bounded at 10,000 output tokens.
 
 ## Per-report measurement
 
 Successful API responses include an `operations` object outside the validated
-research report. It records stage, first-useful and complete latency, per-domain
-status, latency, token/search/cost telemetry, aggregate input/output/total tokens, counted web-search
-calls, estimated cost, pricing version, and target status. Missing provider
+research report. It records first-useful/complete latency, retrieval status,
+SEC network count/cache state, synthesis status, tokens, estimated cost, and
+target status. Missing provider
 usage produces unknown cost, not zero. The dashboard displays these values next
 to the report's independent coverage and completion states.
 
@@ -105,7 +86,10 @@ timeout. The received responses used roughly 12k input tokens each. Local
 prompts are only about 0.9–1.0k characters and revised schemas about 5.6–6.5k
 characters, so hosted-search evidence and provider context—not prompt prose
 alone—account for most observed input. Catalyst and Financial schemas are now
-approximately 26% and 21% smaller. Live completion remains uncalibrated.
+approximately 26% and 21% smaller. A later clean run then timed out all three
+parallel domains at 20 seconds without response objects. This established the
+hosted-search mechanism as the remaining bottleneck and led to evidence-first
+Fast. Live performance of the new path remains uncalibrated.
 A future actual measurement requires explicit
 approval and a predeclared sample of at most five case IDs, date, model/config,
 maximum budget, output location, and complete operational fields. The evaluator
@@ -113,10 +97,9 @@ rejects unapproved, unbounded, or incompletely measured live samples.
 
 ## Exceptional behavior
 
-- A progressive report may appear as soon as one valid domain completes. Domain
-  states show which core checks remain pending.
-- A domain timeout becomes visible Pending coverage and does not retry
-  automatically or discard other completed domains.
+- A progressive report appears after identity resolution and expands as filing
+  and Company Facts retrieval settles.
+- A retrieval or synthesis failure preserves completed deterministic evidence.
 - A complex or incomplete case may be rerun in the deep stage only through an
   explicit user action. Deep-stage latency and cost are reported, not judged
   against fast-stage targets.

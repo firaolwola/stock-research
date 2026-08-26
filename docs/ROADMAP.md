@@ -62,13 +62,21 @@ provider structures, sizes domain ceilings from representative compact fixtures
 with headroom, and reports response usage per domain. An approved live run is
 still needed to measure completion after this refinement.
 
+A later clean SWVL run showed all three compact hosted-search domains timing out
+at 20 seconds without response objects. The owner approved evidence-first Fast:
+direct SEC retrieval and progressive deterministic reports now precede optional
+tool-disabled synthesis, while Deep keeps hosted web research. Initial fixture
+verification proves the architecture but does not establish live latency or the
+95% recall target.
+
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
 
 ## Operating targets
 
 - First useful Fast result: approximately 3–10 seconds.
-- All Fast domains: approximately 15–20 seconds, hard-bounded at 20 seconds.
+- Normal evidence-first Fast completion: approximately 4–10 seconds; optional
+  synthesis is independently bounded at eight seconds.
 - Normal completed-report API cost: near or below $0.10.
 - Material claims: sourced or explicitly `Unknown`.
 - Material-risk recall: approximately 95% or better overall on the dated

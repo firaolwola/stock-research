@@ -34,14 +34,12 @@ The first end-to-end prototype is working:
    and meaningful confidence. Historical split, dilution, offering, compliance,
    and warning items from those periods reference the linkage explicitly;
    ambiguous predecessors remain unknown or limited coverage.
-4. Fast launches three independently bounded low-context research operations
-   in parallel: identity/capital history, catalyst/listing risk, and immediate
-   financial risk. Each hard-stops at 20 seconds with no automatic retries.
-   The server requires issuer/security identity agreement before merging
-   domains, constructs and scores the final report deterministically, and
-   streams validated partial progress to the browser. Missing domains remain
-   visibly Pending/Unknown instead of expanding into Deep or becoming favorable.
-   Stable errors distinguish timeouts, rate limits, provider
+4. Fast retrieves SEC identity, submissions, filing metadata, and Company Facts
+   directly, normalizes dated evidence, and streams validated deterministic
+   progress. Identity agreement is required before evidence is assembled.
+   Optional AI synthesis has no tools and may classify only supplied evidence
+   IDs. Missing retrieval remains visibly Pending/Unknown rather than favorable.
+   Stable Deep/synthesis errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
 5. The application renders ranked warnings and unknowns, a financial-health
@@ -156,13 +154,12 @@ Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
 
-Fast measures first-useful latency separately from full domain completion. The
-first validated domain assembly targets 3–10 seconds; all three domains target
-approximately 15–20 seconds and each request is cancelled at 20 seconds. The
-three compact schemas permit at most 6,000 combined output tokens as a failure
-bound and five hosted searches. Normal visible output is expected around
-2,500–4,000 tokens because the server constructs duplicated v4 sections.
-Detailed lineage, financial history, corroboration, historical
+Fast retrieves SEC identity, submissions, recent filing metadata, and Company
+Facts directly, then progressively renders a deterministic report. Optional AI
+synthesis has hosted tools disabled and may reference only supplied evidence
+record IDs; its failure cannot remove deterministic evidence. Cold Fast normally
+makes three SEC requests, while cached issuer requests make none. Detailed
+lineage, filing-text extraction, financial history, corroboration, historical
 catalyst analogues, reaction windows, and conflict resolution remain Deep work.
 
 The default action runs the fast stage. **Deeper research** is a deliberate

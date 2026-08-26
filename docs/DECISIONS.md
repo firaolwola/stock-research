@@ -3,6 +3,28 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Make Fast evidence-first and keep AI non-authoritative
+
+**Status:** Accepted by product owner
+
+**Decision:** Stop using OpenAI hosted web search for production Fast. Retrieve
+SEC identity, submissions, recent filing metadata, and Company Facts directly;
+normalize dated evidence records; render deterministic progress; then optionally
+run a small tool-disabled classification over only those records. Cache the SEC
+ticker map for six hours and issuer data for five minutes, coalesce concurrent
+fetches, identify the client, and stay below SEC fair-access request rates. Seed
+Deep with the completed Fast packet.
+
+**Why:** After schema reduction, three independent compact SWVL hosted-search
+calls all reached the exact 20-second timeout without a response object. Hosted
+search—not one domain schema—was the remaining Fast bottleneck.
+
+**Consequence:** Cold Fast normally makes three free SEC requests and warm Fast
+makes none. The bounded first phase confirms identity/CIK, filing discovery,
+former-name metadata, and standardized financial facts. Filing-text-dependent
+risks and non-SEC news remain Limited/Unknown until later evidence supports a
+parser or data-provider decision. The 95% recall target remains unclaimed.
+
 ## 2026-08-25 — Size Fast domains from compact evidence fixtures
 
 **Status:** Accepted implementation refinement
