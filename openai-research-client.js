@@ -11,7 +11,7 @@ export const RESEARCH_ERROR_CODES = Object.freeze({
   unexpected: "UPSTREAM_UNEXPECTED"
 });
 
-import { buildResearchOperations, RESEARCH_STAGES } from "./lib/research-budget.js";
+import { buildResearchOperations, estimateResearchCost, PRICING_SNAPSHOT, RESEARCH_STAGES } from "./lib/research-budget.js";
 import { createOpenAIOutputSchema } from "./lib/openai-output-schema.js";
 import { assembleFastReport, createFastDomainSchema, fastDomainPrompt, FAST_DOMAINS } from "./lib/fast-research.js";
 
@@ -184,11 +184,12 @@ export function createOpenAIResearchClient(openai, { schema, now = () => perform
     try {
       if (!["completed", "incomplete"].includes(response.status) || typeof response.output_text !== "string" || !response.output_text.trim()) throw new Error("Unusable domain response");
       const fragment = JSON.parse(response.output_text);
-      if (fragment.domain !== domain || fragment.security?.ticker !== ticker) throw new Error("Domain identity boundary failed");
+      if (fragment.domain !== domain || fragment.identity?.ticker !== ticker) throw new Error("Domain identity boundary failed");
       const webSearchCalls = Array.isArray(response.output) ? response.output.filter((item) => item?.type === "web_search_call").length : 0;
       return { domain, fragment, elapsed_ms, error_code: null, usage: response.usage ?? null, web_search_calls: webSearchCalls, response_status: response.status };
     } catch (error) {
-      return { domain, fragment: null, elapsed_ms, error_code: response.status === "incomplete" ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.invalid, diagnostics: getSafeUpstreamDiagnostics(error, { stage: "fast", phase: `fast_${domain}_parse`, startedAt, response, now }) };
+      const webSearchCalls = Array.isArray(response.output) ? response.output.filter((item) => item?.type === "web_search_call").length : 0;
+      return { domain, fragment: null, elapsed_ms, error_code: response.status === "incomplete" ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.invalid, usage: response.usage ?? null, web_search_calls: webSearchCalls, response_status: response.status, diagnostics: getSafeUpstreamDiagnostics(error, { stage: "fast", phase: `fast_${domain}_parse`, startedAt, response, now }) };
     }
   }
 
@@ -223,7 +224,11 @@ export function createOpenAIResearchClient(openai, { schema, now = () => perform
     } : null;
     const domains = Object.fromEntries(Object.keys(FAST_DOMAINS).map((domain) => {
       const result = results[domain];
-      return [domain, result ? { status: result.fragment ? "completed" : "pending", latency_ms: result.elapsed_ms, error_code: result.error_code } : { status: "pending", latency_ms: null, error_code: null }];
+      return [domain, result ? {
+        status: result.fragment ? "completed" : "pending", latency_ms: result.elapsed_ms, error_code: result.error_code,
+        input_tokens: result.usage?.input_tokens ?? null, output_tokens: result.usage?.output_tokens ?? null, total_tokens: result.usage?.total_tokens ?? null,
+        web_search_calls: result.web_search_calls ?? 0, estimated_cost_usd: estimateResearchCost(result.usage, result.web_search_calls ?? 0), pricing_version: result.usage ? PRICING_SNAPSHOT.version : null
+      } : { status: "pending", latency_ms: null, error_code: null, input_tokens: null, output_tokens: null, total_tokens: null, web_search_calls: 0, estimated_cost_usd: null, pricing_version: null }];
     }));
     return buildResearchOperations({ stage: "fast", latencyMs: now() - startedAt, firstUsefulLatencyMs, usage, webSearchCalls: values.reduce((sum, result) => sum + (result.web_search_calls || 0), 0), domains });
   }
