@@ -75,6 +75,11 @@ dependency because orchestration, scoring sufficiency, provider budgets, and
 calibration all depend on which evidence can be obtained reliably and legally
 within Fast's limits.
 
+The #48 source map and provider comparison are documented in
+`FAST_SOURCE_STRATEGY.md`. The recommendation is intentionally pending explicit
+owner approval; #49 and #51 must not treat the preferred pilot candidate as
+selected until that approval is recorded.
+
 ### Milestone acceptance criteria
 
 - Current security and issuer identity do not mix evidence across securities.
