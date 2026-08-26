@@ -40,9 +40,41 @@ export function createApp({ researchClient, reportValidator, logger = console, r
 
   const app = express();
   app.use(express.static("public"));
+  const logDomainDiagnostics = (ticker, result) => {
+    for (const diagnostics of result?.diagnostics ?? []) logger.error(`Fast research domain did not complete for ${ticker} (${diagnostics.phase ?? "fast_domain"}${diagnosticSuffix(diagnostics)}).`);
+  };
 
   app.get("/api/runtime", (_req, res) => {
     return res.json({ mode: runtime.mode, demoTicker: runtime.demoTicker, demoTickers: runtime.demoTickers });
+  });
+
+  app.get("/api/analyze-stream", async (req, res) => {
+    const validation = validateTicker(req.query.ticker);
+    if (!validation.valid) return res.status(400).json({ code: validation.error.code, error: validation.error.message });
+    const { ticker } = validation;
+    res.setHeader("Content-Type", "application/x-ndjson; charset=utf-8");
+    res.setHeader("Cache-Control", "no-cache, no-transform");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    let emitted = 0;
+    let finalProgressEmitted = false;
+    const emit = async (researchResult, final = false) => {
+      try {
+        const report = calibrateReportScores(researchResult.report);
+        if (!reportValidator(report).valid) return;
+        res.write(`${JSON.stringify({ type: "report", ticker, report, operations: researchResult.operations, final })}\n`);
+        emitted += 1;
+      } catch {}
+    };
+    try {
+      const result = await researchClient.researchTicker(ticker, { stage: "fast", onProgress: (progress) => { finalProgressEmitted ||= progress.final === true; return emit(progress, progress.final === true); } });
+      logDomainDiagnostics(ticker, result);
+      if (!finalProgressEmitted) await emit(result, true);
+      if (emitted === 0) res.write(`${JSON.stringify({ type: "error", code: "INVALID_RESEARCH_RESPONSE", error: "The research provider returned an invalid report." })}\n`);
+    } catch (error) {
+      const controlled = error instanceof ResearchResponseError ? controlledResearchErrors[error.code] : null;
+      res.write(`${JSON.stringify({ type: "error", code: controlled?.code ?? "RESEARCH_UNAVAILABLE", error: controlled?.error ?? "Research is temporarily unavailable." })}\n`);
+    }
+    res.end();
   });
 
   app.get("/api/analyze", async (req, res) => {
@@ -58,6 +90,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
 
     try {
       const researchResult = await researchClient.researchTicker(ticker, { stage });
+      logDomainDiagnostics(ticker, researchResult);
       const researchedReport = researchResult?.report ?? researchResult;
       const operations = researchResult?.report ? researchResult.operations : null;
       let report;

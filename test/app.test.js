@@ -90,6 +90,28 @@ test("analyze returns a validated partial report as a successful result", async 
   });
 });
 
+test("Fast streaming emits progressive validated reports and a final result", async () => {
+  const app = buildApp({
+    async researchTicker(_ticker, options) {
+      const progress = { report: structuredClone(partialReport), operations: { stage: "fast", domains: { capital: { status: "completed" }, catalyst: { status: "pending" }, financial: { status: "pending" } } } };
+      progress.report.metadata.stage = "fast";
+      await options.onProgress(progress);
+      return { report: progress.report, operations: { ...progress.operations, domains: { capital: { status: "completed" }, catalyst: { status: "completed" }, financial: { status: "pending" } } } };
+    }
+  });
+  await withTestServer(app, async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/analyze-stream?ticker=XYZ`);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("content-type"), /application\/x-ndjson/);
+    const messages = (await response.text()).trim().split("\n").map(JSON.parse);
+    assert.equal(messages.length, 2);
+    assert.equal(messages[0].type, "report");
+    assert.equal(messages[0].final, false);
+    assert.equal(messages[1].final, true);
+    assert.equal(messages[1].report.scores.financial_health.value, null);
+  });
+});
+
 test("analyze rejects empty and malformed tickers without calling research", async () => {
   let called = false;
   const app = buildApp({ async researchTicker() { called = true; return completeReport; } });

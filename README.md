@@ -34,10 +34,13 @@ The first end-to-end prototype is working:
    and meaningful confidence. Historical split, dilution, offering, compliance,
    and warning items from those periods reference the linkage explicitly;
    ambiguous predecessors remain unknown or limited coverage.
-4. The fast-stage OpenAI request targets 3–10 seconds, permits a bounded
-   over-budget grace period, and hard-stops at 30 seconds with no automatic
-   retries. It uses at most four low-context web searches and deliberately
-   returns visible partial/pending coverage instead of expanding into Deep.
+4. Fast launches three independently bounded low-context research operations
+   in parallel: identity/capital history, catalyst/listing risk, and immediate
+   financial risk. Each hard-stops at 20 seconds with no automatic retries.
+   The server requires issuer/security identity agreement before merging
+   domains, constructs and scores the final report deterministically, and
+   streams validated partial progress to the browser. Missing domains remain
+   visibly Pending/Unknown instead of expanding into Deep or becoming favorable.
    Stable errors distinguish timeouts, rate limits, provider
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
@@ -153,13 +156,12 @@ Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
 
-Fast latency is measured independently from its hard timeout. A usable Fast
-report received after 10 seconds is returned with
-`within_latency_target=false`; the synchronous provider request is cancelled at
-30 seconds if no response object has arrived. Fast keeps its 5,000-token output
-ceiling, caps hosted search calls at four, and defers detailed lineage,
-financial history, corroboration, and historical catalyst analogues to Deep
-with explicit limitations.
+Fast measures first-useful latency separately from full domain completion. The
+first validated domain assembly targets 3–10 seconds; all three domains target
+approximately 15–20 seconds and each request is cancelled at 20 seconds. The
+three compact schemas permit at most 3,400 combined output tokens and five
+hosted searches. Detailed lineage, financial history, corroboration, historical
+catalyst analogues, reaction windows, and conflict resolution remain Deep work.
 
 The default action runs the fast stage. **Deeper research** is a deliberate
 second-stage request with a larger timeout/output budget; the server never

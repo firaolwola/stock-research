@@ -13,6 +13,7 @@ export const RESEARCH_ERROR_CODES = Object.freeze({
 
 import { buildResearchOperations, RESEARCH_STAGES } from "./lib/research-budget.js";
 import { createOpenAIOutputSchema } from "./lib/openai-output-schema.js";
+import { assembleFastReport, createFastDomainSchema, fastDomainPrompt, FAST_DOMAINS } from "./lib/fast-research.js";
 
 export const FAST_RESEARCH_TIMEOUT_MS = RESEARCH_STAGES.fast.timeout_ms;
 
@@ -160,10 +161,78 @@ export function createOpenAIResearchClient(openai, { schema, now = () => perform
   if (!schema || typeof schema !== "object") {
     throw new TypeError("The stock-report JSON schema is required");
   }
+
+  async function requestFastDomain(ticker, domain, startedAt) {
+    const domainStartedAt = now();
+    const config = FAST_DOMAINS[domain];
+    let response;
+    try {
+      response = await openai.responses.create({
+        model: "gpt-5.1",
+        reasoning: { effort: "none" },
+        max_output_tokens: config.max_output_tokens,
+        max_tool_calls: config.max_tool_calls,
+        tools: [{ type: "web_search", search_context_size: "low" }],
+        include: ["web_search_call.action.sources"],
+        text: { format: { type: "json_schema", name: `fast_${domain}_evidence`, description: `Compact ${domain} evidence for server-side Fast report assembly.`, schema: createFastDomainSchema(schema, domain), strict: false } },
+        input: fastDomainPrompt(ticker, domain)
+      }, { timeout: RESEARCH_STAGES.fast.timeout_ms, maxRetries: 0 });
+    } catch (error) {
+      return { domain, fragment: null, elapsed_ms: Math.max(0, Math.round(now() - domainStartedAt)), error_code: classifyUpstreamError(error) ?? RESEARCH_ERROR_CODES.unexpected, diagnostics: getSafeUpstreamDiagnostics(error, { stage: "fast", phase: `fast_${domain}_request`, startedAt, response: null, now }) };
+    }
+    const elapsed_ms = Math.max(0, Math.round(now() - domainStartedAt));
+    try {
+      if (!["completed", "incomplete"].includes(response.status) || typeof response.output_text !== "string" || !response.output_text.trim()) throw new Error("Unusable domain response");
+      const fragment = JSON.parse(response.output_text);
+      if (fragment.domain !== domain || fragment.security?.ticker !== ticker) throw new Error("Domain identity boundary failed");
+      const webSearchCalls = Array.isArray(response.output) ? response.output.filter((item) => item?.type === "web_search_call").length : 0;
+      return { domain, fragment, elapsed_ms, error_code: null, usage: response.usage ?? null, web_search_calls: webSearchCalls, response_status: response.status };
+    } catch (error) {
+      return { domain, fragment: null, elapsed_ms, error_code: response.status === "incomplete" ? RESEARCH_ERROR_CODES.incomplete : RESEARCH_ERROR_CODES.invalid, diagnostics: getSafeUpstreamDiagnostics(error, { stage: "fast", phase: `fast_${domain}_parse`, startedAt, response, now }) };
+    }
+  }
+
+  async function researchFast(ticker, { onProgress } = {}) {
+    const startedAt = now();
+    const results = {};
+    let firstUsefulLatencyMs = null;
+    const publish = async (result) => {
+      results[result.domain] = result;
+      if (result.fragment && firstUsefulLatencyMs === null) firstUsefulLatencyMs = Math.max(0, now() - startedAt);
+      if (typeof onProgress === "function" && result.fragment) {
+        const report = assembleFastReport(ticker, results);
+        await onProgress({ report, operations: fastOperations(results, startedAt, firstUsefulLatencyMs), final: Object.keys(results).length === Object.keys(FAST_DOMAINS).length });
+      }
+      return result;
+    };
+    await Promise.all(Object.keys(FAST_DOMAINS).map((domain) => requestFastDomain(ticker, domain, startedAt).then(publish)));
+    return {
+      report: assembleFastReport(ticker, results),
+      operations: fastOperations(results, startedAt, firstUsefulLatencyMs),
+      diagnostics: Object.values(results).filter((result) => result.diagnostics).map((result) => result.diagnostics)
+    };
+  }
+
+  function fastOperations(results, startedAt, firstUsefulLatencyMs) {
+    const values = Object.values(results);
+    const usageValues = values.map((result) => result.usage).filter(Boolean);
+    const usage = usageValues.length ? {
+      input_tokens: usageValues.reduce((sum, item) => sum + (item.input_tokens || 0), 0),
+      output_tokens: usageValues.reduce((sum, item) => sum + (item.output_tokens || 0), 0),
+      total_tokens: usageValues.reduce((sum, item) => sum + (item.total_tokens || 0), 0)
+    } : null;
+    const domains = Object.fromEntries(Object.keys(FAST_DOMAINS).map((domain) => {
+      const result = results[domain];
+      return [domain, result ? { status: result.fragment ? "completed" : "pending", latency_ms: result.elapsed_ms, error_code: result.error_code } : { status: "pending", latency_ms: null, error_code: null }];
+    }));
+    return buildResearchOperations({ stage: "fast", latencyMs: now() - startedAt, firstUsefulLatencyMs, usage, webSearchCalls: values.reduce((sum, result) => sum + (result.web_search_calls || 0), 0), domains });
+  }
+
   return {
-    async researchTicker(ticker, { stage = "fast" } = {}) {
+    async researchTicker(ticker, { stage = "fast", onProgress } = {}) {
       const budget = RESEARCH_STAGES[stage];
       if (!budget) throw new TypeError(`Unsupported research stage: ${stage}`);
+      if (stage === "fast") return researchFast(ticker, { onProgress });
       const startedAt = now();
       let outputSchema;
       try {

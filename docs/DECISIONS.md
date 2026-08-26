@@ -3,6 +3,34 @@
 Record consequential decisions here so future work preserves their context. Keep
 entries short and append new decisions rather than rewriting history.
 
+## 2026-08-25 — Assemble Fast from independent identity-gated domains
+
+**Status:** Accepted by product owner
+
+**Decision:** Replace the single Fast Responses API request with three parallel,
+independently bounded evidence calls: identity/capital history,
+catalyst/listing risk, and immediate financial risk. Require current ticker,
+issuer name, and CIK agreement before merging separate-domain evidence. Build
+the v4 report and deterministic scores server-side. Stream each validated
+partial assembly when cleanly available. A failed, missing, malformed, or
+identity-conflicting domain remains Pending/Unknown and cannot become favorable
+evidence. Target first useful output in 3–10 seconds, all domains in 15–20
+seconds, and hard-bound each Fast operation at 20 seconds.
+
+**Why:** A clean SWVL request still reached 30 seconds with no response object
+after provider score removal, compact Fast schema work, low-context search, and
+a four-call search cap. One model-managed request still combined several
+dependent searches and thousands of structured tokens, so a single slow phase
+discarded every otherwise useful domain.
+
+**Consequence:** Fast makes three provider requests and may cost slightly more
+in fixed/search overhead, but gains parallelism, fault isolation, progressive
+results, and explicit domain coverage. Its combined output ceilings total 3,400
+tokens across at most five hosted searches. Deep remains the broader full-report
+workflow for exhaustive lineage, detailed financial history, corroboration,
+analogues/reactions, and conflict resolution. Live latency/cost still require an
+approved measured run.
+
 ## 2026-08-25 — Separate the Fast latency target from hard cancellation
 
 **Status:** Accepted

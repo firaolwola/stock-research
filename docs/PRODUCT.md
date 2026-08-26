@@ -93,8 +93,8 @@ should be `Not applicable`; sections with inadequate evidence should be
 
 ### Fast decision view
 
-Target a normal response time of approximately 3–10 seconds. Present a compact
-dashboard containing:
+Target first useful evidence in approximately 3–10 seconds and all bounded Fast
+domains in approximately 15–20 seconds. Present a compact dashboard containing:
 
 - the most material red flags and unknowns, ranked by importance;
 - dilution-risk components and reverse-split risk;
@@ -119,11 +119,23 @@ limited or pending coverage, so the full-contract completion status remains
 `partial` or `pending`; deliberate Deep research may expand it. Current
 catalyst evidence and material-risk checks remain part of Fast.
 
+Fast research is assembled from three independently bounded evidence domains
+run in parallel: identity/capital history, catalyst/listing risk, and immediate
+financial risk. The interface may render a validated partial report as soon as
+one domain is usable, then replace it as additional identity-compatible domains
+finish. The first-useful-result target remains approximately 3–10 seconds; all
+Fast domains have an approximately 15–20 second completion target and a
+20-second hard bound. Failed or identity-conflicting domains remain visibly
+pending or unknown and cannot produce favorable evidence or scores.
+
 ### Deep research view
 
 A deeper report may take longer or be explicitly requested. It should expand
 the evidence, history, financial analysis, comparable prior catalysts, and
 source detail without changing the meaning of the fast-view scores.
+Deep remains the broader workflow for exhaustive lineage, detailed financial
+history, secondary corroboration, catalyst analogues and reaction windows, and
+conflict resolution.
 
 ## Research coverage direction
 
@@ -199,7 +211,8 @@ claims it supports.
 The MVP is successful when:
 
 - it is repeatedly useful during real trading sessions after screener alerts;
-- a normal fast report is produced in approximately 3–10 seconds;
+- useful Fast evidence begins rendering in approximately 3–10 seconds and all
+  bounded Fast domains normally settle in approximately 15–20 seconds;
 - normal API cost is kept near or below $0.10 per completed report, with
   deliberate exceptions for unusually complex research;
 - every material conclusion has supporting evidence or is clearly marked

@@ -41,19 +41,27 @@ incomplete.
 Fast-stage requests now terminate after a defined
 timeout and map major provider failures to controlled responses. A token-free
 mock mode supports repeatable manual frontend and integration checks.
-Live evidence showed the original 15-second Fast hard cutoff aborting the full
-Responses API web-search/generation operation before a response object arrived.
-Fast now bounds hosted research to four low-context searches, defers named Deep
-work explicitly, records responses over 10 seconds as latency misses, and uses a
-bounded 20-second grace period before a 30-second hard cancellation. Live
-performance after this correction remains to be calibrated by an approved run.
+Live evidence showed the original 15-second and revised 30-second Fast cutoffs
+both aborting the monolithic Responses API web-search/generation operation
+before a response object arrived. Those findings motivated the domain redesign
+below rather than another timeout increase.
+
+A subsequent clean SWVL run also reached the revised 30-second boundary with no
+provider response object. The owner therefore approved replacing the monolithic
+Fast request with three parallel, independently bounded domain-evidence calls.
+The server now identity-gates domain merging, assembles and scores the report
+deterministically, streams validated partial progress, and leaves failed domains
+Pending/Unknown. Fast targets first useful evidence in 3–10 seconds and all
+domains by 15–20 seconds with a 20-second hard bound. Deep retains the broader
+research workflow. Live performance of the new architecture remains unmeasured.
 
 The product is currently a personal post-screening due-diligence tool. Public
 deployment is not a current milestone.
 
 ## Operating targets
 
-- Normal fast report: approximately 3–10 seconds.
+- First useful Fast result: approximately 3–10 seconds.
+- All Fast domains: approximately 15–20 seconds, hard-bounded at 20 seconds.
 - Normal completed-report API cost: near or below $0.10.
 - Material claims: sourced or explicitly `Unknown`.
 - Material-risk recall: approximately 95% or better overall on the dated
