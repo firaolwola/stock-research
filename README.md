@@ -34,9 +34,11 @@ The first end-to-end prototype is working:
    and meaningful confidence. Historical split, dilution, offering, compliance,
    and warning items from those periods reference the linkage explicitly;
    ambiguous predecessors remain unknown or limited coverage.
-4. Fast retrieves SEC identity, submissions, filing metadata, and Company Facts
-   directly, normalizes dated evidence, and streams validated deterministic
-   progress. Identity agreement is required before evidence is assembled.
+4. Fast retrieves SEC identity, submissions, Company Facts, and at most four
+   selected recent filing documents plus one directly linked material exhibit.
+   It normalizes dated evidence, explicit capital/warning/catalyst language, and
+   financial freshness before streaming validated deterministic progress.
+   Identity agreement is required before evidence is assembled.
    Optional AI synthesis has no tools and may classify only supplied evidence
    IDs. Missing retrieval remains visibly Pending/Unknown rather than favorable.
    Stable Deep/synthesis errors distinguish timeouts, rate limits, provider
@@ -158,12 +160,16 @@ Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
 
-Fast retrieves SEC identity, submissions, recent filing metadata, and Company
-Facts directly, then progressively renders a deterministic report. Optional AI
-synthesis has hosted tools disabled and may reference only supplied evidence
+Fast retrieves SEC identity, submissions, recent filing metadata, Company Facts,
+and a bounded set of material filing documents directly, then progressively
+renders a deterministic report. Explicit split ratios, actual issuance versus
+registered capacity, warrants/convertibles, warning language, and recent filing
+events are extracted conservatively; unmatched content stays Limited/Unknown.
+Optional AI synthesis has hosted tools disabled and may reference only supplied evidence
 record IDs; its failure cannot remove deterministic evidence. Cold Fast normally
-makes three SEC requests, while cached issuer requests make none. Detailed
-lineage, filing-text extraction, financial history, corroboration, historical
+makes three metadata/facts requests plus up to four documents and one material
+exhibit, while cached issuer requests make none. Detailed
+lineage, exhaustive filing extraction, financial history, corroboration, and historical
 catalyst analogues, reaction windows, and conflict resolution remain Deep work.
 
 The default action runs the fast stage. **Deeper research** is a deliberate

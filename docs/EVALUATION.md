@@ -51,7 +51,23 @@ Token-free SEC fixtures verify architecture coverage, not real-ticker recall:
   going-concern/accounting language, dividends, and non-SEC news: unknown or
   limited coverage.
 
-These results do not establish the 95% recall target. The existing dry evaluator
+The bounded filing-text fixture now improves architecture coverage as follows:
+
+- reverse-split ratios: explicit terms produce confirmed items;
+- offerings: actual/agreed issuance is confirmed, while registration capacity
+  remains limited coverage;
+- warrants and convertibles: explicit instrument language produces confirmed
+  items;
+- going-concern, accounting/restatement, and listing-deficiency language:
+  explicit statements produce confirmed warnings;
+- current 8-K/6-K substance: a specific material-event sentence produces a
+  confirmed current catalyst; and
+- stale standardized financial periods: periods older than 180 days produce a
+  sourced high-severity freshness warning.
+
+These deterministic phrase fixtures improve category capability but do not
+measure recall on the dated real-ticker cases. They do not establish the 95%
+recall target. The existing dry evaluator
 continues to measure its checked-in report samples. A future approved dated
 evaluation must measure the new retrieval path against real case facts.
 
