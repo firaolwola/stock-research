@@ -15,7 +15,7 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-sparse-3.json");
+const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-sparse-4.json");
 const batchPlan = JSON.parse(await readFile(planPath, "utf8"));
 const baselinePath = path.join(root, ...batchPlan.baseline_plan.split("/"));
 const baselineBytes = await readFile(baselinePath);

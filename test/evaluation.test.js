@@ -260,6 +260,24 @@ test("Issue 55 sparse batch 3 restores validity but still fails reliability", as
   assert.ok(result.severe_misleading_misses.length > 0);
 });
 
+test("Issue 55 sparse batch 4 freezes the post-Sparse-3 verification bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-4.json");
+  assert.equal(plan.required_ancestor, "7614589");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-4");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 6);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
