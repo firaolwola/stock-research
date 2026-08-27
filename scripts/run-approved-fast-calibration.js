@@ -15,7 +15,7 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-batch-2.json");
+const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-batch-3.json");
 const batchPlan = JSON.parse(await readFile(planPath, "utf8"));
 const basePlanPath = path.join(root, ...batchPlan.base_plan.split("/"));
 const basePlan = JSON.parse(await readFile(basePlanPath, "utf8"));
@@ -27,15 +27,18 @@ if (process.env.RUN_APPROVED_FAST_CALIBRATION !== approvalToken) {
 if (plan.approval.maximum_runs !== 5 || plan.approval.runs_per_ticker !== 1 || plan.approval.automatic_retries !== false || plan.approval.difficult_budget_approved !== false) {
   throw new Error("The frozen approval does not match the bounded runner.");
 }
-if (JSON.stringify(plan.approval.tickers) !== JSON.stringify(basePlan.approval.tickers) || batchPlan.configuration.change_from_batch_1 !== "none" || batchPlan.approval.deep_runs !== 0 || batchPlan.approval.hosted_web_search !== false) {
-  throw new Error("Batch 2 must preserve the original cases and Fast configuration without Deep or hosted search.");
+if (JSON.stringify(plan.approval.tickers) !== JSON.stringify(basePlan.approval.tickers) || batchPlan.configuration.change_from_batch_2 !== "none" || batchPlan.approval.deep_runs !== 0 || batchPlan.approval.hosted_web_search !== false) {
+  throw new Error("Batch 3 must preserve the original cases and Fast configuration without Deep or hosted search.");
 }
-if (batchPlan.alpha_vantage_preflight.inferred_remaining_before_batch_2 < plan.approval.maximum_alpha_vantage_requests) {
-  throw new Error("The recorded Alpha Vantage allowance cannot cover the approved batch.");
+const currentDay = new Date().toISOString().slice(0, 10);
+if (currentDay === batchPlan.alpha_vantage_preflight.usage_day && batchPlan.alpha_vantage_preflight.inferred_remaining_on_approval_day < plan.approval.maximum_alpha_vantage_requests) {
+  throw new Error("The recorded Alpha Vantage allowance cannot cover Batch 3 until the daily quota resets.");
 }
-for (const [name, expected] of [["summary.json", batchPlan.preserve_batch_1.summary_sha256], ["run-summary.json", batchPlan.preserve_batch_1.run_summary_sha256]]) {
-  const original = await readFile(path.join(root, ...batchPlan.preserve_batch_1.directory.split("/"), name));
-  if (createHash("sha256").update(original).digest("hex") !== expected) throw new Error(`Refusing to run because the original ${name} changed.`);
+for (const preserved of batchPlan.preserve_prior_batches) {
+  for (const [name, expected] of [["summary.json", preserved.summary_sha256], ["run-summary.json", preserved.run_summary_sha256]]) {
+    const original = await readFile(path.join(root, ...preserved.directory.split("/"), name));
+    if (createHash("sha256").update(original).digest("hex") !== expected) throw new Error(`Refusing to run because ${preserved.directory}/${name} changed.`);
+  }
 }
 
 const outputRoot = path.join(root, "evaluation", "live", batchPlan.output_directory);
