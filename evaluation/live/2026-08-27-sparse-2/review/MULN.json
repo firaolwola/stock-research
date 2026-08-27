@@ -1,0 +1,14 @@
+{
+  "case_id":"muln-2026-sparse","ticker":"MULN","material_checks":{"detected":3,"expected":4},
+  "adjudication":[
+    {"expectation":"Repeated completed reverse-split history","detected":false,"cause":"retrieval","note":"Four 2024-2025 actions appeared, but the required May, August, and December 2023 completed actions remained omitted."},
+    {"expectation":"Splits linked to bid-price compliance","detected":true,"cause":null},
+    {"expectation":"Current or terminal listing-pressure state","detected":true,"cause":null},
+    {"expectation":"Material financing/capital-structure risk","detected":true,"cause":null}
+  ],
+  "identity_result":"MULN resolved through CIK 0001499961 to Bollinger Innovations/BINI, but the security header remained Nasdaq/unknown even though retrieved evidence said BINI moved to OTCID.",
+  "validation":{"valid":false,"cause":"identity/lineage","summary":"Former-name sources/backlinks, confirmed-lineage dates, historical-item lineage references, and confirmed security listing semantics failed validation."},
+  "score_range":{"passed":1,"evaluated":5,"note":"Only safely Limited Financial Health met the previously accepted state; capital-risk scores remained Limited."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "severe_misses":["Older 2023 completed split history remained materially incomplete.","Current BINI OTCID/delisted evidence did not update the security header.","The report was invalid."],"result":"failed"
+}

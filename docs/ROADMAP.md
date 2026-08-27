@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — verification approval required:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%), but the four-ticker sparse batch reached only 3/16 (18.75%). Offline regressions now cover exact historical-ticker/CIK resolution, OTC/delisted identity, terminal settlement, foreign-filer control language and IFRS facts, historical corporate actions, and TUP bankruptcy/going-concern/delisting. The measured sparse result is unchanged; the next step is owner review and, only if separately approved, one bounded sparse verification batch.
+8. [ ] **Active — Sparse-2 blockers require offline fixes:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-2 improved the sparse repeat from 3/16 to 13/16 and fixed terminal settlement, but only one of four reports validated. Lineage source links, MULN historical actions/current status, NIO net-loss normalization, and TUPBQ delisting/catalyst semantics must be fixed offline before another paid verification is proposed.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -85,11 +85,11 @@ Issue #55 remains active. The approved second five-ticker batch improved recall
 from 66.28% to 82.56% but did not pass. The reproduced overbroad non-reliance,
 AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
 Limited-series defects now have deterministic regression fixes on PR #74.
-The approved sparse-category batch ran and failed. Its reproduced deterministic
-failure mechanisms now have offline regression coverage; no new reliability
-claim follows from those tests. The next active step is owner review of the
-corrective branch and a separate decision on a bounded sparse verification
-batch. Any further live verification requires new owner approval. A paid data
+The approved Sparse-2 verification also ran and failed. Retrieval improved to
+81.25% and settlement passed, but valid-report rate fell to 25% and severe
+deterministic blockers remain. The next active step is offline reproduction and
+correction using the stored artifacts. Any further live verification requires
+new owner approval. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

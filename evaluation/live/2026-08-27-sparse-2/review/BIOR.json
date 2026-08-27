@@ -1,0 +1,14 @@
+{
+  "case_id":"bior-2026-sparse","ticker":"BIOR","material_checks":{"detected":4,"expected":4},
+  "adjudication":[
+    {"expectation":"Completed 1-for-25 reverse split","detected":true,"cause":null},
+    {"expectation":"Completed 1-for-10 reverse split","detected":true,"cause":null},
+    {"expectation":"October 2024 issuance and warrants","detected":true,"cause":null},
+    {"expectation":"Completed history distinct from prospective risk","detected":true,"cause":null}
+  ],
+  "identity_result":"Historical BIOR resolved to CIK 0001580063 with Biora/Progenity lineage and explicit OTC Pink/delisted context.",
+  "validation":{"valid":false,"cause":"identity/lineage","summary":"SEC former-name claims referenced source-sec-submissions, but the assembled historical-identity source set omitted that source and had inconsistent backlinks."},
+  "score_range":{"passed":0,"evaluated":4,"note":"All four capital-risk scores remained Limited despite retrieved authoritative evidence."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "severe_misses":["The retrieved report was unusable because lineage claim/source links failed semantic validation."],"result":"failed"
+}

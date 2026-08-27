@@ -209,3 +209,16 @@ test("Issue 55 sparse batch 2 reuses the frozen cases under new strict bounds", 
   assert.equal(plan.approval.hosted_web_search, false);
   assert.equal(plan.preserve_prior_batches.length, 4);
 });
+
+test("Issue 55 sparse batch 2 records improvement without passing reliability", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-2/summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.8125);
+  assert.equal(result.valid_report_rate.rate, 0.25);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.operations.alpha_vantage_requests, 8);
+  assert.equal(result.operations.twelve_data_requests, 0);
+  assert.ok(result.operations.measured_openai_cost_usd <= 0.12);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+});

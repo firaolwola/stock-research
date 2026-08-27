@@ -185,6 +185,15 @@ control language is excluded from material-weakness findings. The frozen plan
 remains unchanged; stale identity facts are recorded separately in
 `evaluation/plans/fast-reliability-2026-08-27-sparse-corrections.json`.
 
+The separately approved same-four Sparse-2 verification then measured 13/16
+(81.25%) material checks, up from 3/16, and terminal settlement passed 4/4. It
+still failed: only NIO validated; BIOR/MULN had lineage source-link defects;
+MULN omitted older split history and retained stale listing semantics; NIO still
+missed annual net loss; and TUPBQ used a 404 delisting seed and an invalid
+catalyst classification. Explanation fidelity remained 0/4 and score/state
+checks remained 7/18. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-2.md`.
+
 The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
 uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
 control disclosures; requires event-specific non-reliance language; separates
