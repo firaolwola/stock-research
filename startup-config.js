@@ -27,5 +27,6 @@ export function loadRealAppConfig(env = process.env) {
   }
 
   const secUserAgent = typeof env.SEC_USER_AGENT === "string" && env.SEC_USER_AGENT.trim() ? env.SEC_USER_AGENT.trim() : undefined;
-  return Object.freeze({ apiKey, port: parsePort(env.PORT), secUserAgent });
+  const alphaVantageApiKey = typeof env.ALPHA_VANTAGE_API_KEY === "string" ? env.ALPHA_VANTAGE_API_KEY.trim() : "";
+  return Object.freeze({ apiKey, port: parsePort(env.PORT), secUserAgent, alphaVantageApiKey });
 }

@@ -159,7 +159,8 @@ function renderOperations(operations) {
   if (operations.stage === "fast" && operations.domains) panel.append(element("p", "muted", Object.entries(operations.domains).map(([name, value]) => `${formatLabel(name)}: ${formatLabel(value.status)}`).join(" · ")));
   if (operations.stage === "fast" && operations.synthesis) panel.append(element("p", "muted", `AI synthesis: ${formatLabel(operations.synthesis.status)}${operations.synthesis.priority_evidence_ids ? ` · ${operations.synthesis.priority_evidence_ids.length} evidence records prioritized` : ""}. Deterministic evidence remains authoritative.`));
   if (operations.stage === "fast" && operations.retrieval) panel.append(element("p", "muted", `SEC retrieval: ${formatLabel(operations.retrieval.status)} · ${operations.retrieval.sec_request_count ?? "Unknown"} network requests`));
-  if (operations.stage === "fast" && operations.within_cost_target === false) panel.append(element("p", "coverage-note", "This report exceeded the approximately $0.10 normal cost target."));
+  if (operations.stage === "fast" && operations.bounded_sources) panel.append(element("p", "muted", `Bounded sources: ${formatLabel(operations.bounded_sources.status)} · Nasdaq ${formatLabel(operations.bounded_sources.nasdaq)} · news ${formatLabel(operations.bounded_sources.news)} · market ${formatLabel(operations.bounded_sources.market)} · ${operations.bounded_sources.request_count} network requests · Alpha Vantage ${operations.bounded_sources.alpha_vantage_requests_today}/${operations.bounded_sources.alpha_vantage_free_daily_limit} local daily allowance`));
+  if (operations.stage === "fast" && operations.within_cost_target === false) panel.append(element("p", "coverage-note", "This report exceeded the $0.03 normal Fast cost ceiling."));
   panel.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
   return panel;
 }

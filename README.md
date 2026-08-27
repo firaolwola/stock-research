@@ -6,7 +6,8 @@ produce a fast, evidence-backed view of the catalyst, company context, and
 material risks before deeper research.
 
 The current application uses two research stages. Fast retrieves and validates
-bounded SEC evidence directly, streams deterministic partial reports, and may
+bounded SEC and Nasdaq Trader evidence directly, adds optional Alpha Vantage
+free-tier news discovery and end-of-day market context, streams deterministic partial reports, and may
 run a small tool-disabled classification over supplied evidence IDs. Deep uses
 the OpenAI Responses API with broader web search and must ultimately extend the
 Fast evidence packet. The report contract covers identity,
@@ -27,7 +28,9 @@ This application is a research aid, not financial advice.
 The first end-to-end prototype is working:
 
 1. A user enters a ticker in the browser.
-2. The Express server requests JSON Schema output from OpenAI.
+2. For Fast, Express retrieves bounded deterministic evidence and optionally
+   requests tool-disabled classification from OpenAI. For Deep, it requests
+   broader JSON Schema output through the OpenAI Responses API.
 3. The server validates the schema and cross-record semantics.
    Material report records must link to dated, typed evidence; secondary sources
    carry reduced confidence, and conflicting evidence remains unknown or limited.
@@ -80,6 +83,7 @@ cost, and reliability remain uncalibrated. See
    OPENAI_API_KEY=your_key_here
    PORT=3000
    SEC_USER_AGENT=stock-research your-name your-contact-email@example.com
+   ALPHA_VANTAGE_API_KEY=your_free_key_here
    ```
 
    `OPENAI_API_KEY` is required for the real application. Startup fails before
@@ -88,7 +92,10 @@ cost, and reliability remain uncalibrated. See
    app's listening port. Set `SEC_USER_AGENT` to an application name and a
    monitored contact address. The SEC may return HTTP 403 when it cannot
    identify or permit a client; Fast then keeps affected evidence
-   Pending/Unknown and logs only safe request metadata.
+   Pending/Unknown and logs only safe request metadata. `ALPHA_VANTAGE_API_KEY`
+   is optional. With a free key, Fast uses at most two uncached Alpha Vantage
+   requests per ticker for discovery and end-of-day context. Without a key, or
+   after quota exhaustion, those areas remain Limited while SEC/Nasdaq evidence survives.
 
 3. Start the application:
 
@@ -171,11 +178,14 @@ renders a deterministic report. Explicit split ratios, actual issuance versus
 registered capacity, warrants/convertibles, warning language, and recent filing
 events are extracted conservatively; unmatched content stays Limited/Unknown.
 Optional AI synthesis has hosted tools disabled and may reference only supplied
-evidence record IDs; its failure cannot remove deterministic evidence. The
-approved next milestone adds a bounded non-SEC source strategy, end-to-end
-20-second and cost ceilings, corrected evidence semantics, recalibrated scores,
-and real-ticker reliability evaluation. These policies are documented but not
-yet fully implemented.
+evidence record IDs; its failure cannot remove deterministic evidence. Nasdaq
+Trader supplies identity-gated current symbol, security-type, listing-status,
+and halt context. Alpha Vantage supplies discovery-only news links and
+timestamped end-of-day price/volume; its summaries, sentiment, and article text
+are never sent to OpenAI and cannot independently support a material score.
+Original newswire links are promoted only after issuer identity agrees. All
+source work participates in the shared 20-second and cost ceilings. The next
+milestone recalibrates scoring against these corrected evidence semantics.
 
 The default action runs the Fast stage. **Deeper research** remains deliberate
 and separately budgeted. The approved direction requires Deep to build and reuse

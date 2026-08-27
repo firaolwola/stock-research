@@ -24,11 +24,12 @@ function synthesisMaximumCost(request, pricing = PRICING_SNAPSHOT) {
   return Number((maximumInputTokens * pricing.input_per_million_usd / 1_000_000 + SYNTHESIS_MAX_OUTPUT_TOKENS * pricing.output_per_million_usd / 1_000_000).toFixed(6));
 }
 
-export function createEvidenceFirstResearchClient({ secClient, openai, deepClient, now = () => performance.now() } = {}) {
+export function createEvidenceFirstResearchClient({ secClient, boundedSourceClient, openai, deepClient, now = () => performance.now() } = {}) {
   if (!secClient || !deepClient) throw new TypeError("SEC and Deep research clients are required");
+  const completedPackets = new Map();
   return {
     async researchTicker(ticker, { stage = "fast", onProgress, budget, budgetClass = "normal" } = {}) {
-      if (stage === "deep") return deepClient.researchTicker(ticker, { stage, seedEvidence: secClient.getPacket(ticker) });
+      if (stage === "deep") return deepClient.researchTicker(ticker, { stage, seedEvidence: completedPackets.get(ticker) ?? secClient.getPacket(ticker) });
       const ownedBudget = !budget;
       const fastBudget = budget ?? createFastBudgetController({ budgetClass, now });
       const started = now();
@@ -38,11 +39,16 @@ export function createEvidenceFirstResearchClient({ secClient, openai, deepClien
         const budgetTelemetry = ownedBudget ? fastBudget.finish({ partial }) : fastBudget.telemetry({ final: true });
         return { ...result, operations: { ...result.operations, budget: budgetTelemetry } };
       };
-      const deterministic = await secClient.researchTicker(ticker, {
+      let deterministic = await secClient.researchTicker(ticker, {
         budget: fastBudget,
         onProgress: onProgress ? (progress) => onProgress({ ...progress, operations: { ...withBudget(progress.operations), synthesis: { status: "pending" } } }) : undefined
       });
+      if (boundedSourceClient && !fastBudget.isStopped() && deterministic.evidence_packet) {
+        deterministic = await boundedSourceClient.enrich(ticker, deterministic, { budget: fastBudget, onProgress });
+        deterministic.evidence_packet = { ...deterministic.evidence_packet, records: structuredClone(deterministic.evidence_records), sources: structuredClone(deterministic.report.sources) };
+      }
       const packet = deterministic.evidence_packet;
+      if (packet) completedPackets.set(ticker, structuredClone(packet));
       if (!packet || !openai?.responses?.create || fastBudget.isStopped()) {
         const reason = fastBudget.telemetry().termination_reason;
         const status = reason === "time_ceiling" || reason === "cost_ceiling" ? "skipped" : "unavailable";
