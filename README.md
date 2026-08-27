@@ -24,7 +24,9 @@ catalyst content; smaller screens stack the same sections. Financial display
 rows show independently calibrated company-relative trend stars only when at
 least two comparable SEC-derived observations pass the evidence gate; otherwise
 they remain Limited/Unscored. Detailed
-financial reasoning is consolidated under Financial Health. Compact vertical
+financial reasoning is consolidated under Financial Health. Compact star
+tooltips expose the internal value and metric-specific low/high meaning on hover
+or keyboard/tap focus without adding permanent row text. Compact vertical
 bar charts compare only source-linked, definition- and period-compatible
 observations; one observation never implies a trend. A separate SEC-reported
 shares-outstanding chart shows bounded point-in-time share-base history without

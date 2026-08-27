@@ -136,7 +136,10 @@ The report contract keeps detailed scores on the existing 0–10 internal scale.
 The Fast dashboard converts them to a 0–5 star presentation, allowing half-stars
 where useful. A unified row summary keeps only metric names left-aligned and
 stars or honest unresolved states right-aligned, without redundant visible
-numeric star text. Descriptions, detailed 0–10 values, methodology, inputs,
+numeric star text. A scored star display exposes a focusable hover/focus tooltip
+with its internal 0–10 value and metric-specific low/high interpretation; risk
+scores explicitly say that more stars mean more risk. Unresolved rows expose no
+fabricated numeric tooltip. Descriptions, detailed 0–10 values, methodology, inputs,
 explanations, and sources remain inspectable in a separate expandable block
 below. Revenue, net income/loss, debt, free cash flow, cash, and operating cash
 flow have independent company-relative trend scores when at least two comparable

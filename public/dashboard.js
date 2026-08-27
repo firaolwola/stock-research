@@ -43,6 +43,19 @@ const financialTrendScoreKeys = Object.freeze({
   revenue: "financial_revenue_trend", profitability: "financial_net_income_trend", debt: "financial_debt_trend",
   free_cash_flow: "financial_free_cash_flow_trend", cash: "financial_cash_trend", operating_cash_flow: "financial_operating_cash_flow_trend"
 });
+const scoreTooltipGuidance = Object.freeze({
+  financial_health: ["strong overall financial resilience", "very weak financial condition"],
+  revenue: ["strong/improving revenue trend", "sharply deteriorating revenue"],
+  profitability: ["strong profits or major improvement", "worsening losses"],
+  debt: ["falling or well-controlled debt trend", "rapidly worsening debt trend"],
+  free_cash_flow: ["strong positive/improving free cash flow", "strongly negative/deteriorating free cash flow"],
+  cash: ["strong/growing cash position", "substantial cash depletion"],
+  operating_cash_flow: ["strong/improving operating cash generation", "heavy/deteriorating operating cash consumption"],
+  dilution_historical_severity: ["severe historical dilution", "little or no confirmed historical dilution"],
+  dilution_future_likelihood: ["high supported future dilution risk", "low supported future dilution risk"],
+  dilution_potential_impact: ["potentially severe shareholder dilution", "little supported potential dilution"],
+  reverse_split_risk: ["high supported reverse-split risk", "low supported reverse-split risk"]
+});
 
 export function validateTickerInput(value) {
   const ticker = String(value || "").trim().toUpperCase();
@@ -56,6 +69,12 @@ export function formatLabel(value) {
 export function scoreToStars(value) {
   if (!Number.isFinite(value)) return null;
   return Math.round(Math.max(0, Math.min(10, value))) / 2;
+}
+export function scoreTooltipText(key, score, presentation = buildScorePresentation(score)) {
+  if (presentation.state !== "scored" || !Number.isFinite(score.value)) return null;
+  const guidance = scoreTooltipGuidance[key];
+  if (!guidance) return `${score.value} / 10. ${presentation.directionLabel}.`;
+  return `${score.value} / 10. ${presentation.directionLabel}. 5 stars = ${guidance[0]}. 0 stars = ${guidance[1]}.`;
 }
 export function settledScoreKeysForOperations(operations, final = false) {
   if (final) return new Set(priorityScoreKeys);
@@ -163,16 +182,19 @@ function appendSourceLinks(parent, sources) {
   });
   parent.append(links);
 }
-function renderStars(presentation) {
-  const wrapper = element("div", "star-rating");
-  wrapper.setAttribute("role", "img");
+function renderStars(score) {
+  const { presentation } = score; const tooltipId = `score-tooltip-${score.key}`;
+  const wrapper = element("button", "star-rating score-tooltip-trigger"); wrapper.type = "button";
   wrapper.setAttribute("aria-label", presentation.accessibleLabel);
+  wrapper.setAttribute("aria-describedby", tooltipId);
   const visual = element("span", "stars"); visual.setAttribute("aria-hidden", "true");
   for (let index = 0; index < 5; index += 1) {
     const remaining = presentation.stars - index;
     visual.append(element("span", `star ${remaining >= 1 ? "full" : remaining >= 0.5 ? "half" : "empty"}`, remaining >= 1 ? "★" : "☆"));
   }
-  wrapper.append(visual, element("span", "visually-hidden", presentation.accessibleLabel));
+  const tooltip = element("span", "score-tooltip", scoreTooltipText(score.key, score, presentation));
+  tooltip.id = tooltipId; tooltip.setAttribute("role", "tooltip");
+  wrapper.append(visual, element("span", "visually-hidden", presentation.accessibleLabel), tooltip);
   return wrapper;
 }
 function renderHeader(view) {
@@ -265,7 +287,7 @@ function renderScores(view) {
       copy.append(element("p", "score-metric-value", `${score.metric.value.toLocaleString()} ${score.metric.unit} · ${context}`));
     }
     const value = element("div", "score-summary-value");
-    if (score.presentation.state === "scored") value.append(renderStars(score.presentation));
+    if (score.presentation.state === "scored") value.append(renderStars(score));
     else value.append(badge(score.presentation.state), element("span", "visually-hidden", score.presentation.accessibleLabel));
     row.append(copy, value); list.append(row);
   });
