@@ -48,7 +48,11 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   stage, `complete`, `partial`, or `pending` completion, topic-specific research
   windows, and structured coverage limitations.
 - `security` records the current ticker, display name, security type, listing
-  venue/status, evidence state, and supporting claims.
+  venue/status, evidence state, and supporting claims. A confirmed security
+  record cannot leave security type or listing status `unknown`. The SEC ticker
+  association may confirm issuer/ticker/CIK and venue while the overall security
+  record remains `limited_coverage` until an authoritative source establishes
+  type and current listing state.
 - `issuer` records legal identity, optional CIK, identity confidence, and prior
   names/tickers. Confirmed prior identities require both effective dates,
   `high` or `medium` linkage confidence, and sourced confirmed linkage claims.
@@ -74,6 +78,20 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   liquidity, burn, leverage, profitability, accounting, or going-concern
   warnings carry severity and dates for priority ranking. Operating-company
   metrics may be `not_applicable` for securities such as ETFs.
+
+Fast financial normalization uses conservative derived-value rules. Operating
+cash flow is not free cash flow: FCF is populated only when aligned operating
+cash flow and capital-expenditure facts share a period and unit. Total debt is
+populated only from aligned current and non-current components; one component,
+or components with conflicting periods or currencies, leaves total debt limited
+and null. Stale decision-critical values retain sourced warnings but are not
+exposed as current numeric inputs. Runway stays unresolved unless current,
+comparable cash and positive burn inputs are both available.
+The semantic validator applies the same boundary to all report producers: a
+confirmed monetary metric must use the assessment reporting currency, critical
+liquidity metrics more than 180 days old cannot remain confirmed, FCF cannot be
+labeled as OCF, and a single current/non-current component cannot be labeled as
+confirmed total debt.
 - `scores` keeps dilution historical severity, future likelihood, and potential
   impact separate. Reverse-split risk, financial health, long-term company
   quality, catalyst strength, and near-term setup quality are also separate.
@@ -173,6 +191,9 @@ references, bidirectional claim/source links, evidence requirements for
 confirmed/not-found claims, evidence references on material report records,
 reduced confidence for secondary sources, source-date ordering, and consistency
 between complete status and coverage limitations.
+Validation also rejects a confirmed security with unresolved type/listing state,
+and the HTTP boundary rejects a report whose security ticker differs from the
+requested ticker.
 
 The complete fixture demonstrates all initial trustworthy-report sections,
 confirmed lineage, dated SEC, exchange, company, original-news, and secondary

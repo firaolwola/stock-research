@@ -58,7 +58,7 @@ verdict.
 
 1. [x] [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
 2. [x] [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
-3. [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
+3. [x] [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
 4. [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). Provider selection, payment, scraping, integration, and new production dependencies require explicit owner approval.
 5. [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52).
 6. [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53).
@@ -69,10 +69,10 @@ verdict.
 is bounded technical cleanup that can be scheduled after #48 when it minimizes
 conflict with milestone implementation.
 
-The source-strategy and evidence-contract decision is the next implementation
-dependency because orchestration, scoring sufficiency, provider budgets, and
-calibration all depend on which evidence can be obtained reliably and legally
-within Fast's limits.
+The next implementation dependency is #51. Its provider-neutral integration
+boundary can build on #49 and #50, but selecting or integrating a named news or
+market-data provider still requires the owner's explicit licensing, access, and
+cost approval.
 
 The provider-neutral #48 source map and bounded architecture are approved and
 documented in `FAST_SOURCE_STRATEGY.md`. No named provider is selected. #49 may

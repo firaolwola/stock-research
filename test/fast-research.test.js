@@ -52,18 +52,11 @@ test("a missing domain remains Pending and cannot become favorable evidence", ()
   assert.notEqual(calibrated.scores.financial_health.state, "confirmed");
 });
 
-test("disagreeing issuer identity blocks all cross-domain evidence", () => {
+test("disagreeing issuer identity is a hard failure", () => {
   const financial = structuredClone(fragment("financial"));
   financial.identity.cik = "0009999999";
   financial.identity.issuer_legal_name = "Different Issuer Corp.";
-  const report = assembleFastReport("ACME", { capital: { fragment: fragment("capital") }, financial: { fragment: financial } }, { generatedAt: "2026-08-25T12:00:00Z" });
-  const calibrated = calibrateReportScores(report);
-  assert.equal(validate(calibrated).valid, true);
-  assert.equal(report.security.evidence_state, "unknown");
-  assert.equal(report.claims.length, 0);
-  assert.equal(report.sections.dilution.state, "unknown");
-  assert.equal(calibrated.scores.dilution_historical_severity.value, null);
-  assert.ok(report.metadata.coverage_limitations.some((item) => item.code.includes("identity-mismatch")));
+  assert.throws(() => assembleFastReport("ACME", { capital: { fragment: fragment("capital") }, financial: { fragment: financial } }, { generatedAt: "2026-08-25T12:00:00Z" }), { name: "FastIdentityMismatchError", code: "FAST_IDENTITY_MISMATCH" });
 });
 
 test("representative compact fragments retain at least 35 percent rough output headroom", () => {
