@@ -119,8 +119,8 @@ Fast should normally attempt to produce trustworthy values for:
 7. Near-term setup quality.
 
 Long-term company quality may remain unscored more often and be expanded in
-Deep. Deterministic methodology 2.0.0 is the current executable contract;
-methodology 1.0.0 remains only a historical comparison baseline.
+Deep. Deterministic methodology 2.1.0 is the current executable contract;
+methodologies 2.0.0 and 1.0.0 remain historical comparison baselines.
 
 ### Progressive score behavior
 
@@ -138,13 +138,16 @@ where useful. A unified row summary keeps only metric names left-aligned and
 stars or honest unresolved states right-aligned, without redundant visible
 numeric star text. Descriptions, detailed 0–10 values, methodology, inputs,
 explanations, and sources remain inspectable in a separate expandable block
-below. Financial sub-metrics may reuse a direct methodology 2.0.0
-component for display; metrics without a direct score remain Unscored.
+below. Revenue, net income/loss, debt, free cash flow, cash, and operating cash
+flow have independent company-relative trend scores when at least two comparable
+SEC-derived observations satisfy the 2.1.0 evidence gate. They do not score raw
+company size. Missing, stale, conflicting, mismatched, or secondary-provider
+financial inputs remain Limited/Unscored.
 
 Financial Health is the main financial explanation container. Revenue, net
 income or loss, total debt, free cash flow, cash, and operating cash flow appear
 as compact supporting rows rather than repeated score explanations. Internal
-burn and runway inputs remain available to methodology 2.0.0 but are not a
+burn and runway inputs remain available to the overall Financial Health score but are not a
 primary chart label. Charts
 use only source-linked observations with matching definitions, units,
 currencies, and comparable period lengths. A single observation is labeled as
@@ -159,7 +162,7 @@ The same chart area may show SEC-reported shares outstanding as capital-structur
 context. It uses point-in-time reported observations and may summarize the
 visible-window change, but it must remain distinct from float, authorized shares,
 registered capacity, warrants, convertibles, and potential dilution. This display
-context does not create or modify a methodology 2.0.0 score.
+context does not create or modify a methodology 2.1.0 score.
 
 ### Dashboard order
 

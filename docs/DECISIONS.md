@@ -338,7 +338,7 @@ excluded.
 
 **Decision:** Version the report contract at 4.0.0 and replace upstream score
 values with a versioned deterministic methodology before final validation. The
-current endpoint uses 2.0.0; 1.0.0 remains the historical baseline. Every score shows
+current endpoint uses 2.1.0; 2.0.0 and 1.0.0 remain historical baselines. Every score shows
 its construct, direction, horizon, confidence, components, weights, explanation,
 and evidence links. Required uncertainty leaves a score null. Near-term setup
 uses a five-trading-day evidence horizon and excludes long-term company quality.
@@ -807,3 +807,22 @@ provides quantified share terms, current comparable financials, promoted
 catalysts, and sufficient EOD baselines. Issue #53 changed their presentation
 without changing these meanings; Issue #55 must measure real-ticker coverage before reliability
 targets are claimed.
+
+## 2026-08-27 — Score financial trends only from comparable SEC evidence
+
+**Status:** Accepted and implemented as methodology 2.1.0
+
+**Decision:** Add independent higher-is-stronger revenue, net-income/loss, total
+debt, free-cash-flow, cash, and operating-cash-flow trend scores. Each compares
+the issuer only with its own compatible SEC-reported history and requires at
+least two observations; three or more increase confidence. Company Facts and
+SEC-filed reports/exhibits are the only score-authoritative financial sources.
+Alpha Vantage remains news discovery and EOD market context only. Shares
+outstanding remains capital-structure evidence for dilution constructs, not a
+generic higher-is-stronger score. The overall Financial Health formula remains
+the 2.0 construct and does not consume the six sub-scores, avoiding circularity.
+
+**Why:** Borrowing stars from overall-health components obscured the difference
+between current condition and independent trend. Secondary financial values or
+one observation could also create false confidence. Version 2.1.0 makes the UI
+semantics explicit while preserving the stricter 2.0 philosophy and baseline.

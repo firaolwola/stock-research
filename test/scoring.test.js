@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { buildScoreRollup, calibrateReportScores, LEGACY_SCORING_METHODOLOGY_VERSION, SCORING_METHODOLOGY_VERSION, SCORE_DEFINITIONS } from "../lib/scoring.js";
+import { buildScoreRollup, calibrateReportScores, LEGACY_SCORING_METHODOLOGY_VERSION, PREVIOUS_SCORING_METHODOLOGY_VERSION, SCORING_METHODOLOGY_VERSION, SCORE_DEFINITIONS } from "../lib/scoring.js";
 
 const load = async (name) => JSON.parse(await readFile(new URL(`../fixtures/reports/${name}.json`, import.meta.url), "utf8"));
 const actualDilution = (report, percent = 20) => {
@@ -24,14 +24,15 @@ const marketContext = (report, price = 8, volume = 2) => {
   return report;
 };
 
-test("methodology 2 is deterministic, explicit, and preserves the 1.0 baseline", async () => {
+test("methodology 2.1 is deterministic, explicit, and preserves prior baselines", async () => {
   const report = marketContext(scoreableCatalyst(actualDilution(await load("complete"))));
   const first = calibrateReportScores(report); const second = calibrateReportScores(report);
   assert.equal(LEGACY_SCORING_METHODOLOGY_VERSION, "1.0.0");
-  assert.equal(SCORING_METHODOLOGY_VERSION, "2.0.0");
+  assert.equal(PREVIOUS_SCORING_METHODOLOGY_VERSION, "2.0.0");
+  assert.equal(SCORING_METHODOLOGY_VERSION, "2.1.0");
   assert.deepEqual(first.scores, second.scores);
   assert.deepEqual(Object.keys(first.scores), Object.keys(SCORE_DEFINITIONS));
-  for (const score of Object.values(first.scores)) assert.equal(score.methodology_version, "2.0.0");
+  for (const score of Object.values(first.scores)) assert.equal(score.methodology_version, "2.1.0");
   assert.equal(first.scores.long_term_company_quality.state, "limited_coverage");
 });
 

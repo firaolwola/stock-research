@@ -28,18 +28,21 @@ const financialMetricLabels = Object.freeze({
 const scoreDescriptions = Object.freeze({
   financial_health: "Overall resilience from liquidity, debt, cash flow, profitability, and material warnings.",
   revenue: "Latest reported sales and whether comparable evidence supports a trend.",
-  profitability: "Reported net income or loss on comparable evidence.",
-  debt: "Debt burden relative to the issuer's supported capacity.",
-  free_cash_flow: "Cash left after operating needs and capital spending.",
-  cash: "Latest supported cash balance and its freshness.",
+  profitability: "Whether comparable SEC-reported net income or loss is improving.",
+  debt: "Whether comparable SEC-reported total debt is stable, declining, or growing.",
+  free_cash_flow: "Whether comparable SEC-derived free cash flow is improving.",
+  cash: "Whether fresh comparable SEC-reported cash balances are strengthening or depleting.",
   cash_burn: "Supported rate of cash use; missing burn never implies safety.",
-  operating_cash_flow: "Cash generated or consumed by business operations during the reporting period.",
+  operating_cash_flow: "Whether comparable SEC-reported operating cash flow is improving.",
   dilution_historical_severity: "How much supported dilution has already affected the share base.",
   dilution_future_likelihood: "How likely supported financing capacity is to become future dilution.",
   dilution_potential_impact: "Potential share-base impact from supported warrants, convertibles, or offerings.",
   reverse_split_risk: "Supported split history and current listing pressure."
 });
-const financialComponentKeys = Object.freeze({ profitability: "profitability", debt: "total_debt_capacity", free_cash_flow: "free_cash_flow" });
+const financialTrendScoreKeys = Object.freeze({
+  revenue: "financial_revenue_trend", profitability: "financial_net_income_trend", debt: "financial_debt_trend",
+  free_cash_flow: "financial_free_cash_flow_trend", cash: "financial_cash_trend", operating_cash_flow: "financial_operating_cash_flow_trend"
+});
 
 export function validateTickerInput(value) {
   const ticker = String(value || "").trim().toUpperCase();
@@ -117,14 +120,13 @@ export function buildDashboardView(report, { final = true, settledScoreKeys = ne
     return [...ids].map((id) => sourcesById.get(id)).filter(Boolean);
   };
   const financialScore = report.scores.financial_health;
-  const financialComponents = new Map(financialScore.components.map((component) => [component.key, component]));
   const scoreForSummaryKey = (key) => {
     if (report.scores[key]) return { key, label: scoreLabels[key], description: scoreDescriptions[key], ...report.scores[key], presentation: buildScorePresentation(report.scores[key], { final, settled: settledScoreKeys.has(key) }) };
     const metric = report.financial_assessment.metrics[key] ?? { state: "unknown", value: null, unit: null, observations: [], annual_observations: [], summary: `${financialMetricLabels[key]} is not available in this report.`, claim_ids: [] };
-    const component = financialComponents.get(financialComponentKeys[key]);
+    const independentScore = report.scores[financialTrendScoreKeys[key]];
     const settled = settledScoreKeys.has("financial_health");
-    const displayScore = component
-      ? { state: component.state, value: component.value, scale_max: 10, direction: "higher_is_better", confidence: financialScore.confidence, methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: component.explanation, claim_ids: component.claim_ids, components: [] }
+    const displayScore = independentScore
+      ? independentScore
       : { state: metric.state === "limited_coverage" ? "limited_coverage" : "unknown", value: null, scale_max: 10, direction: "higher_is_better", confidence: "unknown", methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: `${metric.summary} This metric has no independent methodology score, so no stars are shown.`, claim_ids: metric.claim_ids, components: [] };
     return { key, label: key === "debt" ? "Debt" : financialMetricLabels[key], description: scoreDescriptions[key], metric, ...displayScore, presentation: buildScorePresentation(displayScore, { final, settled }) };
   };
@@ -456,10 +458,11 @@ function renderScoreDetails(view) {
   const body = element("div", "score-detail-body"); body.append(element("p", "", financialHealth.explanation), element("p", "muted", `${financialHealth.presentation.directionLabel} · ${financialHealth.presentation.state === "scored" ? `Internal value: ${financialHealth.value} / ${financialHealth.scale_max}` : "Internal value: not available"} · ${formatLabel(financialHealth.confidence)} confidence · methodology ${financialHealth.methodology_version}`));
   const inputs = element("div", "financial-input-details");
   financialMetricOrder.forEach((key) => {
-    const metric = view.report.financial_assessment.metrics[key]; const item = element("article", "financial-input-detail");
+    const metric = view.report.financial_assessment.metrics[key]; const trendScore = view.scoreSummary.find((score) => score.key === key); const item = element("article", "financial-input-detail");
     const title = element("div", "section-title"); title.append(element("h4", "", financialMetricLabels[key]), badge(metric.state)); item.append(title);
     if (metric.state === "confirmed") item.append(element("p", "", `${metric.value.toLocaleString()} ${metric.unit} · ${metric.observations?.length > 1 ? formatLabel(metric.trend) : "one period; no trend inferred"}`));
     item.append(element("p", "", metric.summary));
+    item.append(element("p", "coverage-note", `Independent trend: ${trendScore.presentation.stateLabel}. ${trendScore.explanation}`));
     appendSourceLinks(item, view.sourcesForClaims(metric.claim_ids)); inputs.append(item);
   });
   financialHealth.components.forEach((component) => body.append(element("p", "coverage-note", `${formatLabel(component.key)} (${formatLabel(component.state)}): ${component.explanation}`)));

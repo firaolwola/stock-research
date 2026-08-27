@@ -37,6 +37,12 @@
         "dilution_potential_impact": { "$ref": "#/$defs/score" },
         "reverse_split_risk": { "$ref": "#/$defs/score" },
         "financial_health": { "$ref": "#/$defs/score" },
+        "financial_revenue_trend": { "$ref": "#/$defs/score" },
+        "financial_net_income_trend": { "$ref": "#/$defs/score" },
+        "financial_debt_trend": { "$ref": "#/$defs/score" },
+        "financial_free_cash_flow_trend": { "$ref": "#/$defs/score" },
+        "financial_cash_trend": { "$ref": "#/$defs/score" },
+        "financial_operating_cash_flow_trend": { "$ref": "#/$defs/score" },
         "long_term_company_quality": { "$ref": "#/$defs/score" },
         "catalyst_strength": { "$ref": "#/$defs/score" },
         "near_term_setup_quality": { "$ref": "#/$defs/score" }
@@ -327,7 +333,7 @@
       "properties": {
         "state": { "$ref": "#/$defs/evidenceState" }, "value": { "type": ["number", "null"], "minimum": 0, "maximum": 10 }, "scale_min": { "const": 0 }, "scale_max": { "const": 10 },
         "direction": { "enum": ["higher_is_more_risk", "higher_is_better"] }, "time_horizon": { "$ref": "#/$defs/nonEmptyString" }, "explanation": { "$ref": "#/$defs/nonEmptyString" }, "claim_ids": { "$ref": "#/$defs/claimIds" },
-        "confidence": { "$ref": "#/$defs/confidence" }, "methodology_version": { "const": "2.0.0" }, "components": { "type": "array", "items": { "$ref": "#/$defs/scoreComponent" } }
+        "confidence": { "$ref": "#/$defs/confidence" }, "methodology_version": { "enum": ["2.0.0", "2.1.0"] }, "components": { "type": "array", "items": { "$ref": "#/$defs/scoreComponent" } }
       },
       "allOf": [
         { "if": { "properties": { "state": { "enum": ["unknown", "not_applicable", "limited_coverage", "not_found"] } }, "required": ["state"] }, "then": { "properties": { "value": { "type": "null" } } } },

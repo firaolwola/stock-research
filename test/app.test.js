@@ -3,6 +3,7 @@ import test from "node:test";
 import { createApp } from "../app.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { RESEARCH_ERROR_CODES, ResearchResponseError } from "../openai-research-client.js";
+import { calibrateReportScores } from "../lib/scoring.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { withTestServer } from "../support/test-server.js";
 
@@ -48,7 +49,7 @@ test("analyze normalizes a ticker and returns a validated complete report", asyn
     assert.equal(response.status, 200);
     const body = await response.json();
     assert.equal(body.ticker, "ACME");
-    assert.deepEqual(body.report, completeReport);
+    assert.deepEqual(body.report, calibrateReportScores(completeReport));
     assert.equal(body.operations.budget.cost_limit_usd, 0.03);
     assert.equal(body.operations.budget.termination_reason, "completed");
     assert.ok(body.operations.score_states.scored > 0);
@@ -81,7 +82,7 @@ test("analyze replaces provider-authored score values deterministically", async 
     assert.equal(response.status, 200);
     const body = await response.json();
     assert.equal(body.report.scores.dilution_historical_severity.value, null);
-    assert.equal(body.report.scores.dilution_historical_severity.methodology_version, "2.0.0");
+    assert.equal(body.report.scores.dilution_historical_severity.methodology_version, "2.1.0");
     assert.notEqual(body.report.scores.dilution_historical_severity.explanation, "Provider-authored placeholder.");
   });
 });
@@ -93,7 +94,7 @@ test("analyze returns a validated partial report as a successful result", async 
     assert.equal(response.status, 200);
     const body = await response.json();
     assert.equal(body.ticker, "XYZ");
-    assert.deepEqual(body.report, partialReport);
+    assert.deepEqual(body.report, calibrateReportScores(partialReport));
     assert.equal(body.operations.budget.termination_reason, "partial_coverage");
     assert.ok(body.operations.score_states.unscored + body.operations.score_states.limited > 0);
   });
