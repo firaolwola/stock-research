@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { buildDashboardView, buildPriorityFindings, buildScorePresentation, financialMetricOrder, priorityScoreKeys, scoreSummaryOrder, scoreToStars, sectionLabels, settledScoreKeysForOperations, validateTickerInput } from "../public/dashboard.js";
+import { buildDashboardView, buildPriorityFindings, buildScorePresentation, financialMetricOrder, priorityScoreKeys, scoreSummaryOrder, scoreToStars, scoreTooltipText, sectionLabels, settledScoreKeysForOperations, validateTickerInput } from "../public/dashboard.js";
 import { loadReportFixture } from "../support/report-fixtures.js";
 import { calibrateReportScores } from "../lib/scoring.js";
 
@@ -28,6 +28,41 @@ test("risk and quality cards communicate direction in text and accessible labels
   assert.match(risk.accessibleLabel, /4 out of 5 stars.*More Risk/);
   assert.equal(quality.directionLabel, "Higher = Stronger");
   assert.match(quality.accessibleLabel, /4 out of 5 stars.*Stronger/);
+});
+
+test("score tooltips state the internal value and correct low-to-high meaning", () => {
+  const quality = { state: "confirmed", value: 7.1, scale_max: 10, direction: "higher_is_better" };
+  const risk = { state: "confirmed", value: 8, scale_max: 10, direction: "higher_is_more_risk" };
+  assert.equal(scoreTooltipText("revenue", quality), "7.1 / 10. Higher = Stronger. 5 stars = strong/improving revenue trend. 0 stars = sharply deteriorating revenue.");
+  assert.match(scoreTooltipText("dilution_historical_severity", risk), /Higher = More Risk.*5 stars = severe historical dilution.*0 stars = little or no confirmed historical dilution/);
+  assert.match(scoreTooltipText("debt", quality), /5 stars = falling or well-controlled debt trend.*0 stars = rapidly worsening debt trend/);
+  assert.doesNotMatch(scoreTooltipText("debt", quality), /5 stars = more debt/i);
+  for (const key of ["financial_health", "revenue", "profitability", "debt", "free_cash_flow", "cash", "operating_cash_flow"]) {
+    assert.match(scoreTooltipText(key, quality), /Higher = Stronger.*5 stars = .+.*0 stars = .+/i, key);
+  }
+  for (const key of ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]) {
+    assert.match(scoreTooltipText(key, risk), /Higher = More Risk.*5 stars = .+.*0 stars = .+/i, key);
+  }
+});
+
+test("unresolved score states never expose fake numeric tooltip values", () => {
+  for (const [state, settled] of [["limited_coverage", true], ["unknown", true], ["confirmed", false]]) {
+    const score = { state, value: state === "confirmed" ? 7 : null, scale_max: 10, direction: "higher_is_better" };
+    const presentation = buildScorePresentation(score, { final: settled, settled });
+    assert.equal(scoreTooltipText("revenue", score, presentation), null);
+    assert.doesNotMatch(presentation.accessibleLabel, /internal score|out of 10/i);
+  }
+});
+
+test("star tooltips are keyboard, hover, touch-focus, and screen-reader accessible", async () => {
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  const css = await readFile(new URL("../public/styles.css", import.meta.url), "utf8");
+  assert.match(source, /element\("button", "star-rating score-tooltip-trigger"\)/);
+  assert.match(source, /aria-describedby/); assert.match(source, /role", "tooltip"/); assert.match(source, /aria-label/);
+  assert.match(css, /\.score-tooltip-trigger:hover \.score-tooltip/);
+  assert.match(css, /\.score-tooltip-trigger:focus \.score-tooltip/);
+  assert.match(css, /\.score-tooltip-trigger:focus-visible \.score-tooltip/);
+  assert.match(css, /@media \(max-width: 680px\)[\s\S]*\.score-tooltip/);
 });
 
 test("cards transition without provisional numbers and settle independently", async () => {
