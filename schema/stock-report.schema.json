@@ -119,7 +119,7 @@
         "event_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
           "period_start": { "$ref": "#/$defs/date" }, "period_end": { "$ref": "#/$defs/date" },
           "evidence_role": { "enum": ["actual_issuance", "registration_capacity", "potential_issuance", "instrument_overhang", "context"] },
-          "corporate_action_state": { "enum": ["completed", "authorized", "proposed", "unknown"] },
+          "corporate_action_state": { "enum": ["completed", "scheduled", "authorized", "proposed", "cancelled", "unknown"] },
           "resolution_state": { "enum": ["active", "resolved", "historical", "informational"] },
           "value": { "type": "number" }, "unit": { "$ref": "#/$defs/nonEmptyString" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }

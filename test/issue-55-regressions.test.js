@@ -14,15 +14,15 @@ const reportValidator = createReportValidator(schema);
 const fact = (val, { start, end, filed = "2026-08-15", form = "10-Q", accn = "0000000001-26-000001", frame } = {}) => ({ val, ...(start ? { start } : {}), end, filed, form, accn, ...(frame ? { frame } : {}) });
 const concept = (label, entries, unit = "USD") => ({ label, units: { [unit]: entries } });
 
-function secFixture({ ticker = "TEST", cik = 1, companyFacts, filings = [], documents = {} }) {
+function secFixture({ ticker = "TEST", cik = 1, companyFacts, filings = [], archivedFilings = {}, documents = {} }) {
   const padded = String(cik).padStart(10, "0");
   const tickerMap = { fields: ["cik", "name", "ticker", "exchange"], data: [[cik, `${ticker} Corp.`, ticker, "Nasdaq"]] };
   const recent = { accessionNumber: [], form: [], filingDate: [], reportDate: [], primaryDocument: [], items: [], primaryDocDescription: [] };
   for (const filing of filings) for (const key of Object.keys(recent)) recent[key].push(filing[key] ?? "");
-  const submissions = { cik: padded, name: `${ticker} Corp.`, filings: { recent } };
+  const submissions = { cik: padded, name: `${ticker} Corp.`, filings: { recent, files: Object.keys(archivedFilings).map((name) => ({ name, filingFrom: "2021-01-01", filingTo: "2024-12-31" })) } };
   return async (url) => {
     const pathname = new URL(url).pathname; const name = pathname.split("/").at(-1);
-    const body = pathname.includes("company_tickers") ? tickerMap : pathname.includes("submissions") ? submissions : companyFacts;
+    const body = pathname.includes("company_tickers") ? tickerMap : pathname.includes("/submissions/") ? (archivedFilings[name] ?? submissions) : companyFacts;
     return { ok: true, status: 200, async json() { return structuredClone(body); }, async text() { return documents[name] ?? "No classified material event."; } };
   };
 }
@@ -81,6 +81,44 @@ test("AMC completed reverse split is historical while NXL authorization is not",
   const authorized = extractSecFilingEvidence({ html: "Stockholders approved and authorized the board to effectuate a 1-for-30 reverse stock split in the future.", form: "DEF 14A", filed: "2026-07-01", accession: "nxl", documentUrl: "https://www.sec.gov/nxl.htm", documentName: "nxl.htm" }).find((item) => item.kind === "reverse_split");
   assert.equal(completed.action_state, "completed"); assert.equal(completed.split_factor, .1);
   assert.equal(authorized.action_state, "authorized");
+});
+
+test("AAPL effective-control opinion is a negative control while SMCI explicit weakness remains a warning", () => {
+  const extract = (html) => extractSecFilingEvidence({ html, form: "10-K", filed: "2025-10-31", accession: "control", documentUrl: "https://www.sec.gov/control.htm", documentName: "control.htm" });
+  assert.equal(extract("Internal control over financial reporting was maintained in all material respects. The audit assessed the risk that a material weakness exists and concluded the company maintained effective internal control over financial reporting.").some((item) => item.kind === "accounting_warning"), false);
+  assert.equal(extract("Management concluded that internal control over financial reporting was not effective because we identified material weaknesses that remained unremediated.").some((item) => item.kind === "accounting_warning"), true);
+});
+
+test("NXL split timing is scheduled before its effective date and completed afterward", () => {
+  const html = "The Company filed an amendment to effectuate a 1-for-30 reverse stock split. The Reverse Stock Split will become effective on August 28, 2026 and trading is expected to begin on a split-adjusted basis on August 31, 2026.";
+  const extract = (evaluatedAt) => extractSecFilingEvidence({ html, form: "8-K", filed: "2026-08-27", evaluatedAt, accession: "nxl", documentUrl: "https://www.sec.gov/nxl.htm", documentName: "nxl.htm" }).find((item) => item.kind === "reverse_split");
+  assert.equal(extract("2026-08-27T12:00:00Z").action_state, "scheduled");
+  assert.equal(extract("2026-08-29T12:00:00Z").action_state, "completed");
+  const proposed = extractSecFilingEvidence({ html: "The board proposed a 1-for-20 reverse stock split, subject to stockholder approval.", form: "PRE 14A", filed: "2026-08-01", evaluatedAt: "2026-08-27T12:00:00Z", accession: "proposal", documentUrl: "https://www.sec.gov/proposal.htm", documentName: "proposal.htm" }).find((item) => item.kind === "reverse_split");
+  assert.equal(proposed.action_state, "proposed");
+});
+
+test("SMCI listing covenant is informational while an actual Nasdaq notice is active", () => {
+  const extract = (html) => extractSecFilingEvidence({ html, form: "10-K", filed: "2026-08-01", accession: "listing", documentUrl: "https://www.sec.gov/listing.htm", documentName: "listing.htm" });
+  assert.equal(extract("The credit facility requires continuous Nasdaq listing; noncompliance with this financing covenant may accelerate repayment.").some((item) => item.kind === "exchange_compliance"), false);
+  const active = extract("Nasdaq notified the Company that it was not in compliance with the minimum bid price requirement and provided a 180-day compliance period.").find((item) => item.kind === "exchange_compliance");
+  assert.equal(active.resolution_state, "active");
+});
+
+test("AMC historical submissions chunk supplies the completed authoritative split", async () => {
+  const archive = { accessionNumber: ["0000000001-23-000001"], form: ["8-K"], filingDate: ["2023-08-24"], reportDate: ["2023-08-24"], primaryDocument: ["split.htm"], items: ["5.03"], primaryDocDescription: ["Reverse split"] };
+  const result = await researchFixture({ ticker: "AMC", archivedFilings: { "CIK0000000001-submissions-001.json": archive }, documents: { "split.htm": "The Company effected a reverse stock split at a ratio of 1-for-10, effective August 24, 2023." } });
+  const split = result.report.sections.reverse_splits.items[0];
+  assert.equal(split.title, "Completed 1-for-10 reverse split"); assert.equal(split.corporate_action_state, "completed");
+});
+
+test("AMC and NXL OCF without aligned SEC capex remain honestly Limited FCF", async () => {
+  for (const ticker of ["AMC", "NXL"]) {
+    const result = await researchFixture({ ticker, companyFacts: { cik: 1, entityName: `${ticker} Corp.`, facts: { "us-gaap": { NetCashProvidedByUsedInOperatingActivities: concept("OCF", [fact(-8, { start: "2026-01-01", end: "2026-06-30" }), fact(-4, { start: "2025-01-01", end: "2025-06-30", filed: "2025-08-15", accn: "prior" })]) } } } });
+    assert.equal(result.report.financial_assessment.metrics.free_cash_flow.state, "unknown");
+    assert.match(result.report.financial_assessment.metrics.free_cash_flow.summary, /aligned capital expenditures are not/);
+    assert.equal(calibrateReportScores(result.report).scores.financial_free_cash_flow_trend.value, null);
+  }
 });
 
 test("AMC issuance growth survives reverse-split adjustment", async () => {

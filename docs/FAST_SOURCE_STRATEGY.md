@@ -128,6 +128,18 @@ deadline completed successfully; it never means the wider internet was searched.
   cannot override the issuer/exchange record.
 - **Otherwise:** `Limited` or `Unscored`; no split result alone is not low risk.
 
+Fast may retrieve up to two SEC historical-submissions index chunks when the
+current submissions block no longer contains the bounded five-year corporate-
+action window. Split normalization preserves `proposed`, `authorized`,
+`scheduled`, `completed`, and `cancelled` timing. A future effective date remains
+scheduled at the report cutoff even when an amendment has already been filed.
+
+Control and listing warnings require contextual affirmative evidence. Effective-
+control audit language and discussion of the risk that a weakness could exist do
+not establish a weakness. A lending covenant, hypothetical delisting consequence,
+or generic continued-listing risk does not establish an active deficiency; Fast
+requires an exchange notice or explicit issuer disclosure of active status.
+
 ### Financial health
 
 - **Required evidence:** latest available cash, debt, revenue, profitability,

@@ -64,3 +64,22 @@ date, and SMCI listing-context defects with deterministic regressions. After
 that, the smallest previously proposed expansion remains BIOR, MULN, NIO, and
 TUPBQ (at most four Fast runs, eight optional-provider operations, and $0.12
 OpenAI). That expansion is not authorized.
+
+## Corrective-work status (post-measurement)
+
+The measured 96.51% result above is unchanged. Offline regressions now fix the
+four reproduced mechanisms without another live run:
+
+- effective-control audit language is a negative control, while explicit SMCI-
+  style ineffective-control/material-weakness language remains detected;
+- bounded historical SEC submissions retrieval supplies an older authoritative
+  AMC-style Item 5.03 split filing when it has rolled out of the current block;
+- future-effective NXL-style actions remain `scheduled` before the effective
+  cutoff and become `completed` only afterward; and
+- a financing covenant requiring continued listing is informational, while an
+  actual Nasdaq deficiency notice remains active evidence.
+
+The two Batch 3 FCF misses were reproduced. Both have OCF but no aligned SEC
+capex fact for the same cadence, so they remain Limited/Unscored. No secondary
+value or unsupported taxonomy proxy was introduced. This corrective status is
+not a fourth batch and does not prove the remaining sparse categories.

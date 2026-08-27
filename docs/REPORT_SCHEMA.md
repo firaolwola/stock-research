@@ -81,8 +81,10 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   accounting warnings, financial measures, catalysts, and news. They provide
   dated event summaries and claim references, with optional periods and paired
   numeric value/unit fields where those facts are useful. Reverse-split items
-  may carry `corporate_action_state` to distinguish completed, authorized,
-  proposed, and unresolved actions; only completed actions count as history.
+  may carry `corporate_action_state` to distinguish completed, scheduled,
+  authorized, proposed, cancelled, and unresolved actions. Only actions whose
+  effective time has passed, or whose source explicitly confirms completion,
+  count as completed history; filing date alone is not completion.
 - `catalyst_assessment` identifies the current catalyst and classifies its
   recency, specificity, credibility, novelty, and potential significance. It
   keeps favorable evidence, unfavorable evidence, uncertainty, and a

@@ -4,6 +4,27 @@ Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.
 
+## 2026-08-27 — Interpret controls, listing status, and split timing contextually
+
+**Status:** Accepted from Batch 3 corrective evidence
+
+**Decision:** A control warning requires affirmative ineffective-control,
+identified-weakness, or remediation evidence; positive audit language and
+negated weakness statements are negative controls. Active listing pressure
+requires an exchange notice or explicit issuer disclosure of an active status,
+not a financing covenant or hypothetical risk. Corporate actions retain
+proposed, authorized, scheduled, completed, or cancelled timing at the report
+cutoff. Fast may open a bounded SEC historical-submissions index when the current
+submissions block no longer covers the five-year action window.
+
+**Why:** Batch 3 produced false AAPL and SMCI warnings, marked NXL completed one
+day early, and missed AMC's older completed split. Each error could materially
+change a reject-or-continue decision.
+
+**Consequence:** Explanations and settlement follow normalized contextual state.
+Missing aligned OCF/capex periods still leave FCF Limited; recall is not improved
+by inventing a derived value.
+
 ## 2026-08-27 — Make bounded market/news retrieval interchangeable
 
 **Status:** Accepted, implemented, and approved for the frozen Batch 3 bounds

@@ -155,6 +155,15 @@ NXL split timing, and SMCI listing context produced severe misses; and required
 sparse categories remain unproven. The independent result is recorded in
 `docs/results/FAST_RELIABILITY_2026-08-27-BATCH-3.md`.
 
+Post-Batch-3 offline regressions now cover the four reproduced severe mechanisms:
+positive-control language no longer becomes a weakness; historical submissions
+can supply AMC's authoritative completed split; NXL-style future-effective
+actions remain scheduled until their cutoff passes; and financing/listing
+covenants do not become active exchange deficiencies. True SMCI weakness and
+active Nasdaq-notice controls remain detected. These corrections do not change
+the measured Batch 3 result and are not another calibration run. AMC/NXL FCF
+remains honestly Limited because the stored evidence has no aligned capex fact.
+
 The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
 uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
 control disclosures; requires event-specific non-reliance language; separates
