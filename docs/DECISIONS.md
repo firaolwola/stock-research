@@ -399,10 +399,11 @@ Unknown, limited, pending, and not-applicable results remain readable and
 unscored. The dependency-free browser renderer uses the existing validated
 report contract and safe external-link attributes.
 
-**Superseding detail:** The current hierarchy leads with identity and compact
-research status, then current catalyst/market context, one unified Fast score
-summary, honest financial charts, a separate explanation block, expandable
-detailed evidence, and the source library. Direct methodology components may be
+**Superseding detail:** The current hierarchy places identity, compact research
+status, and current catalyst/market context in a wide-screen left column, with
+one unified compact Fast score summary in a right sidebar. The same sections
+stack on smaller screens. Honest financial charts, a separate explanation
+block, expandable detailed evidence, and the source library. Direct methodology components may be
 shown as financial sub-metric stars; revenue, cash, or cash-burn rows remain
 Unscored until they have an independent trustworthy score. Long-term company
 quality is Deep-oriented rather than a primary Fast row.

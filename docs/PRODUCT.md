@@ -134,15 +134,19 @@ Do not show provisional numeric scores that may change materially later.
 
 The report contract keeps detailed scores on the existing 0–10 internal scale.
 The Fast dashboard converts them to a 0–5 star presentation, allowing half-stars
-where useful. A unified row summary keeps metric descriptions left-aligned and
-stars right-aligned without redundant visible numeric star text. Detailed 0–10
-values, methodology, inputs, explanations, and sources remain inspectable in a
-separate block below. Financial sub-metrics may reuse a direct methodology 2.0.0
+where useful. A unified row summary keeps only metric names left-aligned and
+stars or honest unresolved states right-aligned, without redundant visible
+numeric star text. Descriptions, detailed 0–10 values, methodology, inputs,
+explanations, and sources remain inspectable in a separate expandable block
+below. Financial sub-metrics may reuse a direct methodology 2.0.0
 component for display; metrics without a direct score remain Unscored.
 
 ### Dashboard order
 
-The preferred top-to-bottom order is:
+On wide screens, identity, research status, and catalyst content form the left
+column while the compact score summary occupies a right sidebar. Medium and
+narrow screens stack those sections. After that responsive top region, the
+preferred content order is:
 
 1. Stock name and identity.
 2. Research, budget, and completion status.

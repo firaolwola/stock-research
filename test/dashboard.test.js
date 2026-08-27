@@ -137,15 +137,28 @@ test("dashboard uses safe external links, semantic form submission, and a narrow
   assert.match(script, /textContent = text/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /\.score-grid, \.financial-grid, \.financial-chart-grid, \.factor-grid, \.evidence-grid \{ grid-template-columns: 1fr; \}/);
+  assert.match(css, /\.fast-top-layout \{ grid-template-columns: 1fr; \}/);
   assert.match(script, /role", "img"/);
   assert.match(script, /aria-label/);
   assert.match(script, /visually-hidden/);
   assert.doesNotMatch(script, /\/ 5 stars/);
 });
 
-test("approved dashboard render order is summary, charts, why, then detailed evidence", async () => {
+test("wide dashboard pairs identity, operations, and catalyst with the score sidebar", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  assert.match(source, /replaceChildren\(renderHeader\(view\), renderOperations\(operations\), renderCatalystAssessment\(view\), renderScores\(view\), renderFinancialAssessment\(view\), renderScoreDetails\(view\), renderSupportingEvidence\(view\), renderSources\(view\)\)/);
+  const css = await readFile(new URL("../public/styles.css", import.meta.url), "utf8");
+  assert.match(source, /primary\.append\(renderHeader\(view\), renderOperations\(operations\), renderCatalystAssessment\(view\)\)/);
+  assert.match(source, /sidebar\.append\(renderScores\(view\)\)/);
+  assert.match(source, /replaceChildren\(renderTopLayout\(view, operations\), renderFinancialAssessment\(view\), renderScoreDetails\(view\), renderSupportingEvidence\(view\), renderSources\(view\)\)/);
+  assert.match(css, /\.fast-top-layout \{ display: grid; grid-template-columns: minmax\(0, 1\.3fr\) minmax\(340px, \.9fr\)/);
+});
+
+test("compact score rows contain only the metric name and stars or status", async () => {
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  const scoreFunction = source.slice(source.indexOf("function renderScores"), source.indexOf("function renderCatalystAssessment"));
+  assert.match(scoreFunction, /copy\.append\(element\("h3", "", score\.label\)\)/);
+  assert.doesNotMatch(scoreFunction, /score\.description|directionLabel|score\.explanation/);
+  assert.match(source, /body\.append\(element\("p", "", score\.description\), element\("p", "", score\.explanation\)/);
 });
 
 test("dashboard ticker input retains server-compatible normalization", () => {
