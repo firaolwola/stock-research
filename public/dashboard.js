@@ -256,7 +256,7 @@ function renderScores(view) {
   const list = element("div", "score-summary");
   view.scoreSummary.forEach((score) => {
     const row = element("article", "score-summary-row"); row.dataset.presentationState = score.presentation.state;
-    const copy = element("div", "score-summary-copy"); copy.append(element("h3", "", score.label), element("p", "muted", score.description), element("p", "score-direction", score.presentation.directionLabel));
+    const copy = element("div", "score-summary-copy"); copy.append(element("h3", "", score.label));
     const value = element("div", "score-summary-value");
     if (score.presentation.state === "scored") value.append(renderStars(score.presentation));
     else value.append(badge(score.presentation.state), element("span", "visually-hidden", score.presentation.accessibleLabel));
@@ -385,7 +385,7 @@ function renderScoreDetails(view) {
       const details = element("details", "metric-details");
       details.append(element("summary", "", `${score.label} — ${score.presentation.stateLabel}`));
       const body = element("div", "score-detail-body");
-      body.append(element("p", "", score.explanation), element("p", "muted", `${score.presentation.state === "scored" ? `Internal value: ${score.value} / ${score.scale_max}` : "Internal value: not available"} · ${formatLabel(score.confidence)} confidence · methodology ${score.methodology_version}`));
+      body.append(element("p", "", score.description), element("p", "", score.explanation), element("p", "muted", `${score.presentation.directionLabel} · ${score.presentation.state === "scored" ? `Internal value: ${score.value} / ${score.scale_max}` : "Internal value: not available"} · ${formatLabel(score.confidence)} confidence · methodology ${score.methodology_version}`));
       if (score.components.length) {
         const list = element("ul", "section-items");
         score.components.forEach((component) => {
@@ -432,9 +432,18 @@ function renderSupportingEvidence(view) {
   body.append(renderFindings(view), renderCoverage(view), renderSections(view)); details.append(body); panel.append(details);
   return panel;
 }
+function renderTopLayout(view, operations) {
+  const layout = element("div", "fast-top-layout");
+  const primary = element("div", "fast-top-primary");
+  const sidebar = element("aside", "fast-score-sidebar");
+  primary.append(renderHeader(view), renderOperations(operations), renderCatalystAssessment(view));
+  sidebar.append(renderScores(view));
+  layout.append(primary, sidebar);
+  return layout;
+}
 export function renderDashboard(container, report, operations = null, { final = true } = {}) {
   const view = buildDashboardView(report, { final, settledScoreKeys: settledScoreKeysForOperations(operations, final) });
-  container.replaceChildren(renderHeader(view), renderOperations(operations), renderCatalystAssessment(view), renderScores(view), renderFinancialAssessment(view), renderScoreDetails(view), renderSupportingEvidence(view), renderSources(view)); container.hidden = false;
+  container.replaceChildren(renderTopLayout(view, operations), renderFinancialAssessment(view), renderScoreDetails(view), renderSupportingEvidence(view), renderSources(view)); container.hidden = false;
 }
 async function showRuntimeMode() {
   try {
