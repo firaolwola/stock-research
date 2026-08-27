@@ -38,6 +38,15 @@ field, changing a field's meaning, making an optional field required, or changin
 an enum incompatibly increments the major version. Saved reports retain the
 version with which they were produced.
 
+The current accepted score methodology is `2.0.0`; `1.0.0` remains documented
+as a historical comparison baseline but is no longer accepted by the live v4
+endpoint. Fast market context uses confirmed `financial_context` items with
+units `price_change_percent` and `volume_ratio`, sourced to a bounded market-data
+record. These contextual items cannot establish an issuer event.
+Dilution section items may use `evidence_role` to distinguish completed
+`actual_issuance`, `registration_capacity`, `potential_issuance`, and
+`instrument_overhang`; scoring never infers one role from an offering label.
+
 All object fields are explicit: objects reject unknown properties and fields in
 each object's `required` list are mandatory. Nullable values are distinct from
 omitted values. Arrays may be empty unless the schema specifies `minItems`.

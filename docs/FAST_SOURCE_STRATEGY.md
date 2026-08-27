@@ -248,7 +248,9 @@ workflow does not repeat successful bounded retrieval.
 - **#51:** completed with Alpha Vantage free-tier discovery/EOD context, public
   Nasdaq data, attribution, identity gating, bounded original-source promotion,
   cache/quota policy, and graceful fallback to completed SEC evidence.
-- **#52:** encode the seven evidence-sufficiency contracts; no numeric score may
-  appear merely because a provider field exists.
+- **#52:** completed; methodology 2.0.0 encodes the seven evidence-sufficiency
+  contracts, and no numeric score appears merely because a provider field exists.
+- **#53:** next; present the independently gated 2.0.0 results progressively
+  without changing their constructs or inventing provisional values.
 - **#55:** measure the real-ticker evaluation set and decide whether the pilot's
   small-cap/news/venue gaps justify a paid newswire or dedicated news service.

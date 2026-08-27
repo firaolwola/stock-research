@@ -197,6 +197,7 @@ test("invalid evidence-state combinations are rejected", async () => {
       mutate(report) {
         report.scores.catalyst_strength.state = "not_applicable";
         report.scores.catalyst_strength.value = null;
+        report.scores.catalyst_strength.claim_ids = ["claim-catalyst"];
       },
       message: "score catalyst_strength cannot cite claims when not_applicable"
     },
