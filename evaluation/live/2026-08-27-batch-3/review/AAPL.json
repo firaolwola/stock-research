@@ -1,0 +1,13 @@
+{
+  "ticker": "AAPL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "comparable revenue and net income", "debt, cash, OCF, and FCF trends", "shares history", "current earnings catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"accounting_material_weakness","cause":"interpretation","severity":"severe","finding":"Audit language saying controls were maintained in all material respects was falsely labeled as a confirmed material weakness because the excerpt discussed assessing whether a weakness exists."},
+    {"category":"score_range","cause":"calibration","finding":"Cash trend remained 2.0, below the frozen 5-9 range; the explanation consistently reflects depletion."}
+  ],
+  "score_range_result": {"passed":9,"evaluated":13},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "fail_false_confirmed_warning"
+}

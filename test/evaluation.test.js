@@ -128,6 +128,7 @@ test("Issue 55 batch 2 remains separately bounded and records improvement withou
 
 test("Issue 55 batch 3 freezes the same five cases and approved provider bounds", async () => {
   const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-batch-3.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-batch-3/summary.json");
   assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
   assert.equal(plan.required_ancestor, "3aa5a79"); assert.equal(plan.configuration.change_from_batch_2, "none");
   assert.equal(plan.approval.maximum_runs, 5); assert.equal(plan.approval.automatic_retries, false);
@@ -140,4 +141,10 @@ test("Issue 55 batch 3 freezes the same five cases and approved provider bounds"
   assert.equal(plan.approval.maximum_twelve_data_requests, 10);
   assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 20);
   assert.equal(plan.preserve_prior_batches.length, 2);
+  assert.equal(result.completed_runs, 5);
+  assert.equal(result.validation.post_scoring_reports_valid, 5);
+  assert.equal(result.overall_material_checks.recall, 0.9651);
+  assert.equal(result.overall_material_checks.passes_recall_only, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
 });

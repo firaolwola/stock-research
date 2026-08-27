@@ -1,0 +1,14 @@
+{
+  "ticker": "AMC",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "current issuance, warrants, and convertible evidence", "137.6% genuine post-split-window share growth", "revenue, net income, debt, cash, and OCF trends", "current filing catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"reverse_splits","cause":"retrieval_selection","severity":"severe","finding":"The completed 1-for-10 historical reverse split remains absent."},
+    {"category":"free_cash_flow","cause":"unavailable_evidence","finding":"FCF remained Limited because an aligned capital-expenditure input was not retained."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Strong issuance evidence still did not settle historical or future dilution scores."}
+  ],
+  "score_range_result": {"passed":6,"evaluated":13},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "pass_missing_components_remained_limited"
+}

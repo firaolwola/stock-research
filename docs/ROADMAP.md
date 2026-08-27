@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — Batch 3 approved for bounded execution:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Two approved batches failed the recall and severe-miss gates; deterministic blockers have offline corrections. The owner approved Alpha Vantage-first/Twelve Data-fallback execution with 10 requests per provider and 20 optional-provider attempts combined.
+8. [ ] **Active — Batch 3 failed the complete reliability gate:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%) and all reports validated, but reverse-split/FCF category recall, four severe misleading misses, and sparse categories still block completion.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -85,9 +85,9 @@ Issue #55 remains active. The approved second five-ticker batch improved recall
 from 66.28% to 82.56% but did not pass. The reproduced overbroad non-reliance,
 AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
 Limited-series defects now have deterministic regression fixes on PR #74.
-The next active step is the frozen Batch 3 execution and independent
-adjudication against the unchanged answer key. A future approved
-sparse-category batch can target completed
+The next active step is deterministic correction of the AAPL warning-context,
+AMC older-split retrieval, NXL effective-date, and SMCI listing-context defects.
+Only after those regressions pass should an owner-approved sparse-category batch target completed
 splits, listing/going-concern cases, a foreign ADR/20-F, and an OTC/delisted
 security. A paid data
 subscription remains neither selected nor required and would need separate owner

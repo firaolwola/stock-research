@@ -1,0 +1,13 @@
+{
+  "ticker": "NCPL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": false,
+  "detected": ["issuer and security identity", "actual Item 4.02 non-reliance event", "affected financial-score invalidation", "going concern", "minimum-bid deficiency", "completed 1-for-70 reverse split", "offering, convertible, and warrant evidence", "stale financial evidence", "shares history", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"control_warning_state","cause":"interpretation","finding":"A remediated prior material weakness is retained as accounting context without a clearer resolved-state label."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Confirmed split, listing, going-concern, financing, and share evidence still did not settle numeric capital-risk scores."}
+  ],
+  "score_range_result": {"passed":2,"evaluated":6},
+  "explanation_fidelity": "pass_for_baseline_non_reliance_and_invalidation",
+  "settlement_behavior": "pass"
+}

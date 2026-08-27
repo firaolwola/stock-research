@@ -148,6 +148,13 @@ Alpha Vantage-first/Twelve Data-fallback policy with at most 10 requests per
 provider and 20 optional-provider attempts combined. Prior artifacts and the
 independent answer key remain unchanged.
 
+Batch 3 completed all five bounded runs and improved recall to 83/86 (96.51%),
+with five valid reports. It did not pass the milestone: reverse-split and FCF
+category recall remained below 90%; AAPL control language, AMC split history,
+NXL split timing, and SMCI listing context produced severe misses; and required
+sparse categories remain unproven. The independent result is recorded in
+`docs/results/FAST_RELIABILITY_2026-08-27-BATCH-3.md`.
+
 The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
 uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
 control disclosures; requires event-specific non-reliance language; separates
