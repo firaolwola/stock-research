@@ -4,6 +4,7 @@ import { getSafeUpstreamDiagnostics, RESEARCH_ERROR_CODES, ResearchResponseError
 import { finalizeResearchReport } from "./lib/finalize-research-report.js";
 import { parseResearchStage } from "./lib/research-budget.js";
 import { createFastBudgetController } from "./lib/fast-budget-controller.js";
+import { validateFinalReportSettlement } from "./lib/report-validation.js";
 
 const controlledResearchErrors = Object.freeze({
   [RESEARCH_ERROR_CODES.timeout]: Object.freeze({ status: 504, code: "RESEARCH_TIMEOUT", error: "Research took too long. Please try again." }),
@@ -98,9 +99,10 @@ export function createApp({ researchClient, reportValidator, logger = console, r
         return;
       }
       const validationResult = reportValidator(report);
-      if (!validationResult.valid || report.security?.ticker !== ticker) {
+      const settlementResult = final && runtime.mode === "live" ? validateFinalReportSettlement(report) : { valid: true, errors: [] };
+      if (!validationResult.valid || !settlementResult.valid || report.security?.ticker !== ticker) {
         const identityErrors = report.security?.ticker !== ticker ? [{ path: "/security/ticker", keyword: "requestedIdentity" }] : [];
-        logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_validation", requestStartedAt, { validation_errors: [...safeValidationErrors(validationResult.errors), ...identityErrors] }))}`);
+        logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_validation", requestStartedAt, { validation_errors: [...safeValidationErrors(validationResult.errors), ...safeValidationErrors(settlementResult.errors), ...identityErrors] }))}`);
         return;
       }
       const partial = report.metadata?.completion_status !== "complete";
@@ -154,7 +156,8 @@ export function createApp({ researchClient, reportValidator, logger = console, r
         return res.status(502).json({ code: controlledError.code, error: controlledError.error });
       }
       const validationResult = reportValidator(report);
-      if (!validationResult.valid || report.security?.ticker !== ticker) {
+      const settlementResult = runtime.mode === "live" ? validateFinalReportSettlement(report) : { valid: true, errors: [] };
+      if (!validationResult.valid || !settlementResult.valid || report.security?.ticker !== ticker) {
         logger.error(`Research provider returned an invalid report for ${ticker} (INVALID_RESEARCH_RESPONSE${diagnosticSuffix({ stage, phase: "report_validation", elapsed_ms: Math.round(performance.now() - requestStartedAt), response_received: true, input_tokens: operations?.input_tokens, output_tokens: operations?.output_tokens, total_tokens: operations?.total_tokens })}).`);
         const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
         budget?.finish({ partial: true });

@@ -1,0 +1,12 @@
+{
+  "correction_version": "1.0.0",
+  "recorded_at": "2026-08-27",
+  "applies_to": "fast-reliability-2026-08-27-sparse.json",
+  "frozen_plan_sha256": "044a9d0f7491f31509f98acfd632094ea3f202963c8e88d838a038c501ce7d63",
+  "changes_frozen_plan": false,
+  "corrections": [
+    { "ticker": "BIOR", "field": "identity", "frozen_text_is_stale": true, "corrected_fact": "BIOR was suspended from Nasdaq and its common stock subsequently traded OTC; the historical CIK and Biora/Progenity lineage remain the identity gate.", "source": "https://www.sec.gov/Archives/edgar/data/1580063/000119312524282788/d915106d8k.htm" },
+    { "ticker": "MULN", "field": "identity", "frozen_text_is_stale": true, "corrected_fact": "Mullen Automotive changed its name to Bollinger Innovations and its ticker from MULN to BINI; CIK 1499961 provides the bounded successor lineage.", "source": "https://www.sec.gov/Archives/edgar/data/1499961/000182912625004146/mullenautomotive_ex99-1.htm" }
+  ],
+  "policy": "Corrections are separately auditable and must be reviewed before a future approved live plan is frozen. They do not revise sparse-batch measurements or answer keys after execution."
+}

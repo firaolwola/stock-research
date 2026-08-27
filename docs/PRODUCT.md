@@ -78,6 +78,9 @@ Fast must resolve the current security and issuer correctly and capture obvious
 recent name or ticker changes when reliable evidence is available. Exhaustive
 predecessor and issuer-history reconstruction belongs primarily in Deep.
 Uncertain identity relationships must not be treated as confirmed.
+Fast may resolve an exact historical, renamed, OTC, or delisted ticker through a
+small reviewed SEC-backed CIK registry. It never fuzzy-matches identity; an
+unmapped or conflicting lineage settles Limited and cannot merge issuer evidence.
 
 ### Make evidence inspectable
 

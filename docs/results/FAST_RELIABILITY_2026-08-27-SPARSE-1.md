@@ -50,3 +50,18 @@ Issue #55 and PR #74 remain open. Before another paid run:
 5. add offline regressions for all four live shapes.
 
 The sparse categories remain inadequately demonstrated. No further live batch is authorized by this result.
+
+## Offline corrective status
+
+The measured batch and frozen answer key remain unchanged. Deterministic tests
+now cover exact historical-ticker/CIK fallback for BIOR, MULN/BINI, and
+TUP/TUPBQ; OTC/delisted and renamed identity states; multiple completed split
+history; financing evidence after lineage; TUP Chapter 11, going concern, and
+delisting; NIO positive-control language; compatible IFRS revenue and
+profit/loss aliases; and final Limited settlement. The separate correction file
+records the two stale frozen identity descriptions without rewriting history.
+
+These fixes make the code ready for owner review, not for a reliability claim.
+The 18.75% sparse recall, failed explanation/settlement measures, and category
+uncertainty above remain the only measured result until another bounded batch is
+explicitly approved.

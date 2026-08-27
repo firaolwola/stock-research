@@ -11,6 +11,9 @@
 Fast uses a small, deterministic source graph instead of broad web search:
 
 1. Resolve and gate the current security and issuer with SEC and exchange data.
+   If an exact symbol is absent from the current map, use only the reviewed
+   SEC-backed historical identity registry; never fuzzy-match an issuer. Record
+   requested ticker, current ticker, CIK, and renamed/OTC state before merging.
 2. Retrieve filing-based facts directly from SEC EDGAR.
 3. Use cached Nasdaq Trader symbol/status/halt files for authoritative exchange
    context and use an ordered pool of approved free-tier adapters for at most one
@@ -21,6 +24,12 @@ Fast uses a small, deterministic source graph instead of broad web search:
 5. Score each component only when its independent evidence contract is met.
    Missing, stale, conflicting, or timed-out sources settle as `Unscored` or
    `Limited`; they never become favorable evidence.
+
+Historical identity seeds remain bounded authoritative discovery inputs. They
+allow selected older corporate-action, financing, bankruptcy, going-concern,
+and delisting filings to participate after CIK agreement. Unknown lineage,
+failed initial SEC access, or exhausted deadlines produces a terminal partial
+report whose unfinished domains are Limited, not indefinitely Pending.
 
 The owner approved Alpha Vantage's free API and Twelve Data Basic on 2026-08-27
 for personal/internal deterministic market context and ticker-news discovery.

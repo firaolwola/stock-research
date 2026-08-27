@@ -923,3 +923,19 @@ than retained under a contradictory Limited state.
 semantics could both erase valid financial history and make a safe partial
 report invalid. Dedicated bounded retrieval slots improve the chance of opening
 older event filings without introducing open-ended search.
+
+## 2026-08-27 — Resolve stale tickers through a bounded SEC identity registry
+
+**Status:** Accepted corrective implementation from Issue #55 sparse calibration
+
+**Decision:** When the current SEC ticker map has no exact match, Fast may use a
+curated SEC-backed mapping from an exact requested ticker to one CIK, current
+security identity, and dated authoritative filing seeds. No fuzzy name matching
+or cross-issuer inference is allowed. The evidence packet records requested and
+current tickers plus `current`, `renamed`, or `otc` resolution state. Delisted
+and OTC listing states remain explicit. Unmapped identifiers terminate as
+Limited rather than Pending.
+
+**Why:** Current ticker maps intentionally omit many former, delisted, and OTC
+symbols. A small reviewed registry preserves the hard identity gate and bounded
+retrieval while making corrections auditable.

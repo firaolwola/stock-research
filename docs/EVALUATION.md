@@ -174,6 +174,17 @@ an effective-controls false positive and inconsistent foreign Company Facts
 selection. The batch therefore proves neither the sparse categories nor the
 milestone and authorizes no additional paid run.
 
+Offline corrective coverage now resolves those reproduced mechanisms without
+changing the measured 18.75% result. A bounded SEC-backed historical identity
+registry links BIOR, MULN/BINI, and TUP/TUPBQ to exact CIKs; it is never fuzzy,
+and unresolved symbols settle terminally Limited. Authoritative filing seeds
+retain completed splits, financing, bankruptcy, going-concern, and delisting
+evidence after lineage resolution. Foreign-filer normalization accepts
+compatible IFRS revenue and attributable-profit aliases, while positive 20-F
+control language is excluded from material-weakness findings. The frozen plan
+remains unchanged; stale identity facts are recorded separately in
+`evaluation/plans/fast-reliability-2026-08-27-sparse-corrections.json`.
+
 The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
 uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
 control disclosures; requires event-specific non-reliance language; separates
@@ -184,8 +195,9 @@ The score-range diagnostic at
 `evaluation/diagnostics/fast-score-ranges-2026-08-27-batch-2.json` preserves the
 measured reports and records every failed owner range with normalized inputs,
 periods, sources, formula components, confidence, and a cause classification.
-These are regression fixes, not new calibration measurements; 82.56% remains
-the latest measured recall and another live batch still requires owner approval.
+These are regression fixes, not new calibration measurements; historical and
+later measured artifacts remain unchanged. Another live batch still requires
+owner approval.
 
 ## Paid live evaluation boundary
 

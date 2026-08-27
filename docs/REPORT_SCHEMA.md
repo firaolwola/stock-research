@@ -23,6 +23,14 @@ records stage, latency, tokens, web-search calls, estimated cost, pricing
 version, and fast-budget status. This keeps performance metadata from changing
 the meaning or validity of a stored report. See [PERFORMANCE.md](PERFORMANCE.md).
 
+The internal Fast evidence packet may additionally carry `identity_resolution`
+with requested ticker, current ticker, resolution status, and authoritative
+source URL. This is orchestration metadata, not a v4 report-contract field.
+Final live reports cannot retain `completion_status: pending` or Pending coverage
+limitations: exhausted, unavailable, or unresolved work settles as a valid
+partial report with Limited/Unscored evidence. Progressive intermediate events
+and the token-free `PENDING` demonstration may still use Researching/Pending.
+
 The live OpenAI request uses a derived provider schema that removes Structured
 Outputs composition keywords the Responses API does not support. The repository
 schema remains the authoritative contract: the server still applies its full

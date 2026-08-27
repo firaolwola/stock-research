@@ -32,6 +32,21 @@ async function researchFixture(options) {
   return client.researchTicker(options.ticker ?? "TEST");
 }
 
+function historicalFixture({ cik, name, documents = {}, companyFacts = { facts: {} } }) {
+  const padded = String(cik).padStart(10, "0");
+  const submissions = { cik: padded, name, formerNames: [], filings: { recent: { accessionNumber: [], form: [], filingDate: [], reportDate: [], primaryDocument: [], items: [], primaryDocDescription: [] }, files: [] } };
+  return async (url) => {
+    const pathname = new URL(url).pathname; const file = pathname.split("/").at(-1);
+    const body = pathname.includes("company_tickers") ? { fields: ["cik", "name", "ticker", "exchange"], data: [] } : pathname.includes("/submissions/") ? submissions : { cik: padded, entityName: name, ...companyFacts };
+    return { ok: true, status: 200, async json() { return structuredClone(body); }, async text() { return documents[file] ?? "No classified material event."; } };
+  };
+}
+
+async function researchHistorical(ticker, options) {
+  const client = createSecEvidenceClient({ fetchImpl: historicalFixture(options), now: () => Date.parse("2026-08-27T12:00:00Z"), minRequestIntervalMs: 0 });
+  return client.researchTicker(ticker);
+}
+
 test("AAPL, AMC, NCPL, NXL, and SMCI-style same-end duration facts select the quarter without conflict", async (t) => {
   for (const ticker of ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]) await t.test(ticker, async () => {
     const result = await researchFixture({ ticker, companyFacts: { cik: 1, entityName: `${ticker} Corp.`, facts: { "us-gaap": {
@@ -87,6 +102,72 @@ test("AAPL effective-control opinion is a negative control while SMCI explicit w
   const extract = (html) => extractSecFilingEvidence({ html, form: "10-K", filed: "2025-10-31", accession: "control", documentUrl: "https://www.sec.gov/control.htm", documentName: "control.htm" });
   assert.equal(extract("Internal control over financial reporting was maintained in all material respects. The audit assessed the risk that a material weakness exists and concluded the company maintained effective internal control over financial reporting.").some((item) => item.kind === "accounting_warning"), false);
   assert.equal(extract("Management concluded that internal control over financial reporting was not effective because we identified material weaknesses that remained unremediated.").some((item) => item.kind === "accounting_warning"), true);
+});
+
+test("NIO foreign-filer effective-control language is not a material weakness", () => {
+  const html = "Our management has concluded that our internal control over financial reporting was effective as of December 31, 2025. In the future, management may conclude that internal control over financial reporting is not effective. If we fail to maintain effective controls, a material weakness could cause misstatements.";
+  const findings = extractSecFilingEvidence({ html, form: "20-F", filed: "2026-04-10", accession: "nio-control", documentUrl: "https://www.sec.gov/nio.htm", documentName: "nio.htm" });
+  assert.equal(findings.some((item) => item.kind === "accounting_warning"), false);
+});
+
+test("BIOR bounded historical identity reaches OTC lineage and both completed splits", async () => {
+  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
+    "d463897dars.pdf": "All share data reflect a 1-for-25 reverse stock split completed and effective January 3, 2023.",
+    "bior-20241009.htm": "The Company effected a reverse stock split at a ratio of 1-for-10, effective October 18, 2024.",
+    "d899591d8k.htm": "The Company entered into a securities purchase agreement and issued and sold common stock. The Company issued warrants exercisable for shares of common stock.",
+    "bior-20241210.htm": "Nasdaq notified the Company that it determined to delist the securities. Trading was suspended and the shares began trading on OTC Pink under BIOR."
+  } });
+  assert.equal(result.report.issuer.cik, "0001580063");
+  assert.equal(result.report.security.listing_venue, "OTC Pink");
+  assert.equal(result.report.security.listing_status, "delisted");
+  assert.equal(result.evidence_packet.identity_resolution.status, "otc");
+  assert.deepEqual(result.report.sections.reverse_splits.items.map((item) => item.corporate_action_state), ["completed", "completed"]);
+  assert.ok(result.report.sections.dilution.items.some((item) => item.kind === "warrant"));
+});
+
+test("MULN historical ticker resolves CIK lineage to BINI and preserves repeated split history", async () => {
+  const result = await researchHistorical("MULN", { cik: 1499961, name: "Bollinger Innovations, Inc.", documents: {
+    "muln20240630c_10q.htm": "In May 2023, we completed a 1-for-25 reverse split.",
+    "mullenautomotive_8k.htm": "The Company implemented a reverse stock split at a ratio of 1-for-100 effective September 17, 2024. Nasdaq notified the Company it was subject to delisting.",
+    "mullenautomotive_ex99-1.htm": "The Company will effect a 1-for-100 reverse stock split effective June 2, 2025.",
+    "bollingerinnovations_8k.htm": "Mullen Automotive Inc. changed its name to Bollinger Innovations, Inc. and ticker MULN changed to BINI effective July 28, 2025."
+  } });
+  assert.equal(result.report.security.ticker, "MULN");
+  assert.equal(result.evidence_packet.identity_resolution.current_ticker, "BINI");
+  assert.equal(result.evidence_packet.identity_resolution.status, "renamed");
+  assert.ok(result.report.issuer.prior_identities.some((item) => item.ticker === "MULN"));
+  assert.ok(result.report.sections.reverse_splits.items.length >= 3);
+});
+
+test("TUP and TUPBQ resolve delisted OTC lineage with Chapter 11 and going concern", async () => {
+  for (const ticker of ["TUP", "TUPBQ"]) {
+    const result = await researchHistorical(ticker, { cik: 1008654, name: "Tupperware Brands Corporation", documents: {
+      "tup-20221231.htm": "The conditions raise substantial doubt about the Company's ability to continue as a going concern.",
+      "tup-20240917.htm": "The Corporation filed voluntary petitions to commence proceedings under chapter 11 of the Bankruptcy Code.",
+      "tup-20240923.htm": "NYSE notified the Corporation it determined to commence proceedings to delist the common stock. Trading was suspended and commenced on the OTC Expert Market as TUPBQ."
+    } });
+    assert.equal(result.report.security.listing_venue, "OTC Expert Market");
+    assert.equal(result.report.security.listing_status, "delisted");
+    assert.equal(result.evidence_packet.identity_resolution.current_ticker, "TUPBQ");
+    assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
+    assert.ok(result.report.financial_assessment.material_warnings.some((item) => /Bankruptcy/i.test(item.title)));
+  }
+});
+
+test("NIO IFRS summary and scoring share the newest comparable annual revenue and loss series", async () => {
+  const annual = (value, year, tagAccn) => fact(value, { start: `${year}-01-01`, end: `${year}-12-31`, filed: `${year + 1}-04-10`, form: "20-F", accn: tagAccn });
+  const result = await researchFixture({ ticker: "NIO", companyFacts: { cik: 1, entityName: "NIO Corp.", facts: { "ifrs-full": {
+    Revenue: concept("Revenue", [annual(55_617_933_000, 2023, "r23"), annual(65_731_559_000, 2024, "r24"), annual(87_487_510_000, 2025, "r25"), fact(167_180_000, { start: "2023-01-01", end: "2023-12-31", filed: "2024-04-09", form: "20-F", accn: "stale-custom" })], "CNY"),
+    ProfitLossAttributableToOwnersOfParent: concept("Loss attributable to owners", [annual(-20_719_800_000, 2023, "p23"), annual(-22_401_700_000, 2024, "p24"), annual(-23_100_000_000, 2025, "p25")], "CNY")
+  } } } });
+  const revenue = result.report.financial_assessment.metrics.revenue; const loss = result.report.financial_assessment.metrics.profitability;
+  assert.equal(revenue.value, 87_487_510_000); assert.equal(revenue.period_end, "2025-12-31");
+  assert.equal(revenue.annual_observations.at(-1).value, revenue.value);
+  assert.equal(loss.value, -23_100_000_000); assert.equal(loss.annual_observations.length, 3);
+  const scored = calibrateReportScores(result.report);
+  assert.equal(scored.scores.financial_revenue_trend.state, "confirmed");
+  assert.equal(scored.scores.financial_net_income_trend.state, "confirmed");
+  assert.equal(result.report.financial_assessment.reporting_currency, "CNY");
 });
 
 test("NXL split timing is scheduled before its effective date and completed afterward", () => {

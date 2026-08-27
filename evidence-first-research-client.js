@@ -64,7 +64,7 @@ export function createEvidenceFirstResearchClient({ secClient, boundedSourceClie
       }
       const packet = deterministic.evidence_packet;
       if (!packet || !openai?.responses?.create || fastBudget.isStopped()) {
-        const reason = fastBudget.telemetry().termination_reason;
+        const reason = deterministic.synthesis?.reason ?? deterministic.operations?.retrieval?.reason ?? fastBudget.telemetry().termination_reason;
         const status = reason === "time_ceiling" || reason === "cost_ceiling" ? "skipped" : "unavailable";
         fastBudget.recordSource("openai_synthesis", status === "skipped" ? "cancelled" : "unavailable", { reason });
         const result = settle({ ...deterministic, synthesis: { status, reason } }, { partial: true }); storeSnapshot(ticker, result); return result;
