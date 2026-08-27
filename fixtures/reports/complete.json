@@ -194,6 +194,10 @@
         "trend": "improving",
         "comparison_period_start": "2026-03-31",
         "comparison_period_end": "2026-03-31",
+        "observations": [
+          { "value": 40, "unit": "USD millions", "period_start": "2026-03-31", "period_end": "2026-03-31", "claim_ids": ["claim-financial"] },
+          { "value": 48.2, "unit": "USD millions", "period_start": "2026-06-30", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }
+        ],
         "summary": "Quarter-end cash increased from the prior quarter.",
         "claim_ids": [
           "claim-financial"
@@ -209,6 +213,10 @@
         "trend": "improving",
         "comparison_period_start": "2026-01-01",
         "comparison_period_end": "2026-03-31",
+        "observations": [
+          { "value": 2, "unit": "USD millions per quarter", "period_start": "2026-01-01", "period_end": "2026-03-31", "claim_ids": ["claim-financial"] },
+          { "value": -8.4, "unit": "USD millions per quarter", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }
+        ],
         "summary": "Negative burn denotes $8.4 million of operating cash generation rather than cash consumption.",
         "claim_ids": [
           "claim-financial"
@@ -224,6 +232,10 @@
         "trend": "improving",
         "comparison_period_start": "2025-04-01",
         "comparison_period_end": "2025-06-30",
+        "observations": [
+          { "value": 110, "unit": "USD millions", "period_start": "2025-04-01", "period_end": "2025-06-30", "claim_ids": ["claim-financial"] },
+          { "value": 125, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }
+        ],
         "summary": "Revenue increased from the comparable prior-year quarter.",
         "claim_ids": [
           "claim-financial"
@@ -239,6 +251,10 @@
         "trend": "improving",
         "comparison_period_start": "2025-04-01",
         "comparison_period_end": "2025-06-30",
+        "observations": [
+          { "value": 2, "unit": "USD millions", "period_start": "2025-04-01", "period_end": "2025-06-30", "claim_ids": ["claim-financial"] },
+          { "value": 6.2, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }
+        ],
         "summary": "The issuer was profitable and improved versus the prior-year quarter.",
         "claim_ids": [
           "claim-financial"
@@ -254,6 +270,10 @@
         "trend": "improving",
         "comparison_period_start": "2025-04-01",
         "comparison_period_end": "2025-06-30",
+        "observations": [
+          { "value": 1, "unit": "USD millions", "period_start": "2025-04-01", "period_end": "2025-06-30", "claim_ids": ["claim-financial"] },
+          { "value": 7.1, "unit": "USD millions", "period_start": "2026-04-01", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }
+        ],
         "summary": "Free cash flow was positive and improved year over year.",
         "claim_ids": [
           "claim-financial"
@@ -269,6 +289,10 @@
         "trend": "stable",
         "comparison_period_start": "2026-03-31",
         "comparison_period_end": "2026-03-31",
+        "observations": [
+          { "value": 30.5, "unit": "USD millions", "period_start": "2026-03-31", "period_end": "2026-03-31", "claim_ids": ["claim-financial"] },
+          { "value": 31, "unit": "USD millions", "period_start": "2026-06-30", "period_end": "2026-06-30", "claim_ids": ["claim-financial"] }
+        ],
         "summary": "Debt was broadly stable from the prior quarter and below quarter-end cash.",
         "claim_ids": [
           "claim-financial"
@@ -770,7 +794,7 @@
     },
     {
       "id": "claim-financial",
-      "text": "For the quarter ended June 30, 2026, the issuer reported $48.2 million cash, $8.4 million operating cash generation, $125.0 million revenue, $6.2 million net income, $7.1 million free cash flow, and $31.0 million total debt, with the stated trends based on the specified comparison periods.",
+      "text": "For the quarter ended June 30, 2026, the issuer reported $48.2 million cash, $8.4 million operating cash generation, $125.0 million revenue, $6.2 million net income, $7.1 million free cash flow, and $31.0 million total debt. Comparable values were $40.0 million cash, $2.0 million cash burn, $110.0 million revenue, $2.0 million net income, $1.0 million free cash flow, and $30.5 million total debt for the specified prior periods.",
       "materiality": "high",
       "state": "confirmed",
       "as_of": "2026-08-24T15:00:00Z",

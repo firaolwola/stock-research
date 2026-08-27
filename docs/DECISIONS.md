@@ -408,6 +408,13 @@ shown as financial sub-metric stars; revenue, cash, or cash-burn rows remain
 Unscored until they have an independent trustworthy score. Long-term company
 quality is Deep-oriented rather than a primary Fast row.
 
+**Financial detail refinement:** Financial Health owns the detailed explanation
+for revenue, profitability, debt, free cash flow, cash, and cash burn. Those
+supporting inputs are not repeated as six independent explanation dropdowns.
+Their charts use bounded source-linked observations only when metric definition,
+unit, currency, and period length agree; otherwise the chart remains single-period,
+Limited, or unavailable.
+
 ## 2026-08-25 — Require explicit evidence when carrying issuer history
 
 **Status:** Accepted

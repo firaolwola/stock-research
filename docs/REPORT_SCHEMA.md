@@ -82,8 +82,11 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   the analogue state is `unknown` with no invented item or reaction.
 - `financial_assessment` preserves a dated reporting currency, cash, cash burn,
   revenue, profitability, free cash flow, and debt. Confirmed metrics include a
-  value, unit, statement period, and sourced claim. A claimed trend also includes
-  the comparison period. Going-concern evidence is explicit, and material
+  value, unit, statement period, and sourced claim. Its optional bounded
+  `observations` retain source-linked values in chronological order for honest
+  charts. Observations share the metric definition and unit and use comparable
+  period lengths; one observation never implies a trend. A claimed trend also
+  includes the comparison period. Going-concern evidence is explicit, and material
   liquidity, burn, leverage, profitability, accounting, or going-concern
   warnings carry severity and dates for priority ranking. Operating-company
   metrics may be `not_applicable` for securities such as ETFs.
@@ -248,5 +251,7 @@ Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing
 numeric values; and confirmed financial-health scores built from an unresolved
 assessment. Confirmed going-concern evidence must also appear as a dated material
-warning. A wholly inapplicable assessment contains no dates, currency, evidence,
+warning. Chart observations must be chronological, source-linked, unit-aligned,
+period-comparable, and include the metric's current reported value. A wholly
+inapplicable assessment contains no dates, currency, evidence,
 or warnings and marks every financial component `not_applicable`.

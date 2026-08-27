@@ -19,7 +19,7 @@ function makeScenario(spec) {
     report.financial_assessment = {
       state: "not_applicable", as_of: null, reporting_currency: null,
       summary: "Operating-company financial metrics do not apply to this ETF.", coverage_notes: [],
-      metrics: Object.fromEntries(Object.entries(report.financial_assessment.metrics).map(([key, metric]) => [key, { ...metric, state: "not_applicable", value: null, unit: null, period_start: null, period_end: null, trend: "not_applicable", comparison_period_start: null, comparison_period_end: null, summary: `${metric.label} is not applicable to this ETF security.`, claim_ids: [] }])),
+      metrics: Object.fromEntries(Object.entries(report.financial_assessment.metrics).map(([key, metric]) => [key, { ...metric, state: "not_applicable", value: null, unit: null, period_start: null, period_end: null, trend: "not_applicable", comparison_period_start: null, comparison_period_end: null, observations: [], summary: `${metric.label} is not applicable to this ETF security.`, claim_ids: [] }])),
       going_concern: { state: "not_applicable", as_of: null, summary: "Issuer going-concern analysis is not applicable to this ETF security.", claim_ids: [] },
       material_warnings: []
     };
@@ -32,7 +32,10 @@ function makeScenario(spec) {
   const sourceId = `source-financial-${spec.id}`;
   report.claims.push({ id: claimId, text: spec.claim_text, materiality: "high", state: "confirmed", as_of: "2026-08-24T15:00:00Z", source_ids: [sourceId] });
   report.sources.push({ id: sourceId, title: `${spec.id} fixed financial fixture`, url: `https://www.sec.gov/Archives/example/${spec.id}`, published_date: "2026-08-05", source_type: "sec_filing", confidence: "high", retrieved_at: "2026-08-24T15:00:00Z", supported_claim_ids: [claimId] });
-  for (const [metricName, override] of Object.entries(spec.metric_overrides || {})) Object.assign(report.financial_assessment.metrics[metricName], override, { claim_ids: [claimId] });
+  for (const [metricName, override] of Object.entries(spec.metric_overrides || {})) {
+    const metric = report.financial_assessment.metrics[metricName]; Object.assign(metric, override, { claim_ids: [claimId] });
+    const current = metric.observations?.at(-1); if (current && Object.hasOwn(override, "value")) { current.value = override.value; current.claim_ids = [claimId]; }
+  }
   if (spec.going_concern) report.financial_assessment.going_concern = { ...spec.going_concern, claim_ids: [claimId] };
   if (spec.warning) report.financial_assessment.material_warnings.push({ ...spec.warning, claim_ids: [claimId] });
   return report;
