@@ -126,7 +126,7 @@ test("Issue 55 batch 2 remains separately bounded and records improvement withou
   assert.equal(result.issue_must_remain_open, true);
 });
 
-test("Issue 55 batch 3 freezes the same five cases and refuses approval-day quota overrun", async () => {
+test("Issue 55 batch 3 freezes the same five cases and approved provider bounds", async () => {
   const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-batch-3.json");
   assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
   assert.equal(plan.required_ancestor, "3aa5a79"); assert.equal(plan.configuration.change_from_batch_2, "none");
@@ -135,6 +135,9 @@ test("Issue 55 batch 3 freezes the same five cases and refuses approval-day quot
   assert.equal(plan.alpha_vantage_preflight.inferred_remaining_on_approval_day, 5);
   assert.equal(plan.alpha_vantage_preflight.approved_batch_3_requests, 10);
   assert.equal(plan.alpha_vantage_preflight.status, "blocked_until_daily_reset");
-  assert.equal(plan.provider_policy.requires_owner_review_after_architecture_change, true);
+  assert.equal(plan.provider_policy.requires_owner_review_after_architecture_change, false);
+  assert.deepEqual(plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 10);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 20);
   assert.equal(plan.preserve_prior_batches.length, 2);
 });

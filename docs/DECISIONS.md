@@ -6,7 +6,7 @@ rather than erasing history.
 
 ## 2026-08-27 — Make bounded market/news retrieval interchangeable
 
-**Status:** Accepted and implemented; calibration policy review still required
+**Status:** Accepted, implemented, and approved for the frozen Batch 3 bounds
 
 **Decision:** Preserve SEC and exchange authority while routing optional market
 and discovery operations through an ordered provider-neutral pool. Alpha
@@ -22,8 +22,9 @@ prevents an outage from becoming an application dependency and permits later
 replacement without changing score semantics.
 
 **Consequence:** No paid plan or production dependency is added. Missing optional
-context remains Limited. The frozen Issue #55 Batch 3 must not run until the
-owner separately approves its revised provider order and live request ceilings.
+context remains Limited. For Issue #55 Batch 3, the owner approved Alpha Vantage
+first and Twelve Data fallback, capped at 10 requests per provider and 20
+combined optional-provider attempts.
 
 ## 2026-08-27 — Make validated Fast evidence the mandatory Deep foundation
 

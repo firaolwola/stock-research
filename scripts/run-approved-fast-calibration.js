@@ -35,6 +35,7 @@ const currentDay = new Date().toISOString().slice(0, 10); const configuredProvid
 const alphaAvailable = currentDay === batchPlan.alpha_vantage_preflight.usage_day ? batchPlan.alpha_vantage_preflight.inferred_remaining_on_approval_day : batchPlan.alpha_vantage_preflight.free_daily_limit;
 const providerPreflight = evaluateCalibrationProviderAvailability({ alphaRequestsAvailable: alphaAvailable, alphaRequestsRequired: plan.approval.maximum_alpha_vantage_requests, configuredProviders: configuredProviders.filter((provider) => batchPlan.provider_policy.approved_providers.includes(provider)), optionalContextMaySettleLimited: batchPlan.provider_policy.optional_context_may_settle_limited, requiresOwnerReview: batchPlan.provider_policy.requires_owner_review_after_architecture_change });
 if (!providerPreflight.allowed) throw new Error(`Batch 3 provider preflight blocked: ${providerPreflight.reason}.`);
+if (JSON.stringify(batchPlan.provider_policy.provider_order) !== JSON.stringify(["alpha_vantage", "twelve_data"]) || plan.approval.maximum_twelve_data_requests !== 10 || plan.approval.maximum_combined_optional_provider_attempts !== 20) throw new Error("Batch 3 provider policy does not match the owner-approved bounds.");
 for (const preserved of batchPlan.preserve_prior_batches) {
   for (const [name, expected] of [["summary.json", preserved.summary_sha256], ["run-summary.json", preserved.run_summary_sha256]]) {
     const original = await readFile(path.join(root, ...preserved.directory.split("/"), name));
@@ -57,7 +58,7 @@ const schema = JSON.parse(await readFile(path.join(root, "schema", "stock-report
 const reportValidator = createReportValidator(schema);
 const openai = new OpenAI({ apiKey: config.apiKey });
 const deepClient = createOpenAIResearchClient(openai, { schema });
-const boundedSourceClient = createBoundedFastSourceClient({ alphaVantageApiKey: config.alphaVantageApiKey, twelveDataApiKey: config.twelveDataApiKey, providerOrder: config.marketProviderOrder });
+const boundedSourceClient = createBoundedFastSourceClient({ alphaVantageApiKey: config.alphaVantageApiKey, twelveDataApiKey: config.twelveDataApiKey, providerOrder: batchPlan.provider_policy.provider_order });
 const client = createEvidenceFirstResearchClient({
   secClient: createSecEvidenceClient({ userAgent: config.secUserAgent }),
   boundedSourceClient,
@@ -122,6 +123,8 @@ for (const scenario of plan.cases) {
 
 const totalKnownCost = runs.reduce((sum, run) => sum + (Number.isFinite(run.estimated_cost_usd) ? run.estimated_cost_usd : 0), 0);
 const maximumAlphaRequests = Math.max(0, ...runs.map((run) => run.alpha_vantage_requests_today ?? 0));
+const maximumTwelveDataRequests = Math.max(0, ...runs.map((run) => run.provider_usage?.quotas?.find((item) => item.provider === "twelve_data")?.daily_used ?? 0));
+const combinedOptionalProviderAttempts = runs.reduce((sum, run) => sum + ["market", "news"].flatMap((operation) => run.provider_usage?.[operation]?.attempts ?? []).reduce((count, attempt) => count + (attempt.request_count ?? 0), 0), 0);
 const summary = {
   plan: path.relative(root, planPath).replaceAll("\\", "/"),
   live_calls: true,
@@ -131,9 +134,13 @@ const summary = {
   maximum_approved_openai_cost_usd: plan.approval.maximum_openai_cost_usd,
   alpha_vantage_requests: maximumAlphaRequests,
   maximum_approved_alpha_vantage_requests: plan.approval.maximum_alpha_vantage_requests,
+  twelve_data_requests: maximumTwelveDataRequests,
+  maximum_approved_twelve_data_requests: plan.approval.maximum_twelve_data_requests,
+  combined_optional_provider_attempts: combinedOptionalProviderAttempts,
+  maximum_approved_combined_optional_provider_attempts: plan.approval.maximum_combined_optional_provider_attempts,
   runs
 };
-if (runs.length !== 5 || totalKnownCost > plan.approval.maximum_openai_cost_usd || maximumAlphaRequests > plan.approval.maximum_alpha_vantage_requests) {
+if (runs.length !== 5 || totalKnownCost > plan.approval.maximum_openai_cost_usd || maximumAlphaRequests > plan.approval.maximum_alpha_vantage_requests || maximumTwelveDataRequests > plan.approval.maximum_twelve_data_requests || combinedOptionalProviderAttempts > plan.approval.maximum_combined_optional_provider_attempts) {
   summary.approval_violation = true;
 }
 await writeFile(path.join(outputRoot, "run-summary.json"), `${JSON.stringify(summary, null, 2)}\n`, { flag: "wx" });

@@ -15,6 +15,8 @@
     "maximum_runs": 5,
     "maximum_openai_cost_usd": 0.15,
     "maximum_alpha_vantage_requests": 10,
+    "maximum_twelve_data_requests": 10,
+    "maximum_combined_optional_provider_attempts": 20,
     "difficult_budget_approved": false,
     "fast_ceiling_ms_per_ticker": 20000,
     "deep_runs": 0,
@@ -32,10 +34,12 @@
     "budget_class": "normal"
   },
   "provider_policy": {
-    "approved_providers": ["alpha_vantage"],
+    "approved_providers": ["alpha_vantage", "twelve_data"],
+    "provider_order": ["alpha_vantage", "twelve_data"],
     "optional_context_may_settle_limited": true,
-    "requires_owner_review_after_architecture_change": true,
-    "note": "Batch 3 remains frozen. Adding Twelve Data to this calibration requires owner review of the resulting provider plan; the architecture change itself does not silently alter the approved evaluation source policy."
+    "requires_owner_review_after_architecture_change": false,
+    "approved_at": "2026-08-27",
+    "note": "The owner approved Alpha Vantage first with Twelve Data fallback, at most 10 requests per provider and 20 combined optional-provider attempts. Local provider rate limits still fail closed as Limited."
   },
   "alpha_vantage_preflight": {
     "free_daily_limit": 25,

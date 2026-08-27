@@ -143,9 +143,10 @@ split-as-dilution wording improved, while live evidence exposed overbroad
 non-reliance matching, persistent corporate-action selection gaps, an omitted
 SMCI material weakness, and an invalid Limited shares series. The independent
 result is in `docs/results/FAST_RELIABILITY_2026-08-27-BATCH-2.md`. The same-five
-Batch 3 plan was subsequently approved and frozen, but execution is paused for
-owner review of the new provider order and request ceilings. Prior artifacts and
-the independent answer key remain unchanged.
+Batch 3 plan was subsequently approved and frozen. The owner then approved the
+Alpha Vantage-first/Twelve Data-fallback policy with at most 10 requests per
+provider and 20 optional-provider attempts combined. Prior artifacts and the
+independent answer key remain unchanged.
 
 The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
 uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
