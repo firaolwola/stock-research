@@ -185,7 +185,11 @@ test("TUP and TUPBQ resolve delisted OTC lineage with Chapter 11 and going conce
     assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
     assert.ok(result.report.financial_assessment.material_warnings.some((item) => /Bankruptcy/i.test(item.title)));
     assert.ok(result.report.sources.some((item) => item.id === "source-sec-historical-identity" && item.url.endsWith("/000100865424000068/tup-20240917.htm")));
-    const finalized = calibrateReportScores(result.report); assert.equal(reportValidator(finalized).valid, true, JSON.stringify(reportValidator(finalized).errors));
+    const finalized = calibrateReportScores(result.report);
+    assert.match(finalized.financial_assessment.going_concern.summary, /substantial doubt/i);
+    assert.match(finalized.claims.find((item) => item.id === "claim-sec-identity").text, /current ticker is TUPBQ.*OTC Expert Market/i);
+    assert.match(finalized.scores.financial_health.explanation, /going-concern|critical warning/i);
+    assert.equal(reportValidator(finalized).valid, true, JSON.stringify(reportValidator(finalized).errors));
   }
 });
 
@@ -202,6 +206,8 @@ test("NIO IFRS summary and scoring share the newest comparable annual revenue an
   const scored = calibrateReportScores(result.report);
   assert.equal(scored.scores.financial_revenue_trend.state, "confirmed");
   assert.equal(scored.scores.financial_net_income_trend.state, "confirmed");
+  assert.match(scored.scores.financial_revenue_trend.explanation, /annual periods/i);
+  assert.match(scored.scores.financial_net_income_trend.explanation, /annual periods/i);
   assert.equal(result.report.financial_assessment.reporting_currency, "CNY");
 });
 
