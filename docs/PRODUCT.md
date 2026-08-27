@@ -1,6 +1,6 @@
 # Product definition
 
-**Last reviewed:** 2026-08-26
+**Last reviewed:** 2026-08-27
 
 This document is the running source of truth for product vision, user workflow,
 scope, and success criteria. Implementation mechanics belong in the technical
@@ -118,8 +118,8 @@ Fast should normally attempt to produce trustworthy values for:
 7. Near-term setup quality.
 
 Long-term company quality may remain unscored more often and be expanded in
-Deep. The existing deterministic methodology is a baseline scaffold for
-recalibration, not a fixed product philosophy.
+Deep. Deterministic methodology 2.0.0 is the current executable contract;
+methodology 1.0.0 remains only a historical comparison baseline.
 
 ### Progressive score behavior
 
@@ -145,7 +145,8 @@ The preferred top-to-bottom order is:
 3. Current news and catalyst.
 4. Score components.
 5. Financial-health context.
-6. Deeper evidence, filings, scoring inputs, sources, and supporting sections.
+6. Detailed research and evidence.
+7. Source library and technical supporting detail.
 
 ### Source strategy
 
