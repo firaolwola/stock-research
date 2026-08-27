@@ -1,0 +1,14 @@
+{
+  "ticker": "AAPL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": false,
+  "detected": ["issuer and security identity", "comparable quarterly revenue", "comparable quarterly net income", "cash", "total debt", "current comparable operating cash flow", "current comparable free cash flow", "shares history", "current earnings catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"score_range","cause":"calibration","finding":"Cash trend scored 2.0, below the owner-reviewed 5-9 range; the explanation accurately reflects quarter-end cash depletion."},
+    {"category":"financial_health","cause":"coverage","finding":"Financial Health remained Limited because bounded going-concern coverage was unresolved."}
+  ],
+  "score_range_result": {"passed":9,"evaluated":13},
+  "explanation_fidelity": "pass",
+  "settlement_behavior": "pass",
+  "safe_settlement": "Unresolved capital-risk components remained Limited and were not converted into favorable scores."
+}

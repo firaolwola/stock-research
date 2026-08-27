@@ -1,0 +1,15 @@
+{
+  "ticker": "NXL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": false,
+  "detected": ["issuer and security identity", "completed 1-for-30 reverse split", "Nasdaq delisting pressure", "going-concern warning", "material weakness", "offering and warrant evidence", "cash depletion", "negative operating cash flow", "split-adjusted 71.3% shares growth", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"revenue","cause":"unavailable_evidence","finding":"Comparable revenue remained Unknown rather than receiving a numeric trend score."},
+    {"category":"free_cash_flow","cause":"unavailable_evidence","finding":"Free cash flow remained Unknown because an aligned capital-expenditure input was unavailable."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Strong capital, split, and compliance evidence did not settle corresponding numeric risk scores."}
+  ],
+  "score_range_result": {"passed":6,"evaluated":13},
+  "explanation_fidelity": "pass",
+  "settlement_behavior": "pass",
+  "safe_settlement": "Unfinished components remained Limited; the principal immediate risks were surfaced without favorable inference."
+}

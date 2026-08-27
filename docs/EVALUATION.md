@@ -137,6 +137,14 @@ invalidation, and SMCI-style material weaknesses, recent cash-flow deterioration
 and forward-split share normalization. These tests correct known mechanisms but
 do not replace a separately approved live batch or prove recall targets.
 
+The approved same-five-ticker repeat on 2026-08-27 improved recall from 66.28%
+to 82.56% but still failed the milestone. Current-flow precedence and the worst
+split-as-dilution wording improved, while live evidence exposed overbroad
+non-reliance matching, persistent corporate-action selection gaps, an omitted
+SMCI material weakness, and an invalid Limited shares series. The independent
+result is in `docs/results/FAST_RELIABILITY_2026-08-27-BATCH-2.md`. A third live
+batch is not appropriate until these deterministic failures are corrected.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

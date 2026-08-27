@@ -1,0 +1,72 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-27-batch-2.json",
+  "live_calls": true,
+  "approved_run_count": 5,
+  "completed_run_count": 5,
+  "known_openai_cost_usd": 0.015242,
+  "maximum_approved_openai_cost_usd": 0.15,
+  "alpha_vantage_requests": 10,
+  "maximum_approved_alpha_vantage_requests": 10,
+  "runs": [
+    {
+      "case_id": "aapl-2026-live",
+      "ticker": "AAPL",
+      "result": "report",
+      "elapsed_ms": 6597,
+      "estimated_cost_usd": 0.015242,
+      "input_tokens": 8290,
+      "output_tokens": 488,
+      "alpha_vantage_requests_today": 2,
+      "completion_status": "partial",
+      "termination_reason": "partial_coverage"
+    },
+    {
+      "case_id": "amc-2026-live",
+      "ticker": "AMC",
+      "result": "report",
+      "elapsed_ms": 9779,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": 4,
+      "completion_status": "partial",
+      "termination_reason": "partial_coverage"
+    },
+    {
+      "case_id": "ncpl-2026-live",
+      "ticker": "NCPL",
+      "result": "report",
+      "elapsed_ms": 1649,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": 6,
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    },
+    {
+      "case_id": "nxl-2026-live",
+      "ticker": "NXL",
+      "result": "report",
+      "elapsed_ms": 9501,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": 8,
+      "completion_status": "partial",
+      "termination_reason": "partial_coverage"
+    },
+    {
+      "case_id": "smci-2026-live",
+      "ticker": "SMCI",
+      "result": "invalid_report",
+      "elapsed_ms": 1522,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": 10,
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    }
+  ]
+}

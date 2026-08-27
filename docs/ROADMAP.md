@@ -81,12 +81,14 @@ verdict.
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
-Issue #55 remains active. Deterministic regressions now cover the first batch's
-known Company Facts comparable-period, accounting-event gating,
-reverse-split/share-history normalization, and current-period cash-flow failures.
-The next priority is an owner-approved second bounded calibration plan; no new
-live batch is currently authorized, and the first batch remains the measured
-baseline rather than being rewritten. A paid data
+Issue #55 remains active. The approved second five-ticker batch improved recall
+from 66.28% to 82.56% but did not pass. The next priority is deterministic
+correction of the reproduced overbroad non-reliance match, AMC/SMCI split
+retrieval gaps, omitted SMCI material weakness, restored-compliance semantics,
+and invalid Limited shares series. No third live batch is authorized. After
+those fixes, a separately approved sparse-category batch can target completed
+splits, listing/going-concern cases, a foreign ADR/20-F, and an OTC/delisted
+security. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

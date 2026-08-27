@@ -107,3 +107,21 @@ test("Issue 55 artifacts preserve the approved bound and failed reliability gate
   assert.ok(result.severe_misleading_misses.length > 0);
   assert.equal(result.issue_must_remain_open, true);
 });
+
+test("Issue 55 batch 2 remains separately bounded and records improvement without claiming reliability", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-batch-2.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-batch-2/summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.approval.maximum_runs, 5);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(result.completed_runs, 5);
+  assert.equal(result.operations.alpha_vantage_requests, 10);
+  assert.ok(result.operations.conservative_maximum_possible_cost_usd <= plan.approval.maximum_openai_cost_usd);
+  assert.ok(result.overall_material_checks.recall > result.overall_material_checks.batch_1_recall);
+  assert.equal(result.overall_material_checks.passes, false);
+  assert.equal(result.validation.post_scoring_reports_valid, 4);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
+});
