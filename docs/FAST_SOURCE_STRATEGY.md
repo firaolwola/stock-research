@@ -1,19 +1,20 @@
 # Bounded Fast source strategy
 
-**Status:** Architecture accepted by product owner; named provider not selected
+**Status:** Implemented for Issue #51; Alpha Vantage free tier explicitly approved
 
-**Last reviewed:** 2026-08-26
+**Last reviewed:** 2026-08-27
 
-**Scope:** GitHub Issue #48; no provider is selected or integrated by this document
+**Scope:** Source map approved in #48 and free-first implementation completed in #51
 
 ## Recommendation
 
-Fast should use a small, deterministic source graph instead of broad web search:
+Fast uses a small, deterministic source graph instead of broad web search:
 
 1. Resolve and gate the current security and issuer with SEC and exchange data.
 2. Retrieve filing-based facts directly from SEC EDGAR.
-3. Make at most two bounded requests to one approved data API: one for current
-   news discovery and one for market/reference data.
+3. Use cached Nasdaq Trader symbol/status/halt files for authoritative exchange
+   context and make at most two bounded Alpha Vantage free-tier requests per
+   uncached ticker: news discovery and end-of-day market context.
 4. Promote a discovered event into material evidence only after following its
    original URL to an issuer release, original newswire release, SEC filing,
    exchange notice, or reputable original report.
@@ -21,42 +22,18 @@ Fast should use a small, deterministic source graph instead of broad web search:
    Missing, stale, conflicting, or timed-out sources settle as `Unscored` or
    `Limited`; they never become favorable evidence.
 
-No named provider is ready for approval from public evidence alone. **Massive
-Stocks Basic** is the strongest technical candidate for a personal-project
-pilot: its published individual plans expose ticker news with publisher and
-original-article links, historical bars, ticker/reference data, splits, and
-float through one REST API, and Basic is listed as free. But its personal market
-data terms describe the data as display-only by default and restrict derived
-works and third-party use without consent. Fast score derivation and supplying a
-normalized packet to OpenAI therefore need written entitlement clarification or
-a suitable license before selection. Current-data entitlements can also vary by
-endpoint, and OTC/foreign coverage has not been demonstrated.
+The owner approved Alpha Vantage's free API on 2026-08-27 for personal,
+deterministic market context and ticker-news discovery. Provider summaries,
+sentiment, and article bodies are excluded from OpenAI packets. Discovery alone
+is structurally Limited and non-scoreable; an event can influence material
+scoring only after promotion to SEC, exchange, issuer, or another attributable
+original source. No paid Alpha Vantage plan or other subscription is approved.
 
-If those checks fail, **Alpaca Basic** is the fallback pilot candidate. It has a
-free individual plan, historical full-market SIP data outside the latest
-15-minute window, IEX-only real-time data, and Benzinga-supplied news. The IEX
-real-time subset is not sufficient for a current full-market setup assessment,
-so Fast would use a timestamped delayed SIP bar or remain Limited. Alpaca also
-requires an account and credentials.
-
-**Benzinga Stock News plus Press Releases** is the stronger premium discovery
-option if later evaluation shows the free candidates miss small-cap movers. It
-publishes broad U.S. ticker coverage and direct company press-release access,
-but pricing and redistribution/licensing terms require a sales quote. It cannot
-be selected within the current cost evidence.
-
-This recommendation does not approve a subscription, scraping, credentials,
-provider integration, or production dependency. There are two separate owner
-decisions. The first was approved on 2026-08-26; the second remains outstanding:
-
-1. **Approved:** use this provider-neutral source-responsibility map and bounded
-   architecture.
-2. **Not approved:** after written rights and a small-cap coverage sample are
-   available, select one provider: authorize a Massive entitlement inquiry,
-   accept Alpaca's
-   delayed-market fallback subject to its own terms check, or authorize premium
-   Benzinga/newswire and market-data quotes. #51 must stop for that selection and
-   may not silently substitute another vendor.
+The free tier allows 25 requests per day in ordinary use. The adapter maintains
+a local UTC-day counter, uses five-minute ticker caches, recognizes provider
+quota responses, and settles missing news/market work as Limited. Nasdaq
+directories are cached for 24 hours and halt data for one minute. All requests
+use #49's shared cancellation signal and zero-dollar source ledger entries.
 
 ## Source roles
 
@@ -182,7 +159,7 @@ deadline completed successfully; it never means the wider internet was searched.
 |---|---|---|---|---|
 | A. No new provider: SEC + public exchange/issuer endpoints | Usually 4–12 seconds cached/normal; SEC requests plus exchange lookups; issuer IR retrieval varies | Free and comfortably bounded | Strong filing risk; weak standardized current-news discovery and market context; issuer sites are heterogeneous | Keep as graceful fallback, not the complete strategy |
 | B. Search-based discovery | Historically exceeded Fast bounds; query count and context are variable | Tool/token cost can approach ceilings unpredictably | Broad reach but nondeterministic, hard to license/attribute, and unsafe as sole score evidence | Reject for normal Fast; reserve broad search for Deep |
-| C. Bounded data API + primary-source promotion | Target 5–12 seconds normal, hard stop at 20 seconds; at most one news and one market/reference request in parallel with SEC | A free pilot can fit only if intended derived/AI use is licensed; paid fixed fees require allocation and owner approval; optional synthesis must keep total under $0.03 normal/$0.05 difficult | Best predictable discovery/market coverage while primary evidence remains authoritative; gaps remain explicit | Recommend the provider-neutral architecture; named provider pending rights and coverage evidence |
+| C. Bounded data API + primary-source promotion | Target 5–12 seconds normal, hard stop at 20 seconds; at most one news and one market/reference request in parallel with SEC | The approved free Alpha Vantage use adds no data charge; optional synthesis must keep total under $0.03 normal/$0.05 difficult | Predictable discovery/market coverage while primary evidence remains authoritative; gaps remain explicit | Implemented with Alpha Vantage free tier and public Nasdaq data |
 
 The 20-second controller must reserve time for validation and finalization rather
 than giving every source its own 20 seconds. A practical initial allocation for
@@ -199,11 +176,12 @@ run at or below $0.03 normally and $0.05 for an explicitly difficult run.
 
 ## Provider comparison
 
-Public information was reviewed on 2026-08-26. Pricing, entitlements, and terms
-can change; #51 must repeat the final check before credentials or code are added.
+Public information was reviewed on 2026-08-27. Pricing, entitlements, and terms
+can change; any paid or broadened use requires a new owner decision.
 
 | Candidate | API/feed and latency | Coverage/attribution | Pricing, limits, and licensing | Fit |
 |---|---|---|---|---|
+| Alpha Vantage | REST ticker news plus daily time series; every call is capped at four seconds | Discovery spans many outlets and exposes original URLs; end-of-day price/volume is timestamped. Small-cap and foreign recall still need measurement | Free personal access allows 25 requests/day and documents LLM-oriented use. This implementation excludes summaries, sentiment, and article bodies from OpenAI and scoring | **Approved and implemented** for discovery and EOD context only |
 | Massive Stocks | REST news, market bars/snapshots, reference, splits, and float; no public response-time SLA found, so the adapter must settle Limited at four seconds; direct article URLs and publisher metadata | Broad U.S. stock API surface; small-cap, OTC, foreign/ADR news recall needs measurement | Individual Basic shown as free; paid tiers shown at $29/$79/$199 monthly. Personal terms default to display-only and restrict derived works/third-party use, so scoring and synthesis require written clarification or another license | Strongest technical candidate; not selectable yet |
 | Alpaca | REST/WebSocket market data and Benzinga news; no public REST response-time SLA found, so the adapter must settle Limited at four seconds | U.S. stocks/ETFs; news averages 130+ items/day. Free real-time is IEX only; full SIP is delayed 15 minutes | Basic free with account, 200 historical calls/minute; Algo Trader Plus $99/month. Credentialed market-data agreements and derived/AI use need confirmation | Strong fallback for delayed price context; thinner stated news volume |
 | Benzinga | REST/TCP/RSS Stock News and Press Release APIs; advertises sub-0.1-second API delivery, but Fast still enforces four seconds | Wilshire 5000 plus stated additional popular/Canadian tickers; press releases are direct company communications and include attribution | Pricing and rate limits are quote-based; embedding/use is licensed | Best premium discovery candidate, but cannot be approved against current cost evidence |
@@ -217,6 +195,8 @@ can change; #51 must repeat the final check before credentials or code are added
 - [Nasdaq symbol directory definitions](https://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs)
 - [Nasdaq current symbol lookup](https://nasdaqtrader.com/trader.aspx?id=symbollookup)
 - [Nasdaq trading-halt definitions](https://nasdaqtrader.com/Trader.aspx?id=TradeHaltCodes)
+- [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/)
+- [Alpha Vantage free-tier limits](https://www.alphavantage.co/support/)
 - [Massive stocks API and individual pricing](https://massive.com/docs/rest/stocks)
 - [Massive ticker-news response contract](https://massive.com/docs/rest/stocks/news)
 - [Massive personal market-data terms](https://massive.com/legal/market-data-terms-of-service)
@@ -258,13 +238,12 @@ workflow does not repeat successful bounded retrieval.
 
 ## Handoff to dependent issues
 
-- **#49:** may proceed without a named provider. Enforce one shared 20-second
-  deadline and provider-neutral cost ledger across SEC, exchange, provider,
-  original-source promotion, optional synthesis, scoring, and finalization.
-- **#51:** after the architecture approval and a separate explicit named-provider
-  selection, implement only that candidate, the two-call provider ceiling,
-  attribution, identity gating, primary-source promotion, cache policy, and
-  graceful fallback to completed SEC evidence.
+- **#49:** completed; its shared deadline and provider-neutral cost ledger cover
+  SEC, exchange, provider, original-source promotion, optional synthesis,
+  scoring, and finalization.
+- **#51:** completed with Alpha Vantage free-tier discovery/EOD context, public
+  Nasdaq data, attribution, identity gating, bounded original-source promotion,
+  cache/quota policy, and graceful fallback to completed SEC evidence.
 - **#52:** encode the seven evidence-sufficiency contracts; no numeric score may
   appear merely because a provider field exists.
 - **#55:** measure the real-ticker evaluation set and decide whether the pilot's

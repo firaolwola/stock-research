@@ -32,17 +32,26 @@ Production Fast currently retrieves:
 - issuer submissions and recent filing metadata;
 - SEC Company Facts;
 - at most four selected primary filing documents; and
-- at most one directly linked material exhibit.
+- at most one directly linked material exhibit;
+- cached Nasdaq Trader current-symbol and halt data; and
+- when a free key is configured, at most one Alpha Vantage news-discovery and
+  one end-of-day market-data request per uncached ticker, plus at most one
+  bounded original-newswire promotion request.
 
 SEC issuer/ticker/CIK association is kept separate from security type and active
-listing status, which remain Limited until authoritative support exists. Company
+listing status. Identity-gated Nasdaq data may resolve those fields; unsupported
+or conflicting venues remain Limited. Company
 Facts normalization derives FCF only from aligned OCF and capital expenditures,
 derives total debt only from aligned current and non-current components, and
 withholds stale or conflicting liquidity values from current decision use.
 
 It caches the ticker map for six hours and issuer data or filing documents for
 five minutes, coalesces concurrent requests, declares a User-Agent, and paces SEC
-request starts. One request-scoped controller now governs the entire Fast path.
+request starts. Nasdaq directory data is cached for 24 hours, halt data for one
+minute, and Alpha Vantage ticker results for five minutes. A local UTC-day
+counter stops new Alpha Vantage work at its 25-request free allowance, while
+provider quota responses settle the affected source as Limited. One
+request-scoped controller governs the entire Fast path.
 It stops source work after 19.5 seconds, reserving 0.5 seconds for scoring,
 validation, telemetry, and response finalization before the 20-second hard
 ceiling. The same abort signal reaches SEC pacing waits, queued/shared waits,
@@ -127,7 +136,8 @@ fields and use only owner-approved paid bounds.
 snapshot. Pricing and tool fees can change and must be checked against official
 provider terms before interpreting or approving a new measured run.
 
-A news or market-data provider must be evaluated for speed, coverage,
-availability, reliability, source attribution, total cost, licensing, and
-integration effort. Evaluation may recommend an option; selecting, paying for,
-scraping, or integrating it requires explicit owner approval.
+Alpha Vantage's free API is approved only for personal deterministic market
+context and ticker-news discovery. Its summaries, sentiment, and article bodies
+do not enter OpenAI packets or material scoring. No paid plan is approved;
+selecting another provider, paying, scraping, or broadening licensed use still
+requires explicit owner approval.

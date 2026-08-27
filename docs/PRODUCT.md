@@ -152,10 +152,11 @@ The preferred top-to-bottom order is:
 Fast is SEC-first for filing-based risks, but not SEC-only when another bounded
 source is better for current news or market context.
 
-The approved provider-neutral source-responsibility map, score-level evidence
-contracts, and candidate comparison are maintained in
-`FAST_SOURCE_STRATEGY.md`. It authorizes the bounded architecture, not a named
-provider, subscription, credential, or integration.
+The approved source-responsibility map and score-level evidence contracts are
+maintained in `FAST_SOURCE_STRATEGY.md`. The implemented free-first stack uses
+SEC and Nasdaq Trader as authoritative public sources and Alpha Vantage's free
+tier for discovery and end-of-day market context. No paid subscription is
+approved.
 
 Use sources in this order when available:
 
@@ -163,7 +164,7 @@ Use sources in this order when available:
 2. Official company releases and original newswires.
 3. Reputable original financial reporting.
 4. Financial-news or research services as discovery and secondary evidence.
-5. General search discovery when needed to locate stronger evidence.
+5. Broad search only in deliberate Deep research, not Fast.
 
 Services such as Seeking Alpha, TipRanks, or search-based discovery may identify
 what happened and where to look, but an AI-generated search summary or discovery

@@ -34,7 +34,7 @@ test("dashboard exposes operational budgets and deliberate deeper research", asy
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
   assert.match(html, /value="fast"/);
   assert.match(html, /value="deep"/);
-  for (const text of ["Research budget & stage", "estimated_cost_usd", "web_search_calls", "Operational budgets do not certify evidence completeness"]) assert.match(source, new RegExp(text));
+  for (const text of ["Research budget & stage", "estimated_cost_usd", "web_search_calls", "bounded_sources", "Alpha Vantage", "Operational budgets do not certify evidence completeness"]) assert.match(source, new RegExp(text));
 });
 
 test("priority findings rank unknowns before material confirmed risk evidence", async () => {

@@ -10,8 +10,8 @@ test("real startup requires a non-empty API key", () => {
 });
 
 test("real startup uses the default port and accepts a PORT override", () => {
-  assert.deepEqual(loadRealAppConfig({ OPENAI_API_KEY: "test-key" }), { apiKey: "test-key", port: REAL_APP_PORT, secUserAgent: undefined });
-  assert.deepEqual(loadRealAppConfig({ OPENAI_API_KEY: "test-key", PORT: "4123", SEC_USER_AGENT: "stock-research owner owner@example.com" }), { apiKey: "test-key", port: 4123, secUserAgent: "stock-research owner owner@example.com" });
+  assert.deepEqual(loadRealAppConfig({ OPENAI_API_KEY: "test-key" }), { apiKey: "test-key", port: REAL_APP_PORT, secUserAgent: undefined, alphaVantageApiKey: "" });
+  assert.deepEqual(loadRealAppConfig({ OPENAI_API_KEY: "test-key", PORT: "4123", SEC_USER_AGENT: "stock-research owner owner@example.com", ALPHA_VANTAGE_API_KEY: " alpha-key " }), { apiKey: "test-key", port: 4123, secUserAgent: "stock-research owner owner@example.com", alphaVantageApiKey: "alpha-key" });
 });
 
 test("real startup rejects invalid ports without exposing configuration values", () => {

@@ -23,7 +23,8 @@ but this does not establish real-ticker recall or trustworthy score coverage.
 The current implementation is not yet the approved Fast product contract:
 
 - current Fast evidence normally leaves important scores unresolved;
-- current-news and market-context coverage is incomplete;
+- current-news and market context now have a bounded free-tier path, but
+  coverage and free-quota limits still require evaluation;
 - deterministic identity and financial semantics now fail closed on unsupported,
   stale, partial, conflicting, or mismatched evidence, but real-ticker coverage
   still requires calibration;
@@ -61,24 +62,21 @@ verdict.
 1. [x] **Complete:** [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
 2. [x] **Complete:** [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
 3. [x] **Complete:** [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
-4. [ ] **Next — blocked on owner provider approval:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). Provider selection, payment, scraping, integration, and new production dependencies require explicit owner approval.
-5. [ ] **Queued — depends on #51:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52).
+4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and optional Alpha Vantage free-tier discovery/end-of-day context.
+5. [ ] **Next — depends on completed #51:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52).
 6. [ ] **Queued — depends on #52:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53).
 7. [ ] **Queued — coordinates with #51 and #52:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
 8. [ ] **Final reliability gate — blocked by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
-is unblocked optional technical cleanup. It may proceed while #51 awaits provider
-approval when doing so will not conflict with the milestone implementation.
+remains optional technical cleanup when it will not conflict with milestone work.
 
 No milestone implementation issue is currently active. The next implementation
-priority is #51, and it is intentionally blocked until the owner explicitly
-selects a named provider after licensing, derived-use, coverage, pricing,
-attribution, and access evidence is sufficient. The provider-neutral source map
-is approved in `FAST_SOURCE_STRATEGY.md`; #49's reusable controls and #50's
-corrected evidence semantics are already implemented. If provider approval is
-not yet available, #56 is optional technical cleanup rather than a substitute
-for or silent expansion of #51.
+priority is #52. It can now calibrate and version the seven Fast score constructs
+against the completed evidence semantics and bounded source packet. #53 depends
+on #52; #54 coordinates with the completed Fast packet; #55 remains the final
+real-ticker reliability gate. A paid data subscription remains neither selected
+nor required and would need separate owner approval.
 
 ### Milestone acceptance criteria
 
@@ -141,8 +139,9 @@ logging, rollback, and deployment safeguards are approved and implemented.
 - Fast dashboard and token-free mock mode (#4, #22, #24).
 - Provider-schema, output-bound, timeout, parallel-domain, evidence-first,
   diagnostic, and bounded filing-extraction work delivered through PRs #38–#46.
-- Provider-neutral Fast source responsibility, end-to-end budgets, and corrected
-  deterministic identity/financial semantics (#48–#50).
+- Provider-neutral Fast source responsibility, end-to-end budgets, corrected
+  deterministic identity/financial semantics, and the approved free-first
+  bounded news/market implementation (#48–#51).
 
 These completed items are foundations and historical implementation results;
 they do not by themselves satisfy the current Fast reliability milestone.

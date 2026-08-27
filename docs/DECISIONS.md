@@ -739,3 +739,19 @@ major workflows, or priorities.
 
 **Why:** The repository should remain aligned without requiring separate
 documentation requests, while product direction remains owner-controlled.
+
+## 2026-08-27 — Use a free-first bounded Fast source stack
+
+**Status:** Accepted and implemented by Issue #51
+
+**Decision:** Keep SEC, Nasdaq Trader, issuer filings/exhibits, and attributable
+original releases authoritative. Use Alpha Vantage's free API only for personal
+deterministic end-of-day market context and ticker-specific news discovery.
+Provider summaries, sentiment, and article bodies are not supplied to OpenAI.
+Discovery alone cannot support a material score; missing, failed, or
+quota-blocked work remains Limited or Unscored. No paid plan is approved.
+
+**Why:** The owner prefers public authoritative sources and a free non-AI data
+layer when practical, while allowing bounded OpenAI cost for classification.
+This preserves predictable termination and avoids a recurring data subscription
+before evaluation demonstrates that paid coverage is necessary.
