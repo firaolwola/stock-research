@@ -5,17 +5,20 @@ external screener identifies a moving or news-relevant ticker, it is intended to
 produce a fast, evidence-backed view of the catalyst, company context, and
 material risks before deeper research.
 
-The current prototype requests a validated, versioned stock-report object from
-the OpenAI Responses API with web search. The report contract covers identity,
+The current application uses two research stages. Fast retrieves and validates
+bounded SEC evidence directly, streams deterministic partial reports, and may
+run a small tool-disabled classification over supplied evidence IDs. Deep uses
+the OpenAI Responses API with broader web search and must ultimately extend the
+Fast evidence packet. The report contract covers identity,
 reverse splits, dilution, dividends, warnings, dated financial metrics and trends, structured
 catalyst factors and historical analogues, scores, claims, and sources. Catalyst
 history includes explicit comparison limits and dated reaction windows, or an
 unknown result when no reliable analogue is available. Issuer identity now follows confirmed prior names
 and tickers so dated material history is not lost across renames or rebrands.
 The browser renders the validated report as a responsive fast-decision
-dashboard. Scores are now recalculated server-side with documented deterministic
-methodology. Fast/deep stage budgets and per-report usage telemetry are now
-implemented; comparison remains active roadmap work.
+dashboard. Scores are recalculated server-side with deterministic methodology.
+That methodology is now a historical calibration baseline pending the active
+Fast reliability milestone. Comparison remains planned behind that milestone.
 
 This application is a research aid, not financial advice.
 
@@ -51,9 +54,11 @@ The first end-to-end prototype is working:
    distinct score groups, all research sections, coverage and issuer context,
    and claim-linked sources in a responsive dashboard.
 
-The repository now includes a dated representative ticker evaluation set and a
-token-free score and operating-budget calibration run. Actual live latency and
-cost remain unmeasured because no paid verification run was authorized. See
+The repository includes a dated representative ticker evaluation set and a
+token-free score and operating-budget calibration run. Its checked-in research
+results are fictional and do not establish production Fast recall. A free SWVL
+structural run verified bounded SEC extraction, but complete live score quality,
+cost, and reliability remain uncalibrated. See
 [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Requirements
@@ -165,18 +170,19 @@ and a bounded set of material filing documents directly, then progressively
 renders a deterministic report. Explicit split ratios, actual issuance versus
 registered capacity, warrants/convertibles, warning language, and recent filing
 events are extracted conservatively; unmatched content stays Limited/Unknown.
-Optional AI synthesis has hosted tools disabled and may reference only supplied evidence
-record IDs; its failure cannot remove deterministic evidence. Cold Fast normally
-makes three metadata/facts requests plus up to four documents and one material
-exhibit, while cached issuer requests make none. Detailed
-lineage, exhaustive filing extraction, financial history, corroboration, and historical
-catalyst analogues, reaction windows, and conflict resolution remain Deep work.
+Optional AI synthesis has hosted tools disabled and may reference only supplied
+evidence record IDs; its failure cannot remove deterministic evidence. The
+approved next milestone adds a bounded non-SEC source strategy, end-to-end
+20-second and cost ceilings, corrected evidence semantics, recalibrated scores,
+and real-ticker reliability evaluation. These policies are documented but not
+yet fully implemented.
 
-The default action runs the fast stage. **Deeper research** is a deliberate
-second-stage request with a larger timeout/output budget; the server never
-escalates automatically. Successful responses show latency, token use,
-web-search calls, estimated cost, and budget status without replacing report
-coverage or unknown states. See [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+The default action runs the Fast stage. **Deeper research** remains deliberate
+and separately budgeted. The approved direction requires Deep to build and reuse
+Fast evidence automatically, but the current direct-Deep path does not yet do so
+when no in-memory Fast packet exists. Successful responses show operational
+telemetry without replacing report coverage or unknown states. See
+[docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 
 ## Project documentation
 

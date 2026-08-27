@@ -1,13 +1,21 @@
 # Score methodology
 
-**Methodology version:** 1.0.0  
-**Last reviewed:** 2026-08-25
+**Methodology version:** 1.0.0
+
+**Status:** Historical baseline pending Fast reliability recalibration
+
+**Last reviewed:** 2026-08-26
 
 Scores are deterministic summaries of the validated report evidence. The server
 replaces provider-authored score values before final validation and response.
 Every score retains its inputs, weights, evidence state, confidence, time
 horizon, explanation, and claim links. Scores are research aids—not outcome
 probabilities, price forecasts, or trade instructions.
+
+Methodology 1.0.0 is the current executable implementation and must remain
+available as a calibration baseline. It is not the approved final scoring
+philosophy. The Fast reliability milestone will review its constructs, evidence
+sufficiency rules, proxies, windows, and weights against real-ticker evidence.
 
 ## Shared rules
 
@@ -23,6 +31,25 @@ probabilities, price forecasts, or trade instructions.
   sources yield high. Unscored results use unknown confidence.
 - `not_found` can support a numeric component only when it represents a sourced,
   bounded search. It never proves lifetime absence.
+
+## Fast presentation
+
+The report contract retains the 0–10 scale. Fast converts a trustworthy internal
+score to a 0–5 star card and may use half-stars so useful differences are not
+hidden. Risk and quality cards intentionally use their natural directions:
+
+- five stars means very high risk for dilution and reverse-split risk cards;
+- five stars means very strong financial health, catalyst strength, or near-term
+  setup quality for quality cards.
+
+The title, direction label, and one-sentence evidence explanation must remove
+ambiguity. Detailed 0–10 values, components, weights, methodology, and sources
+remain visible below or through expandable details.
+
+While evidence collection continues, a card shows `Researching`. It shows a
+number only after its evidence threshold is satisfied; otherwise the final card
+settles as `Unscored` or `Limited`. `Researching` is a transport/UI state rather
+than a new factual evidence state unless later contract design proves otherwise.
 
 ## Constructs and inputs
 
@@ -65,3 +92,23 @@ than an ownership percentage, historical reactions are sparse, and no approved
 live outcome study has been run. Calibration should therefore be revisited with
 dated evidence and owner approval before changing thresholds or claiming
 predictive performance.
+
+## Required methodology redesign
+
+The next methodology must be designed around the seven priority Fast scores and
+evidence obtainable within the approved 20-second and cost ceilings. It should:
+
+- measure potential shareholder dilution more directly than offering value
+  relative to cash when reliable share or instrument terms are available;
+- choose historical windows because they support current risk assessment, not
+  merely because they were inherited from version 1.0.0;
+- avoid making near-term setup depend on issuer-reaction history when that
+  evidence is not realistically available in Fast;
+- define a minimum evidence threshold for every numeric score;
+- retain distinct risk and quality constructs without a combined verdict; and
+- keep long-term company quality primarily in Deep when Fast evidence is
+  insufficient.
+
+Real-ticker calibration evaluates evidence recall, interpretation, explanation
+fidelity, owner-reviewed reasonable ranges, and relative ordering between
+clearly cleaner and riskier cases. Exact numeric agreement is not required.

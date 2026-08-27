@@ -27,12 +27,6 @@ bounds, and Fast deliberately represents historical catalyst analogues as a
 named deep-stage coverage gap. After research, deterministic scoring restores
 the required full v4 shape before authoritative validation and browser delivery.
 
-Operational telemetry is intentionally outside this contract. A successful
-`/api/analyze` response contains `{ ticker, report, operations }`; `operations`
-records stage, latency, tokens, web-search calls, estimated cost, pricing
-version, and fast-budget status. This keeps performance metadata from changing
-the meaning or validity of a stored report. See [PERFORMANCE.md](PERFORMANCE.md).
-
 ## Versioning
 
 Every report must include `schema_version: "4.0.0"`. The schema `$id` also ends
@@ -113,6 +107,13 @@ become clear. `confirmed` or `not_found` may be downgraded to `unknown` or
 `not_applicable` changes only when the security or context classification changes.
 Consumers must compare report timestamps and evidence; they must not infer that
 one state silently transitions in place.
+
+`Researching` is currently a progressive transport and UI state, not a stored
+factual evidence state. While Fast continues, the transport identifies unfinished
+components. A final validated report settles those components using the existing
+`unknown` or `limited_coverage` semantics and null numeric values. A later
+implementation may propose a contract change only if transport state cannot
+represent the approved behavior safely.
 
 Unknown, not-found, not-applicable, and limited-coverage scores must have a
 `null` value. Only `confirmed` scores carry a numeric value. Consequently,
@@ -199,14 +200,12 @@ separate implementation and evaluation responsibilities.
 
 Deep supplies this contract as a JSON Schema response format with API-level
 strict mode disabled because the contract uses Draft 2020-12 features beyond
-the API strict subset. Fast instead requests three compact domain schemas and
-assembles this same v4 contract server-side. Separate Fast fragments are merged
-only when ticker, issuer legal name, and CIK agree; failed or conflicting domains
-produce explicit pending/unknown placeholders. Every progressive and final
-assembly must pass the complete server validator, so API formatting alone is
-never treated as sufficient. Requests include
-`web_search_call.action.sources` so provider search metadata remains available
-while typed, dated, claim-linked source records are constructed.
+the API strict subset. Production Fast assembles the same v4 contract from
+server-retrieved evidence and validates every progressive and final report.
+Current Fast retrieval is SEC-based with optional tool-disabled evidence
+classification; the approved reliability milestone will add only an explicitly
+approved bounded source strategy. Provider formatting or discovery summaries
+are never treated as authoritative validation or sole material evidence.
 
 Catalyst validation additionally requires confirmed catalysts to have a date,
 classification, sourced claims, and meaningful confidence. Confirmed analogues

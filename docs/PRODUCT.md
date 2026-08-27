@@ -1,254 +1,258 @@
 # Product definition
 
-**Last reviewed:** 2026-08-25
+**Last reviewed:** 2026-08-26
+
+This document is the running source of truth for product vision, user workflow,
+scope, and success criteria. Implementation mechanics belong in the technical
+documents linked from the README; milestone ordering belongs in `ROADMAP.md`.
 
 ## Product statement
 
 Stock Research is a personal, decision-focused stock research and due-diligence
 tool. After an external screener identifies a moving or news-relevant ticker, it
-helps the user rapidly assess the current catalyst, historical company risks,
-and financial context before deciding whether the setup deserves deeper
-consideration.
+helps the owner rapidly assess the current catalyst, material company risks, and
+financial context before deciding whether the setup deserves deeper research.
 
-It provides evidence, uncertainty, and risk signals. It does not execute trades,
-recommend entries or exits, provide personalized investment advice, or function
-as a trading platform.
+It provides evidence, uncertainty, and separate risk or quality signals. It does
+not execute trades, recommend entries or exits, provide a combined buy/sell or
+reject/continue verdict, or function as a trading platform.
 
 ## Current product intent
 
-The current priority is optimizing the tool for the owner's personal research
-workflow. A public product may be considered only after research quality is
-reliably demonstrated. Public access would additionally require authentication,
-abuse prevention, privacy review, cost controls, and deployment safeguards.
+The current priority is making Fast a trustworthy evidence-backed scoring report
+for the owner's personal workflow. Comparison, saved history, and change
+detection remain planned, but they depend on a stable Fast evidence and scoring
+contract. Public access is not a current milestone.
 
 ## Primary workflow
 
-1. A separate screener identifies a ticker with unusual volume, a rapid change
-   in volume, a price move, or a possible catalyst.
-2. The user enters the ticker in Stock Research.
-3. The tool returns a fast, decision-focused view of material red flags,
-   catalyst strength, company context, evidence quality, and unknowns.
-4. The user rejects the setup or continues with deeper research.
+1. A separate screener identifies a ticker with unusual volume, a price move, or
+   a possible catalyst.
+2. The user runs Fast.
+3. Fast progressively gathers bounded evidence and displays each score only when
+   its evidence threshold is satisfied.
+4. The user reviews seven score components, their short explanations, prominent
+   red flags, evidence quality, and unresolved work.
+5. The user rejects the setup, continues manual review, or requests Deep.
+6. Deep reuses Fast's evidence packet and expands unresolved or low-confidence
+   components instead of restarting the same research.
 
-Stock discovery and screening are outside this product. The product is a
-post-screening due-diligence gate.
+Stock discovery and screening remain outside this product. The product is a
+post-screening due-diligence gate, while the final combined judgment remains the
+user's.
 
 ## Product principles
 
+### Evidence quality precedes scoring
+
+A numeric score is useful only when the material evidence beneath it is
+trustworthy. Fast must prefer `Researching`, `Unscored`, `Unknown`, or `Limited`
+over a weak number that looks more confident than its evidence. Missing or
+uncertain evidence must never become a favorable score.
+
 ### Prefer risk recall over false reassurance
 
-Missing a material risk is worse than displaying an additional warning or
-`Unknown`. Warnings must still be ranked by materiality so critical findings are
-not buried beneath minor concerns. Missing evidence must never be interpreted as
-low risk or proof that an event did not occur.
+Missing a material risk is worse than displaying an additional ranked warning
+or unresolved state. The most serious failures are those that could make a risky
+ticker appear cleaner or safer than the available evidence supports.
 
 ### Keep distinct concepts separate
 
-Do not compress unlike concepts into an opaque score. In particular:
+Do not compress unlike concepts into an opaque overall verdict. Historical
+dilution severity, future dilution likelihood, potential dilution impact,
+reverse-split risk, financial health, catalyst strength, and near-term setup
+quality remain separate. Long-term company quality is primarily a Deep-stage
+construct when Fast lacks sufficient evidence.
 
-- dilution history, likelihood of future dilution, and likely shareholder
-  impact must remain visible as separate components;
-- near-term catalyst or setup quality must remain separate from longer-term
-  company quality and risk; and
-- an optional roll-up score must preserve its component values, evidence, and
-  explanation.
+Risk cards and quality cards have intentionally different directions:
 
-A weak company can have a strong short-term catalyst, and a strong company can
-have an unfavorable near-term setup.
+- more stars mean more risk for risk constructs; and
+- more stars mean stronger quality for financial, catalyst, and setup constructs.
 
-### Follow the issuer, not only the ticker
+The card title and explanation must make the direction unmistakable.
 
-Material history should follow the underlying issuer across reliably linked
-ticker changes, corporate-name changes, and rebrands. Reports should identify
-previous names and tickers with effective dates and state the confidence and
-evidence supporting each linkage. Uncertain identity relationships must not be
-treated as confirmed.
+### Follow the issuer without overclaiming lineage
+
+Fast must resolve the current security and issuer correctly and capture obvious
+recent name or ticker changes when reliable evidence is available. Exhaustive
+predecessor and issuer-history reconstruction belongs primarily in Deep.
+Uncertain identity relationships must not be treated as confirmed.
 
 ### Make evidence inspectable
 
-Every material factual claim must be traceable to evidence. Important claims
-and scores should link directly to their sources or to numbered references in a
-clearly organized source list.
+Every material factual claim and score explanation must be traceable to dated
+evidence. The top of Fast stays concise; detailed calculations, filings, source
+excerpts, and scoring inputs remain available farther down or through expandable
+details.
 
-### Optimize for fast decisions without hiding incompleteness
+### Bound the work honestly
 
-The first result should emphasize the most decision-relevant conclusions rather
-than reproduce a long research memo. Deeper research may take longer, but the
-interface must clearly show which checks are complete, limited, pending, or
-unknown.
+Fast stops when either its cost ceiling or overall elapsed-time ceiling is
+reached. Remaining components settle as unresolved rather than continuing
+open-ended research. The budget is a ceiling, not a spending target.
 
 ## Supported security universe
 
 Nasdaq- and NYSE-listed common stocks are the reliability priority, regardless
-of market capitalization. The product should support OTC securities, ADRs,
-ETFs, warrants, preferred shares, foreign listings, and delisted tickers when
-reliable evidence is available.
+of market capitalization. Other security types and listing states may be
+supported when reliable evidence is available, but their limitations and
+applicability must be explicit. Syntax acceptance never proves that a security
+exists or is supported.
 
-Every report should identify the security type, issuer, listing venue and
-status, and coverage limitations. Sections that do not apply to a security type
-should be `Not applicable`; sections with inadequate evidence should be
-`Unknown` or `Limited coverage` rather than guessed.
+Every report should identify the current security, issuer, venue, listing state,
+security type, and coverage limitations. Inapplicable sections use `Not
+applicable`; inadequate evidence uses `Unknown` or `Limited` rather than a guess.
 
-## Report experience
+## Fast report contract
 
-### Fast decision view
+### Priority score components
 
-Target first useful evidence in approximately 3–10 seconds and normal bounded
-Fast completion in approximately 4–10 seconds. Present a compact dashboard containing:
+Fast should normally attempt to produce trustworthy values for:
 
-- the most material red flags and unknowns, ranked by importance;
-- dilution-risk components and reverse-split risk;
-- financial-health and longer-term company-quality context;
-- current catalyst strength and near-term setup assessment;
-- evidence confidence and coverage status; and
-- short explanations with inspectable source references.
+1. Historical dilution severity.
+2. Future dilution likelihood.
+3. Potential dilution impact.
+4. Reverse-split risk.
+5. Financial health.
+6. Catalyst strength.
+7. Near-term setup quality.
 
-The assessment may use probability-style language, but must avoid false
-precision and must show the favorable evidence, unfavorable evidence, evidence
-quality, and uncertainty behind it. It must not be presented as a personalized
-trade recommendation.
+Long-term company quality may remain unscored more often and be expanded in
+Deep. The existing deterministic methodology is a baseline scaffold for
+recalibration, not a fixed product philosophy.
 
-Near-term setup quality describes the strength and limitations of evidence over
-the next five trading days. It is not a predicted return or numeric probability.
-Its catalyst, qualitative implication, and bounded historical-reaction inputs
-remain visible and separate from multi-year company quality.
+### Progressive score behavior
 
-Fast research may defer detailed issuer-specific catalyst analogues and reaction
-windows when they do not fit the normal budget. That gap must be visible as
-limited or pending coverage, so the full-contract completion status remains
-`partial` or `pending`; deliberate Deep research may expand it. Current
-catalyst evidence and material-risk checks remain part of Fast.
+Each score card progresses independently:
 
-Fast is evidence-first. The server retrieves SEC ticker/CIK associations,
-submissions metadata, recent filing metadata, and standardized Company Facts
-directly with fair-access caching, normalizes dated evidence records, and
-opens at most four selected material filing documents plus one directly linked
-material exhibit. Conservative deterministic extraction confirms only explicit
-split, financing-instrument, warning, compliance, and event language. Financial
-periods older than 180 days are prominently warned as stale. Unmatched text
-remains Limited/Unknown. Fast AI
-uses no hosted tools and may only classify supplied evidence IDs. A synthesis
-failure leaves deterministic evidence intact and marks synthesis unavailable.
-Missing retrieval coverage remains Limited/Unknown and cannot produce favorable
-evidence or scores. Deep retains broader hosted-web research.
+- sufficient trustworthy evidence: show the real score;
+- work still in progress: show `Researching`;
+- completed pass with inadequate evidence: show `Unscored` or `Limited`.
 
-### Deep research view
+Do not show provisional numeric scores that may change materially later.
 
-A deeper report may take longer or be explicitly requested. It should expand
-the evidence, history, financial analysis, comparable prior catalysts, and
-source detail without changing the meaning of the fast-view scores.
-Deep remains the broader workflow for exhaustive lineage, detailed financial
-history, secondary corroboration, catalyst analogues and reaction windows, and
-conflict resolution.
+The report contract keeps detailed scores on the existing 0–10 internal scale.
+The Fast dashboard converts them to a 0–5 star presentation, allowing half-stars
+where useful. The card shows a short plain-language reason; the detailed 0–10
+value, methodology, inputs, and sources remain inspectable below.
 
-## Research coverage direction
+### Dashboard order
 
-The complete product direction includes:
+The preferred top-to-bottom order is:
 
-- dilution, offerings, warrants, convertibles, and capital-structure risk;
-- reverse splits and issuer history;
-- cash burn, revenue and profitability trends, free cash flow, debt, and
-  going-concern warnings;
-- exchange compliance, SEC and accounting issues;
-- management behavior and insider activity;
-- valuation metrics and dividend history;
-- historical price and market-cap behavior;
-- recent news and catalysts; and
-- historical reactions to similar company news or catalysts.
+1. Stock name and identity.
+2. Research, budget, and completion status.
+3. Current news and catalyst.
+4. Score components.
+5. Financial-health context.
+6. Deeper evidence, filings, scoring inputs, sources, and supporting sections.
 
-These capabilities should be delivered in bounded, testable stages. Breadth
-must not come at the expense of source traceability, risk recall, latency, or
-clear uncertainty.
+### Source strategy
 
-## Initial trustworthy-report scope
-
-The initial dependable report should establish the shared foundation needed by
-both fast and deep views:
-
-1. Security and issuer identity, security type, listing status, and known prior
-   names or tickers.
-2. Reverse splits from at least the last five years, following reliably linked
-   issuer identities.
-3. Major offerings and other material dilution from at least the last three
-   years, including relevant warrants or convertibles when found.
-4. Current dividend status.
-5. Major exchange-compliance, going-concern, SEC, or accounting warnings found
-   within the defined search scope.
-6. The most important recent catalyst and news items, with a clear as-of time
-   and search window.
-7. Separate risk and quality components with concise evidence-based
-   explanations.
-8. Dates and claim-linked sources for material conclusions.
-9. Explicit `Confirmed`, `Not found`, `Unknown`, `Not applicable`, and
-   `Limited coverage` states.
-
-The exact time windows and score calibration must be versioned and documented
-in the report contract rather than implied only by prompts.
-
-## Source standard
+Fast is SEC-first for filing-based risks, but not SEC-only when another bounded
+source is better for current news or market context.
 
 Use sources in this order when available:
 
 1. SEC filings and official exchange notices.
-2. Official company investor-relations releases and filings.
-3. Reputable original news reporting.
-4. Secondary aggregators only when a stronger source is unavailable.
+2. Official company releases and original newswires.
+3. Reputable original financial reporting.
+4. Financial-news or research services as discovery and secondary evidence.
+5. General search discovery when needed to locate stronger evidence.
 
-Secondary evidence must be labeled and carry lower confidence. A material claim
-that cannot be reasonably verified must be `Unknown`.
+Services such as Seeking Alpha, TipRanks, or search-based discovery may identify
+what happened and where to look, but an AI-generated search summary or discovery
+service must not be the sole evidence for a material score. A dedicated provider
+may be considered only after evaluating speed, ticker coverage, API/feed
+availability, reliability, attribution, cost, licensing, and integration effort.
+Selecting, paying for, scraping, or integrating a provider requires explicit
+owner approval.
 
-Each source record should include document title, source type, publication or
-filing date, direct URL, retrieval or verification time when useful, and the
-claims it supports.
+### Operating limits
+
+Fast stops at the earlier of:
+
+- 20 seconds for the complete pipeline; or
+- the applicable per-run cost ceiling.
+
+The complete pipeline includes SEC retrieval, news/provider lookup,
+market/price context, synthesis, scoring, and finalization. Normal runs should
+finish earlier when possible.
+
+Initial cost policy:
+
+- ideal normal cost: approximately $0.01–$0.03;
+- normal maximum: approximately $0.03; and
+- difficult-ticker ceiling: approximately $0.05.
+
+Fast should not routinely approach $0.10. That ceiling may be reconsidered only
+after evidence shows that the additional spend consistently produces material
+decision value.
+
+## Deep research contract
+
+Deep extends Fast. It uses the completed Fast evidence packet as authoritative
+seed evidence, prioritizes unresolved score components, and expands broader
+history, corroboration, non-SEC news, historical catalyst reactions, complex
+financing, and issuer-lineage questions. A direct Deep request first builds the
+necessary Fast packet automatically.
+
+Deep may produce a broader comprehensive report, but it should not discard or
+needlessly repeat completed Fast research. Deep remains deliberately requested
+and separately budgeted.
+
+## Reliability and success criteria
+
+The Fast reliability milestone succeeds only when:
+
+- overall material-risk recall is approximately 95% or better;
+- every adequately sampled critical category reaches approximately 90% recall;
+- sparse categories report sample size and uncertainty rather than a falsely
+  precise percentage;
+- important misses are classified as retrieval, interpretation, or unavailable
+  evidence failures;
+- material facts are interpreted correctly;
+- score explanations accurately match their supporting evidence;
+- scores fall within reasonable owner-reviewed ranges;
+- clearly riskier cases generally score worse than cleaner cases;
+- cost and elapsed-time ceilings are enforced end to end; and
+- no known severe misleading miss remains unresolved.
+
+Critical Fast categories are current identity/listing, reverse splits,
+dilution/offerings, warrants/convertibles, exchange compliance,
+going-concern/accounting warnings, financial context, catalysts/news, and
+uncertainty handling.
+
+Automatic milestone blockers include wrong-issuer evidence, a false or
+misattributed catalyst, missed material financing or overhang, missed meaningful
+reverse-split history, missed active listing deficiency, missed going-concern or
+major accounting warnings, financial errors that make an issuer look safer,
+uncertainty converted into a favorable score, or a material reversal of the
+real risk direction.
+
+Exact numeric agreement is not the objective. Trustworthy evidence, correct
+interpretation, correct direction, useful explanations, and sensible relative
+scoring are.
 
 ## Out of scope
 
 - Personalized investment recommendations
+- Automatic reject/continue, buy/sell, or combined score verdicts
 - Entry, exit, position-sizing, or price-target instructions
 - Automated trading or brokerage integration
 - Initial stock discovery or screening
 - Portfolio management
-- Public accounts, billing, or team collaboration during the personal-tool phase
-
-## Success criteria
-
-The MVP is successful when:
-
-- it is repeatedly useful during real trading sessions after screener alerts;
-- useful Fast evidence begins rendering in approximately 3–10 seconds and the
-  bounded evidence-first pipeline normally settles in approximately 4–10 seconds;
-- normal API cost is kept near or below $0.10 per completed report, with
-  deliberate exceptions for unusually complex research;
-- every material conclusion has supporting evidence or is clearly marked
-  `Unknown`;
-- a dated representative evaluation set achieves approximately 95% or better
-  recall of known material risks overall and reports recall by risk category;
-- issuer-lineage cases do not appear to have a clean history merely because of a
-  ticker or name change;
-- invalid, unavailable, partial, and unsupported results are explained clearly;
-- API errors do not break the page or expose sensitive details; and
-- the workflow reduces several minutes of fragmented manual research to a report
-  the user trusts and uses before deeper consideration.
+- Public accounts, billing, or team collaboration during the personal phase
 
 ## Follow-on workflow priority
 
-After the trustworthy fast report:
+After the Fast reliability milestone:
 
 1. Add decision-focused side-by-side ticker comparison.
-2. Add saved report history.
-3. Add automatic refresh and change detection.
-4. Consider watchlists and export when they support demonstrated workflows.
+2. Add local saved report history.
+3. Add automatic refresh and material change detection.
+4. Consider watchlists and export only when demonstrated workflow evidence
+   supports them.
 
-Comparison should emphasize normalized, decision-relevant differences rather
-than display complete reports beside one another.
-
-## Open product questions
-
-- Which checks most often require deliberate deep-stage expansion in approved
-  live evaluation?
-- What source-age and evidence-strength rules should produce `Limited coverage`
-  versus `Unknown`?
-- Should observed live results support changing the explicit deep-stage control
-  or the normal fast budgets?
-- When, if ever, has research quality become reliable enough to reconsider
-  public access?
+Comparison is postponed, not canceled. It should compare stable, trustworthy
+components rather than provisional scoring behavior.
