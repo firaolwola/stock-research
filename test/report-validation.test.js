@@ -252,6 +252,17 @@ test("financial chart observations reject incompatible units, periods, and curre
   }
 });
 
+test("annual financial chart observations reject quarterly periods and mixed units", async () => {
+  const complete = await loadReportFixture("complete");
+  for (const [message, mutate] of [
+    ["annual or point-in-time periods", (report) => { report.financial_assessment.metrics.revenue.annual_observations[0].period_start = "2022-10-01"; }],
+    ["annual observations must use the metric unit", (report) => { report.financial_assessment.metrics.revenue.annual_observations[0].unit = "EUR millions"; }]
+  ]) {
+    const report = structuredClone(complete); mutate(report); const result = validateReport(report);
+    assert.equal(result.valid, false); assert.ok(result.errors.some((error) => error.message.includes(message)), message);
+  }
+});
+
 test("shares outstanding stays distinct from float and potential dilution", async () => {
   const report = await loadReportFixture("complete");
   assert.equal(validateReport(report).valid, true);

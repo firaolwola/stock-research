@@ -19,7 +19,7 @@ function makeScenario(spec) {
     report.financial_assessment = {
       state: "not_applicable", as_of: null, reporting_currency: null,
       summary: "Operating-company financial metrics do not apply to this ETF.", coverage_notes: [],
-      metrics: Object.fromEntries(Object.entries(report.financial_assessment.metrics).map(([key, metric]) => [key, { ...metric, state: "not_applicable", value: null, unit: null, period_start: null, period_end: null, trend: "not_applicable", comparison_period_start: null, comparison_period_end: null, observations: [], summary: `${metric.label} is not applicable to this ETF security.`, claim_ids: [] }])),
+      metrics: Object.fromEntries(Object.entries(report.financial_assessment.metrics).map(([key, metric]) => [key, { ...metric, state: "not_applicable", value: null, unit: null, period_start: null, period_end: null, trend: "not_applicable", comparison_period_start: null, comparison_period_end: null, observations: [], annual_observations: [], summary: `${metric.label} is not applicable to this ETF security.`, claim_ids: [] }])),
       going_concern: { state: "not_applicable", as_of: null, summary: "Issuer going-concern analysis is not applicable to this ETF security.", claim_ids: [] },
       material_warnings: []
     };

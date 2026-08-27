@@ -5,7 +5,7 @@ export const sectionLabels = Object.freeze({
   compliance_and_warnings: "Compliance & warnings", financial_context: "Financial context", catalysts_and_news: "Catalysts & news"
 });
 export const priorityScoreKeys = Object.freeze(["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk", "financial_health", "catalyst_strength", "near_term_setup_quality"]);
-export const financialMetricOrder = Object.freeze(["revenue", "profitability", "debt", "free_cash_flow", "cash", "cash_burn"]);
+export const financialMetricOrder = Object.freeze(["revenue", "profitability", "debt", "free_cash_flow", "cash", "operating_cash_flow"]);
 export const scoreSummaryOrder = Object.freeze(["financial_health", ...financialMetricOrder, "dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
 const scoreLabels = Object.freeze({
   dilution_historical_severity: "Historical dilution severity", dilution_future_likelihood: "Future dilution likelihood",
@@ -22,17 +22,18 @@ const catalystFactorLabels = Object.freeze({
   novelty: "Novelty", potential_significance: "Potential significance"
 });
 const financialMetricLabels = Object.freeze({
-  cash: "Cash", cash_burn: "Cash burn", revenue: "Revenue", profitability: "Profitability",
-  free_cash_flow: "Free cash flow", debt: "Debt"
+  cash: "Cash", cash_burn: "Cash burn", revenue: "Revenue", profitability: "Net income / loss",
+  operating_cash_flow: "Operating cash flow", free_cash_flow: "Free cash flow", debt: "Total debt"
 });
 const scoreDescriptions = Object.freeze({
   financial_health: "Overall resilience from liquidity, debt, cash flow, profitability, and material warnings.",
   revenue: "Latest reported sales and whether comparable evidence supports a trend.",
-  profitability: "Whether current operations produce profit on comparable evidence.",
+  profitability: "Reported net income or loss on comparable evidence.",
   debt: "Debt burden relative to the issuer's supported capacity.",
   free_cash_flow: "Cash left after operating needs and capital spending.",
   cash: "Latest supported cash balance and its freshness.",
   cash_burn: "Supported rate of cash use; missing burn never implies safety.",
+  operating_cash_flow: "Cash generated or consumed by business operations during the reporting period.",
   dilution_historical_severity: "How much supported dilution has already affected the share base.",
   dilution_future_likelihood: "How likely supported financing capacity is to become future dilution.",
   dilution_potential_impact: "Potential share-base impact from supported warrants, convertibles, or offerings.",
@@ -119,13 +120,13 @@ export function buildDashboardView(report, { final = true, settledScoreKeys = ne
   const financialComponents = new Map(financialScore.components.map((component) => [component.key, component]));
   const scoreForSummaryKey = (key) => {
     if (report.scores[key]) return { key, label: scoreLabels[key], description: scoreDescriptions[key], ...report.scores[key], presentation: buildScorePresentation(report.scores[key], { final, settled: settledScoreKeys.has(key) }) };
-    const metric = report.financial_assessment.metrics[key];
+    const metric = report.financial_assessment.metrics[key] ?? { state: "unknown", value: null, unit: null, observations: [], annual_observations: [], summary: `${financialMetricLabels[key]} is not available in this report.`, claim_ids: [] };
     const component = financialComponents.get(financialComponentKeys[key]);
     const settled = settledScoreKeys.has("financial_health");
     const displayScore = component
       ? { state: component.state, value: component.value, scale_max: 10, direction: "higher_is_better", confidence: financialScore.confidence, methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: component.explanation, claim_ids: component.claim_ids, components: [] }
       : { state: metric.state === "limited_coverage" ? "limited_coverage" : "unknown", value: null, scale_max: 10, direction: "higher_is_better", confidence: "unknown", methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: `${metric.summary} This metric has no independent methodology score, so no stars are shown.`, claim_ids: metric.claim_ids, components: [] };
-    return { key, label: financialMetricLabels[key], description: scoreDescriptions[key], metric, ...displayScore, presentation: buildScorePresentation(displayScore, { final, settled }) };
+    return { key, label: key === "debt" ? "Debt" : financialMetricLabels[key], description: scoreDescriptions[key], metric, ...displayScore, presentation: buildScorePresentation(displayScore, { final, settled }) };
   };
   return {
     report, findings: buildPriorityFindings(report), sourcesForClaims,
@@ -358,6 +359,35 @@ function renderVerticalBarChart({ label, observations, state, summary, colorClas
   chart.append(axis, plot); card.append(chart, element("p", "muted", summary));
   return card;
 }
+function renderGroupedBarChart(titleText, series) {
+  const card = element("article", "financial-chart grouped-financial-chart");
+  const title = element("div", "section-title"); title.append(element("h3", "", titleText)); card.append(title);
+  const useAnnual = series.some((item) => (item.metric.annual_observations?.length ?? 0) > 0);
+  const selected = series.map((item) => ({ ...item, observations: useAnnual ? item.metric.annual_observations ?? [] : item.metric.observations ?? [] }));
+  const unit = selected.find((item) => item.observations.length)?.observations[0]?.unit;
+  selected.forEach((item) => { if (item.observations.some((observation) => observation.unit !== unit)) item.observations = []; });
+  const values = selected.flatMap((item) => item.observations.map((observation) => observation.value));
+  const legend = element("div", "chart-legend"); selected.forEach((item) => legend.append(element("span", `legend-item ${item.colorClass}`, item.label))); card.append(legend);
+  if (!values.length) { card.append(element("p", "chart-unavailable", "Limited — no trustworthy comparable history is available.")); return card; }
+  const periods = [...new Set(selected.flatMap((item) => item.observations.map((observation) => observation.period_end)))].sort();
+  const minimum = Math.min(0, ...values); const maximum = Math.max(0, ...values); const range = maximum - minimum || 1;
+  const compact = (value) => Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(value);
+  const chart = element("div", "vertical-bar-chart grouped-bar-chart");
+  chart.setAttribute("role", "img"); chart.setAttribute("aria-label", `${titleText}, ${useAnnual ? "annual" : "comparable"} observations: ${selected.flatMap((item) => item.observations.map((observation) => `${item.label} ${observation.value.toLocaleString()} ${observation.unit} for ${formatDate(observation.period_end)}`)).join(", ")}.`);
+  const axis = element("div", "chart-y-axis"); axis.append(element("span", "", compact(maximum)), element("span", "", compact(minimum + range / 2)), element("span", "", compact(minimum)));
+  const plot = element("div", "chart-plot"); const zero = element("span", "chart-zero-line"); zero.style.bottom = `${((-minimum / range) * 100).toFixed(2)}%`; plot.append(zero);
+  periods.forEach((period) => {
+    const cluster = element("div", "chart-column chart-cluster");
+    selected.forEach((item) => {
+      const observation = item.observations.find((value) => value.period_end === period); if (!observation) return;
+      const bar = element("span", `vertical-bar ${item.colorClass} ${observation.value < 0 ? "negative" : "positive"}`);
+      bar.style.height = `${(Math.abs(observation.value) / range * 100).toFixed(2)}%`; bar.style.bottom = `${(((Math.min(0, observation.value) - minimum) / range) * 100).toFixed(2)}%`; bar.title = `${item.label}: ${observation.value.toLocaleString()} ${observation.unit}`; cluster.append(bar);
+    });
+    cluster.append(element("span", "chart-x-label", useAnnual ? period.slice(0, 4) : formatDate(period))); plot.append(cluster);
+  });
+  chart.append(axis, plot); card.append(chart, element("p", "muted", `${unit} · ${useAnnual ? "annual reported periods" : "bounded comparable periods"}. Missing series remain Limited; no values are interpolated.`));
+  return card;
+}
 function renderFinancialAssessment(view) {
   const assessment = view.report.financial_assessment;
   const panel = element("section", "panel financial-assessment");
@@ -366,15 +396,16 @@ function renderFinancialAssessment(view) {
   panel.append(heading, element("p", "muted", `${assessment.as_of ? `As of ${formatDate(assessment.as_of)}` : "Date unavailable"}${assessment.reporting_currency ? ` · ${assessment.reporting_currency}` : ""}`), element("p", "", assessment.summary));
   assessment.coverage_notes.forEach((note) => panel.append(element("p", "coverage-note", `Coverage note: ${note}`)));
 
-  const metrics = element("div", "financial-chart-grid");
-  financialMetricOrder.forEach((key) => {
-    const metric = assessment.metrics[key];
-    const period = metric.period_start && metric.period_end ? `${formatDate(metric.period_start)}–${formatDate(metric.period_end)}` : "Period unavailable";
-    const observations = metric.state === "confirmed" ? metric.observations ?? [] : [];
-    metrics.append(renderVerticalBarChart({ label: financialMetricLabels[key], observations, state: metric.state, colorClass: key === "profitability" || key === "free_cash_flow" || key === "cash_burn" ? "chart-cyan" : key === "debt" ? "chart-amber" : "chart-blue", summary: observations.length > 1 ? `${metric.unit} · ${observations.length} comparable periods · ${metric.trend === "unknown" ? "trend not classified" : formatLabel(metric.trend)}` : observations.length === 1 ? `${metric.unit} · one supported period · no trend inferred` : period }));
-  });
+  const metric = (key) => assessment.metrics[key] ?? { state: "unknown", observations: [], annual_observations: [], claim_ids: [], summary: `${financialMetricLabels[key]} is unavailable.` };
+  const metrics = element("div", "financial-chart-grid grouped-chart-grid");
+  metrics.append(
+    renderGroupedBarChart("Income statement", [{ label: "Revenue", metric: metric("revenue"), colorClass: "series-blue" }, { label: "Net income / loss", metric: metric("profitability"), colorClass: "series-cyan" }]),
+    renderGroupedBarChart("Balance sheet", [{ label: "Cash", metric: metric("cash"), colorClass: "series-blue" }, { label: "Total debt", metric: metric("debt"), colorClass: "series-amber" }]),
+    renderGroupedBarChart("Cash flow", [{ label: "Operating cash flow", metric: metric("operating_cash_flow"), colorClass: "series-cyan" }, { label: "Free cash flow", metric: metric("free_cash_flow"), colorClass: "series-purple" }])
+  );
   const shares = assessment.shares_outstanding ?? { state: "unknown", summary: "Reported shares outstanding are unavailable.", observations: [] };
-  const shareChart = renderVerticalBarChart({ label: "Shares outstanding", observations: shares.state === "confirmed" ? shares.observations : [], state: shares.state, summary: shares.summary, colorClass: "chart-purple" });
+  const shareObservations = shares.annual_observations?.length ? shares.annual_observations : shares.observations;
+  const shareChart = renderVerticalBarChart({ label: "Capital structure — Shares outstanding", observations: shares.state === "confirmed" ? shareObservations : [], state: shares.state, summary: shares.summary, colorClass: "chart-purple" });
   appendSourceLinks(shareChart, view.sourcesForClaims(shares.claim_ids)); metrics.append(shareChart);
   panel.append(metrics);
 

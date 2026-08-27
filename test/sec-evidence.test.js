@@ -154,7 +154,7 @@ test("one hanging SEC document does not discard evidence completed by other sour
   assert.equal(calibrated.scores.financial_health.value, null);
 });
 
-const edgeFact = (val, { start, end = "2026-06-30", filed = "2026-08-15", accn = "0000123456-26-000001" } = {}) => ({ val, ...(start ? { start } : {}), end, filed, accn, form: "10-Q" });
+const edgeFact = (val, { start, end = "2026-06-30", filed = "2026-08-15", accn = "0000123456-26-000001", form = "10-Q" } = {}) => ({ val, ...(start ? { start } : {}), end, filed, accn, form });
 const edgeConcept = (label, entries, unit = "USD") => ({ label, units: { [unit]: entries } });
 const factsWith = (concepts, metadata = {}) => ({ ...metadata, facts: { "us-gaap": concepts } });
 
@@ -239,6 +239,22 @@ test("SEC financial observations retain only aligned comparable periods in chron
   assert.deepEqual(metrics.free_cash_flow.observations.map((item) => item.value), [1_000_000, 1_750_000]);
   assert.deepEqual(metrics.debt.observations.map((item) => item.value), [9_000_000, 9_000_000]);
   assert.equal(metrics.revenue.observations.some((item) => item.period_start === "2026-01-01"), false, "YTD revenue is not comparable to a quarter");
+  const validation = validate(calibrateReportScores(result.report)); assert.equal(validation.valid, true, JSON.stringify(validation.errors));
+});
+
+test("SEC financial charts prefer four aligned annual filing periods without mixing quarters", async () => {
+  const annual = (value, year) => edgeFact(value, { start: `${year}-01-01`, end: `${year}-12-31`, filed: `${year + 1}-02-15`, accn: `annual-${year}`, form: "10-K" });
+  const quarterly = edgeFact(99_000_000, { start: "2026-04-01" });
+  const result = await reportForFacts(factsWith({
+    RevenueFromContractWithCustomerExcludingAssessedTax: edgeConcept("Revenue", [quarterly, annual(40_000_000, 2022), annual(50_000_000, 2023), annual(60_000_000, 2024), annual(70_000_000, 2025)]),
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("Operating cash flow", [edgeFact(8_000_000, { start: "2026-04-01" }), annual(-2_000_000, 2022), annual(1_000_000, 2023), annual(5_000_000, 2024), annual(9_000_000, 2025)]),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Capital expenditures", [edgeFact(2_000_000, { start: "2026-04-01" }), annual(1_000_000, 2022), annual(1_000_000, 2023), annual(2_000_000, 2024), annual(3_000_000, 2025)])
+  }));
+  const metrics = result.report.financial_assessment.metrics;
+  assert.deepEqual(metrics.revenue.annual_observations.map((item) => item.period_end), ["2022-12-31", "2023-12-31", "2024-12-31", "2025-12-31"]);
+  assert.deepEqual(metrics.operating_cash_flow.annual_observations.map((item) => item.value), [-2_000_000, 1_000_000, 5_000_000, 9_000_000]);
+  assert.deepEqual(metrics.free_cash_flow.annual_observations.map((item) => item.value), [-3_000_000, 0, 3_000_000, 6_000_000]);
+  assert.equal(metrics.revenue.annual_observations.some((item) => item.period_end === "2026-06-30"), false);
   const validation = validate(calibrateReportScores(result.report)); assert.equal(validation.valid, true, JSON.stringify(validation.errors));
 });
 

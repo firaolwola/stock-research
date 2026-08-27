@@ -80,11 +80,14 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   analogues state why they are comparable, their limitations, and sourced stock
   reactions over explicit date windows. When no reliable analogue is available,
   the analogue state is `unknown` with no invented item or reaction.
-- `financial_assessment` preserves a dated reporting currency, cash, cash burn,
-  revenue, profitability, free cash flow, and debt. Confirmed metrics include a
+- `financial_assessment` preserves a dated reporting currency, cash, internal
+  cash burn, revenue, net income or loss, operating cash flow, free cash flow,
+  and debt. Confirmed metrics include a
   value, unit, statement period, and sourced claim. Its optional bounded
   `observations` retain source-linked values in chronological order for honest
-  charts. Observations share the metric definition and unit and use comparable
+  comparisons. Optional `annual_observations` retain bounded comparable annual
+  or year-end values for the grouped dashboard charts. Observations share the
+  metric definition and unit and use comparable
   period lengths; one observation never implies a trend. A claimed trend also
   includes the comparison period. Going-concern evidence is explicit, and material
   liquidity, burn, leverage, profitability, accounting, or going-concern
@@ -93,7 +96,8 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
 - `financial_assessment.shares_outstanding` is an optional display-support
   series of source-linked, chronological point-in-time observations measured in
   `shares`. It is not float or potential dilution and does not participate in
-  methodology 2.0.0 scoring.
+  methodology 2.0.0 scoring. Its optional `annual_observations` drive the
+  preferred multi-year capital-structure chart.
 
 Fast financial normalization uses conservative derived-value rules. Operating
 cash flow is not free cash flow: FCF is populated only when aligned operating
@@ -259,6 +263,9 @@ warning. Chart observations must be chronological, source-linked, unit-aligned,
 period-comparable, and include the metric's current reported value. A wholly
 inapplicable assessment contains no dates, currency, evidence,
 or warnings and marks every financial component `not_applicable`.
+Annual observations must be chronological and either approximately annual in
+duration or point-in-time year-end balances. They need not duplicate the latest
+quarterly metric value and are kept out of the provider-facing Fast schema.
 When present, confirmed shares-outstanding observations must be unique,
 chronological point-in-time values using the literal `shares` unit. Unresolved
 series cannot carry observations.

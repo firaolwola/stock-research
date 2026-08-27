@@ -8,9 +8,9 @@ test("dashboard exposes every report section and the approved unified score orde
   const view = buildDashboardView(await loadReportFixture("complete"));
   assert.deepEqual(view.sections.map((section) => section.key), Object.keys(sectionLabels));
   assert.deepEqual(priorityScoreKeys, ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk", "financial_health", "catalyst_strength", "near_term_setup_quality"]);
-  assert.deepEqual(financialMetricOrder, ["revenue", "profitability", "debt", "free_cash_flow", "cash", "cash_burn"]);
+  assert.deepEqual(financialMetricOrder, ["revenue", "profitability", "debt", "free_cash_flow", "cash", "operating_cash_flow"]);
   assert.deepEqual(view.scoreSummary.map((score) => score.key), scoreSummaryOrder);
-  assert.deepEqual(scoreSummaryOrder, ["financial_health", "revenue", "profitability", "debt", "free_cash_flow", "cash", "cash_burn", "dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
+  assert.deepEqual(scoreSummaryOrder, ["financial_health", "revenue", "profitability", "debt", "free_cash_flow", "cash", "operating_cash_flow", "dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
 });
 
 test("0–10 internal scores map to 0–5 stars with half-stars", () => {
@@ -49,7 +49,7 @@ test("financial display rows reuse only direct methodology components", async ()
   const view = buildDashboardView(await loadReportFixture("complete"));
   const rows = new Map(view.scoreSummary.map((row) => [row.key, row]));
   for (const key of ["profitability", "debt", "free_cash_flow"]) assert.equal(rows.get(key).presentation.state, "scored", `${key} should reuse its direct methodology component`);
-  for (const key of ["revenue", "cash", "cash_burn"]) {
+  for (const key of ["revenue", "cash", "operating_cash_flow"]) {
     assert.equal(rows.get(key).presentation.state, "unscored", `${key} has no independent methodology score`);
     assert.equal(rows.get(key).presentation.stars, null);
     assert.match(rows.get(key).explanation, /no independent methodology score/i);
@@ -64,7 +64,7 @@ test("financial rows expose supported values while charts use chronological obse
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
   const css = await readFile(new URL("../public/styles.css", import.meta.url), "utf8");
   assert.match(source, /vertical-bar-chart/); assert.match(source, /chart-y-axis/); assert.match(source, /chart-x-label/);
-  assert.match(source, /one supported period · no trend inferred/i);
+  assert.match(source, /annual reported periods/i);
   assert.match(css, /\.vertical-bar-chart/); assert.match(css, /\.vertical-bar/);
   assert.doesNotMatch(source, /single-value-chart/);
 });
@@ -107,7 +107,7 @@ test("dashboard exposes catalyst factors, analogue limits, reactions, and confid
 
 test("dashboard exposes financial periods, trends, going concern, and warnings", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  for (const text of ["Financial and share-structure charts", "one supported period", "no trustworthy chart is available", "Cash burn", "Free cash flow", "Going concern", "financial-warnings"]) assert.match(source, new RegExp(text));
+  for (const text of ["Financial and share-structure charts", "annual reported periods", "no trustworthy comparable history is available", "Operating cash flow", "Free cash flow", "Going concern", "financial-warnings"]) assert.match(source, new RegExp(text));
 });
 
 test("dashboard exposes operational budgets and deliberate deeper research", async () => {
@@ -165,9 +165,12 @@ test("dashboard uses safe external links, semantic form submission, and a narrow
   assert.match(script, /aria-label/);
   assert.match(script, /visually-hidden/);
   assert.doesNotMatch(script, /\/ 5 stars/);
-  assert.match(script, /label: "Shares outstanding"/);
+  assert.match(script, /label: "Capital structure — Shares outstanding"/);
   assert.match(script, /one observation; no trend inferred/i);
   assert.match(css, /\.chart-purple \.vertical-bar\.positive/);
+  for (const heading of ["Income statement", "Balance sheet", "Cash flow", "Capital structure — Shares outstanding"]) assert.match(script, new RegExp(heading));
+  assert.match(script, /annual_observations/);
+  assert.doesNotMatch(financialMetricOrder.join(" "), /cash_burn/);
 });
 
 test("wide dashboard pairs identity, operations, and catalyst with the score sidebar", async () => {
