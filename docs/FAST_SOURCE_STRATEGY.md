@@ -244,6 +244,11 @@ Nasdaq supplies listing/exchange context. Alpha Vantage supplies discovery and
 EOD price/volume context only; it never fills a financial-statement gap. OpenAI
 may classify the normalized packet but cannot invent or backfill financial
 values or promote discovery evidence into a score.
+Fast reserves bounded filing slots for recent catalysts, periodic reports, Item
+4.02 accounting events, Item 5.03 corporate actions, Item 3.01 listing events,
+and explicit control/split descriptions. It may open relevant SEC-filed 3.1 or
+99.1 exhibits. This is deterministic category retrieval, not broad web search;
+event-specific language is still required before evidence changes settlement.
 
 ## Deep-only evidence
 
@@ -270,5 +275,6 @@ workflow does not repeat successful bounded retrieval.
   progressively without changing constructs or inventing provisional values.
 - **#54:** completed; Deep builds or reuses a validated identity-gated Fast
   snapshot, refreshes it by source freshness, and targets unresolved work first.
-- **#55:** next; measure the real-ticker evaluation set and decide whether the pilot's
-  small-cap/news/venue gaps justify a paid newswire or dedicated news service.
+- **#55:** active; two bounded batches are historical measurements. Deterministic
+  Batch-2 blockers have offline regressions, but another calibration batch needs
+  explicit owner approval and must not rewrite the prior results.

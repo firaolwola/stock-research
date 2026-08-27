@@ -145,6 +145,19 @@ SMCI material weakness, and an invalid Limited shares series. The independent
 result is in `docs/results/FAST_RELIABILITY_2026-08-27-BATCH-2.md`. A third live
 batch is not appropriate until these deterministic failures are corrected.
 
+The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
+uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
+control disclosures; requires event-specific non-reliance language; separates
+resolved exchange history from active deficiencies; clears scoreable
+observations when a share series is Limited by an unresolved split; and accepts
+additional SEC revenue taxonomy aliases without merging incompatible periods.
+The score-range diagnostic at
+`evaluation/diagnostics/fast-score-ranges-2026-08-27-batch-2.json` preserves the
+measured reports and records every failed owner range with normalized inputs,
+periods, sources, formula components, confidence, and a cause classification.
+These are regression fixes, not new calibration measurements; 82.56% remains
+the latest measured recall and another live batch still requires owner approval.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

@@ -114,6 +114,12 @@ year-to-date, and annual values ending on the same date are not conflicts unless
 two values disagree for the same exact period and unit. Shares observations are
 normalized across confirmed completed split factors; an unexplained large
 discontinuity stays Limited instead of being described as dilution.
+When that unresolved discontinuity prevents a trustworthy normalized share
+series, the scoreable `observations` and `annual_observations` arrays are empty.
+The raw filing evidence remains available through claims and sources; the
+contract does not expose unsafe observations as though they were valid score
+inputs. Compliance items may carry `resolution_state`; `resolved` history does
+not represent an active deficiency.
 
 Fast financial normalization uses conservative derived-value rules. Operating
 cash flow is not free cash flow: FCF is populated only when aligned operating

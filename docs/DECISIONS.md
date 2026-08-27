@@ -855,11 +855,30 @@ financial flows over older annual trends without mixing cadences. A later SEC
 non-reliance or restatement invalidates affected flow scores. Historical share
 series must be normalized with confirmed completed split factors; proposed or
 authorized reverse splits do not count as completed history, and unexplained
-large share discontinuities remain Limited. Fast may inspect up to six selected
-SEC documents to retain bounded corporate-action and accounting coverage.
+large share discontinuities remain Limited. Fast may inspect a bounded set of
+SEC documents, using dedicated category slots with an overall limit of twelve, to retain
+corporate-action and accounting coverage.
 
 **Why:** The initial real-ticker calibration showed that duration collisions,
 stale annual precedence, missed accounting invalidation, and unadjusted stock
 splits could omit material facts or create severe false reassurance. These rules
 preserve the existing evidence-first methodology while making its deterministic
 inputs match the economic events they describe.
+
+## 2026-08-27 — Use event-specific filing semantics and one scoreable-series contract
+
+**Status:** Accepted corrective implementation after Issue #55 Batch 2
+
+**Decision:** A non-reliance event requires Item 4.02 or explicit prior-period
+invalidation/restatement language; control weakness, estimates, and
+forward-looking boilerplate are separate evidence classes. Completed splits
+require an authoritative action statement and ratio. Resolved exchange
+deficiencies remain historical evidence and do not create active listing
+pressure. When an unresolved corporate action makes a normalized shares series
+unsafe to score, its observations are removed from the scoreable series rather
+than retained under a contradictory Limited state.
+
+**Why:** Batch 2 showed that broad language matching and mixed settlement
+semantics could both erase valid financial history and make a safe partial
+report invalid. Dedicated bounded retrieval slots improve the chance of opening
+older event filings without introducing open-ended search.

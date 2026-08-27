@@ -123,3 +123,21 @@ is BIOR and MULN (additional completed-split/listing cases), NIO (foreign ADR /
 Fast runs, eight Alpha requests, and a $0.12 OpenAI ceiling. It would improve
 coverage substantially but would still leave ADR and OTC categories with small
 samples; no run is authorized by this report.
+
+## Corrective-work status (post-measurement)
+
+The measured 82.56% result above is unchanged. The follow-up PR now has offline
+regressions for the reproduced mechanisms: older completed split selection and
+ratio normalization, proposed-versus-completed actions, precise Item 4.02
+non-reliance, separate material-weakness evidence, resolved compliance status,
+Limited share-series settlement, alternate SEC revenue concepts, recent-flow
+precedence, and application/runner finalization parity.
+
+The frozen Batch-2 score ranges are replayed separately in
+`evaluation/diagnostics/fast-score-ranges-2026-08-27-batch-2.json`; it retains
+Limited-settlement allowances as annotations rather than pretending that an
+unscored component met a numeric range. No 2.1.0
+formula was tuned from these five tickers: most misses were absent/invalidated
+evidence, while confirmed out-of-range values remain labeled formula behavior
+for later owner review rather than silently overfit. This corrective status is
+not a third batch and does not establish the reliability gate.

@@ -76,17 +76,18 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active and blocked — corrective work required:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The initial approved batch failed the recall and severe-miss gates; see `docs/results/FAST_RELIABILITY_2026-08-27.md`.
+8. [ ] **Active — calibration remains blocked pending owner approval:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Two approved batches failed the recall and severe-miss gates; the reproduced deterministic blockers now have offline corrections, but no later batch is authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
 Issue #55 remains active. The approved second five-ticker batch improved recall
-from 66.28% to 82.56% but did not pass. The next priority is deterministic
-correction of the reproduced overbroad non-reliance match, AMC/SMCI split
-retrieval gaps, omitted SMCI material weakness, restored-compliance semantics,
-and invalid Limited shares series. No third live batch is authorized. After
-those fixes, a separately approved sparse-category batch can target completed
+from 66.28% to 82.56% but did not pass. The reproduced overbroad non-reliance,
+AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
+Limited-series defects now have deterministic regression fixes on PR #74.
+The next active step is owner review and explicit authorization of any further
+bounded calibration; no third live batch is authorized. A future approved
+sparse-category batch can target completed
 splits, listing/going-concern cases, a foreign ADR/20-F, and an OTC/delisted
 security. A paid data
 subscription remains neither selected nor required and would need separate owner

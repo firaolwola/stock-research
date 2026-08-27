@@ -4,7 +4,7 @@ import { createApp } from "../app.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { calibrateReportScores } from "../lib/scoring.js";
-import { createSecEvidenceClient } from "../lib/sec-evidence.js";
+import { boundedDocumentRows, createSecEvidenceClient } from "../lib/sec-evidence.js";
 import { extractSecFilingEvidence } from "../lib/sec-filing-extraction.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { withTestServer } from "../support/test-server.js";
@@ -54,6 +54,28 @@ test("AAPL, AMC, NCPL, NXL, and SMCI-style same-end duration facts select the qu
   });
 });
 
+test("NXL-style alternate SEC revenue taxonomy remains authoritative and scoreable", async () => {
+  const result = await researchFixture({ ticker: "NXL", companyFacts: { cik: 1, entityName: "NXL Corp.", facts: { "us-gaap": {
+    SalesRevenueNet: concept("Sales revenue, net", [
+      fact(12, { start: "2026-04-01", end: "2026-06-30", frame: "CY2026Q2" }),
+      fact(10, { start: "2025-04-01", end: "2025-06-30", filed: "2025-08-15", accn: "prior", frame: "CY2025Q2" })
+    ])
+  } } } });
+  assert.equal(result.report.financial_assessment.metrics.revenue.value, 12);
+  assert.equal(calibrateReportScores(result.report).scores.financial_revenue_trend.state, "confirmed");
+});
+
+test("bounded filing selection reserves older split, accounting, listing, and control slots", () => {
+  const row = (accession, form, filed, items = "", description = "") => ({ accession, form, filed, items, description, document: `${accession}.htm` });
+  const selected = boundedDocumentRows([
+    row("recent", "8-K", "2026-08-20", "8.01"), row("periodic", "10-Q", "2026-08-10"), row("annual", "10-K", "2026-02-10"),
+    row("amc-split", "8-K", "2023-08-24", "5.03", "Reverse split"), row("ncpl-accounting", "8-K", "2025-12-01", "4.02", "Non-Reliance"),
+    row("smci-listing", "8-K", "2025-02-20", "3.01", "Nasdaq compliance"), row("smci-controls", "10-Q", "2026-05-11", "", "Material weakness")
+  ], "2026-08-27T12:00:00Z");
+  for (const accession of ["amc-split", "ncpl-accounting", "smci-listing", "smci-controls"]) assert.ok(selected.some((item) => item.accession === accession), accession);
+  assert.ok(selected.length <= 12);
+});
+
 test("AMC completed reverse split is historical while NXL authorization is not", () => {
   const completed = extractSecFilingEvidence({ html: "The Company effected a reverse stock split at a ratio of 1-for-10, effective August 24, 2023.", form: "8-K", filed: "2023-08-24", accession: "amc", documentUrl: "https://www.sec.gov/amc.htm", documentName: "amc.htm" }).find((item) => item.kind === "reverse_split");
   const authorized = extractSecFilingEvidence({ html: "Stockholders approved and authorized the board to effectuate a 1-for-30 reverse stock split in the future.", form: "DEF 14A", filed: "2026-07-01", accession: "nxl", documentUrl: "https://www.sec.gov/nxl.htm", documentName: "nxl.htm" }).find((item) => item.kind === "reverse_split");
@@ -77,6 +99,16 @@ test("SMCI forward split is normalized instead of labeled dilution", async () =>
   const shares = result.report.financial_assessment.shares_outstanding;
   assert.deepEqual(shares.observations.map((item) => item.value), [520_000_000, 594_000_000]);
   assert.match(shares.summary, /increased 14\.2%/); assert.doesNotMatch(shares.summary, /1035/);
+});
+
+test("split-unresolved shares settle Limited with no scoreable observations and remain valid", async () => {
+  const result = await researchFixture({ ticker: "SMCI", companyFacts: { cik: 1, entityName: "SMCI Corp.", facts: { dei: {
+    EntityCommonStockSharesOutstanding: concept("Shares", [fact(52_000_000, { end: "2023-07-31", filed: "2023-08-30", form: "10-K", accn: "old" }), fact(594_000_000, { end: "2025-07-31", filed: "2025-08-30", form: "10-K" })], "shares")
+  } } } });
+  const shares = result.report.financial_assessment.shares_outstanding;
+  assert.equal(shares.state, "limited_coverage"); assert.deepEqual(shares.observations, []); assert.deepEqual(shares.annual_observations, []);
+  assert.match(shares.summary, /unexplained discontinuity/);
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
 
 test("NCPL non-reliance invalidates affected financial trend scoring", async () => {
