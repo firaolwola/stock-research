@@ -64,7 +64,7 @@ verdict.
 3. [x] **Complete:** [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
 4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and optional Alpha Vantage free-tier discovery/end-of-day context.
 5. [x] **Complete:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52). Methodology 2.0.0 replaces misleading proxies, defines score-specific evidence gates, and keeps long-term quality Deep-only.
-6. [x] **Complete:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53). The seven primary cards settle independently, convert 0–10 to accessible 0–5 stars, and keep supporting detail inspectable below.
+6. [x] **Complete:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53), including the owner-approved post-#53 refinement to one compact score summary, honest financial charts, and a separate explanation block.
 7. [ ] **Next — coordinates with completed #51–#53:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
 8. [ ] **Final reliability gate — blocked by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
@@ -144,8 +144,9 @@ logging, rollback, and deployment safeguards are approved and implemented.
   bounded news/market implementation (#48–#51).
 - Versioned Fast scoring methodology 2.0.0 with realistic evidence gates and a
   preserved 1.0.0 historical baseline (#52).
-- Progressive accessible Fast score cards and the approved decision-first
-  dashboard hierarchy (#53).
+- Progressive accessible Fast scoring and the refined decision-first dashboard
+  hierarchy: unified summary, financial charts, then explanations (#53 and its
+  owner-approved UX follow-up).
 
 These completed items are foundations and historical implementation results;
 they do not by themselves satisfy the current Fast reliability milestone.

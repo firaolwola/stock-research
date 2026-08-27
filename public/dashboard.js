@@ -4,11 +4,9 @@ export const sectionLabels = Object.freeze({
   reverse_splits: "Reverse splits", dilution: "Dilution & financing", dividends: "Dividends",
   compliance_and_warnings: "Compliance & warnings", financial_context: "Financial context", catalysts_and_news: "Catalysts & news"
 });
-export const scoreGroups = Object.freeze([
-  { title: "Risk — more stars mean more risk", direction: "risk", keys: ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"] },
-  { title: "Quality & setup — more stars mean stronger evidence", direction: "quality", keys: ["financial_health", "catalyst_strength", "near_term_setup_quality"] }
-]);
-export const priorityScoreKeys = Object.freeze(scoreGroups.flatMap((group) => group.keys));
+export const priorityScoreKeys = Object.freeze(["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk", "financial_health", "catalyst_strength", "near_term_setup_quality"]);
+export const financialMetricOrder = Object.freeze(["revenue", "profitability", "debt", "free_cash_flow", "cash", "cash_burn"]);
+export const scoreSummaryOrder = Object.freeze(["financial_health", ...financialMetricOrder, "dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
 const scoreLabels = Object.freeze({
   dilution_historical_severity: "Historical dilution severity", dilution_future_likelihood: "Future dilution likelihood",
   dilution_potential_impact: "Potential dilution impact", reverse_split_risk: "Reverse-split risk",
@@ -27,6 +25,20 @@ const financialMetricLabels = Object.freeze({
   cash: "Cash", cash_burn: "Cash burn", revenue: "Revenue", profitability: "Profitability",
   free_cash_flow: "Free cash flow", debt: "Debt"
 });
+const scoreDescriptions = Object.freeze({
+  financial_health: "Overall resilience from liquidity, debt, cash flow, profitability, and material warnings.",
+  revenue: "Latest reported sales and whether comparable evidence supports a trend.",
+  profitability: "Whether current operations produce profit on comparable evidence.",
+  debt: "Debt burden relative to the issuer's supported capacity.",
+  free_cash_flow: "Cash left after operating needs and capital spending.",
+  cash: "Latest supported cash balance and its freshness.",
+  cash_burn: "Supported rate of cash use; missing burn never implies safety.",
+  dilution_historical_severity: "How much supported dilution has already affected the share base.",
+  dilution_future_likelihood: "How likely supported financing capacity is to become future dilution.",
+  dilution_potential_impact: "Potential share-base impact from supported warrants, convertibles, or offerings.",
+  reverse_split_risk: "Supported split history and current listing pressure."
+});
+const financialComponentKeys = Object.freeze({ profitability: "profitability", debt: "total_debt_capacity", free_cash_flow: "free_cash_flow" });
 
 export function validateTickerInput(value) {
   const ticker = String(value || "").trim().toUpperCase();
@@ -103,9 +115,21 @@ export function buildDashboardView(report, { final = true, settledScoreKeys = ne
     const ids = new Set(claimIds.flatMap((claimId) => claimsById.get(claimId)?.source_ids || []));
     return [...ids].map((id) => sourcesById.get(id)).filter(Boolean);
   };
+  const financialScore = report.scores.financial_health;
+  const financialComponents = new Map(financialScore.components.map((component) => [component.key, component]));
+  const scoreForSummaryKey = (key) => {
+    if (report.scores[key]) return { key, label: scoreLabels[key], description: scoreDescriptions[key], ...report.scores[key], presentation: buildScorePresentation(report.scores[key], { final, settled: settledScoreKeys.has(key) }) };
+    const metric = report.financial_assessment.metrics[key];
+    const component = financialComponents.get(financialComponentKeys[key]);
+    const settled = settledScoreKeys.has("financial_health");
+    const displayScore = component
+      ? { state: component.state, value: component.value, scale_max: 10, direction: "higher_is_better", confidence: financialScore.confidence, methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: component.explanation, claim_ids: component.claim_ids, components: [] }
+      : { state: metric.state === "limited_coverage" ? "limited_coverage" : "unknown", value: null, scale_max: 10, direction: "higher_is_better", confidence: "unknown", methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: `${metric.summary} This metric has no independent methodology score, so no stars are shown.`, claim_ids: metric.claim_ids, components: [] };
+    return { key, label: financialMetricLabels[key], description: scoreDescriptions[key], ...displayScore, presentation: buildScorePresentation(displayScore, { final, settled }) };
+  };
   return {
     report, findings: buildPriorityFindings(report), sourcesForClaims,
-    scoreGroups: scoreGroups.map((group) => ({ ...group, scores: group.keys.map((key) => ({ key, label: scoreLabels[key], ...report.scores[key], presentation: buildScorePresentation(report.scores[key], { final, settled: settledScoreKeys.has(key) }) })) })),
+    scoreSummary: scoreSummaryOrder.map(scoreForSummaryKey),
     sections: Object.entries(sectionLabels).map(([key, label]) => ({ key, label, ...report.sections[key] }))
   };
 }
@@ -145,7 +169,7 @@ function renderStars(presentation) {
     const remaining = presentation.stars - index;
     visual.append(element("span", `star ${remaining >= 1 ? "full" : remaining >= 0.5 ? "half" : "empty"}`, remaining >= 1 ? "★" : "☆"));
   }
-  wrapper.append(visual, element("span", "star-text", `${presentation.stars} / 5 stars`));
+  wrapper.append(visual, element("span", "visually-hidden", presentation.accessibleLabel));
   return wrapper;
 }
 function renderHeader(view) {
@@ -228,36 +252,17 @@ function renderFindings(view) {
 }
 function renderScores(view) {
   const panel = element("section", "panel score-panel");
-  const heading = element("div", "panel-heading"); heading.append(element("h2", "", "Seven Fast score cards"), element("span", "muted", "No combined verdict")); panel.append(heading);
-  const groups = element("div", "score-groups");
-  view.scoreGroups.forEach((group) => {
-    const section = element("section"); section.append(element("h3", "score-group-title", group.title));
-    const grid = element("div", "score-grid");
-    group.scores.forEach((score) => {
-      const card = element("article", "score-card"); card.dataset.presentationState = score.presentation.state; card.dataset.direction = group.direction;
-      const title = element("div", "section-title"); title.append(element("h3", "", score.label), badge(score.presentation.state)); card.append(title);
-      if (score.presentation.state === "scored") card.append(renderStars(score.presentation));
-      else card.append(element("p", "score-state", score.presentation.stateLabel));
-      card.append(element("p", "score-direction", score.presentation.directionLabel), element("p", "score-reason", score.explanation));
-      const details = element("details", "score-components");
-      details.append(element("summary", "", "Score details, inputs, and sources"));
-      const detailBody = element("div", "score-detail-body");
-      detailBody.append(element("p", "muted", `${score.presentation.state === "scored" ? `Internal value: ${score.value} / ${score.scale_max}` : "Internal value: not available"} · ${score.time_horizon} · ${formatLabel(score.confidence)} confidence · methodology ${score.methodology_version}`));
-      detailBody.append(element("p", "", score.explanation));
-      if (score.components.length) {
-        const list = element("ul", "section-items");
-        score.components.forEach((component) => {
-          const item = element("li", "section-item");
-          item.append(element("strong", "", formatLabel(component.key)), element("p", "muted", `${formatLabel(component.state)} · ${component.value === null ? "Unscored" : `${component.value} / 10`} · weight ${component.weight}`), element("p", "", component.explanation));
-          appendSourceLinks(item, view.sourcesForClaims(component.claim_ids)); list.append(item);
-        });
-        detailBody.append(element("h4", "", `${score.components.length} evidence inputs`), list);
-      }
-      appendSourceLinks(detailBody, view.sourcesForClaims(score.claim_ids)); details.append(detailBody); card.append(details); grid.append(card);
-    });
-    section.append(grid); groups.append(section);
+  const heading = element("div", "panel-heading"); heading.append(element("h2", "", "Fast score summary"), element("span", "muted", "No combined verdict")); panel.append(heading);
+  const list = element("div", "score-summary");
+  view.scoreSummary.forEach((score) => {
+    const row = element("article", "score-summary-row"); row.dataset.presentationState = score.presentation.state;
+    const copy = element("div", "score-summary-copy"); copy.append(element("h3", "", score.label), element("p", "muted", score.description), element("p", "score-direction", score.presentation.directionLabel));
+    const value = element("div", "score-summary-value");
+    if (score.presentation.state === "scored") value.append(renderStars(score.presentation));
+    else value.append(badge(score.presentation.state), element("span", "visually-hidden", score.presentation.accessibleLabel));
+    row.append(copy, value); list.append(row);
   });
-  panel.append(groups); return panel;
+  panel.append(list); return panel;
 }
 function renderCatalystAssessment(view) {
   const assessment = view.report.catalyst_assessment;
@@ -331,20 +336,25 @@ function renderFinancialAssessment(view) {
   const assessment = view.report.financial_assessment;
   const panel = element("section", "panel financial-assessment");
   const heading = element("div", "panel-heading");
-  heading.append(element("h2", "", "Financial health context"), badge(assessment.state));
+  heading.append(element("h2", "", "Financial metric charts"), badge(assessment.state));
   panel.append(heading, element("p", "muted", `${assessment.as_of ? `As of ${formatDate(assessment.as_of)}` : "Date unavailable"}${assessment.reporting_currency ? ` · ${assessment.reporting_currency}` : ""}`), element("p", "", assessment.summary));
   assessment.coverage_notes.forEach((note) => panel.append(element("p", "coverage-note", `Coverage note: ${note}`)));
 
-  const metrics = element("div", "financial-grid");
-  Object.entries(assessment.metrics).forEach(([key, metric]) => {
-    const card = element("article", "section-card");
+  const metrics = element("div", "financial-chart-grid");
+  financialMetricOrder.forEach((key) => {
+    const metric = assessment.metrics[key];
+    const card = element("article", "financial-chart");
     const title = element("div", "section-title"); title.append(element("h3", "", financialMetricLabels[key]), badge(metric.state)); card.append(title);
-    if (metric.value === null) card.append(element("p", "score-state", formatLabel(metric.state)));
-    else card.append(element("p", "financial-value", `${metric.value.toLocaleString()} ${metric.unit}`));
     const period = metric.period_start && metric.period_end ? `${formatDate(metric.period_start)}–${formatDate(metric.period_end)}` : "Period unavailable";
-    const comparison = metric.comparison_period_start && metric.comparison_period_end ? ` · compared with ${formatDate(metric.comparison_period_start)}–${formatDate(metric.comparison_period_end)}` : "";
-    card.append(element("p", "muted", `${period} · ${formatLabel(metric.trend)}${comparison}`), element("p", "", metric.summary));
-    appendSourceLinks(card, view.sourcesForClaims(metric.claim_ids)); metrics.append(card);
+    if (metric.state === "confirmed" && Number.isFinite(metric.value)) {
+      const chart = element("div", `single-value-chart ${metric.value < 0 ? "negative" : "positive"}`);
+      chart.setAttribute("role", "img"); chart.setAttribute("aria-label", `${financialMetricLabels[key]}: ${metric.value.toLocaleString()} ${metric.unit}, ${period}`);
+      chart.append(element("span", "chart-zero", "0"), element("span", "chart-bar"), element("strong", "chart-value", `${metric.value.toLocaleString()} ${metric.unit}`));
+      card.append(chart, element("p", "muted", `Latest supported period · ${period} · ${formatLabel(metric.trend)}`));
+    } else {
+      card.append(element("p", "chart-unavailable", `${formatLabel(metric.state)} — no trustworthy chart is available.`), element("p", "muted", period));
+    }
+    metrics.append(card);
   });
   panel.append(metrics);
 
@@ -363,6 +373,34 @@ function renderFinancialAssessment(view) {
     });
     panel.append(warnings);
   }
+  return panel;
+}
+function renderScoreDetails(view) {
+  const panel = element("section", "panel score-detail-panel");
+  panel.append(element("h2", "", "Why the metrics look this way"), element("p", "muted", "Open a metric for its internal value, evidence inputs, and sources. Display-only financial rows remain Unscored when methodology 2.0.0 has no independent component."));
+  const renderDetailGroup = (title, keys) => {
+    const group = element("section", "score-detail-group"); group.append(element("h3", "", title));
+    keys.forEach((key) => {
+      const score = view.scoreSummary.find((item) => item.key === key);
+      const details = element("details", "metric-details");
+      details.append(element("summary", "", `${score.label} — ${score.presentation.stateLabel}`));
+      const body = element("div", "score-detail-body");
+      body.append(element("p", "", score.explanation), element("p", "muted", `${score.presentation.state === "scored" ? `Internal value: ${score.value} / ${score.scale_max}` : "Internal value: not available"} · ${formatLabel(score.confidence)} confidence · methodology ${score.methodology_version}`));
+      if (score.components.length) {
+        const list = element("ul", "section-items");
+        score.components.forEach((component) => {
+          const item = element("li", "section-item");
+          item.append(element("strong", "", formatLabel(component.key)), element("p", "muted", `${formatLabel(component.state)} · ${component.value === null ? "Unscored" : `${component.value} / 10`} · weight ${component.weight}`), element("p", "", component.explanation));
+          appendSourceLinks(item, view.sourcesForClaims(component.claim_ids)); list.append(item);
+        });
+        body.append(element("h4", "", "Key supporting inputs"), list);
+      }
+      appendSourceLinks(body, view.sourcesForClaims(score.claim_ids)); details.append(body); group.append(details);
+    });
+    panel.append(group);
+  };
+  renderDetailGroup("Financial metric explanations", ["financial_health", ...financialMetricOrder]);
+  renderDetailGroup("Dilution and reverse-split explanations", ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
   return panel;
 }
 function renderSections(view) {
@@ -396,7 +434,7 @@ function renderSupportingEvidence(view) {
 }
 export function renderDashboard(container, report, operations = null, { final = true } = {}) {
   const view = buildDashboardView(report, { final, settledScoreKeys: settledScoreKeysForOperations(operations, final) });
-  container.replaceChildren(renderHeader(view), renderOperations(operations), renderCatalystAssessment(view), renderScores(view), renderFinancialAssessment(view), renderSupportingEvidence(view), renderSources(view)); container.hidden = false;
+  container.replaceChildren(renderHeader(view), renderOperations(operations), renderCatalystAssessment(view), renderScores(view), renderFinancialAssessment(view), renderScoreDetails(view), renderSupportingEvidence(view), renderSources(view)); container.hidden = false;
 }
 async function showRuntimeMode() {
   try {

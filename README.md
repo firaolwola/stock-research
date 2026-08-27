@@ -17,12 +17,12 @@ history includes explicit comparison limits and dated reaction windows, or an
 unknown result when no reliable analogue is available. Issuer identity now follows confirmed prior names
 and tickers so dated material history is not lost across renames or rebrands.
 The browser renders the validated report as a responsive fast-decision
-dashboard. Seven progressive Fast cards convert deterministic methodology
-2.0.0's internal 0–10 scores to accessible 0–5 stars without changing the
-underlying values. Risk and quality directions are explicit, unresolved cards
-show Researching/Limited/Unscored without provisional numbers, and detailed
-inputs and sources remain expandable. Comparison remains planned behind the
-Fast reliability milestone.
+dashboard. One compact progressive score summary converts trustworthy
+methodology 2.0.0 values to accessible 0–5 stars without changing the underlying
+0–10 values. Financial display rows without an independent methodology score
+remain Unscored, and detailed explanations, inputs, and sources live in a
+separate expandable block. Comparison remains planned behind the Fast
+reliability milestone.
 
 This application is a research aid, not financial advice.
 
@@ -54,10 +54,10 @@ The first end-to-end prototype is working:
    authentication/configuration failures, refusals, malformed responses, and
    temporary service failures without exposing provider details.
 5. The dashboard leads with identity, compact research status, current catalyst
-   and market context, and seven independently settling Fast score cards. It then
-   shows financial health, expandable detailed research/coverage, and the source
-   library. All evidence and citations remain available without repeating every
-   technical detail at the top of the page.
+   and market context, and one independently settling score summary. It then
+   shows clean financial metric charts, a separate explanation block, expandable
+   detailed research/coverage, and the source library. All evidence and citations
+   remain available without repeating every technical detail at the top.
 
 The repository includes a dated representative ticker evaluation set and a
 token-free score and operating-budget calibration run. Its checked-in research

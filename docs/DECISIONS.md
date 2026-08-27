@@ -400,9 +400,12 @@ unscored. The dependency-free browser renderer uses the existing validated
 report contract and safe external-link attributes.
 
 **Superseding detail:** The current hierarchy leads with identity and compact
-research status, then current catalyst/market context, seven primary Fast cards,
-financial context, expandable detailed evidence, and the source library.
-Long-term company quality is Deep-oriented rather than a primary Fast card.
+research status, then current catalyst/market context, one unified Fast score
+summary, honest financial charts, a separate explanation block, expandable
+detailed evidence, and the source library. Direct methodology components may be
+shown as financial sub-metric stars; revenue, cash, or cash-burn rows remain
+Unscored until they have an independent trustworthy score. Long-term company
+quality is Deep-oriented rather than a primary Fast row.
 
 ## 2026-08-25 — Require explicit evidence when carrying issuer history
 

@@ -31,8 +31,9 @@ contract. Public access is not a current milestone.
 2. The user runs Fast.
 3. Fast progressively gathers bounded evidence and displays each score only when
    its evidence threshold is satisfied.
-4. The user reviews seven score components, their short explanations, prominent
-   red flags, evidence quality, and unresolved work.
+4. The user scans one unified score summary, simple supported financial charts,
+   separate explanations, prominent red flags, evidence quality, and unresolved
+   work.
 5. The user rejects the setup, continues manual review, or requests Deep.
 6. Deep reuses Fast's evidence packet and expands unresolved or low-confidence
    components instead of restarting the same research.
@@ -133,8 +134,11 @@ Do not show provisional numeric scores that may change materially later.
 
 The report contract keeps detailed scores on the existing 0–10 internal scale.
 The Fast dashboard converts them to a 0–5 star presentation, allowing half-stars
-where useful. The card shows a short plain-language reason; the detailed 0–10
-value, methodology, inputs, and sources remain inspectable below.
+where useful. A unified row summary keeps metric descriptions left-aligned and
+stars right-aligned without redundant visible numeric star text. Detailed 0–10
+values, methodology, inputs, explanations, and sources remain inspectable in a
+separate block below. Financial sub-metrics may reuse a direct methodology 2.0.0
+component for display; metrics without a direct score remain Unscored.
 
 ### Dashboard order
 
@@ -143,10 +147,11 @@ The preferred top-to-bottom order is:
 1. Stock name and identity.
 2. Research, budget, and completion status.
 3. Current news and catalyst.
-4. Score components.
-5. Financial-health context.
-6. Detailed research and evidence.
-7. Source library and technical supporting detail.
+4. Unified score summary.
+5. Financial metric charts, limited to trustworthy reported values.
+6. Separate score and financial explanations.
+7. Detailed research and evidence.
+8. Source library and technical supporting detail.
 
 ### Source strategy
 
