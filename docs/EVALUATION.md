@@ -164,6 +164,16 @@ active Nasdaq-notice controls remain detected. These corrections do not change
 the measured Batch 3 result and are not another calibration run. AMC/NXL FCF
 remains honestly Limited because the stored evidence has no aligned capex fact.
 
+The subsequently approved four-ticker sparse batch is recorded in
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-1.md`. It produced four valid
+reports but only 3/16 material checks (18.75%). BIOR, former ticker MULN, and
+TUPBQ were absent from the current SEC ticker map and exposed the lack of a
+historical-ticker/OTC identity fallback; their finished work also remained
+incorrectly labeled Pending. NIO exercised the foreign 20-F/6-K path but exposed
+an effective-controls false positive and inconsistent foreign Company Facts
+selection. The batch therefore proves neither the sparse categories nor the
+milestone and authorizes no additional paid run.
+
 The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
 uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
 control disclosures; requires event-specific non-reliance language; separates

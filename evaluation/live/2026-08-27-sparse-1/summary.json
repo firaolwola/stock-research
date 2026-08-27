@@ -1,0 +1,40 @@
+{
+  "issue": 55,
+  "batch": "sparse-1",
+  "status": "failed_reliability_gate",
+  "issue_must_remain_open": true,
+  "approved_runs": 4,
+  "completed_runs": 4,
+  "automatic_retries": 0,
+  "valid_report_rate": {"valid":4,"evaluated":4,"rate":1.0},
+  "overall_material_checks": {"detected":3,"expected":16,"recall":0.1875,"target":0.95,"passes":false},
+  "category_recall": {
+    "issuer_security_listing":{"detected":1,"expected":4,"recall":0.25,"note":"Two frozen current-status descriptions were stale; lineage resolution still failed."},
+    "completed_reverse_split_history":{"detected":0,"expected":2,"recall":0.0,"sample_size":2},
+    "active_or_terminal_listing_pressure":{"detected":0,"expected":2,"recall":0.0,"sample_size":2},
+    "going_concern":{"detected":0,"expected":1,"recall":0.0,"sample_size":1},
+    "foreign_issuer_adr_ifrs":{"detected":3,"expected":4,"recall":0.75,"sample_size":1},
+    "otc_or_delisted":{"detected":0,"expected":2,"recall":0.0,"sample_size":2},
+    "capital_structure_financing":{"detected":0,"expected":2,"recall":0.0,"sample_size":2}
+  },
+  "score_calibration": {"passed":7,"evaluated":18,"pass_rate":0.3889},
+  "explanation_fidelity": {"passed_tickers":0,"evaluated_tickers":4,"pass_rate":0.0},
+  "settlement_accuracy": {"passed_tickers":0,"evaluated_tickers":4,"pass_rate":0.0},
+  "operations": {"elapsed_ms":{"BIOR":235,"MULN":6,"NIO":6693,"TUPBQ":6},"average_elapsed_ms":1735,"maximum_elapsed_ms":6693,"all_within_20_second_ceiling":true,"measured_openai_cost_usd":0.010853,"approved_maximum_cost_usd":0.12,"alpha_vantage_requests":2,"twelve_data_requests":0,"combined_optional_provider_attempts":2,"hosted_web_search_calls":0},
+  "provider_behavior": "Alpha Vantage was attempted only after NIO identity resolved: market data completed and news returned provider_quota. Twelve Data was unconfigured, so news stayed Limited. The three unresolved tickers never reached optional providers. SEC/Nasdaq evidence was preserved where available.",
+  "severe_misleading_misses": [
+    "BIOR completed split and OTC/delisting history was not retrieved.",
+    "MULN prior-ticker lineage, repeated split history, listing pressure, and financing evidence was not retrieved.",
+    "TUPBQ Chapter 11, going-concern, delisting, and OTC lineage was not retrieved.",
+    "NIO effective-control language was falsely labeled a confirmed high-severity material weakness.",
+    "NIO current financial summary and annual trend chose inconsistent revenue facts, and comparable net loss was omitted."
+  ],
+  "baseline_quality": {"frozen_plan_unchanged":true,"corrections_required":2,"note":"Post-freeze primary-source review found BIOR was delisted to OTC in December 2024 and MULN changed to BINI in July 2025. These corrections were not inferred from Fast output and are disclosed rather than silently rewriting the answer key."},
+  "sampling_conclusion": "The sparse reliability gaps are not adequately covered. Foreign-filer behavior has only one case; going concern has one case; OTC/delisted has two cases but both failed retrieval. No sparse category can be declared proven.",
+  "minimum_corrective_work": [
+    "Add identity resolution by historical ticker/current CIK and OTC/delisted lineage when the current SEC ticker map has no row, with a terminal Limited state when resolution cannot be proven.",
+    "Apply the effective-controls negative control to foreign 20-F wording and keep generic hypothetical control risks out of confirmed material-weakness evidence.",
+    "Make Company Facts current-summary selection use the same comparable taxonomy/cadence series as scoring and normalize foreign-filer net income/loss aliases.",
+    "Add deterministic BIOR, former-MULN/BINI, NIO, and TUPBQ regressions before requesting any further live run."
+  ]
+}

@@ -151,6 +151,7 @@ test("Issue 55 batch 3 freezes the same five cases and approved provider bounds"
 
 test("Issue 55 sparse batch freezes independent baselines and strict live bounds", async () => {
   const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-1/summary.json");
   assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
   assert.equal(plan.required_ancestor, "81ec4d2");
   assert.equal(plan.approval.maximum_runs, 4);
@@ -172,4 +173,12 @@ test("Issue 55 sparse batch freezes independent baselines and strict live bounds
     assert.ok(scenario.known_baseline.length > 0);
     assert.ok(scenario.severe_miss_conditions.length > 0);
   }
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.valid_report_rate.valid, 4);
+  assert.equal(result.overall_material_checks.recall, 0.1875);
+  assert.equal(result.operations.alpha_vantage_requests, 2);
+  assert.equal(result.operations.twelve_data_requests, 0);
+  assert.ok(result.operations.measured_openai_cost_usd <= plan.approval.maximum_openai_cost_usd);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
 });

@@ -1,0 +1,18 @@
+{
+  "case_id": "bior-2026-sparse",
+  "ticker": "BIOR",
+  "material_checks": {"detected": 0, "expected": 4},
+  "adjudication": [
+    {"expectation":"Completed 1-for-25 reverse split","detected":false,"cause":"retrieval"},
+    {"expectation":"Completed 1-for-10 reverse split","detected":false,"cause":"retrieval"},
+    {"expectation":"October 2024 issuance and warrants","detected":false,"cause":"retrieval"},
+    {"expectation":"Completed history distinct from prospective risk","detected":false,"cause":"retrieval"}
+  ],
+  "identity_result": "The current SEC ticker map did not contain BIOR, so Fast stopped at unresolved identity and never followed CIK 1580063 or the Progenity/Biora lineage.",
+  "baseline_correction": "The frozen plan incorrectly called BIOR currently Nasdaq-listed. A December 10, 2024 SEC 8-K states Nasdaq suspended/delisted it and anticipated OTC Pink trading under BIOR. This correction is independent of Fast output and the frozen plan remains unchanged.",
+  "score_range": {"passed":0,"evaluated":4},
+  "explanation_fidelity": false,
+  "settlement_accurate": false,
+  "severe_misses": ["Both authoritative completed reverse splits and the later financing were omitted.", "Completed work was labeled Pending/in progress instead of terminal Limited/Unavailable."],
+  "result": "failed"
+}

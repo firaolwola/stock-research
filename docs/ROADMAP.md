@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — sparse-category proof still required:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%) and all reports validated. Its four reproduced severe mechanisms now have offline contextual regressions; FCF remains evidence-limited and required sparse categories still block completion.
+8. [ ] **Active — sparse-category corrections required:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%), but the four-ticker sparse batch reached only 3/16 (18.75%). Current-map-only identity resolution missed BIOR, former MULN, and TUPBQ; NIO exposed foreign-filer control-language and Company Facts defects. Offline correction and regression coverage are the next step; no further live batch is authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -85,9 +85,11 @@ Issue #55 remains active. The approved second five-ticker batch improved recall
 from 66.28% to 82.56% but did not pass. The reproduced overbroad non-reliance,
 AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
 Limited-series defects now have deterministic regression fixes on PR #74.
-The next active step, after owner approval, is a minimal sparse-category batch targeting completed
-splits, listing/going-concern cases, a foreign ADR/20-F, and an OTC/delisted
-security. A paid data
+The approved sparse-category batch has now run and failed. The next active step
+is offline historical-ticker/OTC identity resolution, terminal settlement, and
+foreign-filer normalization/control-language correction, followed by
+deterministic regressions. Any further live verification requires a new bounded
+owner approval. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 
