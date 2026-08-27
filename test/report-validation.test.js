@@ -216,3 +216,25 @@ test("invalid evidence-state combinations are rejected", async () => {
     assert.ok(result.errors.some((error) => error.message === message), message);
   }
 });
+
+test("confirmed security identity cannot leave type or listing status unresolved", async () => {
+  const report = await loadReportFixture("complete");
+  report.security.security_type = "unknown";
+  const result = validateReport(report);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => error.message.includes("resolved security type and listing status")));
+});
+
+test("financial semantics reject OCF-as-FCF, component debt, stale cash, and currency mismatch", async () => {
+  const mutations = [
+    ["free cash flow cannot be labeled", (report) => { report.financial_assessment.metrics.free_cash_flow.label = "Operating cash flow"; }],
+    ["total debt cannot be labeled", (report) => { report.financial_assessment.metrics.debt.label = "Current long-term debt"; }],
+    ["too stale", (report) => { report.financial_assessment.metrics.cash.period_start = "2024-01-01"; report.financial_assessment.metrics.cash.period_end = "2024-01-01"; }],
+    ["reporting currency", (report) => { report.financial_assessment.metrics.cash.unit = "EUR"; }]
+  ];
+  for (const [message, mutate] of mutations) {
+    const report = await loadReportFixture("complete"); mutate(report);
+    const result = validateReport(report);
+    assert.equal(result.valid, false); assert.ok(result.errors.some((error) => error.message.includes(message)), message);
+  }
+});

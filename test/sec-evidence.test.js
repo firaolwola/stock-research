@@ -140,9 +140,107 @@ test("one hanging SEC document does not discard evidence completed by other sour
   const result = await client.researchTicker("ACME", { budget });
   const calibrated = calibrateReportScores(result.report);
   assert.equal(validate(calibrated).valid, true);
-  assert.equal(result.report.security.evidence_state, "confirmed");
+  assert.equal(result.report.security.evidence_state, "limited_coverage");
   assert.equal(result.report.catalyst_assessment.current.state, "confirmed");
   assert.ok(result.evidence_records.length > 0);
   assert.equal(budget.finish({ partial: true }).termination_reason, "time_ceiling");
+  assert.equal(calibrated.scores.financial_health.value, null);
+});
+
+const edgeFact = (val, { start, end = "2026-06-30", filed = "2026-08-15", accn = "0000123456-26-000001" } = {}) => ({ val, ...(start ? { start } : {}), end, filed, accn, form: "10-Q" });
+const edgeConcept = (label, entries, unit = "USD") => ({ label, units: { [unit]: entries } });
+const factsWith = (concepts, metadata = {}) => ({ ...metadata, facts: { "us-gaap": concepts } });
+
+async function reportForFacts(factsBody) {
+  const client = createSecEvidenceClient({ fetchImpl: fetchFixture([], factsBody), now: () => Date.parse("2026-08-25T12:00:00Z"), minRequestIntervalMs: 0 });
+  return client.researchTicker("ACME");
+}
+
+test("operating cash flow alone never populates free cash flow or burn/runway", async () => {
+  const result = await reportForFacts(factsWith({
+    CashAndCashEquivalentsAtCarryingValue: edgeConcept("Cash", [edgeFact(5_000_000)]),
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("Operating cash flow", [edgeFact(-2_000_000, { start: "2026-01-01" })])
+  }));
+  const { metrics, coverage_notes: notes } = result.report.financial_assessment;
+  assert.equal(metrics.free_cash_flow.state, "unknown"); assert.equal(metrics.free_cash_flow.value, null);
+  assert.match(metrics.free_cash_flow.summary, /not inferred/); assert.equal(metrics.cash_burn.state, "unknown");
+  assert.match(notes.join(" "), /Runway is not calculated/);
+  assert.equal(calibrateReportScores(result.report).scores.financial_health.value, null);
+});
+
+for (const [name, tag] of [["current debt only", "LongTermDebtCurrent"], ["non-current debt only", "LongTermDebtNoncurrent"]]) {
+  test(`${name} remains a labeled component rather than total debt`, async () => {
+    const result = await reportForFacts(factsWith({ [tag]: edgeConcept(name, [edgeFact(3_000_000)]) }));
+    const debt = result.report.financial_assessment.metrics.debt;
+    assert.equal(debt.state, "limited_coverage"); assert.equal(debt.value, null); assert.equal(debt.label, "Total debt");
+    assert.match(debt.summary, /total debt cannot be established/);
+  });
+}
+
+test("aligned current and non-current components produce an explicit calculated total", async () => {
+  const result = await reportForFacts(factsWith({
+    LongTermDebtCurrent: edgeConcept("Current debt", [edgeFact(2_000_000)]),
+    LongTermDebtNoncurrent: edgeConcept("Non-current debt", [edgeFact(7_000_000)])
+  }));
+  const debt = result.report.financial_assessment.metrics.debt;
+  assert.equal(debt.state, "confirmed"); assert.equal(debt.value, 9_000_000); assert.match(debt.label, /Total debt/);
+  assert.match(debt.summary, /current debt 2000000 plus non-current debt 7000000/);
+});
+
+test("debt components with conflicting periods or currencies remain unresolved", async () => {
+  const result = await reportForFacts({ facts: { "us-gaap": {
+    LongTermDebtCurrent: edgeConcept("Current debt", [edgeFact(2_000_000)], "USD"),
+    LongTermDebtNoncurrent: edgeConcept("Non-current debt", [edgeFact(7_000_000, { end: "2026-03-31" })], "EUR")
+  } } });
+  assert.equal(result.report.financial_assessment.metrics.debt.state, "limited_coverage");
+  assert.equal(result.report.financial_assessment.metrics.debt.value, null);
+});
+
+test("stale cash and conflicting latest facts cannot provide reassuring current liquidity", async () => {
+  const stale = await reportForFacts(factsWith({ CashAndCashEquivalentsAtCarryingValue: edgeConcept("Cash", [edgeFact(5_000_000, { end: "2025-12-31", filed: "2026-02-15" })]) }));
+  assert.equal(stale.report.financial_assessment.metrics.cash.state, "limited_coverage"); assert.equal(stale.report.financial_assessment.metrics.cash.value, null);
+  const conflicting = await reportForFacts(factsWith({ CashAndCashEquivalentsAtCarryingValue: edgeConcept("Cash", [edgeFact(5_000_000), edgeFact(2_000_000)]) }));
+  assert.equal(conflicting.report.financial_assessment.metrics.cash.state, "unknown"); assert.equal(conflicting.report.financial_assessment.metrics.cash.value, null);
+});
+
+test("aligned OCF and capital expenditures produce FCF while currency mismatch does not", async () => {
+  const aligned = await reportForFacts(factsWith({
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(3_000_000, { start: "2026-01-01" })]),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Capex", [edgeFact(1_250_000, { start: "2026-01-01" })])
+  }));
+  assert.equal(aligned.report.financial_assessment.metrics.free_cash_flow.value, 1_750_000);
+  const mismatch = await reportForFacts({ facts: { "us-gaap": {
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(3_000_000, { start: "2026-01-01" })], "USD"),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Capex", [edgeFact(1_250_000, { start: "2026-01-01" })], "EUR")
+  } } });
+  assert.equal(mismatch.report.financial_assessment.metrics.free_cash_flow.state, "unknown");
+});
+
+test("SEC identity confirms the issuer but leaves unsupported security semantics unresolved", async () => {
+  const result = await reportForFacts(facts);
+  assert.equal(result.report.issuer.identity_state, "confirmed");
+  assert.equal(result.report.security.evidence_state, "limited_coverage");
+  assert.equal(result.report.security.security_type, "unknown"); assert.equal(result.report.security.listing_status, "unknown");
+  assert.equal(result.report.issuer.prior_identities[0].name, "Old Example Corp.");
+});
+
+test("wrong Company Facts issuer is a hard identity failure", async () => {
+  await assert.rejects(reportForFacts({ cik: 999999, entityName: "Other Issuer", facts: {} }), { name: "SecIdentityMismatchError", code: "SEC_IDENTITY_MISMATCH" });
+});
+
+test("incomplete selected-filing extraction remains limited and cannot reassure scores", async () => {
+  const fixture = fetchFixture([], factsWith({}));
+  const client = createSecEvidenceClient({
+    fetchImpl: async (url, options) => url.includes("/Archives/")
+      ? { ok: true, status: 200, async text() { return "Selected filing text did not yield a safely classified material-risk statement."; } }
+      : fixture(url, options),
+    now: () => Date.parse("2026-08-25T12:00:00Z"), minRequestIntervalMs: 0
+  });
+  const result = await client.researchTicker("ACME"); const calibrated = calibrateReportScores(result.report);
+  assert.equal(result.report.sections.reverse_splits.state, "limited_coverage");
+  assert.equal(result.report.sections.dilution.state, "limited_coverage");
+  assert.equal(result.report.sections.compliance_and_warnings.state, "limited_coverage");
+  assert.equal(result.report.financial_assessment.going_concern.state, "unknown");
+  assert.equal(calibrated.scores.reverse_split_risk.value, null);
   assert.equal(calibrated.scores.financial_health.value, null);
 });

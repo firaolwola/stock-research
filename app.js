@@ -98,8 +98,9 @@ export function createApp({ researchClient, reportValidator, logger = console, r
         return;
       }
       const validationResult = reportValidator(report);
-      if (!validationResult.valid) {
-        logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_validation", requestStartedAt, { validation_errors: safeValidationErrors(validationResult.errors) }))}`);
+      if (!validationResult.valid || report.security?.ticker !== ticker) {
+        const identityErrors = report.security?.ticker !== ticker ? [{ path: "/security/ticker", keyword: "requestedIdentity" }] : [];
+        logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_validation", requestStartedAt, { validation_errors: [...safeValidationErrors(validationResult.errors), ...identityErrors] }))}`);
         return;
       }
       const partial = report.metadata?.completion_status !== "complete";
@@ -153,7 +154,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
         return res.status(502).json({ code: controlledError.code, error: controlledError.error });
       }
       const validationResult = reportValidator(report);
-      if (!validationResult.valid) {
+      if (!validationResult.valid || report.security?.ticker !== ticker) {
         logger.error(`Research provider returned an invalid report for ${ticker} (INVALID_RESEARCH_RESPONSE${diagnosticSuffix({ stage, phase: "report_validation", elapsed_ms: Math.round(performance.now() - requestStartedAt), response_received: true, input_tokens: operations?.input_tokens, output_tokens: operations?.output_tokens, total_tokens: operations?.total_tokens })}).`);
         const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];
         budget?.finish({ partial: true });

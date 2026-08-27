@@ -33,3 +33,8 @@ test("bounded extraction targets material-risk categories represented in the eva
     assert.equal(expected.has(category), true, `${category} missing from evaluation set`); assert.equal(extracted.has(category), true, `${category} missing from extraction fixture`);
   }
 });
+
+test("unrecognized selected filing text does not become reassuring not-found evidence", () => {
+  const findings = extract("The selected filing could not be normalized into recognizable material-risk statements for this bounded pass.", "10-Q");
+  assert.deepEqual(findings, []);
+});

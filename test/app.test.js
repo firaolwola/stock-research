@@ -192,6 +192,15 @@ test("invalid structured data never reaches the browser as success", async () =>
   });
 });
 
+test("a report for a different requested security is rejected", async () => {
+  const app = buildApp({ async researchTicker() { return structuredClone(completeReport); } });
+  await withTestServer(app, async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/analyze?ticker=WRONG`);
+    assert.equal(response.status, 502);
+    assert.equal((await response.json()).code, "INVALID_RESEARCH_RESPONSE");
+  });
+});
+
 for (const scenario of [
   { code: RESEARCH_ERROR_CODES.timeout, status: 504, expected: { code: "RESEARCH_TIMEOUT", error: "Research took too long. Please try again." } },
   { code: RESEARCH_ERROR_CODES.rateLimit, status: 503, expected: { code: "RESEARCH_RATE_LIMITED", error: "Research is temporarily rate limited. Please try again later." } },
