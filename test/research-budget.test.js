@@ -18,7 +18,9 @@ test("cost estimation accounts for tokens, caching, and every web search", () =>
   assert.equal(estimateResearchCost(usage, 2), 0.07025);
   const measured = buildResearchOperations({ stage: "fast", latencyMs: 5_000, usage, webSearchCalls: 2 });
   assert.equal(measured.within_latency_target, true);
-  assert.equal(measured.within_cost_target, true);
+  assert.equal(measured.within_cost_target, false);
+  assert.equal(RESEARCH_STAGES.fast.target_cost_usd, 0.03);
+  assert.equal(RESEARCH_STAGES.fast.difficult_cost_ceiling_usd, 0.05);
   assert.equal(measured.pricing_version, "2026-08-25");
 });
 

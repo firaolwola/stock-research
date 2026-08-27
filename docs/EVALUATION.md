@@ -1,6 +1,6 @@
 # Research evaluation set
 
-**Last reviewed:** 2026-08-26
+**Last reviewed:** 2026-08-27
 
 The versioned evaluation set in `evaluation/cases.json` measures whether fast reports surface material risks without prescribing a brittle full answer. Each scenario records why it matters, an explicit `as_of` cutoff, the evidence areas to investigate, and dated known facts that a report should find or handle with the stated uncertainty. Evidence published after the cutoff is invalid for that scenario.
 
@@ -49,6 +49,11 @@ reports plus three deterministic invalid-input cases; it does not run the real
 ticker scenarios through production evidence-first Fast. Review every scenario
 and source date when changing the set. The validator rejects incomplete coverage
 and post-cutoff evidence.
+
+The dry evaluator uses the executable $0.03 normal Fast maximum. Its sample costs
+are intentionally below that ceiling and do not authorize or predict a live paid
+run. The $0.05 difficult ceiling remains an explicit per-run policy rather than
+the evaluator's default.
 
 ## Fast reliability gate
 

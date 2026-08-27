@@ -3,6 +3,7 @@ import test from "node:test";
 import { createSecEvidenceClient, getSafeSecDiagnostics } from "../lib/sec-evidence.js";
 import { calibrateReportScores } from "../lib/scoring.js";
 import { createReportValidator } from "../lib/report-validation.js";
+import { createFastBudgetController } from "../lib/fast-budget-controller.js";
 import { loadReportSchema } from "../support/report-fixtures.js";
 
 const schema = await loadReportSchema(); const validate = createReportValidator(schema);
@@ -107,4 +108,41 @@ test("network failure reports its safe nested cause without exposing messages", 
   assert.equal(diagnostic.constructor, "TypeError"); assert.equal(diagnostic.cause_constructor, "AggregateError"); assert.equal(diagnostic.cause_code, "EACCES");
   assert.equal(diagnostic.response_received, false); assert.doesNotMatch(messages[0], /fetch failed|private provider detail/);
   assert.deepEqual(getSafeSecDiagnostics(failure).status, null);
+});
+
+test("hanging SEC retrieval is aborted by the shared deadline and settles safely", async () => {
+  const client = createSecEvidenceClient({
+    fetchImpl: async (_url, options) => new Promise((_resolve, reject) => options.signal.addEventListener("abort", () => reject(options.signal.reason), { once: true })),
+    minRequestIntervalMs: 0,
+    logger: { error() {} }
+  });
+  const budget = createFastBudgetController({ elapsedLimitMs: 40, finalizationReserveMs: 10 });
+  const started = performance.now();
+  const result = await client.researchTicker("ACME", { budget });
+  assert.ok(performance.now() - started < 250);
+  assert.equal(result.report.security.evidence_state, "unknown");
+  assert.equal(result.operations.retrieval.status, "unavailable");
+  assert.equal(budget.finish({ partial: true }).termination_reason, "time_ceiling");
+});
+
+test("one hanging SEC document does not discard evidence completed by other sources", async () => {
+  const requests = [];
+  const fixture = fetchFixture(requests);
+  const client = createSecEvidenceClient({
+    fetchImpl: async (url, options) => {
+      if (url.endsWith("/q.htm")) return new Promise((_resolve, reject) => options.signal.addEventListener("abort", () => reject(options.signal.reason), { once: true }));
+      return fixture(url, options);
+    },
+    minRequestIntervalMs: 0,
+    logger: { error() {} }
+  });
+  const budget = createFastBudgetController({ elapsedLimitMs: 80, finalizationReserveMs: 10 });
+  const result = await client.researchTicker("ACME", { budget });
+  const calibrated = calibrateReportScores(result.report);
+  assert.equal(validate(calibrated).valid, true);
+  assert.equal(result.report.security.evidence_state, "confirmed");
+  assert.equal(result.report.catalyst_assessment.current.state, "confirmed");
+  assert.ok(result.evidence_records.length > 0);
+  assert.equal(budget.finish({ partial: true }).termination_reason, "time_ceiling");
+  assert.equal(calibrated.scores.financial_health.value, null);
 });

@@ -25,11 +25,12 @@ test("the token-free calibration sample reports category recall separately from 
   assert.equal(result.research_quality.uncertainty_accuracy, 1);
   assert.equal(result.operations.latency_p50_ms, 4200);
   assert.equal(result.operations.latency_p95_ms, 8500);
-  assert.ok(Math.abs(result.operations.average_cost_usd - 0.07375) < 1e-9);
-  assert.equal(result.operations.maximum_cost_usd, 0.08);
-  assert.equal(result.operations.input_tokens, 22000);
-  assert.equal(result.operations.output_tokens, 8000);
-  assert.equal(result.operations.web_search_calls, 4);
+  assert.ok(Math.abs(result.operations.average_cost_usd - 0.02275) < 1e-9);
+  assert.equal(result.operations.maximum_cost_usd, 0.028);
+  assert.equal(result.operations.input_tokens, 14000);
+  assert.equal(result.operations.output_tokens, 2800);
+  assert.equal(result.operations.web_search_calls, 0);
+  assert.equal(result.operations.fast_cost_target_usd, 0.03);
   assert.deepEqual(result.operations.fast_first_useful_target_ms, { min: 3000, max: 10000 });
   assert.deepEqual(result.operations.fast_complete_target_ms, { min: 15000, max: 20000 });
   assert.equal(result.operations.meets_latency_target, true);

@@ -1,6 +1,6 @@
 # Roadmap
 
-**Last reviewed:** 2026-08-26
+**Last reviewed:** 2026-08-27
 
 This roadmap records outcomes, dependencies, and milestone progress rather than
 fixed delivery dates. GitHub Issues are the executable backlog. `PRODUCT.md` is
@@ -22,7 +22,6 @@ but this does not establish real-ticker recall or trustworthy score coverage.
 
 The current implementation is not yet the approved Fast product contract:
 
-- the full SEC and provider pipeline is not hard-bounded end to end;
 - current Fast evidence normally leaves important scores unresolved;
 - current-news and market-context coverage is incomplete;
 - known financial and identity semantics require correction;
@@ -58,7 +57,7 @@ verdict.
 ### Ordered implementation dependencies
 
 1. [x] [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
-2. [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
+2. [x] [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
 3. [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
 4. [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). Provider selection, payment, scraping, integration, and new production dependencies require explicit owner approval.
 5. [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52).
