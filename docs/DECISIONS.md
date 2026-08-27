@@ -844,3 +844,22 @@ the 2.0 construct and does not consume the six sub-scores, avoiding circularity.
 between current condition and independent trend. Secondary financial values or
 one observation could also create false confidence. Version 2.1.0 makes the UI
 semantics explicit while preserving the stricter 2.0 philosophy and baseline.
+
+## 2026-08-27 — Fail closed across reporting durations and corporate actions
+
+**Status:** Accepted corrective implementation from Issue #55 calibration
+
+**Decision:** Treat facts with different start dates or durations as distinct
+even when they share an end date and filing. Prefer newer comparable interim
+financial flows over older annual trends without mixing cadences. A later SEC
+non-reliance or restatement invalidates affected flow scores. Historical share
+series must be normalized with confirmed completed split factors; proposed or
+authorized reverse splits do not count as completed history, and unexplained
+large share discontinuities remain Limited. Fast may inspect up to six selected
+SEC documents to retain bounded corporate-action and accounting coverage.
+
+**Why:** The initial real-ticker calibration showed that duration collisions,
+stale annual precedence, missed accounting invalidation, and unadjusted stock
+splits could omit material facts or create severe false reassurance. These rules
+preserve the existing evidence-first methodology while making its deterministic
+inputs match the economic events they describe.

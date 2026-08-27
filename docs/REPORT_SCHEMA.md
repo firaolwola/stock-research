@@ -80,7 +80,9 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   `kind` to distinguish offerings, warrants, convertibles, compliance and
   accounting warnings, financial measures, catalysts, and news. They provide
   dated event summaries and claim references, with optional periods and paired
-  numeric value/unit fields where those facts are useful.
+  numeric value/unit fields where those facts are useful. Reverse-split items
+  may carry `corporate_action_state` to distinguish completed, authorized,
+  proposed, and unresolved actions; only completed actions count as history.
 - `catalyst_assessment` identifies the current catalyst and classifies its
   recency, specificity, credibility, novelty, and potential significance. It
   keeps favorable evidence, unfavorable evidence, uncertainty, and a
@@ -106,6 +108,12 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   `shares`. It is not float or potential dilution and does not participate in
   financial trend scoring. Its optional `annual_observations` drive the
   preferred multi-year capital-structure chart.
+
+Company Facts duration facts retain their full start/end identity. Quarter,
+year-to-date, and annual values ending on the same date are not conflicts unless
+two values disagree for the same exact period and unit. Shares observations are
+normalized across confirmed completed split factors; an unexplained large
+discontinuity stays Limited instead of being described as dilution.
 
 Fast financial normalization uses conservative derived-value rules. Operating
 cash flow is not free cash flow: FCF is populated only when aligned operating

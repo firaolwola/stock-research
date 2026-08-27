@@ -123,11 +123,11 @@ SEC-only source gate.
 ## Six supporting financial trend constructs added in 2.1.0
 
 All six are higher-is-stronger, company-relative 0–10 scores. Raw company size
-does not score. The server prefers a compatible annual series for revenue, net
-income/loss, FCF, and OCF; when annual history is unavailable it may use
-same-length comparable quarters. Cash and debt prefer fresh consecutive
-quarter-end balances, then compatible annual period ends. Annual and quarterly
-observations never mix in one calculation.
+does not score. For revenue, net income/loss, FCF, and OCF, a newer pair of
+same-length comparable interim periods takes precedence over an older annual
+series; otherwise the server uses compatible annual history. Cash and debt
+prefer fresh consecutive quarter-end balances, then compatible annual period
+ends. Annual and interim observations never mix in one calculation.
 
 Minimum evidence is two chronological observations with one definition, unit,
 currency, cadence, issuer identity, and confirmed SEC-only claim chain. Two
@@ -138,6 +138,10 @@ Cash/debt and quarterly flows require the newest observation to be no more than
 the normal annual filing cycle. One
 point, a source conflict, stale balance, mixed currency/unit/cadence/concept,
 identity mismatch, or any secondary-provider value makes the score Limited.
+A later authoritative non-reliance/restatement event invalidates affected flow
+series until corrected comparable statements are available. A severe control
+warning remains visible and caps Financial Health even when unaffected trend
+inputs are strong.
 
 ### Revenue trend and cash trend
 

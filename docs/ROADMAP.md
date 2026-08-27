@@ -81,12 +81,12 @@ verdict.
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
-Issue #55 remains active but cannot complete until the deterministic corrective
-work identified by the first calibration is implemented and verified. The next
-priority is to fix Company Facts comparable-period selection, accounting-event
-gating, reverse-split/share-history normalization, and current-period cash-flow
-freshness. A new live batch is not authorized; it requires a separate bounded
-owner approval after deterministic regression coverage passes. A paid data
+Issue #55 remains active. Deterministic regressions now cover the first batch's
+known Company Facts comparable-period, accounting-event gating,
+reverse-split/share-history normalization, and current-period cash-flow failures.
+The next priority is an owner-approved second bounded calibration plan; no new
+live batch is currently authorized, and the first batch remains the measured
+baseline rather than being rewritten. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

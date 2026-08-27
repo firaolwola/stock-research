@@ -20,7 +20,10 @@ async function trend(metricKey, values, { pointInTime = false } = {}) {
   if (pointInTime) {
     const dates = ["2025-12-31", "2026-03-31", "2026-06-30"];
     metric.observations = values.map((value, index) => ({ value, unit: "USD millions", period_start: dates[index], period_end: dates[index], claim_ids: ["claim-financial"] }));
-  } else metric.annual_observations = annual(values);
+  } else {
+    metric.observations = [];
+    metric.annual_observations = annual(values);
+  }
   return calibrateReportScores(report).scores[scoreKeys[metricKey]];
 }
 
@@ -73,10 +76,10 @@ test("one observation, conflict, unit mismatch, and cadence mismatch remain unsc
   const conflict = await load(); conflict.claims.find((claim) => claim.id === "claim-financial").state = "conflicting";
   assert.equal(calibrateReportScores(conflict).scores.financial_revenue_trend.value, null);
 
-  const currency = await load(); currency.financial_assessment.metrics.revenue.annual_observations[1].unit = "EUR millions";
+  const currency = await load(); currency.financial_assessment.metrics.revenue.observations = []; currency.financial_assessment.metrics.revenue.annual_observations[1].unit = "EUR millions";
   assert.equal(calibrateReportScores(currency).scores.financial_revenue_trend.value, null);
 
-  const cadence = await load(); cadence.financial_assessment.metrics.revenue.annual_observations[1].period_start = "2023-10-01";
+  const cadence = await load(); cadence.financial_assessment.metrics.revenue.observations = []; cadence.financial_assessment.metrics.revenue.annual_observations[1].period_start = "2023-10-01";
   assert.equal(calibrateReportScores(cadence).scores.financial_revenue_trend.value, null);
 });
 
@@ -84,6 +87,7 @@ test("secondary-provider financial observations are ignored for scoring", async 
   const report = await load();
   report.sources.push({ id: "source-discovery-financial", source_type: "other_secondary", title: "Discovery financial value", publisher: "Example discovery API", url: "https://example.test/value", published_date: "2026-08-24", accessed_at: "2026-08-24T15:00:00Z", confidence: "low", claim_ids: ["claim-discovery-financial"] });
   report.claims.push({ id: "claim-discovery-financial", section: "financial_context", text: "Secondary value.", state: "confirmed", materiality: "material", as_of: "2026-08-24", source_ids: ["source-discovery-financial"], conflict_note: null });
+  report.financial_assessment.metrics.revenue.observations = [];
   report.financial_assessment.metrics.revenue.annual_observations = annual([10, 12], "USD millions", ["claim-discovery-financial"]);
   const score = calibrateReportScores(report).scores.financial_revenue_trend;
   assert.equal(score.state, "limited_coverage"); assert.equal(score.value, null); assert.match(score.explanation, /secondary-provider/i);

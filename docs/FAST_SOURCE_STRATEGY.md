@@ -61,7 +61,7 @@ are never material evidence.
 | Active exchange/listing status | Official exchange symbol directory, halt/status feed, and listing notice; issuer SEC disclosure such as Item 3.01 corroborates a deficiency | Market-data reference endpoint may flag active/inactive status | A directory entry proves current listing association, not absence of an undisclosed deficiency; unsupported venues remain Limited |
 | Current catalyst/news | Original issuer release, original newswire release, SEC filing, exchange notice, or reputable original reporting | One bounded ticker/date news endpoint discovers candidates and original URLs | A headline, sentiment field, AI summary, syndicated copy, or absent result cannot solely support catalyst strength |
 | Historical/current price context | Licensed market-data API using timestamped adjusted and unadjusted bars as appropriate | Exchange official close may corroborate | Free IEX-only live data is incomplete; delayed or stale data is labeled and may leave near-term setup unscored |
-| Share structure/market context | SEC filing cover page and financing terms for shares outstanding and instruments; licensed market data for price/float | Corporate-action/reference API corroborates splits and ticker changes | Market cap or dilution percentages require aligned dates, units, and share classes; provider float is not a substitute for issuer-reported shares |
+| Share structure/market context | SEC filing cover page and financing terms for shares outstanding and instruments; licensed market data for price/float | Corporate-action/reference API corroborates splits and ticker changes | Market cap or dilution percentages require aligned dates, units, share classes, and confirmed split normalization; provider float is not a substitute for issuer-reported shares |
 | Dilution and financing | SEC registration statements, prospectuses, current reports, periodic reports, exhibits, and issuer offering releases | News API discovers a just-announced transaction; market data supplies only price context | Registration capacity is not actual issuance; missing warrant/convertible terms remain Unknown |
 | Financial evidence | SEC Company Facts plus the latest primary periodic/current filing, including auditor and going-concern text | Licensed fundamentals may detect a discrepancy but do not override SEC facts | Taxonomy gaps, foreign/private standards, stale periods, currency conflicts, and nonstandard facts remain Limited |
 | Reverse splits | Issuer SEC filings/proxy/current reports and official corporate-action notice | Market-data split endpoint corroborates date and ratio | A bounded no-result is not proof of lifetime absence; identity lineage must cover the search window |
@@ -237,6 +237,9 @@ exhibits are the only authoritative inputs to a Fast financial score. Comparable
 trend series prefer Company Facts and periodic reports. Later 8-K/6-K evidence
 may prevent a stale periodic picture from becoming reassuring, but an isolated
 event value enters a trend only when it states a standardized comparable period.
+Explicit non-reliance/restatement evidence invalidates affected historical flow
+scores until corrected comparable statements are available. Current comparable
+interim flows take precedence over an older annual trend without mixing cadences.
 Nasdaq supplies listing/exchange context. Alpha Vantage supplies discovery and
 EOD price/volume context only; it never fills a financial-statement gap. OpenAI
 may classify the normalized packet but cannot invent or backfill financial

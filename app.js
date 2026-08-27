@@ -1,7 +1,7 @@
 import express from "express";
 import { validateTicker } from "./ticker-validation.js";
 import { getSafeUpstreamDiagnostics, RESEARCH_ERROR_CODES, ResearchResponseError } from "./openai-research-client.js";
-import { calibrateReportScores } from "./lib/scoring.js";
+import { finalizeResearchReport } from "./lib/finalize-research-report.js";
 import { parseResearchStage } from "./lib/research-budget.js";
 import { createFastBudgetController } from "./lib/fast-budget-controller.js";
 
@@ -92,7 +92,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
     const emit = async (researchResult, final = false) => {
       let report;
       try {
-        report = calibrateReportScores(researchResult.report);
+        report = finalizeResearchReport(researchResult.report, { reportValidator, requestedTicker: ticker }).report;
       } catch (error) {
         logger.error(`Streamed report rejected ${JSON.stringify(safeStreamContext(ticker, researchResult, final, "report_conversion", requestStartedAt, { error_constructor: error?.constructor?.name ?? null, error_name: error?.name ?? null }))}`);
         return;
@@ -145,7 +145,7 @@ export function createApp({ researchClient, reportValidator, logger = console, r
       let operations = researchResult?.report ? researchResult.operations : null;
       let report;
       try {
-        report = calibrateReportScores(researchedReport);
+        report = finalizeResearchReport(researchedReport, { reportValidator, requestedTicker: ticker }).report;
       } catch (error) {
         logger.error(`Research provider returned an unscorable report for ${ticker} (INVALID_RESEARCH_RESPONSE${diagnosticSuffix({ stage, phase: "report_conversion", elapsed_ms: Math.round(performance.now() - requestStartedAt), error_constructor: error?.constructor?.name, error_type: error?.name, response_received: true, input_tokens: operations?.input_tokens, output_tokens: operations?.output_tokens, total_tokens: operations?.total_tokens })}).`);
         const controlledError = controlledResearchErrors[RESEARCH_ERROR_CODES.invalid];

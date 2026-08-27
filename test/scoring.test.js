@@ -62,7 +62,7 @@ test("stale, conflicting, missing, and failed-provider evidence stays unscored",
 test("reverse-split risk uses corporate actions and specific listing pressure", async () => {
   assert.equal(calibrateReportScores(await load("complete")).scores.reverse_split_risk.value, 0);
   const r = await load("complete"); r.sections.reverse_splits.state = "confirmed";
-  r.sections.reverse_splits.items = [{ id: "split", kind: "reverse_split", title: "Reverse split", state: "confirmed", summary: "Confirmed corporate action.", event_date: "2025-01-01", claim_ids: ["claim-splits"] }];
+  r.sections.reverse_splits.items = [{ id: "split", kind: "reverse_split", title: "Reverse split", state: "confirmed", summary: "Confirmed corporate action.", event_date: "2025-01-01", corporate_action_state: "completed", claim_ids: ["claim-splits"] }];
   r.sections.compliance_and_warnings.state = "confirmed";
   r.sections.compliance_and_warnings.items = [{ id: "notice", kind: "exchange_compliance", title: "Bid-price deficiency", state: "confirmed", summary: "Specific exchange notice.", event_date: "2026-08-01", claim_ids: ["claim-warnings"] }];
   assert.ok(calibrateReportScores(r).scores.reverse_split_risk.value >= 7);

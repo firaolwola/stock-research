@@ -130,6 +130,13 @@ recall target. The existing dry evaluator
 continues to measure its checked-in report samples. A future approved dated
 evaluation must measure the new retrieval path against real case facts.
 
+The deterministic regression suite also preserves the severe shapes discovered
+in the 2026-08-27 Issue #55 batch: same-end quarter/YTD Company Facts, AMC-style
+completed reverse splits and issuance growth, NCPL-style non-reliance
+invalidation, and SMCI-style material weaknesses, recent cash-flow deterioration,
+and forward-split share normalization. These tests correct known mechanisms but
+do not replace a separately approved live batch or prove recall targets.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

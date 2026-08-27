@@ -8,7 +8,7 @@ import { createOpenAIResearchClient } from "../openai-research-client.js";
 import { createSecEvidenceClient } from "../lib/sec-evidence.js";
 import { createBoundedFastSourceClient } from "../lib/bounded-fast-sources.js";
 import { createReportValidator } from "../lib/report-validation.js";
-import { calibrateReportScores } from "../lib/scoring.js";
+import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { loadRealAppConfig } from "../startup-config.js";
 
 dotenv.config({ quiet: true });
@@ -59,8 +59,9 @@ for (const scenario of plan.cases) {
     const result = await client.researchTicker(scenario.ticker, { stage: "fast", budgetClass: "normal" });
     // Match the application boundary: Fast retrieval assembles evidence first,
     // then deterministic scoring supplies the schema-required score object.
-    const calibratedReport = calibrateReportScores(result.report);
-    const validation = reportValidator(calibratedReport);
+    const finalized = finalizeResearchReport(result.report, { reportValidator, requestedTicker: scenario.ticker });
+    const calibratedReport = finalized.report;
+    const validation = finalized.validation;
     const record = {
       case_id: scenario.id,
       ticker: scenario.ticker,
@@ -77,7 +78,7 @@ for (const scenario of plan.cases) {
     runs.push({
       case_id: scenario.id,
       ticker: scenario.ticker,
-      result: validation.valid ? "report" : "invalid_report",
+      result: finalized.valid ? "report" : "invalid_report",
       elapsed_ms: record.elapsed_ms,
       estimated_cost_usd: result.operations?.estimated_cost_usd ?? result.operations?.budget?.cost_consumed_usd ?? null,
       input_tokens: result.operations?.input_tokens ?? null,

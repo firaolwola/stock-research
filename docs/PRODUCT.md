@@ -156,14 +156,14 @@ use only source-linked observations with matching definitions, units,
 currencies, and comparable period lengths. A single observation is labeled as
 such and never presented as a trend.
 
-The financial chart area groups annual history from primary filings into Income
+The financial chart area groups comparable primary-filing history into Income
 statement, Balance sheet, Cash flow, and Capital structure blocks. Annual and
-quarterly periods are never mixed in one series; annual history is preferred
-when available.
+interim periods are never mixed in one series. Newer comparable interim evidence
+takes precedence when older annual history would hide a material current change.
 
 The same chart area may show SEC-reported shares outstanding as capital-structure
 context. It uses point-in-time reported observations and may summarize the
-visible-window change, but it must remain distinct from float, authorized shares,
+visible-window split-adjusted change, but it must remain distinct from float, authorized shares,
 registered capacity, warrants, convertibles, and potential dilution. This display
 context does not create or modify a methodology 2.1.0 score.
 

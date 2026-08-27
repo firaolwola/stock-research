@@ -31,7 +31,8 @@ Production Fast currently retrieves:
 - SEC ticker, CIK, and exchange associations;
 - issuer submissions and recent filing metadata;
 - SEC Company Facts;
-- at most four selected primary filing documents; and
+- at most six selected primary filing documents, including up to three bounded
+  corporate-action/accounting candidates; and
 - at most one directly linked material exhibit;
 - cached Nasdaq Trader current-symbol and halt data; and
 - when a free key is configured, at most one Alpha Vantage news-discovery and
@@ -51,6 +52,9 @@ or conflicting venues remain Limited. Company
 Facts normalization derives FCF only from aligned OCF and capital expenditures,
 derives total debt only from aligned current and non-current components, and
 withholds stale or conflicting liquidity values from current decision use.
+Quarter, year-to-date, and annual facts that share an end date remain distinct
+periods. Completed split factors normalize shares history; unexplained large
+share discontinuities remain Limited.
 
 It caches the ticker map for six hours and issuer data or filing documents for
 five minutes, coalesces concurrent requests, declares a User-Agent, and paces SEC

@@ -139,3 +139,15 @@ Any later live batch requires a new explicit owner approval. This batch does not
 establish reliability for foreign issuers, ADR/IFRS reporting, OTC/delisted
 securities, or the already sparse reverse-split, listing-deficiency, and
 going-concern categories.
+
+## Deterministic corrective status
+
+The initial result above remains the calibration result of record; it has not
+been replaced by a rerun. The follow-up regression work now covers the observed
+same-end/different-duration Company Facts shapes, completed versus authorized
+reverse splits, split-adjusted shares, non-reliance invalidation, material
+weakness extraction, recent comparable OCF/FCF precedence, and application /
+evaluation-runner finalization parity. These fixes establish deterministic
+coverage for the known failure shapes, not the live reliability gate. A second
+bounded live batch still requires explicit owner approval and Issue #55 remains
+open until its recall and severe-miss criteria are actually measured and pass.
