@@ -62,7 +62,10 @@ test("disagreeing issuer identity is a hard failure", () => {
 test("representative compact fragments retain at least 35 percent rough output headroom", () => {
   for (const domain of Object.keys(FAST_DOMAINS)) {
     const value = fragment(domain);
-    if (domain === "financial") for (const metric of Object.values(value.financial_assessment.metrics)) delete metric.observations;
+    if (domain === "financial") {
+      for (const metric of Object.values(value.financial_assessment.metrics)) delete metric.observations;
+      delete value.financial_assessment.shares_outstanding;
+    }
     const claimIds = new Set();
     const visit = (node) => {
       if (Array.isArray(node)) return node.forEach(visit);
@@ -74,6 +77,7 @@ test("representative compact fragments retain at least 35 percent rough output h
     value.claims = value.claims.filter((claim) => claimIds.has(claim.id));
     const sourceIds = new Set(value.claims.flatMap((claim) => claim.source_ids));
     value.sources = value.sources.filter((source) => sourceIds.has(source.id));
+    value.sources.forEach((source) => { source.supported_claim_ids = source.supported_claim_ids.filter((id) => claimIds.has(id)); });
     const roughTokens = Math.ceil(Buffer.byteLength(JSON.stringify(value), "utf8") / 4);
     assert.ok(roughTokens <= FAST_DOMAINS[domain].max_output_tokens * 0.65, `${domain}: ${roughTokens} rough tokens`);
   }

@@ -148,6 +148,12 @@ use only source-linked observations with matching definitions, units,
 currencies, and comparable period lengths. A single observation is labeled as
 such and never presented as a trend.
 
+The same chart area may show SEC-reported shares outstanding as capital-structure
+context. It uses point-in-time reported observations and may summarize the
+visible-window change, but it must remain distinct from float, authorized shares,
+registered capacity, warrants, convertibles, and potential dilution. This display
+context does not create or modify a methodology 2.0.0 score.
+
 ### Dashboard order
 
 On wide screens, identity, research status, and catalyst content form the left

@@ -415,6 +415,11 @@ Their charts use bounded source-linked observations only when metric definition,
 unit, currency, and period length agree; otherwise the chart remains single-period,
 Limited, or unavailable.
 
+SEC-reported shares outstanding may appear beside the financial charts as a
+display-only capital-structure series. Its point-in-time observations and visible
+window change remain distinct from float and potential dilution and do not alter
+methodology 2.0.0.
+
 ## 2026-08-25 — Require explicit evidence when carrying issuer history
 
 **Status:** Accepted

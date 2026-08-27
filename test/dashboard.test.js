@@ -107,7 +107,7 @@ test("dashboard exposes catalyst factors, analogue limits, reactions, and confid
 
 test("dashboard exposes financial periods, trends, going concern, and warnings", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  for (const text of ["Financial metric charts", "Latest supported period", "no trustworthy chart is available", "Cash burn", "Free cash flow", "Going concern", "financial-warnings"]) assert.match(source, new RegExp(text));
+  for (const text of ["Financial and share-structure charts", "one supported period", "no trustworthy chart is available", "Cash burn", "Free cash flow", "Going concern", "financial-warnings"]) assert.match(source, new RegExp(text));
 });
 
 test("dashboard exposes operational budgets and deliberate deeper research", async () => {
@@ -165,6 +165,9 @@ test("dashboard uses safe external links, semantic form submission, and a narrow
   assert.match(script, /aria-label/);
   assert.match(script, /visually-hidden/);
   assert.doesNotMatch(script, /\/ 5 stars/);
+  assert.match(script, /label: "Shares outstanding"/);
+  assert.match(script, /one observation; no trend inferred/i);
+  assert.match(css, /\.chart-purple \.vertical-bar\.positive/);
 });
 
 test("wide dashboard pairs identity, operations, and catalyst with the score sidebar", async () => {

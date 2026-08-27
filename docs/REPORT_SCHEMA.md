@@ -90,6 +90,10 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   liquidity, burn, leverage, profitability, accounting, or going-concern
   warnings carry severity and dates for priority ranking. Operating-company
   metrics may be `not_applicable` for securities such as ETFs.
+- `financial_assessment.shares_outstanding` is an optional display-support
+  series of source-linked, chronological point-in-time observations measured in
+  `shares`. It is not float or potential dilution and does not participate in
+  methodology 2.0.0 scoring.
 
 Fast financial normalization uses conservative derived-value rules. Operating
 cash flow is not free cash flow: FCF is populated only when aligned operating
@@ -255,3 +259,6 @@ warning. Chart observations must be chronological, source-linked, unit-aligned,
 period-comparable, and include the metric's current reported value. A wholly
 inapplicable assessment contains no dates, currency, evidence,
 or warnings and marks every financial component `not_applicable`.
+When present, confirmed shares-outstanding observations must be unique,
+chronological point-in-time values using the literal `shares` unit. Unresolved
+series cannot carry observations.
