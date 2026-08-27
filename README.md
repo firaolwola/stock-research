@@ -18,10 +18,12 @@ unknown result when no reliable analogue is available. Issuer identity now follo
 and tickers so dated material history is not lost across renames or rebrands.
 The browser renders the validated report as a responsive fast-decision
 dashboard. One compact progressive score summary converts trustworthy
-methodology 2.0.0 values to accessible 0–5 stars without changing the underlying
+methodology 2.1.0 values to accessible 0–5 stars without changing the underlying
 0–10 values. On wide screens it sits beside identity, research status, and
 catalyst content; smaller screens stack the same sections. Financial display
-rows without an independent methodology score remain Unscored, and detailed
+rows show independently calibrated company-relative trend stars only when at
+least two comparable SEC-derived observations pass the evidence gate; otherwise
+they remain Limited/Unscored. Detailed
 financial reasoning is consolidated under Financial Health. Compact vertical
 bar charts compare only source-linked, definition- and period-compatible
 observations; one observation never implies a trend. A separate SEC-reported

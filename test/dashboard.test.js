@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { buildDashboardView, buildPriorityFindings, buildScorePresentation, financialMetricOrder, priorityScoreKeys, scoreSummaryOrder, scoreToStars, sectionLabels, settledScoreKeysForOperations, validateTickerInput } from "../public/dashboard.js";
 import { loadReportFixture } from "../support/report-fixtures.js";
+import { calibrateReportScores } from "../lib/scoring.js";
 
 test("dashboard exposes every report section and the approved unified score order", async () => {
   const view = buildDashboardView(await loadReportFixture("complete"));
@@ -45,15 +46,11 @@ test("cards transition without provisional numbers and settle independently", as
   assert.equal(buildScorePresentation(unknown, { final: false }).accessibleLabel.includes("no provisional score"), true);
 });
 
-test("financial display rows reuse only direct methodology components", async () => {
-  const view = buildDashboardView(await loadReportFixture("complete"));
+test("financial display rows use independent SEC trend scores", async () => {
+  const view = buildDashboardView(calibrateReportScores(await loadReportFixture("complete")));
   const rows = new Map(view.scoreSummary.map((row) => [row.key, row]));
-  for (const key of ["profitability", "debt", "free_cash_flow"]) assert.equal(rows.get(key).presentation.state, "scored", `${key} should reuse its direct methodology component`);
-  for (const key of ["revenue", "cash", "operating_cash_flow"]) {
-    assert.equal(rows.get(key).presentation.state, "unscored", `${key} has no independent methodology score`);
-    assert.equal(rows.get(key).presentation.stars, null);
-    assert.match(rows.get(key).explanation, /no independent methodology score/i);
-  }
+  for (const key of financialMetricOrder) assert.equal(rows.get(key).presentation.state, "scored", `${key} should use its independent trend score`);
+  assert.match(rows.get("revenue").explanation, /company-relative trend/i);
 });
 
 test("financial rows expose supported values while charts use chronological observations", async () => {
@@ -73,6 +70,7 @@ test("Financial Health owns supporting financial explanations without duplicate 
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
   const detailsFunction = source.slice(source.indexOf("function renderScoreDetails"), source.indexOf("function renderSections"));
   assert.match(detailsFunction, /Financial Health explanation/);
+  assert.match(detailsFunction, /Independent trend:/);
   assert.match(detailsFunction, /financialMetricOrder\.forEach/);
   assert.match(detailsFunction, /coverage_notes\.forEach/);
   assert.doesNotMatch(detailsFunction, /renderDetailGroup\("Financial metric explanations"/);

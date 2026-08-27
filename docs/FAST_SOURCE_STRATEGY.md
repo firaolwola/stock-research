@@ -230,6 +230,18 @@ presented as current, any source exceeding the shared deadline, or unknown cost
 treated as free. OTC, unsupported foreign venues, and delisted securities remain
 explicitly Limited unless an approved source proves coverage.
 
+## Financial scoring source boundary
+
+SEC Company Facts and SEC-filed 10-K, 10-Q, 20-F, 40-F, 8-K, 6-K, and relevant
+exhibits are the only authoritative inputs to a Fast financial score. Comparable
+trend series prefer Company Facts and periodic reports. Later 8-K/6-K evidence
+may prevent a stale periodic picture from becoming reassuring, but an isolated
+event value enters a trend only when it states a standardized comparable period.
+Nasdaq supplies listing/exchange context. Alpha Vantage supplies discovery and
+EOD price/volume context only; it never fills a financial-statement gap. OpenAI
+may classify the normalized packet but cannot invent or backfill financial
+values or promote discovery evidence into a score.
+
 ## Deep-only evidence
 
 Fast deliberately does not perform exhaustive predecessor-lineage research,
@@ -248,9 +260,10 @@ workflow does not repeat successful bounded retrieval.
 - **#51:** completed with Alpha Vantage free-tier discovery/EOD context, public
   Nasdaq data, attribution, identity gating, bounded original-source promotion,
   cache/quota policy, and graceful fallback to completed SEC evidence.
-- **#52:** completed; methodology 2.0.0 encodes the seven evidence-sufficiency
-  contracts, and no numeric score appears merely because a provider field exists.
-- **#53:** completed; the dashboard presents independently gated 2.0.0 results
+- **#52:** completed; methodology 2.0.0 established the seven evidence-sufficiency
+  contracts. Methodology 2.1.0 adds six SEC-only company-relative financial
+  trend scores without changing those core constructs.
+- **#53:** completed; the dashboard presents independently gated 2.1.0 results
   progressively without changing constructs or inventing provisional values.
 - **#54:** next; Deep must build and extend the completed Fast evidence packet.
 - **#55:** measure the real-ticker evaluation set and decide whether the pilot's

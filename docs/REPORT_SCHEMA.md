@@ -38,9 +38,9 @@ field, changing a field's meaning, making an optional field required, or changin
 an enum incompatibly increments the major version. Saved reports retain the
 version with which they were produced.
 
-The current accepted score methodology is `2.0.0`; `1.0.0` remains documented
-as a historical comparison baseline but is no longer accepted by the live v4
-endpoint. Fast market context uses confirmed `financial_context` items with
+The current executable score methodology is `2.1.0`; stored `2.0.0` reports
+remain schema-valid as a historical baseline, while `1.0.0` is documented but
+is not accepted by the live v4 endpoint. Fast market context uses confirmed `financial_context` items with
 units `price_change_percent` and `volume_ratio`, sourced to a bounded market-data
 record. These contextual items cannot establish an issuer event.
 Dilution section items may use `evidence_role` to distinguish completed
@@ -96,7 +96,7 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
 - `financial_assessment.shares_outstanding` is an optional display-support
   series of source-linked, chronological point-in-time observations measured in
   `shares`. It is not float or potential dilution and does not participate in
-  methodology 2.0.0 scoring. Its optional `annual_observations` drive the
+  financial trend scoring. Its optional `annual_observations` drive the
   preferred multi-year capital-structure chart.
 
 Fast financial normalization uses conservative derived-value rules. Operating
@@ -115,6 +115,10 @@ confirmed total debt.
 - `scores` keeps dilution historical severity, future likelihood, and potential
   impact separate. Reverse-split risk, financial health, long-term company
   quality, catalyst strength, and near-term setup quality are also separate.
+  Optional additive fields hold six 2.1.0 supporting trends: revenue, net
+  income/loss, debt, free cash flow, cash, and operating cash flow. The server
+  deterministically restores all six on current reports. Confirmed financial
+  scores may cite SEC Company Facts or SEC-filed evidence only.
 - `claims` contains atomic factual conclusions. `sources` contains evidence and
   links back to every supported claim.
 

@@ -1,8 +1,8 @@
 # Fast score methodology
 
-**Current methodology:** 2.0.0
+**Current methodology:** 2.1.0
 
-**Historical comparison baseline:** 1.0.0
+**Historical comparison baselines:** 2.0.0 and 1.0.0
 **Last reviewed:** 2026-08-27
 
 The server calculates scores deterministically after evidence retrieval. OpenAI
@@ -10,7 +10,7 @@ cannot author a score. Every numeric result is 0–10, links its evidence and
 components, states its direction and horizon, and is a research aid rather than
 advice, an outcome probability, or a combined verdict.
 
-## Shared 2.0 rules
+## Shared 2.1 rules
 
 - Missing, stale, conflicting, identity-mismatched, partial, or discovery-only
   evidence is `Limited`/`Unscored`; it never becomes zero risk or good quality.
@@ -25,7 +25,16 @@ advice, an outcome probability, or a combined verdict.
   methodology version.
 - Low/medium/high examples below describe evidence patterns, not recommendations.
 
-## The seven Fast constructs
+Financial-score inputs have a stricter source boundary: Company Facts and
+SEC-filed 10-K, 10-Q, 20-F, 40-F, 8-K, 6-K, and relevant exhibits only. Comparable
+series prefer Company Facts and periodic reports. A later 8-K/6-K can make the
+periodic picture stale or increase current risk, but an isolated value is not a
+trend observation unless it states a compatible standardized period. Nasdaq is
+listing context; Alpha Vantage is discovery/EOD market context. Neither can fill
+a financial-statement gap. OpenAI may explain approved normalized evidence but
+cannot author, invent, or backfill a score input.
+
+## The seven primary Fast constructs
 
 ### Historical dilution severity
 
@@ -105,6 +114,61 @@ or currency-mismatched inputs stay Limited.
 - Medium health: mixed cash generation, leverage, and profitability.
 - High health: supported runway, manageable total debt, positive FCF/profitability, no warning.
 
+Financial Health retains the 2.0 construct and weights above. It does not average
+or consume the six supporting trend scores, so there is no circular dependency.
+The supporting rows add historical direction; Financial Health remains a current
+resilience assessment. All score-affecting financial claims now also pass the
+SEC-only source gate.
+
+## Six supporting financial trend constructs added in 2.1.0
+
+All six are higher-is-stronger, company-relative 0–10 scores. Raw company size
+does not score. The server prefers a compatible annual series for revenue, net
+income/loss, FCF, and OCF; when annual history is unavailable it may use
+same-length comparable quarters. Cash and debt prefer fresh consecutive
+quarter-end balances, then compatible annual period ends. Annual and quarterly
+observations never mix in one calculation.
+
+Minimum evidence is two chronological observations with one definition, unit,
+currency, cadence, issuer identity, and confirmed SEC-only claim chain. Two
+periods cap confidence at low, three at medium, and four or more at high; the
+weakest linked SEC source confidence can lower that cap.
+Cash/debt and quarterly flows require the newest observation to be no more than
+180 days old; an annual flow series may be at most 550 days old to accommodate
+the normal annual filing cycle. One
+point, a source conflict, stale balance, mixed currency/unit/cadence/concept,
+identity mismatch, or any secondary-provider value makes the score Limited.
+
+### Revenue trend and cash trend
+
+For each transition, change is `(current - prior) / max(abs(prior), 10% of
+abs(current), 1)`. The score is 55% average-change score + 30% latest-change
+score + 15% share of non-negative transitions. Each change score is `clamp(5 +
+20 × change, 0, 10)`. Revenue rewards sustained comparable sales growth; cash
+rewards fresh stable/growing liquidity. Neither rewards absolute company size.
+
+### Debt trend
+
+Debt uses the same formula with the change sign reversed and counts
+non-increasing transitions as consistent. Declining/stable total debt scores
+higher and rapid growth lower. This is a trajectory construct, not an assertion
+that all debt is bad; debt relative to cash and generation remains in Financial
+Health.
+
+### Net income/loss, free-cash-flow, and operating-cash-flow trends
+
+Let `scale` be the largest absolute observation, floored at 1. Each score is 45%
+latest sign/level (`clamp(5 + 5 × latest / scale)`), 40% first-to-latest
+improvement (`clamp(5 + 5 × (latest - first) / scale)`), and 15% share of
+improving transitions. This rewards positive/improving generation, shrinking
+losses, and crossings into profit or positive cash flow; it penalizes worsening
+losses and negative/deteriorating cash flow.
+
+Individual rows remain compact. Their supported values, gaps, formulas, and SEC
+sources roll up primarily under Financial Health details. Shares outstanding is
+not a higher-is-stronger financial score and continues to support dilution and
+capital-structure interpretation only.
+
 ### Catalyst strength
 
 Direction/horizon: higher is better; the current catalyst only. Inputs are
@@ -143,6 +207,22 @@ The v4 report retains `long_term_company_quality` for compatibility, but
 methodology 2.0 always leaves it Limited in Fast. Deep can research durable
 business quality with broader history; Fast must not manufacture a multi-year
 quality judgment from a bounded risk packet.
+
+## Historical methodology 2.0.0 baseline
+
+Version 2.0.0 is preserved as the immediate historical baseline. Its seven
+primary constructs, gates, weights, and thresholds remain intact in 2.1.0,
+while the financial source boundary becomes explicitly SEC-only. Version 2.0.0
+did not emit six independent financial trend scores; the dashboard either
+borrowed a Financial Health component or showed Unscored.
+
+The checked-in ACME fixture illustrates the display change. Under 2.0, revenue,
+cash, and OCF had no independent stars, while net income, debt, and FCF borrowed
+overall-health components. Under 2.1, the same SEC histories independently score
+revenue 7.1 (high confidence), net income/loss 10 (high), debt 4.0 (low, because
+the fresh quarter-end pair rose slightly despite the older annual decline), FCF
+10 (high), cash 9.2 (low), and OCF 10 (high). These are deterministic fixture
+examples, not cross-company rankings or predictive validation.
 
 ## Historical methodology 1.0.0 baseline
 

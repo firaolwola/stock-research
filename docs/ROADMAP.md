@@ -28,8 +28,9 @@ The current implementation is not yet the approved Fast product contract:
 - deterministic identity and financial semantics now fail closed on unsupported,
   stale, partial, conflicting, or mismatched evidence, but real-ticker coverage
   still requires calibration;
-- scoring methodology 2.0.0 now gates the seven Fast constructs on realistic
-  evidence, while 1.0.0 remains a documented historical comparison baseline; and
+- scoring methodology 2.1.0 now adds six independent SEC-only financial trend
+  components to the seven Fast constructs; 2.0.0 and 1.0.0 remain documented
+  historical comparison baselines; and
 - checked-in evaluation results are synthetic calibration, not evidence-first
   Fast reliability results on real tickers.
 
@@ -65,6 +66,8 @@ verdict.
 4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and optional Alpha Vantage free-tier discovery/end-of-day context.
 5. [x] **Complete:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52). Methodology 2.0.0 replaces misleading proxies, defines score-specific evidence gates, and keeps long-term quality Deep-only.
 6. [x] **Complete:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53), including the owner-approved post-#53 refinement to one compact score summary, honest financial charts, and a separate explanation block.
+   The subsequent methodology 2.1.0 refinement makes all six displayed financial
+   trends independently scoreable from SEC evidence only.
 7. [ ] **Next — coordinates with completed #51–#53:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
 8. [ ] **Final reliability gate — blocked by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
