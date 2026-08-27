@@ -1,0 +1,14 @@
+{
+  "ticker": "NCPL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "going-concern warning", "minimum-bid deficiency", "historical reverse split", "offering and warrant evidence", "older material weakness", "stale cash limitation", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"accounting_non_reliance","cause":"interpretation","severity":"severe","finding":"The selected August 18 non-reliance filing was retrieved but the non-reliance event was not extracted."},
+    {"category":"operating_cash_flow_score","cause":"evidence_gating","severity":"severe","finding":"Operating cash flow received a 1.1 numeric score even though the current non-reliance conflict should force affected financial trends to Limited/Unscored."},
+    {"category":"current_convertible_financing","cause":"retrieval_selection","finding":"The known current convertible-note activity was not specifically surfaced."},
+    {"category":"revenue","cause":"normalization","finding":"Comparable revenue settled Unknown."},
+    {"category":"shares_outstanding","cause":"normalization","finding":"The displayed 10.5% change does not represent the known recent share increase reliably across the split-affected window."}
+  ],
+  "safe_settlement": "Cash and most financial components failed closed, but OCF did not honor the accounting conflict."
+}

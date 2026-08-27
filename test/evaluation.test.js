@@ -89,3 +89,21 @@ test("live samples require bounded approval and complete operational measurement
   sample.approval_record = { approved: true, run_date: "2026-08-25", model_configuration: "gpt-5.1 / no reasoning / fast", max_budget_usd: 0.10, output_location: "evaluation/results/example.json", case_ids: ["mock-acme-complete"] };
   assert.deepEqual(validateEvaluationSample(evaluationSet, sample), { valid: true, errors: [] });
 });
+
+test("Issue 55 artifacts preserve the approved bound and failed reliability gate", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27.json");
+  const result = await loadJson("../evaluation/live/2026-08-27/summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.approval.maximum_runs, 5);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.difficult_budget_approved, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.15);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 10);
+  assert.equal(result.completed_runs, 5);
+  assert.equal(result.operations.alpha_vantage_requests, 10);
+  assert.ok(result.operations.conservative_maximum_possible_cost_usd <= plan.approval.maximum_openai_cost_usd);
+  assert.equal(result.overall_material_checks.passes, false);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
+});

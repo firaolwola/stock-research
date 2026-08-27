@@ -20,8 +20,8 @@ deterministic evidence when retrieval or synthesis fails. One free SWVL
 structural run completed six SEC requests and produced a valid report quickly,
 but this does not establish real-ticker recall or trustworthy score coverage.
 
-The current implementation has the approved Fast architecture but is not yet
-reliability-calibrated on real tickers:
+The current implementation has the approved Fast architecture but failed its
+first bounded real-ticker reliability calibration on 2026-08-27:
 
 - current Fast evidence normally leaves important scores unresolved;
 - current-news and market context now have a bounded free-tier path, but
@@ -32,8 +32,14 @@ reliability-calibrated on real tickers:
 - scoring methodology 2.1.0 now adds six independent SEC-only financial trend
   components to the seven Fast constructs; 2.0.0 and 1.0.0 remain documented
   historical comparison baselines; and
-- checked-in evaluation results are synthetic calibration, not evidence-first
-  Fast reliability results on real tickers.
+- the initial AAPL/AMC/NCPL/NXL/SMCI live batch achieved 57/86 adjudicated
+  material checks (66.28%), below the 95% overall target;
+- severe misses exposed Company Facts duration conflicts, incomplete
+  non-reliance/reverse-split extraction, unnormalized shares across corporate
+  actions, and stale annual cash-flow scores that contradicted current periods;
+  and
+- the batch stayed within time, Alpha Vantage, and approved cost bounds, but
+  operating compliance does not compensate for failed research quality.
 
 Comparison therefore moves behind a new Fast reliability milestone. Public
 deployment remains outside the current personal-tool priority.
@@ -70,16 +76,19 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Next — final reliability gate, enabled by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
+8. [ ] **Active and blocked — corrective work required:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The initial approved batch failed the recall and severe-miss gates; see `docs/results/FAST_RELIABILITY_2026-08-27.md`.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
-No milestone implementation issue is currently active. The next implementation
-priority is #55, the final real-ticker reliability gate now that Deep reliably
-builds, reuses, and extends Fast. A paid data
-subscription remains neither selected nor required and would need separate
-owner approval.
+Issue #55 remains active but cannot complete until the deterministic corrective
+work identified by the first calibration is implemented and verified. The next
+priority is to fix Company Facts comparable-period selection, accounting-event
+gating, reverse-split/share-history normalization, and current-period cash-flow
+freshness. A new live batch is not authorized; it requires a separate bounded
+owner approval after deterministic regression coverage passes. A paid data
+subscription remains neither selected nor required and would need separate owner
+approval.
 
 ### Milestone acceptance criteria
 

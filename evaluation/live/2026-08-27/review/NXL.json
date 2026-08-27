@@ -1,0 +1,13 @@
+{
+  "ticker": "NXL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": false,
+  "detected": ["issuer and security identity", "completed 1-for-30 reverse split disclosed during the run", "Nasdaq delisting pressure", "going-concern warning", "material weakness", "offering and warrants", "cash depletion", "negative operating cash flow", "shares growth", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"baseline_revision","cause":"new_authoritative_evidence","finding":"The frozen baseline described only authorization; a newly filed August 27 Form 8-K independently confirmed that the 1-for-30 split was effectuated. Fast correctly found the newer fact."},
+    {"category":"revenue","cause":"normalization","finding":"Comparable revenue settled Unknown."},
+    {"category":"net_income_loss","cause":"normalization","finding":"Comparable net loss settled Unknown."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Strong capital and compliance evidence did not settle the corresponding numeric risk scores."}
+  ],
+  "safe_settlement": "Unfinished components remained Limited; the evidence layer still surfaced the principal immediate risks."
+}

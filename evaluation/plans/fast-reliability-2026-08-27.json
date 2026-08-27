@@ -1,0 +1,144 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "approved_at": "2026-08-27",
+  "run_date": "2026-08-27",
+  "purpose": "Initial bounded live calibration of evidence-first Fast against owner-reviewed, independent authoritative baselines.",
+  "approval": {
+    "approved": true,
+    "case_ids": ["aapl-2026-live", "amc-2026-live", "ncpl-2026-live", "nxl-2026-live", "smci-2026-live"],
+    "tickers": ["AAPL", "AMC", "NCPL", "NXL", "SMCI"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 5,
+    "maximum_openai_cost_usd": 0.15,
+    "maximum_alpha_vantage_requests": 10,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000
+  },
+  "model_configuration": {
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "tool_choice": "none",
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 8000,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "sources": {
+    "fast": ["SEC", "Nasdaq Trader", "Alpha Vantage free tier"],
+    "hosted_web_search": false,
+    "adjudication": "Independent known-fact baselines below; Fast output is never its own ground truth."
+  },
+  "output_locations": {
+    "raw": "evaluation/live/2026-08-27/raw/{ticker}.json",
+    "review": "evaluation/live/2026-08-27/review/{ticker}.json",
+    "summary": "evaluation/live/2026-08-27/summary.json",
+    "report": "docs/results/FAST_RELIABILITY_2026-08-27.md"
+  },
+  "cases": [
+    {
+      "id": "aapl-2026-live",
+      "ticker": "AAPL",
+      "why": "Clean large-cap control with comparable SEC financial history.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm"],
+      "known_baseline": [
+        "Quarterly revenue and net income increased on the prior-year comparison.",
+        "Nine-month operating cash flow increased and aligned free cash flow is positive.",
+        "Cash remains substantial while commercial paper and notes declined.",
+        "Bounded absence of a risk must not be represented as proof that no risk exists."
+      ],
+      "score_ranges": {"financial_health":[7,10],"revenue":[7,10],"net_income":[7,10],"debt":[6,10],"free_cash_flow":[7,10],"cash":[5,9],"operating_cash_flow":[7,10],"historical_dilution":[0,2],"future_dilution":[0,3],"potential_dilution":[0,2],"reverse_split":[0,2],"catalyst":[6,10],"near_term_setup":[5,10]},
+      "limited_allowed": ["historical_dilution", "future_dilution", "potential_dilution", "near_term_setup"]
+    },
+    {
+      "id": "amc-2026-live",
+      "ticker": "AMC",
+      "why": "Compound capital-structure case with issuance, exchangeable notes, debt, liquidity pressure, and a completed reverse split.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1411579/000141157926000059/amc-20260630x10q.htm"],
+      "known_baseline": [
+        "Revenue improved on quarterly and six-month comparisons.",
+        "Quarterly loss worsened while the six-month loss improved; the periods must remain distinct.",
+        "Six-month operating cash flow turned positive and aligned simple free cash flow is positive.",
+        "Recent issuance and note exchanges materially increased shares outstanding.",
+        "The issuer completed a 1-for-10 reverse split and retains material future financing and dilution risk."
+      ],
+      "score_ranges": {"financial_health":[3,6],"revenue":[7,10],"net_income":[5,8],"debt":[3,7],"free_cash_flow":[5,9],"cash":[6,10],"operating_cash_flow":[7,10],"historical_dilution":[9,10],"future_dilution":[7,10],"potential_dilution":[7,10],"reverse_split":[2,5],"catalyst":[5,9],"near_term_setup":[4,9]},
+      "limited_allowed": ["potential_dilution", "near_term_setup"]
+    },
+    {
+      "id": "ncpl-2026-live",
+      "ticker": "NCPL",
+      "why": "Small-cap reporting-conflict, going-concern, convertible-financing, and active-listing-pressure case.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1414767/000149315226011686/form10-q.htm",
+        "https://www.sec.gov/Archives/edgar/data/1414767/000164117225023248/form10-k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1414767/000149315226036916/form8-k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1414767/000149315226038853/0001493152-26-038853-index.htm"
+      ],
+      "known_baseline": [
+        "Revenue declined and shares outstanding increased materially.",
+        "Annual evidence disclosed losses, negative operating cash flow, negative working capital, and going-concern uncertainty.",
+        "Nasdaq minimum-bid compliance remains unresolved.",
+        "Recent non-reliance evidence makes affected historical financial values conflicting; they must not produce favorable scores.",
+        "Convertible-note activity supports material future-dilution risk."
+      ],
+      "score_ranges": {"historical_dilution":[8,10],"future_dilution":[8,10],"potential_dilution":[6,10],"reverse_split":[7,10],"catalyst":[7,10],"near_term_setup":[2,8]},
+      "limited_required": ["revenue", "net_income", "debt", "free_cash_flow", "cash", "operating_cash_flow"],
+      "limited_allowed": ["financial_health", "potential_dilution", "near_term_setup"]
+    },
+    {
+      "id": "nxl-2026-live",
+      "ticker": "NXL",
+      "why": "Small-cap distress case with active listing deficiencies, losses, warrants, and prospective reverse-split authority.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1527352/000182912626008709/nexalintechno_10q.htm",
+        "https://www.sec.gov/Archives/edgar/data/1527352/000182912626008934/nexalintec_8k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1527352/000182912626007001/nexalintech_pre14a.htm",
+        "https://www.sec.gov/Archives/edgar/data/1527352/000182912625001794/nexalintech_10k.htm"
+      ],
+      "known_baseline": [
+        "Cash is low, losses continue, operating cash flow is negative, and accumulated deficit is material.",
+        "Revenue and operating cash flow deteriorated on available comparisons.",
+        "Material weaknesses and Nasdaq bid-price and stockholders-equity deficiencies are active risks.",
+        "Reverse-split authorization supports prospective risk but is not a completed historical split.",
+        "Warrants and increasing shares support capital-structure risk."
+      ],
+      "score_ranges": {"financial_health":[0,3],"revenue":[0,4],"net_income":[0,4],"debt":[6,10],"free_cash_flow":[0,3],"cash":[0,4],"operating_cash_flow":[0,3],"historical_dilution":[4,8],"future_dilution":[8,10],"potential_dilution":[5,10],"reverse_split":[8,10],"catalyst":[7,10],"near_term_setup":[1,7]},
+      "limited_allowed": ["debt", "potential_dilution", "near_term_setup"]
+    },
+    {
+      "id": "smci-2026-live",
+      "ticker": "SMCI",
+      "why": "Strong operating-trend case with material accounting-control warnings and newer preliminary evidence.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1375365/000137536525000027/smci-20250630.htm",
+        "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000014/smci-20260331.htm",
+        "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000021/exhibit991_20260630.htm"
+      ],
+      "known_baseline": [
+        "Comparable revenue and net income grew strongly.",
+        "Material weaknesses in internal control remain a serious accounting warning.",
+        "Newer preliminary results may inform catalyst and current context but must not silently replace standardized periodic trend data.",
+        "Strong operating trends must not erase the accounting warning."
+      ],
+      "score_ranges": {"financial_health":[0,3],"revenue":[9,10],"net_income":[8,10],"debt":[0,5],"free_cash_flow":[2,8],"cash":[7,10],"operating_cash_flow":[5,10],"historical_dilution":[0,4],"future_dilution":[2,6],"reverse_split":[0,2],"catalyst":[8,10],"near_term_setup":[6,10]},
+      "limited_allowed": ["financial_health", "free_cash_flow", "historical_dilution", "future_dilution", "potential_dilution", "near_term_setup"]
+    }
+  ],
+  "relative_ordering": [
+    "AMC, NCPL, and NXL must show materially greater confirmed capital-risk evidence than AAPL and SMCI.",
+    "NXL and NCPL must show materially greater listing/reverse-split pressure than AAPL and SMCI.",
+    "SMCI and AAPL should have the strongest supported revenue trends; AMC should improve; NCPL and NXL should be weaker or unresolved.",
+    "AAPL should have the strongest financial resilience; NCPL and NXL should be weakest or unresolved; SMCI operating strength must not hide its accounting warning."
+  ],
+  "sparse_categories": [
+    {"category":"completed_reverse_split_history","positive_cases":1,"status":"unproven"},
+    {"category":"active_listing_deficiency","positive_cases":2,"status":"unproven"},
+    {"category":"going_concern","positive_cases":2,"status":"unproven"},
+    {"category":"foreign_issuer_adr_ifrs","positive_cases":0,"status":"unproven"},
+    {"category":"otc_or_delisted","positive_cases":0,"status":"unproven"}
+  ],
+  "completion_rule": "Issue #55 remains open if any critical category is sparsely sampled or any severe misleading miss is unresolved."
+}
