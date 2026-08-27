@@ -1,114 +1,172 @@
-# Score methodology
+# Fast score methodology
 
-**Methodology version:** 1.0.0
+**Current methodology:** 2.0.0
 
-**Status:** Historical baseline pending Fast reliability recalibration
+**Historical comparison baseline:** 1.0.0
+**Last reviewed:** 2026-08-27
 
-**Last reviewed:** 2026-08-26
+The server calculates scores deterministically after evidence retrieval. OpenAI
+cannot author a score. Every numeric result is 0–10, links its evidence and
+components, states its direction and horizon, and is a research aid rather than
+advice, an outcome probability, or a combined verdict.
 
-Scores are deterministic summaries of the validated report evidence. The server
-replaces provider-authored score values before final validation and response.
-Every score retains its inputs, weights, evidence state, confidence, time
-horizon, explanation, and claim links. Scores are research aids—not outcome
-probabilities, price forecasts, or trade instructions.
+## Shared 2.0 rules
 
-Methodology 1.0.0 is the current executable implementation and must remain
-available as a calibration baseline. It is not the approved final scoring
-philosophy. The Fast reliability milestone will review its constructs, evidence
-sufficiency rules, proxies, windows, and weights against real-ticker evidence.
+- Missing, stale, conflicting, identity-mismatched, partial, or discovery-only
+  evidence is `Limited`/`Unscored`; it never becomes zero risk or good quality.
+- Confirmed material inputs need SEC, exchange, issuer/company-filed,
+  attributable original reporting, or another approved primary source. Alpha
+  Vantage discovery cannot independently support a material score. Its EOD bars
+  may supply market context, not issuer-event facts.
+- Confidence is the weakest linked source confidence. Unscored results use
+  unknown confidence. Conflicts prevent the affected component from scoring.
+- Values are clamped to 0–10 and rounded to one decimal. The documented weights
+  are fixed; changes to constructs, gates, thresholds, or weights require a new
+  methodology version.
+- Low/medium/high examples below describe evidence patterns, not recommendations.
 
-## Shared rules
+## The seven Fast constructs
 
-- All components use 0–10. Risk scores use `higher_is_more_risk`; quality scores
-  use `higher_is_better`.
-- Only sufficient, confirmed inputs produce a number. A required unknown,
-  limited, or inapplicable input produces a null score with the corresponding
-  state; it never becomes zero risk or favorable quality.
-- Final values are clamped to 0–10 and rounded to one decimal. Weighted means
-  divide by the included positive weights.
-- Score confidence is the weakest confidence among linked sources: any low
-  source yields low; otherwise any medium/unknown source yields medium; all-high
-  sources yield high. Unscored results use unknown confidence.
-- `not_found` can support a numeric component only when it represents a sourced,
-  bounded search. It never proves lifetime absence.
+### Historical dilution severity
 
-## Fast presentation
+Direction/horizon: higher is more risk; actual dilution in the past three years.
+The input is confirmed share-base growth from completed issuance, expressed as
+`percent_of_shares` with `evidence_role: actual_issuance`. Registration capacity is tracked separately; warrants and
+convertibles are not historical dilution until issuance is supported.
 
-The report contract retains the 0–10 scale. Fast converts a trustworthy internal
-score to a 0–5 star card and may use half-stars so useful differences are not
-hidden. Risk and quality cards intentionally use their natural directions:
+Minimum evidence is a bounded authoritative history plus quantified actual share
+change. A genuinely bounded `not_found` result scores 0. Otherwise missing terms,
+denominators, lineage, or classification stay Limited. Cumulative thresholds are
+0%=0, >0–5%=2, >5–15%=4, >15–30%=6, >30–60%=8, and >60%=10.
 
-- five stars means very high risk for dilution and reverse-split risk cards;
-- five stars means very strong financial health, catalyst strength, or near-term
-  setup quality for quality cards.
+- Low: bounded review finds no completed issuance, or actual growth is at most 5%.
+- Medium: supported actual share growth is roughly 5–30%.
+- High: supported actual share growth exceeds 30%.
 
-The title, direction label, and one-sentence evidence explanation must remove
-ambiguity. Detailed 0–10 values, components, weights, methodology, and sources
-remain visible below or through expandable details.
+### Future dilution likelihood
 
-While evidence collection continues, a card shows `Researching`. It shows a
-number only after its evidence threshold is satisfied; otherwise the final card
-settles as `Unscored` or `Limited`. `Researching` is a transport/UI state rather
-than a new factual evidence state unless later contract design proves otherwise.
+Direction/horizon: higher is more risk; financing pressure in the next twelve
+months, not a percentage probability. Inputs and weights are liquidity/runway
+(40%), available current mechanisms such as offerings, warrants, or convertibles
+(25%), total-debt pressure (20%), and resolved actual dilution history (15%).
 
-## Constructs and inputs
+Current comparable cash, cash consumption, true FCF, total debt, going-concern
+state, and resolved history are the minimum. Missing runway inputs or unresolved
+history remain Limited rather than receiving favorable defaults. Registration
+capacity can identify a mechanism but does not prove issuance.
 
-| Score | Direction and horizon | Reproducible inputs |
-|---|---|---|
-| Historical dilution severity | More risk; past 3 years | Offering 2 points, warrant 1, convertible 2, other dilution 1; sum capped at 10. Bounded not-found is 0. |
-| Future dilution likelihood | More risk; next 12 months | 40% historical severity, 35% cash-flow pressure, 25% debt/instrument pressure. This is a relative evidence score, not a percentage probability. |
-| Potential dilution impact | More risk; next 12 months | 75% documented offering value relative to cash, 25% confirmed warrant/convertible overhang. It is not an ownership-dilution percentage. |
-| Reverse-split risk | More risk; next 12 months | 65% five-year split history, 35% current listing pressure. A bounded no-split result retains a baseline of 1. |
-| Financial health | Better; latest period/next 12 months | Equal-weight metric trends, then fixed adjustments for positive profitability/free cash flow, debt above cash, and going-concern evidence. |
-| Long-term company quality | Better; multi-year | 60% financial health, 20% dilution resilience, 20% compliance quality. Catalyst/setup inputs are excluded. |
-| Catalyst strength | Better; current catalyst | Equal 20% weights for recency, specificity, credibility, novelty, and potential significance. High/medium/low map to 9/6/2. Any unresolved factor leaves the score null. |
-| Near-term setup quality | Better; next 5 trading days | 60% catalyst strength, 25% qualitative implication, 15% bounded issuer reactions. Long-term company quality is excluded. Missing analogue evidence leaves the score null rather than predicting a reaction. |
+- Low: ample supported runway, low leverage, no active mechanism, clean bounded history.
+- Medium: shorter runway, moderate leverage, or a current financing mechanism.
+- High: going-concern evidence, very short runway, high leverage, or convertible pressure.
 
-The source of truth for executable details is `lib/scoring.js`. Any formula,
-threshold, required-input, or meaning change requires a methodology version and
-contract review.
+### Potential dilution impact
 
-## Optional roll-ups
+Direction/horizon: higher is more risk; potential ownership impact in the next
+twelve months. It requires supported potential-share terms and a current share
+denominator, normalized as `percent_of_shares` and explicitly classified as
+`potential_issuance` or `instrument_overhang`. Proceeds divided by cash and raw
+instrument counts are prohibited proxies. The same percent thresholds as
+historical severity apply. Missing denominator, exercise/conversion terms,
+currency comparability, or conflicts make the score Limited.
 
-No roll-up is emitted in the normal report because unlike directions and time
-horizons can conceal tradeoffs. `buildScoreRollup` supports an explicit optional
-equal-weight summary only for components with the same direction. It always
-returns every component score and confidence. One unresolved component makes
-the roll-up null and limited coverage; opposite directions are rejected.
+- Low: supported potential issuance is at most 5% of the denominator.
+- Medium: supported potential issuance is roughly 5–30%.
+- High: supported potential issuance exceeds 30%.
 
-## Token-free calibration findings
+### Reverse-split risk
 
-`npm run evaluate:dry` compares the checked-in ACME and XYZ fixture scores with
-methodology 1.0.0 expectations. It reports overall and category-level score-check
-pass rates alongside material-risk recall. The 2026-08-25 calibration contains
-13 score checks across dilution, reverse splits, financial context, and
-catalysts; all pass. ACME's unresolved catalyst significance correctly leaves
-catalyst strength and near-term setup unscored, while XYZ's incomplete evidence
-produces only unknown or limited-coverage scores.
+Direction/horizon: higher is more risk; next twelve months. Confirmed five-year
+corporate-action history is 45%; specific current exchange/listing pressure is
+55%. No history scores 0; one event starts at 6 and additional events add 2,
+capped at 10. Active compliance pressure scores 9 and a current halt scores 10.
 
-These results establish deterministic behavior, not predictive validity. The
-fixtures are synthetic, potential dilution uses cash as a context proxy rather
-than an ownership percentage, historical reactions are sparse, and no approved
-live outcome study has been run. Calibration should therefore be revisited with
-dated evidence and owner approval before changing thresholds or claiming
-predictive performance.
+The minimum is resolved split history, current security/listing identity, and a
+bounded compliance review. Generic filing boilerplate about possible exchange
+risk is not a deficiency. Unresolved listing status or lineage stays Limited.
 
-## Required methodology redesign
+- Low: active listing, no specific pressure, no confirmed split in-window.
+- Medium: confirmed split history without current listing pressure.
+- High: specific current deficiency/halt, especially with prior splits.
 
-The next methodology must be designed around the seven priority Fast scores and
-evidence obtainable within the approved 20-second and cost ceilings. It should:
+### Financial health
 
-- measure potential shareholder dilution more directly than offering value
-  relative to cash when reliable share or instrument terms are available;
-- choose historical windows because they support current risk assessment, not
-  merely because they were inherited from version 1.0.0;
-- avoid making near-term setup depend on issuer-reaction history when that
-  evidence is not realistically available in Fast;
-- define a minimum evidence threshold for every numeric score;
-- retain distinct risk and quality constructs without a combined verdict; and
-- keep long-term company quality primarily in Deep when Fast evidence is
-  insufficient.
+Direction/horizon: higher is better; latest comparable period and next twelve
+months. Inputs are liquidity/runway (30%), total-debt capacity (20%), true FCF
+(20%), profitability (15%), and material warnings (15%). A going-concern finding
+caps the result at 2; another severe accounting/liquidity warning caps it at 3.
 
-Real-ticker calibration evaluates evidence recall, interpretation, explanation
-fidelity, owner-reviewed reasonable ranges, and relative ordering between
-clearly cleaner and riskier cases. Exact numeric agreement is not required.
+Minimum evidence is fresh, comparable cash, cash consumption, true FCF, total
+debt, profitability, and resolved going-concern evidence with compatible units,
+currency, and periods. OCF alone is never FCF; one debt component is never total
+debt. Missing burn never implies unlimited runway. Stale, conflicting, partial,
+or currency-mismatched inputs stay Limited.
+
+- Low health: short supported runway, debt well above cash, negative FCF/losses, warnings.
+- Medium health: mixed cash generation, leverage, and profitability.
+- High health: supported runway, manageable total debt, positive FCF/profitability, no warning.
+
+### Catalyst strength
+
+Direction/horizon: higher is better; the current catalyst only. Inputs are
+potential significance (30%), specificity (25%), credibility (20%), novelty
+(15%), and recency (10%); high/medium/low map to 9/6/2.
+
+The event and every factor require identity-gated SEC, exchange, issuer, or
+attributable original evidence. Discovery-only news, unsupported summaries, a
+missing material term, or a primary-source conflict keeps the score Limited.
+Historical catalyst analogues are deliberately Deep-only.
+
+- Low: supported but routine, stale, nonspecific, or low-significance event.
+- Medium: current credible event with moderate specificity/significance.
+- High: current, specific, credible, novel, materially significant event.
+
+### Near-term setup quality
+
+Direction/horizon: higher is better; next five trading days, not a profit
+prediction. Inputs are supported catalyst strength (60%), latest EOD price change
+(20%), and latest volume versus a bounded prior-session baseline (20%). Price
+bands map severe negative/negative/flat/positive/strong positive context to
+1/3/5/7/9; relative volume maps <0.75/0.75–1.5/1.5–3/>=3 to 2/5/7/9.
+
+Minimum evidence is a fully scored catalyst plus fresh Alpha Vantage or exchange
+EOD price and relative-volume records. Provider failure, stale bars, insufficient
+baseline history, or discovery-only catalyst evidence stays Limited. Historical
+reaction analogues and profit forecasts are excluded from Fast.
+
+- Low: weak supported catalyst with negative/low-participation context.
+- Medium: moderate catalyst and ordinary price/volume context.
+- High: strong supported catalyst with strong current participation.
+
+## Deep-only long-term quality
+
+The v4 report retains `long_term_company_quality` for compatibility, but
+methodology 2.0 always leaves it Limited in Fast. Deep can research durable
+business quality with broader history; Fast must not manufacture a multi-year
+quality judgment from a bounded risk packet.
+
+## Historical methodology 1.0.0 baseline
+
+Version 1.0.0 is preserved here for reproducible comparison, not execution by
+the current endpoint. It counted offerings/warrants/convertibles with fixed
+historical points; weighted future dilution 40/35/25 across history, cash-flow,
+and debt/instruments; proxied potential impact with offering dollars versus cash;
+weighted split history/listing pressure 65/35; used equal metric trends plus
+financial adjustments; combined financial/dilution/compliance into long-term
+quality; equally weighted five catalyst factors; and made setup depend 60/25/15
+on catalyst, qualitative implication, and historical reactions.
+
+The checked-in evaluation sample records the changed 1.0-to-2.0 outcomes. Most
+notably, ACME's registration-style offering no longer produces historical or
+potential dilution numbers, financial health moves from 9.1 to 7.4 under the
+current-evidence formula, clean split risk moves from baseline 1 to 0, and
+long-term quality becomes Deep-only. These are intentional construct corrections,
+not evidence loss.
+
+## Optional roll-ups and calibration limits
+
+Normal reports emit no combined score. `buildScoreRollup` permits an explicit
+equal-weight roll-up only for same-direction constructs and becomes null if any
+component is unresolved. Token-free fixtures prove deterministic gates and
+ordering; they do not establish predictive validity or the 95% material-risk
+recall target. Issue #55 remains responsible for real-ticker calibration with
+sample sizes and uncertainty disclosed.

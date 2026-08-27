@@ -80,8 +80,8 @@ test("analyze replaces provider-authored score values deterministically", async 
     const response = await fetch(`${baseUrl}/api/analyze?ticker=ACME`);
     assert.equal(response.status, 200);
     const body = await response.json();
-    assert.equal(body.report.scores.dilution_historical_severity.value, 2);
-    assert.equal(body.report.scores.dilution_historical_severity.methodology_version, "1.0.0");
+    assert.equal(body.report.scores.dilution_historical_severity.value, null);
+    assert.equal(body.report.scores.dilution_historical_severity.methodology_version, "2.0.0");
     assert.notEqual(body.report.scores.dilution_historical_severity.explanation, "Provider-authored placeholder.");
   });
 });
@@ -275,7 +275,7 @@ test("server derives scores when the provider omits redundant score output", asy
     const response = await fetch(`${baseUrl}/api/analyze?ticker=ACME&stage=fast`);
     assert.equal(response.status, 200);
     const body = await response.json();
-    assert.equal(body.report.scores.dilution_historical_severity.value, 2);
+    assert.equal(body.report.scores.dilution_historical_severity.value, null);
     assert.equal(body.report.scores.catalyst_strength.state, "limited_coverage");
   });
 });

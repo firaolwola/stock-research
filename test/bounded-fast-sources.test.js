@@ -15,7 +15,14 @@ const listed = "Symbol|Security Name|Market Category|Test Issue|Financial Status
 const other = "ACT Symbol|Security Name|Exchange|CQS Symbol|ETF|Round Lot Size|Test Issue|NASDAQ Symbol\n";
 const halts = "<rss><channel></channel></rss>";
 const news = { feed: [{ title: "ACME announces a contract", url: "https://example.com/acme", time_published: "20260827T120000", ticker_sentiment: [{ ticker: "ACME" }], summary: "must never be copied" }] };
-const market = { "Time Series (Daily)": { "2026-08-26": { "4. close": "2.50", "5. volume": "1500000" } } };
+const market = { "Time Series (Daily)": {
+  "2026-08-26": { "4. close": "2.50", "5. volume": "1500000" },
+  "2026-08-25": { "4. close": "2.25", "5. volume": "1000000" },
+  "2026-08-24": { "4. close": "2.20", "5. volume": "1000000" },
+  "2026-08-21": { "4. close": "2.15", "5. volume": "1000000" },
+  "2026-08-20": { "4. close": "2.10", "5. volume": "1000000" },
+  "2026-08-19": { "4. close": "2.05", "5. volume": "1000000" }
+} };
 
 function fixtureFetch({ issuer = "ACME", failAlpha = false, original = false } = {}) {
   return async (url) => {
@@ -37,6 +44,8 @@ test("bounded sources add identity-gated exchange and EOD context while news sta
   assert.equal(report.security.listing_status, "active"); assert.equal(report.security.security_type, "common_stock");
   assert.equal(report.claims.find((claim) => claim.id === "claim-alpha-discovery-1").state, "limited_coverage");
   assert.match(report.claims.find((claim) => claim.id === "claim-alpha-eod-market").text, /2.5.*1500000/);
+  assert.equal(report.sections.financial_context.items.find((item) => item.unit === "price_change_percent").value > 11, true);
+  assert.equal(report.sections.financial_context.items.find((item) => item.unit === "volume_ratio").value, 1.5);
   assert.doesNotMatch(JSON.stringify(report), /must never be copied/);
   assert.equal(result.operations.bounded_sources.request_count, 5); assert.equal(result.operations.bounded_sources.alpha_vantage_requests_today, 2);
   budget.finish({ partial: true });

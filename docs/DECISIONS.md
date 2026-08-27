@@ -19,7 +19,8 @@ calculated without current comparable cash and positive burn evidence.
 
 **Why:** Calling OCF free cash flow, calling one debt component total debt, or
 using stale/partial liquidity as current can falsely reassure the user. These are
-evidence-correctness rules; score-formula redesign remains owned by Issue #52.
+evidence-correctness rules; methodology 2.0.0 now consumes them as implemented
+by Issue #52.
 
 ## 2026-08-27 — Enforce Fast limits with one provider-neutral controller
 
@@ -43,7 +44,7 @@ news and market sources participate without coupling orchestration to a vendor.
 
 ## 2026-08-26 — Assign bounded Fast sources by evidence responsibility
 
-**Status:** Accepted by product owner
+**Status:** Accepted and implemented by Issues #48 and #51
 
 **Decision:** Fast uses a provider-neutral bounded source graph. SEC, exchange,
 issuer, original-newswire, and original-reporting sources retain authoritative
@@ -131,7 +132,7 @@ with the approved time and cost limits.
 
 ## 2026-08-26 — Recalibrate scoring against evidence and relative risk
 
-**Status:** Accepted by product owner
+**Status:** Implemented by Issue #52
 
 **Decision:** Treat deterministic methodology 1.0.0 as a historical baseline,
 not a fixed scoring philosophy. Redesign formulas around Fast's purpose and
@@ -336,7 +337,8 @@ excluded.
 **Status:** Accepted
 
 **Decision:** Version the report contract at 4.0.0 and replace upstream score
-values with scoring methodology 1.0.0 before final validation. Every score shows
+values with a versioned deterministic methodology before final validation. The
+current endpoint uses 2.0.0; 1.0.0 remains the historical baseline. Every score shows
 its construct, direction, horizon, confidence, components, weights, explanation,
 and evidence links. Required uncertainty leaves a score null. Near-term setup
 uses a five-trading-day evidence horizon and excludes long-term company quality.
@@ -755,3 +757,25 @@ quota-blocked work remains Limited or Unscored. No paid plan is approved.
 layer when practical, while allowing bounded OpenAI cost for classification.
 This preserves predictable termination and avoids a recurring data subscription
 before evaluation demonstrates that paid coverage is necessary.
+
+## 2026-08-27 — Version Fast scoring around evidence-sufficient constructs
+
+**Status:** Accepted and implemented by Issue #52
+
+**Decision:** Replace executable scoring methodology 1.0.0 with 2.0.0 while
+preserving 1.0.0 as a documented comparison baseline. Score actual dilution from
+share-base change rather than registrations, potential dilution from supported
+share terms and a denominator rather than proceeds versus cash, catalyst strength
+only from promoted primary/original evidence, and near-term setup from catalyst
+plus bounded EOD price/volume context rather than historical analogues. Keep
+long-term company quality primarily Deep and unscored in Fast.
+
+**Why:** A number whose inputs do not match its label can falsely reassure or
+materially alter a reject-or-continue decision. Strict evidence gates are more
+useful than broad score coverage built from misleading proxies.
+
+**Consequence:** Fast will show more Limited/Unscored results until retrieval
+provides quantified share terms, current comparable financials, promoted
+catalysts, and sufficient EOD baselines. Issue #53 may change presentation but
+not these meanings; Issue #55 must measure real-ticker coverage before reliability
+targets are claimed.

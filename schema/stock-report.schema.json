@@ -111,8 +111,9 @@
         "kind": { "enum": ["reverse_split", "offering", "warrant", "convertible", "other_dilution", "dividend", "exchange_compliance", "going_concern", "sec_warning", "accounting_warning", "cash", "cash_burn", "revenue", "profitability", "free_cash_flow", "debt", "catalyst", "news", "other"] },
         "title": { "$ref": "#/$defs/nonEmptyString" }, "state": { "$ref": "#/$defs/evidenceState" }, "summary": { "$ref": "#/$defs/nonEmptyString" },
         "event_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
-        "period_start": { "$ref": "#/$defs/date" }, "period_end": { "$ref": "#/$defs/date" },
-        "value": { "type": "number" }, "unit": { "$ref": "#/$defs/nonEmptyString" },
+          "period_start": { "$ref": "#/$defs/date" }, "period_end": { "$ref": "#/$defs/date" },
+          "evidence_role": { "enum": ["actual_issuance", "registration_capacity", "potential_issuance", "instrument_overhang", "context"] },
+          "value": { "type": "number" }, "unit": { "$ref": "#/$defs/nonEmptyString" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
       },
       "dependentRequired": { "value": ["unit"], "unit": ["value"] }
@@ -300,7 +301,7 @@
       "properties": {
         "state": { "$ref": "#/$defs/evidenceState" }, "value": { "type": ["number", "null"], "minimum": 0, "maximum": 10 }, "scale_min": { "const": 0 }, "scale_max": { "const": 10 },
         "direction": { "enum": ["higher_is_more_risk", "higher_is_better"] }, "time_horizon": { "$ref": "#/$defs/nonEmptyString" }, "explanation": { "$ref": "#/$defs/nonEmptyString" }, "claim_ids": { "$ref": "#/$defs/claimIds" },
-        "confidence": { "$ref": "#/$defs/confidence" }, "methodology_version": { "const": "1.0.0" }, "components": { "type": "array", "items": { "$ref": "#/$defs/scoreComponent" } }
+        "confidence": { "$ref": "#/$defs/confidence" }, "methodology_version": { "const": "2.0.0" }, "components": { "type": "array", "items": { "$ref": "#/$defs/scoreComponent" } }
       },
       "allOf": [
         { "if": { "properties": { "state": { "enum": ["unknown", "not_applicable", "limited_coverage", "not_found"] } }, "required": ["state"] }, "then": { "properties": { "value": { "type": "null" } } } },

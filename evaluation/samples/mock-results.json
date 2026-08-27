@@ -13,12 +13,12 @@
         { "fact_id": "acme-offering", "source_type": "sec_filing", "factually_supported": true }
       ],
       "score_checks": [
-        { "score_key": "dilution_historical_severity", "category": "dilution_offerings", "expected_state": "confirmed", "expected_value": 2, "actual_state": "confirmed", "actual_value": 2 },
-        { "score_key": "dilution_future_likelihood", "category": "dilution_offerings", "expected_state": "confirmed", "expected_value": 2.3, "actual_state": "confirmed", "actual_value": 2.3 },
-        { "score_key": "dilution_potential_impact", "category": "dilution_offerings", "expected_state": "confirmed", "expected_value": 3.1, "actual_state": "confirmed", "actual_value": 3.1 },
-        { "score_key": "reverse_split_risk", "category": "reverse_splits", "expected_state": "confirmed", "expected_value": 1, "actual_state": "confirmed", "actual_value": 1 },
-        { "score_key": "financial_health", "category": "financial_context", "expected_state": "confirmed", "expected_value": 9.1, "actual_state": "confirmed", "actual_value": 9.1 },
-        { "score_key": "long_term_company_quality", "category": "financial_context", "expected_state": "confirmed", "expected_value": 8.7, "actual_state": "confirmed", "actual_value": 8.7 },
+        { "score_key": "dilution_historical_severity", "category": "dilution_offerings", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
+        { "score_key": "dilution_future_likelihood", "category": "dilution_offerings", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
+        { "score_key": "dilution_potential_impact", "category": "dilution_offerings", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
+        { "score_key": "reverse_split_risk", "category": "reverse_splits", "expected_state": "confirmed", "expected_value": 0, "actual_state": "confirmed", "actual_value": 0 },
+        { "score_key": "financial_health", "category": "financial_context", "expected_state": "confirmed", "expected_value": 7.4, "actual_state": "confirmed", "actual_value": 7.4 },
+        { "score_key": "long_term_company_quality", "category": "financial_context", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
         { "score_key": "catalyst_strength", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
         { "score_key": "near_term_setup_quality", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null }
       ],
@@ -31,10 +31,10 @@
       "addressed_evidence": ["security_and_listing", "issuer_lineage", "reverse_splits", "dilution_offerings", "warrants_convertibles", "dividends", "compliance", "going_concern_accounting", "financial_context", "catalysts_news", "uncertainty"],
       "source_checks": [{ "fact_id": "xyz-warrant", "source_type": "exchange_notice", "factually_supported": true }],
       "score_checks": [
-        { "score_key": "dilution_historical_severity", "category": "dilution_offerings", "expected_state": "unknown", "expected_value": null, "actual_state": "unknown", "actual_value": null },
+        { "score_key": "dilution_historical_severity", "category": "dilution_offerings", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
         { "score_key": "reverse_split_risk", "category": "reverse_splits", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
         { "score_key": "financial_health", "category": "financial_context", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
-        { "score_key": "catalyst_strength", "category": "catalysts_news", "expected_state": "unknown", "expected_value": null, "actual_state": "unknown", "actual_value": null },
+        { "score_key": "catalyst_strength", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null },
         { "score_key": "near_term_setup_quality", "category": "catalysts_news", "expected_state": "limited_coverage", "expected_value": null, "actual_state": "limited_coverage", "actual_value": null }
       ],
       "latency_ms": 8500, "input_tokens": 6000, "output_tokens": 1000, "web_search_calls": 0, "estimated_cost_usd": 0.0175, "clarity_rating": 4

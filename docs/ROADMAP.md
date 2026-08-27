@@ -28,8 +28,8 @@ The current implementation is not yet the approved Fast product contract:
 - deterministic identity and financial semantics now fail closed on unsupported,
   stale, partial, conflicting, or mismatched evidence, but real-ticker coverage
   still requires calibration;
-- scoring methodology 1.0.0 is a provisional baseline rather than a trusted
-  final philosophy; and
+- scoring methodology 2.0.0 now gates the seven Fast constructs on realistic
+  evidence, while 1.0.0 remains a documented historical comparison baseline; and
 - checked-in evaluation results are synthetic calibration, not evidence-first
   Fast reliability results on real tickers.
 
@@ -63,8 +63,8 @@ verdict.
 2. [x] **Complete:** [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
 3. [x] **Complete:** [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
 4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and optional Alpha Vantage free-tier discovery/end-of-day context.
-5. [ ] **Next — depends on completed #51:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52).
-6. [ ] **Queued — depends on #52:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53).
+5. [x] **Complete:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52). Methodology 2.0.0 replaces misleading proxies, defines score-specific evidence gates, and keeps long-term quality Deep-only.
+6. [ ] **Next — depends on completed #52:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53).
 7. [ ] **Queued — coordinates with #51 and #52:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
 8. [ ] **Final reliability gate — blocked by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
@@ -72,11 +72,11 @@ verdict.
 remains optional technical cleanup when it will not conflict with milestone work.
 
 No milestone implementation issue is currently active. The next implementation
-priority is #52. It can now calibrate and version the seven Fast score constructs
-against the completed evidence semantics and bounded source packet. #53 depends
-on #52; #54 coordinates with the completed Fast packet; #55 remains the final
-real-ticker reliability gate. A paid data subscription remains neither selected
-nor required and would need separate owner approval.
+priority is #53, which can now present methodology 2.0.0's independently gated
+scores without reopening score meaning. #54 coordinates with the completed Fast
+packet and #55 remains the final real-ticker reliability gate. A paid data
+subscription remains neither selected nor required and would need separate
+owner approval.
 
 ### Milestone acceptance criteria
 
@@ -142,6 +142,8 @@ logging, rollback, and deployment safeguards are approved and implemented.
 - Provider-neutral Fast source responsibility, end-to-end budgets, corrected
   deterministic identity/financial semantics, and the approved free-first
   bounded news/market implementation (#48–#51).
+- Versioned Fast scoring methodology 2.0.0 with realistic evidence gates and a
+  preserved 1.0.0 historical baseline (#52).
 
 These completed items are foundations and historical implementation results;
 they do not by themselves satisfy the current Fast reliability milestone.

@@ -12,7 +12,8 @@ const validate = createReportValidator(schema);
 test("strong catalyst remains distinct from company quality and is fully traceable", () => {
   const result = validate(complete);
   assert.equal(result.valid, true, JSON.stringify(result.errors));
-  assert.notDeepEqual(complete.scores.catalyst_strength.claim_ids, complete.scores.long_term_company_quality.claim_ids);
+  assert.equal(complete.scores.long_term_company_quality.state, "limited_coverage");
+  assert.match(complete.scores.long_term_company_quality.explanation, /Deep construct/);
   assert.ok(complete.catalyst_assessment.current.claim_ids.every((id) => complete.claims.find((claim) => claim.id === id)?.source_ids.length));
   assert.equal(complete.catalyst_assessment.historical_analogues.items[0].comparison_limitations.length, 3);
 });
