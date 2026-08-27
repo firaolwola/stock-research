@@ -46,7 +46,12 @@ test("analyze normalizes a ticker and returns a validated complete report", asyn
   await withTestServer(app, async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/analyze?ticker=%20acme%20`);
     assert.equal(response.status, 200);
-    assert.deepEqual(await response.json(), { ticker: "ACME", report: completeReport });
+    const body = await response.json();
+    assert.equal(body.ticker, "ACME");
+    assert.deepEqual(body.report, completeReport);
+    assert.equal(body.operations.budget.cost_limit_usd, 0.03);
+    assert.equal(body.operations.budget.termination_reason, "completed");
+    assert.ok(body.operations.score_states.scored > 0);
   });
   assert.deepEqual(calls, ["ACME"]);
 });
@@ -86,7 +91,11 @@ test("analyze returns a validated partial report as a successful result", async 
   await withTestServer(app, async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/analyze?ticker=XYZ`);
     assert.equal(response.status, 200);
-    assert.deepEqual(await response.json(), { ticker: "XYZ", report: partialReport });
+    const body = await response.json();
+    assert.equal(body.ticker, "XYZ");
+    assert.deepEqual(body.report, partialReport);
+    assert.equal(body.operations.budget.termination_reason, "partial_coverage");
+    assert.ok(body.operations.score_states.unscored + body.operations.score_states.limited > 0);
   });
 });
 

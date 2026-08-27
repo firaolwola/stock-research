@@ -4,6 +4,26 @@ Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.
 
+## 2026-08-27 — Enforce Fast limits with one provider-neutral controller
+
+**Status:** Implemented from the approved operating policy
+
+**Decision:** Every Fast request uses one monotonic controller with a 20-second
+hard ceiling, a 500-millisecond finalization reserve, and a shared cost ledger.
+Normal runs use $0.03; the $0.05 difficult class requires an explicit internal
+choice and is never an automatic escalation. SEC and synthesis receive the same
+cancellation signal. Every paid source must reserve a finite maximum charge
+before it starts and commit measured cost afterward.
+
+Completed evidence survives cancellation. Unfinished work remains Limited or
+Unscored, while operations metadata records the stop reason, remaining time and
+money, per-source status, and final score-state counts. Deep retains its separate
+budget.
+
+**Why:** Independent per-call timeouts and post-hoc cost estimates could exceed
+the product's total limits. A provider-neutral reservation contract lets later
+news and market sources participate without coupling orchestration to a vendor.
+
 ## 2026-08-26 — Assign bounded Fast sources by evidence responsibility
 
 **Status:** Accepted by product owner

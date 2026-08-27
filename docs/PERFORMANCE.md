@@ -1,6 +1,6 @@
 # Fast-report operating budgets
 
-**Last reviewed:** 2026-08-26
+**Last reviewed:** 2026-08-27
 
 ## Approved policy
 
@@ -36,19 +36,25 @@ Production Fast currently retrieves:
 
 It caches the ticker map for six hours and issuer data or filing documents for
 five minutes, coalesces concurrent requests, declares a User-Agent, and paces SEC
-request starts. It then optionally performs an eight-second tool-disabled
-classification over supplied evidence IDs. Deep uses the broader hosted-search
-report workflow.
+request starts. One request-scoped controller now governs the entire Fast path.
+It stops source work after 19.5 seconds, reserving 0.5 seconds for scoring,
+validation, telemetry, and response finalization before the 20-second hard
+ceiling. The same abort signal reaches SEC pacing waits, queued/shared waits,
+`fetch`, filing/exhibit retrieval, and optional tool-disabled synthesis.
 
-This implementation does **not** yet enforce the approved policy end to end.
-Individual SEC fetches lack a shared cancellation deadline, the complete
-pipeline is not governed by one cost/time controller, and provider costs outside
-the current OpenAI estimate are not represented. The Fast reliability backlog
-owns these gaps.
+The normal controller is fixed at $0.03. A $0.05 difficult controller must be
+selected explicitly by an internal caller; normal runs cannot silently escalate.
+Before any paid operation begins, it must reserve a finite maximum charge. The
+reservation is rejected when consumed plus reserved cost would exceed the active
+ceiling. Completion commits actual measured cost; cancellation or failure
+releases the reservation. Future provider adapters use this same interface and
+must not run when their maximum charge is unknown.
 
-## Required budget behavior
+Deep keeps its separate research budget and hosted-search behavior.
 
-The implementation milestone must provide:
+## Enforced budget behavior
+
+The implementation provides:
 
 - one monotonic deadline shared across every Fast operation;
 - per-operation remaining-time propagation and cancellation;
@@ -61,6 +67,12 @@ The implementation milestone must provide:
 
 Unknown provider usage produces unknown cost, not zero. A path whose cost cannot
 be bounded must not be enabled as normal Fast behavior.
+
+Completed evidence survives a stopped source. Unfinished domains stay Limited or
+pending in the evidence report, deterministic scoring emits no number without
+sufficient evidence, and final operations metadata records `completed`,
+`partial_coverage`, `time_ceiling`, `cost_ceiling`, or `cancelled`. Per-source
+status and scored/unscored/limited/not-applicable counts accompany the result.
 
 ## Measurement
 
@@ -86,6 +98,9 @@ The checked-in dry evaluation uses fictional reports and synthetic operational
 values. Its latency, token, search, cost, coverage, and recall numbers validate
 the evaluator and budget calculations only; they are not evidence that the
 production evidence-first pipeline meets current targets.
+
+Its executable normal cost target is now $0.03 and its illustrative samples stay
+below that ceiling. This validates policy arithmetic only, not live cost.
 
 Historical live findings established:
 
