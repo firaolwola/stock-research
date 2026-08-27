@@ -218,6 +218,17 @@ reported 9.6 score under methodology 2.1.0, so the owner range is recorded as
 too narrow rather than used to tune the method. Another live run remains a
 separately approved verification, not part of this offline correction.
 
+The separately approved Sparse-3 same-four verification restored final-report
+validity from 1/4 to 4/4 and improved material-check recall from 13/16 (81.25%)
+to 14/16 (87.5%). It did not pass the reliability gate. MULN still omitted the
+three required 2023 completed splits, NIO still lacked a safely normalized
+attributable annual net-loss series, and split extraction still duplicated or
+misdated some occurrences across filings. Explanation fidelity remained 0/4
+and score/state checks remained 7/18. Alpha Vantage exhausted or reported its
+provider quota on all eight bounded attempts; Twelve Data was unconfigured;
+completed SEC evidence survived. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-3.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

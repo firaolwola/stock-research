@@ -223,6 +223,43 @@ test("Issue 55 sparse batch 2 records improvement without passing reliability", 
   assert.ok(result.severe_misleading_misses.length > 0);
 });
 
+test("Issue 55 sparse batch 3 preserves the frozen cases and approved bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-3.json");
+  assert.equal(plan.required_ancestor, "08b7f50");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-3");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 5);
+});
+
+test("Issue 55 sparse batch 3 restores validity but still fails reliability", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-3/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-sparse-3/run-summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.875);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.explanation_fidelity.pass_rate, 0);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.score_calibration.pass_rate, 0.3889);
+  assert.equal(run.completed_run_count, 4);
+  assert.equal(run.alpha_vantage_requests, 8);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 8);
+  assert.ok(run.known_openai_cost_usd <= 0.12);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.equal(result.issue_must_remain_open, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

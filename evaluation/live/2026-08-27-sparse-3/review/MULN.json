@@ -1,0 +1,15 @@
+{
+  "case_id":"muln-2026-sparse","ticker":"MULN","material_checks":{"detected":3,"expected":4},
+  "adjudication":[
+    {"expectation":"May 4, August 11, and December 21, 2023 completed splits","detected":false,"cause":"retrieval","note":"The selected bounded documents still did not include the 2024 10-Q passage containing all three 2023 actions."},
+    {"expectation":"Splits linked to bid-price compliance","detected":true,"cause":null},
+    {"expectation":"Historical Nasdaq context separated from current BINI/OTCID terminal status","detected":true,"cause":null},
+    {"expectation":"Material financing/capital-structure risk","detected":true,"cause":null}
+  ],
+  "identity_result":"MULN resolved to CIK 0001499961 and current BINI/OTCID delisted status; explicit MULN effective dates and historical references validated.",
+  "validation":{"valid":true},
+  "score_range":{"passed":1,"evaluated":5,"note":"Safely Limited Financial Health passed; all four capital-risk scores remained below the frozen requirement because evidence gates stayed unresolved."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "remaining_misses":[{"cause":"retrieval","summary":"Required 2023 completed splits remained omitted."},{"cause":"interpretation","summary":"The extracted 2025 action list contains duplicate or conflicting completed/unknown/cancelled representations and filing-date event dates."}],
+  "severe_misses":["The required three completed 2023 reverse splits remain materially omitted."],"result":"failed"
+}

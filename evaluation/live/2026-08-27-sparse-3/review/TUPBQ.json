@@ -1,0 +1,16 @@
+{
+  "case_id":"tupbq-2026-sparse","ticker":"TUPBQ","material_checks":{"detected":4,"expected":4},
+  "adjudication":[
+    {"expectation":"September 2024 Chapter 11 filing","detected":true,"cause":null},
+    {"expectation":"NYSE suspension/delisting and OTC Expert Market TUPBQ status","detected":true,"cause":null,"note":"Accession 000100865424000068 was retrieved successfully and the terminal identity source remained present."},
+    {"expectation":"Substantial doubt about going concern","detected":true,"cause":null},
+    {"expectation":"Stale/missing reporting cannot score favorably","detected":true,"cause":null}
+  ],
+  "identity_result":"TUP/TUPBQ resolved to CIK 0001008654 with current OTC Expert Market/delisted state and dated TUP lineage.",
+  "validation":{"valid":true},
+  "catalyst_result":"The accounting/non-reliance event used allowed classification legal.",
+  "score_range":{"passed":6,"evaluated":6,"note":"Required financial and capital states remained safely Limited."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "remaining_misses":[{"cause":"interpretation","summary":"A 2023 compliance item is labeled active without making sufficiently clear that current security state is already terminal/delisted."}],
+  "severe_misses":[],"result":"partial_pass"
+}
