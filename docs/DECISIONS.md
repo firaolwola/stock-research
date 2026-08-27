@@ -87,7 +87,7 @@ prematurely encode an unapproved weighting philosophy.
 
 ## 2026-08-26 — Preserve detailed scores and simplify Fast presentation
 
-**Status:** Accepted by product owner
+**Status:** Implemented by Issue #53
 
 **Decision:** Keep the internal report and methodology on a 0–10 scale. Convert
 Fast cards to a 0–5 star display, including half-stars when useful. More stars
@@ -382,7 +382,7 @@ turning a weak comparison into false predictive precision.
 
 ## 2026-08-25 — Group the fast dashboard by decision meaning
 
-**Status:** Accepted
+**Status:** Superseded by the approved Issue #53 hierarchy
 
 **Decision:** Lead the dashboard with coverage and ranked material findings,
 then keep capital-structure risk, longer-term company context, and near-term
@@ -398,6 +398,11 @@ summary.
 Unknown, limited, pending, and not-applicable results remain readable and
 unscored. The dependency-free browser renderer uses the existing validated
 report contract and safe external-link attributes.
+
+**Superseding detail:** The current hierarchy leads with identity and compact
+research status, then current catalyst/market context, seven primary Fast cards,
+financial context, expandable detailed evidence, and the source library.
+Long-term company quality is Deep-oriented rather than a primary Fast card.
 
 ## 2026-08-25 — Require explicit evidence when carrying issuer history
 
@@ -776,6 +781,6 @@ useful than broad score coverage built from misleading proxies.
 
 **Consequence:** Fast will show more Limited/Unscored results until retrieval
 provides quantified share terms, current comparable financials, promoted
-catalysts, and sufficient EOD baselines. Issue #53 may change presentation but
-not these meanings; Issue #55 must measure real-ticker coverage before reliability
+catalysts, and sufficient EOD baselines. Issue #53 changed their presentation
+without changing these meanings; Issue #55 must measure real-ticker coverage before reliability
 targets are claimed.

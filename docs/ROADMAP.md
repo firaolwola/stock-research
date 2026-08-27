@@ -64,17 +64,17 @@ verdict.
 3. [x] **Complete:** [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
 4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and optional Alpha Vantage free-tier discovery/end-of-day context.
 5. [x] **Complete:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52). Methodology 2.0.0 replaces misleading proxies, defines score-specific evidence gates, and keeps long-term quality Deep-only.
-6. [ ] **Next — depends on completed #52:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53).
-7. [ ] **Queued — coordinates with #51 and #52:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
+6. [x] **Complete:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53). The seven primary cards settle independently, convert 0–10 to accessible 0–5 stars, and keep supporting detail inspectable below.
+7. [ ] **Next — coordinates with completed #51–#53:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
 8. [ ] **Final reliability gate — blocked by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
 No milestone implementation issue is currently active. The next implementation
-priority is #53, which can now present methodology 2.0.0's independently gated
-scores without reopening score meaning. #54 coordinates with the completed Fast
-packet and #55 remains the final real-ticker reliability gate. A paid data
+priority is #54, which must make Deep build and extend the completed Fast evidence
+packet and prioritize unresolved score components. #55 remains the final
+real-ticker reliability gate. A paid data
 subscription remains neither selected nor required and would need separate
 owner approval.
 
@@ -144,6 +144,8 @@ logging, rollback, and deployment safeguards are approved and implemented.
   bounded news/market implementation (#48–#51).
 - Versioned Fast scoring methodology 2.0.0 with realistic evidence gates and a
   preserved 1.0.0 historical baseline (#52).
+- Progressive accessible Fast score cards and the approved decision-first
+  dashboard hierarchy (#53).
 
 These completed items are foundations and historical implementation results;
 they do not by themselves satisfy the current Fast reliability milestone.

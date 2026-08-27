@@ -1,20 +1,68 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { buildDashboardView, buildPriorityFindings, scoreGroups, sectionLabels, validateTickerInput } from "../public/dashboard.js";
+import { buildDashboardView, buildPriorityFindings, buildScorePresentation, priorityScoreKeys, scoreGroups, scoreToStars, sectionLabels, settledScoreKeysForOperations, validateTickerInput } from "../public/dashboard.js";
 import { loadReportFixture } from "../support/report-fixtures.js";
 
-test("dashboard exposes every report section and keeps score concepts grouped", async () => {
+test("dashboard exposes every report section and exactly seven primary score cards", async () => {
   const view = buildDashboardView(await loadReportFixture("complete"));
   assert.deepEqual(view.sections.map((section) => section.key), Object.keys(sectionLabels));
-  assert.deepEqual(view.scoreGroups.map((group) => group.title), ["Capital structure risk", "Company context", "Near-term catalyst & setup"]);
-  assert.deepEqual(scoreGroups[1].keys, ["financial_health", "long_term_company_quality"]);
-  assert.deepEqual(scoreGroups[2].keys, ["catalyst_strength", "near_term_setup_quality"]);
+  assert.equal(view.scoreGroups.length, 2);
+  assert.deepEqual(priorityScoreKeys, ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk", "financial_health", "catalyst_strength", "near_term_setup_quality"]);
+  assert.equal(priorityScoreKeys.includes("long_term_company_quality"), false);
+  assert.match(scoreGroups[0].title, /more stars mean more risk/i);
+  assert.match(scoreGroups[1].title, /more stars mean stronger/i);
+});
+
+test("0–10 internal scores map to 0–5 stars with half-stars", () => {
+  for (const [internal, stars] of [[0, 0], [1, 0.5], [2, 1], [4, 2], [5, 2.5], [6, 3], [8, 4], [10, 5]]) assert.equal(scoreToStars(internal), stars);
+  assert.equal(scoreToStars(7.4), 3.5);
+  assert.equal(scoreToStars(null), null);
+});
+
+test("risk and quality cards communicate direction in text and accessible labels", () => {
+  const base = { state: "confirmed", value: 8, scale_max: 10 };
+  const risk = buildScorePresentation({ ...base, direction: "higher_is_more_risk" });
+  const quality = buildScorePresentation({ ...base, direction: "higher_is_better" });
+  assert.equal(risk.directionLabel, "Higher = More Risk");
+  assert.match(risk.accessibleLabel, /4 out of 5 stars.*More Risk/);
+  assert.equal(quality.directionLabel, "Higher = Stronger");
+  assert.match(quality.accessibleLabel, /4 out of 5 stars.*Stronger/);
+});
+
+test("cards transition without provisional numbers and settle independently", async () => {
+  const report = await loadReportFixture("partial");
+  const researching = buildDashboardView(report, { final: false });
+  assert.ok(researching.scoreGroups.flatMap((group) => group.scores).every((score) => score.presentation.state === "researching" && score.presentation.stars === null));
+  const partialProgress = structuredClone(report);
+  partialProgress.scores.reverse_split_risk = { ...partialProgress.scores.reverse_split_risk, state: "confirmed", value: 6, confidence: "high" };
+  const progressive = buildDashboardView(partialProgress, { final: false, settledScoreKeys: new Set(["reverse_split_risk"]) }).scoreGroups.flatMap((group) => group.scores);
+  assert.equal(progressive.find((score) => score.key === "reverse_split_risk").presentation.state, "scored");
+  assert.equal(progressive.find((score) => score.key === "catalyst_strength").presentation.state, "researching");
+  const settled = buildDashboardView(report, { final: true }).scoreGroups.flatMap((group) => group.scores);
+  assert.equal(settled.find((score) => score.key === "financial_health").presentation.state, "limited");
+  const unknown = { ...report.scores.catalyst_strength, state: "unknown" };
+  assert.equal(buildScorePresentation(unknown, { final: true }).state, "unscored");
+  assert.equal(buildScorePresentation(unknown, { final: false }).accessibleLabel.includes("no provisional score"), true);
+});
+
+test("partial provider failure settles only dependent cards", () => {
+  const settled = settledScoreKeysForOperations({
+    retrieval: { status: "completed" },
+    bounded_sources: { nasdaq: "completed", news: "limited", market: "timed_out" },
+    synthesis: { status: "unavailable" }
+  }, false);
+  for (const key of priorityScoreKeys) assert.equal(settled.has(key), true, `${key} should settle when its source has reached a terminal state`);
+  const stillWorking = settledScoreKeysForOperations({ retrieval: { status: "completed" }, bounded_sources: { nasdaq: "completed", news: "in_progress", market: "in_progress" }, synthesis: { status: "in_progress" } }, false);
+  assert.equal(stillWorking.has("dilution_historical_severity"), true);
+  assert.equal(stillWorking.has("financial_health"), true);
+  assert.equal(stillWorking.has("catalyst_strength"), false);
+  assert.equal(stillWorking.has("near_term_setup_quality"), false);
 });
 
 test("dashboard exposes score methodology, confidence, inputs, and weights", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  for (const text of ["methodology_version", "confidence", "scoring inputs", "component.weight"]) assert.match(source, new RegExp(text.replace(".", "\\.")));
+  for (const text of ["methodology_version", "confidence", "evidence inputs", "component.weight", "Internal value"] ) assert.match(source, new RegExp(text.replace(".", "\\.")));
 });
 
 test("dashboard exposes catalyst factors, analogue limits, reactions, and confidence", async () => {
@@ -34,7 +82,7 @@ test("dashboard exposes operational budgets and deliberate deeper research", asy
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
   assert.match(html, /value="fast"/);
   assert.match(html, /value="deep"/);
-  for (const text of ["Research budget & stage", "estimated_cost_usd", "web_search_calls", "bounded_sources", "Alpha Vantage", "Operational budgets do not certify evidence completeness"]) assert.match(source, new RegExp(text));
+  for (const text of ["Research status & budget", "Technical operations telemetry", "estimated_cost_usd", "web_search_calls", "bounded_sources", "Alpha Vantage", "Operational budgets do not certify evidence completeness"]) assert.match(source, new RegExp(text));
 });
 
 test("priority findings rank unknowns before material confirmed risk evidence", async () => {
@@ -78,6 +126,15 @@ test("dashboard uses safe external links, semantic form submission, and a narrow
   assert.match(script, /rel = "noopener noreferrer"/);
   assert.match(script, /textContent = text/);
   assert.match(css, /@media \(max-width: 680px\)/);
+  assert.match(css, /\.score-grid, \.financial-grid, \.factor-grid, \.evidence-grid \{ grid-template-columns: 1fr; \}/);
+  assert.match(script, /role", "img"/);
+  assert.match(script, /aria-label/);
+  assert.match(script, /Score details, inputs, and sources/);
+});
+
+test("approved dashboard render order places catalyst and scores before financial and detailed evidence", async () => {
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  assert.match(source, /replaceChildren\(renderHeader\(view\), renderOperations\(operations\), renderCatalystAssessment\(view\), renderScores\(view\), renderFinancialAssessment\(view\), renderSupportingEvidence\(view\), renderSources\(view\)\)/);
 });
 
 test("dashboard ticker input retains server-compatible normalization", () => {

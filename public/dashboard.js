@@ -5,10 +5,10 @@ export const sectionLabels = Object.freeze({
   compliance_and_warnings: "Compliance & warnings", financial_context: "Financial context", catalysts_and_news: "Catalysts & news"
 });
 export const scoreGroups = Object.freeze([
-  { title: "Capital structure risk", keys: ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"] },
-  { title: "Company context", keys: ["financial_health", "long_term_company_quality"] },
-  { title: "Near-term catalyst & setup", keys: ["catalyst_strength", "near_term_setup_quality"] }
+  { title: "Risk — more stars mean more risk", direction: "risk", keys: ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"] },
+  { title: "Quality & setup — more stars mean stronger evidence", direction: "quality", keys: ["financial_health", "catalyst_strength", "near_term_setup_quality"] }
 ]);
+export const priorityScoreKeys = Object.freeze(scoreGroups.flatMap((group) => group.keys));
 const scoreLabels = Object.freeze({
   dilution_historical_severity: "Historical dilution severity", dilution_future_likelihood: "Future dilution likelihood",
   dilution_potential_impact: "Potential dilution impact", reverse_split_risk: "Reverse-split risk",
@@ -37,6 +37,40 @@ export function validateTickerInput(value) {
 export function formatLabel(value) {
   return stateLabels[value] || String(value).replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
+export function scoreToStars(value) {
+  if (!Number.isFinite(value)) return null;
+  return Math.round(Math.max(0, Math.min(10, value))) / 2;
+}
+export function settledScoreKeysForOperations(operations, final = false) {
+  if (final) return new Set(priorityScoreKeys);
+  const terminal = (status) => ["completed", "complete", "limited", "unavailable", "failed", "timed_out", "cancelled", "skipped", "discovery_only"].includes(status);
+  const settled = new Set();
+  const secDone = terminal(operations?.retrieval?.status) || terminal(operations?.domains?.capital?.status) || terminal(operations?.domains?.financial?.status);
+  const capitalDone = terminal(operations?.domains?.capital?.status) || secDone;
+  const financialDone = terminal(operations?.domains?.financial?.status) || secDone;
+  const listingDone = terminal(operations?.bounded_sources?.nasdaq) || terminal(operations?.domains?.capital?.status);
+  const catalystDone = terminal(operations?.bounded_sources?.news) || terminal(operations?.domains?.catalyst?.status);
+  const marketDone = terminal(operations?.bounded_sources?.market) || terminal(operations?.domains?.catalyst?.status);
+  const synthesisDone = !operations?.synthesis || terminal(operations.synthesis.status);
+  if (capitalDone) ["dilution_historical_severity", "dilution_potential_impact"].forEach((key) => settled.add(key));
+  if (capitalDone && financialDone) settled.add("dilution_future_likelihood");
+  if (capitalDone && listingDone) settled.add("reverse_split_risk");
+  if (financialDone) settled.add("financial_health");
+  if (catalystDone && synthesisDone) settled.add("catalyst_strength");
+  if (catalystDone && marketDone && synthesisDone) settled.add("near_term_setup_quality");
+  return settled;
+}
+export function buildScorePresentation(score, { final = true, settled = final } = {}) {
+  const directionLabel = score.direction === "higher_is_more_risk" ? "Higher = More Risk" : "Higher = Stronger";
+  if (settled && score.state === "confirmed" && Number.isFinite(score.value)) {
+    const stars = scoreToStars(score.value);
+    return { state: "scored", stateLabel: "Scored", stars, directionLabel, accessibleLabel: `${stars} out of 5 stars; internal score ${score.value} out of 10; ${directionLabel}` };
+  }
+  if (!settled) return { state: "researching", stateLabel: "Researching", stars: null, directionLabel, accessibleLabel: `Researching; no provisional score; ${directionLabel}` };
+  if (score.state === "limited_coverage") return { state: "limited", stateLabel: "Limited", stars: null, directionLabel, accessibleLabel: `Limited coverage; no score; ${directionLabel}` };
+  if (score.state === "not_applicable") return { state: "not_applicable", stateLabel: "Not applicable", stars: null, directionLabel, accessibleLabel: `Not applicable; no score; ${directionLabel}` };
+  return { state: "unscored", stateLabel: "Unscored", stars: null, directionLabel, accessibleLabel: `Unscored; no score; ${directionLabel}` };
+}
 export function buildPriorityFindings(report) {
   const riskClaimIds = new Set(["reverse_splits", "dilution", "compliance_and_warnings"].flatMap((key) => report.sections[key].items.flatMap((item) => item.claim_ids)));
   const stateRank = { unknown: 0, limited_coverage: 1, confirmed: 2, not_found: 3, not_applicable: 4 };
@@ -62,7 +96,7 @@ export function buildPriorityFindings(report) {
   return [...financialWarnings, ...claimFindings, ...unresolvedSections]
     .sort((a, b) => (stateRank[a.state] - stateRank[b.state]) || (materialityRank[a.materiality] - materialityRank[b.materiality]) || ((a.priority ?? 1) - (b.priority ?? 1)) || a.id.localeCompare(b.id));
 }
-export function buildDashboardView(report) {
+export function buildDashboardView(report, { final = true, settledScoreKeys = new Set(final ? priorityScoreKeys : []) } = {}) {
   const sourcesById = new Map(report.sources.map((source) => [source.id, source]));
   const claimsById = new Map(report.claims.map((claim) => [claim.id, claim]));
   const sourcesForClaims = (claimIds = []) => {
@@ -71,7 +105,7 @@ export function buildDashboardView(report) {
   };
   return {
     report, findings: buildPriorityFindings(report), sourcesForClaims,
-    scoreGroups: scoreGroups.map((group) => ({ ...group, scores: group.keys.map((key) => ({ key, label: scoreLabels[key], ...report.scores[key] })) })),
+    scoreGroups: scoreGroups.map((group) => ({ ...group, scores: group.keys.map((key) => ({ key, label: scoreLabels[key], ...report.scores[key], presentation: buildScorePresentation(report.scores[key], { final, settled: settledScoreKeys.has(key) }) })) })),
     sections: Object.entries(sectionLabels).map(([key, label]) => ({ key, label, ...report.sections[key] }))
   };
 }
@@ -101,6 +135,18 @@ function appendSourceLinks(parent, sources) {
     links.append(link);
   });
   parent.append(links);
+}
+function renderStars(presentation) {
+  const wrapper = element("div", "star-rating");
+  wrapper.setAttribute("role", "img");
+  wrapper.setAttribute("aria-label", presentation.accessibleLabel);
+  const visual = element("span", "stars"); visual.setAttribute("aria-hidden", "true");
+  for (let index = 0; index < 5; index += 1) {
+    const remaining = presentation.stars - index;
+    visual.append(element("span", `star ${remaining >= 1 ? "full" : remaining >= 0.5 ? "half" : "empty"}`, remaining >= 1 ? "★" : "☆"));
+  }
+  wrapper.append(visual, element("span", "star-text", `${presentation.stars} / 5 stars`));
+  return wrapper;
 }
 function renderHeader(view) {
   const { report } = view;
@@ -146,22 +192,25 @@ function renderCoverage(view) {
 }
 function renderOperations(operations) {
   const panel = element("section", "panel operations-panel");
-  panel.append(element("h2", "", "Research budget & stage"));
+  panel.append(element("h2", "", "Research status & budget"));
   if (!operations) {
     panel.append(element("p", "empty-note", "Provider usage and cost telemetry were unavailable; cost is unknown, not zero."));
     return panel;
   }
   const cost = operations.estimated_cost_usd === null ? "Cost unknown" : `Estimated cost $${operations.estimated_cost_usd.toFixed(4)}`;
   panel.append(element("p", "", `${formatLabel(operations.stage)} · ${(operations.latency_ms / 1000).toFixed(1)}s · ${cost}`));
-  panel.append(element("p", "muted", `${operations.input_tokens ?? "Unknown"} input tokens · ${operations.output_tokens ?? "Unknown"} output tokens · ${operations.web_search_calls} web searches`));
-  if (operations.stage === "fast" && operations.within_first_useful_target === false) panel.append(element("p", "coverage-note", "The first usable Fast domain arrived outside the 3–10 second target."));
-  if (operations.stage === "fast" && operations.within_latency_target === false) panel.append(element("p", "coverage-note", "Fast domain collection exceeded the 20-second hard operating target."));
-  if (operations.stage === "fast" && operations.domains) panel.append(element("p", "muted", Object.entries(operations.domains).map(([name, value]) => `${formatLabel(name)}: ${formatLabel(value.status)}`).join(" · ")));
-  if (operations.stage === "fast" && operations.synthesis) panel.append(element("p", "muted", `AI synthesis: ${formatLabel(operations.synthesis.status)}${operations.synthesis.priority_evidence_ids ? ` · ${operations.synthesis.priority_evidence_ids.length} evidence records prioritized` : ""}. Deterministic evidence remains authoritative.`));
-  if (operations.stage === "fast" && operations.retrieval) panel.append(element("p", "muted", `SEC retrieval: ${formatLabel(operations.retrieval.status)} · ${operations.retrieval.sec_request_count ?? "Unknown"} network requests`));
-  if (operations.stage === "fast" && operations.bounded_sources) panel.append(element("p", "muted", `Bounded sources: ${formatLabel(operations.bounded_sources.status)} · Nasdaq ${formatLabel(operations.bounded_sources.nasdaq)} · news ${formatLabel(operations.bounded_sources.news)}${operations.bounded_sources.news_reason ? ` (${formatLabel(operations.bounded_sources.news_reason)})` : ""} · market ${formatLabel(operations.bounded_sources.market)}${operations.bounded_sources.market_reason ? ` (${formatLabel(operations.bounded_sources.market_reason)})` : ""} · ${operations.bounded_sources.request_count} network requests · Alpha Vantage ${operations.bounded_sources.alpha_vantage_requests_today}/${operations.bounded_sources.alpha_vantage_free_daily_limit} local daily allowance`));
-  if (operations.stage === "fast" && operations.within_cost_target === false) panel.append(element("p", "coverage-note", "This report exceeded the $0.03 normal Fast cost ceiling."));
-  panel.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
+  const details = element("details", "operations-details"); const body = element("div", "operations-detail-body");
+  details.append(element("summary", "", "Technical operations telemetry"));
+  body.append(element("p", "muted", `${operations.input_tokens ?? "Unknown"} input tokens · ${operations.output_tokens ?? "Unknown"} output tokens · ${operations.web_search_calls} web searches`));
+  if (operations.stage === "fast" && operations.within_first_useful_target === false) body.append(element("p", "coverage-note", "The first usable Fast domain arrived outside the 3–10 second target."));
+  if (operations.stage === "fast" && operations.within_latency_target === false) body.append(element("p", "coverage-note", "Fast collection exceeded the 20-second hard operating target."));
+  if (operations.stage === "fast" && operations.domains) body.append(element("p", "muted", Object.entries(operations.domains).map(([name, value]) => `${formatLabel(name)}: ${formatLabel(value.status)}`).join(" · ")));
+  if (operations.stage === "fast" && operations.synthesis) body.append(element("p", "muted", `AI synthesis: ${formatLabel(operations.synthesis.status)}${operations.synthesis.priority_evidence_ids ? ` · ${operations.synthesis.priority_evidence_ids.length} evidence records prioritized` : ""}. Deterministic evidence remains authoritative.`));
+  if (operations.stage === "fast" && operations.retrieval) body.append(element("p", "muted", `SEC retrieval: ${formatLabel(operations.retrieval.status)} · ${operations.retrieval.sec_request_count ?? "Unknown"} network requests`));
+  if (operations.stage === "fast" && operations.bounded_sources) body.append(element("p", "muted", `Bounded sources: ${formatLabel(operations.bounded_sources.status)} · Nasdaq ${formatLabel(operations.bounded_sources.nasdaq)} · news ${formatLabel(operations.bounded_sources.news)}${operations.bounded_sources.news_reason ? ` (${formatLabel(operations.bounded_sources.news_reason)})` : ""} · market ${formatLabel(operations.bounded_sources.market)}${operations.bounded_sources.market_reason ? ` (${formatLabel(operations.bounded_sources.market_reason)})` : ""} · ${operations.bounded_sources.request_count} network requests · Alpha Vantage ${operations.bounded_sources.alpha_vantage_requests_today}/${operations.bounded_sources.alpha_vantage_free_daily_limit} local daily allowance`));
+  if (operations.stage === "fast" && operations.within_cost_target === false) body.append(element("p", "coverage-note", "This report exceeded the $0.03 normal Fast cost ceiling."));
+  body.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
+  details.append(body); panel.append(details);
   return panel;
 }
 function renderFindings(view) {
@@ -178,27 +227,33 @@ function renderFindings(view) {
   panel.append(list); return panel;
 }
 function renderScores(view) {
-  const panel = element("section", "panel"); panel.append(element("h2", "", "Score components"));
+  const panel = element("section", "panel score-panel");
+  const heading = element("div", "panel-heading"); heading.append(element("h2", "", "Seven Fast score cards"), element("span", "muted", "No combined verdict")); panel.append(heading);
   const groups = element("div", "score-groups");
   view.scoreGroups.forEach((group) => {
     const section = element("section"); section.append(element("h3", "score-group-title", group.title));
     const grid = element("div", "score-grid");
     group.scores.forEach((score) => {
-      const card = element("article", "score-card"); const title = element("div", "section-title"); title.append(element("h3", "", score.label), badge(score.state)); card.append(title);
-      if (score.value === null) card.append(element("p", "score-state", formatLabel(score.state)));
-      else { const value = element("div", "score-value"); value.append(element("strong", "", String(score.value)), element("span", "", `/ ${score.scale_max}`)); card.append(value); }
-      card.append(element("p", "score-direction", `${formatLabel(score.direction)} · ${score.time_horizon} · ${formatLabel(score.confidence)} confidence · method ${score.methodology_version}`), element("p", "", score.explanation));
+      const card = element("article", "score-card"); card.dataset.presentationState = score.presentation.state; card.dataset.direction = group.direction;
+      const title = element("div", "section-title"); title.append(element("h3", "", score.label), badge(score.presentation.state)); card.append(title);
+      if (score.presentation.state === "scored") card.append(renderStars(score.presentation));
+      else card.append(element("p", "score-state", score.presentation.stateLabel));
+      card.append(element("p", "score-direction", score.presentation.directionLabel), element("p", "score-reason", score.explanation));
+      const details = element("details", "score-components");
+      details.append(element("summary", "", "Score details, inputs, and sources"));
+      const detailBody = element("div", "score-detail-body");
+      detailBody.append(element("p", "muted", `${score.presentation.state === "scored" ? `Internal value: ${score.value} / ${score.scale_max}` : "Internal value: not available"} · ${score.time_horizon} · ${formatLabel(score.confidence)} confidence · methodology ${score.methodology_version}`));
+      detailBody.append(element("p", "", score.explanation));
       if (score.components.length) {
-        const details = element("details", "score-components");
         const list = element("ul", "section-items");
         score.components.forEach((component) => {
           const item = element("li", "section-item");
           item.append(element("strong", "", formatLabel(component.key)), element("p", "muted", `${formatLabel(component.state)} · ${component.value === null ? "Unscored" : `${component.value} / 10`} · weight ${component.weight}`), element("p", "", component.explanation));
           appendSourceLinks(item, view.sourcesForClaims(component.claim_ids)); list.append(item);
         });
-        details.append(element("summary", "", `${score.components.length} scoring inputs`), list); card.append(details);
+        detailBody.append(element("h4", "", `${score.components.length} evidence inputs`), list);
       }
-      appendSourceLinks(card, view.sourcesForClaims(score.claim_ids)); grid.append(card);
+      appendSourceLinks(detailBody, view.sourcesForClaims(score.claim_ids)); details.append(detailBody); card.append(details); grid.append(card);
     });
     section.append(grid); groups.append(section);
   });
@@ -225,8 +280,22 @@ function renderCatalystAssessment(view) {
     appendSourceLinks(card, view.sourcesForClaims(factor.claim_ids));
     factors.append(card);
   });
-  current.append(factors);
   panel.append(current);
+
+  const marketItems = view.report.sections.financial_context.items.filter((item) => ["price_change_percent", "volume_ratio"].includes(item.unit));
+  const market = element("article", "market-context section-card"); market.append(element("h3", "", "Current market context"));
+  if (!marketItems.length) market.append(element("p", "empty-note", "Fresh bounded price/volume context is unavailable; setup may remain Limited or Unscored."));
+  marketItems.forEach((item) => {
+    const value = item.unit === "price_change_percent" ? `${item.value.toFixed(1)}% price change` : `${item.value.toFixed(1)}× relative volume`;
+    market.append(element("p", "market-value", `${value} · ${item.event_date ? formatDate(item.event_date) : "Date unavailable"}`));
+    appendSourceLinks(market, view.sourcesForClaims(item.claim_ids));
+  });
+  panel.append(market);
+
+  const supporting = element("details", "catalyst-supporting");
+  const supportingBody = element("div", "catalyst-supporting-body");
+  supporting.append(element("summary", "", "Supporting catalyst factors, evidence, and Deep analogues"));
+  supportingBody.append(factors);
 
   const evidence = element("div", "evidence-grid");
   [["Favorable evidence", assessment.favorable_evidence_claim_ids], ["Unfavorable evidence", assessment.unfavorable_evidence_claim_ids]].forEach(([title, claimIds]) => {
@@ -235,7 +304,7 @@ function renderCatalystAssessment(view) {
     claimIds.forEach((claimId) => card.append(element("p", "", view.report.claims.find((claim) => claim.id === claimId)?.text || claimId)));
     appendSourceLinks(card, view.sourcesForClaims(claimIds)); evidence.append(card);
   });
-  panel.append(evidence);
+  supportingBody.append(evidence);
 
   const analogues = element("article", "section-card");
   const analogueTitle = element("div", "section-title"); analogueTitle.append(element("h3", "", "Historical analogues"), badge(assessment.historical_analogues.state));
@@ -248,13 +317,14 @@ function renderCatalystAssessment(view) {
     item.reaction_windows.forEach((window) => detail.append(element("p", "", `${window.label} (${formatDate(window.start)}–${formatDate(window.end)}): ${window.summary}`)));
     appendSourceLinks(detail, view.sourcesForClaims(item.claim_ids)); analogues.append(detail);
   });
-  appendSourceLinks(analogues, view.sourcesForClaims(assessment.historical_analogues.claim_ids)); panel.append(analogues);
+  appendSourceLinks(analogues, view.sourcesForClaims(assessment.historical_analogues.claim_ids)); supportingBody.append(analogues);
 
   const implication = element("article", "section-card");
   const implicationTitle = element("div", "section-title"); implicationTitle.append(element("h3", "", "Near-term evidence implication"), badge(assessment.near_term_implication.state));
   implication.append(implicationTitle, element("p", "muted", `${formatLabel(assessment.near_term_implication.direction)} · ${formatLabel(assessment.near_term_implication.confidence)} confidence`), element("p", "", assessment.near_term_implication.summary));
   assessment.uncertainty.forEach((note) => implication.append(element("p", "coverage-note", `Uncertainty: ${note}`)));
-  appendSourceLinks(implication, view.sourcesForClaims(assessment.near_term_implication.claim_ids)); panel.append(implication);
+  appendSourceLinks(implication, view.sourcesForClaims(assessment.near_term_implication.claim_ids)); supportingBody.append(implication);
+  supporting.append(supportingBody); panel.append(supporting);
   return panel;
 }
 function renderFinancialAssessment(view) {
@@ -317,9 +387,16 @@ function renderSources(view) {
     item.append(link, element("p", "source-meta", `${formatDate(source.published_date)} · ${formatLabel(source.source_type)} · ${formatLabel(source.confidence)} confidence`)); list.append(item);
   }); panel.append(list); return panel;
 }
-export function renderDashboard(container, report, operations = null) {
-  const view = buildDashboardView(report);
-  container.replaceChildren(renderHeader(view), renderOperations(operations), renderCoverage(view), renderFindings(view), renderFinancialAssessment(view), renderCatalystAssessment(view), renderScores(view), renderSections(view), renderSources(view)); container.hidden = false;
+function renderSupportingEvidence(view) {
+  const panel = element("section", "panel supporting-panel");
+  const details = element("details"); const body = element("div", "supporting-body");
+  details.append(element("summary", "", "Detailed research, unresolved findings, and evidence"));
+  body.append(renderFindings(view), renderCoverage(view), renderSections(view)); details.append(body); panel.append(details);
+  return panel;
+}
+export function renderDashboard(container, report, operations = null, { final = true } = {}) {
+  const view = buildDashboardView(report, { final, settledScoreKeys: settledScoreKeysForOperations(operations, final) });
+  container.replaceChildren(renderHeader(view), renderOperations(operations), renderCatalystAssessment(view), renderScores(view), renderFinancialAssessment(view), renderSupportingEvidence(view), renderSources(view)); container.hidden = false;
 }
 async function showRuntimeMode() {
   try {
@@ -350,7 +427,7 @@ export function initializeDashboard() {
           const lines = buffer.split("\n"); buffer = done ? "" : lines.pop();
           for (const line of lines) {
             if (!line.trim()) continue; const data = JSON.parse(line); if (data.type === "error") throw new Error(data.error);
-            if (data.type === "report") { received = true; renderDashboard(results, data.report, data.operations); status.textContent = data.final ? `${ticker} fast research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.` : `${ticker}: showing completed Fast domains while remaining checks continue…`; status.dataset.kind = data.final ? "success" : "loading"; }
+            if (data.type === "report") { received = true; const presentationFinal = data.final && data.report.metadata.completion_status !== "pending"; renderDashboard(results, data.report, data.operations, { final: presentationFinal }); status.textContent = presentationFinal ? `${ticker} fast research ${formatLabel(data.report.metadata.completion_status).toLowerCase()}.` : `${ticker}: showing completed Fast domains while remaining checks continue…`; status.dataset.kind = presentationFinal ? "success" : "loading"; }
           }
           if (done) break;
         }
