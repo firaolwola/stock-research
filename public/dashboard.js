@@ -246,7 +246,7 @@ function renderOperations(operations) {
     panel.append(element("p", "empty-note", "Provider usage and cost telemetry were unavailable; cost is unknown, not zero."));
     return panel;
   }
-  const cost = operations.estimated_cost_usd === null ? "Cost unknown" : `Estimated cost $${operations.estimated_cost_usd.toFixed(4)}`;
+  const cost = Number.isFinite(operations.estimated_cost_usd) ? `Estimated cost $${operations.estimated_cost_usd.toFixed(4)}` : "Cost unknown";
   panel.append(element("p", "", `${formatLabel(operations.stage)} · ${(operations.latency_ms / 1000).toFixed(1)}s · ${cost}`));
   const details = element("details", "operations-details"); const body = element("div", "operations-detail-body");
   details.append(element("summary", "", "Technical operations telemetry"));
@@ -258,6 +258,12 @@ function renderOperations(operations) {
   if (operations.stage === "fast" && operations.retrieval) body.append(element("p", "muted", `SEC retrieval: ${formatLabel(operations.retrieval.status)} · ${operations.retrieval.sec_request_count ?? "Unknown"} network requests`));
   if (operations.stage === "fast" && operations.bounded_sources) body.append(element("p", "muted", `Bounded sources: ${formatLabel(operations.bounded_sources.status)} · Nasdaq ${formatLabel(operations.bounded_sources.nasdaq)} · news ${formatLabel(operations.bounded_sources.news)}${operations.bounded_sources.news_reason ? ` (${formatLabel(operations.bounded_sources.news_reason)})` : ""} · market ${formatLabel(operations.bounded_sources.market)}${operations.bounded_sources.market_reason ? ` (${formatLabel(operations.bounded_sources.market_reason)})` : ""} · ${operations.bounded_sources.request_count} network requests · Alpha Vantage ${operations.bounded_sources.alpha_vantage_requests_today}/${operations.bounded_sources.alpha_vantage_free_daily_limit} local daily allowance`));
   if (operations.stage === "fast" && operations.within_cost_target === false) body.append(element("p", "coverage-note", "This report exceeded the $0.03 normal Fast cost ceiling."));
+  if (operations.stage === "deep" && operations.fast_foundation) {
+    const foundation = operations.fast_foundation;
+    body.append(element("p", "muted", `Fast foundation: ${formatLabel(foundation.mode)} · ${foundation.reused_fast_evidence_count ?? 0} evidence records reused · ${foundation.new_deep_evidence_count ?? 0} new Deep claims · ${foundation.duplicate_retrieval_avoided ?? 0} duplicate requests avoided`));
+    if (foundation.unresolved_components_targeted?.length) body.append(element("p", "muted", `Deep targeted unresolved components first: ${foundation.unresolved_components_targeted.map(formatLabel).join(", ")}.`));
+  }
+  if (operations.stage === "deep" && operations.evidence_lineage?.revisions?.length) body.append(element("p", "coverage-note", `${operations.evidence_lineage.revisions.length} Fast-to-Deep evidence revision${operations.evidence_lineage.revisions.length === 1 ? "" : "s"} retained for traceability.`));
   body.append(element("p", "muted", "Operational budgets do not certify evidence completeness; review coverage and unknowns below."));
   details.append(body); panel.append(details);
   return panel;

@@ -78,7 +78,13 @@ ceiling. Completion commits actual measured cost; cancellation or failure
 releases the reservation. Future provider adapters use this same interface and
 must not run when their maximum charge is unknown.
 
-Deep keeps its separate research budget and hosted-search behavior.
+Deep keeps its separate research budget and hosted-search behavior. Its elapsed
+telemetry includes any automatic Fast-foundation build. `fast_foundation`
+telemetry identifies whether that foundation was built, reused, refreshed for
+fast-moving sources, or rebuilt; it also reports age, source freshness,
+evidence reused, duplicate retrieval avoided, and unresolved components
+targeted. `evidence_lineage` reports preserved Fast claims, new Deep claims, and
+explicit revisions. These fields measure reuse but never certify completeness.
 
 ## Enforced budget behavior
 

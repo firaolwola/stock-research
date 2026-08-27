@@ -243,6 +243,13 @@ Deep may produce a broader comprehensive report, but it should not discard or
 needlessly repeat completed Fast research. Deep remains deliberately requested
 and separately budgeted.
 
+The implemented handoff validates and identity-gates Fast before Deep. It reuses
+a fresh in-memory snapshot, refreshes faster-moving exchange/news/market context
+after its shorter freshness window, and rebuilds the foundation when core
+evidence is stale. Deep targets unresolved scores and coverage gaps first.
+Conflicting newer evidence remains traceable beside the preserved Fast record;
+it is never a silent replacement.
+
 ## Reliability and success criteria
 
 The Fast reliability milestone succeeds only when:

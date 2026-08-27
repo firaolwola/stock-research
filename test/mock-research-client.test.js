@@ -20,6 +20,17 @@ test("mock client rejects unsupported tickers", async () => {
   await assert.rejects(client.researchTicker("MSFT"), UnsupportedDemoTickerError);
 });
 
+test("token-free Deep builds or reuses the deterministic Fast foundation", async () => {
+  const client = createMockResearchClient(await loadReportFixture("complete"));
+  const direct = await client.researchTicker("ACME", { stage: "deep" });
+  assert.equal(direct.operations.fast_foundation.mode, "built");
+  assert.equal(direct.operations.fast_foundation.status, "extended");
+  const sequential = await client.researchTicker("ACME", { stage: "deep" });
+  assert.equal(sequential.operations.fast_foundation.mode, "reused");
+  assert.ok(sequential.operations.fast_foundation.duplicate_retrieval_avoided > 0);
+  assert.equal(sequential.operations.estimated_cost_usd, 0);
+});
+
 test("mock client serves deterministic complete, partial, and pending reports", async () => {
   const complete = await loadReportFixture("complete");
   const partial = await loadReportFixture("partial");

@@ -3,17 +3,20 @@ import test from "node:test";
 import { createEvidenceFirstResearchClient } from "../evidence-first-research-client.js";
 import { loadReportFixture } from "../support/report-fixtures.js";
 import { createFastBudgetController } from "../lib/fast-budget-controller.js";
+import { createReportValidator } from "../lib/report-validation.js";
+import { loadReportSchema } from "../support/report-fixtures.js";
 
-const report = await loadReportFixture("partial"); report.metadata.stage = "fast";
-const packet = { ticker: "ACME", identity: { ticker: "ACME", issuer_legal_name: "Example Corp.", cik: "0000123456" }, records: [{ id: "evidence-sec-identity", category: "security_and_listing", text: "SEC identity", source_id: "source-1" }] };
+const report = await loadReportFixture("complete"); report.metadata.stage = "fast";
+const packet = { ticker: "ACME", identity: { ticker: "ACME", issuer_legal_name: "Acme Holdings, Inc.", cik: "0001234567" }, records: [{ id: "evidence-sec-identity", category: "security_and_listing", text: "SEC identity", source_id: "source-1" }] };
 const deterministic = { report, operations: { stage: "fast", web_search_calls: 0 }, evidence_packet: packet, evidence_records: packet.records };
+const reportValidator = createReportValidator(await loadReportSchema());
 
 function setup(responseOrError) {
   const requests = []; const deepCalls = [];
   const secClient = { getPacket() { return packet; }, async researchTicker() { return structuredClone(deterministic); } };
   const openai = { responses: { async create(request, options) { requests.push({ request, options }); if (responseOrError instanceof Error) throw responseOrError; return responseOrError; } } };
   const deepClient = { async researchTicker(ticker, options) { deepCalls.push({ ticker, options }); return { report }; } };
-  return { client: createEvidenceFirstResearchClient({ secClient, openai, deepClient }), requests, deepCalls };
+  return { client: createEvidenceFirstResearchClient({ secClient, openai, deepClient, reportValidator }), requests, deepCalls };
 }
 
 test("Fast synthesis has no tools and references only supplied evidence IDs", async () => {
@@ -32,7 +35,10 @@ test("failed or unsupported synthesis retains deterministic report", async () =>
 
 test("Deep receives the completed Fast evidence packet as seed", async () => {
   const { client, deepCalls } = setup(null); await client.researchTicker("ACME", { stage: "deep" });
-  assert.deepEqual(deepCalls[0].options.seedEvidence, packet);
+  assert.equal(deepCalls[0].options.seedEvidence.identity.ticker, "ACME");
+  assert.deepEqual(deepCalls[0].options.seedEvidence.evidence_records, packet.records);
+  assert.ok(deepCalls[0].options.seedEvidence.fast_report);
+  assert.ok(deepCalls[0].options.priorityPlan);
 });
 
 test("Fast skips synthesis before a paid call would exceed the cost ceiling", async () => {
@@ -55,7 +61,7 @@ test("slow synthesis receives cancellation and retains deterministic evidence", 
     return new Promise((_resolve, reject) => options.signal.addEventListener("abort", () => reject(options.signal.reason), { once: true }));
   } } };
   const deepClient = { async researchTicker() { return { report }; } };
-  const client = createEvidenceFirstResearchClient({ secClient, openai, deepClient });
+  const client = createEvidenceFirstResearchClient({ secClient, openai, deepClient, reportValidator });
   const budget = createFastBudgetController({ elapsedLimitMs: 40, finalizationReserveMs: 10 });
   const result = await client.researchTicker("ACME", { budget });
   assert.equal(providerSignal.aborted, true);
