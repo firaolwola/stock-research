@@ -4,6 +4,23 @@ Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.
 
+## 2026-08-27 — Keep deterministic identity and financial derivations conservative
+
+**Status:** Implemented
+
+**Decision:** Treat SEC ticker/CIK/issuer association separately from unsupported
+security type and active-listing conclusions. Preserve dated SEC former-name
+metadata, reject cross-domain or returned-ticker identity disagreement, and leave
+exhaustive ticker lineage to Deep. Populate free cash flow only from aligned
+operating cash flow and capital expenditures. Populate total debt only from
+aligned current and non-current components. Stale, conflicting, partial, or
+unit-incompatible liquidity inputs remain Limited or Unknown; runway is not
+calculated without current comparable cash and positive burn evidence.
+
+**Why:** Calling OCF free cash flow, calling one debt component total debt, or
+using stale/partial liquidity as current can falsely reassure the user. These are
+evidence-correctness rules; score-formula redesign remains owned by Issue #52.
+
 ## 2026-08-27 — Enforce Fast limits with one provider-neutral controller
 
 **Status:** Implemented from the approved operating policy
@@ -80,23 +97,6 @@ calculations and sources remain inspectable below.
 **Why:** The internal scale preserves calibration and comparison precision while
 the star presentation makes the Fast dashboard quickly scannable without
 rewriting the report contract solely for visual design.
-
-## 2026-08-27 — Keep deterministic identity and financial derivations conservative
-
-**Status:** Implemented
-
-**Decision:** Treat SEC ticker/CIK/issuer association separately from unsupported
-security type and active-listing conclusions. Preserve dated SEC former-name
-metadata, reject cross-domain or returned-ticker identity disagreement, and leave
-exhaustive ticker lineage to Deep. Populate free cash flow only from aligned
-operating cash flow and capital expenditures. Populate total debt only from
-aligned current and non-current components. Stale, conflicting, partial, or
-unit-incompatible liquidity inputs remain Limited or Unknown; runway is not
-calculated without current comparable cash and positive burn evidence.
-
-**Why:** Calling OCF free cash flow, calling one debt component total debt, or
-using stale/partial liquidity as current can falsely reassure the user. These are
-evidence-correctness rules; score-formula redesign remains owned by Issue #52.
 
 ## 2026-08-26 — Bound the complete Fast pipeline by cost and elapsed time
 

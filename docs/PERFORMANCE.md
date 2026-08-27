@@ -34,6 +34,12 @@ Production Fast currently retrieves:
 - at most four selected primary filing documents; and
 - at most one directly linked material exhibit.
 
+SEC issuer/ticker/CIK association is kept separate from security type and active
+listing status, which remain Limited until authoritative support exists. Company
+Facts normalization derives FCF only from aligned OCF and capital expenditures,
+derives total debt only from aligned current and non-current components, and
+withholds stale or conflicting liquidity values from current decision use.
+
 It caches the ticker map for six hours and issuer data or filing documents for
 five minutes, coalesces concurrent requests, declares a User-Agent, and paces SEC
 request starts. One request-scoped controller now governs the entire Fast path.
