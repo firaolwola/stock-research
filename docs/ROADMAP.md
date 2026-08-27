@@ -57,7 +57,7 @@ verdict.
 
 ### Ordered implementation dependencies
 
-1. [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
+1. [x] [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
 2. [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
 3. [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
 4. [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). Provider selection, payment, scraping, integration, and new production dependencies require explicit owner approval.
@@ -75,10 +75,10 @@ dependency because orchestration, scoring sufficiency, provider budgets, and
 calibration all depend on which evidence can be obtained reliably and legally
 within Fast's limits.
 
-The #48 source map and provider comparison are documented in
-`FAST_SOURCE_STRATEGY.md`. The recommendation is intentionally pending explicit
-owner approval; #49 and #51 must not treat the preferred pilot candidate as
-selected until that approval is recorded.
+The provider-neutral #48 source map and bounded architecture are approved and
+documented in `FAST_SOURCE_STRATEGY.md`. No named provider is selected. #49 may
+proceed with provider-neutral deadline and cost controls; #51 remains blocked on
+a separate explicit provider selection after licensing and coverage evidence.
 
 ### Milestone acceptance criteria
 

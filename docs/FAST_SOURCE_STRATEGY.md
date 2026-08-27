@@ -1,6 +1,6 @@
 # Bounded Fast source strategy
 
-**Status:** Proposed for owner approval
+**Status:** Architecture accepted by product owner; named provider not selected
 
 **Last reviewed:** 2026-08-26
 
@@ -47,12 +47,13 @@ be selected within the current cost evidence.
 
 This recommendation does not approve a subscription, scraping, credentials,
 provider integration, or production dependency. There are two separate owner
-decisions:
+decisions. The first was approved on 2026-08-26; the second remains outstanding:
 
-1. Approve this provider-neutral source-responsibility map and bounded
+1. **Approved:** use this provider-neutral source-responsibility map and bounded
    architecture.
-2. After written rights and a small-cap coverage sample are available, select
-   one provider: authorize a Massive entitlement inquiry, accept Alpaca's
+2. **Not approved:** after written rights and a small-cap coverage sample are
+   available, select one provider: authorize a Massive entitlement inquiry,
+   accept Alpaca's
    delayed-market fallback subject to its own terms check, or authorize premium
    Benzinga/newswire and market-data quotes. #51 must stop for that selection and
    may not silently substitute another vendor.
@@ -257,9 +258,9 @@ workflow does not repeat successful bounded retrieval.
 
 ## Handoff to dependent issues
 
-- **#49:** enforce one shared 20-second deadline and shared cost ledger across
-  SEC, exchange, provider, original-source promotion, optional synthesis,
-  scoring, and finalization.
+- **#49:** may proceed without a named provider. Enforce one shared 20-second
+  deadline and provider-neutral cost ledger across SEC, exchange, provider,
+  original-source promotion, optional synthesis, scoring, and finalization.
 - **#51:** after the architecture approval and a separate explicit named-provider
   selection, implement only that candidate, the two-call provider ceiling,
   attribution, identity gating, primary-source promotion, cache policy, and

@@ -152,9 +152,10 @@ The preferred top-to-bottom order is:
 Fast is SEC-first for filing-based risks, but not SEC-only when another bounded
 source is better for current news or market context.
 
-The proposed source-responsibility map, score-level evidence contracts, and
-provider comparison are maintained in `FAST_SOURCE_STRATEGY.md`. That proposal
-is awaiting explicit owner approval and does not select or authorize a provider.
+The approved provider-neutral source-responsibility map, score-level evidence
+contracts, and candidate comparison are maintained in
+`FAST_SOURCE_STRATEGY.md`. It authorizes the bounded architecture, not a named
+provider, subscription, credential, or integration.
 
 Use sources in this order when available:
 
