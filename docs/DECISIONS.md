@@ -4,6 +4,30 @@ Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.
 
+## 2026-08-26 — Assign bounded Fast sources by evidence responsibility
+
+**Status:** Accepted by product owner
+
+**Decision:** Fast uses a provider-neutral bounded source graph. SEC, exchange,
+issuer, original-newswire, and original-reporting sources retain authoritative
+responsibility for the facts they originate. At most one approved external API
+may provide bounded current-news discovery and market data. A material event
+found through a secondary service is promoted to an original source when
+reasonably available; missing coverage remains `Limited` or `Unscored`.
+Open-ended web search remains Deep-only.
+
+No named provider is selected. Massive, Alpaca, Benzinga, TipRanks, and other
+candidates require a separate owner decision after licensing, derived/AI-use,
+coverage, pricing, attribution, and integration evidence is sufficient. In
+particular, Massive data must not drive scoring or OpenAI synthesis unless the
+intended derived use is clearly licensed.
+
+**Why:** Source responsibility is stable even when vendors change. A small,
+known request graph can terminate within Fast's shared limits while preserving
+primary attribution and avoiding false reassurance from missing discovery data.
+The detailed map and seven score evidence contracts are recorded in
+`FAST_SOURCE_STRATEGY.md`.
+
 ## 2026-08-26 — Make Fast an evidence-backed seven-score report
 
 **Status:** Accepted by product owner
