@@ -38,6 +38,13 @@ Production Fast currently retrieves:
   one end-of-day market-data request per uncached ticker, plus at most one
   bounded original-newswire promotion request.
 
+The two Alpha Vantage requests are serialized, market first, with a 250 ms gap.
+A live SWVL structural probe confirmed that `TIME_SERIES_DAILY` returns the
+expected `Meta Data` and `Time Series (Daily)` shape with `4. close` and
+`5. volume`. Concurrent free-tier requests intermittently returned HTTP 200
+with an `Information` object for one request, so concurrency was removed. This
+adds a small bounded delay while avoiding a false generic no-data result.
+
 SEC issuer/ticker/CIK association is kept separate from security type and active
 listing status. Identity-gated Nasdaq data may resolve those fields; unsupported
 or conflicting venues remain Limited. Company
@@ -52,6 +59,12 @@ minute, and Alpha Vantage ticker results for five minutes. A local UTC-day
 counter stops new Alpha Vantage work at its 25-request free allowance, while
 provider quota responses settle the affected source as Limited. One
 request-scoped controller governs the entire Fast path.
+
+Market telemetry records a safe reason such as `provider_quota`,
+`premium_endpoint`, `invalid_request_or_symbol`, `provider_information`,
+`missing_daily_series`, `invalid_daily_bar`, or `stale_daily_bar`. Daily bars
+older than seven calendar days are Limited. Logs include only source category,
+response keys, status/reason, and request count—not credentials or response text.
 It stops source work after 19.5 seconds, reserving 0.5 seconds for scoring,
 validation, telemetry, and response finalization before the 20-second hard
 ceiling. The same abort signal reaches SEC pacing waits, queued/shared waits,

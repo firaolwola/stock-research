@@ -96,6 +96,12 @@ cost, and reliability remain uncalibrated. See
    is optional. With a free key, Fast uses at most two uncached Alpha Vantage
    requests per ticker for discovery and end-of-day context. Without a key, or
    after quota exhaustion, those areas remain Limited while SEC/Nasdaq evidence survives.
+   The two free Alpha Vantage calls are deliberately serialized because the
+   provider can return HTTP 200 with an informational response when they are
+   submitted concurrently. Operations telemetry distinguishes quota, premium
+   entitlement, invalid request/symbol, missing series, invalid bar, stale bar,
+   timeout, and other provider-information outcomes without logging the key or
+   provider message.
 
 3. Start the application:
 

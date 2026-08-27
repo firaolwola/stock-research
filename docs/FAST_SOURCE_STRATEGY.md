@@ -34,6 +34,10 @@ a local UTC-day counter, uses five-minute ticker caches, recognizes provider
 quota responses, and settles missing news/market work as Limited. Nasdaq
 directories are cached for 24 hours and halt data for one minute. All requests
 use #49's shared cancellation signal and zero-dollar source ledger entries.
+Alpha Vantage calls are serialized, market first, because live investigation
+showed that simultaneous free-tier requests can return HTTP 200 plus an
+informational object instead of the requested dataset. Safe telemetry retains
+the response category and market parse/freshness reason.
 
 ## Source roles
 
