@@ -353,7 +353,9 @@
       "properties": {
         "id": { "$ref": "#/$defs/sourceId" }, "title": { "$ref": "#/$defs/nonEmptyString" }, "url": { "type": "string", "format": "uri", "pattern": "^https://" },
         "published_date": { "$ref": "#/$defs/date" }, "source_type": { "enum": ["sec_filing", "exchange_notice", "company_release", "company_filing", "original_news", "secondary_aggregator", "other_primary", "other_secondary"] },
-        "confidence": { "$ref": "#/$defs/confidence" }, "retrieved_at": { "$ref": "#/$defs/dateTime" }, "supported_claim_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/claimId" }, "uniqueItems": true }
+        "confidence": { "$ref": "#/$defs/confidence" }, "retrieved_at": { "$ref": "#/$defs/dateTime" }, "supported_claim_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/claimId" }, "uniqueItems": true },
+        "provider_name": { "type": "string", "minLength": 1 }, "data_type": { "enum": ["market_context", "news_discovery"] },
+        "freshness": { "enum": ["current", "stale", "unknown"] }, "evidence_role": { "enum": ["discovery_only", "market_context", "promoted_original"] }
       }
     }
   }

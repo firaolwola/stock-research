@@ -135,5 +135,6 @@ test("Issue 55 batch 3 freezes the same five cases and refuses approval-day quot
   assert.equal(plan.alpha_vantage_preflight.inferred_remaining_on_approval_day, 5);
   assert.equal(plan.alpha_vantage_preflight.approved_batch_3_requests, 10);
   assert.equal(plan.alpha_vantage_preflight.status, "blocked_until_daily_reset");
+  assert.equal(plan.provider_policy.requires_owner_review_after_architecture_change, true);
   assert.equal(plan.preserve_prior_batches.length, 2);
 });

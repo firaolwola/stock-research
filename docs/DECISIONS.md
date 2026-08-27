@@ -4,6 +4,27 @@ Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.
 
+## 2026-08-27 — Make bounded market/news retrieval interchangeable
+
+**Status:** Accepted and implemented; calibration policy review still required
+
+**Decision:** Preserve SEC and exchange authority while routing optional market
+and discovery operations through an ordered provider-neutral pool. Alpha
+Vantage and Twelve Data Basic are approved for internal/personal discovery and
+end-of-day context only. Operations fall back independently, share the Fast
+deadline, cache, and zero-dollar ledger, and expose normalized provenance and
+quota telemetry. Twelve Data press-release bodies, and all provider summaries,
+sentiment, and article text, are excluded from OpenAI and material scoring.
+
+**Why:** A free-tier provider can be unavailable, malformed, or quota-limited
+without making the authoritative SEC/Nasdaq report unusable. An adapter boundary
+prevents an outage from becoming an application dependency and permits later
+replacement without changing score semantics.
+
+**Consequence:** No paid plan or production dependency is added. Missing optional
+context remains Limited. The frozen Issue #55 Batch 3 must not run until the
+owner separately approves its revised provider order and live request ceilings.
+
 ## 2026-08-27 — Make validated Fast evidence the mandatory Deep foundation
 
 **Status:** Implemented by Issue #54
@@ -62,21 +83,19 @@ news and market sources participate without coupling orchestration to a vendor.
 
 ## 2026-08-26 — Assign bounded Fast sources by evidence responsibility
 
-**Status:** Accepted and implemented by Issues #48 and #51
+**Status:** Source responsibilities remain accepted; single-provider selection detail superseded by the 2026-08-27 adapter-pool decision
 
 **Decision:** Fast uses a provider-neutral bounded source graph. SEC, exchange,
 issuer, original-newswire, and original-reporting sources retain authoritative
-responsibility for the facts they originate. At most one approved external API
-may provide bounded current-news discovery and market data. A material event
+responsibility for the facts they originate. Approved external adapters may
+provide bounded current-news discovery and market data. A material event
 found through a secondary service is promoted to an original source when
 reasonably available; missing coverage remains `Limited` or `Unscored`.
 Open-ended web search remains Deep-only.
 
-No named provider is selected. Massive, Alpaca, Benzinga, TipRanks, and other
-candidates require a separate owner decision after licensing, derived/AI-use,
-coverage, pricing, attribution, and integration evidence is sufficient. In
-particular, Massive data must not drive scoring or OpenAI synthesis unless the
-intended derived use is clearly licensed.
+Provider selection was intentionally deferred here and later resolved narrowly
+for Alpha Vantage and Twelve Data Basic. Massive, Alpaca, Benzinga, TipRanks,
+and other candidates still require a separate owner decision.
 
 **Why:** Source responsibility is stable even when vendors change. A small,
 known request graph can terminate within Fast's shared limits while preserving

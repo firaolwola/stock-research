@@ -190,9 +190,11 @@ source is better for current news or market context.
 
 The approved source-responsibility map and score-level evidence contracts are
 maintained in `FAST_SOURCE_STRATEGY.md`. The implemented free-first stack uses
-SEC and Nasdaq Trader as authoritative public sources and Alpha Vantage's free
-tier for discovery and end-of-day market context. No paid subscription is
-approved.
+SEC and Nasdaq Trader as authoritative public sources and an interchangeable
+free-tier adapter layer for discovery and end-of-day market context. Alpha
+Vantage and Twelve Data Basic are approved for this narrow internal/personal
+role. Neither provider supplies authoritative financial facts or material-score
+evidence, and no paid subscription is approved.
 
 Use sources in this order when available:
 

@@ -35,8 +35,9 @@ Production Fast currently retrieves:
   corporate-action/accounting candidates; and
 - at most one directly linked material exhibit;
 - cached Nasdaq Trader current-symbol and halt data; and
-- when a free key is configured, at most one Alpha Vantage news-discovery and
-  one end-of-day market-data request per uncached ticker, plus at most one
+- when a free key is configured, at most one successful provider-neutral news
+  and one end-of-day market operation per uncached ticker, with ordered bounded
+  fallback attempts, plus at most one
   bounded original-newswire promotion request.
 
 The two Alpha Vantage requests are serialized, market first, with a 250 ms gap.
@@ -59,9 +60,10 @@ share discontinuities remain Limited.
 It caches the ticker map for six hours and issuer data or filing documents for
 five minutes, coalesces concurrent requests, declares a User-Agent, and paces SEC
 request starts. Nasdaq directory data is cached for 24 hours, halt data for one
-minute, and Alpha Vantage ticker results for five minutes. A local UTC-day
-counter stops new Alpha Vantage work at its 25-request free allowance, while
-provider quota responses settle the affected source as Limited. One
+minute, and provider ticker results for five minutes. Local counters stop Alpha
+Vantage at 25/day and Twelve Data at 8/minute or 800/day; cache hits consume
+neither counter. Quota responses trigger an approved fallback or settle the
+affected source as Limited. One
 request-scoped controller governs the entire Fast path.
 
 Market telemetry records a safe reason such as `provider_quota`,
@@ -159,8 +161,9 @@ fields and use only owner-approved paid bounds.
 snapshot. Pricing and tool fees can change and must be checked against official
 provider terms before interpreting or approving a new measured run.
 
-Alpha Vantage's free API is approved only for personal deterministic market
-context and ticker-news discovery. Its summaries, sentiment, and article bodies
-do not enter OpenAI packets or material scoring. No paid plan is approved;
+Alpha Vantage and Twelve Data Basic are approved only for personal/internal
+market context and ticker/news discovery. Provider summaries, sentiment,
+press-release bodies, and article bodies do not enter OpenAI packets or material
+scoring. No paid plan is approved;
 selecting another provider, paying, scraping, or broadening licensed use still
 requires explicit owner approval.

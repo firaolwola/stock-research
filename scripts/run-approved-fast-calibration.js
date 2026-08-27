@@ -10,6 +10,7 @@ import { createSecEvidenceClient } from "../lib/sec-evidence.js";
 import { createBoundedFastSourceClient } from "../lib/bounded-fast-sources.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
+import { evaluateCalibrationProviderAvailability } from "../lib/calibration-provider-policy.js";
 import { loadRealAppConfig } from "../startup-config.js";
 
 dotenv.config({ quiet: true });
@@ -30,10 +31,10 @@ if (plan.approval.maximum_runs !== 5 || plan.approval.runs_per_ticker !== 1 || p
 if (JSON.stringify(plan.approval.tickers) !== JSON.stringify(basePlan.approval.tickers) || batchPlan.configuration.change_from_batch_2 !== "none" || batchPlan.approval.deep_runs !== 0 || batchPlan.approval.hosted_web_search !== false) {
   throw new Error("Batch 3 must preserve the original cases and Fast configuration without Deep or hosted search.");
 }
-const currentDay = new Date().toISOString().slice(0, 10);
-if (currentDay === batchPlan.alpha_vantage_preflight.usage_day && batchPlan.alpha_vantage_preflight.inferred_remaining_on_approval_day < plan.approval.maximum_alpha_vantage_requests) {
-  throw new Error("The recorded Alpha Vantage allowance cannot cover Batch 3 until the daily quota resets.");
-}
+const currentDay = new Date().toISOString().slice(0, 10); const configuredProviders = [process.env.ALPHA_VANTAGE_API_KEY?.trim() ? "alpha_vantage" : null, process.env.TWELVE_DATA_API_KEY?.trim() ? "twelve_data" : null].filter(Boolean);
+const alphaAvailable = currentDay === batchPlan.alpha_vantage_preflight.usage_day ? batchPlan.alpha_vantage_preflight.inferred_remaining_on_approval_day : batchPlan.alpha_vantage_preflight.free_daily_limit;
+const providerPreflight = evaluateCalibrationProviderAvailability({ alphaRequestsAvailable: alphaAvailable, alphaRequestsRequired: plan.approval.maximum_alpha_vantage_requests, configuredProviders: configuredProviders.filter((provider) => batchPlan.provider_policy.approved_providers.includes(provider)), optionalContextMaySettleLimited: batchPlan.provider_policy.optional_context_may_settle_limited, requiresOwnerReview: batchPlan.provider_policy.requires_owner_review_after_architecture_change });
+if (!providerPreflight.allowed) throw new Error(`Batch 3 provider preflight blocked: ${providerPreflight.reason}.`);
 for (const preserved of batchPlan.preserve_prior_batches) {
   for (const [name, expected] of [["summary.json", preserved.summary_sha256], ["run-summary.json", preserved.run_summary_sha256]]) {
     const original = await readFile(path.join(root, ...preserved.directory.split("/"), name));
@@ -51,12 +52,12 @@ await mkdir(path.join(outputRoot, "raw"), { recursive: true });
 await mkdir(path.join(outputRoot, "review"), { recursive: true });
 
 const config = loadRealAppConfig();
-if (!config.alphaVantageApiKey) throw new Error("ALPHA_VANTAGE_API_KEY is required for this approved calibration.");
+if (!config.alphaVantageApiKey && !config.twelveDataApiKey) console.warn("No optional market/news provider is configured; calibration will preserve SEC/Nasdaq evidence and settle optional context Limited.");
 const schema = JSON.parse(await readFile(path.join(root, "schema", "stock-report.schema.json"), "utf8"));
 const reportValidator = createReportValidator(schema);
 const openai = new OpenAI({ apiKey: config.apiKey });
 const deepClient = createOpenAIResearchClient(openai, { schema });
-const boundedSourceClient = createBoundedFastSourceClient({ alphaVantageApiKey: config.alphaVantageApiKey });
+const boundedSourceClient = createBoundedFastSourceClient({ alphaVantageApiKey: config.alphaVantageApiKey, twelveDataApiKey: config.twelveDataApiKey, providerOrder: config.marketProviderOrder });
 const client = createEvidenceFirstResearchClient({
   secClient: createSecEvidenceClient({ userAgent: config.secUserAgent }),
   boundedSourceClient,
@@ -101,6 +102,7 @@ for (const scenario of plan.cases) {
       input_tokens: result.operations?.input_tokens ?? null,
       output_tokens: result.operations?.output_tokens ?? null,
       alpha_vantage_requests_today: result.operations?.bounded_sources?.alpha_vantage_requests_today ?? null,
+      provider_usage: result.operations?.bounded_sources?.providers ?? null,
       completion_status: calibratedReport?.metadata?.completion_status ?? null,
       termination_reason: result.operations?.budget?.termination_reason ?? null
     });

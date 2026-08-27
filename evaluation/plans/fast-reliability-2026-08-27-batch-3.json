@@ -31,6 +31,12 @@
     "sdk_retries": 0,
     "budget_class": "normal"
   },
+  "provider_policy": {
+    "approved_providers": ["alpha_vantage"],
+    "optional_context_may_settle_limited": true,
+    "requires_owner_review_after_architecture_change": true,
+    "note": "Batch 3 remains frozen. Adding Twelve Data to this calibration requires owner review of the resulting provider plan; the architecture change itself does not silently alter the approved evaluation source policy."
+  },
   "alpha_vantage_preflight": {
     "free_daily_limit": 25,
     "usage_day": "2026-08-27",

@@ -70,13 +70,13 @@ verdict.
 1. [x] **Complete:** [#48 — Evaluate and approve the bounded Fast source strategy](https://github.com/firaolwola/stock-research/issues/48).
 2. [x] **Complete:** [#49 — Enforce end-to-end Fast time and cost budgets](https://github.com/firaolwola/stock-research/issues/49).
 3. [x] **Complete:** [#50 — Correct Fast identity and financial evidence semantics](https://github.com/firaolwola/stock-research/issues/50).
-4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and optional Alpha Vantage free-tier discovery/end-of-day context.
+4. [x] **Complete:** [#51 — Implement the approved bounded news and market-context strategy](https://github.com/firaolwola/stock-research/issues/51). The approved free-first stack uses SEC, Nasdaq Trader, original-source promotion, and an interchangeable Alpha Vantage/Twelve Data Basic discovery/EOD layer.
 5. [x] **Complete:** [#52 — Redesign and version Fast scoring methodology](https://github.com/firaolwola/stock-research/issues/52). Methodology 2.0.0 replaces misleading proxies, defines score-specific evidence gates, and keeps long-term quality Deep-only.
 6. [x] **Complete:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53), including the owner-approved post-#53 refinement to one compact score summary, honest financial charts, and a separate explanation block.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — calibration remains blocked pending owner approval:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Two approved batches failed the recall and severe-miss gates; the reproduced deterministic blockers now have offline corrections, but no later batch is authorized.
+8. [ ] **Active — Batch 3 paused for provider-plan review:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Two approved batches failed the recall and severe-miss gates; deterministic blockers have offline corrections. Batch 3 is frozen but must not run until the owner approves its provider order and request ceilings after the adapter change.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -85,8 +85,9 @@ Issue #55 remains active. The approved second five-ticker batch improved recall
 from 66.28% to 82.56% but did not pass. The reproduced overbroad non-reliance,
 AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
 Limited-series defects now have deterministic regression fixes on PR #74.
-The next active step is owner review and explicit authorization of any further
-bounded calibration; no third live batch is authorized. A future approved
+The next active step is owner review of the frozen Batch 3 provider plan. The
+ticker set and paid budget were already approved, but the new fallback order
+and per-provider request ceilings require explicit confirmation. A future approved
 sparse-category batch can target completed
 splits, listing/going-concern cases, a foreign ADR/20-F, and an OTC/delisted
 security. A paid data

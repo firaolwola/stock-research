@@ -270,10 +270,14 @@ strict mode disabled because the contract uses Draft 2020-12 features beyond
 the API strict subset. Production Fast assembles the same v4 contract from
 server-retrieved evidence and validates every progressive and final report.
 Current Fast retrieval combines authoritative SEC evidence, bounded public
-Nasdaq Trader context, optional Alpha Vantage free-tier discovery/end-of-day
+Nasdaq Trader context, optional provider-neutral free-tier discovery/end-of-day
 context, original-source promotion, and optional tool-disabled classification.
 Provider formatting or discovery summaries are never treated as authoritative
 validation or sole material evidence.
+
+Optional source provenance fields identify `provider_name`, `data_type`,
+`freshness`, and `evidence_role`. They distinguish provider discovery, market
+observations, and promoted original evidence without changing claim authority.
 
 Catalyst validation additionally requires confirmed catalysts to have a date,
 classification, sourced claims, and meaningful confidence. Confirmed analogues
