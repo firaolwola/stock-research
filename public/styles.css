@@ -84,15 +84,19 @@ button:disabled { cursor: wait; opacity: .62; }
 .market-value { font-weight: 800; }
 .supporting-body { display: grid; gap: 14px; margin-top: 14px; }
 .supporting-body > .panel { background: #0e1722; }
-.financial-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
-.financial-chart { min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #0e1722; }
+.financial-chart-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.financial-chart { min-width: 0; padding: 14px; border: 1px solid #26384b; border-radius: 8px; background: linear-gradient(180deg, #101a26, #0b131d); box-shadow: inset 0 1px rgba(255,255,255,.025); }
 .vertical-bar-chart { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 8px; margin-top: 14px; }
 .chart-y-axis { display: flex; height: 170px; flex-direction: column; justify-content: space-between; align-items: flex-end; color: var(--muted); font-size: .7rem; }
-.chart-plot { position: relative; display: flex; height: 190px; align-items: stretch; justify-content: space-around; gap: 8px; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0 8px 20px; }
+.chart-plot { position: relative; display: flex; height: 190px; align-items: stretch; justify-content: space-around; gap: 8px; border-left: 1px solid #33465c; border-bottom: 1px solid #33465c; padding: 0 8px 20px; background: repeating-linear-gradient(to bottom, transparent 0, transparent 41px, rgba(84,106,132,.13) 42px); }
 .chart-zero-line { position: absolute; right: 0; left: 0; border-top: 1px dashed #60748c; pointer-events: none; }
 .chart-column { position: relative; flex: 1 1 54px; max-width: 80px; height: 170px; }
 .vertical-bar { position: absolute; left: 18%; width: 64%; min-height: 2px; border-radius: 5px 5px 0 0; background: var(--accent); }
 .vertical-bar.negative { border-radius: 0 0 5px 5px; background: var(--warning); }
+.chart-cyan .vertical-bar.positive { background: #26a69a; }
+.chart-blue .vertical-bar.positive { background: #2962ff; }
+.chart-amber .vertical-bar.positive { background: #f0b90b; }
+.chart-purple .vertical-bar.positive { background: #ab47bc; }
 .chart-bar-value { position: absolute; top: 4px; left: 0; width: 100%; color: var(--text); font-size: .68rem; text-align: center; }
 .chart-x-label { position: absolute; top: 174px; left: -10px; width: calc(100% + 20px); color: var(--muted); font-size: .65rem; line-height: 1.1; text-align: center; }
 .chart-unavailable { min-height: 42px; color: var(--unknown); font-weight: 750; }
@@ -118,6 +122,7 @@ footer { padding: 26px 0 40px; font-size: .84rem; }
 @media (max-width: 980px) {
   .fast-top-layout { grid-template-columns: 1fr; }
   .fast-score-sidebar { grid-row: auto; }
+  .financial-chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 680px) {
   .site-header, main, footer { width: min(100% - 20px, 1180px); }

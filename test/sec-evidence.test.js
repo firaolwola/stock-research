@@ -15,6 +15,11 @@ const submissions = { name: "Example Corp.", formerNames: [{ name: "Old Example 
 const facts = { facts: { "us-gaap": {
   CashAndCashEquivalentsAtCarryingValue: { label: "Cash", units: { USD: [{ val: 5000000, end: "2026-06-30", filed: "2026-08-15", file: "2026-08-15", accn: "0000123456-26-000001", form: "10-Q" }] } },
   RevenueFromContractWithCustomerExcludingAssessedTax: { label: "Revenue", units: { USD: [{ val: 8000000, start: "2026-04-01", end: "2026-06-30", filed: "2026-08-15", file: "2026-08-15", accn: "0000123456-26-000001", form: "10-Q" }] } }
+}, dei: {
+  EntityCommonStockSharesOutstanding: { label: "Common shares outstanding", units: { shares: [
+    { val: 100000000, end: "2026-03-31", filed: "2026-05-15", accn: "0000123456-26-000000", form: "10-Q" },
+    { val: 120000000, end: "2026-06-30", filed: "2026-08-15", accn: "0000123456-26-000001", form: "10-Q" }
+  ] } }
 } } };
 const documentText = {
   "event.htm": "The Company entered into a material supply contract with an initial committed value of $20 million.",
@@ -49,6 +54,8 @@ test("SEC Fast pipeline emits identity first, normalizes evidence, and validates
   assert.equal(progress[0].operations.retrieval.status, "in_progress");
   assert.equal(result.operations.web_search_calls, 0);
   assert.equal(result.report.financial_assessment.metrics.cash.value, 5000000);
+  assert.deepEqual(result.report.financial_assessment.shares_outstanding.observations.map((item) => item.value), [100000000, 120000000]);
+  assert.match(result.report.financial_assessment.shares_outstanding.summary, /increased 20\.0%/);
   assert.equal(result.report.catalyst_assessment.current.state, "confirmed");
   assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
 });

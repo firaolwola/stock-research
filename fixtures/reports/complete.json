@@ -299,6 +299,15 @@
         ]
       }
     },
+    "shares_outstanding": {
+      "state": "confirmed",
+      "summary": "Reported shares outstanding increased 20.0% from March 31 to June 30, 2026.",
+      "observations": [
+        { "value": 100000000, "unit": "shares", "period_start": "2026-03-31", "period_end": "2026-03-31", "claim_ids": ["claim-shares-outstanding"] },
+        { "value": 120000000, "unit": "shares", "period_start": "2026-06-30", "period_end": "2026-06-30", "claim_ids": ["claim-shares-outstanding"] }
+      ],
+      "claim_ids": ["claim-shares-outstanding"]
+    },
     "going_concern": {
       "state": "not_found",
       "as_of": "2026-08-05",
@@ -803,6 +812,14 @@
       ]
     },
     {
+      "id": "claim-shares-outstanding",
+      "text": "ACME reported 100 million common shares outstanding at March 31, 2026 and 120 million at June 30, 2026.",
+      "materiality": "high",
+      "state": "confirmed",
+      "as_of": "2026-08-24T15:00:00Z",
+      "source_ids": ["source-sec"]
+    },
+    {
       "id": "claim-catalyst",
       "text": "The issuer announced a material multi-year customer contract on August 23, 2026.",
       "materiality": "high",
@@ -860,7 +877,8 @@
         "claim-lineage",
         "claim-splits",
         "claim-warnings",
-        "claim-financial"
+        "claim-financial",
+        "claim-shares-outstanding"
       ]
     },
     {

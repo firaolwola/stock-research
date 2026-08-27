@@ -251,3 +251,12 @@ test("financial chart observations reject incompatible units, periods, and curre
     assert.ok(errors.some((error) => error.message.includes(message)), `${message}: ${JSON.stringify(errors)}`);
   }
 });
+
+test("shares outstanding stays distinct from float and potential dilution", async () => {
+  const report = await loadReportFixture("complete");
+  assert.equal(validateReport(report).valid, true);
+  report.financial_assessment.shares_outstanding.observations[0].unit = "float";
+  const result = validateReport(report);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => /shares outstanding observations must use shares/.test(error.message)));
+});

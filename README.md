@@ -24,7 +24,9 @@ catalyst content; smaller screens stack the same sections. Financial display
 rows without an independent methodology score remain Unscored, and detailed
 financial reasoning is consolidated under Financial Health. Compact vertical
 bar charts compare only source-linked, definition- and period-compatible
-observations; one observation never implies a trend. Capital-risk explanations,
+observations; one observation never implies a trend. A separate SEC-reported
+shares-outstanding chart shows bounded point-in-time share-base history without
+presenting it as float or potential dilution. Capital-risk explanations,
 inputs, and sources remain independently expandable.
 Comparison remains planned behind the Fast reliability milestone.
 

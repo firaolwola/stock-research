@@ -197,8 +197,19 @@
             "debt": { "$ref": "#/$defs/financialMetric" }
           }
         },
+        "shares_outstanding": { "$ref": "#/$defs/shareSeries" },
         "going_concern": { "$ref": "#/$defs/goingConcernAssessment" },
         "material_warnings": { "type": "array", "items": { "$ref": "#/$defs/financialWarning" } }
+      }
+    },
+    "shareSeries": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "summary", "observations", "claim_ids"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
     },
     "assessmentFactor": {

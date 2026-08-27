@@ -336,39 +336,46 @@ function renderCatalystAssessment(view) {
   supporting.append(supportingBody); panel.append(supporting);
   return panel;
 }
+function renderVerticalBarChart({ label, observations, state, summary, colorClass = "chart-blue" }) {
+  const card = element("article", "financial-chart");
+  const title = element("div", "section-title"); title.append(element("h3", "", label), badge(state)); card.append(title);
+  if (!observations.length) {
+    card.append(element("p", "chart-unavailable", `${formatLabel(state)} — no trustworthy chart is available.`), element("p", "muted", summary));
+    return card;
+  }
+  const values = observations.map((item) => item.value); const minimum = Math.min(0, ...values); const maximum = Math.max(0, ...values); const range = maximum - minimum || 1;
+  const compact = (value) => Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(value);
+  const chart = element("div", `vertical-bar-chart ${colorClass}`);
+  chart.setAttribute("role", "img"); chart.setAttribute("aria-label", `${label} in ${observations[0].unit}: ${observations.map((item) => `${item.value.toLocaleString()} for ${formatDate(item.period_end)}`).join(", ")}. ${observations.length === 1 ? "One observation; no trend inferred." : "Comparable observations in chronological order."}`);
+  const midpoint = minimum + range / 2; const axis = element("div", "chart-y-axis"); axis.append(element("span", "", compact(maximum)), element("span", "", compact(midpoint)), element("span", "", compact(minimum)));
+  const plot = element("div", "chart-plot"); const zero = element("span", "chart-zero-line"); zero.style.bottom = `${((-minimum / range) * 100).toFixed(2)}%`; plot.append(zero);
+  observations.forEach((observation) => {
+    const column = element("div", "chart-column"); const bar = element("span", `vertical-bar ${observation.value < 0 ? "negative" : "positive"}`);
+    bar.style.height = `${(Math.abs(observation.value) / range * 100).toFixed(2)}%`; bar.style.bottom = `${(((Math.min(0, observation.value) - minimum) / range) * 100).toFixed(2)}%`;
+    bar.title = `${observation.value.toLocaleString()} ${observation.unit}`;
+    column.append(bar, element("span", "chart-bar-value", compact(observation.value)), element("span", "chart-x-label", formatDate(observation.period_end))); plot.append(column);
+  });
+  chart.append(axis, plot); card.append(chart, element("p", "muted", summary));
+  return card;
+}
 function renderFinancialAssessment(view) {
   const assessment = view.report.financial_assessment;
   const panel = element("section", "panel financial-assessment");
   const heading = element("div", "panel-heading");
-  heading.append(element("h2", "", "Financial metric charts"), badge(assessment.state));
+  heading.append(element("h2", "", "Financial and share-structure charts"), badge(assessment.state));
   panel.append(heading, element("p", "muted", `${assessment.as_of ? `As of ${formatDate(assessment.as_of)}` : "Date unavailable"}${assessment.reporting_currency ? ` · ${assessment.reporting_currency}` : ""}`), element("p", "", assessment.summary));
   assessment.coverage_notes.forEach((note) => panel.append(element("p", "coverage-note", `Coverage note: ${note}`)));
 
   const metrics = element("div", "financial-chart-grid");
   financialMetricOrder.forEach((key) => {
     const metric = assessment.metrics[key];
-    const card = element("article", "financial-chart");
-    const title = element("div", "section-title"); title.append(element("h3", "", financialMetricLabels[key]), badge(metric.state)); card.append(title);
     const period = metric.period_start && metric.period_end ? `${formatDate(metric.period_start)}–${formatDate(metric.period_end)}` : "Period unavailable";
     const observations = metric.state === "confirmed" ? metric.observations ?? [] : [];
-    if (observations.length) {
-      const values = observations.map((item) => item.value); const minimum = Math.min(0, ...values); const maximum = Math.max(0, ...values); const range = maximum - minimum || 1;
-      const chart = element("div", "vertical-bar-chart");
-      chart.setAttribute("role", "img"); chart.setAttribute("aria-label", `${financialMetricLabels[key]} in ${metric.unit}: ${observations.map((item) => `${item.value.toLocaleString()} for ${formatDate(item.period_end)}`).join(", ")}. ${observations.length === 1 ? "One observation; no trend inferred." : "Comparable observations in chronological order."}`);
-      const midpoint = minimum + range / 2; const axis = element("div", "chart-y-axis"); axis.append(element("span", "", maximum.toLocaleString()), element("span", "", midpoint.toLocaleString(undefined, { maximumFractionDigits: 2 })), element("span", "", minimum.toLocaleString()));
-      const plot = element("div", "chart-plot"); const zero = element("span", "chart-zero-line"); zero.style.bottom = `${((-minimum / range) * 100).toFixed(2)}%`; plot.append(zero);
-      observations.forEach((observation) => {
-        const column = element("div", "chart-column"); const bar = element("span", `vertical-bar ${observation.value < 0 ? "negative" : "positive"}`);
-        bar.style.height = `${(Math.abs(observation.value) / range * 100).toFixed(2)}%`; bar.style.bottom = `${(((Math.min(0, observation.value) - minimum) / range) * 100).toFixed(2)}%`;
-        bar.title = `${observation.value.toLocaleString()} ${observation.unit}`;
-        column.append(bar, element("span", "chart-bar-value", observation.value.toLocaleString()), element("span", "chart-x-label", formatDate(observation.period_end))); plot.append(column);
-      });
-      chart.append(axis, plot); card.append(chart, element("p", "muted", observations.length > 1 ? `${metric.unit} · ${observations.length} comparable periods · ${metric.trend === "unknown" ? "trend not classified" : formatLabel(metric.trend)}` : `${metric.unit} · one supported period · no trend inferred`));
-    } else {
-      card.append(element("p", "chart-unavailable", `${formatLabel(metric.state)} — no trustworthy chart is available.`), element("p", "muted", period));
-    }
-    metrics.append(card);
+    metrics.append(renderVerticalBarChart({ label: financialMetricLabels[key], observations, state: metric.state, colorClass: key === "profitability" || key === "free_cash_flow" || key === "cash_burn" ? "chart-cyan" : key === "debt" ? "chart-amber" : "chart-blue", summary: observations.length > 1 ? `${metric.unit} · ${observations.length} comparable periods · ${metric.trend === "unknown" ? "trend not classified" : formatLabel(metric.trend)}` : observations.length === 1 ? `${metric.unit} · one supported period · no trend inferred` : period }));
   });
+  const shares = assessment.shares_outstanding ?? { state: "unknown", summary: "Reported shares outstanding are unavailable.", observations: [] };
+  const shareChart = renderVerticalBarChart({ label: "Shares outstanding", observations: shares.state === "confirmed" ? shares.observations : [], state: shares.state, summary: shares.summary, colorClass: "chart-purple" });
+  appendSourceLinks(shareChart, view.sourcesForClaims(shares.claim_ids)); metrics.append(shareChart);
   panel.append(metrics);
 
   const goingConcern = element("article", "section-card");
