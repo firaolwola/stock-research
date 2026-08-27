@@ -265,6 +265,7 @@ workflow does not repeat successful bounded retrieval.
   trend scores without changing those core constructs.
 - **#53:** completed; the dashboard presents independently gated 2.1.0 results
   progressively without changing constructs or inventing provisional values.
-- **#54:** next; Deep must build and extend the completed Fast evidence packet.
-- **#55:** measure the real-ticker evaluation set and decide whether the pilot's
+- **#54:** completed; Deep builds or reuses a validated identity-gated Fast
+  snapshot, refreshes it by source freshness, and targets unresolved work first.
+- **#55:** next; measure the real-ticker evaluation set and decide whether the pilot's
   small-cap/news/venue gaps justify a paid newswire or dedicated news service.

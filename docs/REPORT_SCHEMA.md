@@ -9,6 +9,14 @@ token-free mock research clients now return this object shape, and the server
 validates both JSON Schema and cross-record semantics before responding. Reports
 are research aids, not personalized investment advice.
 
+Before Deep starts, the server calibrates and validates a complete or safe
+partial Fast report and packages it with normalized evidence, sources, identity,
+and operations. Deep preserves reused claim/source IDs. Newly found or
+conflicting evidence uses distinct IDs; conflicts retain both records, mark the
+report partial, and add `deep_revision_lineage` rather than silently replacing
+the Fast fact. Handoff freshness and lineage counts remain operations telemetry
+outside this versioned report contract.
+
 Operational telemetry is intentionally outside this contract. A successful
 `/api/analyze` response contains `{ ticker, report, operations }`; `operations`
 records stage, latency, tokens, web-search calls, estimated cost, pricing
@@ -247,10 +255,11 @@ Deep supplies this contract as a JSON Schema response format with API-level
 strict mode disabled because the contract uses Draft 2020-12 features beyond
 the API strict subset. Production Fast assembles the same v4 contract from
 server-retrieved evidence and validates every progressive and final report.
-Current Fast retrieval is SEC-based with optional tool-disabled evidence
-classification; the approved reliability milestone will add only an explicitly
-approved bounded source strategy. Provider formatting or discovery summaries
-are never treated as authoritative validation or sole material evidence.
+Current Fast retrieval combines authoritative SEC evidence, bounded public
+Nasdaq Trader context, optional Alpha Vantage free-tier discovery/end-of-day
+context, original-source promotion, and optional tool-disabled classification.
+Provider formatting or discovery summaries are never treated as authoritative
+validation or sole material evidence.
 
 Catalyst validation additionally requires confirmed catalysts to have a date,
 classification, sourced claims, and meaningful confidence. Confirmed analogues

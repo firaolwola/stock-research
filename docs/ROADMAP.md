@@ -20,7 +20,8 @@ deterministic evidence when retrieval or synthesis fails. One free SWVL
 structural run completed six SEC requests and produced a valid report quickly,
 but this does not establish real-ticker recall or trustworthy score coverage.
 
-The current implementation is not yet the approved Fast product contract:
+The current implementation has the approved Fast architecture but is not yet
+reliability-calibrated on real tickers:
 
 - current Fast evidence normally leaves important scores unresolved;
 - current-news and market context now have a bounded free-tier path, but
@@ -68,16 +69,15 @@ verdict.
 6. [x] **Complete:** [#53 — Add progressive Fast score cards and approved dashboard hierarchy](https://github.com/firaolwola/stock-research/issues/53), including the owner-approved post-#53 refinement to one compact score summary, honest financial charts, and a separate explanation block.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
-7. [ ] **Next — coordinates with completed #51–#53:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54).
-8. [ ] **Final reliability gate — blocked by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
+7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
+8. [ ] **Next — final reliability gate, enabled by #49–#54:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55).
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
 No milestone implementation issue is currently active. The next implementation
-priority is #54, which must make Deep build and extend the completed Fast evidence
-packet and prioritize unresolved score components. #55 remains the final
-real-ticker reliability gate. A paid data
+priority is #55, the final real-ticker reliability gate now that Deep reliably
+builds, reuses, and extends Fast. A paid data
 subscription remains neither selected nor required and would need separate
 owner approval.
 
@@ -150,6 +150,8 @@ logging, rollback, and deployment safeguards are approved and implemented.
 - Progressive accessible Fast scoring and the refined decision-first dashboard
   hierarchy: unified summary, financial charts, then explanations (#53 and its
   owner-approved UX follow-up).
+- Validated Fast-to-Deep handoff, source-aware snapshot freshness, unresolved-first
+  Deep planning, duplicate-retrieval telemetry, and conflict lineage (#54).
 
 These completed items are foundations and historical implementation results;
 they do not by themselves satisfy the current Fast reliability milestone.

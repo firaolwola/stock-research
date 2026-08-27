@@ -9,8 +9,8 @@ The current application uses two research stages. Fast retrieves and validates
 bounded SEC and Nasdaq Trader evidence directly, adds optional Alpha Vantage
 free-tier news discovery and end-of-day market context, streams deterministic partial reports, and may
 run a small tool-disabled classification over supplied evidence IDs. Deep uses
-the OpenAI Responses API with broader web search and must ultimately extend the
-Fast evidence packet. The report contract covers identity,
+the OpenAI Responses API with broader web search after automatically building or
+reusing a validated, identity-gated Fast evidence packet. The report contract covers identity,
 reverse splits, dilution, dividends, warnings, dated financial metrics and trends, structured
 catalyst factors and historical analogues, scores, claims, and sources. Catalyst
 history includes explicit comparison limits and dated reaction windows, or an
@@ -206,12 +206,14 @@ timestamped end-of-day price/volume; its summaries, sentiment, and article text
 are never sent to OpenAI and cannot independently support a material score.
 Original newswire links are promoted only after issuer identity agrees. All
 source work participates in the shared 20-second and cost ceilings. The next
-milestone recalibrates scoring against these corrected evidence semantics.
+priority measures this evidence-first Fast behavior against the real-ticker
+evaluation set; checked-in dry results do not establish live reliability.
 
 The default action runs the Fast stage. **Deeper research** remains deliberate
-and separately budgeted. The approved direction requires Deep to build and reuse
-Fast evidence automatically, but the current direct-Deep path does not yet do so
-when no in-memory Fast packet exists. Successful responses show operational
+and separately budgeted. Direct Deep first builds a valid Fast foundation;
+Deep-after-Fast reuses a fresh in-memory snapshot and refreshes stale source
+classes. It prioritizes unresolved scores, coverage gaps, low-confidence claims,
+and missing history before broader enrichment. Successful responses show operational
 telemetry without replacing report coverage or unknown states. See
 [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 

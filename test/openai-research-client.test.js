@@ -146,7 +146,7 @@ test("Deep retains a separate larger search budget", async () => {
 test("Deep prompt receives completed Fast evidence as authoritative seed", async () => {
   const requests = []; const seed = { identity: { ticker: "XYZ", cik: "0000000001" }, records: [{ id: "evidence-1", text: "SEC fact" }] };
   await adapterFor({ status: "completed", output: [], output_text: JSON.stringify(partialReport) }, requests).researchTicker("XYZ", { stage: "deep", seedEvidence: seed });
-  assert.match(requests[0].input, /evidence-1/); assert.match(requests[0].input, /search only to expand named gaps/);
+  assert.match(requests[0].input, /evidence-1/); assert.match(requests[0].input, /Search only the explicit priority_plan gaps/);
 });
 
 test("OpenAI adapter classifies refusal, incomplete, invalid, and unusable output", async () => {

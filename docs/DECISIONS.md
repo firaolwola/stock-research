@@ -4,6 +4,24 @@ Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.
 
+## 2026-08-27 — Make validated Fast evidence the mandatory Deep foundation
+
+**Status:** Implemented by Issue #54
+
+**Decision:** A direct Deep request first builds and validates an identity-gated
+Fast snapshot. A Deep request after Fast reuses the in-memory snapshot while it
+is fresh; fast-moving exchange/news/market context is refreshed after two
+minutes, and the full foundation is rebuilt after five minutes. Deep receives
+the calibrated Fast report, normalized evidence, source records, operations,
+and an explicit unresolved-first priority plan. Reused claim/source IDs remain
+stable. New or conflicting Deep evidence gets distinct IDs, retains the Fast
+record, and records revision lineage instead of silently replacing facts.
+
+**Why:** Deep previously received only an opportunistic SEC packet and could
+restart research, lose completed score context, or obscure changed evidence.
+The validated handoff makes direct and sequential Deep behavior consistent,
+reduces needless retrieval, and keeps disagreements inspectable.
+
 ## 2026-08-27 — Keep deterministic identity and financial derivations conservative
 
 **Status:** Implemented

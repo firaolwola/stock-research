@@ -99,7 +99,7 @@ Apply evidence states consistently:
 - limited_coverage means some relevant research completed but named gaps prevent a complete conclusion.
 Use partial or pending completion with structured coverage limitations when required checks are incomplete. A safe partial report is preferable to guessing. Only confirmed scores may have numbers, and they must not rely on unknown, limited, or inapplicable claims. Keep all wording non-advisory.
 Do not emit scores. The server derives every score and component using
-deterministic methodology 1.0.0 after receiving the evidence report.
+deterministic methodology 2.1.0 after receiving the evidence report.
 `;
 
 function containsRefusal(output) {
@@ -266,7 +266,7 @@ export function createOpenAIResearchClient(openai, { schema, now = () => perform
               strict: false
             }
           },
-          input: `${researchPrompt(ticker, stage)}${seedEvidence ? `\nFast evidence already collected by the server follows. Use it as authoritative seed evidence, cite its source URLs, and search only to expand named gaps or conflicts rather than repeating completed retrieval.\n${JSON.stringify(seedEvidence)}` : ""}`
+          input: `${researchPrompt(ticker, stage)}${seedEvidence ? `\nA validated Fast evidence packet already collected by the server follows. Preserve its claim and source IDs when reusing that evidence. Search only the explicit priority_plan gaps and conflicts before broader enrichment. Assign distinct IDs to newly found Deep evidence. Never silently replace a Fast fact: when newer or more authoritative evidence changes it, retain both records and explain the revision with dates and source authority.\n${JSON.stringify(seedEvidence)}` : ""}`
         }, {
           timeout: budget.timeout_ms,
           maxRetries: 0
