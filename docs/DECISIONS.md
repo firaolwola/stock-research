@@ -967,3 +967,36 @@ terms into the contract.
 
 **Why:** A valid TUPBQ evidence packet failed final validation solely because an
 internal `accounting` label was not a report-contract classification.
+
+## 2026-08-27 — Separate corporate-action dates from filing publication dates
+
+**Status:** Accepted corrective implementation after Issue #55 Sparse-3
+
+**Decision:** A filing source retains its publication date separately from a
+corporate action's announced, effective, and completed dates. Reverse-split
+event identity is based on issuer/security, direction, ratio, and effective or
+completed action date. Later filings that describe the same occurrence add
+corroborating claim/source links instead of another event. Distinct ratios or
+action dates remain distinct, and lifecycle state resolves in the order
+completed, cancelled, scheduled, authorized, proposed, then unknown.
+
+**Why:** Sparse-3 showed filing dates presented as split dates and duplicate
+occurrences from corroborating filings. It also showed that limiting raw
+inline-XBRL HTML before extracting visible text can omit an otherwise selected
+disclosure. Fast now strips bounded markup before applying its visible-text
+limit while retaining the existing bounded filing set.
+
+## 2026-08-27 — Keep terminal listing identity separate from historical compliance
+
+**Status:** Accepted corrective implementation after Issue #55 Sparse-3
+
+**Decision:** A newer authoritative OTC or delisted security state controls the
+current listing explanation. Older exchange deficiencies remain dated historical
+evidence and cannot be worded as an active warning unless separately supported.
+Issuer-specific foreign Company Facts aliases require exact CIK, semantic label,
+currency, cadence, and comparability gates; they are not global taxonomy guesses.
+
+**Why:** BIOR, MULN/BINI, and TUPBQ retained useful historical exchange evidence,
+but their explanations blurred historical and current state. NIO also requires a
+safe way to recognize attributable issuer loss without weakening the global SEC
+financial-source boundary.

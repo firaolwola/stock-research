@@ -142,10 +142,16 @@ current submissions block no longer contains the bounded five-year corporate-
 action window. Split normalization preserves `proposed`, `authorized`,
 `scheduled`, `completed`, and `cancelled` timing. A future effective date remains
 scheduled at the report cutoff even when an amendment has already been filed.
-Multiple completed actions disclosed in one bounded filing are retained and
-deduplicated by ratio, state, and effective date. Confirmed predecessor tickers
-use explicit effective windows, and a carried event must link both to its SEC
-evidence and to the matching lineage claim. Newer authoritative terminal
+Multiple completed actions disclosed in one bounded filing are retained.
+Corroborating filings for the same ratio and effective/completed date are merged
+as provenance rather than counted as additional actions. Filing publication,
+announcement, effective, and completion dates remain separate. Confirmed
+predecessor tickers use explicit effective windows, and a carried event must
+link both to its SEC
+source and to the applicable lineage claim. Selected SEC documents are still
+bounded; their inline-XBRL markup is stripped before the visible-text evidence
+cap is applied so markup density does not silently remove later disclosures.
+Newer authoritative terminal
 listing evidence takes precedence over stale registry context; ambiguity still
 settles Limited.
 
@@ -310,5 +316,8 @@ workflow does not repeat successful bounded retrieval.
 - **#54:** completed; Deep builds or reuses a validated identity-gated Fast
   snapshot, refreshes it by source freshness, and targets unresolved work first.
 - **#55:** active; two bounded batches are historical measurements. Deterministic
-  Batch-2 blockers have offline regressions, but another calibration batch needs
-  explicit owner approval and must not rewrite the prior results.
+  Batch-2 and Sparse-3 blockers have offline regressions, but another calibration
+  batch needs explicit owner approval and must not rewrite the prior results.
+  Exact live verification of NIO's issuer-specific attributable-loss taxonomy
+  remains outstanding because the frozen payload did not retain the unmatched
+  concept metadata.

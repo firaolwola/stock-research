@@ -1,0 +1,15 @@
+{
+  "source_artifact": "evaluation/live/2026-08-27-sparse-3/raw/NIO.json",
+  "cik": "0001736541",
+  "artifact_retains_unmatched_companyfacts_metadata": false,
+  "observed_result": "profitability was not established by the available SEC Company Facts",
+  "known_constraints": {
+    "currency": "CNY",
+    "cadence": "annual",
+    "meaning": "net loss attributable to ordinary shareholders of NIO Inc.",
+    "preferred_standard_concepts": ["ifrs-full:ProfitLossAttributableToOwnersOfParent", "ifrs-full:ProfitLoss"],
+    "issuer_extension_policy": "Only CIK 0001736541 concepts whose SEC label exactly states net loss attributable to NIO Inc. ordinary shareholders and whose units contain CNY are eligible."
+  },
+  "implementation": "Standard IFRS concepts remain preferred. The fallback discovers only the verified label under NIO's exact CIK instead of broadly accepting custom profit/loss tags.",
+  "remaining_verification": "Because the frozen raw artifact did not retain the unmatched namespace/tag/label, the exact live tag cannot be named offline and must be confirmed in a separately authorized verification. Unsafe or non-equivalent shapes remain Limited."
+}

@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — Sparse-3 blockers require offline correction:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-3 restored valid reports to 4/4 and improved the sparse repeat to 14/16 (87.5%), but MULN still omits the required 2023 split history, NIO still omits attributable annual net loss, and split occurrence dates/deduplication remain unreliable. Another paid verification is not justified until those stored shapes are fixed offline.
+8. [ ] **Active — await approval for post-correction verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-3 restored valid reports to 4/4 and improved the sparse repeat to 14/16 (87.5%). Offline regressions now cover the reproduced MULN large-inline-XBRL split omission, action-date/deduplication defects, terminal-listing explanations, NIO issuer-gated attributable-loss semantics, and explicit capital-score insufficiency. Sparse-3 measurements remain unchanged; another live verification requires owner approval.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -87,9 +87,11 @@ AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
 Limited-series defects now have deterministic regression fixes on PR #74.
 The approved Sparse-3 verification also ran and failed. Recall improved from
 81.25% to 87.5%, validity improved from 25% to 100%, and settlement stayed 4/4,
-but critical retrieval/normalization and explanation defects remain. The next
-active step is offline correction from the immutable Sparse-3 artifacts; no new
-live run or expansion batch is authorized. A paid data
+but critical retrieval/normalization and explanation defects remained. The
+reproduced Sparse-3 shapes now have offline regression coverage. The next active
+step is owner review of a same-four bounded verification; no new live run or
+expansion batch is authorized. The frozen NIO artifact did not retain the exact
+unmatched Company Facts tag, so live alias verification remains explicit. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

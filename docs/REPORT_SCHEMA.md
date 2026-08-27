@@ -303,6 +303,13 @@ Deterministic parser labels are normalized before validation into the v4
 classification enum; internal labels such as accounting, bankruptcy, or
 delisting never appear directly in a report.
 
+Corporate-action section items may carry `source_filing_date`, `announced_date`,
+`effective_date`, and `completed_date`. `event_date` represents the best supported
+action date, not the publication date of a corroborating filing. Optional action
+dates may be null when the filing does not support them. Multiple sources can
+link to one normalized event through its claim references; differing filing
+dates alone do not create duplicate corporate actions.
+
 Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing
 numeric values; and confirmed financial-health scores built from an unresolved

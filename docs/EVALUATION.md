@@ -229,6 +229,23 @@ provider quota on all eight bounded attempts; Twelve Data was unconfigured;
 completed SEC evidence survived. See
 `docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-3.md`.
 
+The post-Sparse-3 offline correction preserves those measurements and adds
+regressions for the reproduced failure shapes. Filing HTML is normalized to
+visible text before the bounded evidence window is applied, so large inline-XBRL
+markup cannot hide a selected filing's later corporate-action disclosure.
+Reverse-split occurrences now retain separate filing, announcement, effective,
+and completion dates; event identity uses the action date and ratio, while
+corroborating filings contribute source links rather than duplicate events.
+Current OTC/delisted identity now makes earlier exchange deficiencies explicitly
+historical in the explanation. A NIO-only attributable-loss fallback requires
+the exact issuer CIK, an exact semantic label, CNY units, and otherwise comparable
+SEC periods. The frozen Sparse-3 payload did not retain the unmatched live
+Company Facts tag/label, so the exact live alias remains unverified until a
+separately approved run. Capital-score sufficiency diagnostics enumerate missing
+inputs and retain `Limited`; they do not force a numeric score. See
+`evaluation/diagnostics/capital-sufficiency-sparse-3.json` and
+`evaluation/diagnostics/nio-attributable-loss-sparse-3.json`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

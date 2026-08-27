@@ -47,3 +47,20 @@ and foreign-financial category recall remain below 90%; explanation fidelity and
 score calibration fail; and severe misleading misses remain. The next step is
 offline correction of the immutable Sparse-3 shapes. An independent expansion
 batch is premature, and another live run requires separate owner approval.
+
+## Offline corrective status
+
+The measured table above is immutable and has not been recalculated. Offline
+regressions now reproduce and correct the large-inline-XBRL omission that hid
+MULN's three 2023 completed splits, distinguish filing publication from split
+announcement/effective/completion dates, merge corroborating disclosures without
+losing distinct actions, and describe prior exchange deficiencies as historical
+when newer terminal OTC/delisted evidence controls. Capital-score diagnostics
+show why BIOR, MULN, and TUPBQ remain correctly `Limited` instead of forcing
+scores.
+
+NIO now has an exact-CIK, exact-semantic-label, CNY-only fallback for attributable
+annual loss concepts. The frozen Sparse-3 provider payload did not retain the
+unmatched concept metadata, so the exact live taxonomy tag cannot be named or
+claimed verified from stored evidence. A same-four live verification is now
+technically justified, but it is not authorized by this offline corrective task.

@@ -3,7 +3,7 @@ import test from "node:test";
 import { createApp } from "../app.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { createReportValidator } from "../lib/report-validation.js";
-import { calibrateReportScores } from "../lib/scoring.js";
+import { calibrateReportScores, diagnoseCapitalScoreSufficiency } from "../lib/scoring.js";
 import { boundedDocumentRows, createSecEvidenceClient } from "../lib/sec-evidence.js";
 import { extractSecFilingEvidence, normalizeCatalystClassification } from "../lib/sec-filing-extraction.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
@@ -149,6 +149,29 @@ test("MULN historical ticker resolves CIK lineage to BINI and preserves repeated
   const finalized = calibrateReportScores(result.report); assert.equal(reportValidator(finalized).valid, true, JSON.stringify(reportValidator(finalized).errors));
 });
 
+test("Sparse-3 MULN replay strips bounded inline-XBRL markup before selecting all 2023 split events", async () => {
+  const inlineMarkup = `<ix:nonNumeric contextRef="large-context" name="muln:Disclosure"> </ix:nonNumeric>`.repeat(28_000);
+  const splitHistory = "The Company completed a 1-for-25 reverse stock split effective May 4, 2023. The Company completed a 1-for-9 reverse stock split effective August 11, 2023. The Company completed a 1-for-100 reverse stock split effective December 21, 2023.";
+  assert.ok(inlineMarkup.length > 2_000_000);
+  const result = await researchHistorical("MULN", { cik: 1499961, name: "Bollinger Innovations, Inc.", documents: { "muln20240630c_10q.htm": `${inlineMarkup}${splitHistory}` } });
+  const completed = result.report.sections.reverse_splits.items.filter((item) => item.corporate_action_state === "completed");
+  assert.deepEqual(completed.map((item) => [item.title.match(/1-for-\d+/)[0], item.effective_date]), [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"]]);
+});
+
+test("split lifecycle uses effective dates and deduplicates corroborating filings", async () => {
+  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
+    "d463897dars.pdf": "The Company proposed a 1-for-25 reverse stock split which would become effective January 3, 2023.",
+    "bior-20241009.htm": "The Company completed a 1-for-10 reverse stock split effective October 18, 2024.",
+    "d899591d8k.htm": "All share data reflect the completed 1-for-10 reverse stock split effected on October 18, 2024.",
+    "bior-20241210.htm": "The completed 1-for-10 reverse stock split became effective October 18, 2024."
+  } });
+  const ten = result.report.sections.reverse_splits.items.filter((item) => item.title.includes("1-for-10"));
+  assert.equal(ten.length, 1); assert.equal(ten[0].event_date, "2024-10-18"); assert.equal(ten[0].effective_date, "2024-10-18"); assert.notEqual(ten[0].source_filing_date, ten[0].effective_date); assert.ok(ten[0].claim_ids.length >= 2);
+  const proposed = extractSecFilingEvidence({ html: "The board proposed a 1-for-20 reverse stock split scheduled to become effective 2026-09-01.", form: "8-K", filed: "2026-08-01", evaluatedAt: "2026-08-10T00:00:00Z", accession: "proposal", documentUrl: "https://www.sec.gov/proposal", documentName: "proposal.htm" }).find((item) => item.kind === "reverse_split");
+  const completed = extractSecFilingEvidence({ html: "The Company completed a 1-for-20 reverse stock split effective 2026-09-01.", form: "8-K", filed: "2026-09-02", evaluatedAt: "2026-09-02T00:00:00Z", accession: "completion", documentUrl: "https://www.sec.gov/completion", documentName: "completion.htm" }).find((item) => item.kind === "reverse_split");
+  assert.equal(proposed.action_state, "scheduled"); assert.equal(completed.action_state, "completed"); assert.equal(proposed.effective_date, completed.effective_date);
+});
+
 test("Sparse-2 capital evidence remains Limited for explicit evidence-gate reasons", async () => {
   const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
     "d463897dars.pdf": "The Company completed a 1-for-25 reverse stock split effective January 3, 2023.",
@@ -219,6 +242,31 @@ test("NIO issuer-specific SEC taxonomy normalizes attributable annual net loss",
   const metric = result.report.financial_assessment.metrics.profitability;
   assert.equal(metric.value, -23_100_000_000); assert.equal(metric.unit, "CNY"); assert.deepEqual(metric.annual_observations.map((item) => item.value), [-20_700_000_000, -22_400_000_000, -23_100_000_000]);
   assert.equal(calibrateReportScores(result.report).scores.financial_net_income_trend.state, "confirmed");
+});
+
+test("NIO Sparse-3 live-style extension label is accepted only for its CIK and CNY unit", async () => {
+  const annual = (value, year, accn) => fact(value, { start: `${year}-01-01`, end: `${year}-12-31`, filed: `${year + 1}-04-10`, form: "20-F", accn });
+  const companyFacts = { cik: 1736541, entityName: "NIO Inc.", facts: { nio: { UnexpectedAttributableLossTag: concept("Net loss attributable to ordinary shareholders of NIO Inc.", [annual(-20_700_000_000, 2023, "n23"), annual(-22_400_000_000, 2024, "n24"), annual(-23_100_000_000, 2025, "n25")], "CNY") } } };
+  const accepted = await researchFixture({ ticker: "NIO", cik: 1736541, companyFacts });
+  assert.deepEqual(accepted.report.financial_assessment.metrics.profitability.annual_observations.map((item) => item.value), [-20_700_000_000, -22_400_000_000, -23_100_000_000]);
+  const rejected = await researchFixture({ ticker: "OTHER", cik: 1, companyFacts: { ...companyFacts, cik: 1, entityName: "OTHER Corp." } });
+  assert.equal(rejected.report.financial_assessment.metrics.profitability.state, "unknown");
+});
+
+test("terminal OTC reports label earlier exchange pressure as historical", async () => {
+  for (const ticker of ["BIOR", "MULN", "TUPBQ"]) {
+    const registry = { BIOR: [1580063, "Biora Therapeutics, Inc.", "bior-20241210.htm", "Nasdaq notified the Company that its securities were subject to delisting. Trading was suspended and began on OTC Pink."], MULN: [1499961, "Bollinger Innovations, Inc.", "bollingerinnovations_8k.htm", "Nasdaq notified the Company that its securities were subject to delisting. Trading was suspended and commenced on OTCID."], TUPBQ: [1008654, "Tupperware Brands Corporation", "tup-20240917.htm", "NYSE notified the Company that its securities were subject to delisting. Trading was suspended and commenced on OTC Expert Market."] }[ticker];
+    const result = await researchHistorical(ticker, { cik: registry[0], name: registry[1], documents: { [registry[2]]: registry[3] } });
+    assert.match(result.report.sections.compliance_and_warnings.summary, /currently .*delisted.*prior exchange deficiencies are historical/i);
+    assert.ok(result.report.sections.compliance_and_warnings.items.every((item) => item.resolution_state === "historical" && item.title === "Historical exchange compliance event"));
+  }
+});
+
+test("capital diagnostics enumerate missing evidence without forcing scores", async () => {
+  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: { "bior-20241009.htm": "The Company completed a 1-for-10 reverse stock split effective October 18, 2024." } });
+  const diagnostic = diagnoseCapitalScoreSufficiency(result.report);
+  for (const value of Object.values(diagnostic)) { assert.ok(value.required_inputs.length); assert.ok(value.missing_inputs.length); assert.equal(value.final_state, "limited_coverage"); assert.equal(value.value, null); }
+  assert.ok(diagnostic.reverse_split_risk.available_inputs.includes("current listing state"));
 });
 
 test("deterministic catalyst classifications always normalize to the report enum", () => {
