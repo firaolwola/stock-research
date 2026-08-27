@@ -1,17 +1,16 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { buildDashboardView, buildPriorityFindings, buildScorePresentation, priorityScoreKeys, scoreGroups, scoreToStars, sectionLabels, settledScoreKeysForOperations, validateTickerInput } from "../public/dashboard.js";
+import { buildDashboardView, buildPriorityFindings, buildScorePresentation, financialMetricOrder, priorityScoreKeys, scoreSummaryOrder, scoreToStars, sectionLabels, settledScoreKeysForOperations, validateTickerInput } from "../public/dashboard.js";
 import { loadReportFixture } from "../support/report-fixtures.js";
 
-test("dashboard exposes every report section and exactly seven primary score cards", async () => {
+test("dashboard exposes every report section and the approved unified score order", async () => {
   const view = buildDashboardView(await loadReportFixture("complete"));
   assert.deepEqual(view.sections.map((section) => section.key), Object.keys(sectionLabels));
-  assert.equal(view.scoreGroups.length, 2);
   assert.deepEqual(priorityScoreKeys, ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk", "financial_health", "catalyst_strength", "near_term_setup_quality"]);
-  assert.equal(priorityScoreKeys.includes("long_term_company_quality"), false);
-  assert.match(scoreGroups[0].title, /more stars mean more risk/i);
-  assert.match(scoreGroups[1].title, /more stars mean stronger/i);
+  assert.deepEqual(financialMetricOrder, ["revenue", "profitability", "debt", "free_cash_flow", "cash", "cash_burn"]);
+  assert.deepEqual(view.scoreSummary.map((score) => score.key), scoreSummaryOrder);
+  assert.deepEqual(scoreSummaryOrder, ["financial_health", "revenue", "profitability", "debt", "free_cash_flow", "cash", "cash_burn", "dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
 });
 
 test("0–10 internal scores map to 0–5 stars with half-stars", () => {
@@ -33,17 +32,28 @@ test("risk and quality cards communicate direction in text and accessible labels
 test("cards transition without provisional numbers and settle independently", async () => {
   const report = await loadReportFixture("partial");
   const researching = buildDashboardView(report, { final: false });
-  assert.ok(researching.scoreGroups.flatMap((group) => group.scores).every((score) => score.presentation.state === "researching" && score.presentation.stars === null));
+  assert.ok(researching.scoreSummary.every((score) => score.presentation.state === "researching" && score.presentation.stars === null));
   const partialProgress = structuredClone(report);
   partialProgress.scores.reverse_split_risk = { ...partialProgress.scores.reverse_split_risk, state: "confirmed", value: 6, confidence: "high" };
-  const progressive = buildDashboardView(partialProgress, { final: false, settledScoreKeys: new Set(["reverse_split_risk"]) }).scoreGroups.flatMap((group) => group.scores);
+  const progressive = buildDashboardView(partialProgress, { final: false, settledScoreKeys: new Set(["reverse_split_risk"]) }).scoreSummary;
   assert.equal(progressive.find((score) => score.key === "reverse_split_risk").presentation.state, "scored");
-  assert.equal(progressive.find((score) => score.key === "catalyst_strength").presentation.state, "researching");
-  const settled = buildDashboardView(report, { final: true }).scoreGroups.flatMap((group) => group.scores);
+  assert.equal(progressive.find((score) => score.key === "dilution_historical_severity").presentation.state, "researching");
+  const settled = buildDashboardView(report, { final: true }).scoreSummary;
   assert.equal(settled.find((score) => score.key === "financial_health").presentation.state, "limited");
   const unknown = { ...report.scores.catalyst_strength, state: "unknown" };
   assert.equal(buildScorePresentation(unknown, { final: true }).state, "unscored");
   assert.equal(buildScorePresentation(unknown, { final: false }).accessibleLabel.includes("no provisional score"), true);
+});
+
+test("financial display rows reuse only direct methodology components", async () => {
+  const view = buildDashboardView(await loadReportFixture("complete"));
+  const rows = new Map(view.scoreSummary.map((row) => [row.key, row]));
+  for (const key of ["profitability", "debt", "free_cash_flow"]) assert.equal(rows.get(key).presentation.state, "scored", `${key} should reuse its direct methodology component`);
+  for (const key of ["revenue", "cash", "cash_burn"]) {
+    assert.equal(rows.get(key).presentation.state, "unscored", `${key} has no independent methodology score`);
+    assert.equal(rows.get(key).presentation.stars, null);
+    assert.match(rows.get(key).explanation, /no independent methodology score/i);
+  }
 });
 
 test("partial provider failure settles only dependent cards", () => {
@@ -62,7 +72,7 @@ test("partial provider failure settles only dependent cards", () => {
 
 test("dashboard exposes score methodology, confidence, inputs, and weights", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  for (const text of ["methodology_version", "confidence", "evidence inputs", "component.weight", "Internal value"] ) assert.match(source, new RegExp(text.replace(".", "\\.")));
+  for (const text of ["methodology_version", "confidence", "Key supporting inputs", "component.weight", "Internal value", "Why the metrics look this way"] ) assert.match(source, new RegExp(text.replace(".", "\\.")));
 });
 
 test("dashboard exposes catalyst factors, analogue limits, reactions, and confidence", async () => {
@@ -74,7 +84,7 @@ test("dashboard exposes catalyst factors, analogue limits, reactions, and confid
 
 test("dashboard exposes financial periods, trends, going concern, and warnings", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  for (const text of ["Financial health context", "Cash burn", "Free cash flow", "Going concern", "compared with", "financial-warnings"]) assert.match(source, new RegExp(text));
+  for (const text of ["Financial metric charts", "Latest supported period", "no trustworthy chart is available", "Cash burn", "Free cash flow", "Going concern", "financial-warnings"]) assert.match(source, new RegExp(text));
 });
 
 test("dashboard exposes operational budgets and deliberate deeper research", async () => {
@@ -126,15 +136,16 @@ test("dashboard uses safe external links, semantic form submission, and a narrow
   assert.match(script, /rel = "noopener noreferrer"/);
   assert.match(script, /textContent = text/);
   assert.match(css, /@media \(max-width: 680px\)/);
-  assert.match(css, /\.score-grid, \.financial-grid, \.factor-grid, \.evidence-grid \{ grid-template-columns: 1fr; \}/);
+  assert.match(css, /\.score-grid, \.financial-grid, \.financial-chart-grid, \.factor-grid, \.evidence-grid \{ grid-template-columns: 1fr; \}/);
   assert.match(script, /role", "img"/);
   assert.match(script, /aria-label/);
-  assert.match(script, /Score details, inputs, and sources/);
+  assert.match(script, /visually-hidden/);
+  assert.doesNotMatch(script, /\/ 5 stars/);
 });
 
-test("approved dashboard render order places catalyst and scores before financial and detailed evidence", async () => {
+test("approved dashboard render order is summary, charts, why, then detailed evidence", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  assert.match(source, /replaceChildren\(renderHeader\(view\), renderOperations\(operations\), renderCatalystAssessment\(view\), renderScores\(view\), renderFinancialAssessment\(view\), renderSupportingEvidence\(view\), renderSources\(view\)\)/);
+  assert.match(source, /replaceChildren\(renderHeader\(view\), renderOperations\(operations\), renderCatalystAssessment\(view\), renderScores\(view\), renderFinancialAssessment\(view\), renderScoreDetails\(view\), renderSupportingEvidence\(view\), renderSources\(view\)\)/);
 });
 
 test("dashboard ticker input retains server-compatible normalization", () => {
