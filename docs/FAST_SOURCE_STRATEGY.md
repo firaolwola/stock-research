@@ -142,6 +142,12 @@ current submissions block no longer contains the bounded five-year corporate-
 action window. Split normalization preserves `proposed`, `authorized`,
 `scheduled`, `completed`, and `cancelled` timing. A future effective date remains
 scheduled at the report cutoff even when an amendment has already been filed.
+Multiple completed actions disclosed in one bounded filing are retained and
+deduplicated by ratio, state, and effective date. Confirmed predecessor tickers
+use explicit effective windows, and a carried event must link both to its SEC
+evidence and to the matching lineage claim. Newer authoritative terminal
+listing evidence takes precedence over stale registry context; ambiguity still
+settles Limited.
 
 Control and listing warnings require contextual affirmative evidence. Effective-
 control audit language and discussion of the risk that a weakness could exist do

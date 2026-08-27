@@ -265,6 +265,10 @@ The isolated lineage fixtures and tests cover a ticker change, company rename,
 combined name/ticker rebrand, delisted common stock, and ambiguous predecessor.
 They verify both successful carried history and rejection when the linkage is
 missing or unresolved.
+Lineage provenance is reciprocal: a carried historical claim references a
+present source, that source lists the claim, and a historical event references
+the applicable dated lineage claim. SEC submissions former-name evidence is not
+silently reassigned to a separate historical filing source.
 
 An upstream Responses API result marked `incomplete` may still contain a safe,
 parseable partial report. Such output proceeds through the same full server
@@ -295,6 +299,9 @@ must include a date, comparison limitations, and valid reaction windows;
 unresolved reaction windows cannot contain a numeric price change. The server
 rejects unsupported numerical probability language and advisory wording in the
 catalyst assessment.
+Deterministic parser labels are normalized before validation into the v4
+classification enum; internal labels such as accounting, bankruptcy, or
+delisting never appear directly in a report.
 
 Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing

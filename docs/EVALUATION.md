@@ -208,6 +208,16 @@ These are regression fixes, not new calibration measurements; historical and
 later measured artifacts remain unchanged. Another live batch still requires
 owner approval.
 
+The post-Sparse-2 corrective pass now also covers the four invalid-report
+mechanisms without changing any measured artifact: reciprocal source links for
+former-name lineage, bounded extraction of multiple completed splits from one
+filing, dated terminal OTC/delisting identity precedence, and contract-safe
+catalyst classification. NIO-specific SEC attributable-net-loss aliases are
+accepted only for its exact CIK. The stored NIO revenue inputs reproduce the
+reported 9.6 score under methodology 2.1.0, so the owner range is recorded as
+too narrow rather than used to tune the method. Another live run remains a
+separately approved verification, not part of this offline correction.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

@@ -5,7 +5,7 @@ import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { calibrateReportScores } from "../lib/scoring.js";
 import { boundedDocumentRows, createSecEvidenceClient } from "../lib/sec-evidence.js";
-import { extractSecFilingEvidence } from "../lib/sec-filing-extraction.js";
+import { extractSecFilingEvidence, normalizeCatalystClassification } from "../lib/sec-filing-extraction.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { withTestServer } from "../support/test-server.js";
 
@@ -32,9 +32,9 @@ async function researchFixture(options) {
   return client.researchTicker(options.ticker ?? "TEST");
 }
 
-function historicalFixture({ cik, name, documents = {}, companyFacts = { facts: {} } }) {
+function historicalFixture({ cik, name, formerNames = [], documents = {}, companyFacts = { facts: {} } }) {
   const padded = String(cik).padStart(10, "0");
-  const submissions = { cik: padded, name, formerNames: [], filings: { recent: { accessionNumber: [], form: [], filingDate: [], reportDate: [], primaryDocument: [], items: [], primaryDocDescription: [] }, files: [] } };
+  const submissions = { cik: padded, name, formerNames, filings: { recent: { accessionNumber: [], form: [], filingDate: [], reportDate: [], primaryDocument: [], items: [], primaryDocDescription: [] }, files: [] } };
   return async (url) => {
     const pathname = new URL(url).pathname; const file = pathname.split("/").at(-1);
     const body = pathname.includes("company_tickers") ? { fields: ["cik", "name", "ticker", "exchange"], data: [] } : pathname.includes("/submissions/") ? submissions : { cik: padded, entityName: name, ...companyFacts };
@@ -111,7 +111,7 @@ test("NIO foreign-filer effective-control language is not a material weakness", 
 });
 
 test("BIOR bounded historical identity reaches OTC lineage and both completed splits", async () => {
-  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
+  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", formerNames: [{ name: "Progenity, Inc.", from: "2015-06-17", to: "2022-04-19" }], documents: {
     "d463897dars.pdf": "All share data reflect a 1-for-25 reverse stock split completed and effective January 3, 2023.",
     "bior-20241009.htm": "The Company effected a reverse stock split at a ratio of 1-for-10, effective October 18, 2024.",
     "d899591d8k.htm": "The Company entered into a securities purchase agreement and issued and sold common stock. The Company issued warrants exercisable for shares of common stock.",
@@ -123,34 +123,69 @@ test("BIOR bounded historical identity reaches OTC lineage and both completed sp
   assert.equal(result.evidence_packet.identity_resolution.status, "otc");
   assert.deepEqual(result.report.sections.reverse_splits.items.map((item) => item.corporate_action_state), ["completed", "completed"]);
   assert.ok(result.report.sections.dilution.items.some((item) => item.kind === "warrant"));
+  const finalized = calibrateReportScores(result.report);
+  assert.equal(reportValidator(finalized).valid, true, JSON.stringify(reportValidator(finalized).errors));
+  const claims = new Map(finalized.claims.map((item) => [item.id, item])); const sources = new Map(finalized.sources.map((item) => [item.id, item]));
+  for (const identity of finalized.issuer.prior_identities) for (const claimId of identity.claim_ids) for (const sourceId of claims.get(claimId).source_ids) assert.ok(sources.get(sourceId)?.supported_claim_ids.includes(claimId));
 });
 
 test("MULN historical ticker resolves CIK lineage to BINI and preserves repeated split history", async () => {
-  const result = await researchHistorical("MULN", { cik: 1499961, name: "Bollinger Innovations, Inc.", documents: {
-    "muln20240630c_10q.htm": "In May 2023, we completed a 1-for-25 reverse split.",
+  const spacer = " Background information about the issuer and its capital structure. ".repeat(12);
+  const result = await researchHistorical("MULN", { cik: 1499961, name: "Bollinger Innovations, Inc.", formerNames: [{ name: "Mullen Automotive Inc.", from: "2021-11-12", to: "2025-07-23" }], documents: {
+    "muln20240630c_10q.htm": `The Company completed a 1-for-25 reverse stock split effective May 4, 2023.${spacer}The Company completed a 1-for-9 reverse stock split effective August 11, 2023.${spacer}The Company completed a 1-for-100 reverse stock split effective December 21, 2023.`,
     "mullenautomotive_8k.htm": "The Company implemented a reverse stock split at a ratio of 1-for-100 effective September 17, 2024. Nasdaq notified the Company it was subject to delisting.",
     "mullenautomotive_ex99-1.htm": "The Company will effect a 1-for-100 reverse stock split effective June 2, 2025.",
-    "bollingerinnovations_8k.htm": "Mullen Automotive Inc. changed its name to Bollinger Innovations, Inc. and ticker MULN changed to BINI effective July 28, 2025."
+    "bollingerinnovations_8k.htm": "Mullen Automotive Inc. changed its name to Bollinger Innovations, Inc. and ticker MULN changed to BINI effective July 28, 2025. Trading in the Company's securities will be suspended on October 13, 2025 and will commence trading on the OTCID market under ticker BINI."
   } });
   assert.equal(result.report.security.ticker, "MULN");
   assert.equal(result.evidence_packet.identity_resolution.current_ticker, "BINI");
   assert.equal(result.evidence_packet.identity_resolution.status, "renamed");
   assert.ok(result.report.issuer.prior_identities.some((item) => item.ticker === "MULN"));
-  assert.ok(result.report.sections.reverse_splits.items.length >= 3);
+  for (const ratio of ["1-for-25", "1-for-9", "1-for-100"]) assert.ok(result.report.sections.reverse_splits.items.some((item) => item.title.includes(ratio)), ratio);
+  for (const date of ["2023-05-04", "2023-08-11", "2023-12-21"]) assert.ok(result.report.sections.reverse_splits.items.some((item) => item.event_date === date), date);
+  assert.equal(result.report.security.listing_venue, "OTCID"); assert.equal(result.report.security.listing_status, "delisted");
+  assert.equal(result.evidence_packet.identity_resolution.current_ticker_effective_from, "2025-07-28"); assert.equal(result.evidence_packet.identity_resolution.listing_effective_from, "2025-10-13");
+  const prior = result.report.issuer.prior_identities.find((item) => item.ticker === "MULN"); assert.equal(prior.effective_from, "2021-11-12"); assert.equal(prior.effective_to, "2025-07-27");
+  const finalized = calibrateReportScores(result.report); assert.equal(reportValidator(finalized).valid, true, JSON.stringify(reportValidator(finalized).errors));
+});
+
+test("Sparse-2 capital evidence remains Limited for explicit evidence-gate reasons", async () => {
+  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
+    "d463897dars.pdf": "The Company completed a 1-for-25 reverse stock split effective January 3, 2023.",
+    "bior-20241009.htm": "The Company completed a 1-for-10 reverse stock split effective October 18, 2024.",
+    "d899591d8k.htm": "The Company entered into a securities purchase agreement and issued and sold common stock. Warrants are exercisable for shares of common stock."
+  } });
+  const scored = calibrateReportScores(result.report);
+  assert.match(scored.scores.dilution_historical_severity.explanation, /bounded authoritative three-year history/i);
+  assert.match(scored.scores.dilution_future_likelihood.explanation, /liquidity|resolved dilution history/i);
+  assert.match(scored.scores.dilution_potential_impact.explanation, /numerator.*denominator/i);
+  assert.match(scored.scores.reverse_split_risk.explanation, /resolved split history.*listing status/i);
+  assert.ok(["limited_coverage", "unscored"].includes(scored.scores.dilution_historical_severity.state));
+});
+
+test("Sparse explanations retain evidence-backed current and historical identity", async () => {
+  const result = await researchHistorical("MULN", { cik: 1499961, name: "Bollinger Innovations, Inc.", documents: { "bollingerinnovations_8k.htm": "Mullen Automotive Inc. changed its name to Bollinger Innovations, Inc. and ticker MULN changed to BINI effective July 28, 2025. Trading will be suspended and commence on OTCID under BINI on October 13, 2025." } });
+  const report = calibrateReportScores(result.report); const claimMap = new Map(report.claims.map((item) => [item.id, item]));
+  const current = claimMap.get("claim-sec-identity"); const prior = report.issuer.prior_identities.find((item) => item.ticker === "MULN");
+  assert.match(current.text, /requested ticker MULN.*current ticker is BINI.*OTCID/i);
+  assert.match(claimMap.get(prior.claim_ids[0]).text, /historical ticker MULN.*current ticker BINI/i);
+  assert.match(report.scores.dilution_potential_impact.explanation, /required/i);
+  assert.equal(reportValidator(report).valid, true, JSON.stringify(reportValidator(report).errors));
 });
 
 test("TUP and TUPBQ resolve delisted OTC lineage with Chapter 11 and going concern", async () => {
   for (const ticker of ["TUP", "TUPBQ"]) {
     const result = await researchHistorical(ticker, { cik: 1008654, name: "Tupperware Brands Corporation", documents: {
       "tup-20221231.htm": "The conditions raise substantial doubt about the Company's ability to continue as a going concern.",
-      "tup-20240917.htm": "The Corporation filed voluntary petitions to commence proceedings under chapter 11 of the Bankruptcy Code.",
-      "tup-20240923.htm": "NYSE notified the Corporation it determined to commence proceedings to delist the common stock. Trading was suspended and commenced on the OTC Expert Market as TUPBQ."
+      "tup-20240917.htm": "The Corporation filed voluntary petitions to commence proceedings under chapter 11 of the Bankruptcy Code. NYSE notified the Corporation it determined to commence proceedings to delist the common stock. Trading was suspended and commenced on the OTC Expert Market as TUPBQ."
     } });
     assert.equal(result.report.security.listing_venue, "OTC Expert Market");
     assert.equal(result.report.security.listing_status, "delisted");
     assert.equal(result.evidence_packet.identity_resolution.current_ticker, "TUPBQ");
     assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
     assert.ok(result.report.financial_assessment.material_warnings.some((item) => /Bankruptcy/i.test(item.title)));
+    assert.ok(result.report.sources.some((item) => item.id === "source-sec-historical-identity" && item.url.endsWith("/000100865424000068/tup-20240917.htm")));
+    const finalized = calibrateReportScores(result.report); assert.equal(reportValidator(finalized).valid, true, JSON.stringify(reportValidator(finalized).errors));
   }
 });
 
@@ -168,6 +203,23 @@ test("NIO IFRS summary and scoring share the newest comparable annual revenue an
   assert.equal(scored.scores.financial_revenue_trend.state, "confirmed");
   assert.equal(scored.scores.financial_net_income_trend.state, "confirmed");
   assert.equal(result.report.financial_assessment.reporting_currency, "CNY");
+});
+
+test("NIO issuer-specific SEC taxonomy normalizes attributable annual net loss", async () => {
+  const annual = (value, year, accn) => fact(value, { start: `${year}-01-01`, end: `${year}-12-31`, filed: `${year + 1}-04-10`, form: "20-F", accn });
+  const result = await researchFixture({ ticker: "NIO", cik: 1736541, companyFacts: { cik: 1736541, entityName: "NIO Inc.", facts: { nio: {
+    NetLossAttributableToOrdinaryShareholdersOfNioInc: concept("Net loss attributable to NIO Inc. ordinary shareholders", [annual(-20_700_000_000, 2023, "n23"), annual(-22_400_000_000, 2024, "n24"), annual(-23_100_000_000, 2025, "n25")], "CNY")
+  } } } });
+  const metric = result.report.financial_assessment.metrics.profitability;
+  assert.equal(metric.value, -23_100_000_000); assert.equal(metric.unit, "CNY"); assert.deepEqual(metric.annual_observations.map((item) => item.value), [-20_700_000_000, -22_400_000_000, -23_100_000_000]);
+  assert.equal(calibrateReportScores(result.report).scores.financial_net_income_trend.state, "confirmed");
+});
+
+test("deterministic catalyst classifications always normalize to the report enum", () => {
+  const cases = { accounting: "legal", bankruptcy: "corporate_action", restructuring: "corporate_action", listing: "regulatory", delisting: "regulatory", operational: "product", financing: "financing", contract: "contract", nonsense_internal_label: "other" };
+  for (const [input, expected] of Object.entries(cases)) assert.equal(normalizeCatalystClassification(input), expected, input);
+  const finding = extractSecFilingEvidence({ html: "Item 4.02. Previously issued financial statements should no longer be relied upon and will be restated.", form: "8-K", filed: "2026-01-10", accession: "accounting", documentUrl: "https://www.sec.gov/accounting.htm", documentName: "accounting.htm" }).find((item) => item.kind === "catalyst");
+  assert.equal(finding.classification, "legal");
 });
 
 test("NXL split timing is scheduled before its effective date and completed afterward", () => {

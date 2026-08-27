@@ -49,3 +49,17 @@ severe blockers remain. No new expansion batch should run yet. The next step is
 offline deterministic correction of the stored Sparse-2 shapes, followed by a
 separately approved same-four verification. Sparse sampling remains inadequate
 even after those cases pass.
+
+## Offline corrective status
+
+The measured table above is immutable. A later offline corrective pass now
+reproduces and covers the invalid-report mechanisms: lineage source backlinks,
+multiple completed splits in one filing, dated BINI/OTCID terminal state,
+CIK-scoped NIO attributable-net-loss aliases, an accessible TUP filing seed,
+and normalized catalyst classifications. Capital-score tracing confirms that
+Limited remains correct when quantified dilution denominators, active capacity,
+or a resolved five-year window are absent; no score was forced to satisfy the
+frozen range. The stored NIO revenue series independently reconstructs 9.6
+under methodology 2.1.0, so methodology is unchanged. These are regression
+results only and do not raise the measured recall, validity, explanation, or
+score-range rates. A same-four live verification still requires owner approval.

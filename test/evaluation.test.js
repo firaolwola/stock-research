@@ -222,3 +222,16 @@ test("Issue 55 sparse batch 2 records improvement without passing reliability", 
   assert.equal(result.issue_must_remain_open, true);
   assert.ok(result.severe_misleading_misses.length > 0);
 });
+
+test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
+  const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
+  assert.equal(diagnostic.methodology_version, "2.1.0");
+  assert.deepEqual(diagnostic.observations_cny.map((item) => item.period), ["2022", "2023", "2024", "2025"]);
+  assert.ok(diagnostic.year_over_year_changes.every((value) => value > 0));
+  const calculated = diagnostic.weights.average_direction * diagnostic.average_direction_component
+    + diagnostic.weights.latest_change * diagnostic.latest_change_component
+    + diagnostic.weights.consistency * diagnostic.consistency_component;
+  assert.ok(Math.abs(calculated - diagnostic.unrounded_result) < 1e-9);
+  assert.equal(Number(diagnostic.unrounded_result.toFixed(1)), diagnostic.reported_result);
+  assert.match(diagnostic.conclusion, /range was too narrow.*methodology.*unchanged/i);
+});

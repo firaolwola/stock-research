@@ -939,3 +939,31 @@ Limited rather than Pending.
 **Why:** Current ticker maps intentionally omit many former, delisted, and OTC
 symbols. A small reviewed registry preserves the hard identity gate and bounded
 retrieval while making corrections auditable.
+
+## 2026-08-27 — Apply dated terminal identity evidence and reciprocal lineage provenance
+
+**Status:** Accepted corrective implementation after Issue #55 Sparse-2
+
+**Decision:** Exact-CIK historical identity records carry explicit inclusive
+effective windows. Newer authoritative terminal exchange evidence may supersede
+stale registry listing state, while evidence from a prior ticker is merged only
+when its event date falls inside that ticker's confirmed window. Every carried
+lineage claim and source must retain reciprocal links; SEC submissions and
+historical filing sources remain separate provenance records.
+
+**Why:** Sparse-2 retrieved useful BIOR and MULN evidence but produced invalid
+reports because former-name claims pointed at an omitted source, while stale
+listing state survived newer terminal evidence.
+
+## 2026-08-27 — Normalize deterministic catalyst classes at assembly boundaries
+
+**Status:** Accepted corrective implementation after Issue #55 Sparse-2
+
+**Decision:** Deterministic filing labels are mapped once into the report v4
+catalyst enum before assembly. Accounting/non-reliance events map to `legal`,
+bankruptcy/restructuring to `corporate_action`, and listing/delisting to
+`regulatory`; unknown labels map to `other` rather than leaking internal parser
+terms into the contract.
+
+**Why:** A valid TUPBQ evidence packet failed final validation solely because an
+internal `accounting` label was not a report-contract classification.
