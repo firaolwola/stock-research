@@ -192,3 +192,20 @@ test("sparse-batch corrections stay separate from the frozen answer key", async 
   assert.deepEqual(corrections.corrections.map((item) => item.ticker), ["BIOR", "MULN"]);
   assert.ok(corrections.corrections.every((item) => item.frozen_text_is_stale && item.source.startsWith("https://www.sec.gov/")));
 });
+
+test("Issue 55 sparse batch 2 reuses the frozen cases under new strict bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-2.json");
+  assert.equal(plan.required_ancestor, "27ee9aa");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-2");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 4);
+});

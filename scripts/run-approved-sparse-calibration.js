@@ -15,8 +15,13 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-sparse.json");
-const plan = JSON.parse(await readFile(planPath, "utf8"));
+const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-sparse-2.json");
+const batchPlan = JSON.parse(await readFile(planPath, "utf8"));
+const baselinePath = path.join(root, ...batchPlan.baseline_plan.split("/"));
+const baselineBytes = await readFile(baselinePath);
+if (createHash("sha256").update(baselineBytes).digest("hex") !== batchPlan.baseline_plan_sha256) throw new Error("The frozen Sparse-1 baseline plan changed.");
+const basePlan = JSON.parse(baselineBytes);
+const plan = { ...basePlan, ...batchPlan, approval: batchPlan.approval, provider_policy: { ...basePlan.provider_policy, ...batchPlan.provider_policy }, cases: basePlan.cases };
 if (process.env.RUN_APPROVED_FAST_CALIBRATION !== plan.approval_token) throw new Error(`Live calibration is locked. Set RUN_APPROVED_FAST_CALIBRATION=${plan.approval_token} only for the approved run.`);
 const expectedTickers = ["BIOR", "MULN", "NIO", "TUPBQ"];
 if (JSON.stringify(plan.approval.tickers) !== JSON.stringify(expectedTickers) || plan.approval.maximum_runs !== 4 || plan.approval.runs_per_ticker !== 1 || plan.approval.automatic_retries !== false || plan.approval.difficult_budget_approved !== false || plan.approval.deep_runs !== 0 || plan.approval.hosted_web_search !== false) throw new Error("The sparse-batch approval does not match the bounded runner.");
