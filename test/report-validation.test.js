@@ -239,3 +239,15 @@ test("financial semantics reject OCF-as-FCF, component debt, stale cash, and cur
     assert.equal(result.valid, false); assert.ok(result.errors.some((error) => error.message.includes(message)), message);
   }
 });
+
+test("financial chart observations reject incompatible units, periods, and current values", async () => {
+  const complete = await loadReportFixture("complete");
+  for (const [message, mutate] of [
+    ["metric unit", (report) => { report.financial_assessment.metrics.revenue.observations[0].unit = "EUR millions"; }],
+    ["comparable period lengths", (report) => { report.financial_assessment.metrics.revenue.observations[0].period_start = "2025-01-01"; }],
+    ["current value and period", (report) => { report.financial_assessment.metrics.revenue.observations.at(-1).value = 999; }]
+  ]) {
+    const report = structuredClone(complete); const errors = validateReport(mutate(report) ?? report).errors;
+    assert.ok(errors.some((error) => error.message.includes(message)), `${message}: ${JSON.stringify(errors)}`);
+  }
+});

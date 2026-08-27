@@ -56,6 +56,29 @@ test("financial display rows reuse only direct methodology components", async ()
   }
 });
 
+test("financial rows expose supported values while charts use chronological observations", async () => {
+  const view = buildDashboardView(await loadReportFixture("complete"));
+  const revenue = view.scoreSummary.find((row) => row.key === "revenue");
+  assert.equal(revenue.metric.value, 125);
+  assert.deepEqual(revenue.metric.observations.map((item) => item.period_end), ["2025-06-30", "2026-06-30"]);
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  const css = await readFile(new URL("../public/styles.css", import.meta.url), "utf8");
+  assert.match(source, /vertical-bar-chart/); assert.match(source, /chart-y-axis/); assert.match(source, /chart-x-label/);
+  assert.match(source, /one supported period · no trend inferred/i);
+  assert.match(css, /\.vertical-bar-chart/); assert.match(css, /\.vertical-bar/);
+  assert.doesNotMatch(source, /single-value-chart/);
+});
+
+test("Financial Health owns supporting financial explanations without duplicate metric dropdowns", async () => {
+  const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
+  const detailsFunction = source.slice(source.indexOf("function renderScoreDetails"), source.indexOf("function renderSections"));
+  assert.match(detailsFunction, /Financial Health explanation/);
+  assert.match(detailsFunction, /financialMetricOrder\.forEach/);
+  assert.match(detailsFunction, /coverage_notes\.forEach/);
+  assert.doesNotMatch(detailsFunction, /renderDetailGroup\("Financial metric explanations"/);
+  assert.match(detailsFunction, /renderDetailGroup\("Dilution and reverse-split explanations"/);
+});
+
 test("partial provider failure settles only dependent cards", () => {
   const settled = settledScoreKeysForOperations({
     retrieval: { status: "completed" },
@@ -72,7 +95,7 @@ test("partial provider failure settles only dependent cards", () => {
 
 test("dashboard exposes score methodology, confidence, inputs, and weights", async () => {
   const source = await readFile(new URL("../public/dashboard.js", import.meta.url), "utf8");
-  for (const text of ["methodology_version", "confidence", "Key supporting inputs", "component.weight", "Internal value", "Why the metrics look this way"] ) assert.match(source, new RegExp(text.replace(".", "\\.")));
+  for (const text of ["methodology_version", "confidence", "component.weight", "Internal value", "Why the scores look this way"] ) assert.match(source, new RegExp(text.replace(".", "\\.")));
 });
 
 test("dashboard exposes catalyst factors, analogue limits, reactions, and confidence", async () => {

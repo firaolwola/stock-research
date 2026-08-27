@@ -216,6 +216,25 @@ test("aligned OCF and capital expenditures produce FCF while currency mismatch d
   assert.equal(mismatch.report.financial_assessment.metrics.free_cash_flow.state, "unknown");
 });
 
+test("SEC financial observations retain only aligned comparable periods in chronological order", async () => {
+  const result = await reportForFacts(factsWith({
+    CashAndCashEquivalentsAtCarryingValue: edgeConcept("Cash", [edgeFact(5_000_000), edgeFact(4_000_000, { end: "2026-03-31", filed: "2026-05-10", accn: "0000123456-26-000000" })]),
+    RevenueFromContractWithCustomerExcludingAssessedTax: edgeConcept("Revenue", [edgeFact(8_000_000, { start: "2026-04-01" }), edgeFact(6_500_000, { start: "2025-04-01", end: "2025-06-30", filed: "2025-08-15", accn: "0000123456-25-000001" }), edgeFact(20_000_000, { start: "2026-01-01", filed: "2026-08-14", accn: "0000123456-26-000009" })]),
+    NetIncomeLoss: edgeConcept("Net income", [edgeFact(1_000_000, { start: "2026-04-01" }), edgeFact(250_000, { start: "2025-04-01", end: "2025-06-30", filed: "2025-08-15", accn: "0000123456-25-000001" })]),
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(3_000_000, { start: "2026-04-01" }), edgeFact(2_000_000, { start: "2025-04-01", end: "2025-06-30", filed: "2025-08-15", accn: "0000123456-25-000001" })]),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Capex", [edgeFact(1_250_000, { start: "2026-04-01" }), edgeFact(1_000_000, { start: "2025-04-01", end: "2025-06-30", filed: "2025-08-15", accn: "0000123456-25-000001" })]),
+    LongTermDebtCurrent: edgeConcept("Current debt", [edgeFact(2_000_000), edgeFact(1_500_000, { end: "2026-03-31", filed: "2026-05-10", accn: "0000123456-26-000000" })]),
+    LongTermDebtNoncurrent: edgeConcept("Non-current debt", [edgeFact(7_000_000), edgeFact(7_500_000, { end: "2026-03-31", filed: "2026-05-10", accn: "0000123456-26-000000" })])
+  }));
+  const metrics = result.report.financial_assessment.metrics;
+  assert.deepEqual(metrics.cash.observations.map((item) => item.value), [4_000_000, 5_000_000]);
+  assert.deepEqual(metrics.revenue.observations.map((item) => item.value), [6_500_000, 8_000_000]);
+  assert.deepEqual(metrics.free_cash_flow.observations.map((item) => item.value), [1_000_000, 1_750_000]);
+  assert.deepEqual(metrics.debt.observations.map((item) => item.value), [9_000_000, 9_000_000]);
+  assert.equal(metrics.revenue.observations.some((item) => item.period_start === "2026-01-01"), false, "YTD revenue is not comparable to a quarter");
+  const validation = validate(calibrateReportScores(result.report)); assert.equal(validation.valid, true, JSON.stringify(validation.errors));
+});
+
 test("SEC identity confirms the issuer but leaves unsupported security semantics unresolved", async () => {
   const result = await reportForFacts(facts);
   assert.equal(result.report.issuer.identity_state, "confirmed");

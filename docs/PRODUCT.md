@@ -141,6 +141,13 @@ explanations, and sources remain inspectable in a separate expandable block
 below. Financial sub-metrics may reuse a direct methodology 2.0.0
 component for display; metrics without a direct score remain Unscored.
 
+Financial Health is the main financial explanation container. Revenue,
+profitability, debt, free cash flow, cash, and cash burn appear as compact
+supporting rows and charts rather than six repeated score explanations. Charts
+use only source-linked observations with matching definitions, units,
+currencies, and comparable period lengths. A single observation is labeled as
+such and never presented as a trend.
+
 ### Dashboard order
 
 On wide screens, identity, research status, and catalyst content form the left

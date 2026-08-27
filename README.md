@@ -22,7 +22,10 @@ methodology 2.0.0 values to accessible 0–5 stars without changing the underlyi
 0–10 values. On wide screens it sits beside identity, research status, and
 catalyst content; smaller screens stack the same sections. Financial display
 rows without an independent methodology score remain Unscored, and detailed
-explanations, inputs, and sources live in a separate expandable block.
+financial reasoning is consolidated under Financial Health. Compact vertical
+bar charts compare only source-linked, definition- and period-compatible
+observations; one observation never implies a trend. Capital-risk explanations,
+inputs, and sources remain independently expandable.
 Comparison remains planned behind the Fast reliability milestone.
 
 This application is a research aid, not financial advice.

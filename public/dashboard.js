@@ -125,7 +125,7 @@ export function buildDashboardView(report, { final = true, settledScoreKeys = ne
     const displayScore = component
       ? { state: component.state, value: component.value, scale_max: 10, direction: "higher_is_better", confidence: financialScore.confidence, methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: component.explanation, claim_ids: component.claim_ids, components: [] }
       : { state: metric.state === "limited_coverage" ? "limited_coverage" : "unknown", value: null, scale_max: 10, direction: "higher_is_better", confidence: "unknown", methodology_version: financialScore.methodology_version, time_horizon: financialScore.time_horizon, explanation: `${metric.summary} This metric has no independent methodology score, so no stars are shown.`, claim_ids: metric.claim_ids, components: [] };
-    return { key, label: financialMetricLabels[key], description: scoreDescriptions[key], ...displayScore, presentation: buildScorePresentation(displayScore, { final, settled }) };
+    return { key, label: financialMetricLabels[key], description: scoreDescriptions[key], metric, ...displayScore, presentation: buildScorePresentation(displayScore, { final, settled }) };
   };
   return {
     report, findings: buildPriorityFindings(report), sourcesForClaims,
@@ -257,6 +257,10 @@ function renderScores(view) {
   view.scoreSummary.forEach((score) => {
     const row = element("article", "score-summary-row"); row.dataset.presentationState = score.presentation.state;
     const copy = element("div", "score-summary-copy"); copy.append(element("h3", "", score.label));
+    if (score.metric?.state === "confirmed" && Number.isFinite(score.metric.value)) {
+      const count = score.metric.observations?.length ?? 0; const trend = score.metric.trend === "unknown" ? "Trend not classified" : formatLabel(score.metric.trend); const context = count > 1 ? `${trend} · ${count} comparable periods` : "Latest supported period · no trend inferred";
+      copy.append(element("p", "score-metric-value", `${score.metric.value.toLocaleString()} ${score.metric.unit} · ${context}`));
+    }
     const value = element("div", "score-summary-value");
     if (score.presentation.state === "scored") value.append(renderStars(score.presentation));
     else value.append(badge(score.presentation.state), element("span", "visually-hidden", score.presentation.accessibleLabel));
@@ -346,11 +350,20 @@ function renderFinancialAssessment(view) {
     const card = element("article", "financial-chart");
     const title = element("div", "section-title"); title.append(element("h3", "", financialMetricLabels[key]), badge(metric.state)); card.append(title);
     const period = metric.period_start && metric.period_end ? `${formatDate(metric.period_start)}–${formatDate(metric.period_end)}` : "Period unavailable";
-    if (metric.state === "confirmed" && Number.isFinite(metric.value)) {
-      const chart = element("div", `single-value-chart ${metric.value < 0 ? "negative" : "positive"}`);
-      chart.setAttribute("role", "img"); chart.setAttribute("aria-label", `${financialMetricLabels[key]}: ${metric.value.toLocaleString()} ${metric.unit}, ${period}`);
-      chart.append(element("span", "chart-zero", "0"), element("span", "chart-bar"), element("strong", "chart-value", `${metric.value.toLocaleString()} ${metric.unit}`));
-      card.append(chart, element("p", "muted", `Latest supported period · ${period} · ${formatLabel(metric.trend)}`));
+    const observations = metric.state === "confirmed" ? metric.observations ?? [] : [];
+    if (observations.length) {
+      const values = observations.map((item) => item.value); const minimum = Math.min(0, ...values); const maximum = Math.max(0, ...values); const range = maximum - minimum || 1;
+      const chart = element("div", "vertical-bar-chart");
+      chart.setAttribute("role", "img"); chart.setAttribute("aria-label", `${financialMetricLabels[key]} in ${metric.unit}: ${observations.map((item) => `${item.value.toLocaleString()} for ${formatDate(item.period_end)}`).join(", ")}. ${observations.length === 1 ? "One observation; no trend inferred." : "Comparable observations in chronological order."}`);
+      const midpoint = minimum + range / 2; const axis = element("div", "chart-y-axis"); axis.append(element("span", "", maximum.toLocaleString()), element("span", "", midpoint.toLocaleString(undefined, { maximumFractionDigits: 2 })), element("span", "", minimum.toLocaleString()));
+      const plot = element("div", "chart-plot"); const zero = element("span", "chart-zero-line"); zero.style.bottom = `${((-minimum / range) * 100).toFixed(2)}%`; plot.append(zero);
+      observations.forEach((observation) => {
+        const column = element("div", "chart-column"); const bar = element("span", `vertical-bar ${observation.value < 0 ? "negative" : "positive"}`);
+        bar.style.height = `${(Math.abs(observation.value) / range * 100).toFixed(2)}%`; bar.style.bottom = `${(((Math.min(0, observation.value) - minimum) / range) * 100).toFixed(2)}%`;
+        bar.title = `${observation.value.toLocaleString()} ${observation.unit}`;
+        column.append(bar, element("span", "chart-bar-value", observation.value.toLocaleString()), element("span", "chart-x-label", formatDate(observation.period_end))); plot.append(column);
+      });
+      chart.append(axis, plot); card.append(chart, element("p", "muted", observations.length > 1 ? `${metric.unit} · ${observations.length} comparable periods · ${metric.trend === "unknown" ? "trend not classified" : formatLabel(metric.trend)}` : `${metric.unit} · one supported period · no trend inferred`));
     } else {
       card.append(element("p", "chart-unavailable", `${formatLabel(metric.state)} — no trustworthy chart is available.`), element("p", "muted", period));
     }
@@ -377,7 +390,7 @@ function renderFinancialAssessment(view) {
 }
 function renderScoreDetails(view) {
   const panel = element("section", "panel score-detail-panel");
-  panel.append(element("h2", "", "Why the metrics look this way"), element("p", "muted", "Open a metric for its internal value, evidence inputs, and sources. Display-only financial rows remain Unscored when methodology 2.0.0 has no independent component."));
+  panel.append(element("h2", "", "Why the scores look this way"), element("p", "muted", "Financial Health contains its supporting financial inputs. Independent capital-risk scores keep separate explanations, evidence, and sources."));
   const renderDetailGroup = (title, keys) => {
     const group = element("section", "score-detail-group"); group.append(element("h3", "", title));
     keys.forEach((key) => {
@@ -399,7 +412,21 @@ function renderScoreDetails(view) {
     });
     panel.append(group);
   };
-  renderDetailGroup("Financial metric explanations", ["financial_health", ...financialMetricOrder]);
+  const financialHealth = view.scoreSummary.find((item) => item.key === "financial_health");
+  const financialDetails = element("section", "score-detail-group"); financialDetails.append(element("h3", "", "Financial Health explanation"));
+  const details = element("details", "metric-details"); details.append(element("summary", "", `Financial health — ${financialHealth.presentation.stateLabel}`));
+  const body = element("div", "score-detail-body"); body.append(element("p", "", financialHealth.explanation), element("p", "muted", `${financialHealth.presentation.directionLabel} · ${financialHealth.presentation.state === "scored" ? `Internal value: ${financialHealth.value} / ${financialHealth.scale_max}` : "Internal value: not available"} · ${formatLabel(financialHealth.confidence)} confidence · methodology ${financialHealth.methodology_version}`));
+  const inputs = element("div", "financial-input-details");
+  financialMetricOrder.forEach((key) => {
+    const metric = view.report.financial_assessment.metrics[key]; const item = element("article", "financial-input-detail");
+    const title = element("div", "section-title"); title.append(element("h4", "", financialMetricLabels[key]), badge(metric.state)); item.append(title);
+    if (metric.state === "confirmed") item.append(element("p", "", `${metric.value.toLocaleString()} ${metric.unit} · ${metric.observations?.length > 1 ? formatLabel(metric.trend) : "one period; no trend inferred"}`));
+    item.append(element("p", "", metric.summary));
+    appendSourceLinks(item, view.sourcesForClaims(metric.claim_ids)); inputs.append(item);
+  });
+  financialHealth.components.forEach((component) => body.append(element("p", "coverage-note", `${formatLabel(component.key)} (${formatLabel(component.state)}): ${component.explanation}`)));
+  view.report.financial_assessment.coverage_notes.forEach((note) => body.append(element("p", "coverage-note", `Coverage note: ${note}`)));
+  body.append(inputs); appendSourceLinks(body, view.sourcesForClaims(financialHealth.claim_ids)); details.append(body); financialDetails.append(details); panel.append(financialDetails);
   renderDetailGroup("Dilution and reverse-split explanations", ["dilution_historical_severity", "dilution_future_likelihood", "dilution_potential_impact", "reverse_split_risk"]);
   return panel;
 }

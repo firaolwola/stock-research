@@ -136,7 +136,19 @@
         "trend": { "enum": ["improving", "stable", "deteriorating", "mixed", "unknown", "not_applicable"] },
         "comparison_period_start": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
         "comparison_period_end": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
         "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "financialObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["value", "unit", "period_start", "period_end", "claim_ids"],
+      "properties": {
+        "value": { "type": "number" },
+        "unit": { "$ref": "#/$defs/nonEmptyString" },
+        "period_start": { "$ref": "#/$defs/date" },
+        "period_end": { "$ref": "#/$defs/date" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
     },

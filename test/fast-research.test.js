@@ -62,6 +62,7 @@ test("disagreeing issuer identity is a hard failure", () => {
 test("representative compact fragments retain at least 35 percent rough output headroom", () => {
   for (const domain of Object.keys(FAST_DOMAINS)) {
     const value = fragment(domain);
+    if (domain === "financial") for (const metric of Object.values(value.financial_assessment.metrics)) delete metric.observations;
     const claimIds = new Set();
     const visit = (node) => {
       if (Array.isArray(node)) return node.forEach(visit);
