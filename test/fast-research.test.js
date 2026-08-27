@@ -63,7 +63,7 @@ test("representative compact fragments retain at least 35 percent rough output h
   for (const domain of Object.keys(FAST_DOMAINS)) {
     const value = fragment(domain);
     if (domain === "financial") {
-      for (const metric of Object.values(value.financial_assessment.metrics)) delete metric.observations;
+      for (const metric of Object.values(value.financial_assessment.metrics)) { delete metric.observations; delete metric.annual_observations; }
       delete value.financial_assessment.shares_outstanding;
     }
     const claimIds = new Set();

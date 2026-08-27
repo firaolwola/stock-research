@@ -141,12 +141,19 @@ explanations, and sources remain inspectable in a separate expandable block
 below. Financial sub-metrics may reuse a direct methodology 2.0.0
 component for display; metrics without a direct score remain Unscored.
 
-Financial Health is the main financial explanation container. Revenue,
-profitability, debt, free cash flow, cash, and cash burn appear as compact
-supporting rows and charts rather than six repeated score explanations. Charts
+Financial Health is the main financial explanation container. Revenue, net
+income or loss, total debt, free cash flow, cash, and operating cash flow appear
+as compact supporting rows rather than repeated score explanations. Internal
+burn and runway inputs remain available to methodology 2.0.0 but are not a
+primary chart label. Charts
 use only source-linked observations with matching definitions, units,
 currencies, and comparable period lengths. A single observation is labeled as
 such and never presented as a trend.
+
+The financial chart area groups annual history from primary filings into Income
+statement, Balance sheet, Cash flow, and Capital structure blocks. Annual and
+quarterly periods are never mixed in one series; annual history is preferred
+when available.
 
 The same chart area may show SEC-reported shares outstanding as capital-structure
 context. It uses point-in-time reported observations and may summarize the

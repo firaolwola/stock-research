@@ -420,6 +420,13 @@ display-only capital-structure series. Its point-in-time observations and visibl
 window change remain distinct from float and potential dilution and do not alter
 methodology 2.0.0.
 
+**Grouped annual-chart refinement:** The primary financial display uses Revenue,
+Net income / loss, Cash, Total debt, Operating cash flow, Free cash flow, and
+Shares outstanding. It groups these into Income statement, Balance sheet, Cash
+flow, and Capital structure blocks and prefers up to four source-linked annual
+filing periods. Cash burn remains an internal runway/scoring input, not a primary
+chart. This presentation change does not alter methodology 2.0.0.
+
 ## 2026-08-25 — Require explicit evidence when carrying issuer history
 
 **Status:** Accepted

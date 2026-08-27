@@ -137,6 +137,7 @@
         "comparison_period_start": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
         "comparison_period_end": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
         "observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
+        "annual_observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
         "summary": { "$ref": "#/$defs/nonEmptyString" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
@@ -193,6 +194,7 @@
             "cash_burn": { "$ref": "#/$defs/financialMetric" },
             "revenue": { "$ref": "#/$defs/financialMetric" },
             "profitability": { "$ref": "#/$defs/financialMetric" },
+            "operating_cash_flow": { "$ref": "#/$defs/financialMetric" },
             "free_cash_flow": { "$ref": "#/$defs/financialMetric" },
             "debt": { "$ref": "#/$defs/financialMetric" }
           }
@@ -209,6 +211,7 @@
         "state": { "$ref": "#/$defs/evidenceState" },
         "summary": { "$ref": "#/$defs/nonEmptyString" },
         "observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
+        "annual_observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
     },

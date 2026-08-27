@@ -97,6 +97,21 @@ button:disabled { cursor: wait; opacity: .62; }
 .chart-blue .vertical-bar.positive { background: #2962ff; }
 .chart-amber .vertical-bar.positive { background: #f0b90b; }
 .chart-purple .vertical-bar.positive { background: #ab47bc; }
+.grouped-chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; color: var(--muted); font-size: .75rem; }
+.legend-item::before { display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 2px; background: currentColor; content: ""; }
+.series-blue { color: #2962ff; }
+.series-cyan { color: #26a69a; }
+.series-amber { color: #f0b90b; }
+.series-purple { color: #ab47bc; }
+.chart-cluster { display: flex; align-items: flex-end; justify-content: center; gap: 3px; }
+.chart-cluster .vertical-bar { left: auto; width: min(32%, 26px); }
+.chart-cluster .vertical-bar.series-blue { left: 14%; background: #2962ff; }
+.chart-cluster .vertical-bar.series-cyan, .chart-cluster .vertical-bar.series-amber, .chart-cluster .vertical-bar.series-purple { right: 14%; left: auto; }
+.chart-cluster .vertical-bar.series-cyan { background: #26a69a; }
+.chart-cluster .vertical-bar.series-amber { background: #f0b90b; }
+.chart-cluster .vertical-bar.series-purple { background: #ab47bc; }
+.chart-cluster .vertical-bar.negative { background: #ef5350; }
 .chart-bar-value { position: absolute; top: 4px; left: 0; width: 100%; color: var(--text); font-size: .68rem; text-align: center; }
 .chart-x-label { position: absolute; top: 174px; left: -10px; width: calc(100% + 20px); color: var(--muted); font-size: .65rem; line-height: 1.1; text-align: center; }
 .chart-unavailable { min-height: 42px; color: var(--unknown); font-weight: 750; }

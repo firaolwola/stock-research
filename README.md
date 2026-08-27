@@ -28,6 +28,9 @@ observations; one observation never implies a trend. A separate SEC-reported
 shares-outstanding chart shows bounded point-in-time share-base history without
 presenting it as float or potential dilution. Capital-risk explanations,
 inputs, and sources remain independently expandable.
+The primary chart blocks group annual Income statement, Balance sheet, Cash
+flow, and Capital structure history; Operating cash flow replaces Cash burn as
+the user-facing cash-generation metric while burn/runway logic remains internal.
 Comparison remains planned behind the Fast reliability milestone.
 
 This application is a research aid, not financial advice.
