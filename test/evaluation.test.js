@@ -443,6 +443,24 @@ test("fresh recursive-plan MULN verification freezes a new one-run authorization
   assert.equal(plan.approval.hosted_web_search, false);
 });
 
+test("recursive-plan MULN live result records target recall but fails the severe false-event gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-4/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-4/run-summary.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 1);
+  assert.equal(result.known_false_positive_split_events, 2);
+  assert.equal(result.explanation_fidelity.rate, 0);
+  assert.equal(result.settlement_accuracy.rate, 0);
+  assert.equal(result.severe_misleading_misses, 2);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

@@ -332,6 +332,14 @@ its grandparent baseline, provider policy, approval bounds, and frozen MULN case
 ID deterministically. The failed artifact remains unchanged and its authorization
 is not reusable; a new live run still requires separate owner approval.
 
+The fresh recursive-plan MULN verification reached research and produced a valid
+partial report, but failed the severe canonical-action gate. It retrieved all
+five frozen completed splits, yet retained the false August 4, 2025 1-for-100
+event and added a false August 1, 2025 1-for-2 event by truncating written
+1-for-250 text. Both accepted occurrences had `competing_ratio_detected=true`.
+The parser blocker therefore remains open; no retry occurred. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-4.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

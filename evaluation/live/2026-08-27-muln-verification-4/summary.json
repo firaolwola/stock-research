@@ -1,0 +1,12 @@
+{
+  "report_produced": true,
+  "valid_report_rate": {"passed":1,"evaluated":1,"rate":1},
+  "completed_split_recall": {"retrieved":5,"expected":5,"recall":1},
+  "known_false_positive_split_events": 2,
+  "explanation_fidelity": {"passed":0,"evaluated":1,"rate":0},
+  "settlement_accuracy": {"passed":0,"evaluated":1,"rate":0},
+  "severe_misleading_misses": 2,
+  "diagnostics": {"total":158,"accepted":13,"merged":7,"withheld":29,"rejected":109},
+  "muln_live_parser_blocker_resolved": false,
+  "issue_must_remain_open": true
+}
