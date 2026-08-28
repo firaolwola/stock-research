@@ -1,0 +1,3246 @@
+{
+  "case_id": "final-sparse-proof-stn",
+  "ticker": "STN",
+  "attempted_at": "2026-08-28T19:05:20.443Z",
+  "elapsed_ms": 1136,
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-STN-2026-08-28T19:05:19.307Z",
+    "metadata": {
+      "as_of": "2026-08-28T19:05:19.307Z",
+      "generated_at": "2026-08-28T19:05:19.307Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-28",
+          "end": "2026-08-28"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "provider-news-provider_quota",
+          "explanation": "Current news discovery is Limited; optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "STN",
+      "name": "Stantec Inc Common Stock",
+      "security_type": "common_stock",
+      "listing_venue": "NYSE",
+      "listing_status": "active",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-nasdaq-current-listing"
+      ],
+      "security_structure": "unknown",
+      "depositary_ratio": null,
+      "additional_listing_venues": []
+    },
+    "issuer": {
+      "legal_name": "STANTEC INC",
+      "cik": "0001131383",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [],
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-sec-reporting-regime"
+      ],
+      "jurisdiction": "Canada",
+      "foreign_private_issuer": true,
+      "filing_regime": "foreign_40-F_6-K",
+      "accounting_basis": "unknown",
+      "accounting_authority": null,
+      "presentation_currency": "CAD"
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "SEC filing discovery completed, but split terms were not extracted in this bounded phase.",
+        "coverage_notes": [
+          "Filing-text and exchange corporate-action parsing remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "Stantec believes that, from time to time, the market price of its common shares may not adequately reflect the value of its business and its future business prospects.",
+            "event_date": "2026-08-19",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-offering-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000117184326005636-offering-1"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "SEC filing metadata does not safely establish current compliance or accounting warnings.",
+        "coverage_notes": [
+          "Item-level filing extraction and exchange lists remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2025-12-31; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+          "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+          "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+        ],
+        "items": [
+          {
+            "id": "financial-stale-period",
+            "kind": "other",
+            "title": "Financial evidence is stale",
+            "state": "confirmed",
+            "summary": "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+            "event_date": "2025-12-31",
+            "claim_ids": [
+              "claim-financial-stale"
+            ]
+          },
+          {
+            "id": "alpha-eod-price-change",
+            "kind": "other",
+            "title": "End-of-day price change",
+            "state": "confirmed",
+            "summary": "Latest close compared with the immediately preceding daily close.",
+            "event_date": "2026-08-27",
+            "value": -0.9413948554760077,
+            "unit": "price_change_percent",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          },
+          {
+            "id": "alpha-eod-relative-volume",
+            "kind": "other",
+            "title": "End-of-day relative volume",
+            "state": "confirmed",
+            "summary": "Latest volume compared with a 20-session bounded baseline.",
+            "event_date": "2026-08-27",
+            "value": 0.8160654968786488,
+            "unit": "volume_ratio",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-financial-stale",
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-revenue-observation-1",
+          "claim-financial-revenue",
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-profitability-observation-1",
+          "claim-financial-profitability",
+          "claim-financial-profitability-annual-1",
+          "claim-financial-profitability-annual-2",
+          "claim-financial-profitability-annual-3",
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow",
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-alpha-eod-market"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "18, 2026 (GLOBE NEWSWIRE) -- TSX, NYSE: STN Stantec Inc. (“Stantec”), a global leader in sustainable design and engineering, announced today that it has received approval from the Toronto Stock Exchange (the “TSX”) respecting an amendment of its previously approved Normal Course Issuer Bid (“NCIB”) to increase the maximum number of common shares Stantec may repurchase for cancellation under the NCIB from 2,281,339 (or 2% of Stantec’s issued and outstanding shares as of March 2, 2026), to 5,703,349 common shares (or 5% of Stantec’s shares as of March 2, 2026).",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "18, 2026 (GLOBE NEWSWIRE) -- TSX, NYSE: STN Stantec Inc. (“Stantec”), a global leader in sustainable design and engineering, announced today that it has received approval from the Toronto Stock Exchange (the “TSX”) respecting an amendment of its previously approved Normal Course Issuer Bid (“NCIB”) to increase the maximum number of common shares Stantec may repurchase for cancellation under the NCIB from 2,281,339 (or 2% of Stantec’s issued and outstanding shares as of March 2, 2026), to 5,703,349 common shares (or 5% of Stantec’s shares as of March 2, 2026).",
+            "event_date": "2026-08-19",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000117184326005636-catalyst-1"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-28",
+      "reporting_currency": "CAD",
+      "summary": "Latest standardized SEC facts are shown through 2025-12-31; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+        "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+        "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "limited_coverage",
+          "label": "Cash",
+          "value": null,
+          "unit": null,
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-12-31",
+          "comparison_period_end": "2024-12-31",
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Cash is 240 days old and is not used as current decision evidence.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3"
+          ]
+        },
+        "revenue": {
+          "state": "confirmed",
+          "label": "Revenue",
+          "value": 4827300000,
+          "unit": "CAD",
+          "period_start": "2019-01-01",
+          "period_end": "2019-12-31",
+          "trend": "unknown",
+          "comparison_period_start": "2018-01-01",
+          "comparison_period_end": "2018-12-31",
+          "observations": [
+            {
+              "value": 4283800000,
+              "unit": "CAD",
+              "period_start": "2018-01-01",
+              "period_end": "2018-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-observation-1"
+              ]
+            },
+            {
+              "value": 4827300000,
+              "unit": "CAD",
+              "period_start": "2019-01-01",
+              "period_end": "2019-12-31",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 4300100000,
+              "unit": "CAD",
+              "period_start": "2016-01-01",
+              "period_end": "2016-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-1"
+              ]
+            },
+            {
+              "value": 4283800000,
+              "unit": "CAD",
+              "period_start": "2018-01-01",
+              "period_end": "2018-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-2"
+              ]
+            },
+            {
+              "value": 4827300000,
+              "unit": "CAD",
+              "period_start": "2019-01-01",
+              "period_end": "2019-12-31",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Revenue of 4827300000 CAD for the period ending 2019-12-31, filed 2020-02-27.",
+          "claim_ids": [
+            "claim-financial-revenue-observation-1",
+            "claim-financial-revenue",
+            "claim-financial-revenue-annual-1",
+            "claim-financial-revenue-annual-2"
+          ]
+        },
+        "profitability": {
+          "state": "confirmed",
+          "label": "Profit or loss",
+          "value": 479400000,
+          "unit": "CAD",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-01-01",
+          "comparison_period_end": "2024-12-31",
+          "observations": [
+            {
+              "value": 361500000,
+              "unit": "CAD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-observation-1"
+              ]
+            },
+            {
+              "value": 479400000,
+              "unit": "CAD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-profitability"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 200700000,
+              "unit": "CAD",
+              "period_start": "2021-01-01",
+              "period_end": "2021-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-1"
+              ]
+            },
+            {
+              "value": 247000000,
+              "unit": "CAD",
+              "period_start": "2022-01-01",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-2"
+              ]
+            },
+            {
+              "value": 361500000,
+              "unit": "CAD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-3"
+              ]
+            },
+            {
+              "value": 479400000,
+              "unit": "CAD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-profitability"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Profit or loss of 479400000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+          "claim_ids": [
+            "claim-financial-profitability-observation-1",
+            "claim-financial-profitability",
+            "claim-financial-profitability-annual-1",
+            "claim-financial-profitability-annual-2",
+            "claim-financial-profitability-annual-3"
+          ]
+        },
+        "operating_cash_flow": {
+          "state": "confirmed",
+          "label": "Operating cash flow",
+          "value": 862900000,
+          "unit": "CAD",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-01-01",
+          "comparison_period_end": "2024-12-31",
+          "observations": [
+            {
+              "value": 603100000,
+              "unit": "CAD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": 862900000,
+              "unit": "CAD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 397000000,
+              "unit": "CAD",
+              "period_start": "2021-01-01",
+              "period_end": "2021-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 304300000,
+              "unit": "CAD",
+              "period_start": "2022-01-01",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": 603100000,
+              "unit": "CAD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 862900000,
+              "unit": "CAD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Operating cash flow of 862900000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow",
+            "claim-financial-operating_cash_flow-annual-1",
+            "claim-financial-operating_cash_flow-annual-2",
+            "claim-financial-operating_cash_flow-annual-3"
+          ]
+        },
+        "free_cash_flow": {
+          "state": "unknown",
+          "label": "Free cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Operating cash flow is available, but aligned capital expenditures are not; free cash flow is not inferred.",
+          "claim_ids": []
+        },
+        "cash_burn": {
+          "state": "unknown",
+          "label": "Cash burn",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Cash burn and runway remain unknown without a valid aligned cash-flow measure.",
+          "claim_ids": []
+        },
+        "debt": {
+          "state": "unknown",
+          "label": "Total debt",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Neither an aligned total nor sufficient current and non-current debt components were established.",
+          "claim_ids": []
+        }
+      },
+      "shares_outstanding": {
+        "state": "confirmed",
+        "summary": "Reported shares outstanding increased 2.9% over the displayed period from 2022-12-31 to 2025-12-31.",
+        "observations": [
+          {
+            "value": 110809020,
+            "unit": "shares",
+            "period_start": "2022-12-31",
+            "period_end": "2022-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 114066995,
+            "unit": "shares",
+            "period_start": "2023-12-31",
+            "period_end": "2023-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 114066995,
+            "unit": "shares",
+            "period_start": "2024-12-31",
+            "period_end": "2024-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 114066995,
+            "unit": "shares",
+            "period_start": "2025-12-31",
+            "period_end": "2025-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 110809020,
+            "unit": "shares",
+            "period_start": "2022-12-31",
+            "period_end": "2022-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 114066995,
+            "unit": "shares",
+            "period_start": "2023-12-31",
+            "period_end": "2023-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 114066995,
+            "unit": "shares",
+            "period_start": "2024-12-31",
+            "period_end": "2024-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 114066995,
+            "unit": "shares",
+            "period_start": "2025-12-31",
+            "period_end": "2025-12-31",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-shares-outstanding-1",
+          "claim-shares-outstanding-2",
+          "claim-shares-outstanding-3",
+          "claim-shares-outstanding-4"
+        ]
+      },
+      "going_concern": {
+        "state": "unknown",
+        "as_of": null,
+        "summary": "Going-concern language was not established from bounded filing extraction.",
+        "claim_ids": []
+      },
+      "material_warnings": [
+        {
+          "id": "financial-stale-period",
+          "kind": "other",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Financial evidence is stale",
+          "as_of": "2025-12-31",
+          "summary": "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+          "claim_ids": [
+            "claim-financial-stale"
+          ]
+        }
+      ]
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "regulatory",
+        "title": "Material filing event",
+        "event_date": "2026-08-19",
+        "summary": "18, 2026 (GLOBE NEWSWIRE) -- TSX, NYSE: STN Stantec Inc. (“Stantec”), a global leader in sustainable design and engineering, announced today that it has received approval from the Toronto Stock Exchange (the “TSX”) respecting an amendment of its previously approved Normal Course Issuer Bid (“NCIB”) to increase the maximum number of common shares Stantec may repurchase for cancellation under the NCIB from 2,281,339 (or 2% of Stantec’s issued and outstanding shares as of March 2, 2026), to 5,703,349 common shares (or 5% of Stantec’s shares as of March 2, 2026).",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000117184326005636-catalyst-1"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC associates STN with STANTEC INC (CIK 0001131383) on NYSE.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-28T19:05:19.307Z",
+        "source_ids": [
+          "source-sec-ticker-map"
+        ]
+      },
+      {
+        "id": "claim-sec-reporting-regime",
+        "text": "SEC-filed authoritative evidence identifies STANTEC INC with filing regime foreign_40-F_6-K.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-reporting-regime"
+        ]
+      },
+      {
+        "id": "claim-extracted-000117184326005636-offering-1",
+        "text": "Stantec believes that, from time to time, the market price of its common shares may not adequately reflect the value of its business and its future business prospects.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-19T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000117184326005636-exh991htm"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000117184326005636",
+        "text": "STANTEC INC filed Form 6-K on 2026-08-19; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-19T00:00:00Z",
+        "source_ids": [
+          "source-sec-000117184326005636"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000113138326000017",
+        "text": "STANTEC INC filed Form 6-K on 2026-08-12; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-000113138326000017"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000117184326005457",
+        "text": "STANTEC INC filed Form 6-K on 2026-08-12; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-000117184326005457"
+        ]
+      },
+      {
+        "id": "claim-extracted-000117184326005636-catalyst-1",
+        "text": "18, 2026 (GLOBE NEWSWIRE) -- TSX, NYSE: STN Stantec Inc. (“Stantec”), a global leader in sustainable design and engineering, announced today that it has received approval from the Toronto Stock Exchange (the “TSX”) respecting an amendment of its previously approved Normal Course Issuer Bid (“NCIB”) to increase the maximum number of common shares Stantec may repurchase for cancellation under the NCIB from 2,281,339 (or 2% of Stantec’s issued and outstanding shares as of March 2, 2026), to 5,703,349 common shares (or 5% of Stantec’s shares as of March 2, 2026).",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-19T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000117184326005636-exh991htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash of 398100000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash of 228500000 CAD for the comparable period ending 2024-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash of 148300000 CAD for the comparable period ending 2023-01-01, filed 2025-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash of 352900000 CAD for the comparable period ending 2023-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash of 228500000 CAD for the comparable period ending 2024-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue",
+        "text": "SEC Company Facts reports Revenue of 4827300000 CAD for the period ending 2019-12-31, filed 2020-02-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2020-02-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-observation-1",
+        "text": "SEC Company Facts reports Revenue of 4283800000 CAD for the comparable period ending 2018-12-31, filed 2020-02-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2020-02-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-1",
+        "text": "SEC Company Facts reports Revenue of 4300100000 CAD for the comparable period ending 2016-12-31, filed 2018-02-22.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2018-02-22T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-2",
+        "text": "SEC Company Facts reports Revenue of 4283800000 CAD for the comparable period ending 2018-12-31, filed 2020-02-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2020-02-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability",
+        "text": "SEC Company Facts reports Profit or loss of 479400000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-observation-1",
+        "text": "SEC Company Facts reports Profit or loss of 361500000 CAD for the comparable period ending 2024-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-1",
+        "text": "SEC Company Facts reports Profit or loss of 200700000 CAD for the comparable period ending 2021-12-31, filed 2023-02-22.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-02-22T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-2",
+        "text": "SEC Company Facts reports Profit or loss of 247000000 CAD for the comparable period ending 2022-12-31, filed 2024-02-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-02-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-3",
+        "text": "SEC Company Facts reports Profit or loss of 361500000 CAD for the comparable period ending 2024-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-1",
+        "text": "SEC Company Facts reports 110809020 common shares outstanding at 2022-12-31, filed 2023-02-22.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2023-02-22T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-2",
+        "text": "SEC Company Facts reports 114066995 common shares outstanding at 2023-12-31, filed 2024-02-28.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-02-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-3",
+        "text": "SEC Company Facts reports 114066995 common shares outstanding at 2024-12-31, filed 2025-02-25.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2025-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-4",
+        "text": "SEC Company Facts reports 114066995 common shares outstanding at 2025-12-31, filed 2026-02-25.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow",
+        "text": "SEC Company Facts reports Operating cash flow of 862900000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Operating cash flow of 603100000 CAD for the comparable period ending 2024-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Operating cash flow of 397000000 CAD for the comparable period ending 2021-12-31, filed 2023-02-22.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-02-22T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Operating cash flow of 304300000 CAD for the comparable period ending 2022-12-31, filed 2024-02-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-02-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Operating cash flow of 603100000 CAD for the comparable period ending 2024-12-31, filed 2026-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-stale",
+        "text": "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-28T19:05:19.307Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1",
+          "source-sec-companyfacts-cash",
+          "source-sec-companyfacts-cash-annual-1",
+          "source-sec-companyfacts-cash-annual-2",
+          "source-sec-companyfacts-cash-annual-3",
+          "source-sec-companyfacts-profitability-observation-1",
+          "source-sec-companyfacts-profitability",
+          "source-sec-companyfacts-profitability-annual-1",
+          "source-sec-companyfacts-profitability-annual-2",
+          "source-sec-companyfacts-profitability-annual-3",
+          "source-sec-companyfacts-operating_cash_flow-observation-1",
+          "source-sec-companyfacts-operating_cash_flow",
+          "source-sec-companyfacts-operating_cash_flow-annual-1",
+          "source-sec-companyfacts-operating_cash_flow-annual-2",
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-nasdaq-current-listing",
+        "text": "Nasdaq Trader's current symbol directory identifies STN as Stantec Inc Common Stock; current status is active.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-28T19:05:20.437Z",
+        "source_ids": [
+          "source-nasdaq-symbol-directory"
+        ]
+      },
+      {
+        "id": "claim-alpha-eod-market",
+        "text": "STN's end-of-day close was 74.71 with volume 328834 on 2026-08-27; this is market context, not evidence of an issuer event.",
+        "materiality": "low",
+        "state": "confirmed",
+        "as_of": "2026-08-27T00:00:00Z",
+        "source_ids": [
+          "source-alpha-eod-market"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-reporting-regime",
+        "title": "40-F filed 2026-02-25 — filing regime foreign_40-F_6-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000007/stn-20251231.htm",
+        "published_date": "2026-02-25",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-sec-reporting-regime"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000117184326005636-exh991htm",
+        "title": "6-K filed 2026-08-19 — exh_991.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005636/exh_991.htm",
+        "published_date": "2026-08-19",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-extracted-000117184326005636-offering-1"
+        ]
+      },
+      {
+        "id": "source-sec-000117184326005636",
+        "title": "6-K filed 2026-08-19",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005636/f6k_081826.htm",
+        "published_date": "2026-08-19",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000117184326005636"
+        ]
+      },
+      {
+        "id": "source-sec-000113138326000017",
+        "title": "6-K filed 2026-08-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000017/a6kq22026.htm",
+        "published_date": "2026-08-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000113138326000017"
+        ]
+      },
+      {
+        "id": "source-sec-000117184326005457",
+        "title": "6-K filed 2026-08-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005457/f6k_081226.htm",
+        "published_date": "2026-08-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000117184326005457"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000117184326005636-exh991htm",
+        "title": "6-K filed 2026-08-19 — exh_991.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005636/exh_991.htm",
+        "published_date": "2026-08-19",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-extracted-000117184326005636-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2020-02-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2020-02-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2018-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2020-02-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Profit or loss",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2023-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2024-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2023-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2024-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2023-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2024-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+        "published_date": "2026-08-28",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:20.437Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "alpha vantage end-of-day market data for STN",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-27",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-28T19:05:20.437Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ],
+        "provider_name": "alpha_vantage",
+        "data_type": "market_context",
+        "freshness": "current",
+        "evidence_role": "market_context"
+      }
+    ],
+    "scores": {
+      "dilution_historical_severity": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Past three years",
+        "explanation": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_future_likelihood": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_potential_impact": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "reverse_split_risk": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_health": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Latest reported period and next twelve months",
+        "explanation": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_revenue_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "The latest comparable SEC observation is too stale for a Fast financial trend score.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_net_income_trend": {
+        "state": "confirmed",
+        "value": 9.2,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-profitability-annual-1",
+          "claim-financial-profitability-annual-2",
+          "claim-financial-profitability-annual-3",
+          "claim-financial-profitability"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 9.2,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-profitability-annual-1",
+              "claim-financial-profitability-annual-2",
+              "claim-financial-profitability-annual-3",
+              "claim-financial-profitability"
+            ]
+          }
+        ]
+      },
+      "financial_debt_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_free_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_cash_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_operating_cash_flow_trend": {
+        "state": "confirmed",
+        "value": 8.6,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-operating_cash_flow"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 8.6,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-annual-1",
+              "claim-financial-operating_cash_flow-annual-2",
+              "claim-financial-operating_cash_flow-annual-3",
+              "claim-financial-operating_cash_flow"
+            ]
+          }
+        ]
+      },
+      "long_term_company_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Multi-year (Deep only)",
+        "explanation": "Long-term company quality remains a Deep construct and is not deterministically scored from bounded Fast evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "catalyst_strength": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Current catalyst",
+        "explanation": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+        "claim_ids": [
+          "claim-extracted-000117184326005636-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          }
+        ]
+      },
+      "near_term_setup_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Next five trading days",
+        "explanation": "A supported current catalyst is required before market context can form a setup score.",
+        "claim_ids": [
+          "claim-extracted-000117184326005636-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000117184326005636-catalyst-1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-28",
+      "text": "SEC associates STN with STANTEC INC (CIK 0001131383) on NYSE.",
+      "source_id": "source-sec-ticker-map",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-catalyst-0001171843-26-005636",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-19",
+      "text": "STANTEC INC filed Form 6-K on 2026-08-19; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000117184326005636",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001131383-26-000017",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-12",
+      "text": "STANTEC INC filed Form 6-K on 2026-08-12; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000113138326000017",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001171843-26-005457",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-12",
+      "text": "STANTEC INC filed Form 6-K on 2026-08-12; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000117184326005457",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-02-25",
+      "text": "SEC Company Facts reports Cash of 398100000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-revenue",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2020-02-27",
+      "text": "SEC Company Facts reports Revenue of 4827300000 CAD for the period ending 2019-12-31, filed 2020-02-27.",
+      "source_id": "source-sec-companyfacts-revenue",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-profitability",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-02-25",
+      "text": "SEC Company Facts reports Profit or loss of 479400000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+      "source_id": "source-sec-companyfacts-profitability",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2023-02-22",
+      "text": "SEC Company Facts reports 110809020 common shares outstanding at 2022-12-31, filed 2023-02-22.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-1",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-2",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2024-02-28",
+      "text": "SEC Company Facts reports 114066995 common shares outstanding at 2023-12-31, filed 2024-02-28.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-2",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2025-02-25",
+      "text": "SEC Company Facts reports 114066995 common shares outstanding at 2024-12-31, filed 2025-02-25.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-3",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-4",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-02-25",
+      "text": "SEC Company Facts reports 114066995 common shares outstanding at 2025-12-31, filed 2026-02-25.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-4",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-operating_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-02-25",
+      "text": "SEC Company Facts reports Operating cash flow of 862900000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+      "source_id": "source-sec-companyfacts-operating_cash_flow",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-stale",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2025-12-31",
+      "text": "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+      "source_id": "source-sec-companyfacts-cash-observation-1",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-reporting-regime",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-02-25",
+      "text": "SEC-filed authoritative evidence identifies STANTEC INC with filing regime foreign_40-F_6-K.",
+      "source_id": "source-sec-reporting-regime",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001171843-26-005636-offering-1",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-08-19",
+      "text": "Stantec believes that, from time to time, the market price of its common shares may not adequately reflect the value of its business and its future business prospects.",
+      "source_id": "source-sec-document-capital-000117184326005636-exh991htm",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001171843-26-005636-catalyst-1",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2026-08-19",
+      "text": "18, 2026 (GLOBE NEWSWIRE) -- TSX, NYSE: STN Stantec Inc. (“Stantec”), a global leader in sustainable design and engineering, announced today that it has received approval from the Toronto Stock Exchange (the “TSX”) respecting an amendment of its previously approved Normal Course Issuer Bid (“NCIB”) to increase the maximum number of common shares Stantec may repurchase for cancellation under the NCIB from 2,281,339 (or 2% of Stantec’s issued and outstanding shares as of March 2, 2026), to 5,703,349 common shares (or 5% of Stantec’s shares as of March 2, 2026).",
+      "source_id": "source-sec-document-catalyst-000117184326005636-exh991htm",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-nasdaq-current-listing",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-28",
+      "text": "Nasdaq Trader's current symbol directory identifies STN as Stantec Inc Common Stock; current status is active.",
+      "source_id": "source-nasdaq-symbol-directory",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-alpha-eod-market",
+      "category": "market_context",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "STN's end-of-day close was 74.71 with volume 328834 on 2026-08-27; this is market context, not evidence of an issuer event.",
+      "source_id": "source-alpha-eod-market",
+      "issuer_cik": "0001131383",
+      "security_ticker": "STN",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "STN",
+    "identity": {
+      "ticker": "STN",
+      "issuer_legal_name": "STANTEC INC",
+      "cik": "0001131383"
+    },
+    "identity_resolution": {
+      "requested_ticker": "STN",
+      "current_ticker": "STN",
+      "status": "current",
+      "current_ticker_effective_from": null,
+      "listing_effective_from": null,
+      "filer_jurisdiction": "Canada",
+      "filer_regime": "foreign_40-F_6-K",
+      "accounting_standard": "unknown",
+      "source_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+      "security_type_resolution": {
+        "status": "limited",
+        "security_type": "unknown",
+        "basis": "unresolved",
+        "source_accession": null,
+        "claim_id": null
+      }
+    },
+    "retrieved_at": "2026-08-28T19:05:19.307Z",
+    "records": [
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-28",
+        "text": "SEC associates STN with STANTEC INC (CIK 0001131383) on NYSE.",
+        "source_id": "source-sec-ticker-map",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-catalyst-0001171843-26-005636",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-19",
+        "text": "STANTEC INC filed Form 6-K on 2026-08-19; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000117184326005636",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001131383-26-000017",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-12",
+        "text": "STANTEC INC filed Form 6-K on 2026-08-12; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000113138326000017",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001171843-26-005457",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-12",
+        "text": "STANTEC INC filed Form 6-K on 2026-08-12; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000117184326005457",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-02-25",
+        "text": "SEC Company Facts reports Cash of 398100000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-revenue",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2020-02-27",
+        "text": "SEC Company Facts reports Revenue of 4827300000 CAD for the period ending 2019-12-31, filed 2020-02-27.",
+        "source_id": "source-sec-companyfacts-revenue",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-profitability",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-02-25",
+        "text": "SEC Company Facts reports Profit or loss of 479400000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+        "source_id": "source-sec-companyfacts-profitability",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2023-02-22",
+        "text": "SEC Company Facts reports 110809020 common shares outstanding at 2022-12-31, filed 2023-02-22.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-1",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-2",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2024-02-28",
+        "text": "SEC Company Facts reports 114066995 common shares outstanding at 2023-12-31, filed 2024-02-28.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-2",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2025-02-25",
+        "text": "SEC Company Facts reports 114066995 common shares outstanding at 2024-12-31, filed 2025-02-25.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-3",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-4",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-02-25",
+        "text": "SEC Company Facts reports 114066995 common shares outstanding at 2025-12-31, filed 2026-02-25.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-4",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-operating_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-02-25",
+        "text": "SEC Company Facts reports Operating cash flow of 862900000 CAD for the period ending 2025-12-31, filed 2026-02-25.",
+        "source_id": "source-sec-companyfacts-operating_cash_flow",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-stale",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2025-12-31",
+        "text": "The newest standardized SEC financial period ended 2025-12-31, 240 days before this Fast report.",
+        "source_id": "source-sec-companyfacts-cash-observation-1",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-reporting-regime",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-02-25",
+        "text": "SEC-filed authoritative evidence identifies STANTEC INC with filing regime foreign_40-F_6-K.",
+        "source_id": "source-sec-reporting-regime",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001171843-26-005636-offering-1",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-08-19",
+        "text": "Stantec believes that, from time to time, the market price of its common shares may not adequately reflect the value of its business and its future business prospects.",
+        "source_id": "source-sec-document-capital-000117184326005636-exh991htm",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001171843-26-005636-catalyst-1",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2026-08-19",
+        "text": "18, 2026 (GLOBE NEWSWIRE) -- TSX, NYSE: STN Stantec Inc. (“Stantec”), a global leader in sustainable design and engineering, announced today that it has received approval from the Toronto Stock Exchange (the “TSX”) respecting an amendment of its previously approved Normal Course Issuer Bid (“NCIB”) to increase the maximum number of common shares Stantec may repurchase for cancellation under the NCIB from 2,281,339 (or 2% of Stantec’s issued and outstanding shares as of March 2, 2026), to 5,703,349 common shares (or 5% of Stantec’s shares as of March 2, 2026).",
+        "source_id": "source-sec-document-catalyst-000117184326005636-exh991htm",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-nasdaq-current-listing",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-28",
+        "text": "Nasdaq Trader's current symbol directory identifies STN as Stantec Inc Common Stock; current status is active.",
+        "source_id": "source-nasdaq-symbol-directory",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-alpha-eod-market",
+        "category": "market_context",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "STN's end-of-day close was 74.71 with volume 328834 on 2026-08-27; this is market context, not evidence of an issuer event.",
+        "source_id": "source-alpha-eod-market",
+        "issuer_cik": "0001131383",
+        "security_ticker": "STN",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-reporting-regime",
+        "title": "40-F filed 2026-02-25 — filing regime foreign_40-F_6-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000007/stn-20251231.htm",
+        "published_date": "2026-02-25",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-sec-reporting-regime"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000117184326005636-exh991htm",
+        "title": "6-K filed 2026-08-19 — exh_991.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005636/exh_991.htm",
+        "published_date": "2026-08-19",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-extracted-000117184326005636-offering-1"
+        ]
+      },
+      {
+        "id": "source-sec-000117184326005636",
+        "title": "6-K filed 2026-08-19",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005636/f6k_081826.htm",
+        "published_date": "2026-08-19",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000117184326005636"
+        ]
+      },
+      {
+        "id": "source-sec-000113138326000017",
+        "title": "6-K filed 2026-08-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000017/a6kq22026.htm",
+        "published_date": "2026-08-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000113138326000017"
+        ]
+      },
+      {
+        "id": "source-sec-000117184326005457",
+        "title": "6-K filed 2026-08-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005457/f6k_081226.htm",
+        "published_date": "2026-08-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000117184326005457"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000117184326005636-exh991htm",
+        "title": "6-K filed 2026-08-19 — exh_991.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1131383/000117184326005636/exh_991.htm",
+        "published_date": "2026-08-19",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-extracted-000117184326005636-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2020-02-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2020-02-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2018-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2020-02-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Profit or loss",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2023-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2024-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Profit or loss comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2023-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2024-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2023-02-22",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2024-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001131383.json",
+        "published_date": "2026-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:19.307Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+        "published_date": "2026-08-28",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-28T19:05:20.437Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "alpha vantage end-of-day market data for STN",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-27",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-28T19:05:20.437Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ],
+        "provider_name": "alpha_vantage",
+        "data_type": "market_context",
+        "freshness": "current",
+        "evidence_role": "market_context"
+      }
+    ],
+    "normalization_diagnostics": [
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "BasicEarningsLossPerShare",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD/shares",
+        "currency": null,
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "ComprehensiveIncome",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "CurrentTaxExpenseIncome",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "DeferredTaxExpenseIncome",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "DeferredTaxExpenseIncomeRecognisedInProfitOrLoss",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "DeferredTaxExpenseIncomeRelatingToOriginationAndReversalOfTemporaryDifferences",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "DilutedEarningsLossPerShare",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD/shares",
+        "currency": null,
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "ImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "IncomeFromSubleasingRightofuseAssets",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "IncomeTaxExpenseContinuingOperations",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "IncomeTaxesPaidClassifiedAsOperatingActivities",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "IncomeTaxRelatingToRemeasurementsOfDefinedBenefitPlansOfOtherComprehensiveIncome",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "OtherComprehensiveIncome",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "OtherComprehensiveIncomeNetOfTaxExchangeDifferencesOnTranslation",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "OtherComprehensiveIncomeNetOfTaxGainsLossesOnRemeasurementsOfDefinedBenefitPlans",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "OtherComprehensiveIncomeThatWillBeReclassifiedToProfitOrLossNetOfTax",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "OtherOperatingIncomeExpense",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "ProfitLossBeforeTax",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "TaxRateEffectOfExpenseNotDeductibleInDeterminingTaxableProfitTaxLoss",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "pure",
+        "currency": null,
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "AdjustmentsForDecreaseIncreaseInAccruedIncomeOtherThanContractAssets",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "AdjustmentsForImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "GainsLossesOnFinancialAssetsAtFairValueThroughProfitOrLossMandatorilyMeasuredAtFairValue",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "IncomeTaxesPaidRefundClassifiedAsOperatingActivities",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      },
+      {
+        "taxonomy_namespace": "ifrs-full",
+        "concept_tag": "PostemploymentBenefitExpenseInProfitOrLoss",
+        "label": "",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "CAD",
+        "currency": "CAD",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001131383-26-000007",
+        "form": "40-F",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0001131383"
+      }
+    ],
+    "reporting_identity_diagnostics": [
+      {
+        "foreign_filer_source": "0001131383-26-000007",
+        "filing_regime_source": "0001131383-26-000007",
+        "accounting_framework_source": null,
+        "accounting_framework_text_range": null,
+        "accounting_framework": "unknown",
+        "accounting_framework_state": "unresolved",
+        "security_structure_source": null,
+        "security_structure_state": "unresolved",
+        "primary_venue": "NYSE",
+        "additional_venues": [],
+        "candidates": [],
+        "promoted_properties": {
+          "foreign_private_issuer": true,
+          "filing_regime": "foreign_40-F_6-K",
+          "accounting_basis": "unknown",
+          "accounting_authority": null,
+          "presentation_currency": "CAD",
+          "security_structure": "unknown",
+          "depositary_ratio": null
+        }
+      }
+    ],
+    "listing_compliance_diagnostics": [],
+    "corporate_action_diagnostics": [],
+    "nt_filing_diagnostics": [],
+    "cache": {
+      "tickers": "hit",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0001171843-26-005636",
+          "document": "f6k_081826.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001131383-26-000007",
+          "document": "stn-20251231.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001171843-26-005636",
+          "document": "exh_991.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 5
+  },
+  "synthesis": {
+    "status": "skipped",
+    "reason": "cost_ceiling"
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 680,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "web_search_calls": 0,
+    "estimated_cost_usd": null,
+    "pricing_version": null,
+    "within_latency_target": true,
+    "first_useful_latency_ms": 170,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 5,
+      "cache": {
+        "tickers": "hit",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0001171843-26-005636",
+            "document": "f6k_081826.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001131383-26-000007",
+            "document": "stn-20251231.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001171843-26-005636",
+            "document": "exh_991.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 1131,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 18869,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.03,
+      "termination_reason": "cost_ceiling",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0001131383": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0001131383": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001171843-26-005636:f6k_081826.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001131383-26-000007:stn-20251231.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001171843-26-005636:exh_991.htm": {
+          "endpoint_category": "filing_exhibit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 1,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:news": {
+          "cache_state": "miss",
+          "request_count": 2,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:news": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "maximum_cost_usd": 0.030906,
+          "status": "cost_blocked"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 2,
+      "nasdaq": "completed",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "completed",
+      "market_reason": null,
+      "provider_order": [
+        "alpha_vantage",
+        "twelve_data"
+      ],
+      "configured_providers": [
+        "alpha_vantage"
+      ],
+      "providers": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 4,
+            "daily_limit": 25,
+            "minute_used": 4,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "alpha_vantage_requests_today": 4,
+      "alpha_vantage_free_daily_limit": 25
+    }
+  }
+}

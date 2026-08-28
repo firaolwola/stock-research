@@ -1243,3 +1243,22 @@ remain internal diagnostics.
 
 **Why:** Verification-2 found ZAPPF's current delay but lost its stated reason,
 while unrelated old NT filings became current warnings for REKR and GMBL.
+
+## 2026-08-28 — Keep Issue #55 open after ONFO/STN live confirmation
+
+**Status:** Confirmation complete; milestone remains open
+
+**Decision:** The approved ONFO/STN confirmation is recorded as a separate live
+artifact and does not rewrite the frozen Final Sparse Proof measurements. ONFO's
+targeted listing-state and completed-split checks passed. STN's identity,
+Canadian foreign-private-issuer, 40-F/6-K, CAD, and NYSE context passed, but its
+live filing packet produced no typed IFRS/IASB or direct-common-share/TSX
+reporting-property candidates. Those properties remain unresolved rather than
+being guessed or promoted from incidental text.
+
+**Why:** This is a deterministic interpretation/normalization false-suppression
+miss, not unavailable authoritative evidence. The run measured 5/7 targeted
+claims, 2/2 valid reports, and one severe miss while staying within its approved
+budget and provider limits. Issue #55 therefore remains open; the next step is
+offline Form 40-F reporting-property binding correction, and any additional live
+confirmation requires separate owner approval.

@@ -647,18 +647,20 @@ Final Sparse Proof 1 remains frozen at 4/7. Offline stored-shape regressions now
 promote STN as a Canadian foreign private issuer under 40-F/6-K, IASB IFRS, CAD
 presentation, and direct common shares on NYSE plus TSX without inventing an ADS
 ratio. ONFO now reconciles its newer Rule 5550(a)(2) closure against the older bid
-warning while leaving Rule 5550(b)(1) active. One fresh bounded ONFO/STN
-verification is technically justified but not authorized.
+warning while leaving Rule 5550(b)(1) active.
 
-That verification subsequently ran once per ticker and also measured 4/7. ONFO's
-internal rule states reconciled, but its active equity explanation retained the
-full mixed-rule paragraph and an incidental ADS mention polluted security
-structure. STN settled Canada and 40-F/6-K but broad phrase matching selected an
-incidental U.S.-GAAP reference and failed direct-share/TSX promotion. Both are
-prospective deterministic defects. They are now corrected by source-scoped
-property candidates and rule-scoped explanation claims, and the offline holdout
-gate passes. One fresh bounded ONFO/STN live verification is technically
-justified but remains unauthorized.
+The separately approved ONFO/STN confirmation ran exactly once per ticker on
+2026-08-28. It stayed within every bound and produced 2/2 valid partial reports.
+ONFO passed the targeted listing/split checks. STN passed identity, Canada,
+foreign-private-issuer, 40-F/6-K, CAD, and NYSE context, but the selected live
+filing text produced no typed IFRS/IASB or direct-common-share/TSX candidate. The
+targeted result was 5/7 material claims, explanation fidelity 1/2, settlement
+accuracy 1/2, score/state safety 2/2, and one severe false-suppression miss.
+This is an interpretation/normalization defect, not unavailable authoritative
+evidence; no false ADS or U.S.-GAAP promotion occurred. The offline holdout gate
+remains useful but does not override this live result. No further run is
+authorized by that approval; offline Form 40-F reporting-property correction is
+the next dependency and any later live confirmation needs fresh owner approval.
 
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,
