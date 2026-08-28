@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { extractSecFilingEvidence, filingHtmlToText, findMaterialExhibitUrl } from "../lib/sec-filing-extraction.js";
+import { extractSecFilingEvidence, filingHtmlToText, findMaterialExhibitUrl, findMaterialExhibitUrls } from "../lib/sec-filing-extraction.js";
 
 const samples = JSON.parse(await readFile(new URL("../fixtures/sec-filings/representative.json", import.meta.url), "utf8"));
 const evaluation = JSON.parse(await readFile(new URL("../evaluation/cases.json", import.meta.url), "utf8"));
@@ -23,6 +23,10 @@ test("registered capacity is not mislabeled as actual issuance", () => {
 test("HTML normalization removes code and resolves only SEC material exhibits", () => {
   assert.equal(filingHtmlToText("<style>private</style><p>A &amp; B</p><script>secret</script>"), "A & B");
   assert.equal(findMaterialExhibitUrl('<a href="ex99-1.htm">Exhibit 99.1</a>', "https://www.sec.gov/Archives/edgar/data/1/main.htm"), "https://www.sec.gov/Archives/edgar/data/1/ex99-1.htm");
+  assert.deepEqual(findMaterialExhibitUrls('<a href="exh_991.htm">99.1</a><a href="ex-992xmda2025.htm">99.2</a>', "https://www.sec.gov/Archives/edgar/data/1/main.htm"), [
+    "https://www.sec.gov/Archives/edgar/data/1/exh_991.htm",
+    "https://www.sec.gov/Archives/edgar/data/1/ex-992xmda2025.htm"
+  ]);
   assert.equal(findMaterialExhibitUrl('<a href="https://example.com/ex99-1.htm">Outside</a>', "https://www.sec.gov/a.htm"), null);
 });
 

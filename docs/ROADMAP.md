@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — offline correction required after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop passes 36/36 checks, including 12/12 untouched holdout transformations and zero cross-property contamination. The approved ONFO/STN confirmation ran within bounds, but STN still conservatively suppressed supported IFRS/direct-share evidence. Issue #55 remains open; the next dependency is an offline Form 40-F reporting-property binding correction, followed by a new owner decision before any further live run.
+8. [ ] **Active — offline correction complete; awaiting fresh live approval:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The approved ONFO/STN confirmation ran within bounds, but STN conservatively suppressed supported IFRS/direct-share evidence because its 40-F exhibit was not inspected. The bounded annual-exhibit retrieval correction is now covered offline; the next dependency is a new owner decision before any further live run.
 
 ### Issue #55 corrective roadmap
 
@@ -109,8 +109,10 @@ verdict.
    actionable failures and is sufficient for this correction. No broad mutation
    framework, second parser, filing archive, or LLM-dependent test system is
    justified. The approved ONFO/STN confirmation is complete; its STN
-   false-suppression miss makes the next dependency an offline Form 40-F
-   reporting-property binding correction, not another blind live rerun.
+   false-suppression miss made the next dependency an offline Form 40-F
+   reporting-property binding correction, not another blind live rerun. That
+   correction is now implemented and covered by a captured 40-F exhibit shape;
+   fresh live confirmation remains separately gated.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -150,10 +152,11 @@ bounds: ONFO passed its targeted listing/split checks, while STN retained
 identity and 40-F/6-K/CAD context but failed to bind supported IFRS/IASB and
 direct-common-share/TSX properties. The result was 5/7 targeted claims, 2/2
 valid reports, and one severe false-suppression miss. No further live work is
-authorized by that approval. The next step is offline correction of live Form
-40-F reporting-property binding; a new live run requires separate owner
-approval. A paid data subscription remains neither selected nor required and
-would need separate owner approval.
+authorized by that approval. The offline correction now inspects a bounded set
+of SEC-hosted 99.x exhibits linked from annual 20-F/40-F filings, including the
+STN audited exhibit, and has deterministic regression coverage. A new live run
+requires separate owner approval. A paid data subscription remains neither
+selected nor required and would need separate owner approval.
 
 ### Milestone acceptance criteria
 

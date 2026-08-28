@@ -219,6 +219,23 @@ test("STN stored-live shape promotes 40-F foreign filer IFRS and direct common-s
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
 
+test("STN 40-F linked audited exhibit is included for reporting-property binding", async () => {
+  const result = await researchFixture({ ticker: "STN", cik: 1131383, filings: [
+    { accessionNumber: "0001131383-26-000007", form: "40-F", filingDate: "2026-02-25", reportDate: "2025-12-31", primaryDocument: "stn-index.htm", items: "" }
+  ], companyFacts: { cik: 1131383, entityName: "STN Corp.", facts: {} }, documents: {
+    "stn-index.htm": '<html><body><a href="exh_991.htm">Exhibit 99.1</a><a href="ex-992xmda2025.htm">Audited financial statements</a></body></html>',
+    "exh_991.htm": "Stantec Inc. annual report exhibit.",
+    "ex-992xmda2025.htm": "The audited consolidated financial statements are presented in Canadian dollars in accordance with IFRS Accounting Standards as issued by the International Accounting Standards Board. The common shares are listed on the Toronto Stock Exchange and the New York Stock Exchange under STN. An unrelated discussion mentions U.S. GAAP and American Depositary Shares."
+  } });
+  assert.equal(result.report.issuer.accounting_basis, "IFRS");
+  assert.equal(result.report.issuer.accounting_authority, "IASB");
+  assert.equal(result.report.security.security_structure, "direct_share");
+  assert.deepEqual(result.report.security.additional_listing_venues, ["TSX"]);
+  assert.equal(result.evidence_packet.reporting_identity_diagnostics[0].accounting_framework_source, "0001131383-26-000007");
+  assert.ok(result.evidence_packet.cache.documents.some((item) => item.document === "ex-992xmda2025.htm"));
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
 test("foreign filer status does not imply ADS and explicit U.S. GAAP remains U.S. GAAP", async () => {
   const filings = [{ accessionNumber: "xpev-20f", form: "20-F", filingDate: "2026-04-01", reportDate: "2025-12-31", primaryDocument: "xpev.htm", items: "" }];
   const result = await researchFixture({ ticker: "XPEV", cik: 1810997, filings, companyFacts: { cik: 1810997, entityName: "XPEV Corp.", facts: {} }, documents: { "xpev.htm": "The Company is a Cayman Islands foreign private issuer. The American Depositary Shares are listed on the New York Stock Exchange. The consolidated financial statements are prepared in accordance with U.S. GAAP." } });

@@ -658,9 +658,11 @@ targeted result was 5/7 material claims, explanation fidelity 1/2, settlement
 accuracy 1/2, score/state safety 2/2, and one severe false-suppression miss.
 This is an interpretation/normalization defect, not unavailable authoritative
 evidence; no false ADS or U.S.-GAAP promotion occurred. The offline holdout gate
-remains useful but does not override this live result. No further run is
-authorized by that approval; offline Form 40-F reporting-property correction is
-the next dependency and any later live confirmation needs fresh owner approval.
+remains useful but does not override this live result. The correction now
+retrieves a bounded set of SEC-hosted 99.x exhibits linked from annual 20-F/40-F
+filings and includes a regression for the STN audited exhibit shape. No further
+run is authorized by that approval; any later live confirmation needs fresh
+owner approval.
 
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,

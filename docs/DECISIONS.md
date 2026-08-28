@@ -1262,3 +1262,22 @@ claims, 2/2 valid reports, and one severe miss while staying within its approved
 budget and provider limits. Issue #55 therefore remains open; the next step is
 offline Form 40-F reporting-property binding correction, and any additional live
 confirmation requires separate owner approval.
+
+## 2026-08-28 — Inspect bounded annual foreign-filer exhibits for reporting properties
+
+**Status:** Accepted offline correction; live confirmation remains separately gated
+
+**Decision:** For annual 20-F/40-F filings, Fast may inspect a bounded set of
+SEC-hosted 99.x exhibits linked from the selected filing. The existing catalyst
+exhibit path remains bounded, and no open-ended filing crawl is introduced.
+Linked exhibits participate in the same source-scoped reporting-property binding
+as the primary filing, so audited IFRS/IASB and direct-share/venue declarations
+can be promoted when present. Incidental ADS or U.S.-GAAP language remains
+non-authoritative unless it satisfies the existing statement-basis or
+listed-security rules.
+
+**Why:** The live STN packet omitted its audited reporting exhibit, leaving
+supported IFRS and direct-share/TSX properties suppressed despite successful SEC
+retrieval. A deterministic regression now covers the `ex-992...` annual-exhibit
+shape. The correction must be confirmed by a newly approved live run before
+Issue #55 can close.
