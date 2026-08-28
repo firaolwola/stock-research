@@ -416,6 +416,17 @@ SEC table fallback exists, and the score settles Limited/Unscored. This
 classification does not alter any frozen batch measurement, answer key, or
 reported recall.
 
+The subsequently approved three-ticker expansion ran REKR, ZAPPF, and GMBL once
+each and stopped on GMBL final validation failure. It measured 10/20 (50%)
+material-risk recall, 2/3 valid reports, 0/3 explanation fidelity, 2/3 settlement
+accuracy, and two severe blockers. REKR retrieved the active deficiency and
+going-concern warning but missed exact working-capital/note pressure. ZAPPF did
+not resolve to Zapp/CIK 1955104. GMBL retained an unknown security type despite
+confirmed terminal evidence and rendered its 1-for-400 action as 1-for-4. No
+missing evidence became favorable. Offline correction is required before any
+additional live sample. See
+`docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

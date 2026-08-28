@@ -1,0 +1,25 @@
+{
+  "ticker": "GMBL",
+  "valid_report": false,
+  "validation_errors": [
+    {"type":"semantic","path":"","message":"confirmed security evidence requires resolved security type and listing status"}
+  ],
+  "material_checks": { "detected": 5, "expected": 7, "recall": 0.7143 },
+  "checks": [
+    {"name":"domestic_nevada_issuer_and_security_identity","result":"miss","cause":"normalization","note":"Issuer and CIK resolved and no foreign-filer label appeared, but confirmed security evidence retained security_type=unknown and failed validation."},
+    {"name":"completed_1_for_100_reverse_split","result":"pass","cause":null},
+    {"name":"completed_1_for_400_reverse_split","result":"miss","cause":"normalization","note":"The source text contained one-for-four-hundred (1-for-400), but the canonical title became Completed 1-for-4 reverse split."},
+    {"name":"nasdaq_suspension_and_delisting","result":"pass","cause":null},
+    {"name":"otc_transition","result":"pass","cause":null},
+    {"name":"going_concern_distress","result":"pass","cause":null},
+    {"name":"stale_post_deregistration_financials_remain_limited","result":"pass","cause":null}
+  ],
+  "explanation_fidelity": false,
+  "settlement_accurate": false,
+  "score_state_result": "numeric scores remained Limited, but the final report was invalid",
+  "severe_misleading_miss": true,
+  "blockers": [
+    "Terminal OTC identity assembly confirms the security before security_type is resolved.",
+    "The complete 1-for-400 ratio is truncated to 1-for-4 during canonical presentation."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "ticker": "ZAPPF",
+  "valid_report": true,
+  "material_checks": { "detected": 0, "expected": 7, "recall": 0 },
+  "checks": [
+    {"name":"cayman_foreign_private_issuer_identity","result":"miss","cause":"identity_retrieval"},
+    {"name":"20_f_6_k_ifrs_regime","result":"miss","cause":"identity_retrieval"},
+    {"name":"completed_1_for_20_reverse_split","result":"miss","cause":"identity_retrieval"},
+    {"name":"nasdaq_suspension_and_delisting","result":"miss","cause":"identity_retrieval"},
+    {"name":"current_zappf_otc_identity","result":"miss","cause":"identity_retrieval"},
+    {"name":"liquidity_and_going_concern_pressure","result":"miss","cause":"identity_retrieval"},
+    {"name":"late_newer_annual_evidence_settles_limited_for_that_reason","result":"miss","cause":"interpretation","note":"The report settled Limited safely, but only because identity was unresolved; it did not retrieve or explain the NT 20-F freshness limitation."}
+  ],
+  "explanation_fidelity": false,
+  "settlement_accurate": true,
+  "score_state_result": "safe Limited/Unscored; no missing evidence became favorable",
+  "severe_misleading_miss": true,
+  "blocker": "The bounded historical identity registry does not resolve current OTC ticker ZAPPF to former Nasdaq ticker ZAPP and CIK 1955104."
+}

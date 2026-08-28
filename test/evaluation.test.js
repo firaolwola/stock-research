@@ -590,6 +590,31 @@ test("approved sparse expansion freezes exactly three independent bounded runs",
   assert.match(plan.approval_token, /approved-sparse-expansion-three-runs/);
 });
 
+test("sparse expansion records the deterministic blockers without passing Issue 55", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/run-summary.json");
+  const rekr = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/review/REKR.json");
+  const zappf = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/review/ZAPPF.json");
+  const gmbl = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/review/GMBL.json");
+  assert.equal(result.material_risk_recall.recall, .5);
+  assert.equal(result.valid_report_rate.rate, .6667);
+  assert.equal(result.severe_misleading_misses, 2);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(rekr.material_checks.detected, 5);
+  assert.equal(zappf.material_checks.detected, 0);
+  assert.equal(zappf.blocker.includes("ZAPPF"), true);
+  assert.equal(gmbl.valid_report, false);
+  assert.ok(gmbl.blockers.some((item) => item.includes("1-for-400")));
+  assert.equal(run.completed_run_count, 3);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 4);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 4);
+  assert.ok(run.runs.every((item) => item.elapsed_ms <= 20000));
+  assert.ok(run.aggregate_elapsed_ms <= 60000);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
