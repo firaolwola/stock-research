@@ -1,0 +1,10 @@
+{
+  "as_of": "2026-08-28",
+  "issue": 55,
+  "research_scope": ["SEC", "exchange", "issuer-filed authoritative releases"],
+  "fast_output_used": false,
+  "paid_calls_used": false,
+  "historical_measurements_modified": false,
+  "conclusions": {"HUBC": "rejected_resolved_deficiency", "XPEV": "rejected_for_IFRS_positive_case", "ONFO": "accepted_active_deficiency_replacement"},
+  "notes": ["HUBC remains a foreign private issuer on Form 20-F/6-K, but its January 2026 MVLS deficiency was formally closed after compliance was regained.", "XPEV remains a clean Cayman foreign-private-issuer ADS case, but its SEC financial statements are prepared under U.S. GAAP; it cannot prove IFRS handling.", "ONFO is a domestic Delaware common-stock issuer. Its latest Form 10-Q states that the stockholders-equity plan remains under review and that its bid-price compliance period runs through 2026-12-29."]
+}

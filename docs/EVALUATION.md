@@ -469,10 +469,13 @@ Offline regression now constrains NT selection by filer regime, report period,
 age, superseding periodic filings, and the current freshness gap. Stored ZAPPF
 text preserves a filing-specific issuer reason; missing reasons remain explicitly
 unavailable. Stored REKR and GMBL shapes no longer surface old cured NT forms.
-No same-three rerun is proposed. The non-executable final sparse-proof proposal
-is `evaluation/plans/fast-reliability-final-sparse-proof-proposal.json`; its HUBC
-and XPEV candidates require current authoritative baseline confirmation before
-the owner can approve any live execution.
+No same-three rerun is proposed. The authoritative baseline pass rejected HUBC
+because Nasdaq closed its MVLS deficiency and rejected XPEV as an IFRS proof case
+because its SEC financial statements use U.S. GAAP. The one permitted replacement,
+ONFO, is accepted for active-deficiency proof from its August 19, 2026 Form 10-Q.
+The non-executable plan remains blocked until the owner authorizes selection and
+baseline confirmation of one genuinely IFRS-reporting foreign security. No live
+Fast execution is authorized.
 
 ## Paid live evaluation boundary
 

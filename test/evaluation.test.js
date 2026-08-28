@@ -684,14 +684,14 @@ test("Sparse Expansion Verification-2 resolves prior defects but keeps Issue 55 
   assert.ok(run.aggregate_elapsed_ms <= 60000);
 });
 
-test("final sparse-proof proposal is two-case, bounded, and non-executable", async () => {
+test("final sparse-proof proposal records failed candidates and remains non-executable", async () => {
   const plan = await loadJson("../evaluation/plans/fast-reliability-final-sparse-proof-proposal.json");
   assert.equal(plan.execution_authorized, false);
-  assert.deepEqual(plan.cases.map((item) => item.ticker), ["HUBC", "XPEV"]);
-  assert.equal(plan.cases.every((item) => /requires_current/.test(item.baseline_status)), true);
-  assert.deepEqual({ runs: plan.proposed_bounds.maximum_runs, cost: plan.proposed_bounds.maximum_openai_cost_usd, alpha: plan.proposed_bounds.maximum_alpha_vantage_requests, twelve: plan.proposed_bounds.maximum_twelve_data_requests, combined: plan.proposed_bounds.maximum_combined_optional_provider_attempts }, { runs: 2, cost: .06, alpha: 4, twelve: 4, combined: 8 });
-  assert.equal(plan.proposed_bounds.hosted_web_search, false);
-  assert.equal(plan.proposed_bounds.deep_runs, 0);
+  assert.equal(plan.baseline_confirmation_complete, false);
+  assert.deepEqual(plan.candidate_adjudication.map((item) => [item.ticker, item.disposition]), [["HUBC", "rejected"], ["XPEV", "rejected_for_ifrs_proof"], ["ONFO", "accepted_replacement_for_active_deficiency"]]);
+  assert.deepEqual({ runs: plan.reserved_two_case_bounds.maximum_runs, cost: plan.reserved_two_case_bounds.maximum_openai_cost_usd, alpha: plan.reserved_two_case_bounds.maximum_alpha_vantage_requests, twelve: plan.reserved_two_case_bounds.maximum_twelve_data_requests, combined: plan.reserved_two_case_bounds.maximum_combined_optional_provider_attempts }, { runs: 2, cost: .06, alpha: 4, twelve: 4, combined: 8 });
+  assert.equal(plan.reserved_two_case_bounds.hosted_web_search, false);
+  assert.equal(plan.reserved_two_case_bounds.deep_runs, 0);
 });
 
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
