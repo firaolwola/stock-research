@@ -1,0 +1,17 @@
+{
+  "ticker": "REKR",
+  "valid_report": true,
+  "material_checks": { "detected": 6, "expected": 6, "recall": 1 },
+  "checks": [
+    {"name":"issuer_security_identity","result":"pass","cause":null},
+    {"name":"active_nasdaq_minimum_bid_deficiency","result":"pass","cause":null},
+    {"name":"compliance_deadline_2026-10-26","result":"pass","cause":null},
+    {"name":"going_concern_warning","result":"pass","cause":null},
+    {"name":"working_capital_and_near_term_debt_pressure","result":"pass","cause":null,"note":"The report retained the $6.598 million working-capital deficit and $15.0 million notes due December 15, 2026."},
+    {"name":"possible_reverse_split_remains_prospective","result":"pass","cause":null}
+  ],
+  "explanation_fidelity": true,
+  "settlement_accurate": true,
+  "score_state_result": "safe; current risk warnings survived while incomplete capital and total-debt inputs remained Limited",
+  "severe_misleading_miss": false
+}

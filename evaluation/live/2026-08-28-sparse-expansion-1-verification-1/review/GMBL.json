@@ -1,0 +1,19 @@
+{
+  "ticker": "GMBL",
+  "valid_report": true,
+  "material_checks": { "detected": 6, "expected": 7, "recall": 0.8571 },
+  "checks": [
+    {"name":"domestic_nevada_issuer_and_security_identity","result":"miss","cause":"security_type_settlement","note":"Issuer and CIK were correct and no foreign classification appeared, but live terminal evidence still left security_type unknown/Limited."},
+    {"name":"completed_1_for_100_reverse_split","result":"pass","cause":null},
+    {"name":"completed_1_for_400_reverse_split","result":"pass","cause":null},
+    {"name":"nasdaq_suspension_and_delisting","result":"pass","cause":null},
+    {"name":"otc_transition","result":"pass","cause":null},
+    {"name":"going_concern_distress","result":"pass","cause":null},
+    {"name":"stale_post_deregistration_financials_remain_limited","result":"pass","cause":null}
+  ],
+  "explanation_fidelity": false,
+  "settlement_accurate": false,
+  "score_state_result": "safe; stale financial and unresolved security-type evidence remained Limited",
+  "severe_misleading_miss": false,
+  "blocker": "Authoritative common-stock language exists in selected filings, but current terminal settlement inspects only the terminal compliance excerpt."
+}

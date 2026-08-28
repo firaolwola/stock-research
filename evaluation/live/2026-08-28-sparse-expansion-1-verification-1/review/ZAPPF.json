@@ -1,0 +1,22 @@
+{
+  "ticker": "ZAPPF",
+  "valid_report": true,
+  "material_checks": { "detected": 5, "expected": 7, "recall": 0.7143 },
+  "checks": [
+    {"name":"cayman_foreign_private_issuer_identity","result":"pass","cause":null},
+    {"name":"20_f_6_k_ifrs_regime","result":"pass","cause":null},
+    {"name":"completed_1_for_20_reverse_split","result":"miss","cause":"retrieval_and_lifecycle_normalization","note":"The bounded packet found an April 2024 1-for-20 authorization/forward-looking occurrence but did not promote authoritative completion evidence."},
+    {"name":"nasdaq_suspension_and_delisting","result":"pass","cause":null},
+    {"name":"current_zappf_otc_identity","result":"pass","cause":null},
+    {"name":"liquidity_and_going_concern_pressure","result":"pass","cause":null},
+    {"name":"late_newer_annual_evidence_settles_limited_for_that_reason","result":"miss","cause":"retrieval_and_explanation","note":"Financials settled Limited as stale, but the report did not carry the frozen NT 20-F late-filing reason and also produced an overbroad non-reliance warning from prospectus boilerplate."}
+  ],
+  "explanation_fidelity": false,
+  "settlement_accurate": false,
+  "score_state_result": "safe Limited/Unscored; stale or missing financial evidence did not become favorable",
+  "severe_misleading_miss": true,
+  "blockers": [
+    "Completed 1-for-20 lifecycle evidence was not selected/promoted after identity resolution.",
+    "NT 20-F lateness was not represented explicitly and prospectus restatement boilerplate was misclassified as a company non-reliance event."
+  ]
+}

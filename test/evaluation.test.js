@@ -634,6 +634,25 @@ test("Sparse Expansion 1 verification freezes the corrected same-three authoriza
   assert.ok(plan.preserve_artifacts.some((item) => item.path.endsWith("2026-08-28-sparse-expansion-1/summary.json")));
 });
 
+test("Sparse Expansion 1 verification records improvement without passing Issue 55", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1-verification-1/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1-verification-1/run-summary.json");
+  assert.equal(result.material_risk_recall.recall, .85);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.corporate_actions.precision, 1);
+  assert.equal(result.corporate_actions.recall, .6667);
+  assert.equal(result.severe_misleading_misses, 1);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(run.completed_run_count, 3);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 6);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 6);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.ok(run.aggregate_elapsed_ms <= 60000);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

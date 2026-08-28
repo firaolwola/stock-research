@@ -1,0 +1,28 @@
+{
+  "batch": "sparse-expansion-1-verification-1",
+  "material_risk_recall": { "detected": 17, "expected": 20, "recall": 0.85 },
+  "recall_by_category": {
+    "issuer_security_identity": {"detected":2,"expected":3,"recall":0.6667},
+    "completed_reverse_split_history": {"detected":2,"expected":3,"recall":0.6667},
+    "active_listing_deficiency": {"detected":1,"expected":1,"recall":1},
+    "going_concern_or_bankruptcy": {"detected":3,"expected":3,"recall":1},
+    "foreign_issuer_adr_ifrs": {"detected":1,"expected":1,"recall":1},
+    "otc_or_delisted": {"detected":2,"expected":2,"recall":1},
+    "liquidity_freshness_context": {"detected":3,"expected":4,"recall":0.75},
+    "prospective_action_uncertainty": {"detected":1,"expected":1,"recall":1}
+  },
+  "valid_report_rate": {"valid":3,"evaluated":3,"rate":1},
+  "explanation_fidelity": {"passed":1,"evaluated":3,"rate":0.3333},
+  "settlement_accuracy": {"passed":1,"evaluated":3,"rate":0.3333},
+  "score_state_safety": {"passed":3,"evaluated":3,"rate":1},
+  "corporate_actions": {"expected_completed":3,"retrieved_completed":2,"true_positive_completed":2,"false_positive_completed":0,"recall":0.6667,"precision":1},
+  "severe_misleading_misses": 1,
+  "resolved_mechanisms": ["REKR working-capital and near-term maturity extraction", "ZAPPF exact identity and foreign/OTC routing", "GMBL full 1-for-400 ratio preservation"],
+  "remaining_blockers": [
+    {"ticker":"ZAPPF","class":"filing_selection_lifecycle_and_interpretation","summary":"Completed split and explicit NT 20-F reason were not promoted; prospectus boilerplate caused a false non-reliance warning."},
+    {"ticker":"GMBL","class":"security_type_settlement","summary":"Selected filings establish common stock, but terminal settlement remained unknown/Limited."}
+  ],
+  "gate": {"overall_recall_target":0.95,"adequately_sampled_category_target":0.9,"maximum_severe_misses":0,"passed":false},
+  "issue_must_remain_open": true,
+  "next_step": "Offline stored-live-shape corrections for ZAPPF completed-split selection/lifecycle, NT 20-F lateness, prospectus non-reliance negative control, and GMBL cross-filing authoritative security-type settlement. No live rerun is authorized."
+}

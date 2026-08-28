@@ -434,6 +434,16 @@ settles authoritative OTC common-stock identity and retains 1-for-100 plus
 note-maturity disclosures. The measured 10/20 result remains frozen. A fresh
 same-three verification is technically justified but is not authorized.
 
+That approved verification improved the frozen same-three result from 10/20 to
+17/20 (85%) with 3/3 valid reports. REKR passed all checks; ZAPPF identity and
+foreign/OTC routing plus GMBL's exact 1-for-400 normalization held live. The gate
+still failed because ZAPPF did not promote completed 1-for-20 evidence or the NT
+20-F lateness reason, generic prospectus text created a false non-reliance
+warning, and GMBL security type remained Limited despite authoritative
+common-stock evidence elsewhere in the packet. No additional live run is
+authorized. See
+`docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-1.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It
