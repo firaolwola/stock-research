@@ -370,6 +370,17 @@ claim/source as provenance. Frozen measurements and artifacts are unchanged.
 See `docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-5-OFFLINE-CORRECTION.md`
 and `evaluation/diagnostics/muln-verification-5-date-role-reconciliation.json`.
 
+The newly approved Verification-6 process produced one valid partial report and
+did not retry. Recall was 9/9, but canonical precision remained 9/10 because an
+overlapping 10-Q span still promoted August 1 as a completed 1-for-250 action.
+One occurrence correctly classified the date as filing provenance and withheld
+it; another used the retrospective-history fallback to classify the same date as
+completion, passed the invariant, and made reconciliation ambiguous. Explanation
+and settlement fidelity therefore failed with one severe misleading event. The
+run cost $0 in OpenAI usage, took 3,657 ms, used 18 SEC requests and two Alpha
+Vantage requests, and stayed inside all approved bounds. See
+`docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-6.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

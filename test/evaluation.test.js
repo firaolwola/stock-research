@@ -495,6 +495,27 @@ test("Verification-6 freezes the approved date-role one-run bounds", async () =>
   assert.match(plan.approval_token, /approved-muln-date-role-one-run/);
 });
 
+test("Verification-6 preserves recall but fails the overlapping-span precision gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-muln-verification-6/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-muln-verification-6/run-summary.json");
+  const review = await loadJson("../evaluation/live/2026-08-28-muln-verification-6/review/MULN.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 1);
+  assert.equal(result.canonical_event_precision.precision, .9);
+  assert.equal(result.august_1_duplicate_eliminated, false);
+  assert.equal(result.severe_misleading_misses, 1);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(review.canonical_events.length, 10);
+  assert.deepEqual(review.false_positive_events.map((item) => [item.event_date, item.ratio]), [["2025-08-01", "1-for-250"]]);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 2);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
