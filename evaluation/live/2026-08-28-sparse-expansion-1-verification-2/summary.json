@@ -1,0 +1,36 @@
+{
+  "batch": "sparse-expansion-1-verification-2",
+  "material_risk_recall": { "detected": 20, "expected": 20, "recall": 1 },
+  "recall_by_category": {
+    "issuer_security_identity": {"detected":3,"expected":3,"recall":1},
+    "completed_reverse_split_history": {"detected":3,"expected":3,"recall":1},
+    "active_listing_deficiency": {"detected":1,"expected":1,"recall":1},
+    "going_concern_or_bankruptcy": {"detected":3,"expected":3,"recall":1},
+    "foreign_issuer_adr_ifrs": {"detected":1,"expected":1,"recall":1},
+    "otc_or_delisted": {"detected":2,"expected":2,"recall":1},
+    "liquidity_freshness_context": {"detected":4,"expected":4,"recall":1},
+    "prospective_action_uncertainty": {"detected":1,"expected":1,"recall":1}
+  },
+  "valid_report_rate": {"valid":3,"evaluated":3,"rate":1},
+  "explanation_fidelity": {"passed":2,"evaluated":3,"rate":0.6667,"failure":"ZAPPF NT 20-F was represented but its filing-specific delay reason was not extracted. Unbounded-age NT selection also surfaced irrelevant historical NT warnings for REKR and GMBL."},
+  "settlement_accuracy": {"passed":3,"evaluated":3,"rate":1},
+  "score_state_safety": {"passed":3,"evaluated":3,"rate":1},
+  "corporate_actions": {"expected_completed":3,"retrieved_completed":3,"true_positive_completed":3,"false_positive_completed":0,"recall":1,"precision":1},
+  "identity_success": {"passed":3,"evaluated":3,"rate":1},
+  "severe_misleading_misses": 0,
+  "resolved_verification_1_defects": ["ZAPPF completed split promotion with authorization provenance", "ZAPPF NT 20-F explicit representation", "prospectus boilerplate non-reliance suppression", "GMBL packet-wide common-stock settlement"],
+  "new_blockers": [
+    {"ticker":"ZAPPF","class":"nt_form_reason_interpretation","summary":"The NT 20-F warning used a generic fallback instead of preserving the filing-specific delay reason."},
+    {"ticker":"REKR/GMBL","class":"nt_form_recency_selection","summary":"The NT annual-form slot lacked a relevance window and surfaced old 2019/2023 delays as current material warnings."}
+  ],
+  "practical_sample_counts": {
+    "completed_reverse_split_history": {"positive_cases":5,"still_sparse":false},
+    "active_listing_deficiency": {"positive_cases":2,"still_sparse":true},
+    "going_concern_or_bankruptcy": {"positive_cases":4,"still_sparse":false},
+    "foreign_issuer_adr_ifrs": {"positive_cases":2,"still_sparse":true},
+    "otc_or_delisted": {"positive_cases":5,"still_sparse":false}
+  },
+  "gate": {"overall_recall_target":0.95,"adequately_sampled_category_target":0.9,"maximum_severe_misses":0,"passed":false,"reason":"Explanation fidelity failed and two categories remain independently sparse."},
+  "issue_must_remain_open": true,
+  "next_step": "Offline correction of NT annual-form reason extraction and recency/relevance selection; no live run is authorized."
+}

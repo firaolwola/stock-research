@@ -454,6 +454,17 @@ determination; and identity-gated common-stock wording anywhere in the selected
 packet may settle GMBL's security type. Another same-three live verification is
 technically justified but requires fresh owner approval.
 
+Sparse Expansion Verification-2 then ran those three frozen cases once. It
+measured 20/20 recall, 3/3 valid reports, 3/3 settlement accuracy, 100% completed
+corporate-action precision/recall, and zero severe misleading misses. All four
+Verification-1 defects resolved live. The complete gate still failed: ZAPPF's NT
+20-F used a generic fallback instead of its filing-specific delay reason, and
+the NT selection slot surfaced irrelevant old NT forms for REKR and GMBL.
+Explanation fidelity was 2/3. Active-deficiency and foreign/IFRS proof also
+remain sparse at two independent positive cases each. No further live work is
+authorized. See
+`docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-2.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It
