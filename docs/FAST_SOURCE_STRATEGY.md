@@ -285,6 +285,13 @@ explicitly Limited unless an approved source proves coverage.
 
 ## Financial scoring source boundary
 
+SEC annual/current-report form metadata and explicit audited-statement language
+also govern filer regime and accounting framework. Form 40-F/6-K is supported
+alongside 20-F/6-K. Direct foreign common shares and ADSs are independent
+security structures requiring their own authoritative evidence; nationality
+alone supplies neither classification. Listing events are reconciled by rule so
+a newer closure supersedes only the matching deficiency.
+
 SEC Company Facts and SEC-filed 10-K, 10-Q, 20-F, 40-F, 8-K, 6-K, and relevant
 exhibits are the only authoritative inputs to a Fast financial score. Comparable
 trend series prefer Company Facts and periodic reports. Later 8-K/6-K evidence

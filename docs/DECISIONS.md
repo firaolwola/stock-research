@@ -1,5 +1,17 @@
 # Decision log
 
+## 2026-08-28 — Settle foreign reporting properties and listing lifecycles independently
+
+**Status:** Accepted corrective implementation after Issue #55 Final Sparse Proof 1
+
+Fast treats issuer jurisdiction, foreign-private-issuer status, filing regime,
+accounting framework, presentation currency, security/depositary structure, and
+venues as separate evidence properties. Form 40-F/6-K is an explicit Canadian
+foreign-filer regime; foreign status does not imply ADS. Explicit SEC-filed IFRS
+or U.S.-GAAP language outranks taxonomy fallback. Exchange compliance is a
+rule-scoped lifecycle: newer closure evidence makes older same-rule warnings
+historical without changing another rule's state.
+
 Record consequential decisions here so future work preserves their context. Keep
 entries short, place the newest decisions first, and mark superseded decisions
 rather than erasing history.

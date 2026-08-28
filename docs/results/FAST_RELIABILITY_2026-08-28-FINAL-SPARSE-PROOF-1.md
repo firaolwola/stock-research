@@ -50,3 +50,13 @@ independent positive cases, but foreign/IFRS has only two passing cases out of
 three attempted and remains sparse. The next work is offline: promote bounded
 authoritative foreign-filer/accounting-basis evidence and reconcile newer resolved
 listing evidence over older active warnings. No further live run is authorized.
+
+## Offline corrective-work status
+
+Stored failure shapes now have deterministic regression coverage. Form 40-F and
+6-K promote foreign-private-issuer regime; explicit audited IASB-IFRS text, CAD
+presentation, direct common shares, NYSE, and TSX settle independently. Foreign
+status does not imply ADS. ONFO compliance events reconcile by listing rule, so
+the older bid warning becomes historical after the August 27 closure while its
+stockholders'-equity deficiency remains active. This does not alter the measured
+live result above. A fresh bounded verification needs separate owner approval.

@@ -488,6 +488,13 @@ any new live authorization. See
 
 ## Paid live evaluation boundary
 
+Final Sparse Proof 1 remains frozen at 4/7. Offline stored-shape regressions now
+promote STN as a Canadian foreign private issuer under 40-F/6-K, IASB IFRS, CAD
+presentation, and direct common shares on NYSE plus TSX without inventing an ADS
+ratio. ONFO now reconciles its newer Rule 5550(a)(2) closure against the older bid
+warning while leaving Rule 5550(b)(1) active. One fresh bounded ONFO/STN
+verification is technically justified but not authorized.
+
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,
 record the date, model/configuration, exact case IDs (at most five), maximum

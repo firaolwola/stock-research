@@ -184,7 +184,7 @@ test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC fi
   assert.equal(result.report.security.security_type, "foreign_ordinary_share");
   assert.equal(result.report.security.listing_status, "delisted");
   assert.equal(result.report.issuer.cik, "0001955104");
-  assert.deepEqual({ jurisdiction: result.evidence_packet.identity_resolution.filer_jurisdiction, regime: result.evidence_packet.identity_resolution.filer_regime, accounting: result.evidence_packet.identity_resolution.accounting_standard }, { jurisdiction: "Cayman Islands", regime: "foreign_private_issuer", accounting: "IFRS" });
+  assert.deepEqual({ jurisdiction: result.evidence_packet.identity_resolution.filer_jurisdiction, regime: result.evidence_packet.identity_resolution.filer_regime, accounting: result.evidence_packet.identity_resolution.accounting_standard }, { jurisdiction: "Cayman Islands", regime: "foreign_20-F_6-K", accounting: "IFRS" });
   assert.ok(result.report.issuer.prior_identities.some((item) => item.ticker === "ZAPP" && item.linkage_state === "confirmed"));
   assert.ok(result.report.sections.reverse_splits.items.some((item) => item.title === "Completed 1-for-20 reverse split" && item.event_date === "2024-04-22"));
   assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
@@ -195,6 +195,58 @@ test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC fi
   assert.ok(result.evidence_packet.corporate_action_diagnostics.some((item) => item.authorization_accession === "0000950170-24-044773" && item.canonical_event_id));
   assert.ok(result.report.sources.some((item) => /20-F filed/i.test(item.title)));
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
+test("STN stored-live shape promotes 40-F foreign filer IFRS and direct common-share semantics independently", async () => {
+  const filings = [
+    { accessionNumber: "0001131383-26-000017", form: "6-K", filingDate: "2026-08-12", reportDate: "2026-06-30", primaryDocument: "a6kq22026.htm", items: "" },
+    { accessionNumber: "0001131383-26-000007", form: "40-F", filingDate: "2026-02-25", reportDate: "2025-12-31", primaryDocument: "stn-20251231.htm", items: "" }
+  ];
+  const result = await researchFixture({ ticker: "STN", cik: 1131383, filings, companyFacts: { cik: 1131383, entityName: "STN Corp.", facts: {} }, documents: {
+    "stn-20251231.htm": "Stantec Inc. is a Canadian foreign private issuer. The common shares are listed on the Toronto Stock Exchange and the New York Stock Exchange under STN. These consolidated financial statements are prepared in Canadian dollars in accordance with IFRS Accounting Standards as issued by the International Accounting Standards Board.",
+    "a6kq22026.htm": "Stantec Inc. furnishes this report as a foreign private issuer on Form 6-K and files its annual report on Form 40-F."
+  } });
+  assert.equal(result.report.issuer.foreign_private_issuer, true);
+  assert.equal(result.report.issuer.filing_regime, "foreign_40-F_6-K");
+  assert.equal(result.report.issuer.accounting_basis, "IFRS");
+  assert.equal(result.report.issuer.accounting_authority, "IASB");
+  assert.equal(result.report.issuer.presentation_currency, "CAD");
+  assert.equal(result.report.security.security_structure, "direct_share");
+  assert.equal(result.report.security.depositary_ratio, null);
+  assert.deepEqual(result.report.security.additional_listing_venues, ["TSX"]);
+  assert.notEqual(result.report.security.security_type, "adr");
+  assert.equal(result.evidence_packet.reporting_identity_diagnostics[0].accounting_framework_source, "0001131383-26-000007");
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
+test("foreign filer status does not imply ADS and explicit U.S. GAAP remains U.S. GAAP", async () => {
+  const filings = [{ accessionNumber: "xpev-20f", form: "20-F", filingDate: "2026-04-01", reportDate: "2025-12-31", primaryDocument: "xpev.htm", items: "" }];
+  const result = await researchFixture({ ticker: "XPEV", cik: 1810997, filings, companyFacts: { cik: 1810997, entityName: "XPEV Corp.", facts: {} }, documents: { "xpev.htm": "The Company is a Cayman Islands foreign private issuer. The American Depositary Shares are listed on the New York Stock Exchange. The consolidated financial statements are prepared in accordance with U.S. GAAP." } });
+  assert.equal(result.report.issuer.foreign_private_issuer, true);
+  assert.equal(result.report.issuer.filing_regime, "foreign_20-F_6-K");
+  assert.equal(result.report.issuer.accounting_basis, "US_GAAP");
+  assert.equal(result.report.security.security_structure, "ads");
+});
+
+test("ONFO listing lifecycle closes minimum bid without closing stockholders equity", async () => {
+  const filings = [
+    { accessionNumber: "new-close", form: "8-K", filingDate: "2026-08-27", reportDate: "2026-08-27", primaryDocument: "close.htm", items: "3.01" },
+    { accessionNumber: "quarter", form: "10-Q", filingDate: "2026-08-19", reportDate: "2026-06-30", primaryDocument: "quarter.htm", items: "" },
+    { accessionNumber: "split", form: "8-K", filingDate: "2026-08-10", reportDate: "2026-08-10", primaryDocument: "split.htm", items: "5.03" }
+  ];
+  const result = await researchFixture({ ticker: "ONFO", cik: 1825452, filings, companyFacts: { cik: 1825452, entityName: "ONFO Corp.", facts: {} }, documents: {
+    "close.htm": "Nasdaq notified the Company that it regained compliance with Nasdaq Listing Rule 5550(a)(2), the minimum bid price requirement, and this matter is now closed.",
+    "quarter.htm": "Nasdaq notified the Company on May 26, 2026 that it was not in compliance with Nasdaq Listing Rule 5550(b)(1), the minimum stockholders' equity requirement. The compliance plan remains under review. On July 2, 2026 Nasdaq notified the Company that it was not in compliance with Nasdaq Listing Rule 5550(a)(2), the minimum bid price requirement, with a deadline of December 29, 2026.",
+    "split.htm": "The Company effected a 1-for-50 reverse stock split effective August 10, 2026 as part of its effort to regain compliance."
+  } });
+  const items = result.report.sections.compliance_and_warnings.items;
+  assert.ok(items.some((item) => item.resolution_state === "resolved" && /5550\(a\)\(2\)|minimum bid/i.test(item.summary)));
+  assert.ok(items.some((item) => item.resolution_state === "active" && /5550\(b\)\(1\)|stockholders.? equity/i.test(item.summary)));
+  assert.ok(items.some((item) => item.resolution_state === "historical" && /5550\(a\)\(2\)|minimum bid/i.test(item.summary)));
+  assert.match(result.report.sections.compliance_and_warnings.summary, /1 active.*1 separately resolved/i);
+  assert.ok(result.evidence_packet.listing_compliance_diagnostics.some((item) => item.rule === "nasdaq_5550_a_2_minimum_bid" && item.current_state === "resolved"));
+  assert.ok(result.evidence_packet.listing_compliance_diagnostics.some((item) => item.rule === "nasdaq_5550_b_1_stockholders_equity" && item.current_state === "active"));
+  assert.equal(result.report.sections.reverse_splits.items[0].corporate_action_state, "completed");
 });
 
 test("GMBL authoritative OTC common-stock evidence settles type and preserves both completed ratios", async () => {

@@ -159,6 +159,17 @@ confirmed total debt.
 
 ## Evidence states
 
+Issuer reporting and security structure are independently settled optional
+identity properties. They distinguish jurisdiction, foreign-private-issuer
+status, domestic/20-F/40-F filing regime, IFRS or U.S.-GAAP framework,
+presentation currency, direct shares versus depositary securities, and additional
+venues. Missing financial taxonomy does not erase an explicit SEC-filed
+accounting framework, and foreign-private-issuer status never implies ADS.
+
+Exchange-compliance items retain `active`, `resolved`, or `historical` state.
+Fast reconciles newer authoritative events within the same venue and listing
+rule; closure of one rule cannot close another deficiency.
+
 The following states apply to sections, items, claims, identity, and scores:
 
 - `confirmed`: sufficient evidence supports the stated conclusion.
