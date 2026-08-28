@@ -16,8 +16,9 @@ dotenv.config({ quiet: true });
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const verificationToken = "issue-55-2026-08-28-approved-final-sparse-proof-verification-two-runs";
 const correctionToken = "issue-55-2026-08-28-approved-offline-correction-live-confirmation-two-runs";
-const isCorrectionConfirmation = process.env.RUN_APPROVED_FAST_CALIBRATION === correctionToken;
-const planName = isCorrectionConfirmation ? "fast-reliability-2026-08-28-final-sparse-proof-verification-2.json" : process.env.RUN_APPROVED_FAST_CALIBRATION === verificationToken ? "fast-reliability-2026-08-28-final-sparse-proof-verification-1.json" : "fast-reliability-2026-08-28-final-sparse-proof-1.json";
+const exhibitConfirmationToken = "issue-55-2026-08-28-approved-form-40f-exhibit-live-confirmation-three";
+const approvalToken = process.env.RUN_APPROVED_FAST_CALIBRATION;
+const planName = approvalToken === exhibitConfirmationToken ? "fast-reliability-2026-08-28-final-sparse-proof-verification-3.json" : approvalToken === correctionToken ? "fast-reliability-2026-08-28-final-sparse-proof-verification-2.json" : approvalToken === verificationToken ? "fast-reliability-2026-08-28-final-sparse-proof-verification-1.json" : "fast-reliability-2026-08-28-final-sparse-proof-1.json";
 const planPath = path.join(root, "evaluation", "plans", planName);
 const plan = JSON.parse(await readFile(planPath, "utf8"));
 const readFrozen = async (relativePath, expectedHash) => {
