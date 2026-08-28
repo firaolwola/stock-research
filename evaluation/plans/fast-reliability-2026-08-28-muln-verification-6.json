@@ -1,0 +1,19 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "muln-verification-6",
+  "approved_at": "2026-08-28",
+  "purpose": "Run one fresh bounded MULN Fast verification after filing-date and effective-date reconciliation was corrected offline.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification-5.json",
+  "parent_plan_sha256": "11a8a5fd3408d910f9d5c7c630c47174f9f3b4930659f2c4ca385607c38172ac",
+  "output_directory": "2026-08-28-muln-verification-6",
+  "approval_token": "issue-55-2026-08-28-approved-muln-date-role-one-run",
+  "required_ancestor": "2092c1c",
+  "preserve_verification_5": {
+    "directory": "evaluation/live/2026-08-27-muln-verification-5",
+    "run_summary_sha256": "cbc59f1863461e1808b53920068c2bf1170b2dafcd16387e22ac2b05d2f387e8",
+    "raw_muln_sha256": "22e951703dacf964c347930e3ae733125df24b3c1c89e24c841813bf26e48d05",
+    "summary_sha256": "296e6f720ac349f806cab5bee0140f16305f4e7d6cba5dd7a9a4a6bde876df91",
+    "review_muln_sha256": "96e59333cae744f6f543799eafc7fb31b7c8d5c35f8304fc4c6b5dc9f769cf17"
+  }
+}

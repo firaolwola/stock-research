@@ -486,6 +486,15 @@ test("Verification-5 preserves recall but records the remaining severe filing-da
   assert.ok(run.runs[0].elapsed_ms <= 20000);
 });
 
+test("Verification-6 freezes the approved date-role one-run bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-muln-verification-6.json");
+  assert.equal(plan.required_ancestor, "2092c1c");
+  assert.equal(plan.output_directory, "2026-08-28-muln-verification-6");
+  assert.deepEqual(plan.approval ?? {}, {});
+  assert.equal(plan.preserve_verification_5.directory, "evaluation/live/2026-08-27-muln-verification-5");
+  assert.match(plan.approval_token, /approved-muln-date-role-one-run/);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
