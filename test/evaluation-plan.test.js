@@ -95,6 +95,21 @@ test("Verification-4 resolves the complete four-plan ancestry before runtime", a
   assert.equal(result.chain.length, 4);
 });
 
+test("Verification-5 inherits the frozen baseline and exact final one-run bounds", async () => {
+  const root = path.resolve(".");
+  const planPath = path.join(root, "evaluation/plans/fast-reliability-2026-08-27-muln-verification-5.json");
+  const { plan, chain } = await resolveEvaluationPlan({ root, planPath, requiredFields: [{ path: "baseline_plan", type: "string" }, { path: "preserve_verification_4.directory", type: "string" }] });
+  assert.equal(plan.required_ancestor, "dfae2a9");
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.03);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.output_directory, "2026-08-27-muln-verification-5");
+  assert.equal(chain.length, 5);
+});
+
 test("the one-case runner resolves and validates plans before runtime or network construction", async () => {
   const source = await readFile(new URL("../scripts/run-approved-muln-verification-implementation.js", import.meta.url), "utf8");
   const resolveAt = source.indexOf("await resolveEvaluationPlan");
