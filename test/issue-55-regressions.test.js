@@ -906,6 +906,19 @@ test("AMC current filing selection promotes the completed split into the report"
   assert.ok(result.report.sections.reverse_splits.items.some((item) => item.title === "Completed 1-for-10 reverse split" && item.event_date === "2023-08-24"));
 });
 
+test("AMC delayed ratio clause remains bound inside the expanded local split span", () => {
+  const html = `The Company completed a reverse stock split pursuant to the plan. ${"inline XBRL context ".repeat(40)} At a ratio of 1-for-10, the action became effective August 24, 2023.`;
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html, form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-28T00:00:00Z",
+    accession: "amc-delayed-ratio", documentUrl: "https://www.sec.gov/amc-delayed-ratio", documentName: "amc-delayed-ratio.htm"
+  });
+  const split = result.findings.find((item) => item.kind === "reverse_split");
+  assert.equal(split?.ratio, "1-for-10");
+  assert.equal(split?.event_date, "2023-08-24");
+  assert.equal(split?.action_state, "completed");
+  assert.equal(result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10")?.canonical_acceptance_invariant_passed, true);
+});
+
 test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted and invalidates affected metrics", async () => {
   const result = await researchFixture({
     ticker: "NCPL",

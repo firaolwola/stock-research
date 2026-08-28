@@ -1351,3 +1351,18 @@ final extraction path. A smallest offline AMC discovery/selection correction
 and separately approved confirmation are required before reassessing the
 severe-miss gate. Targeted recall was 1/2; OpenAI synthesis was cost-blocked
 before request, with no paid OpenAI spend recorded.
+
+## 2026-08-28 — AMC delayed split-clause offline correction
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** Extend the local reverse-split action span from 260 to 900
+characters after the action anchor, retaining the next-anchor boundary. This
+captures ratios and effective dates separated by inline-XBRL/prospectus table
+prose without allowing a neighboring action to donate its values.
+
+**Why:** The targeted live AMC diagnostics showed repeated
+`complete_ratio_token_required` rejections in authoritative older filings. A
+delayed-clause deterministic fixture now produces a completed 1-for-10 action
+on 2023-08-24. Historical live artifacts remain unchanged; another AMC request
+requires separate approval.

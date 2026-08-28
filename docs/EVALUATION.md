@@ -527,6 +527,16 @@ targeted result was 1/2 (50%), so the AMC retrieval/filing-selection defect
 remains open. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-NCPL-OFFLINE-CORRECTION-CONFIRMATION-1.md`.
 
+### AMC split offline correction 2 (2026-08-28)
+
+The live AMC diagnostics showed that the ratio/effective clause can occur more
+than 260 characters after the `reverse stock split` anchor in inline-XBRL or
+prospectus text. The bounded extractor now permits 900 characters after that
+anchor while still stopping at the next action. A deterministic delayed-clause
+fixture passes the completed 1-for-10/date binding and canonical invariant.
+This remains offline-only; no new live result is implied. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-2.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

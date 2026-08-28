@@ -118,6 +118,10 @@ verdict.
    retrieval/filing-selection miss. No retries or additional tickers were run.
    Issue #55 stays active pending the smallest offline AMC correction and a
    separately approved confirmation.
+8. [x] **Complete — AMC delayed-clause correction:** widened the bounded local
+   split span to capture delayed ratio/effective wording without crossing the
+   next action. Offline regression passes; a fresh AMC-only live confirmation
+   remains separately gated.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
