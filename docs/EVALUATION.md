@@ -268,6 +268,16 @@ range to a completed 1-for-60 event. Rejected Company Facts candidates now emit
 bounded, non-evidentiary structural diagnostics in the evaluation packet. These
 are deterministic readiness checks, not a new reliability result.
 
+The approved Sparse-5 verification remained at 14/16 material checks (87.5%)
+with 4/4 valid reports, 4/4 safe settlement, and 7/18 score/state checks. BIOR's
+canonical split reconciliation passed and explanation fidelity improved to 3/4.
+MULN's live filing shape still produced an incomplete and partly false corporate-
+action history. NIO's diagnostic now identifies the exact limitation: the live
+Company Facts candidates represent total, noncontrolling-interest, or
+comprehensive income/loss, not a safely established annual loss attributable to
+ordinary shareholders. The semantic gate was not broadened. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-5.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

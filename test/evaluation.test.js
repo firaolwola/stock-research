@@ -315,6 +315,25 @@ test("Issue 55 sparse batch 5 freezes canonical-action verification bounds", asy
   assert.equal(plan.preserve_prior_batches.length, 7);
 });
 
+test("Issue 55 sparse batch 5 remains below the reliability gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-5/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-sparse-5/run-summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.875);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.explanation_fidelity.pass_rate, 0.75);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.score_calibration.pass_rate, 0.3889);
+  assert.equal(run.completed_run_count, 4);
+  assert.equal(run.alpha_vantage_requests, 8);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 8);
+  assert.ok(run.known_openai_cost_usd <= 0.12);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(result.severe_misleading_misses.length, 2);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

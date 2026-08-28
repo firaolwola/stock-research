@@ -1,0 +1,51 @@
+{
+  "issue": 55,
+  "batch": "sparse-5",
+  "status": "failed_reliability_gate",
+  "issue_must_remain_open": true,
+  "approved_runs": 4,
+  "completed_runs": 4,
+  "automatic_retries": 0,
+  "valid_report_rate": { "valid": 4, "evaluated": 4, "rate": 1.0 },
+  "overall_material_checks": { "detected": 14, "expected": 16, "recall": 0.875, "target": 0.95, "passes": false },
+  "comparison": {
+    "sparse_1": { "detected": 3, "expected": 16, "recall": 0.1875 },
+    "sparse_2": { "detected": 13, "expected": 16, "recall": 0.8125 },
+    "sparse_3": { "detected": 14, "expected": 16, "recall": 0.875 },
+    "sparse_4": { "detected": 14, "expected": 16, "recall": 0.875 },
+    "sparse_5": { "detected": 14, "expected": 16, "recall": 0.875 }
+  },
+  "category_recall": {
+    "issuer_security_listing": { "detected": 4, "expected": 4, "recall": 1.0, "sample_size": 4 },
+    "completed_reverse_split_history": { "detected": 1, "expected": 2, "recall": 0.5, "sample_size": 2, "note": "BIOR passed canonical event reconciliation; MULN still lacks the complete correctly dated 2023 series and contains false occurrences." },
+    "active_or_terminal_listing_pressure": { "detected": 2, "expected": 2, "recall": 1.0, "sample_size": 2 },
+    "going_concern": { "detected": 1, "expected": 1, "recall": 1.0, "sample_size": 1 },
+    "foreign_issuer_adr_ifrs": { "detected": 3, "expected": 4, "recall": 0.75, "sample_size": 1, "note": "Identity, regime, and revenue passed; no live Company Facts concept safely established annual net loss attributable to ordinary shareholders." },
+    "otc_or_delisted": { "detected": 2, "expected": 2, "recall": 1.0, "sample_size": 2 },
+    "capital_structure_financing": { "detected": 2, "expected": 2, "recall": 1.0, "sample_size": 2 }
+  },
+  "score_calibration": { "passed": 7, "evaluated": 18, "pass_rate": 0.3889, "note": "The frozen score/state rubric result is unchanged; methodology and answer keys were not adjusted." },
+  "explanation_fidelity": { "passed_tickers": 3, "evaluated_tickers": 4, "pass_rate": 0.75, "note": "BIOR, NIO, and TUPBQ were traceable and honest. MULN's false and incomplete corporate-action output failed." },
+  "settlement_accuracy": { "passed_tickers": 4, "evaluated_tickers": 4, "pass_rate": 1.0, "note": "Every report settled partial with no forced score or favorable inference from missing provider data." },
+  "operations": {
+    "elapsed_ms": { "BIOR": 3209, "MULN": 2735, "NIO": 7677, "TUPBQ": 1542 },
+    "average_elapsed_ms": 3790.75,
+    "maximum_elapsed_ms": 7677,
+    "all_within_20_second_ceiling": true,
+    "measured_openai_cost_usd": 0.014712,
+    "approved_maximum_cost_usd": 0.12,
+    "alpha_vantage_requests": 8,
+    "twelve_data_requests": 0,
+    "combined_optional_provider_attempts": 8,
+    "hosted_web_search_calls": 0,
+    "alpha_vantage_result": "provider_quota",
+    "twelve_data_result": "not_configured"
+  },
+  "severe_misleading_misses": [
+    "MULN still lacks a correct complete dated 2023 split series and contains false corporate-action occurrences.",
+    "NIO still omits comparable attributable annual net loss; diagnostics now prove that the live Company Facts candidates do not satisfy the existing exact semantic gate."
+  ],
+  "remaining_miss_causes": { "retrieval": 0, "identity_lineage": 0, "normalization": 1, "interpretation": 0, "scoring": 0, "unavailable_evidence": 1 },
+  "sampling_conclusion": "Sparse-5 remained at 87.5% recall. BIOR's prior duplicate-event blocker cleared and NIO's unresolved concept is now precisely diagnosed, but completed-split and foreign-financial recall remain below gate with two severe misses.",
+  "next_step": "Correct the live MULN filing/table normalization offline. Do not broaden NIO taxonomy acceptance; resolve whether an authoritative attributable-to-ordinary-shareholders source exists or seek an explicit baseline/methodology decision. Another live or expansion batch requires owner approval."
+}

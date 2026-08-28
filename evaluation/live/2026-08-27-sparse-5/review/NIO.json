@@ -1,0 +1,25 @@
+{
+  "case_id": "nio-2026-sparse",
+  "ticker": "NIO",
+  "material_checks": { "detected": 3, "expected": 4 },
+  "adjudication": [
+    { "expectation": "Correct NIO ADR/foreign-filer identity", "detected": true, "cause": null },
+    { "expectation": "Comparable annual CNY revenue series", "detected": true, "cause": null },
+    { "expectation": "Comparable attributable annual net-loss series", "detected": false, "cause": "unavailable_evidence" },
+    { "expectation": "Effective-control language remains non-warning", "detected": true, "cause": null }
+  ],
+  "validation": { "valid": true },
+  "score_range": { "passed": 3, "evaluated": 6, "note": "Revenue passed; net income/loss remained Limited rather than accepting an unsafe alias." },
+  "explanation_fidelity": true,
+  "settlement_accurate": true,
+  "diagnostic": {
+    "exact_mismatch": "The live Company Facts response exposed total, noncontrolling-interest, or comprehensive-income concepts, but no concept safely established annual net loss attributable to NIO ordinary shareholders.",
+    "representative_rejected_concepts": ["us-gaap:ProfitLoss", "us-gaap:ComprehensiveIncomeNetOfTax", "us-gaap:NetIncomeLossAttributableToNoncontrollingInterest"],
+    "guardrail": "No taxonomy alias was broadened and no rejected value entered scoring."
+  },
+  "remaining_misses": [
+    { "cause": "unavailable_evidence", "summary": "The frozen attributable annual net-loss expectation remains unavailable from safely matched live Company Facts concepts." }
+  ],
+  "severe_misses": ["Comparable attributable annual net loss remains absent from the report."],
+  "result": "failed"
+}

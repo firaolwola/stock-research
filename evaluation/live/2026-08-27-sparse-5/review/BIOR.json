@@ -1,0 +1,19 @@
+{
+  "case_id": "bior-2026-sparse",
+  "ticker": "BIOR",
+  "material_checks": { "detected": 4, "expected": 4 },
+  "adjudication": [
+    { "expectation": "Completed 1-for-25 reverse split", "detected": true, "cause": null },
+    { "expectation": "Completed 1-for-10 reverse split", "detected": true, "cause": null },
+    { "expectation": "October 2024 issuance and warrants/convertibles", "detected": true, "cause": null },
+    { "expectation": "Completed history distinct from prospective risk", "detected": true, "cause": null }
+  ],
+  "identity_result": "CIK 0001580063, Biora/Progenity lineage, and current OTC Pink/delisted status remained correct.",
+  "validation": { "valid": true },
+  "score_range": { "passed": 0, "evaluated": 4, "note": "All capital scores remained Limited because their evidence gates were incomplete." },
+  "explanation_fidelity": true,
+  "settlement_accurate": true,
+  "remaining_misses": [],
+  "severe_misses": [],
+  "result": "passed"
+}
