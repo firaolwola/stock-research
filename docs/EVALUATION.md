@@ -461,8 +461,8 @@ Verification-1 defects resolved live. The complete gate still failed: ZAPPF's NT
 20-F used a generic fallback instead of its filing-specific delay reason, and
 the NT selection slot surfaced irrelevant old NT forms for REKR and GMBL.
 Explanation fidelity was 2/3. Active-deficiency and foreign/IFRS proof also
-remain sparse at two independent positive cases each. No further live work is
-authorized. See
+were sparse at two independent positive cases each at that time. No further live
+work was authorized from that batch. See
 `docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-2.md`.
 
 Offline regression now constrains NT selection by filer regime, report period,
@@ -481,9 +481,12 @@ ONFO retrieved newer authoritative closure of its bid-price matter while its
 stockholders'-equity deficiency remained active; frozen historical baselines were
 not rewritten. STN validated but did not promote foreign-private-issuer, 40-F/6-K,
 direct-share/TSX, or IASB-IFRS semantics. The run measured 4/7 bundled material
-claims, 2/2 valid reports, and one severe miss. Foreign/IFRS remains sparse at two
-passing independent cases; offline deterministic correction is required before
-any new live authorization. See
+claims, 2/2 valid reports, and one severe miss. Offline deterministic correction
+then added bounded annual-exhibit retrieval. The subsequent confirmation passed
+ONFO and STN at 7/7 targeted claims with zero severe misses, bringing active-
+deficiency and foreign/IFRS coverage to three practical independent positive
+cases each. This satisfies the local milestone minimum but is not a broad
+statistical reliability claim. See
 `docs/results/FAST_RELIABILITY_2026-08-28-FINAL-SPARSE-PROOF-1.md`.
 
 ## Offline adversarial and property evaluation roadmap

@@ -1265,7 +1265,7 @@ confirmation requires separate owner approval.
 
 ## 2026-08-28 — Inspect bounded annual foreign-filer exhibits for reporting properties
 
-**Status:** Accepted offline correction; live confirmation remains separately gated
+**Status:** Accepted correction; bounded live confirmation passed
 
 **Decision:** For annual 20-F/40-F filings, Fast may inspect a bounded set of
 SEC-hosted 99.x exhibits linked from the selected filing. The existing catalyst
@@ -1279,8 +1279,8 @@ listed-security rules.
 **Why:** The live STN packet omitted its audited reporting exhibit, leaving
 supported IFRS and direct-share/TSX properties suppressed despite successful SEC
 retrieval. A deterministic regression now covers the `ex-992...` annual-exhibit
-shape. The correction must be confirmed by a newly approved live run before
-Issue #55 can close.
+shape. The fresh confirmation passed the targeted ONFO/STN checks; Issue #55
+still requires broader sample-size and reliability review before it can close.
 
 ## 2026-08-28 — Confirm bounded annual-exhibit correction on ONFO/STN
 
