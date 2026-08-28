@@ -1097,3 +1097,23 @@ withheld, and materially separated same-ratio actions remain distinct.
 promoted the August 1 certificate-amendment filing date as a second completed
 1-for-250 action beside its actual August 4 effective date. Date proximity alone
 was being treated as lifecycle evidence.
+
+## 2026-08-28 — Resolve overlapping corporate-action roles by evidence specificity
+
+**Status:** Accepted corrective implementation after MULN Verification-6
+
+**Decision:** Before canonical acceptance, group overlapping split occurrences
+that share the same accession, source document, ratio, candidate date, and source
+reference. Explicit effective, completion, or trading-effective language outranks
+filing provenance; explicit certificate/amendment filing language outranks
+retrospective or generic completion inference. A stronger contradictory role
+suppresses the weaker candidate, while equal-strength different roles remain
+withheld. Retrospective history may establish completion only when no stronger
+local role evidence contradicts it.
+
+**Why:** Verification-6 showed that two overlapping spans could interpret the
+same August 1 certificate reference differently. The more specific span correctly
+classified filing provenance, but the broader retrospective span independently
+passed the old invariant and created a false event beside the August 4 effective
+action. Segment-local validation alone was insufficient; interpretations of one
+source reference must be reconciled first.

@@ -6,7 +6,7 @@ import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { calibrateReportScores, diagnoseCapitalScoreSufficiency } from "../lib/scoring.js";
 import { boundedDocumentRows, classifyProfitConceptSemantics, createSecEvidenceClient } from "../lib/sec-evidence.js";
-import { extractSecFilingEvidence, extractSecFilingEvidenceWithDiagnostics, normalizeCatalystClassification } from "../lib/sec-filing-extraction.js";
+import { extractSecFilingEvidence, extractSecFilingEvidenceWithDiagnostics, normalizeCatalystClassification, resolveOverlappingSplitDateRoleConflicts } from "../lib/sec-filing-extraction.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { withTestServer } from "../support/test-server.js";
 
@@ -262,6 +262,53 @@ test("corporate-action diagnostics distinguish announcement, authorization, sche
   }
 });
 
+test("explicit filing provenance suppresses overlapping retrospective completion inference", () => {
+  const findings = [
+    { occurrence_id: "fallback", kind: "reverse_split", event_date: "2025-08-01" },
+    { occurrence_id: "filing", kind: "reverse_split", event_date: null, canonical_support_only: true }
+  ];
+  const shared = { source_accession: "same-accession", extracted_ratio: "1-for-250", extracted_date: "2025-08-01", source_date_position: 100, source_text_range_start: 0, source_text_range_end: 300, canonical_acceptance_invariant_passed: true, disposition: "accepted", canonical_event_id: null, canonical_chosen_event_date: "2025-08-01", merge_target: null };
+  const diagnostics = [
+    { ...shared, occurrence_id: "fallback", date_role: "completion_date", date_role_evidence: "authoritative_retrospective_history", date_role_evidence_strength: 100 },
+    { ...shared, occurrence_id: "filing", date_role: "filing_date", date_role_evidence: "certificate_or_amendment_filing_language_without_same_day_effectiveness", date_role_evidence_strength: 500, canonical_acceptance_invariant_passed: false, disposition: "withheld", canonical_chosen_event_date: null }
+  ];
+  resolveOverlappingSplitDateRoleConflicts(findings, diagnostics);
+  assert.deepEqual(findings.map((item) => item.occurrence_id), ["filing"]);
+  assert.equal(diagnostics[0].retrospective_fallback_suppressed, true);
+  assert.equal(diagnostics[0].winning_date_role, "filing_date");
+  assert.equal(diagnostics[0].losing_interpretation, "completion_date");
+  assert.equal(diagnostics[0].canonical_acceptance_invariant_passed, false);
+  assert.equal(diagnostics[0].reason, "stronger_overlapping_date_role_evidence");
+  assert.deepEqual(diagnostics[0].competing_overlapping_occurrence_ids, ["filing"]);
+});
+
+test("explicit effective evidence beats filing provenance for canonical event identity", () => {
+  const findings = [{ occurrence_id: "filing" }, { occurrence_id: "effective" }];
+  const shared = { source_accession: "same-accession", extracted_ratio: "1-for-250", extracted_date: "2025-08-04", source_date_position: 100, source_text_range_start: 0, source_text_range_end: 300, canonical_acceptance_invariant_passed: true, disposition: "accepted", canonical_event_id: null, canonical_chosen_event_date: "2025-08-04", merge_target: null, retrospective_fallback_suppressed: false };
+  const diagnostics = [
+    { ...shared, occurrence_id: "filing", date_role: "filing_date", date_role_evidence: "certificate_or_amendment_filing_language_without_same_day_effectiveness", date_role_evidence_strength: 500 },
+    { ...shared, occurrence_id: "effective", date_role: "effective_date", date_role_evidence: "explicit_effective_language", date_role_evidence_strength: 600 }
+  ];
+  resolveOverlappingSplitDateRoleConflicts(findings, diagnostics);
+  assert.deepEqual(findings.map((item) => item.occurrence_id), ["effective"]);
+  assert.equal(diagnostics[0].winning_date_role, "effective_date");
+  assert.equal(diagnostics[0].disposition, "withheld");
+  assert.equal(diagnostics[1].winning_date_role, "effective_date");
+});
+
+test("equal-strength overlapping role conflict is withheld before canonicalization", () => {
+  const findings = [{ occurrence_id: "left" }, { occurrence_id: "right" }];
+  const shared = { source_accession: "same-accession", extracted_ratio: "1-for-10", extracted_date: "2025-01-02", source_date_position: 40, source_text_range_start: 0, source_text_range_end: 100, date_role_evidence_strength: 600, canonical_acceptance_invariant_passed: true, disposition: "accepted", canonical_event_id: null, canonical_chosen_event_date: "2025-01-02", merge_target: null, retrospective_fallback_suppressed: false };
+  const diagnostics = [
+    { ...shared, occurrence_id: "left", date_role: "effective_date", date_role_evidence: "explicit_effective_language" },
+    { ...shared, occurrence_id: "right", date_role: "completion_date", date_role_evidence: "explicit_completion_language" }
+  ];
+  resolveOverlappingSplitDateRoleConflicts(findings, diagnostics);
+  assert.deepEqual(findings, []);
+  assert.ok(diagnostics.every((item) => item.canonical_acceptance_invariant_passed === false));
+  assert.ok(diagnostics.every((item) => item.overlap_conflict_resolution_reason === "equal_strength_overlapping_date_role_conflict_withheld"));
+});
+
 test("Verification-5 certificate date reconciles to the later effective action", async () => {
   const filingReference = "On August 1, 2025, the Company filed a Certificate of Amendment to its Second Amended and Restated Certificate of Incorporation with the Secretary of State of the State of Delaware to effect a one-for-two hundred fifty (1-for-250) reverse stock split.";
   const effectiveReference = "Effective August 4, 2025, the Company implemented a reverse stock split at a ratio of 1-for-250 shares.";
@@ -335,6 +382,40 @@ test("Verification-5 stored-live shape preserves nine actions and merges the Aug
   assert.equal(filingDiagnostic.filing_vs_effective_reconciliation, "merged_to_effective_event");
   const finalized = finalizeResearchReport(result.report, { reportValidator, requestedTicker: "MULN" });
   assert.equal(finalized.valid, true, JSON.stringify(finalized.validation.errors));
+});
+
+test("Verification-6 overlapping live spans suppress August 1 and preserve the nine-event history", async () => {
+  const stored = JSON.parse(await readFile(new URL("../evaluation/live/2026-08-28-muln-verification-6/raw/MULN.json", import.meta.url), "utf8"));
+  const falseOccurrence = stored.report.sections.reverse_splits.items.find((item) => item.event_date === "2025-08-01");
+  const explicitFiling = stored.report.claims.find((item) => item.text.startsWith("On August 1, 2025, the Company filed a Certificate of Amendment"));
+  assert.ok(falseOccurrence && explicitFiling, "stored Verification-6 shape must retain both conflicting interpretations");
+  const history = [
+    "A 1-for-25 reverse stock split was completed on May 4, 2023; a 1-for-9 reverse stock split was completed on August 11, 2023; and a 1-for-100 reverse stock split was completed on December 21, 2023.",
+    "The Company implemented a 1-for-100 reverse stock split on September 17, 2024.",
+    "The Company completed a 1-for-60 reverse stock split on February 18, 2025 and a 1-for-100 reverse stock split on April 11, 2025.",
+    "On June 2, 2025, the Company effected a 1-for-100 reverse stock split, and on August 4, 2025, the Company effected a 1-for-250 reverse stock split.",
+    "The Company completed a 1-for-250 reverse stock split effective September 22, 2025."
+  ].join(" ");
+  const actionSuffix = explicitFiling.text.slice(explicitFiling.text.lastIndexOf(" reverse stock split"));
+  const overlappingLiveShape = `${history} ${falseOccurrence.summary}${actionSuffix}.`;
+  const result = await researchFixture({ ticker: "MULN", filings: [
+    { accessionNumber: "000143774925027016", form: "10-Q", filingDate: "2025-08-14", reportDate: "2025-06-30", primaryDocument: "verification-6-live-shape.htm", primaryDocDescription: "Quarterly report" }
+  ], documents: { "verification-6-live-shape.htm": overlappingLiveShape } });
+  const actual = result.report.sections.reverse_splits.items.map((item) => [item.title.match(/1-for-\d+/)?.[0], item.event_date]);
+  assert.deepEqual(actual, [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"], ["1-for-100", "2024-09-17"], ["1-for-60", "2025-02-18"], ["1-for-100", "2025-04-11"], ["1-for-100", "2025-06-02"], ["1-for-250", "2025-08-04"], ["1-for-250", "2025-09-22"]]);
+  assert.equal(actual.some(([ratio, date]) => ratio === "1-for-250" && date === "2025-08-01"), false);
+  const diagnostics = result.evidence_packet.corporate_action_diagnostics;
+  const suppressed = diagnostics.find((item) => item.extracted_date === "2025-08-01" && item.date_role_evidence === "authoritative_retrospective_history");
+  const filing = diagnostics.find((item) => item.extracted_date === "2025-08-01" && item.date_role === "filing_date");
+  assert.equal(suppressed?.retrospective_fallback_suppressed, true, JSON.stringify(diagnostics.filter((item) => item.extracted_date === "2025-08-01")));
+  assert.equal(suppressed?.canonical_acceptance_invariant_passed, false);
+  assert.equal(suppressed?.winning_date_role, "filing_date");
+  assert.equal(filing?.canonical_chosen_event_date, "2025-08-04");
+  assert.equal(filing?.filing_vs_effective_reconciliation, "merged_to_effective_event");
+  assert.ok(suppressed?.source_reference_id);
+  assert.equal(suppressed?.source_reference_id, filing?.source_reference_id);
+  assert.ok(suppressed?.competing_overlapping_occurrence_ids.includes(filing.occurrence_id));
+  assert.equal(JSON.stringify(result.report).includes("corporate_action_diagnostics"), false);
 });
 
 test("stored-live MULN shape yields canonical history without the false August 2025 1-for-100", async () => {

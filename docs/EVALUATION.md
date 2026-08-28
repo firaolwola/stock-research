@@ -381,6 +381,14 @@ run cost $0 in OpenAI usage, took 3,657 ms, used 18 SEC requests and two Alpha
 Vantage requests, and stayed inside all approved bounds. See
 `docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-6.md`.
 
+The subsequent offline correction resolves interpretations of the same dated
+source reference before canonical acceptance. Explicit effective/completion
+language outranks filing provenance, filing provenance outranks retrospective
+completion inference, and equal-strength role conflicts remain withheld. The
+exact stored Verification-6 shape now preserves the full nine-event MULN history
+while merging August 1 filing provenance into the August 4 effective event. See
+`docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-6-OFFLINE-CORRECTION.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

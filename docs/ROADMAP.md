@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — correct the remaining overlapping-span MULN date-role defect offline:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Verification-6 retrieved all nine supported MULN actions but remained at 9/10 canonical precision: one span correctly withheld August 1 as filing provenance while an overlapping historical-list span still promoted it as a completed 1-for-250 event beside August 4. NIO remains correctly Limited under unavailable authoritative evidence. No additional MULN run or expansion is authorized.
+8. [ ] **Active — await owner decision on one bounded MULN confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Verification-6 retrieved all nine supported MULN actions but remained at 9/10 canonical precision because an overlapping historical-list span overrode explicit August 1 filing provenance. The offline correction now resolves overlapping interpretations by evidence specificity and preserves the nine-event stored-live history without the false August 1 action. NIO remains correctly Limited under unavailable authoritative evidence. A fresh bounded live confirmation requires separate owner approval; no run or expansion is currently authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -97,11 +97,11 @@ exact semantic gate. Both mechanisms now have deterministic offline disposition:
 the Verification-4 replay retains nine supported dated MULN actions without its
 two severe false events, while NIO remains Limited after explicit candidate
 adjudication. Verification-5 confirmed recall but exposed one remaining duplicate
-wrong-date action. The offline date-role correction removed the duplicate in its
-stored replay, but Verification-6 showed that an overlapping live extraction span
-can still invoke the retrospective-history fallback and recreate it. The next
-active step is another offline correction using the captured Verification-6 shape;
-no run or expansion batch is currently authorized. A paid data
+wrong-date action. Verification-6 showed that an overlapping live extraction span
+could still invoke the retrospective-history fallback and recreate it. The
+captured-shape correction now resolves the conflict before canonical acceptance;
+the next active step is an owner decision on one bounded live confirmation. No
+run or expansion batch is currently authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 
