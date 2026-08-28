@@ -473,13 +473,18 @@ No same-three rerun is proposed. The authoritative baseline pass rejected HUBC
 because Nasdaq closed its MVLS deficiency and rejected XPEV as an IFRS proof case
 because its SEC financial statements use U.S. GAAP. The one permitted replacement,
 ONFO, is accepted for active-deficiency proof from its August 19, 2026 Form 10-Q.
-Stantec (STN) is now the accepted clean foreign/IFRS replacement: its direct
+Stantec (STN) was accepted as the clean foreign/IFRS replacement: its direct
 common shares trade on NYSE and TSX, it files Form 40-F/6-K as a Canadian foreign
 private issuer, and its 2025 SEC-filed statements explicitly use IFRS Accounting
-Standards as issued by the IASB. The frozen, non-executable final pair is ONFO/STN.
-If both later pass, each sparse category reaches three independent positives—the
-practical milestone minimum, while remaining statistically small. Explicit owner
-approval is the only remaining prerequisite before the bounded pair may run.
+Standards as issued by the IASB. The frozen ONFO/STN pair ran once on 2026-08-28.
+ONFO retrieved newer authoritative closure of its bid-price matter while its
+stockholders'-equity deficiency remained active; frozen historical baselines were
+not rewritten. STN validated but did not promote foreign-private-issuer, 40-F/6-K,
+direct-share/TSX, or IASB-IFRS semantics. The run measured 4/7 bundled material
+claims, 2/2 valid reports, and one severe miss. Foreign/IFRS remains sparse at two
+passing independent cases; offline deterministic correction is required before
+any new live authorization. See
+`docs/results/FAST_RELIABILITY_2026-08-28-FINAL-SPARSE-PROOF-1.md`.
 
 ## Paid live evaluation boundary
 

@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — owner approval of the final ONFO/STN proof pair:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Sparse Expansion Verification-2 reached 20/20 recall with zero severe misses. The final authoritative baselines now pair active-deficiency ONFO with Canadian foreign-private-issuer/IASB-IFRS case STN. Both remain non-executable until explicit owner approval; a passing pair would bring each sparse category to three independent positives without implying statistical reliability.
+8. [ ] **Active — offline correction after the final sparse-proof run:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). ONFO and STN ran once within all approved bounds. ONFO proved the active stockholders'-equity deficiency but also supplied newer authoritative closure of its bid-price matter; STN failed to promote authoritative foreign-private-issuer, 40-F/6-K, direct-share/TSX, and IASB-IFRS facts. Correct those deterministic interpretation gaps before requesting any further live proof.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -104,9 +104,10 @@ Verification-7 confirmed the nine-event live history without the August 1
 duplicate. The sparse-expansion verification reached 17/20 but exposed the
 remaining ZAPPF filing-selection/interpretation and GMBL security-settlement
 defects. Verification-2 resolved those four defects live and reached 20/20, but
-exposed NT-form reason/recency fidelity defects, now corrected offline. The next
-active step is owner approval of the frozen ONFO/STN two-case proof plan; no live
-work is authorized. A paid data
+exposed NT-form reason/recency fidelity defects, now corrected offline. The final
+ONFO/STN sparse-proof pair then ran within every bound but failed: ONFO needs
+current-vs-historical listing-state reconciliation and STN needs authoritative
+foreign-filer/accounting-basis promotion. No further live work is authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 
