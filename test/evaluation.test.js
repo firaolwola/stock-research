@@ -461,6 +461,14 @@ test("recursive-plan MULN live result records target recall but fails the severe
   assert.ok(run.runs[0].elapsed_ms <= 20000);
 });
 
+test("Verification-4 extra-event adjudication preserves the frozen artifact and separates genuine from false actions", async () => {
+  const adjudication = await loadJson("../evaluation/diagnostics/muln-verification-4-extra-events.json");
+  assert.equal(adjudication.frozen_artifact_modified, false);
+  assert.equal(adjudication.prospective_supported_canonical_count, 9);
+  assert.deepEqual(adjudication.events.filter((item) => item.classification === "false").map((item) => [item.ratio, item.date]), [["1-for-100", "2024-01-24"], ["1-for-100", "2024-10-16"], ["1-for-2", "2025-08-01"], ["1-for-100", "2025-08-04"]]);
+  assert.deepEqual(adjudication.events.filter((item) => item.classification === "genuine").map((item) => item.date), ["2024-09-17", "2025-02-18", "2025-04-11", "2025-09-22"]);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

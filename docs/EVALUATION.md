@@ -340,6 +340,15 @@ event and added a false August 1, 2025 1-for-2 event by truncating written
 The parser blocker therefore remains open; no retry occurred. See
 `docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-4.md`.
 
+The two false-positive mechanisms are now corrected offline against the frozen
+Verification-4 shape. Complete number-word ratios no longer truncate, action
+dates cannot cross an intervening ratio, and canonicalization independently
+enforces the extraction acceptance invariant. Stored evidence supports nine
+prospective canonical actions; restored-compliance dates and both Verification-4
+false actions are excluded. The live artifact and its five-event answer key were
+not changed. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-4-OFFLINE-CORRECTION.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

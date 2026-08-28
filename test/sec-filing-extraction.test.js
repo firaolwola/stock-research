@@ -49,6 +49,17 @@ test("completed, authorized, and absent stock actions remain distinct", () => {
   assert.equal(extract("No corporate-action disclosure is present.").some((item) => /split/.test(item.kind)), false);
 });
 
+test("reverse-split ratio tokens preserve complete multi-digit denominators", () => {
+  const findings = extract([
+    "The Company completed a 1-for-25 reverse stock split effective January 2, 2022.",
+    "The Company completed a 1-for-100 reverse stock split effective January 2, 2023.",
+    "The Company completed a 1-for-250 reverse stock split effective January 2, 2024.",
+    "The Company completed a 1-for-1000 reverse stock split effective January 2, 2025."
+  ].join(" ")).filter((item) => item.kind === "reverse_split");
+  assert.deepEqual(findings.map((item) => item.ratio), ["1-for-25", "1-for-100", "1-for-250", "1-for-1000"]);
+  assert.equal(findings.some((item) => ["1-for-2", "1-for-10"].includes(item.ratio)), false);
+});
+
 test("non-reliance requires event-specific language and does not absorb control warnings", () => {
   const actual = extract("Item 4.02 Non-Reliance on Previously Issued Financial Statements. The audit committee concluded that the statements should no longer be relied upon and will be restated.");
   assert.ok(actual.some((item) => item.kind === "non_reliance"));

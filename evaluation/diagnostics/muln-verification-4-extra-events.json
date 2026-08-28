@@ -1,0 +1,16 @@
+{
+  "baseline_artifact": "evaluation/live/2026-08-27-muln-verification-4/raw/MULN.json",
+  "adjudicated_at": "2026-08-27",
+  "frozen_artifact_modified": false,
+  "events": [
+    { "ratio": "1-for-100", "date": "2024-01-24", "classification": "false", "reason": "January 24 is the restored-compliance notice date; the cited split occurred December 21, 2023." },
+    { "ratio": "1-for-100", "date": "2024-09-17", "classification": "genuine", "reason": "Two stored SEC claims identify the completed action and effective date." },
+    { "ratio": "1-for-100", "date": "2024-10-16", "classification": "false", "reason": "October 16 is the restored-compliance notice date; the cited split occurred September 17, 2024." },
+    { "ratio": "1-for-60", "date": "2025-02-18", "classification": "genuine", "reason": "Two stored SEC claims identify the completed action and effective date." },
+    { "ratio": "1-for-100", "date": "2025-04-11", "classification": "genuine", "reason": "Two stored SEC claims identify the completed action and effective date." },
+    { "ratio": "1-for-2", "date": "2025-08-01", "classification": "false", "reason": "The source says one-for-two hundred fifty (1-for-250); 1-for-2 is a truncated prefix." },
+    { "ratio": "1-for-100", "date": "2025-08-04", "classification": "false", "reason": "The June 1-for-100 ratio borrowed the August 1-for-250 action date." },
+    { "ratio": "1-for-250", "date": "2025-09-22", "classification": "genuine", "reason": "The stored SEC claim announces the ratio and effective date; evaluated after that date, it settles completed." }
+  ],
+  "prospective_supported_canonical_count": 9
+}
