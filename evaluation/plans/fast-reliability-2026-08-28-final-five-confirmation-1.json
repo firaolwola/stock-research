@@ -8,6 +8,21 @@
   "parent_plan_sha256": "032c7e3a4dedfa5d94916cb358987a0eff24c8abc2b0c31acdd531e0a6894e4c",
   "output_directory": "2026-08-28-final-five-confirmation-1",
   "approval_token": "issue-55-2026-08-28-approved-final-five-confirmation-one",
+  "approval": {
+    "approved": true,
+    "tickers": ["AAPL", "AMC", "NCPL", "NXL", "SMCI"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 5,
+    "maximum_openai_cost_usd": 0.15,
+    "maximum_alpha_vantage_requests": 10,
+    "maximum_twelve_data_requests": 10,
+    "maximum_combined_optional_provider_attempts": 20,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
   "required_ancestor": "4748b1b",
   "preserve_prior_batches": [
     {"directory":"evaluation/live/2026-08-27","summary_sha256":"21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56","run_summary_sha256":"6151f8ba50008576180df0b804270e22ddd33da5239c8885067635d210d3fa84"},

@@ -1297,3 +1297,20 @@ both tickers, and zero severe misses.
 earlier measurements. It is only a two-case confirmation, so Issue #55 remains
 open for independent sample-size and broader reliability review; no automatic
 live expansion, merge, or closure follows.
+
+## 2026-08-28 — Recheck the original five cases after offline corrections
+
+**Status:** Gate failed; Issue #55 remains open
+
+**Decision:** Preserve the fresh AAPL/AMC/NCPL/NXL/SMCI confirmation as a new
+bounded result, but do not replace Batch 3 or close the milestone. Against the
+unchanged 86-check baseline it measured 82/86 (95.35%) with five valid reports.
+AAPL and SMCI interpretation defects were corrected, while AMC's completed
+reverse split and NCPL's Item 4.02/non-reliance event remained missing. The
+free-cash-flow category also remains below the category target. NXL's
+2026-08-28 effective event was excluded from the 2026-08-27 adjudication cutoff.
+
+**Why:** Repeated runs of the same tickers are confirmation evidence, not new
+independent samples. The zero-severe-miss requirement and category gate remain
+binding even when aggregate recall is above 95%; NIO's separately documented
+`unavailable_authoritative_evidence` classification is not a system miss.

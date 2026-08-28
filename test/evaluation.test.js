@@ -715,6 +715,26 @@ test("final sparse-proof verification 3 records the bounded live correction pass
   assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
 });
 
+test("final same-five confirmation preserves frozen baselines and severe-miss gate", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-final-five-confirmation-1.json");
+  const result = await loadJson("../evaluation/live/2026-08-28-final-five-confirmation-1/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-final-five-confirmation-1/run-summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .15);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 10);
+  assert.equal(result.adjudication.expected_material_checks, 86);
+  assert.equal(result.adjudication.detected_material_checks, 82);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(result.pr_ready_to_merge, false);
+  assert.equal(result.severe_misleading_misses.length, 2);
+  assert.equal(run.completed_run_count, 5);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 10);
+  assert.notEqual(run.approval_violation, true);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

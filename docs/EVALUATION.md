@@ -489,6 +489,17 @@ cases each. This satisfies the local milestone minimum but is not a broad
 statistical reliability claim. See
 `docs/results/FAST_RELIABILITY_2026-08-28-FINAL-SPARSE-PROOF-1.md`.
 
+The fresh same-five confirmation on 2026-08-28 replayed AAPL, AMC, NCPL, NXL,
+and SMCI once against the unchanged Batch-3 baseline. It measured 82/86
+(95.35%) with five valid reports and no favorable inference from missing data.
+AAPL's clean-control warning and SMCI's restored-compliance projection were
+corrected; NXL's August 28 split was excluded from the August 27 adjudication
+cutoff. AMC's completed 1-for-10 split remains absent and NCPL's Item 4.02 /
+non-reliance event was not surfaced, so two severe live misses remain. The
+free-cash-flow category also remains below target. This confirmation therefore
+does not satisfy the Issue #55 gate or authorize closure. See
+`docs/results/FAST_RELIABILITY_2026-08-28-FINAL-FIVE-CONFIRMATION-1.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims, 2/2 valid reports, and zero severe misses within bounds. Issue #55 remains open pending the broader independent sample-size/reliability gate; no broad reliability claim follows from this two-case confirmation.
+8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims with zero severe misses. A same-five confirmation then measured 82/86 (95.35%), but AMC's completed split and NCPL's non-reliance event remain severe live misses and FCF remains below target. Issue #55 remains open; the numerical rate alone does not satisfy the severe-miss/category gate.
 
 ### Issue #55 corrective roadmap
 

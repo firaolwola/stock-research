@@ -1,0 +1,1 @@
+{"ticker":"AAPL","result":"passed_targeted_confirmation","valid":true,"severe_miss":false,"checks":["identity","comparable financial trends","current catalyst","no false material weakness"],"score_range_note":"Cash remains below the frozen range and is a calibration issue, not a favorable-evidence failure."}
