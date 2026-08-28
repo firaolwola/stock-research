@@ -883,6 +883,45 @@ test("NCPL non-reliance invalidates affected financial trend scoring", async () 
   assert.ok(result.report.financial_assessment.material_warnings.some((item) => item.severity === "critical"));
 });
 
+test("AMC comma-delimited historical split terms remain a completed canonical action", () => {
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html: "On August 24, 2023, the one-for-ten reverse stock split became effective.",
+    form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-28T00:00:00Z",
+    accession: "amc-live-shaped", documentUrl: "https://www.sec.gov/amc-live-shaped", documentName: "amc-live-shaped.htm"
+  });
+  const split = result.findings.find((item) => item.kind === "reverse_split");
+  assert.equal(split?.ratio, "1-for-10");
+  assert.equal(split?.event_date, "2023-08-24");
+  assert.equal(split?.action_state, "completed");
+  assert.equal(result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10")?.disposition, "accepted");
+});
+
+test("AMC current filing selection promotes the completed split into the report", async () => {
+  const result = await researchFixture({
+    ticker: "AMC",
+    filings: [{ accessionNumber: "0001104659-23-090981", form: "8-K", filingDate: "2023-08-14", reportDate: "2023-08-24", primaryDocument: "amc-split.htm", items: "5.03", primaryDocDescription: "Reverse split" }],
+    documents: { "amc-split.htm": "On August 24, 2023, the one-for-ten reverse stock split became effective." },
+    companyFacts: { cik: 1, entityName: "AMC Corp.", facts: {} }
+  });
+  assert.ok(result.report.sections.reverse_splits.items.some((item) => item.title === "Completed 1-for-10 reverse split" && item.event_date === "2023-08-24"));
+});
+
+test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted and invalidates affected metrics", async () => {
+  const result = await researchFixture({
+    ticker: "NCPL",
+    filings: [{ accessionNumber: "0001493152-26-038853", form: "8-K", filingDate: "2026-08-18", reportDate: "2026-08-18", primaryDocument: "form8-k.htm", items: "4.01 4.02 9.01", primaryDocDescription: "Auditor change and non-reliance" }],
+    documents: {
+      "form8-k.htm": "Item 4.02. Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review. On August 12, 2026, the auditor advised that action should be taken to prevent future reliance on affected previously issued financial statements and related audit reports."
+    },
+    companyFacts: { cik: 1, entityName: "NCPL Corp.", facts: { "us-gaap": { NetCashProvidedByUsedInOperatingActivities: concept("OCF", [fact(-8, { start: "2026-01-01", end: "2026-06-30" }), fact(-4, { start: "2025-01-01", end: "2025-06-30", filed: "2025-08-15", accn: "prior" })]) } } }
+  });
+  const warning = result.report.financial_assessment.material_warnings.find((item) => item.kind === "accounting" && item.severity === "critical");
+  assert.ok(warning, "critical non-reliance warning should be retained");
+  assert.match(warning.summary, /prevent future reliance|previously issued financial statements/i);
+  assert.equal(result.report.financial_assessment.metrics.operating_cash_flow.state, "limited_coverage");
+  assert.equal(calibrateReportScores(result.report).scores.financial_operating_cash_flow_trend.value, null);
+});
+
 test("SMCI material weakness is retained and recent OCF/FCF deterioration outranks older annual history", async () => {
   const annual = (value, year) => fact(value, { start: `${year}-07-01`, end: `${year + 1}-06-30`, filed: `${year + 1}-08-28`, form: "10-K", accn: `annual-${year}` });
   const result = await researchFixture({ ticker: "SMCI", filings: [{ accessionNumber: "0000000001-26-000001", form: "10-Q", filingDate: "2026-05-11", reportDate: "2026-03-31", primaryDocument: "quarter.htm", items: "" }], documents: { "quarter.htm": "Management concluded that internal control over financial reporting was not effective because material weaknesses remained unremediated." }, companyFacts: { cik: 1, entityName: "SMCI Corp.", facts: { "us-gaap": {

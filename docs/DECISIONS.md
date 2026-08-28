@@ -1298,6 +1298,24 @@ earlier measurements. It is only a two-case confirmation, so Issue #55 remains
 open for independent sample-size and broader reliability review; no automatic
 live expansion, merge, or closure follows.
 
+## 2026-08-28 — Targeted AMC/NCPL offline correction
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** Correct the two severe mechanisms from the fresh same-five
+confirmation without changing frozen measurements or scoring methodology. The
+corporate-action parser now accepts punctuation after complete written ratios
+and binds explicit past effective dates. The Item 4.02 extractor now recognizes
+authoritative “prevent future reliance on affected previously issued financial
+statements” language and propagates it to affected financial-input invalidation.
+
+**Why:** AMC's written-ratio filing shape reached extraction but its effective
+date/lifecycle binding was not strong enough for canonical promotion; the
+punctuation variant is now covered as well. NCPL's real Item 4.02 used
+prevention-of-reliance wording not covered by the prior narrow pattern. Both fixes preserve the
+existing truncation and prospectus-boilerplate negative controls. A new live
+run is not implied by this offline pass and requires separate owner approval.
+
 ## 2026-08-28 — Recheck the original five cases after offline corrections
 
 **Status:** Gate failed; Issue #55 remains open

@@ -500,6 +500,23 @@ free-cash-flow category also remains below target. This confirmation therefore
 does not satisfy the Issue #55 gate or authorize closure. See
 `docs/results/FAST_RELIABILITY_2026-08-28-FINAL-FIVE-CONFIRMATION-1.md`.
 
+### Targeted AMC/NCPL offline correction (2026-08-28)
+
+The two remaining severe mechanisms were reproduced without network or paid
+provider calls. AMC's stored live-shaped filing had a written ratio whose
+effective date and lifecycle wording were not bound strongly enough for
+canonical promotion; the parser now handles that bounded date/lifecycle shape
+and also accepts sentence punctuation while still rejecting alphanumeric/hyphen
+truncation. Explicit past effective dates are settled safely.
+NCPL's Item 4.02 used authoritative “prevent future reliance on affected
+previously issued financial statements” wording rather than the narrower
+“should no longer be relied upon” phrase; the Item 4.02 extractor now recognizes
+that bounded form and invalidates affected financial trend inputs. New
+integration regressions cover both report outcomes and retain the existing
+boilerplate negative controls. This is an offline correction only; a fresh live
+confirmation requires separate owner approval and historical measured artifacts
+remain unchanged.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary
