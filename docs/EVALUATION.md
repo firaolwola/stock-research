@@ -473,9 +473,13 @@ No same-three rerun is proposed. The authoritative baseline pass rejected HUBC
 because Nasdaq closed its MVLS deficiency and rejected XPEV as an IFRS proof case
 because its SEC financial statements use U.S. GAAP. The one permitted replacement,
 ONFO, is accepted for active-deficiency proof from its August 19, 2026 Form 10-Q.
-The non-executable plan remains blocked until the owner authorizes selection and
-baseline confirmation of one genuinely IFRS-reporting foreign security. No live
-Fast execution is authorized.
+Stantec (STN) is now the accepted clean foreign/IFRS replacement: its direct
+common shares trade on NYSE and TSX, it files Form 40-F/6-K as a Canadian foreign
+private issuer, and its 2025 SEC-filed statements explicitly use IFRS Accounting
+Standards as issued by the IASB. The frozen, non-executable final pair is ONFO/STN.
+If both later pass, each sparse category reaches three independent positives—the
+practical milestone minimum, while remaining statistically small. Explicit owner
+approval is the only remaining prerequisite before the bounded pair may run.
 
 ## Paid live evaluation boundary
 

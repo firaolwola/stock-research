@@ -1,11 +1,11 @@
 {
-  "plan_version": "2.0.0",
+  "plan_version": "3.0.0",
   "issue": 55,
   "batch": "final-sparse-proof-proposal",
   "prepared_at": "2026-08-28",
   "execution_authorized": false,
-  "baseline_confirmation_complete": false,
-  "blocked_reason": "HUBC's deficiency is resolved and XPEV reports under U.S. GAAP, so only the single permitted replacement qualifies. A second owner-authorized candidate selection is required before a two-case live plan can be frozen.",
+  "baseline_confirmation_complete": true,
+  "blocked_reason": "Execution remains unauthorized until the owner explicitly approves the frozen ONFO/STN live plan.",
   "candidate_adjudication": [
     {
       "ticker": "HUBC",
@@ -38,12 +38,38 @@
       "legitimately_limited": ["Outcome of Nasdaq's stockholders-equity compliance-plan review after the 2026-08-19 filing.", "Any compliance event occurring after the baseline as-of date."],
       "severe_miss_conditions": ["Wrong issuer/security.", "Either active deficiency omitted or described as cured without authoritative closure.", "The completed reverse split is treated as proof of compliance.", "Missing later evidence becomes favorable."],
       "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1825452/000165495426007754/onfo_10q.htm", "https://www.sec.gov/Archives/edgar/data/1825452/000165495426007754/0001654954-26-007754-index.html"]
+    },
+    {
+      "ticker": "STN",
+      "issuer": "Stantec Inc.",
+      "disposition": "accepted_foreign_IFRS_replacement",
+      "categories": ["foreign_issuer_IFRS"],
+      "authoritative_baseline": {
+        "cik": "0001131383",
+        "security": "Common Shares",
+        "venue": "New York Stock Exchange",
+        "other_venue": "Toronto Stock Exchange",
+        "security_structure": "direct_common_shares_not_ADS",
+        "jurisdiction": "Canada",
+        "foreign_private_issuer": true,
+        "filer_regime": "40-F_6-K",
+        "accounting_basis": "IFRS_as_issued_by_IASB",
+        "accounting_form": "40-F",
+        "accounting_accession": "0001131383-26-000007",
+        "accounting_period": "2025-12-31",
+        "current_status_source": "6-K accession 0001131383-26-000017 filed 2026-08-12"
+      },
+      "expected_material_claims": ["Correct STN / Stantec Inc. / CIK 0001131383 identity.", "Canadian foreign-private-issuer regime using Form 40-F and 6-K.", "NYSE-listed direct common shares, not ADSs; TSX uses the same STN symbol.", "2025 audited consolidated financial statements use IFRS Accounting Standards as issued by the IASB and are presented in Canadian dollars."],
+      "legitimately_limited": ["SEC Company Facts coverage or taxonomy concepts that the bounded Fast implementation cannot normalize safely for a Form 40-F filer.", "Any financial component lacking two comparable authoritative periods under the existing methodology."],
+      "severe_miss_conditions": ["Wrong issuer or CIK.", "STN common shares are mislabeled as ADSs or linked to another security.", "Foreign-private-issuer or Form 40-F/6-K regime is missed.", "IASB IFRS is missed or treated as U.S. GAAP.", "NYSE identity is materially wrong.", "Missing evidence becomes favorable."],
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1131383/000113138326000007/stn-20251231.htm", "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000007/ex-992xmda2025.htm", "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000017/a6kq22026.htm"]
     }
   ],
   "prospective_sample_counts": {
     "active_listing_deficiency": {"current": 2, "after_ONFO_if_live_passes": 3, "status": "minimum practical independent proof; not statistical reliability"},
-    "foreign_issuer_ADR_IFRS": {"current": 2, "after_current_accepted_cases": 2, "status": "still sparse; no new qualifying IFRS case confirmed"}
+    "foreign_issuer_ADR_IFRS": {"current": 2, "after_STN_if_live_passes": 3, "status": "minimum practical independent proof; not statistical reliability"}
   },
+  "frozen_live_tickers": ["ONFO", "STN"],
   "reserved_two_case_bounds": {"maximum_runs": 2, "runs_per_ticker": 1, "automatic_retries": false, "maximum_openai_cost_usd": 0.06, "maximum_alpha_vantage_requests": 4, "maximum_twelve_data_requests": 4, "maximum_combined_optional_provider_attempts": 8, "fast_ceiling_ms_per_ticker": 20000, "maximum_aggregate_fast_runtime_ms": 40000, "deep_runs": 0, "hosted_web_search": false, "difficult_budget_approved": false},
-  "next_owner_decision": "Authorize one additional authoritative baseline search for a genuinely IFRS-reporting foreign security; do not run ONFO or any other Fast case yet."
+  "next_owner_decision": "Explicitly approve or reject the frozen ONFO/STN two-case live plan; do not execute before approval."
 }

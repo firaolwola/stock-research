@@ -684,11 +684,13 @@ test("Sparse Expansion Verification-2 resolves prior defects but keeps Issue 55 
   assert.ok(run.aggregate_elapsed_ms <= 60000);
 });
 
-test("final sparse-proof proposal records failed candidates and remains non-executable", async () => {
+test("final sparse-proof proposal freezes ONFO and STN but remains non-executable", async () => {
   const plan = await loadJson("../evaluation/plans/fast-reliability-final-sparse-proof-proposal.json");
   assert.equal(plan.execution_authorized, false);
-  assert.equal(plan.baseline_confirmation_complete, false);
-  assert.deepEqual(plan.candidate_adjudication.map((item) => [item.ticker, item.disposition]), [["HUBC", "rejected"], ["XPEV", "rejected_for_ifrs_proof"], ["ONFO", "accepted_replacement_for_active_deficiency"]]);
+  assert.equal(plan.baseline_confirmation_complete, true);
+  assert.deepEqual(plan.candidate_adjudication.map((item) => [item.ticker, item.disposition]), [["HUBC", "rejected"], ["XPEV", "rejected_for_ifrs_proof"], ["ONFO", "accepted_replacement_for_active_deficiency"], ["STN", "accepted_foreign_IFRS_replacement"]]);
+  assert.deepEqual(plan.frozen_live_tickers, ["ONFO", "STN"]);
+  assert.equal(plan.candidate_adjudication.find((item) => item.ticker === "STN").authoritative_baseline.accounting_basis, "IFRS_as_issued_by_IASB");
   assert.deepEqual({ runs: plan.reserved_two_case_bounds.maximum_runs, cost: plan.reserved_two_case_bounds.maximum_openai_cost_usd, alpha: plan.reserved_two_case_bounds.maximum_alpha_vantage_requests, twelve: plan.reserved_two_case_bounds.maximum_twelve_data_requests, combined: plan.reserved_two_case_bounds.maximum_combined_optional_provider_attempts }, { runs: 2, cost: .06, alpha: 4, twelve: 4, combined: 8 });
   assert.equal(plan.reserved_two_case_bounds.hosted_web_search, false);
   assert.equal(plan.reserved_two_case_bounds.deep_runs, 0);
