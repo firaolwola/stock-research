@@ -550,6 +550,17 @@ live report and prior measurements remain unchanged; another AMC request still
 requires separate approval. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-3.md`.
 
+### AMC effective-date confirmation 3 (2026-08-28)
+
+The separately approved single AMC run produced a valid safe-partial report in
+about 2.6 seconds, but the live diagnostic still extracted `1-for-10` and
+`2023-08-24` as `unknown_date_role` and withheld the event with
+`resolved_lifecycle_required`. The targeted live check therefore measured 0/1
+and the severe AMC blocker remains open. OpenAI synthesis was cost-blocked
+before request; no retry was made. The next step is offline reproduction of the
+exact live normalized text shape, not another blind live run. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-EFFECTIVE-DATE-CONFIRMATION-3.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

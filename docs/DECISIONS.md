@@ -1384,3 +1384,19 @@ lifecycle position. Retaining the effective-date proof fixes that false
 suppression without accepting filing dates, authorization ranges, undated
 mentions, or competing-ratio spans. The correction is covered offline; no new
 live request or historical-baseline change is implied.
+
+## 2026-08-28 — AMC confirmation remains blocked after lifecycle correction
+
+**Status:** Live confirmation failed; issue remains open
+
+**Decision:** Preserve the one-run AMC result as a failed targeted check and do
+not authorize an automatic retry. The live parser extracted the expected ratio
+and effective date but still classified the date role as `unknown_date_role`,
+withholding the event as `resolved_lifecycle_required`.
+
+**Why:** The correction passes deterministic forms but does not yet reproduce
+the exact live normalized filing shape. Treating the missing event as Limited
+is safe, but the severe live recall miss remains unresolved. Further work must
+first reproduce and correct that shape offline, then obtain separate approval
+for any additional live confirmation. No OpenAI synthesis or paid OpenAI cost
+was involved.

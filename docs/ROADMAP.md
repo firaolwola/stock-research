@@ -126,6 +126,10 @@ verdict.
    lifecycle proof when an explicit past effective date safely settles a
    completed action. Offline regression passes; the latest live result remains
    the unchanged partial baseline and any further AMC confirmation is gated.
+10. [ ] **Active — reproduce remaining AMC live date-role gap:** the approved
+    confirmation still extracted `1-for-10` / `2023-08-24` but withheld it as
+    `unknown_date_role`. Reproduce the exact normalized filing shape offline;
+    no further live run is authorized until a new approval.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
