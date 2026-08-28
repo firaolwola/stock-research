@@ -389,6 +389,15 @@ exact stored Verification-6 shape now preserves the full nine-event MULN history
 while merging August 1 filing provenance into the August 4 effective event. See
 `docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-6-OFFLINE-CORRECTION.md`.
 
+Verification-7 then exercised that exact conflict against the live SEC path in
+one approved run. The report validated with all nine supported MULN actions,
+9/9 recall, 9/9 precision, and no severe misleading event. The August 1
+retrospective occurrence was suppressed by the stronger filing-date role, while
+August 4 remained the canonical effective action. The live MULN parser blocker
+is resolved and must not be rerun. Issue #55 remains open for NIO's unavailable
+authoritative evidence and independent sparse-category sample-size proof. See
+`docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-7.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

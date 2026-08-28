@@ -525,6 +525,29 @@ test("Verification-7 freezes the approved overlapping-span live confirmation bou
   assert.match(plan.approval_token, /approved-muln-overlap-precedence-one-run/);
 });
 
+test("Verification-7 resolves the live MULN overlap blocker without closing the sparse reliability gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-muln-verification-7/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-muln-verification-7/run-summary.json");
+  const review = await loadJson("../evaluation/live/2026-08-28-muln-verification-7/review/MULN.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 1);
+  assert.equal(result.canonical_event_precision.precision, 1);
+  assert.equal(result.august_1_duplicate_eliminated, true);
+  assert.equal(result.severe_misleading_misses, 0);
+  assert.equal(result.muln_live_parser_blocker_resolved, true);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.deepEqual(review.canonical_events, [["2023-05-04", "1-for-25"], ["2023-08-11", "1-for-9"], ["2023-12-21", "1-for-100"], ["2024-09-17", "1-for-100"], ["2025-02-18", "1-for-60"], ["2025-04-11", "1-for-100"], ["2025-06-02", "1-for-100"], ["2025-08-04", "1-for-250"], ["2025-09-22", "1-for-250"]]);
+  assert.deepEqual(review.false_positive_events, []);
+  assert.equal(review.targeted_diagnostics.find((item) => item.date_role_evidence === "authoritative_retrospective_history").retrospective_fallback_suppressed, true);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 2);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

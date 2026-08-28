@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — await owner decision on one bounded MULN confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Verification-6 retrieved all nine supported MULN actions but remained at 9/10 canonical precision because an overlapping historical-list span overrode explicit August 1 filing provenance. The offline correction now resolves overlapping interpretations by evidence specificity and preserves the nine-event stored-live history without the false August 1 action. NIO remains correctly Limited under unavailable authoritative evidence. A fresh bounded live confirmation requires separate owner approval; no run or expansion is currently authorized.
+8. [ ] **Active — establish remaining sparse-category sample-size proof:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Verification-7 confirmed 9/9 live MULN recall and precision with no severe corporate-action miss; the MULN parser blocker is resolved and must not be rerun. NIO remains correctly Limited under unavailable authoritative evidence rather than a system miss. The remaining milestone gate is independent sample-size proof for sparse critical categories; no expansion batch is currently authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -99,9 +99,10 @@ two severe false events, while NIO remains Limited after explicit candidate
 adjudication. Verification-5 confirmed recall but exposed one remaining duplicate
 wrong-date action. Verification-6 showed that an overlapping live extraction span
 could still invoke the retrospective-history fallback and recreate it. The
-captured-shape correction now resolves the conflict before canonical acceptance;
-the next active step is an owner decision on one bounded live confirmation. No
-run or expansion batch is currently authorized. A paid data
+captured-shape correction resolves the conflict before canonical acceptance, and
+Verification-7 confirmed the nine-event live history without the August 1
+duplicate. The next active step is defining the smallest independent batch needed
+for sparse-category sample-size proof; no expansion is currently authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 
