@@ -317,6 +317,13 @@ MULN actions from authoritative retrospective history, preserves the August 4,
 is offline evidence only; another live verification requires separate owner
 approval and Issue #55 remains open.
 
+The subsequently approved final MULN process did not reach research. Its nested
+child plan inherited only one parent level, leaving the frozen baseline reference
+undefined during local plan validation. No network client was created, provider
+usage and OpenAI cost were zero, and no retry occurred. This is a runner
+composition failure, so the live parser remains unadjudicated. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-3.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

@@ -411,6 +411,22 @@ test("final MULN verification freezes segment-binding approval and preserves the
   assert.match(plan.preserve_previous_verification.raw_muln_sha256, /^[a-f0-9]{64}$/);
 });
 
+test("final MULN verification attempt records the pre-network runner failure without adjudicating the parser", async () => {
+  const raw = await loadJson("../evaluation/live/2026-08-27-muln-verification-3/raw/MULN.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-3/run-summary.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-3/summary.json");
+  assert.equal(raw.failure_phase, "plan_validation");
+  assert.equal(raw.network_clients_created, false);
+  assert.equal(run.completed_run_count, 0);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 0);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.retry_performed, false);
+  assert.equal(result.canonical_live_events, null);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

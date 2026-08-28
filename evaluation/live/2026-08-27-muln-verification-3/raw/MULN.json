@@ -1,0 +1,15 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "attempted_at": "2026-08-27T21:28:18.0069732-05:00",
+  "result": "application_failure",
+  "failure_phase": "plan_validation",
+  "report_produced": false,
+  "network_clients_created": false,
+  "error": {
+    "constructor": "TypeError",
+    "name": "TypeError",
+    "code": null,
+    "safe_reason": "child_plan_missing_inherited_baseline_plan"
+  }
+}

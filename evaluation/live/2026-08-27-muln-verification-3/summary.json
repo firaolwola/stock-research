@@ -1,0 +1,13 @@
+{
+  "report_produced": false,
+  "canonical_live_events": null,
+  "completed_split_recall": null,
+  "false_positive_split_events": null,
+  "report_validity": null,
+  "explanation_fidelity": null,
+  "settlement": null,
+  "severe_misleading_misses": null,
+  "muln_live_parser_blocker_resolved": false,
+  "reason": "The approved process failed during local plan validation before any network client or research request was created; live parser behavior was not exercised.",
+  "issue_must_remain_open": true
+}
