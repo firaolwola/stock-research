@@ -17,7 +17,10 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-batch-3.json");
+const configuredPlanPath = process.env.APPROVED_FAST_CALIBRATION_PLAN?.trim();
+const planPath = configuredPlanPath
+  ? path.resolve(root, configuredPlanPath)
+  : path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-batch-3.json");
 const { plan, provenance: planProvenance } = await resolveEvaluationPlan({ root, planPath, requiredFields: [
   { path: "base_plan", type: "string" }, { path: "approval_token", type: "string" },
   { path: "cases", type: "array" }, { path: "approval.tickers", type: "array" },
