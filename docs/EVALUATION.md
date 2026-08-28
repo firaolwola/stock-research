@@ -324,6 +324,14 @@ usage and OpenAI cost were zero, and no retry occurred. This is a runner
 composition failure, so the live parser remains unadjudicated. See
 `docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-3.md`.
 
+The nested-plan defect now has prospective offline correction. Evaluation plans
+resolve recursively with descendant precedence, parent-integrity checks,
+cycle/missing-parent protection, required-field validation before runtime setup,
+and leaf-level source provenance. The exact Verification-3 chain now resolves
+its grandparent baseline, provider policy, approval bounds, and frozen MULN case
+ID deterministically. The failed artifact remains unchanged and its authorization
+is not reusable; a new live run still requires separate owner approval.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

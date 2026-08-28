@@ -11,16 +11,23 @@ import { createBoundedFastSourceClient } from "../lib/bounded-fast-sources.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { evaluateCalibrationProviderAvailability } from "../lib/calibration-provider-policy.js";
+import { resolveEvaluationPlan } from "../lib/evaluation-plan.js";
 import { loadRealAppConfig } from "../startup-config.js";
 
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-batch-3.json");
-const batchPlan = JSON.parse(await readFile(planPath, "utf8"));
-const basePlanPath = path.join(root, ...batchPlan.base_plan.split("/"));
+const { plan, provenance: planProvenance } = await resolveEvaluationPlan({ root, planPath, requiredFields: [
+  { path: "base_plan", type: "string" }, { path: "approval_token", type: "string" },
+  { path: "cases", type: "array" }, { path: "approval.tickers", type: "array" },
+  { path: "approval.maximum_runs", type: "number" }, { path: "approval.maximum_openai_cost_usd", type: "number" },
+  { path: "approval.fast_ceiling_ms_per_ticker", type: "number" }, { path: "configuration.model", type: "string" },
+  { path: "provider_policy.provider_order", type: "array" }, { path: "output_directory", type: "string" }
+] });
+const batchPlan = plan;
+const basePlanPath = path.join(root, ...plan.base_plan.split("/"));
 const basePlan = JSON.parse(await readFile(basePlanPath, "utf8"));
-const plan = { ...basePlan, purpose: batchPlan.purpose, approval: { ...basePlan.approval, ...batchPlan.approval } };
 const approvalToken = batchPlan.approval_token;
 if (process.env.RUN_APPROVED_FAST_CALIBRATION !== approvalToken) {
   throw new Error(`Live calibration is locked. Set RUN_APPROVED_FAST_CALIBRATION=${approvalToken} only for the approved run.`);
@@ -91,7 +98,8 @@ for (const scenario of plan.cases) {
       evidence_records: result.evidence_records ?? [],
       evidence_packet: result.evidence_packet ?? null,
       synthesis: result.synthesis ?? null,
-      operations: result.operations ?? null
+      operations: result.operations ?? null,
+      evaluation_plan_provenance: planProvenance
     };
     await writeFile(path.join(outputRoot, "raw", `${scenario.ticker}.json`), `${JSON.stringify(record, null, 2)}\n`, { flag: "wx" });
     runs.push({

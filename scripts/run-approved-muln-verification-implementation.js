@@ -10,20 +10,31 @@ import { createSecEvidenceClient } from "../lib/sec-evidence.js";
 import { createBoundedFastSourceClient } from "../lib/bounded-fast-sources.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
+import { resolveEvaluationPlan } from "../lib/evaluation-plan.js";
 import { loadRealAppConfig } from "../startup-config.js";
 
 dotenv.config({ quiet: true });
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-muln-verification-3.json");
-const childPlan = JSON.parse(await readFile(planPath, "utf8"));
-const parentBytes = await readFile(path.join(root, ...childPlan.parent_plan.split("/")));
-if (createHash("sha256").update(parentBytes).digest("hex") !== childPlan.parent_plan_sha256) throw new Error("The first MULN verification plan changed.");
-const plan = { ...JSON.parse(parentBytes), ...childPlan, approval: childPlan.approval };
+const { plan, provenance: planProvenance } = await resolveEvaluationPlan({ root, planPath, requiredFields: [
+  { path: "baseline_plan", type: "string" }, { path: "baseline_plan_sha256", type: "string" },
+  { path: "approval_token", type: "string" }, { path: "output_directory", type: "string" },
+  { path: "approval.tickers", type: "array" }, { path: "approval.maximum_runs", type: "number" },
+  { path: "approval.runs_per_ticker", type: "number" }, { path: "approval.automatic_retries", type: "boolean" },
+  { path: "approval.maximum_openai_cost_usd", type: "number" }, { path: "approval.maximum_alpha_vantage_requests", type: "number" },
+  { path: "approval.maximum_twelve_data_requests", type: "number" }, { path: "approval.maximum_combined_optional_provider_attempts", type: "number" },
+  { path: "approval.fast_ceiling_ms_per_ticker", type: "number" }, { path: "approval.deep_runs", type: "number" },
+  { path: "approval.hosted_web_search", type: "boolean" }, { path: "provider_policy.provider_order", type: "array" },
+  { path: "preserve_prior_batches", type: "array" }, { path: "preserve_failed_run.directory", type: "string" },
+  { path: "preserve_previous_verification.directory", type: "string" }
+] });
 if (process.env.RUN_APPROVED_FAST_CALIBRATION !== plan.approval_token) throw new Error(`Live calibration is locked. Set RUN_APPROVED_FAST_CALIBRATION=${plan.approval_token} only for the approved run.`);
 const approval = plan.approval;
 if (JSON.stringify(approval.tickers) !== JSON.stringify(["MULN"]) || approval.maximum_runs !== 1 || approval.runs_per_ticker !== 1 || approval.automatic_retries !== false || approval.maximum_openai_cost_usd !== 0.03 || approval.maximum_alpha_vantage_requests !== 2 || approval.maximum_twelve_data_requests !== 2 || approval.maximum_combined_optional_provider_attempts !== 4 || approval.fast_ceiling_ms_per_ticker !== 20000 || approval.difficult_budget_approved !== false || approval.deep_runs !== 0 || approval.hosted_web_search !== false) throw new Error("The MULN approval bounds changed.");
 const baselineBytes = await readFile(path.join(root, ...plan.baseline_plan.split("/")));
 if (createHash("sha256").update(baselineBytes).digest("hex") !== plan.baseline_plan_sha256) throw new Error("The frozen baseline plan changed.");
+const baseline = JSON.parse(baselineBytes); const scenario = baseline.cases?.find((item) => item.ticker === "MULN");
+if (!scenario || typeof scenario.id !== "string" || !scenario.id.trim()) throw new Error("The frozen baseline does not contain the approved MULN case ID.");
 for (const preserved of plan.preserve_prior_batches) {
   for (const [name, expected] of [["summary.json", preserved.summary_sha256], ["run-summary.json", preserved.run_summary_sha256]]) {
     const bytes = await readFile(path.join(root, ...preserved.directory.split("/"), name));
@@ -34,8 +45,8 @@ for (const [name, expected] of [["run-summary.json", plan.preserve_failed_run.ru
   const bytes = await readFile(path.join(root, ...plan.preserve_failed_run.directory.split("/"), ...name.split("/")));
   if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Refusing to run because the failed MULN artifact ${name} changed.`);
 }
-for (const [name, expected] of [["run-summary.json", childPlan.preserve_previous_verification.run_summary_sha256], ["raw/MULN.json", childPlan.preserve_previous_verification.raw_muln_sha256]]) {
-  const bytes = await readFile(path.join(root, ...childPlan.preserve_previous_verification.directory.split("/"), ...name.split("/")));
+for (const [name, expected] of [["run-summary.json", plan.preserve_previous_verification.run_summary_sha256], ["raw/MULN.json", plan.preserve_previous_verification.raw_muln_sha256]]) {
+  const bytes = await readFile(path.join(root, ...plan.preserve_previous_verification.directory.split("/"), ...name.split("/")));
   if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Refusing to run because the prior corrected MULN artifact ${name} changed.`);
 }
 const outputRoot = path.join(root, "evaluation", "live", plan.output_directory);
@@ -59,13 +70,13 @@ const started = performance.now(); let record; let run;
 try {
   const result = await client.researchTicker("MULN", { stage: "fast", budgetClass: "normal" });
   const finalized = finalizeResearchReport(result.report, { reportValidator, requestedTicker: "MULN" });
-  record = { case_id: "muln-2026-sparse", ticker: "MULN", attempted_at: new Date().toISOString(), elapsed_ms: Math.round(performance.now() - started), validation: finalized.validation, report: finalized.report, evidence_records: result.evidence_records ?? [], evidence_packet: result.evidence_packet ?? null, synthesis: result.synthesis ?? null, operations: result.operations ?? null };
+  record = { case_id: scenario.id, ticker: scenario.ticker, attempted_at: new Date().toISOString(), elapsed_ms: Math.round(performance.now() - started), validation: finalized.validation, report: finalized.report, evidence_records: result.evidence_records ?? [], evidence_packet: result.evidence_packet ?? null, synthesis: result.synthesis ?? null, operations: result.operations ?? null, evaluation_plan_provenance: planProvenance };
   const providers = result.operations?.bounded_sources?.providers ?? null;
   const attempts = ["market", "news"].flatMap((operation) => providers?.[operation]?.attempts ?? []).reduce((sum, attempt) => sum + (attempt.request_count ?? 0), 0);
   const quotaUsed = (provider) => providers?.quotas?.find((item) => item.provider === provider)?.daily_used ?? 0;
   run = { case_id: record.case_id, ticker: "MULN", result: finalized.valid ? "report" : "invalid_report", elapsed_ms: record.elapsed_ms, estimated_cost_usd: result.operations?.estimated_cost_usd ?? result.operations?.budget?.cost_consumed_usd ?? null, input_tokens: result.operations?.input_tokens ?? null, output_tokens: result.operations?.output_tokens ?? null, provider_usage: providers, optional_provider_attempts: attempts, alpha_vantage_requests: quotaUsed("alpha_vantage"), twelve_data_requests: quotaUsed("twelve_data"), completion_status: finalized.report?.metadata?.completion_status ?? null, termination_reason: result.operations?.budget?.termination_reason ?? null };
 } catch (error) {
-  record = { case_id: "muln-2026-sparse", ticker: "MULN", attempted_at: new Date().toISOString(), elapsed_ms: Math.round(performance.now() - started), result: "application_failure", error: { constructor: error?.constructor?.name ?? null, name: error?.name ?? null, code: error?.code ?? null } };
+  record = { case_id: scenario.id, ticker: scenario.ticker, attempted_at: new Date().toISOString(), elapsed_ms: Math.round(performance.now() - started), result: "application_failure", error: { constructor: error?.constructor?.name ?? null, name: error?.name ?? null, code: error?.code ?? null } };
   run = record;
 } finally { clearInterval(runnerKeepAlive); }
 await writeFile(path.join(outputRoot, "raw", "MULN.json"), `${JSON.stringify(record, null, 2)}\n`, { flag: "wx" });

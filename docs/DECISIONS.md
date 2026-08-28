@@ -1060,3 +1060,21 @@ rejected inheritance attempt.
 but left two unresolved, while a June 1-for-100 label borrowed the August
 1-for-250 action's date and completion semantics. Segment-local binding fixes the
 false event without weakening proposal or authorization safeguards.
+
+## 2026-08-27 — Resolve evaluation-plan inheritance recursively before runtime setup
+
+**Status:** Accepted corrective implementation after MULN Verification-3
+
+**Decision:** Evaluation runners resolve explicit `parent_plan` and `base_plan`
+chains recursively. Descendant fields override direct-parent fields, which
+override earlier ancestors; nested objects merge by field and arrays replace as
+whole values. Parent hashes are verified when frozen. Resolution rejects missing
+parents, cycles, paths outside the repository root, malformed plans, hash drift,
+and missing or mistyped required fields before configuration loading or client
+construction. Evaluation-only provenance records the source plan for every
+resolved leaf field. Historical plan and result files remain immutable.
+
+**Why:** Verification-3 inherited from a child plan, but its one-level merge lost
+the grandparent `baseline_plan` and raised an uncaught `TypeError` before research.
+The same failure class could have silently dropped provider, budget, runtime, or
+case constraints.
