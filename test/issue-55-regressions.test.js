@@ -203,7 +203,7 @@ test("STN stored-live shape promotes 40-F foreign filer IFRS and direct common-s
     { accessionNumber: "0001131383-26-000007", form: "40-F", filingDate: "2026-02-25", reportDate: "2025-12-31", primaryDocument: "stn-20251231.htm", items: "" }
   ];
   const result = await researchFixture({ ticker: "STN", cik: 1131383, filings, companyFacts: { cik: 1131383, entityName: "STN Corp.", facts: {} }, documents: {
-    "stn-20251231.htm": "Stantec Inc. is a Canadian foreign private issuer. The common shares are listed on the Toronto Stock Exchange and the New York Stock Exchange under STN. These consolidated financial statements are prepared in Canadian dollars in accordance with IFRS Accounting Standards as issued by the International Accounting Standards Board.",
+    "stn-20251231.htm": "Stantec Inc. is a Canadian foreign private issuer. The common shares are listed on the Toronto Stock Exchange and the New York Stock Exchange under STN. These consolidated financial statements are prepared in Canadian dollars in accordance with IFRS Accounting Standards as issued by the International Accounting Standards Board. A reconciliation note contains incidental U.S. GAAP terminology that does not state the reporting basis.",
     "a6kq22026.htm": "Stantec Inc. furnishes this report as a foreign private issuer on Form 6-K and files its annual report on Form 40-F."
   } });
   assert.equal(result.report.issuer.foreign_private_issuer, true);
@@ -236,17 +236,20 @@ test("ONFO listing lifecycle closes minimum bid without closing stockholders equ
   ];
   const result = await researchFixture({ ticker: "ONFO", cik: 1825452, filings, companyFacts: { cik: 1825452, entityName: "ONFO Corp.", facts: {} }, documents: {
     "close.htm": "Nasdaq notified the Company that it regained compliance with Nasdaq Listing Rule 5550(a)(2), the minimum bid price requirement, and this matter is now closed.",
-    "quarter.htm": "Nasdaq notified the Company on May 26, 2026 that it was not in compliance with Nasdaq Listing Rule 5550(b)(1), the minimum stockholders' equity requirement. The compliance plan remains under review. On July 2, 2026 Nasdaq notified the Company that it was not in compliance with Nasdaq Listing Rule 5550(a)(2), the minimum bid price requirement, with a deadline of December 29, 2026.",
+    "quarter.htm": "Nasdaq notified the Company on May 26, 2026 that it was not in compliance with Nasdaq Listing Rule 5550(b)(1), the minimum stockholders' equity requirement. The compliance plan remains under review. On July 2, 2026 Nasdaq notified the Company that it was not in compliance with Nasdaq Listing Rule 5550(a)(2), the minimum bid price requirement, with a deadline of December 29, 2026. A risk disclosure separately mentions American Depositary Shares of unrelated issuers.",
     "split.htm": "The Company effected a 1-for-50 reverse stock split effective August 10, 2026 as part of its effort to regain compliance."
   } });
   const items = result.report.sections.compliance_and_warnings.items;
   assert.ok(items.some((item) => item.resolution_state === "resolved" && /5550\(a\)\(2\)|minimum bid/i.test(item.summary)));
   assert.ok(items.some((item) => item.resolution_state === "active" && /5550\(b\)\(1\)|stockholders.? equity/i.test(item.summary)));
   assert.ok(items.some((item) => item.resolution_state === "historical" && /5550\(a\)\(2\)|minimum bid/i.test(item.summary)));
+  assert.ok(items.filter((item) => item.resolution_state === "active").every((item) => !/5550\(a\)\(2\)|minimum bid/i.test(item.summary)));
+  assert.ok(items.filter((item) => item.resolution_state === "resolved").every((item) => !/5550\(b\)\(1\)|stockholders.? equity/i.test(item.summary)));
   assert.match(result.report.sections.compliance_and_warnings.summary, /1 active.*1 separately resolved/i);
   assert.ok(result.evidence_packet.listing_compliance_diagnostics.some((item) => item.rule === "nasdaq_5550_a_2_minimum_bid" && item.current_state === "resolved"));
   assert.ok(result.evidence_packet.listing_compliance_diagnostics.some((item) => item.rule === "nasdaq_5550_b_1_stockholders_equity" && item.current_state === "active"));
   assert.equal(result.report.sections.reverse_splits.items[0].corporate_action_state, "completed");
+  assert.notEqual(result.report.security.security_structure, "ads");
 });
 
 test("GMBL authoritative OTC common-stock evidence settles type and preserves both completed ratios", async () => {

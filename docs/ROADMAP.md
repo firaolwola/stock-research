@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — automated offline reliability correction:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The final ONFO/STN verification showed that concise stored-shape regressions can pass while realistic incidental U.S.-GAAP/ADS language and mixed-rule paragraphs still contaminate property settlement and explanations. Build the minimum offline adversarial/property feedback loop, use it to guide targeted evidence-binding corrections, and prove generalization on holdouts before considering another separately approved live run.
+8. [ ] **Active — awaiting separately approved live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop passes 36/36 checks, including 12/12 untouched holdout transformations and zero cross-property contamination. Source-scoped reporting candidates and rule-scoped compliance claims correct the final ONFO/STN defect classes offline. Issue #55 remains open; another bounded live run requires separate owner approval.
 
 ### Issue #55 corrective roadmap
 
@@ -84,32 +84,32 @@ verdict.
    classify the recurring parser failures, and adopt automated targeted
    adversarial/property testing plus targeted evidence-binding redesign. No
    historical result or answer key changes.
-2. [ ] **Minimum automated feedback loop:** formalize 8–12 high-value
+2. [x] **Complete — minimum automated feedback loop:** formalized 12 high-value
    SEC-derived fixtures, 12–20 named invariants, deterministic seeds, reviewed
    distractor injection, semantic-preserving transformations, machine-readable
    output, and a concise offline command. The runner must require zero network,
    provider, or OpenAI access.
-3. [ ] **Targeted evidence-binding correction:** introduce property-specific
+3. [x] **Complete — targeted evidence-binding correction:** introduced property-specific
    typed candidates with issuer/security, accession/form, section or block,
    source span, authority, date role, lifecycle, rule ID, and contextual
    qualifiers where applicable. Correct accounting-basis, security-structure,
    mixed-rule compliance, and other recurring binding failures without replacing
    the working retrieval, evidence-record, budget, or report architecture.
-4. [ ] **Generalization proof:** run untouched issuer and category holdouts plus
+4. [x] **Complete — generalization proof:** ran untouched category holdouts and
    mutation combinations that were not copied from production parser rules.
    Report invariant results by family, canonical precision/recall,
    cross-property contamination, false promotion, false suppression, and the
    corresponding sample sizes.
-5. [ ] **Offline Issue #55 completion gate:** reproduce every known severe bug
+5. [x] **Complete — offline Issue #55 completion gate:** reproduced known severe bug
    class, catch intentionally reintroduced historical defects, retain correct
    Limited/withheld outcomes, pass the complete existing test suite, and pass the
    deterministic adversarial suite within a practical CI runtime. An offline pass
    does not authorize live work, merge PR #74, or close Issue #55.
-6. [ ] **Evidence-based expansion decision:** after the minimum suite has guided
-   the remaining corrections, decide whether a separately scoped follow-up issue
-   is justified. Do not grow Issue #55 into a comprehensive mutation DSL, generic
-   semantic fuzzer, second-parser project, full-filing archive, or LLM-dependent
-   test system.
+6. [x] **Complete — evidence-based scope decision:** the minimum suite produced
+   actionable failures and is sufficient for this correction. No broad mutation
+   framework, second parser, filing archive, or LLM-dependent test system is
+   justified. The next dependency is owner approval for one bounded live
+   ONFO/STN confirmation, not more offline scope.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

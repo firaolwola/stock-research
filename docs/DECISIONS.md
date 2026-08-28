@@ -2,7 +2,7 @@
 
 ## 2026-08-28 — Pair automated adversarial evaluation with targeted evidence binding
 
-**Status:** Owner-approved direction for the remaining Issue #55 corrective work
+**Status:** Implemented and verified offline; live confirmation remains separately gated
 
 **Decision:** Issue #55 will add a small deterministic offline adversarial and
 property-evaluation loop before further live calibration. The initial suite will
@@ -24,6 +24,13 @@ binding is needed to eliminate the underlying classes rather than patch examples
 feedback loop, targeted evidence-binding changes, issuer/category holdouts, and
 an offline completion gate. Frozen measurements remain unchanged, and no live
 verification is implied or authorized by an offline pass.
+
+**Implementation result:** The bounded suite uses 12 fixtures, 20 named
+invariants, 36 deterministic transformations, and an untouched 12-check holdout
+partition. Source-scoped accounting/security candidates and rule-scoped
+compliance claims pass every check with zero measured cross-property
+contamination. This justifies proposing a bounded live confirmation; it does not
+authorize one or satisfy Issue #55's live reliability gate by itself.
 
 ## 2026-08-28 — Settle foreign reporting properties and listing lifecycles independently
 

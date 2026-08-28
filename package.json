@@ -7,6 +7,7 @@
     "start": "node server.js",
     "dev-test": "node dev-test-server.js",
     "evaluate:dry": "node scripts/evaluate-sample.js",
+    "evaluate:adversarial": "node scripts/evaluate-adversarial.js",
     "validate:reports": "node scripts/validate-report-fixtures.js",
     "test": "node --test \"test/*.test.js\""
   },

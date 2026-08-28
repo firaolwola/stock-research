@@ -196,6 +196,11 @@ for any bounded paid run are documented in
 [docs/EVALUATION.md](docs/EVALUATION.md). Routine tests and dry runs never make
 OpenAI calls.
 
+Run `npm run evaluate:adversarial` for the deterministic Issue #55 evidence-binding
+gate. It applies reviewed distractor and semantic-preserving variations to
+development and untouched holdout fixtures, emits machine-readable JSON, and
+uses no network, provider, or OpenAI client.
+
 Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.

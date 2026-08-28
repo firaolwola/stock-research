@@ -497,19 +497,19 @@ calibration, then guard the targeted evidence-binding rules used to correct thos
 classes. It complements the dated report-level evaluation set; it does not replace
 live recall measurement or make a reliability claim about unseen issuers.
 
-The core suite must be deterministic, token-free, and runnable with no network,
+The implemented core suite is deterministic, token-free, and runnable with no network,
 SEC, exchange, market-data, provider, or OpenAI access. An offline pass never
 authorizes a paid or live run. The intended developer command is
-`npm run evaluate:adversarial`; it does not exist until the minimum runner is
-implemented and verified.
+`npm run evaluate:adversarial`. It emits machine-readable JSON and fails when a
+development mutation or untouched holdout violates its reviewed invariant.
 
 ### Initial corpus
 
-Start with 8–12 high-value cases rather than a broad filing archive. The first
-corpus should cover representative shapes from MULN, GMBL, STN, ONFO, NCPL, REKR,
-BIOR or ZAPPF, and NIO or TUPBQ. Prefer bounded authoritative filing sections or
-snippets for semantic cases, with a small number of raw HTML and inline-XBRL
-inputs for normalization and segmentation behavior.
+The first corpus contains 12 high-value cases rather than a broad filing archive.
+It focuses on the final live ONFO/STN contamination classes, with XPEV-like and
+foreign-ordinary controls plus four untouched category holdouts. Existing exact
+Issue #55 tests continue to cover MULN, GMBL, NCPL, REKR, BIOR, ZAPPF, NIO, and
+TUPBQ retrieval and normalization shapes.
 
 Each fixture must retain:
 
@@ -623,6 +623,16 @@ These criteria establish prospective parser protection only. Issue #55 still
 requires its separately defined real-ticker reliability, sparse-category, severe
 miss, explanation-fidelity, settlement, budget, and approval gates.
 
+### Implemented offline result
+
+The 2026-08-28 run passed 36/36 transformations across 12 fixtures and 20 named
+invariants. Accounting binding passed 9/9, security binding 15/15, compliance
+projection 6/6, and uncertainty/withholding 6/6. The untouched holdout partition
+passed 12/12 and cross-property contamination was zero. The complete 340-test
+suite also passed, retaining historical corporate-action, non-reliance, lineage,
+NT-form, and runner-parity coverage. See
+`docs/results/FAST_RELIABILITY_2026-08-28-OFFLINE-ADVERSARIAL-1.md`.
+
 ### Explicit non-goals
 
 The Issue #55 minimum does not include a generic random semantic fuzzer, mutation
@@ -645,7 +655,10 @@ internal rule states reconciled, but its active equity explanation retained the
 full mixed-rule paragraph and an incidental ADS mention polluted security
 structure. STN settled Canada and 40-F/6-K but broad phrase matching selected an
 incidental U.S.-GAAP reference and failed direct-share/TSX promotion. Both are
-prospective deterministic defects; no further live run is authorized.
+prospective deterministic defects. They are now corrected by source-scoped
+property candidates and rule-scoped explanation claims, and the offline holdout
+gate passes. One fresh bounded ONFO/STN live verification is technically
+justified but remains unauthorized.
 
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,
