@@ -376,6 +376,24 @@ test("corrected MULN verification freezes a new one-process authorization", asyn
   assert.equal(plan.approval.hosted_web_search, false);
 });
 
+test("corrected MULN live verification records the remaining severe parser failure", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-2/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-2/run-summary.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 0.3333);
+  assert.equal(result.ratio_date_retrieval.recall, 1);
+  assert.equal(result.explanation_fidelity.rate, 0);
+  assert.equal(result.settlement_accuracy.rate, 1);
+  assert.equal(result.severe_misleading_misses, 2);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

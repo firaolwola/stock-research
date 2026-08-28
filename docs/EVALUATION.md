@@ -301,6 +301,15 @@ cost is zero and optional-provider usage is unknown. This is a runner failure,
 not evidence that the parser passed or failed. See
 `docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION.md`.
 
+The separately approved corrected-runner MULN verification produced a valid
+partial report, but failed the corporate-action gate. It retrieved all three
+frozen ratio/date pairs, classified only the May 4 1-for-25 action completed,
+left the August 11 1-for-9 and December 21 1-for-100 actions unresolved, and
+created a false completed 1-for-100 action on August 4, 2025 beside the actual
+1-for-250 action. The captured diagnostics isolate lifecycle inference in dated
+history lists and cross-action date borrowing. No retry occurred. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-2.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

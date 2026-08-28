@@ -1,0 +1,30 @@
+{
+  "issue": 55,
+  "batch": "muln-verification-2",
+  "status": "failed_corporate_action_gate",
+  "issue_must_remain_open": true,
+  "approved_runs": 1,
+  "completed_runs": 1,
+  "automatic_retries": 0,
+  "report_produced": true,
+  "valid_report_rate": { "valid": 1, "evaluated": 1, "rate": 1.0 },
+  "completed_split_recall": { "detected": 1, "expected": 3, "recall": 0.3333 },
+  "ratio_date_retrieval": { "detected": 3, "expected": 3, "recall": 1.0 },
+  "explanation_fidelity": { "passed": 0, "evaluated": 1, "rate": 0.0 },
+  "settlement_accuracy": { "passed": 1, "evaluated": 1, "rate": 1.0 },
+  "severe_misleading_misses": 2,
+  "operations": {
+    "elapsed_ms": 3208,
+    "within_20_second_ceiling": true,
+    "measured_openai_cost_usd": 0,
+    "approved_maximum_cost_usd": 0.03,
+    "alpha_vantage_requests": 2,
+    "twelve_data_requests": 0,
+    "combined_optional_provider_attempts": 2,
+    "hosted_web_search_calls": 0,
+    "completion_status": "partial",
+    "termination_reason": "cost_ceiling"
+  },
+  "diagnostics": { "total": 160, "accepted": 10, "merged": 10, "withheld": 31, "rejected": 109 },
+  "next_step": "Stop live verification. Correct lifecycle inference for dated historical-list rows and prevent a prior ratio from borrowing the following action's effective date using the captured live diagnostics."
+}
