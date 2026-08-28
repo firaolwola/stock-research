@@ -80,6 +80,21 @@ test("Verification-3 recursively inherits the frozen baseline and provider const
   assert.equal(result.provenance.baseline_plan, "evaluation/plans/fast-reliability-2026-08-27-muln-verification.json");
 });
 
+test("Verification-4 resolves the complete four-plan ancestry before runtime", async () => {
+  const root = path.resolve(".");
+  const result = await resolveEvaluationPlan({ root, planPath: path.join(root, "evaluation/plans/fast-reliability-2026-08-27-muln-verification-4.json"), requiredFields: [
+    { path: "baseline_plan", type: "string" }, { path: "approval.maximum_openai_cost_usd", type: "number" },
+    { path: "approval.fast_ceiling_ms_per_ticker", type: "number" }, { path: "provider_policy.provider_order", type: "array" },
+    { path: "preserve_failed_verification_3.directory", type: "string" }, { path: "output_directory", type: "string" }
+  ] });
+  assert.equal(result.plan.baseline_plan, "evaluation/plans/fast-reliability-2026-08-27-sparse.json");
+  assert.equal(result.plan.output_directory, "2026-08-27-muln-verification-4");
+  assert.equal(result.plan.approval.maximum_openai_cost_usd, .03);
+  assert.equal(result.plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.deepEqual(result.plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
+  assert.equal(result.chain.length, 4);
+});
+
 test("the one-case runner resolves and validates plans before runtime or network construction", async () => {
   const source = await readFile(new URL("../scripts/run-approved-muln-verification-implementation.js", import.meta.url), "utf8");
   const resolveAt = source.indexOf("await resolveEvaluationPlan");

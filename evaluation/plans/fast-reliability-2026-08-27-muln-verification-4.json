@@ -1,0 +1,32 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "muln-verification-4",
+  "approved_at": "2026-08-27",
+  "purpose": "Run one fresh bounded MULN Fast verification after recursive evaluation-plan resolution was corrected offline.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification-3.json",
+  "parent_plan_sha256": "59c4085c9d2ce1b9afecb1209ce9cff5712f41e04d68ab230600430cea89c5c0",
+  "output_directory": "2026-08-27-muln-verification-4",
+  "approval_token": "issue-55-2026-08-27-approved-muln-recursive-plan-one-run",
+  "required_ancestor": "16776e2",
+  "approval": {
+    "approved": true,
+    "tickers": ["MULN"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 1,
+    "maximum_openai_cost_usd": 0.03,
+    "maximum_alpha_vantage_requests": 2,
+    "maximum_twelve_data_requests": 2,
+    "maximum_combined_optional_provider_attempts": 4,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "preserve_failed_verification_3": {
+    "directory": "evaluation/live/2026-08-27-muln-verification-3",
+    "run_summary_sha256": "3adfb0c319fa5f6bab05645ed59a3e815163cf7a9115e1ddf978b9800895a287",
+    "raw_muln_sha256": "462fe3380053faddc16de0aeb21fe297e76a3d64ddee9397fe2faf7810fdd4f9"
+  }
+}
