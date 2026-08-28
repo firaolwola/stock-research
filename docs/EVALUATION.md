@@ -656,13 +656,17 @@ foreign-private-issuer, 40-F/6-K, CAD, and NYSE context, but the selected live
 filing text produced no typed IFRS/IASB or direct-common-share/TSX candidate. The
 targeted result was 5/7 material claims, explanation fidelity 1/2, settlement
 accuracy 1/2, score/state safety 2/2, and one severe false-suppression miss.
-This is an interpretation/normalization defect, not unavailable authoritative
-evidence; no false ADS or U.S.-GAAP promotion occurred. The offline holdout gate
-remains useful but does not override this live result. The correction now
-retrieves a bounded set of SEC-hosted 99.x exhibits linked from annual 20-F/40-F
-filings and includes a regression for the STN audited exhibit shape. No further
-run is authorized by that approval; any later live confirmation needs fresh
-owner approval.
+This was an interpretation/normalization defect, not unavailable authoritative
+evidence; no false ADS or U.S.-GAAP promotion occurred.
+
+The offline correction now retrieves a bounded set of SEC-hosted 99.x exhibits
+linked from annual 20-F/40-F filings and includes a regression for the STN
+audited exhibit shape. A fresh approved confirmation then ran once per ticker
+and passed 7/7 targeted claims, 2/2 valid reports, 2/2 explanation fidelity,
+2/2 settlement accuracy, 2/2 score/state safety, and zero severe misses. The
+two-case confirmation does not establish broad reliability or close Issue #55;
+independent sample-size review remains required, and no further run is
+authorized automatically.
 
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,

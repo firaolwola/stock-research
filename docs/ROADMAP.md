@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — offline correction complete; awaiting fresh live approval:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The approved ONFO/STN confirmation ran within bounds, but STN conservatively suppressed supported IFRS/direct-share evidence because its 40-F exhibit was not inspected. The bounded annual-exhibit retrieval correction is now covered offline; the next dependency is a new owner decision before any further live run.
+8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims, 2/2 valid reports, and zero severe misses within bounds. Issue #55 remains open pending the broader independent sample-size/reliability gate; no broad reliability claim follows from this two-case confirmation.
 
 ### Issue #55 corrective roadmap
 
@@ -151,12 +151,15 @@ approved ONFO/STN confirmation then ran exactly once per ticker within all
 bounds: ONFO passed its targeted listing/split checks, while STN retained
 identity and 40-F/6-K/CAD context but failed to bind supported IFRS/IASB and
 direct-common-share/TSX properties. The result was 5/7 targeted claims, 2/2
-valid reports, and one severe false-suppression miss. No further live work is
+valid reports, and one severe false-suppression miss. No further live work was
 authorized by that approval. The offline correction now inspects a bounded set
 of SEC-hosted 99.x exhibits linked from annual 20-F/40-F filings, including the
-STN audited exhibit, and has deterministic regression coverage. A new live run
-requires separate owner approval. A paid data subscription remains neither
-selected nor required and would need separate owner approval.
+STN audited exhibit, and has deterministic regression coverage. The fresh
+confirmation then passed both ONFO and STN with 7/7 targeted claims and zero
+severe misses. The next dependency is independent sample-size/reliability
+review; no further live run is authorized automatically. A paid data
+subscription remains neither selected nor required and would need separate
+owner approval.
 
 ### Milestone acceptance criteria
 

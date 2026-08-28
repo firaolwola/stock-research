@@ -696,6 +696,25 @@ test("final sparse-proof proposal freezes ONFO and STN but remains non-executabl
   assert.equal(plan.reserved_two_case_bounds.deep_runs, 0);
 });
 
+test("final sparse-proof verification 3 records the bounded live correction pass", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-final-sparse-proof-verification-3.json");
+  const result = await loadJson("../evaluation/live/2026-08-28-final-sparse-proof-verification-3/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-final-sparse-proof-verification-3/run-summary.json");
+  assert.equal(plan.required_ancestor, "9cda659");
+  assert.equal(plan.approval.maximum_runs, 2);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .06);
+  assert.deepEqual(plan.approval.tickers, ["ONFO", "STN"]);
+  assert.equal(result.material_claim_recall.recall, 1);
+  assert.equal(result.severe_misleading_misses, 0);
+  assert.equal(result.gate.passed, true);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(run.completed_run_count, 2);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 4);
+  assert.equal(run.approval_violation, false);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

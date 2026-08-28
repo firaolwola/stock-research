@@ -1281,3 +1281,19 @@ supported IFRS and direct-share/TSX properties suppressed despite successful SEC
 retrieval. A deterministic regression now covers the `ex-992...` annual-exhibit
 shape. The correction must be confirmed by a newly approved live run before
 Issue #55 can close.
+
+## 2026-08-28 — Confirm bounded annual-exhibit correction on ONFO/STN
+
+**Status:** Confirmation passed; milestone remains open
+
+**Decision:** The fresh, separately approved ONFO/STN confirmation validated the
+bounded annual 20-F/40-F exhibit retrieval correction. ONFO retained its scoped
+listing and split semantics. STN promoted IFRS/IASB and direct common-share/TSX
+properties from the linked audited exhibit while ignoring incidental ADS and
+U.S.-GAAP references. The run produced 7/7 targeted claims, valid reports for
+both tickers, and zero severe misses.
+
+**Why:** This confirms the specific live defect is corrected without rewriting
+earlier measurements. It is only a two-case confirmation, so Issue #55 remains
+open for independent sample-size and broader reliability review; no automatic
+live expansion, merge, or closure follows.
