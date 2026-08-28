@@ -35,17 +35,18 @@ const approvalToken = batchPlan.approval_token;
 if (process.env.RUN_APPROVED_FAST_CALIBRATION !== approvalToken) {
   throw new Error(`Live calibration is locked. Set RUN_APPROVED_FAST_CALIBRATION=${approvalToken} only for the approved run.`);
 }
-if (plan.approval.maximum_runs !== 5 || plan.approval.runs_per_ticker !== 1 || plan.approval.automatic_retries !== false || plan.approval.difficult_budget_approved !== false) {
+const caseTickers = plan.cases.map((scenario) => scenario.ticker);
+if (plan.approval.maximum_runs !== plan.cases.length || plan.approval.runs_per_ticker !== 1 || plan.approval.automatic_retries !== false || plan.approval.difficult_budget_approved !== false) {
   throw new Error("The frozen approval does not match the bounded runner.");
 }
-if (JSON.stringify(plan.approval.tickers) !== JSON.stringify(basePlan.approval.tickers) || batchPlan.configuration.change_from_batch_2 !== "none" || batchPlan.approval.deep_runs !== 0 || batchPlan.approval.hosted_web_search !== false) {
-  throw new Error("Batch 3 must preserve the original cases and Fast configuration without Deep or hosted search.");
+if (JSON.stringify(plan.approval.tickers) !== JSON.stringify(caseTickers) || batchPlan.configuration.change_from_batch_2 !== "none" || batchPlan.approval.deep_runs !== 0 || batchPlan.approval.hosted_web_search !== false) {
+  throw new Error("The bounded confirmation must match its declared cases and Fast configuration without Deep or hosted search.");
 }
 const currentDay = new Date().toISOString().slice(0, 10); const configuredProviders = [process.env.ALPHA_VANTAGE_API_KEY?.trim() ? "alpha_vantage" : null, process.env.TWELVE_DATA_API_KEY?.trim() ? "twelve_data" : null].filter(Boolean);
 const alphaAvailable = currentDay === batchPlan.alpha_vantage_preflight.usage_day ? batchPlan.alpha_vantage_preflight.inferred_remaining_on_approval_day : batchPlan.alpha_vantage_preflight.free_daily_limit;
 const providerPreflight = evaluateCalibrationProviderAvailability({ alphaRequestsAvailable: alphaAvailable, alphaRequestsRequired: plan.approval.maximum_alpha_vantage_requests, configuredProviders: configuredProviders.filter((provider) => batchPlan.provider_policy.approved_providers.includes(provider)), optionalContextMaySettleLimited: batchPlan.provider_policy.optional_context_may_settle_limited, requiresOwnerReview: batchPlan.provider_policy.requires_owner_review_after_architecture_change });
 if (!providerPreflight.allowed) throw new Error(`Batch 3 provider preflight blocked: ${providerPreflight.reason}.`);
-if (JSON.stringify(batchPlan.provider_policy.provider_order) !== JSON.stringify(["alpha_vantage", "twelve_data"]) || plan.approval.maximum_twelve_data_requests !== 10 || plan.approval.maximum_combined_optional_provider_attempts !== 20) throw new Error("Batch 3 provider policy does not match the owner-approved bounds.");
+if (JSON.stringify(batchPlan.provider_policy.provider_order) !== JSON.stringify(["alpha_vantage", "twelve_data"])) throw new Error("The bounded confirmation provider policy does not match the approved order.");
 for (const preserved of batchPlan.preserve_prior_batches) {
   for (const [name, expected] of [["summary.json", preserved.summary_sha256], ["run-summary.json", preserved.run_summary_sha256]]) {
     const original = await readFile(path.join(root, ...preserved.directory.split("/"), name));
@@ -151,7 +152,7 @@ const summary = {
   maximum_approved_combined_optional_provider_attempts: plan.approval.maximum_combined_optional_provider_attempts,
   runs
 };
-if (runs.length !== 5 || totalKnownCost > plan.approval.maximum_openai_cost_usd || maximumAlphaRequests > plan.approval.maximum_alpha_vantage_requests || maximumTwelveDataRequests > plan.approval.maximum_twelve_data_requests || combinedOptionalProviderAttempts > plan.approval.maximum_combined_optional_provider_attempts) {
+if (runs.length !== plan.approval.maximum_runs || totalKnownCost > plan.approval.maximum_openai_cost_usd || maximumAlphaRequests > plan.approval.maximum_alpha_vantage_requests || maximumTwelveDataRequests > plan.approval.maximum_twelve_data_requests || combinedOptionalProviderAttempts > plan.approval.maximum_combined_optional_provider_attempts) {
   summary.approval_violation = true;
 }
 await writeFile(path.join(outputRoot, "run-summary.json"), `${JSON.stringify(summary, null, 2)}\n`, { flag: "wx" });

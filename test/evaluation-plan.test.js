@@ -177,3 +177,20 @@ test("the established multi-case runner uses the same recursive pre-runtime reso
   assert.ok(source.indexOf("new OpenAI(") > resolveAt);
   assert.ok(source.indexOf("for (const scenario of plan.cases)") > resolveAt);
 });
+
+test("AMC and NCPL correction confirmation resolves two declared cases with bounded overrides", async () => {
+  const root = path.resolve(".");
+  const planPath = path.join(root, "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json");
+  const { plan, provenance, chain } = await resolveEvaluationPlan({ root, planPath, requiredFields: [
+    { path: "base_plan", type: "string" }, { path: "cases", type: "array" },
+    { path: "approval.tickers", type: "array" }, { path: "approval.maximum_runs", type: "number" },
+    { path: "approval.maximum_openai_cost_usd", type: "number" }, { path: "provider_policy.provider_order", type: "array" }
+  ] });
+  assert.deepEqual(plan.approval.tickers, ["AMC", "NCPL"]);
+  assert.deepEqual(plan.cases.map((item) => item.ticker), ["AMC", "NCPL"]);
+  assert.equal(plan.approval.maximum_runs, plan.cases.length);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .06);
+  assert.deepEqual(plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
+  assert.equal(provenance["approval.maximum_runs"], "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json");
+  assert.equal(chain.length, 4);
+});
