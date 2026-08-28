@@ -1400,3 +1400,19 @@ is safe, but the severe live recall miss remains unresolved. Further work must
 first reproduce and correct that shape offline, then obtain separate approval
 for any additional live confirmation. No OpenAI synthesis or paid OpenAI cost
 was involved.
+
+## 2026-08-28 — AMC effective-date relationship grammar correction
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** Treat narrowly bounded phrases such as “effective date of which
+was/is/being DATE” and “effective date of the action being DATE” as explicit
+effective-date evidence when they occur in the same action span as the ratio.
+
+**Why:** The latest approved AMC run still extracted `1-for-10` and
+`2023-08-24` but reported `unknown_date_role`. Nearby-date extraction had the
+date, while the role matcher did not permit the relationship words between the
+effective-date label and the date. The correction aligns date extraction and
+role classification without broadening acceptance of filing dates,
+authorizations, orphan mentions, or competing actions. Deterministic coverage
+passes; no new live request or baseline change is implied.

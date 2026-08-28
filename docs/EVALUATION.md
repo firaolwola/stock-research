@@ -561,6 +561,17 @@ before request; no retry was made. The next step is offline reproduction of the
 exact live normalized text shape, not another blind live run. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-EFFECTIVE-DATE-CONFIRMATION-3.md`.
 
+### AMC split offline correction 4 (2026-08-28)
+
+The failed confirmation's extracted date was recovered by nearby-date logic,
+but the live normalized relationship wording (“effective date of which was …”)
+was not recognized as an explicit effective-date role. The bounded grammar now
+accepts that relationship form and uses the same local date as the safe
+completed fallback lifecycle proof. An inline-XBRL-shaped regression passes;
+no live result or historical measurement changed. A new live confirmation still
+requires separate approval. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-4.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

@@ -933,7 +933,7 @@ test("AMC explicit past effective date can complete a split without a nearby lif
 });
 
 test("AMC explicit effective date recovered from a live-shaped clause is not withheld as unknown", () => {
-  const html = `The reverse stock split was disclosed in the filing. <span>Action terms</span> The action used a ratio of one-for-ten; effective date was August 24, 2023.`;
+  const html = `The reverse stock split was disclosed in the filing. <span>Action terms</span> The action used a ratio of one-for-ten, the effective date of which was August 24, 2023.`;
   const result = extractSecFilingEvidenceWithDiagnostics({
     html, form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-28T00:00:00Z",
     accession: "amc-effective-date-live-shaped", documentUrl: "https://www.sec.gov/amc-effective-date-live-shaped", documentName: "amc-effective-date-live-shaped.htm"
