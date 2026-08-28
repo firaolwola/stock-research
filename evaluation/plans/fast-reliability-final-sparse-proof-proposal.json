@@ -1,0 +1,47 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "final-sparse-proof-proposal",
+  "prepared_at": "2026-08-28",
+  "execution_authorized": false,
+  "purpose": "Smallest prospective two-case proof for one additional active-listing-deficiency case and one additional foreign/IFRS case.",
+  "approval_required": "Do not execute. Freeze current authoritative baselines and obtain explicit owner approval first.",
+  "cases": [
+    {
+      "ticker": "HUBC",
+      "issuer": "HUB Cyber Security Ltd.",
+      "target_categories": ["active_listing_deficiency", "foreign_issuer_adr_ifrs"],
+      "selection_reason": "Potentially adds an independent small-cap foreign-filer listing-pressure mechanism in one case.",
+      "baseline_status": "requires_current_SEC_and_Nasdaq_authoritative_confirmation",
+      "required_before_approval": ["CIK and current security identity", "current listing venue", "an unresolved exchange deficiency and deadline", "20-F/6-K filer regime", "IFRS basis", "any later cure, hearing, suspension, or delisting"],
+      "severe_miss_conditions": ["A resolved or historical deficiency is described as active.", "The foreign security or accounting regime is misidentified.", "Missing current exchange evidence becomes favorable."]
+    },
+    {
+      "ticker": "XPEV",
+      "issuer": "XPeng Inc.",
+      "target_categories": ["foreign_issuer_adr_ifrs"],
+      "selection_reason": "Adds a larger, actively traded foreign-filer/ADS control distinct from NIO and ZAPPF.",
+      "baseline_status": "requires_current_SEC_and_exchange_authoritative_confirmation",
+      "required_before_approval": ["CIK and ADS identity", "current NYSE status", "20-F/6-K filer regime", "IFRS basis and reporting currency", "ADS-to-ordinary-share relationship"],
+      "severe_miss_conditions": ["The ADS is represented as domestic common stock.", "Currency, IFRS, cadence, or ADS ratio is mixed into a favorable score.", "Wrong-issuer evidence is merged."]
+    }
+  ],
+  "proposed_bounds": {
+    "maximum_runs": 2,
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_openai_cost_usd": 0.06,
+    "maximum_alpha_vantage_requests": 4,
+    "maximum_twelve_data_requests": 4,
+    "maximum_combined_optional_provider_attempts": 8,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "maximum_aggregate_fast_runtime_ms": 40000,
+    "deep_runs": 0,
+    "hosted_web_search": false,
+    "difficult_budget_approved": false
+  },
+  "sampling_effect_if_baselines_and_runs_pass": {
+    "active_listing_deficiency": {"before":2,"after":3,"status":"minimum practical independent proof, not statistical reliability"},
+    "foreign_issuer_adr_ifrs": {"before":2,"after":4,"status":"broader mechanism coverage, not statistical reliability"}
+  }
+}

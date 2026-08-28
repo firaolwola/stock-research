@@ -465,6 +465,15 @@ remain sparse at two independent positive cases each. No further live work is
 authorized. See
 `docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-2.md`.
 
+Offline regression now constrains NT selection by filer regime, report period,
+age, superseding periodic filings, and the current freshness gap. Stored ZAPPF
+text preserves a filing-specific issuer reason; missing reasons remain explicitly
+unavailable. Stored REKR and GMBL shapes no longer surface old cured NT forms.
+No same-three rerun is proposed. The non-executable final sparse-proof proposal
+is `evaluation/plans/fast-reliability-final-sparse-proof-proposal.json`; its HUBC
+and XPEV candidates require current authoritative baseline confirmation before
+the owner can approve any live execution.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

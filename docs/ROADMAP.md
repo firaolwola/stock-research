@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — correct NT-form relevance and explanation offline:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Sparse Expansion Verification-2 reached 20/20 recall with 3/3 valid reports, full split precision/recall, and zero severe misses; all four Verification-1 defects resolved live. The gate remains open because the ZAPPF NT 20-F reason was not extracted, irrelevant old NT forms surfaced for REKR/GMBL, and active-deficiency plus foreign/IFRS proof remain sparse at two independent cases each. No additional live run is authorized.
+8. [ ] **Active — owner review of final sparse-proof candidates:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Sparse Expansion Verification-2 reached 20/20 recall with zero severe misses. NT reason/recency defects now have offline regression fixes: ZAPPF preserves a bounded issuer reason, while old cured REKR/GMBL NT forms are excluded. A non-executable HUBC/XPEV two-case proposal is ready, but current authoritative baselines must be confirmed and owner approval is required before any live run.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -104,9 +104,9 @@ Verification-7 confirmed the nine-event live history without the August 1
 duplicate. The sparse-expansion verification reached 17/20 but exposed the
 remaining ZAPPF filing-selection/interpretation and GMBL security-settlement
 defects. Verification-2 resolved those four defects live and reached 20/20, but
-exposed NT-form reason/recency fidelity defects. The next active step is offline
-NT-form correction followed by a sample-size reassessment; no additional live
-work is authorized. A paid data
+exposed NT-form reason/recency fidelity defects, now corrected offline. The next
+active step is authoritative baseline confirmation and owner review of the
+non-executable two-case sparse-proof proposal; no live work is authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

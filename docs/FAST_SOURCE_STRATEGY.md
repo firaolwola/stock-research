@@ -310,6 +310,13 @@ language about possible restatements is not an accounting event. Fast may open r
 99.1 exhibits. This is deterministic category retrieval, not broad web search;
 event-specific language is still required before evidence changes settlement.
 
+An NT form is selected only when it matches the issuer's filing regime, remains
+inside the bounded relevance window, has not been superseded by the expected
+periodic filing for the same report period, and explains the current freshness
+gap. Fast records excluded candidates internally. A selected NT warning uses
+only the issuer-stated delay reason found in bounded filing text; if no safe
+reason is found, it says the reason is unavailable.
+
 ## Deep-only evidence
 
 Fast deliberately does not perform exhaustive predecessor-lineage research,

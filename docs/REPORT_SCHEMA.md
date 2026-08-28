@@ -330,6 +330,10 @@ report v4 and cannot become claims, evidence, sources, or score inputs.
 Security type may be supported by direct authoritative wording in any selected,
 identity-gated filing record. A terminal listing excerpt need not repeat that
 wording, but an OTC venue or ticker suffix alone cannot settle security type.
+The internal evidence packet may also carry `nt_filing_diagnostics` describing
+form/period selection, expected periodic form, superseding filings, active-delay
+state, exclusion reason, and bounded reason-source ranges. These diagnostics are
+not report claims or user-facing evidence.
 
 Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing

@@ -1185,3 +1185,17 @@ excerpt. OTC venue or ticker suffix alone remains insufficient.
 errors after retrieval succeeded. Fixing them at selection, interpretation, and
 packet settlement preserves conservative semantics without weakening validation
 or altering the frozen 17/20 result.
+
+## 2026-08-28 — Surface only current, unresolved NT filing conditions
+
+**Status:** Accepted offline corrective implementation after Sparse Expansion Verification-2
+
+**Decision:** Fast selects an NT 10-K, NT 10-Q, NT 20-F, or NT 40-F only when it
+matches the issuer regime, is recent, remains uncured by the expected periodic
+filing for that report period, and explains the present financial-freshness gap.
+The warning paraphrases only a bounded issuer-stated reason. When that reason is
+not safely extractable, Fast says it is unavailable. Selection and reason ranges
+remain internal diagnostics.
+
+**Why:** Verification-2 found ZAPPF's current delay but lost its stated reason,
+while unrelated old NT filings became current warnings for REKR and GMBL.

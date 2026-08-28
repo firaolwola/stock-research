@@ -5,7 +5,7 @@ import { createApp } from "../app.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { calibrateReportScores, diagnoseCapitalScoreSufficiency } from "../lib/scoring.js";
-import { boundedDocumentRows, classifyProfitConceptSemantics, createSecEvidenceClient } from "../lib/sec-evidence.js";
+import { boundedDocumentRows, classifyProfitConceptSemantics, createSecEvidenceClient, selectRelevantNtFiling } from "../lib/sec-evidence.js";
 import { extractSecFilingEvidence, extractSecFilingEvidenceWithDiagnostics, normalizeCatalystClassification, resolveOverlappingSplitDateRoleConflicts } from "../lib/sec-filing-extraction.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { withTestServer } from "../support/test-server.js";
@@ -92,6 +92,49 @@ test("bounded filing selection reserves older split, accounting, listing, and co
   assert.ok(selected.length <= 12);
 });
 
+test("NT selection keeps only a current unresolved delay in the issuer filing regime", () => {
+  const row = (accession, form, filed, reportDate) => ({ accession, form, filed, reportDate, items: "", description: "", document: `${accession}.htm` });
+  const current = selectRelevantNtFiling([
+    row("annual-2024", "20-F", "2025-02-07", "2024-09-30"),
+    row("nt-2025", "NT 20-F", "2026-01-23", "2025-09-30"),
+    row("old-domestic", "NT 10-K", "2024-01-20", "2023-12-31")
+  ], "2026-08-28T12:00:00Z");
+  assert.equal(current.row.accession, "nt-2025");
+  assert.equal(current.diagnostics.find((item) => item.accession === "nt-2025").active_delay, true);
+  assert.equal(current.diagnostics.find((item) => item.accession === "old-domestic").exclusion_reason, "not_current_filer_regime");
+
+  const cured = selectRelevantNtFiling([
+    row("nt", "NT 10-K", "2026-03-02", "2025-12-31"),
+    row("filed", "10-K", "2026-03-14", "2025-12-31")
+  ], "2026-08-28T12:00:00Z");
+  assert.equal(cured.row, null);
+  assert.equal(cured.diagnostics[0].exclusion_reason, "superseded_by_expected_periodic_filing");
+});
+
+test("old NT filings do not explain the current REKR or GMBL freshness gap", () => {
+  const old = (accession, form, filed, reportDate) => ({ accession, form, filed, reportDate, items: "", description: "", document: `${accession}.htm` });
+  for (const rows of [
+    [old("rekr-nt", "NT 10-K", "2019-03-29", "2018-12-31"), old("rekr-current", "10-K", "2026-03-31", "2025-12-31")],
+    [old("gmbl-nt", "NT 10-K", "2023-09-29", "2023-06-30"), old("gmbl-filed", "10-K", "2023-10-13", "2023-06-30")]
+  ]) {
+    const result = selectRelevantNtFiling(rows, "2026-08-28T12:00:00Z");
+    assert.equal(result.row, null);
+    assert.equal(result.diagnostics[0].active_delay, false);
+  }
+});
+
+test("NT reason extraction preserves issuer cause or states that it is unavailable", () => {
+  const stated = extractSecFilingEvidenceWithDiagnostics({ html: "The Registrant's Annual Report on Form 20-F could not be filed within the prescribed time period because it requires additional time to complete its financial statements and the related audit procedures.", form: "NT 20-F", filed: "2026-01-23", reportDate: "2025-09-30", accession: "zapp-nt", documentUrl: "https://www.sec.gov/zapp-nt", documentName: "zapp-nt.htm" });
+  const warning = stated.findings.find((item) => item.kind === "late_annual_filing");
+  assert.match(warning.statement, /additional time to complete its financial statements/i);
+  assert.equal(warning.delay_reason_extracted, true);
+  assert.equal(stated.nt_filing_diagnostics[0].reason_source, "issuer_nt_filing_text");
+
+  const unavailable = extractSecFilingEvidenceWithDiagnostics({ html: "The Registrant filed this Form NT 10-Q.", form: "NT 10-Q", filed: "2026-08-10", reportDate: "2026-06-30", accession: "missing-reason", documentUrl: "https://www.sec.gov/missing", documentName: "missing.htm" });
+  assert.match(unavailable.findings.find((item) => item.kind === "late_annual_filing").statement, /issuer-stated reason was unavailable/i);
+  assert.equal(unavailable.nt_filing_diagnostics[0].reason_extracted, false);
+});
+
 test("AMC completed reverse split is historical while NXL authorization is not", () => {
   const completed = extractSecFilingEvidence({ html: "The Company effected a reverse stock split at a ratio of 1-for-10, effective August 24, 2023.", form: "8-K", filed: "2023-08-24", accession: "amc", documentUrl: "https://www.sec.gov/amc.htm", documentName: "amc.htm" }).find((item) => item.kind === "reverse_split");
   const authorized = extractSecFilingEvidence({ html: "Stockholders approved and authorized the board to effectuate a 1-for-30 reverse stock split in the future.", form: "DEF 14A", filed: "2026-07-01", accession: "nxl", documentUrl: "https://www.sec.gov/nxl.htm", documentName: "nxl.htm" }).find((item) => item.kind === "reverse_split");
@@ -135,7 +178,7 @@ test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC fi
     "zapp-ex99_1.htm": "Shareholders approved a consolidation of every twenty ordinary shares into one ordinary share. The Company will effect the 1-for-20 reverse stock split after approval.",
     "zapp-20240930.htm": "The Company is a Cayman Islands foreign private issuer reporting under IFRS. The reverse share split was effective April 22, 2024. The Company incurred a net loss and negative operating cash flow, and substantial doubt exists about its ability to continue as a going concern without additional capital.",
     "final_nasdaq_delisting_6.htm": "Nasdaq suspended and delisted the Company's ordinary shares formerly traded under ZAPP. The ordinary shares began quotation on OTC under ZAPPF.",
-    "zapp20260122_nt20f.htm": "The annual report on Form 20-F for the fiscal year ended September 30, 2025 could not be filed within the prescribed period."
+    "zapp20260122_nt20f.htm": "The Registrant is unable to timely file its Annual Report on Form 20-F for the fiscal year ended September 30, 2025 because it requires additional time to complete its financial statements and related audit procedures."
   } });
   assert.equal(result.report.security.ticker, "ZAPPF");
   assert.equal(result.report.security.security_type, "foreign_ordinary_share");
@@ -147,7 +190,8 @@ test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC fi
   assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
   const lateAnnual = result.report.financial_assessment.material_warnings.find((item) => item.title === "Delayed annual filing");
   assert.equal(lateAnnual?.state, "confirmed");
-  assert.match(lateAnnual?.summary ?? "", /could not be filed/i);
+  assert.match(lateAnnual?.summary ?? "", /additional time to complete its financial statements/i);
+  assert.ok(result.evidence_packet.nt_filing_diagnostics.some((item) => item.accession === "0001437749-26-002535" && item.active_delay === true && item.selected === true));
   assert.ok(result.evidence_packet.corporate_action_diagnostics.some((item) => item.authorization_accession === "0000950170-24-044773" && item.canonical_event_id));
   assert.ok(result.report.sources.some((item) => /20-F filed/i.test(item.title)));
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
@@ -155,11 +199,13 @@ test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC fi
 
 test("GMBL authoritative OTC common-stock evidence settles type and preserves both completed ratios", async () => {
   const filings = [
+    { accessionNumber: "0001493152-23-034866", form: "NT 10-K", filingDate: "2023-09-29", reportDate: "2023-06-30", primaryDocument: "late.htm", items: "" },
     { accessionNumber: "0001493152-23-037224", form: "10-K", filingDate: "2023-10-13", reportDate: "2023-06-30", primaryDocument: "annual.htm", items: "" },
     { accessionNumber: "0001493152-24-021070", form: "10-Q", filingDate: "2024-05-23", reportDate: "2024-03-31", primaryDocument: "quarter.htm", items: "" },
     { accessionNumber: "0001493152-24-007169", form: "8-K", filingDate: "2024-02-22", reportDate: "2024-02-21", primaryDocument: "delisting.htm", items: "3.01" }
   ];
   const result = await researchFixture({ ticker: "GMBL", cik: 1451448, filings, documents: {
+    "late.htm": "The Registrant required additional time to complete its annual report.",
     "annual.htm": "We implemented a one-for-one hundred (1-for-100) reverse stock split of our common stock effective February 22, 2023.",
     "quarter.htm": "Effective December 22, 2023, the Company completed a one-for-four-hundred (1-for-400) reverse stock split of its common stock.",
     "delisting.htm": "Nasdaq notified the Company that its securities were subject to delisting. Trading was suspended and the securities began trading over-the-counter on OTC Pink under GMBL."
@@ -171,6 +217,8 @@ test("GMBL authoritative OTC common-stock evidence settles type and preserves bo
     ["2023-02-22", "Completed 1-for-100 reverse split"],
     ["2023-12-22", "Completed 1-for-400 reverse split"]
   ]);
+  assert.equal(result.report.financial_assessment.material_warnings.some((item) => /Delayed annual filing/i.test(item.title)), false);
+  assert.equal(result.evidence_packet.nt_filing_diagnostics.find((item) => item.accession === "0001493152-23-034866")?.exclusion_reason, "superseded_by_expected_periodic_filing");
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
 
@@ -200,6 +248,22 @@ test("REKR stored disclosure shape preserves working-capital deficit and near-te
   assert.match(maturity.statement, /December 15, 2026/);
   const distant = extractSecFilingEvidence({ html: "The $15.0 million notes mature December 15, 2030.", form: "10-Q", filed: "2026-08-13", accession: "rekr-far", documentUrl: "https://www.sec.gov/rekr-far.htm", documentName: "rekr-far.htm", evaluatedAt: "2026-08-27T12:00:00Z" });
   assert.equal(distant.some((item) => item.kind === "debt_maturity"), false);
+});
+
+test("REKR current periodic evidence suppresses an unrelated historical NT warning", async () => {
+  const result = await researchFixture({ ticker: "REKR", cik: 1697851, filings: [
+    { accessionNumber: "old-nt", form: "NT 10-K", filingDate: "2019-03-29", reportDate: "2018-12-31", primaryDocument: "old-nt.htm", items: "" },
+    { accessionNumber: "current-quarter", form: "10-Q", filingDate: "2026-08-13", reportDate: "2026-06-30", primaryDocument: "current.htm", items: "" },
+    { accessionNumber: "current-annual", form: "10-K", filingDate: "2026-03-31", reportDate: "2025-12-31", primaryDocument: "annual.htm", items: "" }
+  ], documents: {
+    "old-nt.htm": "The old annual report could not be filed on time because additional compilation work was required.",
+    "current.htm": "Substantial doubt exists about the Company's ability to continue as a going concern. The Company had a working capital deficit of $6.598 million. The $15.0 million notes mature December 15, 2026.",
+    "annual.htm": "The annual report was filed."
+  } });
+  assert.equal(result.report.financial_assessment.material_warnings.some((item) => /Delayed annual filing/i.test(item.title)), false);
+  assert.ok(result.report.financial_assessment.material_warnings.some((item) => item.title === "Working-capital deficit"));
+  assert.ok(result.report.financial_assessment.material_warnings.some((item) => item.title === "Near-term debt or note maturity"));
+  assert.equal(result.evidence_packet.nt_filing_diagnostics.find((item) => item.accession === "old-nt")?.active_delay, false);
 });
 
 test("written split ratios require complete multi-digit denominator tokens", () => {
