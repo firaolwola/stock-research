@@ -1,0 +1,28 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "report_produced": true,
+  "report_valid": true,
+  "completion_status": "partial",
+  "frozen_required_events": 5,
+  "frozen_retrieved_events": 5,
+  "frozen_completed_split_recall": 1,
+  "post_freeze_supported_events": 4,
+  "supported_canonical_events": 9,
+  "reported_canonical_events": 10,
+  "canonical_event_precision": 0.9,
+  "known_false_events_absent": 4,
+  "new_false_positive_events": [
+    {
+      "ratio": "1-for-250",
+      "event_date": "2025-08-01",
+      "reason": "The certificate filing date was promoted as the effective date for the same action that became effective August 4, 2025."
+    }
+  ],
+  "explanation_fidelity": "fail",
+  "settlement_accuracy": "fail",
+  "severe_misleading_misses": 1,
+  "identity_context": "pass",
+  "muln_live_parser_blocker_resolved": false,
+  "retry_performed": false
+}

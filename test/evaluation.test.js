@@ -469,6 +469,23 @@ test("Verification-4 extra-event adjudication preserves the frozen artifact and 
   assert.deepEqual(adjudication.events.filter((item) => item.classification === "genuine").map((item) => item.date), ["2024-09-17", "2025-02-18", "2025-04-11", "2025-09-22"]);
 });
 
+test("Verification-5 preserves recall but records the remaining severe filing-date false positive", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-5/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-5/run-summary.json");
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.frozen_completed_split_recall.recall, 1);
+  assert.equal(result.additional_supported_events.recall, 1);
+  assert.equal(result.canonical_event_precision.precision, 0.9);
+  assert.equal(result.new_false_positive_events, 1);
+  assert.equal(result.severe_misleading_misses, 1);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

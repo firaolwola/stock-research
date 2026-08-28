@@ -349,6 +349,15 @@ false actions are excluded. The live artifact and its five-event answer key were
 not changed. See
 `docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-4-OFFLINE-CORRECTION.md`.
 
+The separately approved Verification-5 live process retrieved all five frozen
+events and all four post-freeze supported actions, and removed the four known
+false Verification-4 pairs. It still failed canonical precision: the August 1
+certificate-filing date was promoted as a separate completed 1-for-250 event
+beside the correct August 4 effective event. The complete word ratio was parsed
+correctly, but the truncated competing-ratio span passed the action-binding
+invariant. Recall was 5/5 plus 4/4; precision was 9/10. No retry occurred. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-5.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It
