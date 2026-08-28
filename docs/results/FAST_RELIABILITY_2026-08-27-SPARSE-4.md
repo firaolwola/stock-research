@@ -53,3 +53,20 @@ and severe misleading split and foreign-financial misses remain. The next step
 is offline correction of undated split reconciliation and capture of rejected
 Company Facts concept metadata. Another same-four run or independent expansion
 requires separate owner approval.
+
+## Offline corrective status
+
+The measured Sparse-4 results above remain unchanged. Offline regressions now
+reconcile BIOR raw split mentions to exactly two canonical completed events and
+retain MULN's May 4 1-for-25, August 11 1-for-9, and December 21 1-for-100 events
+as distinct dated actions. Local mention boundaries prevent a neighboring ratio
+from borrowing another action's date; an authorization range ending at 1-for-60
+does not become a completed action. Corroborating claims remain linked to one
+canonical lifecycle event.
+
+The Fast evidence packet now retains a bounded safe structural diagnostic for
+rejected Company Facts concepts without promoting it to report evidence or a
+score. NIO's existing exact-CIK/CNY/annual/attributable semantic gate remains
+unchanged, and unresolved output explicitly distinguishes usable SEC revenue
+history from unavailable attributable annual net-loss normalization. Another
+same-four verification is technically justified but requires owner approval.

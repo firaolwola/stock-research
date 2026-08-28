@@ -256,6 +256,18 @@ Facts concept metadata needed for exact alias diagnosis. Explanation fidelity
 therefore improved only to 1/4 and score/state checks remained 7/18. See
 `docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-4.md`.
 
+The post-Sparse-4 offline correction does not change that measurement. Split
+regressions now bind ratios, lifecycle language, and dates inside one bounded
+local mention, then reconcile raw mentions into canonical events keyed by ratio
+and authoritative action date. Corroborating claims survive without creating
+extra user-facing occurrences; ambiguous undated mentions are withheld rather
+than assigned another action's date. BIOR fixtures settle to exactly two dated
+events, and a close-packed MULN fixture retains the May 4 1-for-25, August 11
+1-for-9, and December 21 1-for-100 actions without promoting an authorization
+range to a completed 1-for-60 event. Rejected Company Facts candidates now emit
+bounded, non-evidentiary structural diagnostics in the evaluation packet. These
+are deterministic readiness checks, not a new reliability result.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

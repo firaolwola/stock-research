@@ -310,6 +310,14 @@ dates may be null when the filing does not support them. Multiple sources can
 link to one normalized event through its claim references; differing filing
 dates alone do not create duplicate corporate actions.
 
+Raw split mentions are not separate corporate-action section items. Fast first
+reconciles them into canonical lifecycle events; their source-linked claims may
+remain as corroborating provenance, but ambiguous undated mentions cannot appear
+as extra completed actions. The internal
+Fast evidence packet may also carry `normalization_diagnostics` for rejected SEC
+Company Facts concepts. These bounded structural records are deliberately outside
+report v4 and cannot become claims, evidence, sources, or score inputs.
+
 Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing
 numeric values; and confirmed financial-health scores built from an unresolved

@@ -155,6 +155,13 @@ Newer authoritative terminal
 listing evidence takes precedence over stale registry context; ambiguity still
 settles Limited.
 
+Corporate-action extraction binds one ratio, lifecycle statement, and date in a
+bounded local mention before cross-filing reconciliation. Canonical identity is
+CIK, split direction, ratio, and authoritative action date. Undated mentions join
+a lifecycle only when one match is unambiguous; otherwise they are withheld from
+the report rather than assigned a neighboring event's date. All corroborating SEC
+claim/source links remain available on the canonical event.
+
 Control and listing warnings require contextual affirmative evidence. Effective-
 control audit language and discussion of the risk that a weakness could exist do
 not establish a weakness. A lending covenant, hypothetical delisting consequence,
@@ -284,6 +291,9 @@ supply discovery and EOD price/volume context only; they never fill a
 financial-statement gap. OpenAI
 may classify the normalized packet but cannot invent or backfill financial
 values or promote discovery evidence into a score.
+Rejected Company Facts concepts may be retained in a bounded internal diagnostic
+list containing structural metadata and a rejection reason. This list exists for
+offline evaluation only and never supplies report evidence or scoring values.
 Fast reserves bounded filing slots for recent catalysts, periodic reports, Item
 4.02 accounting events, Item 5.03 corporate actions, Item 3.01 listing events,
 and explicit control/split descriptions. It may open relevant SEC-filed 3.1 or

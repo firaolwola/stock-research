@@ -172,6 +172,28 @@ test("split lifecycle uses effective dates and deduplicates corroborating filing
   assert.equal(proposed.action_state, "scheduled"); assert.equal(completed.action_state, "completed"); assert.equal(proposed.effective_date, completed.effective_date);
 });
 
+test("Sparse-4 BIOR raw lifecycle mentions reconcile to two canonical completed events", async () => {
+  const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
+    "d463897dars.pdf": "Stockholders authorized a 1-for-25 reverse stock split. The Company completed the 1-for-25 reverse stock split effective January 3, 2023.",
+    "bior-20241009.htm": "The board approved a 1-for-10 reverse stock split. The 1-for-10 reverse stock split was effected on October 18, 2024.",
+    "d899591d8k.htm": "All share data reflect the completed 1-for-10 reverse stock split effected on October 18, 2024.",
+    "bior-20241210.htm": "The completed 1-for-25 reverse stock split became effective January 3, 2023 and the completed 1-for-10 reverse stock split became effective October 18, 2024."
+  } });
+  const items = result.report.sections.reverse_splits.items;
+  assert.deepEqual(items.map((item) => [item.title.match(/1-for-\d+/)[0], item.event_date]), [["1-for-25", "2023-01-03"], ["1-for-10", "2024-10-18"]]);
+  assert.ok(items.every((item) => item.corporate_action_state === "completed" && item.claim_ids.length >= 2));
+  assert.match(result.report.sections.reverse_splits.summary, /2 distinct reverse-split actions/);
+});
+
+test("Sparse-4 MULN local binding preserves three 2023 actions and does not complete an authorization range", async () => {
+  const html = "The Company completed a 1-for-25 reverse stock split effective May 4, 2023. The Company completed a 1-for-9 reverse stock split effective August 11, 2023. The Company completed a 1-for-100 reverse stock split effective December 21, 2023. Stockholders authorized the board to choose a reverse stock split ratio between 1-for-2 and 1-for-60 in the future.";
+  const findings = extractSecFilingEvidence({ html, form: "10-Q", filed: "2024-08-14", evaluatedAt: "2026-08-27T12:00:00Z", accession: "muln", documentUrl: "https://www.sec.gov/muln.htm", documentName: "muln.htm" }).filter((item) => item.kind === "reverse_split");
+  const completed = findings.filter((item) => item.action_state === "completed");
+  assert.deepEqual(completed.map((item) => [item.ratio, item.event_date]), [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"]]);
+  assert.equal(findings.some((item) => item.ratio === "1-for-60" && item.action_state === "completed"), false);
+  assert.ok(findings.some((item) => item.action_state === "authorized"));
+});
+
 test("Sparse-2 capital evidence remains Limited for explicit evidence-gate reasons", async () => {
   const result = await researchHistorical("BIOR", { cik: 1580063, name: "Biora Therapeutics, Inc.", documents: {
     "d463897dars.pdf": "The Company completed a 1-for-25 reverse stock split effective January 3, 2023.",
@@ -251,6 +273,20 @@ test("NIO Sparse-3 live-style extension label is accepted only for its CIK and C
   assert.deepEqual(accepted.report.financial_assessment.metrics.profitability.annual_observations.map((item) => item.value), [-20_700_000_000, -22_400_000_000, -23_100_000_000]);
   const rejected = await researchFixture({ ticker: "OTHER", cik: 1, companyFacts: { ...companyFacts, cik: 1, entityName: "OTHER Corp." } });
   assert.equal(rejected.report.financial_assessment.metrics.profitability.state, "unknown");
+});
+
+test("rejected NIO Company Facts concepts retain bounded structural diagnostics only", async () => {
+  const companyFacts = { cik: 1736541, entityName: "NIO Corp.", facts: {
+    "ifrs-full": { Revenue: concept("Revenue", [fact(65_731_600_000, { start: "2024-01-01", end: "2024-12-31", filed: "2025-04-10", form: "20-F", accn: "nio-revenue" })], "CNY") },
+    nio: { AmbiguousLossMeasure: concept("Loss allocated to equity holders", [fact(-22_400_000_000, { start: "2024-01-01", end: "2024-12-31", filed: "2025-04-10", form: "20-F", accn: "nio-loss" })], "CNY") }
+  } };
+  const result = await researchFixture({ ticker: "NIO", cik: 1736541, companyFacts });
+  assert.equal(result.report.financial_assessment.metrics.profitability.state, "unknown");
+  assert.match(result.report.financial_assessment.metrics.profitability.summary, /revenue history was usable.*attributable annual net-loss normalization remained unavailable/i);
+  const diagnostic = result.evidence_packet.normalization_diagnostics.find((item) => item.concept_tag === "AmbiguousLossMeasure");
+  assert.deepEqual(diagnostic, { taxonomy_namespace: "nio", concept_tag: "AmbiguousLossMeasure", label: "Loss allocated to equity holders", unit: "CNY", currency: "CNY", start_date: "2024-01-01", end_date: "2024-12-31", duration_days: 365, cadence: "annual", accession: "nio-loss", form: "20-F", rejection_reason: "attributable_profit_loss_semantics_not_established", issuer_cik: "0001736541" });
+  assert.equal(JSON.stringify(result.report).includes("AmbiguousLossMeasure"), false);
+  assert.equal("val" in diagnostic, false);
 });
 
 test("terminal OTC reports label earlier exchange pressure as historical", async () => {

@@ -1000,3 +1000,21 @@ currency, cadence, and comparability gates; they are not global taxonomy guesses
 but their explanations blurred historical and current state. NIO also requires a
 safe way to recognize attributable issuer loss without weakening the global SEC
 financial-source boundary.
+
+## 2026-08-27 — Canonicalize split lifecycles and retain rejected-fact diagnostics
+
+**Status:** Accepted corrective implementation after Issue #55 Sparse-4
+
+**Decision:** Split parsing binds ratio, lifecycle language, and action date in
+one bounded local mention. Reported corporate actions are canonical events keyed
+by issuer, direction, ratio, and authoritative effective/completion date.
+Undated mentions may join one unambiguous dated lifecycle; otherwise they remain
+non-promoted diagnostics rather than duplicate or manufactured dated events.
+Rejected Company Facts normalization candidates retain at most 24 safe structural
+records in the internal evidence packet: taxonomy/tag, short label, unit/currency,
+period/cadence, accession/form, issuer CIK, and rejection reason. They are not
+report evidence, claims, sources, or scoring inputs.
+
+**Why:** Sparse-4 still displayed BIOR duplicate occurrences and cross-associated
+MULN ratios/dates. It also discarded the exact metadata needed to diagnose NIO's
+unmatched attributable-loss concept, making each paid verification partly blind.

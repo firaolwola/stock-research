@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — Sparse-4 blockers require offline correction:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-4 remained at 14/16 (87.5%) with 4/4 valid reports and 4/4 safe settlement. TUPBQ terminal-listing explanation passed, but BIOR/MULN split occurrence reconciliation and NIO attributable-loss normalization remain severe blockers. No additional live run or expansion is authorized.
+8. [ ] **Active — await owner approval for post-Sparse-4 verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-4 remained at 14/16 (87.5%) with 4/4 valid reports and 4/4 safe settlement. Offline regressions now canonicalize BIOR/MULN split lifecycles, prevent neighboring ratio/date association, preserve the three required MULN 2023 events, and retain bounded rejected Company Facts metadata for NIO diagnosis. No additional live run or expansion is authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -89,10 +89,11 @@ The approved Sparse-3 verification also ran and failed. Recall improved from
 81.25% to 87.5%, validity improved from 25% to 100%, and settlement stayed 4/4,
 but critical retrieval/normalization and explanation defects remained. The
 reproduced Sparse-3 shapes received offline regression coverage, but Sparse-4
-showed that undated corroborating split occurrences still evade reconciliation
-and that rejected NIO Company Facts metadata is not retained. The next active
-step is offline correction of those two mechanisms; no new live run or expansion
-batch is authorized. A paid data
+showed that undated corroborating split occurrences still evaded reconciliation
+and that rejected NIO Company Facts metadata was not retained. Both reproduced
+mechanisms now have offline regression coverage. The next active step is owner
+review of a bounded same-four verification; no new live run or expansion batch
+is authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 
