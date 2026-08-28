@@ -1,0 +1,19 @@
+{
+  "case_id": "tupbq-2026-sparse",
+  "ticker": "TUPBQ",
+  "material_checks": { "detected": 4, "expected": 4 },
+  "adjudication": [
+    { "expectation": "Chapter 11 proceeding", "detected": true, "cause": null },
+    { "expectation": "Current OTC Expert Market/delisted status", "detected": true, "cause": null },
+    { "expectation": "Going-concern warning", "detected": true, "cause": null },
+    { "expectation": "Stale financials remain non-favorable", "detected": true, "cause": null }
+  ],
+  "identity_result": "TUP/TUPBQ lineage, CIK 0001008654, and current OTC Expert Market/delisted state remained correct.",
+  "validation": { "valid": true },
+  "score_range": { "passed": 6, "evaluated": 6, "note": "All six required financial components settled Limited without numeric scores." },
+  "explanation_fidelity": true,
+  "settlement_accurate": true,
+  "remaining_misses": [],
+  "severe_misses": [],
+  "result": "passed"
+}

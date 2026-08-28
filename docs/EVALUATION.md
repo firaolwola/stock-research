@@ -246,6 +246,16 @@ inputs and retain `Limited`; they do not force a numeric score. See
 `evaluation/diagnostics/capital-sufficiency-sparse-3.json` and
 `evaluation/diagnostics/nio-attributable-loss-sparse-3.json`.
 
+The separately approved Sparse-4 live verification remained at 14/16 material
+checks (87.5%) with 4/4 valid reports and 4/4 safe settlement. Current-versus-
+historical listing wording improved enough for TUPBQ to pass explanation review,
+but BIOR retained undated duplicate split occurrences, MULN still lacked a
+correct complete dated 2023 split series, and NIO still lacked attributable
+annual net loss. The NIO run artifact also did not preserve the rejected Company
+Facts concept metadata needed for exact alias diagnosis. Explanation fidelity
+therefore improved only to 1/4 and score/state checks remained 7/18. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-4.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

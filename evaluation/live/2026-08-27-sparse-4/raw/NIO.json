@@ -1,0 +1,2381 @@
+{
+  "case_id": "nio-2026-sparse",
+  "ticker": "NIO",
+  "attempted_at": "2026-08-27T23:58:57.749Z",
+  "elapsed_ms": 6748,
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-NIO-2026-08-27T23:58:51.002Z",
+    "metadata": {
+      "as_of": "2026-08-27T23:58:51.002Z",
+      "generated_at": "2026-08-27T23:58:51.002Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-27",
+          "end": "2026-08-27"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "provider-news-provider_quota",
+          "explanation": "Current news discovery is Limited; optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "provider-market-provider_quota",
+          "explanation": "End-of-day price and volume context is Limited (provider quota); optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "NIO",
+      "name": "NIO Inc. American depositary shares, each  representing one Class A ordinary share",
+      "security_type": "adr",
+      "listing_venue": "NYSE",
+      "listing_status": "active",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-nasdaq-current-listing"
+      ]
+    },
+    "issuer": {
+      "legal_name": "NIO Inc.",
+      "cik": "0001736541",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [],
+      "claim_ids": [
+        "claim-sec-identity"
+      ]
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "SEC filing discovery completed, but split terms were not extracted in this bounded phase.",
+        "coverage_notes": [
+          "Filing-text and exchange corporate-action parsing remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "CLASS A ORDINARY SHARES We may from time to time in one or more offerings offer and sell our Class A ordinary shares, including Class A ordinary shares represented by American depositary shares, or ADSs.",
+            "event_date": "2025-09-11",
+            "claim_ids": [
+              "claim-extracted-000110465925089270-offering-1"
+            ]
+          },
+          {
+            "id": "dilution-extracted-2",
+            "kind": "convertible",
+            "title": "Convertible financing instrument",
+            "state": "confirmed",
+            "summary": "If we raise funds through the issuance of additional equity or debt, including convertible notes or debt secured by some or all of our assets, holders of any debt securities or preferred shares issued will have rights, preferences and privileges senior to those of holders of our ordinary shares in the event of liquidation.",
+            "event_date": "2025-09-11",
+            "claim_ids": [
+              "claim-extracted-000110465925089270-convertible-2"
+            ]
+          },
+          {
+            "id": "dilution-extracted-3",
+            "kind": "offering",
+            "title": "Actual offering or issuance",
+            "state": "confirmed",
+            "summary": "In April 2025, the Company completed the offering of 136,800,000 class A ordinary shares of the Company at an offering price of HK$ 29.46 per share, with total offering consideration of HK$ 4,030,130 (RMB 3,684,893 ).",
+            "event_date": "2026-04-10",
+            "value": 29.46,
+            "unit": "USD",
+            "claim_ids": [
+              "claim-extracted-000110465926041765-offering-3"
+            ]
+          },
+          {
+            "id": "dilution-extracted-4",
+            "kind": "warrant",
+            "title": "Warrant financing instrument",
+            "state": "confirmed",
+            "summary": "The significant unobservable inputs adopted in the valuation as of December 31, 2024 and 2025 are as follows: ​ ​ ​ ​ ​ ​ ​ ​ December 31, 2024 ​ December 31, 2025 Unobservable Input ​ ​ ​ ​ ​ ​ Expected volatility 49 %- 52 % 49 %- 52 % Probability Liquidation scenario: 20 %- 43 % Redemption scenario: 0 %- 43 % IPO scenario: 15 %- 80 % Liquidation scenario: 20 %- 43 % Redemption scenario: 20 %- 43 % IPO scenario: 15 %- 60 % ​ As disclosed in Note 20, the warrants issued by PE CNHC in May 2024 are not traded in an active securities market.",
+            "event_date": "2026-04-10",
+            "claim_ids": [
+              "claim-extracted-000110465926041765-warrant-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000110465925089270-offering-1",
+          "claim-extracted-000110465925089270-convertible-2",
+          "claim-extracted-000110465926041765-offering-3",
+          "claim-extracted-000110465926041765-warrant-4"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "SEC filing metadata does not safely establish current compliance or accounting warnings.",
+        "coverage_notes": [
+          "Item-level filing extraction and exchange lists remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2025-12-31; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+          "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+          "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+        ],
+        "items": [
+          {
+            "id": "financial-stale-period",
+            "kind": "other",
+            "title": "Financial evidence is stale",
+            "state": "confirmed",
+            "summary": "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+            "event_date": "2025-12-31",
+            "claim_ids": [
+              "claim-financial-stale"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-financial-stale",
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-revenue-observation-1",
+          "claim-financial-revenue",
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-revenue-annual-3"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "NIO Inc. (A company controlled through weighted voting rights and incorporated in the Cayman Islands with limited liability) (Stock Code: 9866) DATE OF BOARD MEETING The board of directors ( Board ) of NIO Inc. (the Company ) will hold a Board meeting on Tuesday, September 1, 2026 (Beijing/Hong Kong/Singapore Time) for the purposes of, among other things, approving the Company s unaudited financial results and announcement for the three months and six months ended June 30, 2026 ( Q2 2026 Results ).",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "NIO Inc. (A company controlled through weighted voting rights and incorporated in the Cayman Islands with limited liability) (Stock Code: 9866) DATE OF BOARD MEETING The board of directors ( Board ) of NIO Inc. (the Company ) will hold a Board meeting on Tuesday, September 1, 2026 (Beijing/Hong Kong/Singapore Time) for the purposes of, among other things, approving the Company s unaudited financial results and announcement for the three months and six months ended June 30, 2026 ( Q2 2026 Results ).",
+            "event_date": "2026-08-20",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000110465926098991-catalyst-1"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-27",
+      "reporting_currency": "CNY",
+      "summary": "Latest standardized SEC facts are shown through 2025-12-31; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+        "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+        "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "limited_coverage",
+          "label": "Cash and Cash Equivalents, at Carrying Value",
+          "value": null,
+          "unit": null,
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-12-31",
+          "comparison_period_end": "2024-12-31",
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Cash and Cash Equivalents, at Carrying Value is 239 days old and is not used as current decision evidence.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3"
+          ]
+        },
+        "revenue": {
+          "state": "confirmed",
+          "label": "Revenue from Contract with Customer, Excluding Assessed Tax",
+          "value": 87487510000,
+          "unit": "CNY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-01-01",
+          "comparison_period_end": "2024-12-31",
+          "observations": [
+            {
+              "value": 65731559000,
+              "unit": "CNY",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-observation-1"
+              ]
+            },
+            {
+              "value": 87487510000,
+              "unit": "CNY",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 49268561000,
+              "unit": "CNY",
+              "period_start": "2022-01-01",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-1"
+              ]
+            },
+            {
+              "value": 55617933000,
+              "unit": "CNY",
+              "period_start": "2023-01-01",
+              "period_end": "2023-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-2"
+              ]
+            },
+            {
+              "value": 65731559000,
+              "unit": "CNY",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-3"
+              ]
+            },
+            {
+              "value": 87487510000,
+              "unit": "CNY",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 87487510000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+          "claim_ids": [
+            "claim-financial-revenue-observation-1",
+            "claim-financial-revenue",
+            "claim-financial-revenue-annual-1",
+            "claim-financial-revenue-annual-2",
+            "claim-financial-revenue-annual-3"
+          ]
+        },
+        "profitability": {
+          "state": "unknown",
+          "label": "profitability",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "profitability was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "operating_cash_flow": {
+          "state": "unknown",
+          "label": "Operating cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Operating cash flow was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "free_cash_flow": {
+          "state": "unknown",
+          "label": "Free cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Free cash flow was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "cash_burn": {
+          "state": "unknown",
+          "label": "Cash burn",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Cash burn and runway remain unknown without a valid aligned cash-flow measure.",
+          "claim_ids": []
+        },
+        "debt": {
+          "state": "unknown",
+          "label": "Total debt",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Neither an aligned total nor sufficient current and non-current debt components were established.",
+          "claim_ids": []
+        }
+      },
+      "shares_outstanding": {
+        "state": "unknown",
+        "summary": "Comparable reported shares outstanding were not established by SEC Company Facts.",
+        "observations": [],
+        "annual_observations": [],
+        "claim_ids": []
+      },
+      "going_concern": {
+        "state": "unknown",
+        "as_of": null,
+        "summary": "Going-concern language was not established from bounded filing extraction.",
+        "claim_ids": []
+      },
+      "material_warnings": [
+        {
+          "id": "financial-stale-period",
+          "kind": "other",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Financial evidence is stale",
+          "as_of": "2025-12-31",
+          "summary": "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+          "claim_ids": [
+            "claim-financial-stale"
+          ]
+        }
+      ]
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "other",
+        "title": "Material filing event",
+        "event_date": "2026-08-20",
+        "summary": "NIO Inc. (A company controlled through weighted voting rights and incorporated in the Cayman Islands with limited liability) (Stock Code: 9866) DATE OF BOARD MEETING The board of directors ( Board ) of NIO Inc. (the Company ) will hold a Board meeting on Tuesday, September 1, 2026 (Beijing/Hong Kong/Singapore Time) for the purposes of, among other things, approving the Company s unaudited financial results and announcement for the three months and six months ended June 30, 2026 ( Q2 2026 Results ).",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000110465926098991-catalyst-1"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC associates NIO with NIO Inc. (CIK 0001736541) on NYSE.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T23:58:51.002Z",
+        "source_ids": [
+          "source-sec-ticker-map"
+        ]
+      },
+      {
+        "id": "claim-capital-000110465925089270",
+        "text": "NIO Inc. filed Form 424B5 on 2025-09-11; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-09-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-000110465925089270"
+        ]
+      },
+      {
+        "id": "claim-capital-000110465925088835",
+        "text": "NIO Inc. filed Form 424B5 on 2025-09-10; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-09-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-000110465925088835"
+        ]
+      },
+      {
+        "id": "claim-capital-000110465924063863",
+        "text": "NIO Inc. filed Form 424B3 on 2024-05-21; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2024-05-21T00:00:00Z",
+        "source_ids": [
+          "source-sec-000110465924063863"
+        ]
+      },
+      {
+        "id": "claim-capital-000110465924063824",
+        "text": "NIO Inc. filed Form F-3ASR on 2024-05-21; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2024-05-21T00:00:00Z",
+        "source_ids": [
+          "source-sec-000110465924063824"
+        ]
+      },
+      {
+        "id": "claim-extracted-000110465925089270-offering-1",
+        "text": "CLASS A ORDINARY SHARES We may from time to time in one or more offerings offer and sell our Class A ordinary shares, including Class A ordinary shares represented by American depositary shares, or ADSs.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-09-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000110465925089270-tm25251146424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000110465925089270-convertible-2",
+        "text": "If we raise funds through the issuance of additional equity or debt, including convertible notes or debt secured by some or all of our assets, holders of any debt securities or preferred shares issued will have rights, preferences and privileges senior to those of holders of our ordinary shares in the event of liquidation.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-09-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000110465925089270-tm25251146424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000110465926041765-offering-3",
+        "text": "In April 2025, the Company completed the offering of 136,800,000 class A ordinary shares of the Company at an offering price of HK$ 29.46 per share, with total offering consideration of HK$ 4,030,130 (RMB 3,684,893 ).",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000110465926041765-nio20251231x20fhtm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000110465926041765-warrant-4",
+        "text": "The significant unobservable inputs adopted in the valuation as of December 31, 2024 and 2025 are as follows: ​ ​ ​ ​ ​ ​ ​ ​ December 31, 2024 ​ December 31, 2025 Unobservable Input ​ ​ ​ ​ ​ ​ Expected volatility 49 %- 52 % 49 %- 52 % Probability Liquidation scenario: 20 %- 43 % Redemption scenario: 0 %- 43 % IPO scenario: 15 %- 80 % Liquidation scenario: 20 %- 43 % Redemption scenario: 20 %- 43 % IPO scenario: 15 %- 60 % ​ As disclosed in Note 20, the warrants issued by PE CNHC in May 2024 are not traded in an active securities market.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000110465926041765-nio20251231x20fhtm"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000110465926098991",
+        "text": "NIO Inc. filed Form 6-K on 2026-08-20; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-000110465926098991"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000110465926089416",
+        "text": "NIO Inc. filed Form 6-K on 2026-08-03; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-03T00:00:00Z",
+        "source_ids": [
+          "source-sec-000110465926089416"
+        ]
+      },
+      {
+        "id": "claim-extracted-000110465926098991-catalyst-1",
+        "text": "NIO Inc. (A company controlled through weighted voting rights and incorporated in the Cayman Islands with limited liability) (Stock Code: 9866) DATE OF BOARD MEETING The board of directors ( Board ) of NIO Inc. (the Company ) will hold a Board meeting on Tuesday, September 1, 2026 (Beijing/Hong Kong/Singapore Time) for the purposes of, among other things, approving the Company s unaudited financial results and announcement for the three months and six months ended June 30, 2026 ( Q2 2026 Results ).",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000110465926098991-tm2623685d1ex991htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 11274094000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 19328920000 CNY for the comparable period ending 2024-12-31, filed 2026-04-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 19887575000 CNY for the comparable period ending 2022-12-31, filed 2024-04-09.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-04-09T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 32935111000 CNY for the comparable period ending 2023-12-31, filed 2025-04-08.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-04-08T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 19328920000 CNY for the comparable period ending 2024-12-31, filed 2026-04-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 87487510000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-observation-1",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 65731559000 CNY for the comparable period ending 2024-12-31, filed 2026-04-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-1",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 49268561000 CNY for the comparable period ending 2022-12-31, filed 2025-04-08.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-04-08T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-2",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 55617933000 CNY for the comparable period ending 2023-12-31, filed 2026-04-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-3",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 65731559000 CNY for the comparable period ending 2024-12-31, filed 2026-04-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-04-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-stale",
+        "text": "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T23:58:51.002Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1",
+          "source-sec-companyfacts-cash",
+          "source-sec-companyfacts-cash-annual-1",
+          "source-sec-companyfacts-cash-annual-2",
+          "source-sec-companyfacts-cash-annual-3",
+          "source-sec-companyfacts-revenue-observation-1",
+          "source-sec-companyfacts-revenue",
+          "source-sec-companyfacts-revenue-annual-1",
+          "source-sec-companyfacts-revenue-annual-2",
+          "source-sec-companyfacts-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "claim-nasdaq-current-listing",
+        "text": "Nasdaq Trader's current symbol directory identifies NIO as NIO Inc. American depositary shares, each  representing one Class A ordinary share; current status is active.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T23:58:52.091Z",
+        "source_ids": [
+          "source-nasdaq-symbol-directory"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000110465925089270",
+        "title": "424B5 filed 2025-09-11",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925089270/tm2525114-6_424b5.htm",
+        "published_date": "2025-09-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465925089270"
+        ]
+      },
+      {
+        "id": "source-sec-000110465925088835",
+        "title": "424B5 filed 2025-09-10",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925088835/tm2525114-3_424b5.htm",
+        "published_date": "2025-09-10",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465925088835"
+        ]
+      },
+      {
+        "id": "source-sec-000110465924063863",
+        "title": "424B3 filed 2024-05-21",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465924063863/tm2414718-3_424b3.htm",
+        "published_date": "2024-05-21",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465924063863"
+        ]
+      },
+      {
+        "id": "source-sec-000110465924063824",
+        "title": "F-3ASR filed 2024-05-21",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465924063824/tm2414718-1_f3asr.htm",
+        "published_date": "2024-05-21",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465924063824"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000110465925089270-tm25251146424b5htm",
+        "title": "424B5 filed 2025-09-11 — tm2525114-6_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925089270/tm2525114-6_424b5.htm",
+        "published_date": "2025-09-11",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-extracted-000110465925089270-offering-1",
+          "claim-extracted-000110465925089270-convertible-2"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000110465926041765-nio20251231x20fhtm",
+        "title": "20-F filed 2026-04-10 — nio-20251231x20f.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926041765/nio-20251231x20f.htm",
+        "published_date": "2026-04-10",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-extracted-000110465926041765-offering-3",
+          "claim-extracted-000110465926041765-warrant-4"
+        ]
+      },
+      {
+        "id": "source-sec-000110465926098991",
+        "title": "6-K filed 2026-08-20",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926098991/tm2623685d1_6k.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000110465926098991"
+        ]
+      },
+      {
+        "id": "source-sec-000110465926089416",
+        "title": "6-K filed 2026-08-03",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926089416/tm2621806d1_6k.htm",
+        "published_date": "2026-08-03",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000110465926089416"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000110465926098991-tm2623685d1ex991htm",
+        "title": "6-K filed 2026-08-20 — tm2623685d1_ex99-1.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926098991/tm2623685d1_ex99-1.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-extracted-000110465926098991-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2024-04-09",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2025-04-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2025-04-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:52.091Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      }
+    ],
+    "scores": {
+      "dilution_historical_severity": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Past three years",
+        "explanation": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_future_likelihood": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_potential_impact": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "reverse_split_risk": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_health": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Latest reported period and next twelve months",
+        "explanation": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_revenue_trend": {
+        "state": "confirmed",
+        "value": 9.6,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-revenue-annual-3",
+          "claim-financial-revenue"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 9.6,
+            "weight": 1,
+            "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-revenue-annual-1",
+              "claim-financial-revenue-annual-2",
+              "claim-financial-revenue-annual-3",
+              "claim-financial-revenue"
+            ]
+          }
+        ]
+      },
+      "financial_net_income_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_debt_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_free_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_cash_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_operating_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "long_term_company_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Multi-year (Deep only)",
+        "explanation": "Long-term company quality remains a Deep construct and is not deterministically scored from bounded Fast evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "catalyst_strength": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Current catalyst",
+        "explanation": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+        "claim_ids": [
+          "claim-extracted-000110465926098991-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          }
+        ]
+      },
+      "near_term_setup_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Next five trading days",
+        "explanation": "A supported current catalyst is required before market context can form a setup score.",
+        "claim_ids": [
+          "claim-extracted-000110465926098991-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000110465926098991-catalyst-1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "SEC associates NIO with NIO Inc. (CIK 0001736541) on NYSE.",
+      "source_id": "source-sec-ticker-map",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-capital-0001104659-25-089270",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-09-11",
+      "text": "NIO Inc. filed Form 424B5 on 2025-09-11; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000110465925089270",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001104659-25-088835",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-09-10",
+      "text": "NIO Inc. filed Form 424B5 on 2025-09-10; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000110465925088835",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001104659-24-063863",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2024-05-21",
+      "text": "NIO Inc. filed Form 424B3 on 2024-05-21; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000110465924063863",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001104659-24-063824",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2024-05-21",
+      "text": "NIO Inc. filed Form F-3ASR on 2024-05-21; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000110465924063824",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001104659-26-098991",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-20",
+      "text": "NIO Inc. filed Form 6-K on 2026-08-20; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000110465926098991",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001104659-26-089416",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-03",
+      "text": "NIO Inc. filed Form 6-K on 2026-08-03; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000110465926089416",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-04-10",
+      "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 11274094000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-revenue",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-04-10",
+      "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 87487510000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+      "source_id": "source-sec-companyfacts-revenue",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-stale",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2025-12-31",
+      "text": "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+      "source_id": "source-sec-companyfacts-cash-observation-1",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001104659-25-089270-offering-1",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-09-11",
+      "text": "CLASS A ORDINARY SHARES We may from time to time in one or more offerings offer and sell our Class A ordinary shares, including Class A ordinary shares represented by American depositary shares, or ADSs.",
+      "source_id": "source-sec-document-capital-000110465925089270-tm25251146424b5htm",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001104659-25-089270-convertible-2",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2025-09-11",
+      "text": "If we raise funds through the issuance of additional equity or debt, including convertible notes or debt secured by some or all of our assets, holders of any debt securities or preferred shares issued will have rights, preferences and privileges senior to those of holders of our ordinary shares in the event of liquidation.",
+      "source_id": "source-sec-document-capital-000110465925089270-tm25251146424b5htm",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001104659-26-041765-offering-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-04-10",
+      "text": "In April 2025, the Company completed the offering of 136,800,000 class A ordinary shares of the Company at an offering price of HK$ 29.46 per share, with total offering consideration of HK$ 4,030,130 (RMB 3,684,893 ).",
+      "source_id": "source-sec-document-capital-000110465926041765-nio20251231x20fhtm",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001104659-26-041765-warrant-4",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-04-10",
+      "text": "The significant unobservable inputs adopted in the valuation as of December 31, 2024 and 2025 are as follows: ​ ​ ​ ​ ​ ​ ​ ​ December 31, 2024 ​ December 31, 2025 Unobservable Input ​ ​ ​ ​ ​ ​ Expected volatility 49 %- 52 % 49 %- 52 % Probability Liquidation scenario: 20 %- 43 % Redemption scenario: 0 %- 43 % IPO scenario: 15 %- 80 % Liquidation scenario: 20 %- 43 % Redemption scenario: 20 %- 43 % IPO scenario: 15 %- 60 % ​ As disclosed in Note 20, the warrants issued by PE CNHC in May 2024 are not traded in an active securities market.",
+      "source_id": "source-sec-document-capital-000110465926041765-nio20251231x20fhtm",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001104659-26-098991-catalyst-1",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2026-08-20",
+      "text": "NIO Inc. (A company controlled through weighted voting rights and incorporated in the Cayman Islands with limited liability) (Stock Code: 9866) DATE OF BOARD MEETING The board of directors ( Board ) of NIO Inc. (the Company ) will hold a Board meeting on Tuesday, September 1, 2026 (Beijing/Hong Kong/Singapore Time) for the purposes of, among other things, approving the Company s unaudited financial results and announcement for the three months and six months ended June 30, 2026 ( Q2 2026 Results ).",
+      "source_id": "source-sec-document-catalyst-000110465926098991-tm2623685d1ex991htm",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-nasdaq-current-listing",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "Nasdaq Trader's current symbol directory identifies NIO as NIO Inc. American depositary shares, each  representing one Class A ordinary share; current status is active.",
+      "source_id": "source-nasdaq-symbol-directory",
+      "issuer_cik": "0001736541",
+      "security_ticker": "NIO",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "NIO",
+    "identity": {
+      "ticker": "NIO",
+      "issuer_legal_name": "NIO Inc.",
+      "cik": "0001736541"
+    },
+    "identity_resolution": {
+      "requested_ticker": "NIO",
+      "current_ticker": "NIO",
+      "status": "current",
+      "current_ticker_effective_from": null,
+      "listing_effective_from": null,
+      "source_url": "https://www.sec.gov/files/company_tickers_exchange.json"
+    },
+    "retrieved_at": "2026-08-27T23:58:51.002Z",
+    "records": [
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "SEC associates NIO with NIO Inc. (CIK 0001736541) on NYSE.",
+        "source_id": "source-sec-ticker-map",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-capital-0001104659-25-089270",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-09-11",
+        "text": "NIO Inc. filed Form 424B5 on 2025-09-11; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000110465925089270",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001104659-25-088835",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-09-10",
+        "text": "NIO Inc. filed Form 424B5 on 2025-09-10; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000110465925088835",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001104659-24-063863",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2024-05-21",
+        "text": "NIO Inc. filed Form 424B3 on 2024-05-21; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000110465924063863",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001104659-24-063824",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2024-05-21",
+        "text": "NIO Inc. filed Form F-3ASR on 2024-05-21; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000110465924063824",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001104659-26-098991",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-20",
+        "text": "NIO Inc. filed Form 6-K on 2026-08-20; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000110465926098991",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001104659-26-089416",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-03",
+        "text": "NIO Inc. filed Form 6-K on 2026-08-03; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000110465926089416",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-04-10",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 11274094000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-revenue",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-04-10",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 87487510000 CNY for the period ending 2025-12-31, filed 2026-04-10.",
+        "source_id": "source-sec-companyfacts-revenue",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-stale",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2025-12-31",
+        "text": "The newest standardized SEC financial period ended 2025-12-31, 239 days before this Fast report.",
+        "source_id": "source-sec-companyfacts-cash-observation-1",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001104659-25-089270-offering-1",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-09-11",
+        "text": "CLASS A ORDINARY SHARES We may from time to time in one or more offerings offer and sell our Class A ordinary shares, including Class A ordinary shares represented by American depositary shares, or ADSs.",
+        "source_id": "source-sec-document-capital-000110465925089270-tm25251146424b5htm",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001104659-25-089270-convertible-2",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2025-09-11",
+        "text": "If we raise funds through the issuance of additional equity or debt, including convertible notes or debt secured by some or all of our assets, holders of any debt securities or preferred shares issued will have rights, preferences and privileges senior to those of holders of our ordinary shares in the event of liquidation.",
+        "source_id": "source-sec-document-capital-000110465925089270-tm25251146424b5htm",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001104659-26-041765-offering-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-04-10",
+        "text": "In April 2025, the Company completed the offering of 136,800,000 class A ordinary shares of the Company at an offering price of HK$ 29.46 per share, with total offering consideration of HK$ 4,030,130 (RMB 3,684,893 ).",
+        "source_id": "source-sec-document-capital-000110465926041765-nio20251231x20fhtm",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001104659-26-041765-warrant-4",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-04-10",
+        "text": "The significant unobservable inputs adopted in the valuation as of December 31, 2024 and 2025 are as follows: ​ ​ ​ ​ ​ ​ ​ ​ December 31, 2024 ​ December 31, 2025 Unobservable Input ​ ​ ​ ​ ​ ​ Expected volatility 49 %- 52 % 49 %- 52 % Probability Liquidation scenario: 20 %- 43 % Redemption scenario: 0 %- 43 % IPO scenario: 15 %- 80 % Liquidation scenario: 20 %- 43 % Redemption scenario: 20 %- 43 % IPO scenario: 15 %- 60 % ​ As disclosed in Note 20, the warrants issued by PE CNHC in May 2024 are not traded in an active securities market.",
+        "source_id": "source-sec-document-capital-000110465926041765-nio20251231x20fhtm",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001104659-26-098991-catalyst-1",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2026-08-20",
+        "text": "NIO Inc. (A company controlled through weighted voting rights and incorporated in the Cayman Islands with limited liability) (Stock Code: 9866) DATE OF BOARD MEETING The board of directors ( Board ) of NIO Inc. (the Company ) will hold a Board meeting on Tuesday, September 1, 2026 (Beijing/Hong Kong/Singapore Time) for the purposes of, among other things, approving the Company s unaudited financial results and announcement for the three months and six months ended June 30, 2026 ( Q2 2026 Results ).",
+        "source_id": "source-sec-document-catalyst-000110465926098991-tm2623685d1ex991htm",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-nasdaq-current-listing",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "Nasdaq Trader's current symbol directory identifies NIO as NIO Inc. American depositary shares, each  representing one Class A ordinary share; current status is active.",
+        "source_id": "source-nasdaq-symbol-directory",
+        "issuer_cik": "0001736541",
+        "security_ticker": "NIO",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000110465925089270",
+        "title": "424B5 filed 2025-09-11",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925089270/tm2525114-6_424b5.htm",
+        "published_date": "2025-09-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465925089270"
+        ]
+      },
+      {
+        "id": "source-sec-000110465925088835",
+        "title": "424B5 filed 2025-09-10",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925088835/tm2525114-3_424b5.htm",
+        "published_date": "2025-09-10",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465925088835"
+        ]
+      },
+      {
+        "id": "source-sec-000110465924063863",
+        "title": "424B3 filed 2024-05-21",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465924063863/tm2414718-3_424b3.htm",
+        "published_date": "2024-05-21",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465924063863"
+        ]
+      },
+      {
+        "id": "source-sec-000110465924063824",
+        "title": "F-3ASR filed 2024-05-21",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465924063824/tm2414718-1_f3asr.htm",
+        "published_date": "2024-05-21",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-capital-000110465924063824"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000110465925089270-tm25251146424b5htm",
+        "title": "424B5 filed 2025-09-11 — tm2525114-6_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465925089270/tm2525114-6_424b5.htm",
+        "published_date": "2025-09-11",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-extracted-000110465925089270-offering-1",
+          "claim-extracted-000110465925089270-convertible-2"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000110465926041765-nio20251231x20fhtm",
+        "title": "20-F filed 2026-04-10 — nio-20251231x20f.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926041765/nio-20251231x20f.htm",
+        "published_date": "2026-04-10",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-extracted-000110465926041765-offering-3",
+          "claim-extracted-000110465926041765-warrant-4"
+        ]
+      },
+      {
+        "id": "source-sec-000110465926098991",
+        "title": "6-K filed 2026-08-20",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926098991/tm2623685d1_6k.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000110465926098991"
+        ]
+      },
+      {
+        "id": "source-sec-000110465926089416",
+        "title": "6-K filed 2026-08-03",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926089416/tm2621806d1_6k.htm",
+        "published_date": "2026-08-03",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000110465926089416"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000110465926098991-tm2623685d1ex991htm",
+        "title": "6-K filed 2026-08-20 — tm2623685d1_ex99-1.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1736541/000110465926098991/tm2623685d1_ex99-1.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-extracted-000110465926098991-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2024-04-09",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2025-04-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2025-04-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001736541.json",
+        "published_date": "2026-04-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:51.002Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:58:52.091Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      }
+    ],
+    "cache": {
+      "tickers": "hit",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0001104659-26-098991",
+          "document": "tm2623685d1_6k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001104659-25-089270",
+          "document": "tm2525114-6_424b5.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001104659-26-041765",
+          "document": "nio-20251231x20f.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001104659-26-098991",
+          "document": "tm2623685d1_ex99-1.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 6
+  },
+  "synthesis": {
+    "status": "completed",
+    "latency_ms": 5655,
+    "priority_evidence_ids": [
+      "evidence-extracted-0001104659-26-041765-offering-3",
+      "evidence-extracted-0001104659-26-041765-warrant-4",
+      "evidence-extracted-0001104659-25-089270-convertible-2",
+      "evidence-extracted-0001104659-25-089270-offering-1",
+      "evidence-capital-0001104659-25-089270",
+      "evidence-capital-0001104659-25-088835",
+      "evidence-capital-0001104659-24-063863",
+      "evidence-capital-0001104659-24-063824"
+    ],
+    "category_assessments": [
+      {
+        "category": "security_and_listing",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-sec-identity",
+          "evidence-nasdaq-current-listing"
+        ]
+      },
+      {
+        "category": "issuer_lineage",
+        "classification": "unresolved",
+        "evidence_ids": []
+      },
+      {
+        "category": "reverse_splits",
+        "classification": "unresolved",
+        "evidence_ids": []
+      },
+      {
+        "category": "dilution_offerings",
+        "classification": "material_risk",
+        "evidence_ids": [
+          "evidence-extracted-0001104659-26-041765-offering-3",
+          "evidence-extracted-0001104659-25-089270-offering-1",
+          "evidence-capital-0001104659-25-089270",
+          "evidence-capital-0001104659-25-088835",
+          "evidence-capital-0001104659-24-063863",
+          "evidence-capital-0001104659-24-063824"
+        ]
+      },
+      {
+        "category": "warrants_convertibles",
+        "classification": "material_risk",
+        "evidence_ids": [
+          "evidence-extracted-0001104659-26-041765-warrant-4",
+          "evidence-extracted-0001104659-25-089270-convertible-2"
+        ]
+      },
+      {
+        "category": "compliance",
+        "classification": "unresolved",
+        "evidence_ids": []
+      },
+      {
+        "category": "going_concern_accounting",
+        "classification": "unresolved",
+        "evidence_ids": []
+      },
+      {
+        "category": "financial_context",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-financial-cash",
+          "evidence-financial-revenue",
+          "evidence-financial-stale"
+        ]
+      },
+      {
+        "category": "catalysts_news",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-catalyst-0001104659-26-098991",
+          "evidence-catalyst-0001104659-26-089416",
+          "evidence-extracted-0001104659-26-098991-catalyst-1"
+        ]
+      }
+    ]
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 6744,
+    "input_tokens": 4944,
+    "output_tokens": 541,
+    "total_tokens": 5485,
+    "web_search_calls": 0,
+    "estimated_cost_usd": 0.01159,
+    "pricing_version": "2026-08-25",
+    "within_latency_target": true,
+    "first_useful_latency_ms": 40,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 6,
+      "cache": {
+        "tickers": "hit",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0001104659-26-098991",
+            "document": "tm2623685d1_6k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001104659-25-089270",
+            "document": "tm2525114-6_424b5.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001104659-26-041765",
+            "document": "nio-20251231x20f.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001104659-26-098991",
+            "document": "tm2623685d1_ex99-1.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 6745,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 13255,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0.01159,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.01841,
+      "termination_reason": "partial_coverage",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0001736541": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0001736541": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001104659-26-098991:tm2623685d1_6k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001104659-25-089270:tm2525114-6_424b5.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001104659-26-041765:nio-20251231x20f.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001104659-26-098991:tm2623685d1_ex99-1.htm": {
+          "endpoint_category": "filing_exhibit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 1,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:market": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "alpha_vantage:news": {
+          "cache_state": "miss",
+          "request_count": 2,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:news": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "cost_usd": 0.01159,
+          "status": "completed"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 2,
+      "nasdaq": "completed",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "limited",
+      "market_reason": "provider_quota",
+      "provider_order": [
+        "alpha_vantage",
+        "twelve_data"
+      ],
+      "configured_providers": [
+        "alpha_vantage"
+      ],
+      "providers": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 6,
+            "daily_limit": 25,
+            "minute_used": 6,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "alpha_vantage_requests_today": 6,
+      "alpha_vantage_free_daily_limit": 25
+    },
+    "synthesis": {
+      "status": "completed",
+      "latency_ms": 5655,
+      "priority_evidence_ids": [
+        "evidence-extracted-0001104659-26-041765-offering-3",
+        "evidence-extracted-0001104659-26-041765-warrant-4",
+        "evidence-extracted-0001104659-25-089270-convertible-2",
+        "evidence-extracted-0001104659-25-089270-offering-1",
+        "evidence-capital-0001104659-25-089270",
+        "evidence-capital-0001104659-25-088835",
+        "evidence-capital-0001104659-24-063863",
+        "evidence-capital-0001104659-24-063824"
+      ],
+      "category_assessments": [
+        {
+          "category": "security_and_listing",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-sec-identity",
+            "evidence-nasdaq-current-listing"
+          ]
+        },
+        {
+          "category": "issuer_lineage",
+          "classification": "unresolved",
+          "evidence_ids": []
+        },
+        {
+          "category": "reverse_splits",
+          "classification": "unresolved",
+          "evidence_ids": []
+        },
+        {
+          "category": "dilution_offerings",
+          "classification": "material_risk",
+          "evidence_ids": [
+            "evidence-extracted-0001104659-26-041765-offering-3",
+            "evidence-extracted-0001104659-25-089270-offering-1",
+            "evidence-capital-0001104659-25-089270",
+            "evidence-capital-0001104659-25-088835",
+            "evidence-capital-0001104659-24-063863",
+            "evidence-capital-0001104659-24-063824"
+          ]
+        },
+        {
+          "category": "warrants_convertibles",
+          "classification": "material_risk",
+          "evidence_ids": [
+            "evidence-extracted-0001104659-26-041765-warrant-4",
+            "evidence-extracted-0001104659-25-089270-convertible-2"
+          ]
+        },
+        {
+          "category": "compliance",
+          "classification": "unresolved",
+          "evidence_ids": []
+        },
+        {
+          "category": "going_concern_accounting",
+          "classification": "unresolved",
+          "evidence_ids": []
+        },
+        {
+          "category": "financial_context",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-financial-cash",
+            "evidence-financial-revenue",
+            "evidence-financial-stale"
+          ]
+        },
+        {
+          "category": "catalysts_news",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-catalyst-0001104659-26-098991",
+            "evidence-catalyst-0001104659-26-089416",
+            "evidence-extracted-0001104659-26-098991-catalyst-1"
+          ]
+        }
+      ]
+    }
+  }
+}

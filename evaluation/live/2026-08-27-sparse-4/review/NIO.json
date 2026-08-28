@@ -1,0 +1,22 @@
+{
+  "case_id": "nio-2026-sparse",
+  "ticker": "NIO",
+  "material_checks": { "detected": 3, "expected": 4 },
+  "adjudication": [
+    { "expectation": "NYSE ADS/ADR identity", "detected": true, "cause": null },
+    { "expectation": "Foreign 20-F/6-K filing regime", "detected": true, "cause": null },
+    { "expectation": "Comparable annual revenue and attributable net-loss context", "detected": false, "cause": "normalization" },
+    { "expectation": "CNY/IFRS/ADS/cadence consistency", "detected": true, "cause": null }
+  ],
+  "identity_result": "NIO remained the correct NYSE-listed ADR/ADS issuer and no domestic-common-stock evidence was merged.",
+  "validation": { "valid": true },
+  "score_range": { "passed": 0, "evaluated": 3, "note": "Financial health and net income remained Limited; the frozen 6-9 revenue range still excludes the unchanged Methodology 2.1 score of 9.6." },
+  "explanation_fidelity": false,
+  "settlement_accurate": true,
+  "remaining_misses": [
+    { "cause": "normalization", "summary": "Attributable annual net loss remained unknown despite a comparable annual CNY revenue series." },
+    { "cause": "unavailable_evidence", "summary": "The run artifact did not retain the unmatched Company Facts namespace, tag, label, and units, so the requested exact unresolved metadata was not captured." }
+  ],
+  "severe_misses": ["The authoritative widening attributable net loss remains absent from the report."],
+  "result": "failed"
+}
