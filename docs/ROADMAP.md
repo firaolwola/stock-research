@@ -76,7 +76,40 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — offline correction after final ONFO/STN verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The bounded verification preserved correct rule lifecycles and foreign-filer regime but exposed unscoped U.S.-GAAP/ADS phrase matching for STN and mixed-rule explanation projection for ONFO. Fix those stored live shapes offline; no rerun is authorized.
+8. [ ] **Active — automated offline reliability correction:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The final ONFO/STN verification showed that concise stored-shape regressions can pass while realistic incidental U.S.-GAAP/ADS language and mixed-rule paragraphs still contaminate property settlement and explanations. Build the minimum offline adversarial/property feedback loop, use it to guide targeted evidence-binding corrections, and prove generalization on holdouts before considering another separately approved live run.
+
+### Issue #55 corrective roadmap
+
+1. [x] **Direction and baseline:** preserve all frozen calibration measurements,
+   classify the recurring parser failures, and adopt automated targeted
+   adversarial/property testing plus targeted evidence-binding redesign. No
+   historical result or answer key changes.
+2. [ ] **Minimum automated feedback loop:** formalize 8–12 high-value
+   SEC-derived fixtures, 12–20 named invariants, deterministic seeds, reviewed
+   distractor injection, semantic-preserving transformations, machine-readable
+   output, and a concise offline command. The runner must require zero network,
+   provider, or OpenAI access.
+3. [ ] **Targeted evidence-binding correction:** introduce property-specific
+   typed candidates with issuer/security, accession/form, section or block,
+   source span, authority, date role, lifecycle, rule ID, and contextual
+   qualifiers where applicable. Correct accounting-basis, security-structure,
+   mixed-rule compliance, and other recurring binding failures without replacing
+   the working retrieval, evidence-record, budget, or report architecture.
+4. [ ] **Generalization proof:** run untouched issuer and category holdouts plus
+   mutation combinations that were not copied from production parser rules.
+   Report invariant results by family, canonical precision/recall,
+   cross-property contamination, false promotion, false suppression, and the
+   corresponding sample sizes.
+5. [ ] **Offline Issue #55 completion gate:** reproduce every known severe bug
+   class, catch intentionally reintroduced historical defects, retain correct
+   Limited/withheld outcomes, pass the complete existing test suite, and pass the
+   deterministic adversarial suite within a practical CI runtime. An offline pass
+   does not authorize live work, merge PR #74, or close Issue #55.
+6. [ ] **Evidence-based expansion decision:** after the minimum suite has guided
+   the remaining corrections, decide whether a separately scoped follow-up issue
+   is justified. Do not grow Issue #55 into a comprehensive mutation DSL, generic
+   semantic fuzzer, second-parser project, full-filing archive, or LLM-dependent
+   test system.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -105,10 +138,12 @@ duplicate. The sparse-expansion verification reached 17/20 but exposed the
 remaining ZAPPF filing-selection/interpretation and GMBL security-settlement
 defects. Verification-2 resolved those four defects live and reached 20/20, but
 exposed NT-form reason/recency fidelity defects, now corrected offline. The final
-ONFO/STN sparse-proof pair then ran within every bound but failed: ONFO needs
-current-vs-historical listing-state reconciliation and STN needs authoritative
-foreign-filer/accounting-basis promotion. Those paths now pass stored-shape
-regressions, including rule-scoped ONFO reconciliation and 40-F/6-K STN identity.
+ONFO/STN sparse-proof pair then ran within every bound but failed: ONFO needed
+current-vs-historical listing-state reconciliation and STN needed authoritative
+foreign-filer/accounting-basis promotion. Simplified stored-shape regressions
+then passed, but the final verification still measured 4/7: incidental ADS and
+U.S.-GAAP language contaminated security/accounting properties, and a mixed-rule
+paragraph contaminated ONFO's otherwise correct rule-scoped explanation.
 No further live work is authorized without explicit approval. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.

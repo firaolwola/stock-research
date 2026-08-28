@@ -486,6 +486,151 @@ passing independent cases; offline deterministic correction is required before
 any new live authorization. See
 `docs/results/FAST_RELIABILITY_2026-08-28-FINAL-SPARSE-PROOF-1.md`.
 
+## Offline adversarial and property evaluation roadmap
+
+### Purpose and boundary
+
+Issue #55 will use a small automated offline suite as the immediate feedback
+mechanism for deterministic SEC interpretation work. Its purpose is to expose
+semantic variants and cross-property contamination before another live
+calibration, then guard the targeted evidence-binding rules used to correct those
+classes. It complements the dated report-level evaluation set; it does not replace
+live recall measurement or make a reliability claim about unseen issuers.
+
+The core suite must be deterministic, token-free, and runnable with no network,
+SEC, exchange, market-data, provider, or OpenAI access. An offline pass never
+authorizes a paid or live run. The intended developer command is
+`npm run evaluate:adversarial`; it does not exist until the minimum runner is
+implemented and verified.
+
+### Initial corpus
+
+Start with 8–12 high-value cases rather than a broad filing archive. The first
+corpus should cover representative shapes from MULN, GMBL, STN, ONFO, NCPL, REKR,
+BIOR or ZAPPF, and NIO or TUPBQ. Prefer bounded authoritative filing sections or
+snippets for semantic cases, with a small number of raw HTML and inline-XBRL
+inputs for normalization and segmentation behavior.
+
+Each fixture must retain:
+
+- ticker, CIK, current security identity, and any confirmed effective-dated
+  lineage needed by the case;
+- accession, form, filing date, report date, document name, and authoritative
+  source URL;
+- the exact stored parser input, including block or section boundaries when they
+  affect meaning;
+- manually reviewed expected typed candidates and settled facts where exact
+  outputs are appropriate;
+- named invariants and allowed semantic transformations; and
+- the failure taxonomy categories exercised by the fixture.
+
+Stored live result JSON is diagnostic evidence, not automatically a parser-input
+fixture. When an existing artifact lacks the exact contaminating source text, use
+an explicitly labeled semantically faithful negative-control or distractor case
+and improve prospective capture. Do not rewrite frozen live artifacts.
+
+### Initial properties and transformations
+
+The minimum suite should contain 12–20 explicit invariants covering at least:
+
+- complete ratio-token parsing and action-local ratio/date/lifecycle binding;
+- filing, announcement, authorization, scheduled-effective, effective,
+  completion, and trading-effective date roles;
+- duplicate and overlapping occurrence canonicalization;
+- accounting-framework evidence bound to an authoritative statement-basis
+  declaration;
+- security/depositary structure bound to the issuer's current listed security;
+- compliance lifecycle and explanation projection keyed by venue and rule;
+- current versus historical listing evidence;
+- Item 4.02 or actor/determination binding for non-reliance;
+- NT-form relevance and supersession by the expected periodic filing;
+- exact issuer/security lineage and filing-regime boundaries; and
+- correct Limited or withheld settlement when authoritative evidence is absent
+  or ambiguous.
+
+Reviewed semantic-preserving transformations may include whitespace,
+punctuation, harmless HTML or inline-XBRL wrappers, equivalent ratio/date forms,
+duplicate corroborating blocks, reordering independent explicitly dated blocks,
+and injection of unrelated ADS, ADR, IFRS, U.S.-GAAP, restatement, split, date,
+or listing-rule language. A transformation must not remove negation, move a date
+between dependent clauses, reorder a lifecycle whose order supplies meaning, or
+otherwise change semantics while expecting an invariant result.
+
+### Oracle hierarchy and failure classification
+
+Use the following oracle order:
+
+1. owner/reviewer-frozen structured facts from authoritative evidence;
+2. manually specified invariants and metamorphic relationships independent of
+   production parser implementation;
+3. simple rule-derived expectations from separately documented rules;
+4. old-versus-new output differences for triage only;
+5. human adjudication for ambiguous generated cases; and
+6. optional AI-generated test ideas or failure clustering, never normal CI truth.
+
+Production regexes or settlement functions must not generate their own expected
+answers. Do not build a second deterministic parser or make an LLM the offline
+oracle.
+
+Before changing production behavior, classify every failure as one of:
+
+- invalid transformation or incorrect oracle;
+- missing fixture or metadata coverage;
+- isolated parser defect;
+- recurring structural evidence-binding defect;
+- correct Limited, withheld, or unavailable-authoritative-evidence behavior; or
+- unresolved case requiring human adjudication.
+
+Only the isolated and recurring parser categories justify production correction.
+Recurring cross-property, issuer/security, date-role, section, evidence-precedence,
+or lifecycle failures should prefer typed candidate and settlement improvements
+over issuer-specific exceptions.
+
+### Reporting, holdouts, and success criteria
+
+Report fixture and transformation counts alongside:
+
+- invariant pass rate by transformation family;
+- canonical event precision and recall;
+- cross-property contamination rate;
+- false-promotion and false-suppression counts;
+- lifecycle reconciliation results; and
+- issuer and category holdout results.
+
+Do not collapse these into one mutation score. A high aggregate rate must not hide
+a complete failure in a critical category.
+
+Keep at least two or three issuer cases untouched while developing each shared
+binding correction, and use category holdouts where the corpus supports them.
+Mutation parameters and distractor combinations must not merely restate the
+production patterns under test. With a small deterministic corpus, this
+development/holdout discipline is useful; a machine-learning-style training
+program is not required.
+
+The minimum suite is useful when it:
+
+- represents every known severe Issue #55 parser bug class;
+- catches intentionally reintroduced historical defects;
+- exposes semantic variants not covered by exact regression fixtures;
+- demonstrates that unrelated property distractors cannot change settled facts;
+- preserves correct unknown, Limited, withheld, and unavailable outcomes;
+- produces identical results for the same seed and inputs;
+- runs offline within a practical CI budget, initially targeted below ten
+  seconds; and
+- passes together with the complete existing deterministic suite.
+
+These criteria establish prospective parser protection only. Issue #55 still
+requires its separately defined real-ticker reliability, sparse-category, severe
+miss, explanation-fidelity, settlement, budget, and approval gates.
+
+### Explicit non-goals
+
+The Issue #55 minimum does not include a generic random semantic fuzzer, mutation
+DSL, automatic minimizer, comprehensive full-filing corpus, independent second
+parser, LLM adjudication dependency, new provider, dashboard, or automatic live
+evaluation. Broader work requires evidence that the minimum suite produced useful
+new failures and a separately scoped follow-up issue.
+
 ## Paid live evaluation boundary
 
 Final Sparse Proof 1 remains frozen at 4/7. Offline stored-shape regressions now

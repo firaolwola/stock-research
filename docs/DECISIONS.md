@@ -1,5 +1,30 @@
 # Decision log
 
+## 2026-08-28 — Pair automated adversarial evaluation with targeted evidence binding
+
+**Status:** Owner-approved direction for the remaining Issue #55 corrective work
+
+**Decision:** Issue #55 will add a small deterministic offline adversarial and
+property-evaluation loop before further live calibration. The initial suite will
+use reviewed SEC-derived fixtures, explicit invariants, semantic-preserving
+mutations, distractor injection, and metamorphic relationships. It will require
+no network, provider, or OpenAI access. Repeated failures that reveal property,
+section, issuer/security, date-role, or lifecycle contamination will drive
+targeted typed evidence-candidate and settlement improvements. The project will
+not build a comprehensive fuzzing framework, second parser, or AI-based CI oracle.
+
+**Why:** The complete deterministic suite can pass while unseen live filing
+shapes still expose severe interpretation defects. The final ONFO/STN verification
+showed that concise stored-shape regressions did not preserve the incidental
+U.S.-GAAP, ADS, and mixed-rule contexts that caused the real failures. Automated
+semantic variation is therefore needed to improve generalization, while stronger
+binding is needed to eliminate the underlying classes rather than patch examples.
+
+**Consequence:** Work proceeds through a documented baseline, minimum automated
+feedback loop, targeted evidence-binding changes, issuer/category holdouts, and
+an offline completion gate. Frozen measurements remain unchanged, and no live
+verification is implied or authorized by an offline pass.
+
 ## 2026-08-28 — Settle foreign reporting properties and listing lifecycles independently
 
 **Status:** Accepted corrective implementation after Issue #55 Final Sparse Proof 1
