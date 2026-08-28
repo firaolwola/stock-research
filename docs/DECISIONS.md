@@ -1166,3 +1166,22 @@ withheld.
 **Why:** GMBL's `one-for-four-hundred (1-for-400)` disclosure produced a false
 user-facing 1-for-4 event while the correct numeric occurrence was withheld as
 competing evidence.
+
+## 2026-08-28 — Separate sparse-expansion filing roles and packet-wide security identity
+
+**Status:** Accepted offline corrective implementation; live measurement remains frozen
+
+**Decision:** An authorization filing cannot establish a completed split, but a
+reviewed, identity-gated retrospective annual filing may promote the same action
+with its supported effective date and retain the authorization as provenance.
+Bounded retrieval reserves a slot for NT annual forms and represents lateness as
+a Limited-context warning. Non-reliance requires Item 4.02 or explicit
+issuer/auditor determination; generic prospectus risk boilerplate is excluded.
+Security type may settle from direct authoritative common-stock wording anywhere
+in the identity-gated selected packet, rather than only the terminal listing
+excerpt. OTC venue or ticker suffix alone remains insufficient.
+
+**Why:** Sparse Expansion 1 Verification-1 exposed four responsibility-boundary
+errors after retrieval succeeded. Fixing them at selection, interpretation, and
+packet settlement preserves conservative semantics without weakening validation
+or altering the frozen 17/20 result.

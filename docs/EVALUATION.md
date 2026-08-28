@@ -444,6 +444,16 @@ common-stock evidence elsewhere in the packet. No additional live run is
 authorized. See
 `docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-1.md`.
 
+Offline stored-shape regression work now covers those four defects without
+changing the frozen 17/20 measurement: a reviewed retrospective 20-F record can
+promote ZAPPF's completed 1-for-20 action while its earlier authorization remains
+non-completed provenance; NT annual filings receive a bounded selection slot and
+an explicit delayed-filing warning; generic prospectus restatement risk language
+cannot create non-reliance without Item 4.02 or an issuer/auditor accounting
+determination; and identity-gated common-stock wording anywhere in the selected
+packet may settle GMBL's security type. Another same-three live verification is
+technically justified but requires fresh owner approval.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

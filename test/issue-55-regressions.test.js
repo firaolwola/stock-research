@@ -132,8 +132,8 @@ test("BIOR bounded historical identity reaches OTC lineage and both completed sp
 
 test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC filing path", async () => {
   const result = await researchHistorical("ZAPPF", { cik: 1955104, name: "Zapp Electric Vehicles Group Limited", documents: {
-    "zapp-ex99_1.htm": "The Company's ordinary shares began trading on a split-adjusted basis on April 23, 2024 after a 1-for-20 reverse stock split became effective April 22, 2024.",
-    "zapp-20240930.htm": "The Company is a Cayman Islands foreign private issuer reporting under IFRS. The Company incurred a net loss and negative operating cash flow, and substantial doubt exists about its ability to continue as a going concern without additional capital.",
+    "zapp-ex99_1.htm": "Shareholders approved a consolidation of every twenty ordinary shares into one ordinary share. The Company will effect the 1-for-20 reverse stock split after approval.",
+    "zapp-20240930.htm": "The Company is a Cayman Islands foreign private issuer reporting under IFRS. The reverse share split was effective April 22, 2024. The Company incurred a net loss and negative operating cash flow, and substantial doubt exists about its ability to continue as a going concern without additional capital.",
     "final_nasdaq_delisting_6.htm": "Nasdaq suspended and delisted the Company's ordinary shares formerly traded under ZAPP. The ordinary shares began quotation on OTC under ZAPPF.",
     "zapp20260122_nt20f.htm": "The annual report on Form 20-F for the fiscal year ended September 30, 2025 could not be filed within the prescribed period."
   } });
@@ -145,6 +145,10 @@ test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC fi
   assert.ok(result.report.issuer.prior_identities.some((item) => item.ticker === "ZAPP" && item.linkage_state === "confirmed"));
   assert.ok(result.report.sections.reverse_splits.items.some((item) => item.title === "Completed 1-for-20 reverse split" && item.event_date === "2024-04-22"));
   assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
+  const lateAnnual = result.report.financial_assessment.material_warnings.find((item) => item.title === "Delayed annual filing");
+  assert.equal(lateAnnual?.state, "confirmed");
+  assert.match(lateAnnual?.summary ?? "", /could not be filed/i);
+  assert.ok(result.evidence_packet.corporate_action_diagnostics.some((item) => item.authorization_accession === "0000950170-24-044773" && item.canonical_event_id));
   assert.ok(result.report.sources.some((item) => /20-F filed/i.test(item.title)));
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
@@ -158,10 +162,11 @@ test("GMBL authoritative OTC common-stock evidence settles type and preserves bo
   const result = await researchFixture({ ticker: "GMBL", cik: 1451448, filings, documents: {
     "annual.htm": "We implemented a one-for-one hundred (1-for-100) reverse stock split of our common stock effective February 22, 2023.",
     "quarter.htm": "Effective December 22, 2023, the Company completed a one-for-four-hundred (1-for-400) reverse stock split of its common stock.",
-    "delisting.htm": "Nasdaq notified the Company that its shares of common stock were subject to delisting. Trading was suspended and the common stock began trading over-the-counter on OTC Pink under GMBL."
+    "delisting.htm": "Nasdaq notified the Company that its securities were subject to delisting. Trading was suspended and the securities began trading over-the-counter on OTC Pink under GMBL."
   } });
   assert.equal(result.report.security.security_type, "common_stock");
   assert.equal(result.report.security.listing_status, "delisted");
+  assert.deepEqual({ status: result.evidence_packet.identity_resolution.security_type_resolution.status, basis: result.evidence_packet.identity_resolution.security_type_resolution.basis, accession: result.evidence_packet.identity_resolution.security_type_resolution.source_accession }, { status: "resolved", basis: "identity_gated_selected_filing", accession: "0001493152-24-021070" });
   assert.deepEqual(result.report.sections.reverse_splits.items.map((item) => [item.event_date, item.title]), [
     ["2023-02-22", "Completed 1-for-100 reverse split"],
     ["2023-12-22", "Completed 1-for-400 reverse split"]
@@ -175,6 +180,13 @@ test("OTC terminal evidence does not infer common stock from ticker or venue alo
   } });
   assert.equal(result.report.security.security_type, "unknown");
   assert.equal(result.report.security.evidence_state, "limited_coverage");
+});
+
+test("prospectus restatement boilerplate is not non-reliance without an accounting determination", () => {
+  const boilerplate = extractSecFilingEvidence({ html: "Risk factors include any required accounting restatement to correct an error in previously issued financial statements. Description of Securities follows.", form: "424B3", filed: "2025-03-01", accession: "zapp-prospectus", documentUrl: "https://www.sec.gov/zapp-prospectus", documentName: "zapp-prospectus.htm" });
+  assert.equal(boilerplate.some((item) => item.kind === "non_reliance"), false);
+  const actual = extractSecFilingEvidence({ html: "Item 4.02. The audit committee determined that the Company's previously issued financial statements should no longer be relied upon due to an accounting error.", form: "8-K", filed: "2025-03-01", accession: "actual-402", documentUrl: "https://www.sec.gov/actual-402", documentName: "actual-402.htm" });
+  assert.equal(actual.find((item) => item.kind === "non_reliance")?.trigger_basis, "item_4_02");
 });
 
 test("REKR stored disclosure shape preserves working-capital deficit and near-term note maturity", async () => {

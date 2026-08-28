@@ -53,3 +53,13 @@ not pass. Before another live run, add stored-live-shape regressions and correct
    across the selected filing packet, not only the terminal compliance excerpt.
 
 No further live verification is authorized.
+
+## Prospective offline correction
+
+The frozen measurements above remain unchanged. Stored Verification-1 shapes now
+regress the four failures: ZAPPF's retrospective 20-F confirmation promotes the
+completed split without promoting its authorization; NT 20-F lateness is selected
+and represented explicitly; prospectus restatement boilerplate is a negative
+non-reliance control; and GMBL common-stock identity settles from identity-gated
+packet evidence rather than only the terminal excerpt. A fresh same-three live
+verification is technically justified but requires separate owner approval.

@@ -312,6 +312,9 @@ action date, not the publication date of a corroborating filing. Optional action
 dates may be null when the filing does not support them. Multiple sources can
 link to one normalized event through its claim references; differing filing
 dates alone do not create duplicate corporate actions.
+An identity-gated retrospective periodic filing may confirm that an earlier
+authorized action completed and supply its effective date; the authorization
+remains provenance and does not independently establish completion.
 
 Raw split mentions are not separate corporate-action section items. Fast first
 reconciles them into canonical lifecycle events; their source-linked claims may
@@ -324,6 +327,9 @@ enter user-facing evidence. The packet may also carry
 `normalization_diagnostics` for rejected SEC
 Company Facts concepts. These bounded structural records are deliberately outside
 report v4 and cannot become claims, evidence, sources, or score inputs.
+Security type may be supported by direct authoritative wording in any selected,
+identity-gated filing record. A terminal listing excerpt need not repeat that
+wording, but an OTC venue or ticker suffix alone cannot settle security type.
 
 Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing

@@ -303,7 +303,10 @@ list containing structural metadata and a rejection reason. This list exists for
 offline evaluation only and never supplies report evidence or scoring values.
 Fast reserves bounded filing slots for recent catalysts, periodic reports, Item
 4.02 accounting events, Item 5.03 corporate actions, Item 3.01 listing events,
-and explicit control/split descriptions. It may open relevant SEC-filed 3.1 or
+NT annual forms, and explicit control/split descriptions. An NT form establishes
+late filing context, not a favorable financial conclusion. Non-reliance requires
+Item 4.02 or explicit issuer/auditor determination; generic prospectus risk
+language about possible restatements is not an accounting event. Fast may open relevant SEC-filed 3.1 or
 99.1 exhibits. This is deterministic category retrieval, not broad web search;
 event-specific language is still required before evidence changes settlement.
 
