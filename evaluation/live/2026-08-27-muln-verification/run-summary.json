@@ -1,0 +1,21 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification.json",
+  "status": "runner_failure_no_result",
+  "approved_run_count": 1,
+  "started_process_count": 1,
+  "completed_run_count": 0,
+  "automatic_retries": 0,
+  "known_openai_cost_usd": 0,
+  "maximum_approved_openai_cost_usd": 0.03,
+  "alpha_vantage_requests": null,
+  "maximum_approved_alpha_vantage_requests": 2,
+  "twelve_data_requests": null,
+  "maximum_approved_twelve_data_requests": 2,
+  "combined_optional_provider_attempts": null,
+  "maximum_approved_combined_optional_provider_attempts": 4,
+  "report_received": false,
+  "corporate_action_diagnostics_received": false,
+  "retry_performed": false,
+  "approval_consumed": true,
+  "next_action": "Do not rerun without a new explicit owner approval. The runner now has the same keep-alive guard as the established batch runner and must pass token-free runner lifecycle coverage first."
+}

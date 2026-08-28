@@ -350,6 +350,16 @@ test("Issue 55 MULN-only verification freezes the approved one-run bounds", asyn
   assert.equal(plan.preserve_prior_batches.length, 8);
 });
 
+test("MULN verification runner retains the event loop until its one research promise settles", async () => {
+  const source = await readFile(new URL("../scripts/run-approved-muln-verification-implementation.js", import.meta.url), "utf8");
+  assert.match(source, /const runnerKeepAlive = setInterval/);
+  assert.match(source, /finally \{ clearInterval\(runnerKeepAlive\); \}/);
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification/run-summary.json");
+  assert.equal(result.status, "runner_failure_no_result");
+  assert.equal(result.retry_performed, false);
+  assert.equal(result.approval_consumed, true);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

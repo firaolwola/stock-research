@@ -43,6 +43,7 @@ const client = createEvidenceFirstResearchClient({
   deepClient: createOpenAIResearchClient(openai, { schema }),
   reportValidator
 });
+const runnerKeepAlive = setInterval(() => {}, 1_000);
 const started = performance.now(); let record; let run;
 try {
   const result = await client.researchTicker("MULN", { stage: "fast", budgetClass: "normal" });
@@ -55,7 +56,7 @@ try {
 } catch (error) {
   record = { case_id: "muln-2026-sparse", ticker: "MULN", attempted_at: new Date().toISOString(), elapsed_ms: Math.round(performance.now() - started), result: "application_failure", error: { constructor: error?.constructor?.name ?? null, name: error?.name ?? null, code: error?.code ?? null } };
   run = record;
-}
+} finally { clearInterval(runnerKeepAlive); }
 await writeFile(path.join(outputRoot, "raw", "MULN.json"), `${JSON.stringify(record, null, 2)}\n`, { flag: "wx" });
 const cost = Number.isFinite(run.estimated_cost_usd) ? run.estimated_cost_usd : 0;
 const summary = { plan: path.relative(root, planPath).replaceAll("\\", "/"), live_calls: true, configured_optional_providers: configuredProviders, approved_run_count: 1, completed_run_count: 1, known_openai_cost_usd: Number(cost.toFixed(6)), maximum_approved_openai_cost_usd: 0.03, alpha_vantage_requests: run.alpha_vantage_requests ?? 0, maximum_approved_alpha_vantage_requests: 2, twelve_data_requests: run.twelve_data_requests ?? 0, maximum_approved_twelve_data_requests: 2, combined_optional_provider_attempts: run.optional_provider_attempts ?? 0, maximum_approved_combined_optional_provider_attempts: 4, runs: [run] };

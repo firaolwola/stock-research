@@ -293,6 +293,14 @@ the stored evidence with the current parser. Prospectively, a correctly settled
 misses. This rule does not revise frozen answer keys or historical batch recall.
 See `evaluation/diagnostics/nio-attributable-loss-sparse-5-decision.json`.
 
+The approved MULN-only live process on 2026-08-27 produced no research result.
+The dedicated runner omitted the established event-loop keep-alive handle, so
+Node exited with an unsettled top-level await before report, diagnostics, or
+provider telemetry were persisted. The process was not retried; known OpenAI
+cost is zero and optional-provider usage is unknown. This is a runner failure,
+not evidence that the parser passed or failed. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION.md`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It
