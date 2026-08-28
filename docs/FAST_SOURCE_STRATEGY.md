@@ -2,7 +2,7 @@
 
 **Status:** Provider-neutral implementation; Alpha Vantage and Twelve Data Basic explicitly approved
 
-**Last reviewed:** 2026-08-27
+**Last reviewed:** 2026-08-28
 
 **Scope:** Source map approved in #48 and free-first implementation completed in #51
 
@@ -30,6 +30,13 @@ allow selected older corporate-action, financing, bankruptcy, going-concern,
 and delisting filings to participate after CIK agreement. Unknown lineage,
 failed initial SEC access, or exhausted deadlines produces a terminal partial
 report whose unfinished domains are Limited, not indefinitely Pending.
+
+The registry may also carry exact filer-regime metadata when the cited SEC
+record establishes it. ZAPPF is resolved only through the reviewed
+ZAPPF → ZAPP → CIK 1955104 lineage; its Cayman foreign-private-issuer and IFRS
+context remains distinct from its current OTC venue. Terminal OTC evidence may
+settle `common_stock` only when the authoritative text identifies common stock;
+an OTC symbol or suffix alone never establishes security type.
 
 The owner approved Alpha Vantage's free API and Twelve Data Basic on 2026-08-27
 for personal/internal deterministic market context and ticker-news discovery.

@@ -68,3 +68,13 @@ live ticker is proposed, offline work must add stored-shape regressions and fix:
 The REKR working-capital/note omission should receive a bounded extraction
 fixture in the same offline pass. Historical measurements and answer keys remain
 unchanged.
+
+## Offline corrective status
+
+The subsequent offline pass added stored-shape regressions and corrected all
+identified deterministic mechanisms: exact ZAPPF/ZAPP/CIK lineage and foreign
+filing routing, authoritative GMBL OTC common-stock settlement, complete
+1-for-400 parsing alongside the 1-for-100 event, and bounded REKR
+working-capital-deficit and dated note-maturity extraction. The original 50%
+measurement above is immutable. No live rerun has been performed; a same-three
+verification requires fresh owner approval.

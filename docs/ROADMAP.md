@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — correct sparse-expansion deterministic defects offline:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Verification-7 resolved the MULN parser blocker. The approved REKR/ZAPPF/GMBL expansion then measured 10/20 (50%) recall and exposed two severe blockers: missing ZAPPF historical OTC identity resolution, and GMBL terminal security-type plus 1-for-400 normalization defects. No additional live batch is authorized. Active-deficiency and foreign/IFRS sample sizes also remain sparse.
+8. [ ] **Active — await owner approval for same-three verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The REKR/ZAPPF/GMBL expansion remains frozen at 10/20 (50%). Offline regressions now cover exact ZAPPF historical identity and foreign routing, GMBL terminal security type and complete 1-for-400 normalization, and REKR liquidity/maturity extraction. No live verification is authorized. Active-deficiency and foreign/IFRS sample sizes remain sparse even if a same-three rerun passes.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -101,9 +101,9 @@ wrong-date action. Verification-6 showed that an overlapping live extraction spa
 could still invoke the retrospective-history fallback and recreate it. The
 captured-shape correction resolves the conflict before canonical acceptance, and
 Verification-7 confirmed the nine-event live history without the August 1
-duplicate. The next active step is offline regression correction for the ZAPPF
-identity and GMBL security/ratio defects exposed by the three-ticker expansion;
-no additional live work is authorized. A paid data
+duplicate. The sparse-expansion deterministic corrections now pass offline; the
+next active step is owner review of a bounded same-three verification. No
+additional live work is authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

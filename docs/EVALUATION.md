@@ -427,6 +427,13 @@ missing evidence became favorable. Offline correction is required before any
 additional live sample. See
 `docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1.md`.
 
+Offline corrective work now reproduces all four failure shapes without network
+access: exact ZAPPF/ZAPP/CIK lineage reaches the foreign 20-F/6-K path; GMBL
+settles authoritative OTC common-stock identity and retains 1-for-100 plus
+1-for-400; and REKR preserves explicit working-capital-deficit and near-term
+note-maturity disclosures. The measured 10/20 result remains frozen. A fresh
+same-three verification is technically justified but is not authorized.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

@@ -77,7 +77,10 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   record cannot leave security type or listing status `unknown`. The SEC ticker
   association may confirm issuer/ticker/CIK and venue while the overall security
   record remains `limited_coverage` until an authoritative source establishes
-  type and current listing state.
+  type and current listing state. Delisted or OTC is a listing state, not a
+  security type: authoritative common-stock language may settle
+  `common_stock`, while foreign ordinary shares remain
+  `foreign_ordinary_share`. Ticker suffixes do not establish either type.
 - `issuer` records legal identity, optional CIK, identity confidence, and prior
   names/tickers. Confirmed prior identities require both effective dates,
   `high` or `medium` linkage confidence, and sourced confirmed linkage claims.

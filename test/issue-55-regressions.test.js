@@ -130,6 +130,73 @@ test("BIOR bounded historical identity reaches OTC lineage and both completed sp
   for (const identity of finalized.issuer.prior_identities) for (const claimId of identity.claim_ids) for (const sourceId of claims.get(claimId).source_ids) assert.ok(sources.get(sourceId)?.supported_claim_ids.includes(claimId));
 });
 
+test("ZAPPF exact historical identity routes through ZAPP and the foreign SEC filing path", async () => {
+  const result = await researchHistorical("ZAPPF", { cik: 1955104, name: "Zapp Electric Vehicles Group Limited", documents: {
+    "zapp-ex99_1.htm": "The Company's ordinary shares began trading on a split-adjusted basis on April 23, 2024 after a 1-for-20 reverse stock split became effective April 22, 2024.",
+    "zapp-20240930.htm": "The Company is a Cayman Islands foreign private issuer reporting under IFRS. The Company incurred a net loss and negative operating cash flow, and substantial doubt exists about its ability to continue as a going concern without additional capital.",
+    "final_nasdaq_delisting_6.htm": "Nasdaq suspended and delisted the Company's ordinary shares formerly traded under ZAPP. The ordinary shares began quotation on OTC under ZAPPF.",
+    "zapp20260122_nt20f.htm": "The annual report on Form 20-F for the fiscal year ended September 30, 2025 could not be filed within the prescribed period."
+  } });
+  assert.equal(result.report.security.ticker, "ZAPPF");
+  assert.equal(result.report.security.security_type, "foreign_ordinary_share");
+  assert.equal(result.report.security.listing_status, "delisted");
+  assert.equal(result.report.issuer.cik, "0001955104");
+  assert.deepEqual({ jurisdiction: result.evidence_packet.identity_resolution.filer_jurisdiction, regime: result.evidence_packet.identity_resolution.filer_regime, accounting: result.evidence_packet.identity_resolution.accounting_standard }, { jurisdiction: "Cayman Islands", regime: "foreign_private_issuer", accounting: "IFRS" });
+  assert.ok(result.report.issuer.prior_identities.some((item) => item.ticker === "ZAPP" && item.linkage_state === "confirmed"));
+  assert.ok(result.report.sections.reverse_splits.items.some((item) => item.title === "Completed 1-for-20 reverse split" && item.event_date === "2024-04-22"));
+  assert.equal(result.report.financial_assessment.going_concern.state, "confirmed");
+  assert.ok(result.report.sources.some((item) => /20-F filed/i.test(item.title)));
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
+test("GMBL authoritative OTC common-stock evidence settles type and preserves both completed ratios", async () => {
+  const filings = [
+    { accessionNumber: "0001493152-23-037224", form: "10-K", filingDate: "2023-10-13", reportDate: "2023-06-30", primaryDocument: "annual.htm", items: "" },
+    { accessionNumber: "0001493152-24-021070", form: "10-Q", filingDate: "2024-05-23", reportDate: "2024-03-31", primaryDocument: "quarter.htm", items: "" },
+    { accessionNumber: "0001493152-24-007169", form: "8-K", filingDate: "2024-02-22", reportDate: "2024-02-21", primaryDocument: "delisting.htm", items: "3.01" }
+  ];
+  const result = await researchFixture({ ticker: "GMBL", cik: 1451448, filings, documents: {
+    "annual.htm": "We implemented a one-for-one hundred (1-for-100) reverse stock split of our common stock effective February 22, 2023.",
+    "quarter.htm": "Effective December 22, 2023, the Company completed a one-for-four-hundred (1-for-400) reverse stock split of its common stock.",
+    "delisting.htm": "Nasdaq notified the Company that its shares of common stock were subject to delisting. Trading was suspended and the common stock began trading over-the-counter on OTC Pink under GMBL."
+  } });
+  assert.equal(result.report.security.security_type, "common_stock");
+  assert.equal(result.report.security.listing_status, "delisted");
+  assert.deepEqual(result.report.sections.reverse_splits.items.map((item) => [item.event_date, item.title]), [
+    ["2023-02-22", "Completed 1-for-100 reverse split"],
+    ["2023-12-22", "Completed 1-for-400 reverse split"]
+  ]);
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
+test("OTC terminal evidence does not infer common stock from ticker or venue alone", async () => {
+  const result = await researchFixture({ ticker: "OTCX", filings: [{ accessionNumber: "otcx", form: "8-K", filingDate: "2026-01-02", reportDate: "2026-01-02", primaryDocument: "otcx.htm", items: "3.01" }], documents: {
+    "otcx.htm": "Nasdaq suspended and delisted the securities, which began trading over-the-counter on OTC Pink."
+  } });
+  assert.equal(result.report.security.security_type, "unknown");
+  assert.equal(result.report.security.evidence_state, "limited_coverage");
+});
+
+test("REKR stored disclosure shape preserves working-capital deficit and near-term note maturity", async () => {
+  const disclosure = "As of June 30, 2026, we had a $6.598 million working capital deficit. The $15.0 million Series A Prime Revenue Sharing Notes are due December 15, 2026.";
+  const findings = extractSecFilingEvidence({ html: disclosure, form: "10-Q", filed: "2026-08-13", accession: "rekr", documentUrl: "https://www.sec.gov/rekr.htm", documentName: "rekr.htm" });
+  const workingCapital = findings.find((item) => item.kind === "working_capital_deficit");
+  const maturity = findings.find((item) => item.kind === "debt_maturity");
+  assert.equal(workingCapital.value, 6_598_000);
+  assert.match(workingCapital.statement, /working capital deficit/i);
+  assert.equal(maturity.value, 15_000_000);
+  assert.match(maturity.statement, /December 15, 2026/);
+  const distant = extractSecFilingEvidence({ html: "The $15.0 million notes mature December 15, 2030.", form: "10-Q", filed: "2026-08-13", accession: "rekr-far", documentUrl: "https://www.sec.gov/rekr-far.htm", documentName: "rekr-far.htm", evaluatedAt: "2026-08-27T12:00:00Z" });
+  assert.equal(distant.some((item) => item.kind === "debt_maturity"), false);
+});
+
+test("written split ratios require complete multi-digit denominator tokens", () => {
+  const findings = extractSecFilingEvidence({ html: "Effective December 22, 2023, the Company completed a one-for-four-hundred (1-for-400) reverse stock split.", form: "10-Q", filed: "2024-05-23", accession: "gmbl", documentUrl: "https://www.sec.gov/gmbl.htm", documentName: "gmbl.htm" });
+  const splits = findings.filter((item) => item.kind === "reverse_split");
+  assert.ok(splits.some((item) => item.ratio === "1-for-400"));
+  assert.equal(splits.some((item) => item.ratio === "1-for-4"), false);
+});
+
 test("MULN historical ticker resolves CIK lineage to BINI and preserves repeated split history", async () => {
   const spacer = " Background information about the issuer and its capital structure. ".repeat(12);
   const result = await researchHistorical("MULN", { cik: 1499961, name: "Bollinger Innovations, Inc.", formerNames: [{ name: "Mullen Automotive Inc.", from: "2021-11-12", to: "2025-07-23" }], documents: {

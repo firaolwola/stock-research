@@ -1135,3 +1135,34 @@ represented consolidated profit/loss including noncontrolling interests,
 noncontrolling-interest-only results, or comprehensive income rather than the
 required loss attributable to ordinary shareholders. Broadening the semantic
 gate would manufacture comparability; Limited is the correct product result.
+
+## 2026-08-28 — Resolve exact OTC lineage before current security settlement
+
+**Status:** Accepted corrective implementation after Sparse Expansion 1
+
+**Decision:** A reviewed SEC-backed historical identity may resolve a requested
+OTC or delisted symbol even when the current SEC ticker map omits it. Resolution
+preserves the requested symbol, former exchange symbol, current symbol, CIK,
+venue history, and filer regime. Security type remains separate: authoritative
+common-stock wording may settle an OTC common stock, while suffixes and venue
+alone may not. ZAPPF uses the exact ZAPP/CIK 1955104 path; no fuzzy issuer-name
+matching is introduced.
+
+**Why:** Sparse Expansion 1 stopped ZAPPF before authoritative 20-F/6-K evidence
+and made GMBL invalid after terminal OTC evidence left security type unknown.
+Both failures came from deterministic identity settlement, not missing primary
+evidence.
+
+## 2026-08-28 — Require complete equivalent split-ratio tokens
+
+**Status:** Accepted corrective implementation after Sparse Expansion 1
+
+**Decision:** Written and numeric representations of the same complete split
+ratio are corroborating, not competing. Written hundreds and thousands accept
+hyphenated forms only as complete tokens. Prefixes such as `four` within
+`four-hundred` cannot become a denominator; a truncated or ambiguous token is
+withheld.
+
+**Why:** GMBL's `one-for-four-hundred (1-for-400)` disclosure produced a false
+user-facing 1-for-4 event while the correct numeric occurrence was withheld as
+competing evidence.
