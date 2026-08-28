@@ -310,6 +310,13 @@ created a false completed 1-for-100 action on August 4, 2025 beside the actual
 history lists and cross-action date borrowing. No retry occurred. See
 `docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-2.md`.
 
+The stored verification-2 shape now has deterministic regression coverage.
+Segment-local extraction completes the May 4, August 11, and December 21, 2023
+MULN actions from authoritative retrospective history, preserves the August 4,
+2025 1-for-250 action, and suppresses the false same-date 1-for-100 event. This
+is offline evidence only; another live verification requires separate owner
+approval and Issue #55 remains open.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

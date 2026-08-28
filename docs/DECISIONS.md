@@ -1041,3 +1041,22 @@ row-semantic parser and dedicated evidence before approval.
 metadata to prove that NIO's rejected structured concepts were not equivalent to
 the methodology construct. Failing closed is correct when authoritative
 structured evidence is genuinely unavailable.
+
+## 2026-08-27 — Bind split lifecycle and dates within one disclosure segment
+
+**Status:** Accepted corrective implementation after the corrected-runner MULN verification
+
+**Decision:** A raw corporate-action occurrence retains a logical segment ID.
+Its ratio, action date, and lifecycle must resolve within that segment. A named
+prior action cannot borrow the following action clause's date or completion verb.
+Cross-sentence inheritance is allowed only for an explicit, immediately following
+reference to one split with no competing ratio. Authoritative retrospective split
+lists may establish completed lifecycle from historical context and a bound
+ratio/date tuple; an old date alone never proves completion. Ambiguous tuples
+remain withheld or unresolved, and diagnostics record segment provenance and any
+rejected inheritance attempt.
+
+**Why:** The live MULN packet correctly retrieved the three 2023 ratio/date pairs
+but left two unresolved, while a June 1-for-100 label borrowed the August
+1-for-250 action's date and completion semantics. Segment-local binding fixes the
+false event without weakening proposal or authorization safeguards.

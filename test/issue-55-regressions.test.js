@@ -196,6 +196,49 @@ test("Sparse-4 MULN local binding preserves three 2023 actions and does not comp
   assert.ok(diagnostics.some((item) => item.disposition === "withheld" && item.reason === "authorization_range_is_not_a_completed_action"));
 });
 
+test("MULN retrospective split history infers completed lifecycle without requiring the literal word completed", () => {
+  const html = "Reverse stock split history: a 1-for-25 reverse stock split effective May 4, 2023; a 1-for-9 reverse stock split effective August 11, 2023; and a 1-for-100 reverse stock split effective December 21, 2023.";
+  const result = extractSecFilingEvidenceWithDiagnostics({ html, form: "10-K", filed: "2025-01-24", evaluatedAt: "2026-08-27T12:00:00Z", accession: "muln-history", documentUrl: "https://www.sec.gov/muln-history", documentName: "muln-history.htm" });
+  const splits = result.findings.filter((item) => item.kind === "reverse_split");
+  assert.deepEqual(splits.map((item) => [item.ratio, item.effective_date, item.action_state]), [
+    ["1-for-25", "2023-05-04", "completed"],
+    ["1-for-9", "2023-08-11", "completed"],
+    ["1-for-100", "2023-12-21", "completed"]
+  ]);
+  const accepted = result.corporate_action_diagnostics.filter((item) => item.disposition === "accepted" && item.extracted_effective_date);
+  assert.ok(accepted.every((item) => item.segment_id && item.candidate_date_source_segment === item.segment_id && item.candidate_lifecycle_source_segment === item.segment_id));
+});
+
+test("MULN adjacent named action cannot borrow the following split date", () => {
+  const html = "Effective June 2, 2025, the Company implemented a reverse stock split at a ratio of 1-for-100 shares (the June Reverse Stock Split), and effective August 4, 2025, the Company implemented a reverse stock split at a ratio of 1-for-250 shares (the August Reverse Stock Split).";
+  const result = extractSecFilingEvidenceWithDiagnostics({ html, form: "10-Q", filed: "2025-08-14", evaluatedAt: "2026-08-27T12:00:00Z", accession: "muln-adjacent", documentUrl: "https://www.sec.gov/muln-adjacent", documentName: "muln-adjacent.htm" });
+  const splits = result.findings.filter((item) => item.kind === "reverse_split");
+  assert.ok(splits.some((item) => item.ratio === "1-for-100" && item.effective_date === "2025-06-02"));
+  assert.ok(splits.some((item) => item.ratio === "1-for-250" && item.effective_date === "2025-08-04" && item.action_state === "completed"));
+  assert.equal(splits.some((item) => item.ratio === "1-for-100" && item.effective_date === "2025-08-04"), false);
+});
+
+test("stored-live MULN shape yields canonical history without the false August 2025 1-for-100", async () => {
+  const html = "Reverse stock split history: a 1-for-25 reverse stock split effective May 4, 2023; a 1-for-9 reverse stock split effective August 11, 2023; a 1-for-100 reverse stock split effective December 21, 2023. Effective June 2, 2025, the Company implemented a reverse stock split at a ratio of 1-for-100 shares (the June Reverse Stock Split), and effective August 4, 2025, the Company implemented a reverse stock split at a ratio of 1-for-250 shares (the August Reverse Stock Split).";
+  const result = await researchFixture({ ticker: "MULN", filings: [{ accessionNumber: "000143774925027016", form: "10-Q", filingDate: "2025-08-14", reportDate: "2025-06-30", primaryDocument: "muln-stored-live.htm", items: "", primaryDocDescription: "Quarterly report" }], documents: { "muln-stored-live.htm": html } });
+  const events = result.report.sections.reverse_splits.items.map((item) => [item.title.match(/1-for-\d+/)?.[0], item.event_date, item.corporate_action_state]);
+  for (const expected of [["1-for-25", "2023-05-04", "completed"], ["1-for-9", "2023-08-11", "completed"], ["1-for-100", "2023-12-21", "completed"], ["1-for-250", "2025-08-04", "completed"]]) assert.ok(events.some((item) => item.every((value, index) => value === expected[index])), JSON.stringify(events));
+  assert.equal(events.some(([ratio, date]) => ratio === "1-for-100" && date === "2025-08-04"), false);
+  assert.equal(JSON.stringify(result.report).includes("corporate_action_diagnostics"), false);
+});
+
+test("corporate-action clauses isolate sentence list and table-row ratios", () => {
+  const cases = [
+    "The Company completed a 1-for-10 reverse stock split effective January 2, 2025. The Company completed a 1-for-20 reverse stock split effective February 3, 2025.",
+    "<ul><li>The Company completed a 1-for-10 reverse stock split effective January 2, 2025.</li><li>The Company completed a 1-for-20 reverse stock split effective February 3, 2025.</li></ul>",
+    "<table><tr><td>The Company completed a 1-for-10 reverse stock split effective January 2, 2025.</td></tr><tr><td>The Company completed a 1-for-20 reverse stock split effective February 3, 2025.</td></tr></table>"
+  ];
+  for (const html of cases) {
+    const findings = extractSecFilingEvidence({ html, form: "10-Q", filed: "2025-03-01", evaluatedAt: "2026-08-27T12:00:00Z", accession: "segments", documentUrl: "https://www.sec.gov/segments", documentName: "segments.htm" }).filter((item) => item.kind === "reverse_split");
+    assert.deepEqual(findings.map((item) => [item.ratio, item.effective_date]), [["1-for-10", "2025-01-02"], ["1-for-20", "2025-02-03"]]);
+  }
+});
+
 test("Sparse-5 MULN live inline-XBRL shape yields only dated supported canonical actions", async () => {
   const frozen = JSON.parse(await readFile(new URL("../evaluation/live/2026-08-27-sparse-5/raw/MULN.json", import.meta.url), "utf8"));
   assert.equal(frozen.report.sections.reverse_splits.items.length, 18);

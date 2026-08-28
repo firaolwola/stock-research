@@ -313,8 +313,12 @@ dates alone do not create duplicate corporate actions.
 Raw split mentions are not separate corporate-action section items. Fast first
 reconciles them into canonical lifecycle events; their source-linked claims may
 remain as corroborating provenance, but ambiguous undated mentions cannot appear
-as extra completed actions. The internal
-Fast evidence packet may also carry `normalization_diagnostics` for rejected SEC
+as extra completed actions. The internal Fast evidence packet may retain
+corporate-action diagnostics with raw span and logical segment IDs, candidate
+date/lifecycle source segments, inheritance attempt and rejection reason,
+competing-ratio flag, and final canonical disposition. These diagnostics never
+enter user-facing evidence. The packet may also carry
+`normalization_diagnostics` for rejected SEC
 Company Facts concepts. These bounded structural records are deliberately outside
 report v4 and cannot become claims, evidence, sources, or score inputs.
 
