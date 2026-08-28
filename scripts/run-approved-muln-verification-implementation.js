@@ -14,7 +14,7 @@ import { loadRealAppConfig } from "../startup-config.js";
 
 dotenv.config({ quiet: true });
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-muln-verification-2.json");
+const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-muln-verification-3.json");
 const childPlan = JSON.parse(await readFile(planPath, "utf8"));
 const parentBytes = await readFile(path.join(root, ...childPlan.parent_plan.split("/")));
 if (createHash("sha256").update(parentBytes).digest("hex") !== childPlan.parent_plan_sha256) throw new Error("The first MULN verification plan changed.");
@@ -33,6 +33,10 @@ for (const preserved of plan.preserve_prior_batches) {
 for (const [name, expected] of [["run-summary.json", plan.preserve_failed_run.run_summary_sha256], ["raw/MULN.json", plan.preserve_failed_run.raw_muln_sha256]]) {
   const bytes = await readFile(path.join(root, ...plan.preserve_failed_run.directory.split("/"), ...name.split("/")));
   if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Refusing to run because the failed MULN artifact ${name} changed.`);
+}
+for (const [name, expected] of [["run-summary.json", childPlan.preserve_previous_verification.run_summary_sha256], ["raw/MULN.json", childPlan.preserve_previous_verification.raw_muln_sha256]]) {
+  const bytes = await readFile(path.join(root, ...childPlan.preserve_previous_verification.directory.split("/"), ...name.split("/")));
+  if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Refusing to run because the prior corrected MULN artifact ${name} changed.`);
 }
 const outputRoot = path.join(root, "evaluation", "live", plan.output_directory);
 if ((await readdir(outputRoot).catch((error) => error?.code === "ENOENT" ? [] : Promise.reject(error))).length) throw new Error("Refusing to overwrite MULN verification output.");

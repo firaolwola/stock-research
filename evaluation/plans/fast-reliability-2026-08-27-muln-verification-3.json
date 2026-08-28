@@ -1,0 +1,32 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "muln-verification-3",
+  "approved_at": "2026-08-27",
+  "purpose": "Run one final bounded MULN Fast verification after segment-local corporate-action fixes.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification-2.json",
+  "parent_plan_sha256": "b364f4290668d0b4de92d9d7d3f6df0992e031e8f6c8b0bb18e9ed8d3932ca69",
+  "output_directory": "2026-08-27-muln-verification-3",
+  "approval_token": "issue-55-2026-08-27-approved-muln-final-segment-binding-one-run",
+  "required_ancestor": "536baea",
+  "approval": {
+    "approved": true,
+    "tickers": ["MULN"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 1,
+    "maximum_openai_cost_usd": 0.03,
+    "maximum_alpha_vantage_requests": 2,
+    "maximum_twelve_data_requests": 2,
+    "maximum_combined_optional_provider_attempts": 4,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "preserve_previous_verification": {
+    "directory": "evaluation/live/2026-08-27-muln-verification-2",
+    "run_summary_sha256": "f6efacd0f747b69a2f70fd6dc813aa39c804353145afde3f708b0c962253076b",
+    "raw_muln_sha256": "1f11c4c469f86d0bade708c3e8cbd2cb3ca91ec9bacabfef1f8469c9836545b1"
+  }
+}
