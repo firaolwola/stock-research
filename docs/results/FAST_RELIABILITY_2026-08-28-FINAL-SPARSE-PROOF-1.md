@@ -60,3 +60,8 @@ status does not imply ADS. ONFO compliance events reconcile by listing rule, so
 the older bid warning becomes historical after the August 27 closure while its
 stockholders'-equity deficiency remains active. This does not alter the measured
 live result above. A fresh bounded verification needs separate owner approval.
+
+The approved verification ran and did not confirm the correction. Its immutable
+result is documented in
+`FAST_RELIABILITY_2026-08-28-FINAL-SPARSE-PROOF-VERIFICATION-1.md`; this original
+4/7 measurement remains unchanged.

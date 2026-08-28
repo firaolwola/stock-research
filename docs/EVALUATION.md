@@ -495,6 +495,13 @@ ratio. ONFO now reconciles its newer Rule 5550(a)(2) closure against the older b
 warning while leaving Rule 5550(b)(1) active. One fresh bounded ONFO/STN
 verification is technically justified but not authorized.
 
+That verification subsequently ran once per ticker and also measured 4/7. ONFO's
+internal rule states reconciled, but its active equity explanation retained the
+full mixed-rule paragraph and an incidental ADS mention polluted security
+structure. STN settled Canada and 40-F/6-K but broad phrase matching selected an
+incidental U.S.-GAAP reference and failed direct-share/TSX promotion. Both are
+prospective deterministic defects; no further live run is authorized.
+
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,
 record the date, model/configuration, exact case IDs (at most five), maximum

@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — owner decision on one final bounded ONFO/STN verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Final Sparse Proof 1 exposed ONFO listing-state ambiguity and missing STN foreign-filer/IFRS/direct-share promotion. Both defects now have deterministic offline regression coverage. No live rerun is authorized; a fresh bounded verification requires explicit owner approval.
+8. [ ] **Active — offline correction after final ONFO/STN verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The bounded verification preserved correct rule lifecycles and foreign-filer regime but exposed unscoped U.S.-GAAP/ADS phrase matching for STN and mixed-rule explanation projection for ONFO. Fix those stored live shapes offline; no rerun is authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
