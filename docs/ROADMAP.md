@@ -122,6 +122,10 @@ verdict.
    split span to capture delayed ratio/effective wording without crossing the
    next action. Offline regression passes; a fresh AMC-only live confirmation
    remains separately gated.
+9. [x] **Complete — AMC effective-date lifecycle correction:** retained a
+   lifecycle proof when an explicit past effective date safely settles a
+   completed action. Offline regression passes; the latest live result remains
+   the unchanged partial baseline and any further AMC confirmation is gated.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

@@ -537,6 +537,19 @@ fixture passes the completed 1-for-10/date binding and canonical invariant.
 This remains offline-only; no new live result is implied. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-2.md`.
 
+### AMC split offline correction 3 (2026-08-28)
+
+The fresh AMC confirmation reached the delayed 2023 filing and extracted the
+`1-for-10` ratio and `2023-08-24` effective date, but canonical acceptance
+withheld it because the past-effective-date fallback did not retain a lifecycle
+position. The parser now records an explicit effective-date fallback lifecycle
+source and binds that lifecycle proof to the selected effective-date position,
+without weakening date, issuer, competing-ratio, or authorization safeguards.
+A deterministic regression covers the no-nearby-lifecycle-verb shape. The
+live report and prior measurements remain unchanged; another AMC request still
+requires separate approval. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-3.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

@@ -1366,3 +1366,21 @@ prose without allowing a neighboring action to donate its values.
 delayed-clause deterministic fixture now produces a completed 1-for-10 action
 on 2023-08-24. Historical live artifacts remain unchanged; another AMC request
 requires separate approval.
+
+## 2026-08-28 — AMC explicit effective-date lifecycle fallback
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** When a bounded authoritative action clause supplies an explicit
+effective date that is already in the past, the parser may settle the action as
+completed and records `explicit_effective_date_fallback` as its lifecycle
+source. Canonical acceptance uses the selected effective-date position as the
+lifecycle position for this fallback only.
+
+**Why:** The latest AMC live diagnostic showed that ratio and effective date
+were extracted correctly, but the event was withheld as
+`resolved_lifecycle_required` because the inferred completed state had no
+lifecycle position. Retaining the effective-date proof fixes that false
+suppression without accepting filing dates, authorization ranges, undated
+mentions, or competing-ratio spans. The correction is covered offline; no new
+live request or historical-baseline change is implied.

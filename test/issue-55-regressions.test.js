@@ -919,6 +919,34 @@ test("AMC delayed ratio clause remains bound inside the expanded local split spa
   assert.equal(result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10")?.canonical_acceptance_invariant_passed, true);
 });
 
+test("AMC explicit past effective date can complete a split without a nearby lifecycle verb", () => {
+  const html = `The reverse stock split was disclosed in the filing. ${"inline XBRL context ".repeat(40)} The action used a ratio of 1-for-10, effective August 24, 2023.`;
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html, form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-28T00:00:00Z",
+    accession: "amc-effective-date-only", documentUrl: "https://www.sec.gov/amc-effective-date-only", documentName: "amc-effective-date-only.htm"
+  });
+  const split = result.findings.find((item) => item.kind === "reverse_split");
+  assert.equal(split?.ratio, "1-for-10");
+  assert.equal(split?.event_date, "2023-08-24");
+  assert.equal(split?.action_state, "completed");
+  assert.equal(result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10")?.canonical_acceptance_invariant_passed, true);
+});
+
+test("AMC explicit effective date recovered from a live-shaped clause is not withheld as unknown", () => {
+  const html = `The reverse stock split was disclosed in the filing. <span>Action terms</span> The action used a ratio of one-for-ten; effective date was August 24, 2023.`;
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html, form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-28T00:00:00Z",
+    accession: "amc-effective-date-live-shaped", documentUrl: "https://www.sec.gov/amc-effective-date-live-shaped", documentName: "amc-effective-date-live-shaped.htm"
+  });
+  const split = result.findings.find((item) => item.kind === "reverse_split");
+  const diagnostic = result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10");
+  assert.equal(split?.event_date, "2023-08-24");
+  assert.equal(split?.action_state, "completed");
+  assert.equal(diagnostic?.date_role, "effective_date");
+  assert.equal(diagnostic?.disposition, "accepted");
+  assert.equal(diagnostic?.canonical_validation_reason, "ratio_date_lifecycle_bound_within_action_segment");
+});
+
 test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted and invalidates affected metrics", async () => {
   const result = await researchFixture({
     ticker: "NCPL",
