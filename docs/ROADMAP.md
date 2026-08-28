@@ -134,6 +134,10 @@ verdict.
    bounded “effective date of which was …” live-shaped grammar with the same
    lifecycle/date binding safeguards. Offline regression passes; another live
    confirmation remains separately gated.
+12. [x] **Complete — AMC direct effective-date correction:** accepted bounded
+   `effective date of DATE` / `effective date thereof` forms after the second
+   live confirmation still showed `unknown_date_role`. Offline regression
+   passes; another live confirmation remains separately gated.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

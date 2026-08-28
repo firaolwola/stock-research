@@ -572,6 +572,18 @@ no live result or historical measurement changed. A new live confirmation still
 requires separate approval. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-4.md`.
 
+### AMC split offline correction 5 (2026-08-28)
+
+The next approved AMC confirmation still extracted the ratio/date but retained
+`unknown_date_role`. Offline replay identified the remaining common form as
+“with an effective date of DATE” (plus equivalent `thereof` wording). The
+bounded grammar now accepts direct `of`/`for` date relationships and keeps date
+extraction and role classification aligned. An inline-XBRL-shaped regression
+passes with a completed `1-for-10` event on `2023-08-24`; the failed live result
+and historical measurements remain unchanged. Another live confirmation still
+requires separate approval. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-5.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

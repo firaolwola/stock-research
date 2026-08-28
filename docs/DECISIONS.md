@@ -1416,3 +1416,19 @@ effective-date label and the date. The correction aligns date extraction and
 role classification without broadening acceptance of filing dates,
 authorizations, orphan mentions, or competing actions. Deterministic coverage
 passes; no new live request or baseline change is implied.
+
+## 2026-08-28 — AMC direct effective-date relationship correction
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** Accept direct bounded forms such as “effective date of DATE” and
+“effective date thereof was DATE” as explicit effective-date evidence when the
+date is in the same action span as the ratio.
+
+**Why:** The second approved AMC confirmation still showed an extracted
+`1-for-10` / `2023-08-24` occurrence with `unknown_date_role`. The previous
+grammar handled relationship words but not a direct `of DATE` form, causing a
+safe-but-severe false suppression. The shared extractor/classifier grammar now
+handles these forms without accepting filing dates, authorization ranges,
+future dates, orphan dates, or competing-ratio spans. No additional live call
+or historical baseline change is implied.
