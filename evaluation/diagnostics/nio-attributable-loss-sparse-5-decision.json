@@ -1,0 +1,25 @@
+{
+  "ticker": "NIO",
+  "issuer_cik": "0001736541",
+  "decision": "no_safe_company_facts_concept_exists",
+  "methodology_version": "2.1.0",
+  "reviewed_candidates": [
+    { "namespace": "us-gaap", "tag": "ComprehensiveIncomeNetOfTax", "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Parent", "units": ["CNY", "USD"], "forms": ["20-F"], "classification": "comprehensive_income_not_net_income" },
+    { "namespace": "us-gaap", "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest", "label": "Comprehensive Income (Loss), Net of Tax, Including Portion Attributable to Noncontrolling Interest", "units": ["CNY", "USD"], "forms": ["20-F"], "classification": "comprehensive_income_not_net_income" },
+    { "namespace": "us-gaap", "tag": "NetIncomeLossAttributableToNoncontrollingInterest", "label": "Net Income (Loss) Attributable to Noncontrolling Interest", "units": ["CNY", "USD"], "forms": ["20-F"], "classification": "noncontrolling_interest_only" },
+    { "namespace": "us-gaap", "tag": "OtherComprehensiveIncomeForeignCurrencyTranslationAdjustmentTaxPortionAttributableToParent", "label": "Other Comprehensive Income (Loss), Foreign Currency Translation Adjustment, Tax, Portion Attributable to Parent", "units": ["CNY"], "forms": ["20-F"], "classification": "comprehensive_income_not_net_income" },
+    { "namespace": "us-gaap", "tag": "ProfitLoss", "label": "Net Income (Loss), Including Portion Attributable to Noncontrolling Interest", "units": ["CNY", "USD"], "forms": ["20-F"], "classification": "consolidated_profit_loss_including_noncontrolling_interest" }
+  ],
+  "company_facts_result": "limited_unscored",
+  "table_fallback": {
+    "implemented": false,
+    "reason": "The stored bounded evidence does not retain a filed 20-F table row whose exact semantics, CNY unit, comparable annual columns, and provenance can be proven without adding a new table parser or scraping nearby numbers."
+  },
+  "guardrails": [
+    "No alias was added.",
+    "No custom taxonomy acceptance was broadened.",
+    "Consolidated, noncontrolling-interest, and comprehensive-income concepts remain distinct.",
+    "Methodology 2.1.0 remains unchanged."
+  ],
+  "prospective_evaluation_rule": "Unavailable authoritative evidence is recorded separately from a retrieval or normalization miss when the system retrieves and adjudicates all bounded candidates and settles Limited. Frozen historical answer keys and Sparse-5 results remain unchanged."
+}

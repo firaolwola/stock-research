@@ -278,6 +278,21 @@ comprehensive income/loss, not a safely established annual loss attributable to
 ordinary shareholders. The semantic gate was not broadened. See
 `docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-5.md`.
 
+The post-Sparse-5 offline correction does not alter that frozen result. The
+MULN live-shaped regression now retains the May 4 1-for-25, August 11 1-for-9,
+and December 21 1-for-100 actions, while authorization ranges and undated orphan
+occurrences remain diagnostic-only. Internal corporate-action diagnostics record
+the accession, form, local span, ratio, lifecycle, effective and filing dates,
+canonical event ID, disposition, and reason without entering the report.
+
+The NIO review concluded that no safe Company Facts equivalent exists in the
+captured candidates. A bounded 20-F exact-table fallback is not supportable from
+the stored evidence with the current parser. Prospectively, a correctly settled
+`Limited` result after bounded candidate adjudication should be classified as
+`unavailable_authoritative_evidence`, separately from retrieval and normalization
+misses. This rule does not revise frozen answer keys or historical batch recall.
+See `evaluation/diagnostics/nio-attributable-loss-sparse-5-decision.json`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

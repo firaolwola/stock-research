@@ -1,11 +1,12 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createApp } from "../app.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { calibrateReportScores, diagnoseCapitalScoreSufficiency } from "../lib/scoring.js";
-import { boundedDocumentRows, createSecEvidenceClient } from "../lib/sec-evidence.js";
-import { extractSecFilingEvidence, normalizeCatalystClassification } from "../lib/sec-filing-extraction.js";
+import { boundedDocumentRows, classifyProfitConceptSemantics, createSecEvidenceClient } from "../lib/sec-evidence.js";
+import { extractSecFilingEvidence, extractSecFilingEvidenceWithDiagnostics, normalizeCatalystClassification } from "../lib/sec-filing-extraction.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 import { withTestServer } from "../support/test-server.js";
 
@@ -191,7 +192,24 @@ test("Sparse-4 MULN local binding preserves three 2023 actions and does not comp
   const completed = findings.filter((item) => item.action_state === "completed");
   assert.deepEqual(completed.map((item) => [item.ratio, item.event_date]), [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"]]);
   assert.equal(findings.some((item) => item.ratio === "1-for-60" && item.action_state === "completed"), false);
-  assert.ok(findings.some((item) => item.action_state === "authorized"));
+  const diagnostics = extractSecFilingEvidenceWithDiagnostics({ html, form: "10-Q", filed: "2024-08-14", evaluatedAt: "2026-08-27T12:00:00Z", accession: "muln", documentUrl: "https://www.sec.gov/muln.htm", documentName: "muln.htm" }).corporate_action_diagnostics;
+  assert.ok(diagnostics.some((item) => item.disposition === "withheld" && item.reason === "authorization_range_is_not_a_completed_action"));
+});
+
+test("Sparse-5 MULN live inline-XBRL shape yields only dated supported canonical actions", async () => {
+  const frozen = JSON.parse(await readFile(new URL("../evaluation/live/2026-08-27-sparse-5/raw/MULN.json", import.meta.url), "utf8"));
+  assert.equal(frozen.report.sections.reverse_splits.items.length, 18);
+  assert.ok(frozen.report.sections.reverse_splits.items.some((item) => item.title === "Completed 1-for-1 reverse split"));
+  assert.ok(frozen.report.sections.reverse_splits.items.some((item) => /May 4, 20$/.test(item.summary)));
+  const html = `<table><tr><td>Upon approval by stockholders, the Company completed a 1-for-25 reverse stock split on May 4, 2023.</td><td>The Company completed a 1-for-9 reverse stock split on August 11, 2023.</td><td>After receiving stockholder approval, on December 21, 2023, the Company effectuated a 1-for-100 reverse stock split.</td></tr><tr><td>Stockholders authorized a reverse stock split at a ratio between 1-for-2 and 1-for-250.</td></tr></table>`;
+  const result = await researchFixture({ ticker: "MULN", filings: [{ accessionNumber: "000143774925027016", form: "10-Q", filingDate: "2025-08-14", reportDate: "2025-06-30", primaryDocument: "muln-live.htm", items: "", primaryDocDescription: "Quarterly report" }], documents: { "muln-live.htm": html } });
+  assert.deepEqual(result.report.sections.reverse_splits.items.map((item) => [item.title.match(/1-for-\d+/)?.[0], item.event_date]), [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"]]);
+  assert.equal(result.report.sections.reverse_splits.items.some((item) => /1-for-(?:1|2|250)\b/.test(item.title)), false);
+  const diagnostics = result.evidence_packet.corporate_action_diagnostics;
+  assert.ok(diagnostics.every((item) => ["accepted", "merged", "withheld", "rejected"].includes(item.disposition)));
+  assert.ok(diagnostics.filter((item) => item.disposition === "accepted").every((item) => item.canonical_event_id));
+  assert.ok(diagnostics.some((item) => item.reason === "authorization_range_is_not_a_completed_action" && item.canonical_event_id === null));
+  assert.equal(JSON.stringify(result.report).includes("corporate_action_diagnostics"), false);
 });
 
 test("Sparse-2 capital evidence remains Limited for explicit evidence-gate reasons", async () => {
@@ -284,9 +302,36 @@ test("rejected NIO Company Facts concepts retain bounded structural diagnostics 
   assert.equal(result.report.financial_assessment.metrics.profitability.state, "unknown");
   assert.match(result.report.financial_assessment.metrics.profitability.summary, /revenue history was usable.*attributable annual net-loss normalization remained unavailable/i);
   const diagnostic = result.evidence_packet.normalization_diagnostics.find((item) => item.concept_tag === "AmbiguousLossMeasure");
-  assert.deepEqual(diagnostic, { taxonomy_namespace: "nio", concept_tag: "AmbiguousLossMeasure", label: "Loss allocated to equity holders", unit: "CNY", currency: "CNY", start_date: "2024-01-01", end_date: "2024-12-31", duration_days: 365, cadence: "annual", accession: "nio-loss", form: "20-F", rejection_reason: "attributable_profit_loss_semantics_not_established", issuer_cik: "0001736541" });
+  assert.deepEqual(diagnostic, { taxonomy_namespace: "nio", concept_tag: "AmbiguousLossMeasure", label: "Loss allocated to equity holders", semantic_category: "non_equivalent_or_unestablished", unit: "CNY", currency: "CNY", start_date: "2024-01-01", end_date: "2024-12-31", duration_days: 365, cadence: "annual", accession: "nio-loss", form: "20-F", rejection_reason: "attributable_profit_loss_semantics_not_established", issuer_cik: "0001736541" });
   assert.equal(JSON.stringify(result.report).includes("AmbiguousLossMeasure"), false);
   assert.equal("val" in diagnostic, false);
+});
+
+test("Sparse-5 NIO rejected concepts are non-equivalent to attributable ordinary-shareholder net loss", () => {
+  const candidates = [
+    ["ComprehensiveIncomeNetOfTax", "Comprehensive Income (Loss), Net of Tax, Attributable to Parent", "comprehensive_income_not_net_income"],
+    ["ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest", "Comprehensive Income (Loss), Net of Tax, Including Portion Attributable to Noncontrolling Interest", "comprehensive_income_not_net_income"],
+    ["NetIncomeLossAttributableToNoncontrollingInterest", "Net Income (Loss) Attributable to Noncontrolling Interest", "noncontrolling_interest_only"],
+    ["OtherComprehensiveIncomeForeignCurrencyTranslationAdjustmentTaxPortionAttributableToParent", "Other Comprehensive Income (Loss), Foreign Currency Translation Adjustment, Tax, Portion Attributable to Parent", "comprehensive_income_not_net_income"],
+    ["ProfitLoss", "Net Income (Loss), Including Portion Attributable to Noncontrolling Interest", "consolidated_profit_loss_including_noncontrolling_interest"]
+  ];
+  for (const [tag, label, expected] of candidates) assert.equal(classifyProfitConceptSemantics({ tag, label }), expected);
+  assert.equal(candidates.some(([tag, label]) => classifyProfitConceptSemantics({ tag, label }) === "attributable_to_ordinary_shareholders"), false);
+});
+
+test("NIO remains Limited when only Sparse-5 non-equivalent SEC concepts exist", async () => {
+  const annual = (value, year, accn) => fact(value, { start: `${year}-01-01`, end: `${year}-12-31`, filed: `${year + 1}-04-10`, form: "20-F", accn });
+  const candidate = (label, tag) => [tag, concept(label, [annual(-20, 2023, `${tag}-23`), annual(-22, 2024, `${tag}-24`)], "CNY")];
+  const facts = Object.fromEntries([
+    candidate("Comprehensive Income (Loss), Net of Tax, Attributable to Parent", "ComprehensiveIncomeNetOfTax"),
+    candidate("Comprehensive Income (Loss), Net of Tax, Including Portion Attributable to Noncontrolling Interest", "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest"),
+    candidate("Net Income (Loss) Attributable to Noncontrolling Interest", "NetIncomeLossAttributableToNoncontrollingInterest"),
+    candidate("Net Income (Loss), Including Portion Attributable to Noncontrolling Interest", "ProfitLoss")
+  ]);
+  const result = await researchFixture({ ticker: "NIO", cik: 1736541, companyFacts: { cik: 1736541, entityName: "NIO Inc.", facts: { "us-gaap": facts } } });
+  assert.equal(result.report.financial_assessment.metrics.profitability.state, "unknown");
+  assert.equal(calibrateReportScores(result.report).scores.financial_net_income_trend.value, null);
+  assert.ok(result.evidence_packet.normalization_diagnostics.every((item) => item.semantic_category !== "attributable_to_ordinary_shareholders"));
 });
 
 test("terminal OTC reports label earlier exchange pressure as historical", async () => {

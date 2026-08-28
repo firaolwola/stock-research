@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — correct remaining Sparse-5 blockers offline:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-5 remained at 14/16 (87.5%) with 4/4 valid reports and 4/4 safe settlement. BIOR's canonical split history now passes. MULN's live filing shape still produces incomplete/false split events, while NIO diagnostics show no safely attributable ordinary-shareholder annual loss concept under the current exact gate. No additional live run or expansion is authorized.
+8. [ ] **Active — await owner approval for post-Sparse-5 verification:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Sparse-5 remained at 14/16 (87.5%) with 4/4 valid reports and 4/4 safe settlement. Offline regressions now correct the reproduced MULN live shape and expose packet-only occurrence diagnostics. NIO remains correctly Limited because none of its captured Company Facts candidates is semantically equivalent to attributable ordinary-shareholder loss; no unsafe alias or table fallback was added. No additional live run or expansion is authorized.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -93,9 +93,11 @@ showed that undated corroborating split occurrences still evaded reconciliation
 and that rejected NIO Company Facts metadata was not retained. Sparse-5 cleared
 the BIOR reconciliation blocker and made the NIO limitation observable, but
 MULN's live extraction still failed and NIO remains unavailable under the exact
-semantic gate. The next active step is offline correction of the MULN live shape
-and an evidence-backed decision on NIO's authoritative attributable-loss source;
-no new live run or expansion batch is authorized. A paid data
+semantic gate. Both mechanisms now have deterministic offline disposition: the
+MULN live-shaped regression yields the three dated 2023 actions without orphan
+events, while NIO remains Limited after explicit candidate adjudication. The next
+active step is owner review of whether another same-four verification is worth
+the bounded cost; no new live run or expansion batch is authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

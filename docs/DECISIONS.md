@@ -1018,3 +1018,26 @@ report evidence, claims, sources, or scoring inputs.
 **Why:** Sparse-4 still displayed BIOR duplicate occurrences and cross-associated
 MULN ratios/dates. It also discarded the exact metadata needed to diagnose NIO's
 unmatched attributable-loss concept, making each paid verification partly blind.
+
+## 2026-08-27 — Require dated split events and keep NIO attributable loss Limited
+
+**Status:** Accepted corrective implementation after Issue #55 Sparse-5
+
+**Decision:** An undated reverse-split occurrence may corroborate exactly one
+dated action of the same ratio but cannot create a user-facing action by itself.
+Corporate-action parsing retains packet-only disposition diagnostics. For NIO,
+none of the Company Facts candidates observed in Sparse-5 is semantically equal
+to annual net loss attributable to ordinary shareholders. Consolidated loss
+including noncontrolling interests, noncontrolling-interest-only loss, and
+comprehensive income remain distinct. No alias is added and the metric remains
+Limited under methodology 2.1.0.
+
+A 20-F table fallback is not added from the stored evidence because the exact
+filed row, CNY unit, comparable annual columns, and provenance cannot all be
+proved with the current bounded text extractor. A future fallback needs an exact
+row-semantic parser and dedicated evidence before approval.
+
+**Why:** Sparse-5 showed false undated MULN actions and provided enough bounded
+metadata to prove that NIO's rejected structured concepts were not equivalent to
+the methodology construct. Failing closed is correct when authoritative
+structured evidence is genuinely unavailable.
