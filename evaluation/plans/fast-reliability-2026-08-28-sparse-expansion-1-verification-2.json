@@ -1,0 +1,59 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "sparse-expansion-1-verification-2",
+  "approved_at": "2026-08-28",
+  "proposal": "evaluation/plans/fast-reliability-sparse-expansion-proposal.json",
+  "proposal_sha256": "45e688cfff333f7d20bfbdab722101847f51545cd1f81eb01c639c76c93a7241",
+  "purpose": "Verify commit 199d145 against REKR, ZAPPF, and GMBL exactly once without changing the frozen answer key or Verification-1 measurement.",
+  "output_directory": "2026-08-28-sparse-expansion-1-verification-2",
+  "approval_token": "issue-55-2026-08-28-approved-sparse-expansion-one-verification-two-three-runs",
+  "required_ancestor": "199d145",
+  "approval": {
+    "approved": true,
+    "tickers": ["REKR", "ZAPPF", "GMBL"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 3,
+    "maximum_openai_cost_usd": 0.09,
+    "maximum_alpha_vantage_requests": 6,
+    "maximum_twelve_data_requests": 6,
+    "maximum_combined_optional_provider_attempts": 12,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "maximum_aggregate_fast_runtime_ms": 60000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "configuration": {
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 8000,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "provider_policy": {
+    "provider_order": ["alpha_vantage", "twelve_data"],
+    "alpha_vantage_is_hard_gate": false,
+    "optional_context_may_settle_limited": true,
+    "twelve_data_financials_for_scoring": false,
+    "twelve_data_release_bodies_to_openai": false
+  },
+  "provider_preflight": {
+    "alpha_vantage_local_daily_limit": 25,
+    "alpha_vantage_required_requests": 6,
+    "twelve_data_local_daily_limit": 800,
+    "twelve_data_maximum_fallback_requests": 6,
+    "combined_optional_provider_attempts": 12,
+    "remote_quota_status": "observe_only_during_approved_calls"
+  },
+  "preserve_artifacts": [
+    {"path":"evaluation/live/2026-08-28-sparse-expansion-1-verification-1/run-summary.json","sha256":"f4ecc25db98d25cabfb4a6a6d5f5639ea414194bc1b7527eea17dbc35df1b600"},
+    {"path":"evaluation/live/2026-08-28-sparse-expansion-1-verification-1/summary.json","sha256":"b25ddbe34e3f4661999a3156e5450820b94d6112b61e7adcb4606b2ae7ccaee4"},
+    {"path":"evaluation/live/2026-08-28-sparse-expansion-1-verification-1/raw/REKR.json","sha256":"52fb47880f5abd7a9b38db5e66e422be408d86ad41f8c81835eef6c293e7eacf"},
+    {"path":"evaluation/live/2026-08-28-sparse-expansion-1-verification-1/raw/ZAPPF.json","sha256":"cc53b06b6c5e853193f6a18c093a0190056413db44360ea3bb51b9d68b170392"},
+    {"path":"evaluation/live/2026-08-28-sparse-expansion-1-verification-1/raw/GMBL.json","sha256":"fb3e3eb55069471d877db76e8edfc195a66fe48cfea6f400cb254438ea1d4cd4"}
+  ]
+}

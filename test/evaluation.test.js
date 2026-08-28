@@ -653,6 +653,17 @@ test("Sparse Expansion 1 verification records improvement without passing Issue 
   assert.ok(run.aggregate_elapsed_ms <= 60000);
 });
 
+test("Sparse Expansion Verification-2 freezes the owner-approved corrective run", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-sparse-expansion-1-verification-2.json");
+  assert.equal(plan.required_ancestor, "199d145");
+  assert.deepEqual(plan.approval.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.deepEqual({ runs: plan.approval.maximum_runs, retries: plan.approval.automatic_retries, deep: plan.approval.deep_runs, search: plan.approval.hosted_web_search }, { runs: 3, retries: false, deep: 0, search: false });
+  assert.deepEqual({ openai: plan.approval.maximum_openai_cost_usd, alpha: plan.approval.maximum_alpha_vantage_requests, twelve: plan.approval.maximum_twelve_data_requests, combined: plan.approval.maximum_combined_optional_provider_attempts }, { openai: .09, alpha: 6, twelve: 6, combined: 12 });
+  assert.deepEqual({ perTicker: plan.approval.fast_ceiling_ms_per_ticker, aggregate: plan.approval.maximum_aggregate_fast_runtime_ms }, { perTicker: 20000, aggregate: 60000 });
+  assert.ok(plan.preserve_artifacts.some((item) => item.path.endsWith("sparse-expansion-1-verification-1/summary.json")));
+  assert.match(plan.approval_token, /verification-two-three-runs/);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");

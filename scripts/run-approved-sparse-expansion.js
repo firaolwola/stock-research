@@ -15,10 +15,11 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const verificationToken = "issue-55-2026-08-28-approved-sparse-expansion-one-verification-three-runs";
-const planName = process.env.RUN_APPROVED_FAST_CALIBRATION === verificationToken
-  ? "fast-reliability-2026-08-28-sparse-expansion-1-verification-1.json"
-  : "fast-reliability-2026-08-28-sparse-expansion-1.json";
+const verificationPlans = new Map([
+  ["issue-55-2026-08-28-approved-sparse-expansion-one-verification-three-runs", "fast-reliability-2026-08-28-sparse-expansion-1-verification-1.json"],
+  ["issue-55-2026-08-28-approved-sparse-expansion-one-verification-two-three-runs", "fast-reliability-2026-08-28-sparse-expansion-1-verification-2.json"]
+]);
+const planName = verificationPlans.get(process.env.RUN_APPROVED_FAST_CALIBRATION) ?? "fast-reliability-2026-08-28-sparse-expansion-1.json";
 const planPath = path.join(root, "evaluation", "plans", planName);
 const plan = JSON.parse(await readFile(planPath, "utf8"));
 const proposalBytes = await readFile(path.join(root, ...plan.proposal.split("/")));
