@@ -1,0 +1,121 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "sparse-expansion-1-proposal",
+  "prepared_at": "2026-08-28",
+  "execution_authorized": false,
+  "purpose": "Smallest independent three-ticker expansion for completed reverse splits, active listing deficiency, going concern, foreign-filer/IFRS, and OTC/delisted coverage.",
+  "proposed_output_directory": "evaluation/live/2026-08-28-sparse-expansion-1",
+  "proposed_result_document": "docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1.md",
+  "approval_required": "A new owner approval must freeze this proposal before any live execution. This file contains no approval token and is not executable.",
+  "proposed_bounds": {
+    "tickers": ["REKR", "ZAPPF", "GMBL"],
+    "runs_per_ticker": 1,
+    "maximum_runs": 3,
+    "automatic_retries": false,
+    "maximum_openai_cost_usd": 0.09,
+    "estimated_openai_cost_usd": [0.0, 0.03],
+    "maximum_alpha_vantage_requests": 6,
+    "maximum_twelve_data_requests": 6,
+    "maximum_combined_optional_provider_attempts": 12,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "maximum_fast_runtime_ms": 60000,
+    "difficult_budget_approved": false,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "evaluation_rules": {
+    "independence": "BIOR, MULN, NIO, and TUPBQ remain historical controls and are not run.",
+    "answer_key": "Adjudicate only against the primary-source facts below; never revise them to match Fast output.",
+    "nio_clarification": "Prospectively classify NIO attributable annual net loss as unavailable_authoritative_evidence when bounded authoritative retrieval completes, no safe Company Facts concept or implemented SEC table fallback exists, and the report settles Limited/Unscored. Historical measurements and answer keys remain unchanged.",
+    "gate": "Approximately 95% overall material-risk recall, approximately 90% for every adequately sampled critical category, and zero unresolved severe misleading misses.",
+    "sampling_guardrail": "Three additional cases improve mechanism diversity but do not establish statistical reliability. Foreign/IFRS and active-deficiency coverage remain sparse after this batch."
+  },
+  "cases": [
+    {
+      "id": "rekr-2026-independent-sparse",
+      "ticker": "REKR",
+      "identity": "Rekor Systems, Inc. common stock, Nasdaq Capital Market ticker REKR, CIK 1697851; domestic Delaware issuer.",
+      "current_listing_status": "Nasdaq-listed with an active minimum-bid-price deficiency disclosed April 27, 2026; the June 30, 2026 Form 10-Q says the compliance period runs through October 26, 2026.",
+      "categories": ["active_listing_deficiency", "going_concern"],
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1697851/000143774926014478/rekr20260501_8k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1697851/000143774926027488/rekr20260630_10q.htm",
+        "https://www.sec.gov/Archives/edgar/data/1697851/000143774926010647/rekr20251231_10k.htm"
+      ],
+      "known_material_facts": [
+        "The April 27, 2026 Nasdaq notice establishes an active Rule 5550(a)(2) minimum-bid deficiency, not a delisting and not restored compliance.",
+        "The June 30, 2026 Form 10-Q says REKR remained Nasdaq-listed and had until October 26, 2026 to regain bid-price compliance.",
+        "The June 30, 2026 Form 10-Q reports substantial doubt about going concern, a $6.598 million working-capital deficit, $9.8 million cash, and $15.0 million of Series A Prime Revenue Sharing Notes due December 15, 2026.",
+        "A possible future reverse split is a cure option only; it is not a completed historical split."
+      ],
+      "legitimately_limited": ["completed_reverse_split_history", "OTC status", "non-SEC catalyst context when optional discovery is unavailable"],
+      "severe_miss_conditions": [
+        "Active Nasdaq deficiency is omitted, described as resolved, or converted to an OTC/delisted state.",
+        "The going-concern conclusion or immediate liquidity/debt pressure is omitted or made favorable.",
+        "A proposed cure reverse split is presented as completed."
+      ]
+    },
+    {
+      "id": "zappf-2026-independent-sparse",
+      "ticker": "ZAPPF",
+      "identity": "Zapp Electric Vehicles Group Limited ordinary shares, OTC ticker ZAPPF, CIK 1955104; Cayman Islands foreign private issuer using Form 20-F/6-K and IFRS.",
+      "current_listing_status": "Nasdaq suspended/delisted the former ZAPP ordinary shares effective May 20, 2025; SEC's current entity page identifies ZAPPF on OTC.",
+      "categories": ["completed_reverse_split_history", "going_concern", "foreign_issuer_adr_ifrs", "otc_or_delisted"],
+      "authoritative_sources": [
+        "https://www.sec.gov/edgar/browse/?CIK=1955104",
+        "https://www.sec.gov/Archives/edgar/data/1955104/000095017025073965/final_nasdaq_delisting_6.htm",
+        "https://www.sec.gov/Archives/edgar/data/1955104/000095017025011073/zapp-20240930.htm",
+        "https://www.sec.gov/Archives/edgar/data/1955104/000095017024044773/zapp-ex99_1.htm",
+        "https://www.sec.gov/Archives/edgar/data/1955104/000143774926002535/zapp20260122_nt20f.htm"
+      ],
+      "known_material_facts": [
+        "ZAPPF represents Cayman Islands ordinary shares, not a U.S. domestic common stock and not an ADR; the issuer files 20-F/6-K and reports under IFRS.",
+        "A 1-for-20 reverse split became effective April 22, 2024 and split-adjusted trading began April 23, 2024.",
+        "Nasdaq suspended/delisted the former ZAPP securities effective May 20, 2025 for minimum-bid and market-value noncompliance; SEC now identifies ZAPPF on OTC.",
+        "The September 30, 2024 20-F reports a net loss, negative operating cash flow, $1.6 million cash, $20.7 million trade and other payables, and material going-concern dependence on additional capital.",
+        "The fiscal-2025 Form 20-F was reported late on Form NT 20-F in January 2026, so stale or unavailable newer financial trends must remain Limited."
+      ],
+      "legitimately_limited": ["fresh fiscal-2025 financial trend scores", "precise OTC tier beyond the SEC current ticker identity", "secondary news when optional discovery is unavailable"],
+      "severe_miss_conditions": [
+        "Wrong security type, domestic filing regime, currency, cadence, or accounting basis is used.",
+        "The completed 1-for-20 split or Nasdaq delisting is omitted or described as merely proposed.",
+        "Stale 2024 financials create favorable scores despite the late 2025 annual filing and going-concern evidence.",
+        "Former Nasdaq ticker ZAPP is presented as currently Nasdaq-listed."
+      ]
+    },
+    {
+      "id": "gmbl-2026-independent-sparse",
+      "ticker": "GMBL",
+      "identity": "Esports Entertainment Group, Inc. common stock, OTC ticker GMBL, CIK 1451448; Nevada domestic issuer with principal operations/address historically in Malta.",
+      "current_listing_status": "Nasdaq trading was suspended February 21, 2024 after voluntary delisting; the filed issuer release said the securities would initially quote on OTC Pink and seek OTCQB.",
+      "categories": ["completed_reverse_split_history", "going_concern", "otc_or_delisted"],
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1451448/000149315224007169/ex99-1.htm",
+        "https://www.sec.gov/Archives/edgar/data/1451448/000149315223045518/ex99-1.htm",
+        "https://infomemo.theocc.com/infomemos?number=53818",
+        "https://www.sec.gov/Archives/edgar/data/1451448/000149315223005607/form10-q.htm"
+      ],
+      "known_material_facts": [
+        "GMBL is a Nevada domestic issuer, not a foreign private issuer merely because its principal address was in Malta.",
+        "A completed 1-for-100 reverse split became split-adjusted February 22, 2023 and a completed 1-for-400 reverse split became effective December 22, 2023.",
+        "Nasdaq trading was suspended February 21, 2024 following voluntary delisting, with issuer-disclosed migration to OTC quotation.",
+        "The bounded record contains repeated listing pressure, preferred-stock/financing obligations, and going-concern risk; missing post-deregistration financial detail must not become favorable."
+      ],
+      "legitimately_limited": ["exact current OTC tier if no current market-operator record is retrieved", "fresh financial trends after deregistration", "current news without optional discovery"],
+      "severe_miss_conditions": [
+        "GMBL is represented as currently Nasdaq-listed or as a foreign private issuer.",
+        "Either 2023 completed reverse split is omitted, duplicated, or given the wrong effective date/ratio.",
+        "Missing post-deregistration financial evidence becomes a favorable score.",
+        "Voluntary delisting is misclassified as an active curable Nasdaq deficiency."
+      ]
+    }
+  ],
+  "sample_size_map": [
+    {"category":"completed_reverse_split_history","existing_positive_cases":["AMC","BIOR","MULN"],"new_positive_cases":["ZAPPF","GMBL"],"expected_total":5,"still_sparse":false,"note":"Mechanism diversity improves, but five cases are not a statistical reliability claim."},
+    {"category":"active_listing_deficiency","existing_positive_cases":["NXL"],"new_positive_cases":["REKR"],"expected_total":2,"still_sparse":true,"note":"Two issuers remain too few for a category-level reliability claim."},
+    {"category":"going_concern_or_bankruptcy","existing_positive_cases":["TUPBQ"],"new_positive_cases":["REKR","ZAPPF","GMBL"],"expected_total":4,"still_sparse":false,"note":"Includes bankruptcy plus three going-concern shapes; still a small calibration sample."},
+    {"category":"foreign_issuer_adr_ifrs","existing_positive_cases":["NIO"],"new_positive_cases":["ZAPPF"],"expected_total":2,"still_sparse":true,"note":"Adds ordinary-share/OTC/IFRS diversity but no second new ADR or 40-F case."},
+    {"category":"otc_or_delisted","existing_positive_cases":["BIOR","MULN","TUPBQ"],"new_positive_cases":["ZAPPF","GMBL"],"expected_total":5,"still_sparse":false,"note":"Covers current OTC identity after involuntary and voluntary Nasdaq exits; precise tier may remain Limited."}
+  ]
+}

@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — establish remaining sparse-category sample-size proof:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Verification-7 confirmed 9/9 live MULN recall and precision with no severe corporate-action miss; the MULN parser blocker is resolved and must not be rerun. NIO remains correctly Limited under unavailable authoritative evidence rather than a system miss. The remaining milestone gate is independent sample-size proof for sparse critical categories; no expansion batch is currently authorized.
+8. [ ] **Active — await approval for the frozen sparse expansion:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). Batch 3 reached 83/86 material checks (96.51%). Verification-7 confirmed 9/9 live MULN recall and precision with no severe corporate-action miss; the MULN parser blocker is resolved and must not be rerun. NIO remains correctly Limited under unavailable authoritative evidence rather than a system miss. A planning-only REKR/ZAPPF/GMBL proposal now defines the smallest independent next batch. It is not authorized; even a passing run would leave active-deficiency and foreign/IFRS sample sizes sparse.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -101,8 +101,8 @@ wrong-date action. Verification-6 showed that an overlapping live extraction spa
 could still invoke the retrospective-history fallback and recreate it. The
 captured-shape correction resolves the conflict before canonical acceptance, and
 Verification-7 confirmed the nine-event live history without the August 1
-duplicate. The next active step is defining the smallest independent batch needed
-for sparse-category sample-size proof; no expansion is currently authorized. A paid data
+duplicate. The next active step is owner review of the frozen three-ticker
+REKR/ZAPPF/GMBL expansion plan; no expansion is currently authorized. A paid data
 subscription remains neither selected nor required and would need separate owner
 approval.
 

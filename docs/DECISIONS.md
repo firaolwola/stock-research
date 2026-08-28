@@ -1117,3 +1117,21 @@ classified filing provenance, but the broader retrospective span independently
 passed the old invariant and created a false event beside the August 4 effective
 action. Segment-local validation alone was insufficient; interpretations of one
 source reference must be reconciled first.
+
+## 2026-08-28 — Separate unavailable authoritative evidence from prospective system misses
+
+**Status:** Accepted evaluation clarification; historical measurements frozen
+
+**Decision:** When bounded authoritative retrieval completes, no safe SEC
+Company Facts concept exists, no implemented bounded SEC table fallback can
+establish the construct, and Fast settles Limited/Unscored, classify the missing
+fact prospectively as `unavailable_authoritative_evidence`. Do not count that
+outcome as a retrieval or parser defect. Preserve every historical answer key,
+measurement, and reported recall unchanged. NIO attributable annual net loss is
+the first documented application of this rule.
+
+**Why:** Sparse-5 retained and adjudicated the actual rejected NIO concepts. They
+represented consolidated profit/loss including noncontrolling interests,
+noncontrolling-interest-only results, or comprehensive income rather than the
+required loss attributable to ordinary shareholders. Broadening the semantic
+gate would manufacture comparability; Limited is the correct product result.

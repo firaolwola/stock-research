@@ -398,6 +398,24 @@ is resolved and must not be rerun. Issue #55 remains open for NIO's unavailable
 authoritative evidence and independent sparse-category sample-size proof. See
 `docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-7.md`.
 
+The smallest proposed independent expansion is now frozen as a planning-only
+three-ticker set in
+`evaluation/plans/fast-reliability-sparse-expansion-proposal.json`. REKR covers
+an active Nasdaq deficiency plus going concern; ZAPPF covers a Cayman foreign
+private issuer using IFRS, a completed reverse split, Nasdaq delisting, and OTC
+identity; GMBL independently covers completed splits, going concern, and a
+voluntary Nasdaq-to-OTC transition. The proposal has no approval token and is
+not executable. It would add only one new foreign/IFRS issuer and one new active
+deficiency issuer, leaving those categories explicitly sparse even if all three
+cases pass. No live execution is authorized.
+
+Prospectively, NIO attributable annual net loss is
+`unavailable_authoritative_evidence`, not a system miss, when bounded
+authoritative retrieval completes, no safe Company Facts concept or implemented
+SEC table fallback exists, and the score settles Limited/Unscored. This
+classification does not alter any frozen batch measurement, answer key, or
+reported recall.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

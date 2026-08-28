@@ -548,6 +548,30 @@ test("Verification-7 resolves the live MULN overlap blocker without closing the 
   assert.ok(run.runs[0].elapsed_ms <= 20000);
 });
 
+test("sparse expansion proposal is independent, bounded, and cannot authorize a live run", async () => {
+  const proposal = await loadJson("../evaluation/plans/fast-reliability-sparse-expansion-proposal.json");
+  assert.equal(proposal.execution_authorized, false);
+  assert.equal(Object.hasOwn(proposal, "approval_token"), false);
+  assert.deepEqual(proposal.proposed_bounds.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.equal(proposal.proposed_bounds.maximum_runs, 3);
+  assert.equal(proposal.proposed_bounds.runs_per_ticker, 1);
+  assert.equal(proposal.proposed_bounds.automatic_retries, false);
+  assert.equal(proposal.proposed_bounds.maximum_openai_cost_usd, .09);
+  assert.equal(proposal.proposed_bounds.maximum_alpha_vantage_requests, 6);
+  assert.equal(proposal.proposed_bounds.maximum_twelve_data_requests, 6);
+  assert.equal(proposal.proposed_bounds.maximum_combined_optional_provider_attempts, 12);
+  assert.equal(proposal.proposed_bounds.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(proposal.proposed_bounds.difficult_budget_approved, false);
+  assert.equal(proposal.proposed_bounds.deep_runs, 0);
+  assert.equal(proposal.proposed_bounds.hosted_web_search, false);
+  assert.equal(proposal.cases.length, 3);
+  assert.ok(proposal.cases.every((item) => item.authoritative_sources.length >= 3));
+  assert.ok(proposal.cases.every((item) => item.severe_miss_conditions.length >= 3));
+  assert.ok(proposal.sample_size_map.find((item) => item.category === "active_listing_deficiency").still_sparse);
+  assert.ok(proposal.sample_size_map.find((item) => item.category === "foreign_issuer_adr_ifrs").still_sparse);
+  assert.match(proposal.evaluation_rules.nio_clarification, /unavailable_authoritative_evidence/);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
