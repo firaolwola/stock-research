@@ -14,8 +14,11 @@ import { loadRealAppConfig } from "../startup-config.js";
 
 dotenv.config({ quiet: true });
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-muln-verification.json");
-const plan = JSON.parse(await readFile(planPath, "utf8"));
+const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-27-muln-verification-2.json");
+const childPlan = JSON.parse(await readFile(planPath, "utf8"));
+const parentBytes = await readFile(path.join(root, ...childPlan.parent_plan.split("/")));
+if (createHash("sha256").update(parentBytes).digest("hex") !== childPlan.parent_plan_sha256) throw new Error("The first MULN verification plan changed.");
+const plan = { ...JSON.parse(parentBytes), ...childPlan, approval: childPlan.approval };
 if (process.env.RUN_APPROVED_FAST_CALIBRATION !== plan.approval_token) throw new Error(`Live calibration is locked. Set RUN_APPROVED_FAST_CALIBRATION=${plan.approval_token} only for the approved run.`);
 const approval = plan.approval;
 if (JSON.stringify(approval.tickers) !== JSON.stringify(["MULN"]) || approval.maximum_runs !== 1 || approval.runs_per_ticker !== 1 || approval.automatic_retries !== false || approval.maximum_openai_cost_usd !== 0.03 || approval.maximum_alpha_vantage_requests !== 2 || approval.maximum_twelve_data_requests !== 2 || approval.maximum_combined_optional_provider_attempts !== 4 || approval.fast_ceiling_ms_per_ticker !== 20000 || approval.difficult_budget_approved !== false || approval.deep_runs !== 0 || approval.hosted_web_search !== false) throw new Error("The MULN approval bounds changed.");
@@ -26,6 +29,10 @@ for (const preserved of plan.preserve_prior_batches) {
     const bytes = await readFile(path.join(root, ...preserved.directory.split("/"), name));
     if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Refusing to run because ${preserved.directory}/${name} changed.`);
   }
+}
+for (const [name, expected] of [["run-summary.json", plan.preserve_failed_run.run_summary_sha256], ["raw/MULN.json", plan.preserve_failed_run.raw_muln_sha256]]) {
+  const bytes = await readFile(path.join(root, ...plan.preserve_failed_run.directory.split("/"), ...name.split("/")));
+  if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Refusing to run because the failed MULN artifact ${name} changed.`);
 }
 const outputRoot = path.join(root, "evaluation", "live", plan.output_directory);
 if ((await readdir(outputRoot).catch((error) => error?.code === "ENOENT" ? [] : Promise.reject(error))).length) throw new Error("Refusing to overwrite MULN verification output.");

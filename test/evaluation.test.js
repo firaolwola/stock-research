@@ -360,6 +360,22 @@ test("MULN verification runner retains the event loop until its one research pro
   assert.equal(result.approval_consumed, true);
 });
 
+test("corrected MULN verification freezes a new one-process authorization", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-muln-verification-2.json");
+  assert.equal(plan.required_ancestor, "e5833db");
+  assert.equal(plan.output_directory, "2026-08-27-muln-verification-2");
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.03);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 2);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 2);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
