@@ -15,7 +15,11 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const planPath = path.join(root, "evaluation", "plans", "fast-reliability-2026-08-28-sparse-expansion-1.json");
+const verificationToken = "issue-55-2026-08-28-approved-sparse-expansion-one-verification-three-runs";
+const planName = process.env.RUN_APPROVED_FAST_CALIBRATION === verificationToken
+  ? "fast-reliability-2026-08-28-sparse-expansion-1-verification-1.json"
+  : "fast-reliability-2026-08-28-sparse-expansion-1.json";
+const planPath = path.join(root, "evaluation", "plans", planName);
 const plan = JSON.parse(await readFile(planPath, "utf8"));
 const proposalBytes = await readFile(path.join(root, ...plan.proposal.split("/")));
 if (createHash("sha256").update(proposalBytes).digest("hex") !== plan.proposal_sha256) throw new Error("The frozen sparse-expansion proposal changed.");

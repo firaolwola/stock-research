@@ -615,6 +615,25 @@ test("sparse expansion records the deterministic blockers without passing Issue 
   assert.ok(run.aggregate_elapsed_ms <= 60000);
 });
 
+test("Sparse Expansion 1 verification freezes the corrected same-three authorization", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-sparse-expansion-1-verification-1.json");
+  assert.equal(plan.required_ancestor, "6c5f9d3");
+  assert.deepEqual(plan.approval.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.equal(plan.approval.maximum_runs, 3);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .09);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 6);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 6);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 12);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.maximum_aggregate_fast_runtime_ms, 60000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.match(plan.approval_token, /verification-three-runs/);
+  assert.ok(plan.preserve_artifacts.some((item) => item.path.endsWith("2026-08-28-sparse-expansion-1/summary.json")));
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
