@@ -1,0 +1,10 @@
+{
+  "ticker": "NCPL",
+  "expected": ["Item 4.02 non-reliance invalidates affected historical financial inputs"],
+  "detected": ["Item 4.02 non-reliance warning", "Affected financial metrics Limited/Unscored"],
+  "report_valid": true,
+  "settlement": "safe_limited",
+  "classification": "corrected",
+  "severe_miss": false,
+  "notes": "The live-shaped Item 4.02 wording was surfaced as a critical accounting warning and prevented favorable financial trend scoring."
+}

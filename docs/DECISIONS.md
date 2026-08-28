@@ -1332,3 +1332,22 @@ free-cash-flow category also remains below the category target. NXL's
 independent samples. The zero-severe-miss requirement and category gate remain
 binding even when aggregate recall is above 95%; NIO's separately documented
 `unavailable_authoritative_evidence` classification is not a system miss.
+
+## 2026-08-28 — Targeted AMC/NCPL live confirmation after offline correction
+
+**Status:** Gate failed; Issue #55 remains open
+
+**Decision:** Preserve the two-case confirmation as a new artifact without
+changing prior baselines. NCPL's live SEC packet now contains the Item 4.02
+prevention-of-reliance warning and invalidates affected financial trend inputs.
+AMC's completed 2023-08-24 1-for-10 split is still absent from the bounded live
+packet, so the AMC defect is classified as retrieval/filing selection rather
+than fixed. Both reports remained valid and safe partial results; no automatic
+retries or further live cases are implied.
+
+**Why:** The offline matcher correction is necessary but insufficient when the
+live bounded filing set does not deliver the historical AMC source into the
+final extraction path. A smallest offline AMC discovery/selection correction
+and separately approved confirmation are required before reassessing the
+severe-miss gate. Targeted recall was 1/2; OpenAI synthesis was cost-blocked
+before request, with no paid OpenAI spend recorded.

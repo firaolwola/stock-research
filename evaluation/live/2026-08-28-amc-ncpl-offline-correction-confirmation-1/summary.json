@@ -1,0 +1,63 @@
+{
+  "issue": 55,
+  "batch": "amc-ncpl-offline-correction-confirmation-1",
+  "live_calls": true,
+  "approved_run_count": 2,
+  "completed_run_count": 2,
+  "adjudication": {
+    "baseline": "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json",
+    "purpose": "Targeted confirmation of the AMC completed-split and NCPL Item 4.02 corrections; historical baselines remain unchanged.",
+    "expected_targeted_checks": 2,
+    "detected_targeted_checks": 1,
+    "recall": 0.5
+  },
+  "results": {
+    "AMC": {
+      "report_valid": true,
+      "completed_reverse_split_detected": false,
+      "expected_reverse_split": "2023-08-24 1-for-10",
+      "observed": "SEC filing discovery completed, but split terms were not extracted in the bounded packet.",
+      "classification": "retrieval_or_filing-selection_gap",
+      "settlement_safe": true,
+      "explanation_fidelity": false
+    },
+    "NCPL": {
+      "report_valid": true,
+      "item_4_02_non_reliance_detected": true,
+      "affected_financial_inputs_limited": true,
+      "classification": "corrected",
+      "settlement_safe": true,
+      "explanation_fidelity": true
+    }
+  },
+  "valid_report_rate": {"valid": 2, "evaluated": 2, "rate": 1},
+  "explanation_fidelity": {"passed": 1, "evaluated": 2, "rate": 0.5},
+  "settlement_accuracy": {"passed": 2, "evaluated": 2, "rate": 1},
+  "score_state_safety": {"passed": 2, "evaluated": 2, "rate": 1},
+  "severe_misleading_misses": [
+    {"ticker": "AMC", "class": "completed_reverse_split_retrieval", "detail": "Expected completed 1-for-10 history remains absent from the live bounded packet; reverse-split score stayed Limited rather than favorable."}
+  ],
+  "operations": {
+    "aggregate_elapsed_ms": 5164,
+    "max_ticker_elapsed_ms": 2651,
+    "known_openai_cost_usd": 0,
+    "alpha_vantage_requests": 4,
+    "twelve_data_requests": 0,
+    "combined_optional_provider_attempts": 4,
+    "retries": 0,
+    "hosted_web_search_calls": 0,
+    "openai_synthesis": "cost_blocked_before_request"
+  },
+  "comparison": {
+    "prior_same_five_recall": 0.9535,
+    "targeted_checks_recall": 0.5,
+    "note": "This focused two-case measurement does not replace or rewrite any prior batch result."
+  },
+  "gate": {
+    "passed": false,
+    "reason": "AMC remains a severe live retrieval miss; the full Issue 55 reliability gate remains open."
+  },
+  "issue_must_remain_open": true,
+  "pr_ready_to_merge": false,
+  "next_step": "Offline-correct AMC bounded filing discovery/selection so the authoritative historical split reaches live evidence, then seek a separately approved single AMC confirmation. NCPL correction is live-confirmed."
+}

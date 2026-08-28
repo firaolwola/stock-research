@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims with zero severe misses. A same-five confirmation measured 82/86 (95.35%), but AMC's completed split and NCPL's non-reliance event remained severe live misses and FCF remained below target. A targeted offline correction now covers AMC comma-delimited/effective-date split extraction and NCPL Item 4.02 “prevent future reliance” extraction; these fixes are not a live confirmation. Issue #55 remains open until a separately approved confirmation and the severe-miss/category gate pass.
+8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims with zero severe misses. A same-five confirmation measured 82/86 (95.35%), but AMC's completed split and NCPL's non-reliance event remained severe live misses and FCF remained below target. The targeted offline correction was confirmed for NCPL (Item 4.02 surfaced and affected metrics stayed Limited) but not for AMC: the completed 2023-08-24 1-for-10 split remains absent from the live bounded packet. The two-case confirmation measured 1/2 with valid, safe partial reports. Issue #55 remains open until the AMC retrieval defect and the severe-miss/category gate pass.
 
 ### Issue #55 corrective roadmap
 
@@ -113,6 +113,11 @@ verdict.
    reporting-property binding correction, not another blind live rerun. That
    correction is now implemented and covered by a captured 40-F exhibit shape;
    fresh live confirmation remains separately gated.
+7. [x] **Complete — targeted AMC/NCPL confirmation:** NCPL's Item 4.02
+   correction passed one live case; AMC's historical split remains a live
+   retrieval/filing-selection miss. No retries or additional tickers were run.
+   Issue #55 stays active pending the smallest offline AMC correction and a
+   separately approved confirmation.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

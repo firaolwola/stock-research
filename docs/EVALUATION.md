@@ -517,6 +517,16 @@ boilerplate negative controls. This is an offline correction only; a fresh live
 confirmation requires separate owner approval and historical measured artifacts
 remain unchanged.
 
+The separately approved two-case confirmation then ran exactly one Fast request
+for AMC and one for NCPL. NCPL's Item 4.02 prevention-of-reliance event was
+surfaced as a critical warning and affected financial inputs remained
+Limited/Unscored. AMC's completed 2023-08-24 1-for-10 split was still absent
+from the live bounded packet, whose reverse-split section correctly settled
+Limited rather than favorable. Both reports were valid and safely partial; the
+targeted result was 1/2 (50%), so the AMC retrieval/filing-selection defect
+remains open. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-NCPL-OFFLINE-CORRECTION-CONFIRMATION-1.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary
