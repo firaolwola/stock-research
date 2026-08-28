@@ -15,7 +15,9 @@ import { loadRealAppConfig } from "../startup-config.js";
 dotenv.config({ quiet: true });
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const verificationToken = "issue-55-2026-08-28-approved-final-sparse-proof-verification-two-runs";
-const planName = process.env.RUN_APPROVED_FAST_CALIBRATION === verificationToken ? "fast-reliability-2026-08-28-final-sparse-proof-verification-1.json" : "fast-reliability-2026-08-28-final-sparse-proof-1.json";
+const correctionToken = "issue-55-2026-08-28-approved-offline-correction-live-confirmation-two-runs";
+const isCorrectionConfirmation = process.env.RUN_APPROVED_FAST_CALIBRATION === correctionToken;
+const planName = isCorrectionConfirmation ? "fast-reliability-2026-08-28-final-sparse-proof-verification-2.json" : process.env.RUN_APPROVED_FAST_CALIBRATION === verificationToken ? "fast-reliability-2026-08-28-final-sparse-proof-verification-1.json" : "fast-reliability-2026-08-28-final-sparse-proof-1.json";
 const planPath = path.join(root, "evaluation", "plans", planName);
 const plan = JSON.parse(await readFile(planPath, "utf8"));
 const readFrozen = async (relativePath, expectedHash) => {
@@ -26,6 +28,7 @@ const readFrozen = async (relativePath, expectedHash) => {
 const proposal = await readFrozen(plan.proposal, plan.proposal_sha256);
 await readFrozen(plan.baseline, plan.baseline_sha256);
 if (plan.preserved_measurement) await readFrozen(plan.preserved_measurement, plan.preserved_measurement_sha256);
+if (plan.prior_confirmation) await readFrozen(plan.prior_confirmation, plan.prior_confirmation_sha256);
 if (process.env.RUN_APPROVED_FAST_CALIBRATION !== plan.approval_token) throw new Error(`Live calibration is locked. Set RUN_APPROVED_FAST_CALIBRATION=${plan.approval_token}`);
 const approval = plan.approval;
 const expectedTickers = ["ONFO", "STN"];
