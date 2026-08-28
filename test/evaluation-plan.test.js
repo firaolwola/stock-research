@@ -135,6 +135,30 @@ test("Verification-6 inherits all frozen bounds and preserves Verification-5", a
   assert.equal(chain.length, 6);
 });
 
+test("Verification-7 inherits the exact overlap-precedence one-run bounds and preserves Verification-6", async () => {
+  const root = path.resolve(".");
+  const planPath = path.join(root, "evaluation/plans/fast-reliability-2026-08-28-muln-verification-7.json");
+  const { plan, chain } = await resolveEvaluationPlan({ root, planPath, requiredFields: [
+    { path: "baseline_plan", type: "string" }, { path: "approval.maximum_openai_cost_usd", type: "number" },
+    { path: "approval.maximum_alpha_vantage_requests", type: "number" }, { path: "approval.maximum_twelve_data_requests", type: "number" },
+    { path: "approval.maximum_combined_optional_provider_attempts", type: "number" }, { path: "approval.fast_ceiling_ms_per_ticker", type: "number" },
+    { path: "preserve_verification_6.directory", type: "string" }
+  ] });
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .03);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 2);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 2);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.output_directory, "2026-08-28-muln-verification-7");
+  assert.equal(plan.preserve_verification_6.directory, "evaluation/live/2026-08-28-muln-verification-6");
+  assert.equal(chain.length, 7);
+});
+
 test("the one-case runner resolves and validates plans before runtime or network construction", async () => {
   const source = await readFile(new URL("../scripts/run-approved-muln-verification-implementation.js", import.meta.url), "utf8");
   const resolveAt = source.indexOf("await resolveEvaluationPlan");

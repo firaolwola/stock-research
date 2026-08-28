@@ -1,0 +1,19 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "muln-verification-7",
+  "approved_at": "2026-08-28",
+  "purpose": "Run one fresh bounded MULN Fast verification after overlapping source-span date roles were resolved by evidence specificity.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-28-muln-verification-6.json",
+  "parent_plan_sha256": "d9c187fc8c1db8e588f5b67db940778e6c0443058bb29099e64d59af2521ca97",
+  "output_directory": "2026-08-28-muln-verification-7",
+  "approval_token": "issue-55-2026-08-28-approved-muln-overlap-precedence-one-run",
+  "required_ancestor": "8fd908e",
+  "preserve_verification_6": {
+    "directory": "evaluation/live/2026-08-28-muln-verification-6",
+    "run_summary_sha256": "d3636a591907e3c00d8b5e119bf1fde8ac9ab5a26bbb4da573d3689ef95e3886",
+    "raw_muln_sha256": "ca5d160b015fa3564c02d3f2ba1b26cb4c1d155b839f3642ea09218dd17b2641",
+    "summary_sha256": "a51b89b25d84a0c4aeed78544bdcf05f2b2478d77dcb0128e9ba634db69a7f40",
+    "review_muln_sha256": "80868a6ee80f081c6b5b80fbb9d0332e6499ee0813fffc397195cbb24e1bd5cc"
+  }
+}

@@ -516,6 +516,15 @@ test("Verification-6 preserves recall but fails the overlapping-span precision g
   assert.ok(run.runs[0].elapsed_ms <= 20000);
 });
 
+test("Verification-7 freezes the approved overlapping-span live confirmation bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-muln-verification-7.json");
+  assert.equal(plan.required_ancestor, "8fd908e");
+  assert.equal(plan.output_directory, "2026-08-28-muln-verification-7");
+  assert.deepEqual(plan.approval ?? {}, {});
+  assert.equal(plan.preserve_verification_6.directory, "evaluation/live/2026-08-28-muln-verification-6");
+  assert.match(plan.approval_token, /approved-muln-overlap-precedence-one-run/);
+});
+
 test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
   const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
   assert.equal(diagnostic.methodology_version, "2.1.0");
