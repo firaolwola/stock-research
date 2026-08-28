@@ -1078,3 +1078,22 @@ resolved leaf field. Historical plan and result files remain immutable.
 the grandparent `baseline_plan` and raised an uncaught `TypeError` before research.
 The same failure class could have silently dropped provider, budget, runtime, or
 case constraints.
+
+## 2026-08-28 — Separate corporate-action filing dates from event dates
+
+**Status:** Accepted corrective implementation after MULN Verification-5
+
+**Decision:** Corporate-action extraction classifies a date's role before it may
+identify a user-facing event. Filing and publication dates are provenance and do
+not satisfy a Completed action. Explicit effective, completion, and trading-
+effective dates take precedence; a passed scheduled-effective date may settle
+according to the evaluation cutoff. A same-issuer, same-direction, same-ratio
+certificate filing reference may merge into exactly one event-date occurrence
+within seven calendar days. The canonical action uses the event date and retains
+the filing claim/source as corroboration. No match or multiple matches remain
+withheld, and materially separated same-ratio actions remain distinct.
+
+**Why:** Verification-5 correctly found MULN's supported split history but
+promoted the August 1 certificate-amendment filing date as a second completed
+1-for-250 action beside its actual August 4 effective date. Date proximity alone
+was being treated as lifecycle evidence.

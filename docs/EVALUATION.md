@@ -358,6 +358,18 @@ correctly, but the truncated competing-ratio span passed the action-binding
 invariant. Recall was 5/5 plus 4/4; precision was 9/10. No retry occurred. See
 `docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-5.md`.
 
+The Verification-5 filing-date defect now has deterministic offline correction.
+Corporate-action dates are classified as filing, announcement, authorization,
+scheduled-effective, effective, completion, trading-effective, or unknown.
+Certificate filing dates cannot establish Completed actions. One same-issuer,
+same-direction, same-ratio filing reference may corroborate exactly one
+effective/completion event within seven days; the action date wins and ambiguous
+or unmatched filing references remain withheld. The replay retains all nine
+supported MULN actions and removes the August 1 duplicate while preserving its
+claim/source as provenance. Frozen measurements and artifacts are unchanged.
+See `docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-5-OFFLINE-CORRECTION.md`
+and `evaluation/diagnostics/muln-verification-5-date-role-reconciliation.json`.
+
 ## Paid live evaluation boundary
 
 A paid evaluation must never run automatically or as part of routine tests. It

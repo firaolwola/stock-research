@@ -225,6 +225,69 @@ test("Verification-4 written 1-for-250 text never truncates to 1-for-2", () => {
   assert.ok(result.corporate_action_diagnostics.every((item) => item.complete_ratio_token_text === null || /250/.test(item.complete_ratio_token_text)));
 });
 
+test("a certificate filing date alone cannot establish a completed split", () => {
+  const html = "On August 1, 2025, the Company filed a Certificate of Amendment to its certificate of incorporation to effect a one-for-two hundred fifty (1-for-250) reverse stock split.";
+  const result = extractSecFilingEvidenceWithDiagnostics({ html, form: "10-Q", filed: "2025-08-14", evaluatedAt: "2026-08-27T12:00:00Z", accession: "certificate-only", documentUrl: "https://www.sec.gov/certificate-only", documentName: "certificate-only.htm" });
+  const filingReference = result.findings.find((item) => item.kind === "reverse_split");
+  assert.equal(filingReference.action_state, "unknown");
+  assert.equal(filingReference.event_date, null);
+  assert.equal(filingReference.filing_reference_date, "2025-08-01");
+  assert.equal(filingReference.date_role, "filing_date");
+  assert.equal(filingReference.canonical_support_only, true);
+  assert.equal(result.corporate_action_diagnostics[0].canonical_acceptance_invariant_passed, false);
+  assert.equal(result.corporate_action_diagnostics[0].reason, "filing_date_cannot_establish_completed_event");
+});
+
+test("explicit same-day certificate filing and effectiveness remains a completed action", () => {
+  const html = "On August 4, 2025, the Company filed a Certificate of Amendment to effect a 1-for-250 reverse stock split, which became effective on August 4, 2025.";
+  const result = extractSecFilingEvidenceWithDiagnostics({ html, form: "8-K", filed: "2025-08-04", evaluatedAt: "2026-08-27T12:00:00Z", accession: "same-day", documentUrl: "https://www.sec.gov/same-day", documentName: "same-day.htm" });
+  const split = result.findings.find((item) => item.kind === "reverse_split" && item.action_state === "completed");
+  assert.equal(split.event_date, "2025-08-04");
+  assert.equal(split.date_role, "effective_date");
+  assert.equal(result.corporate_action_diagnostics.find((item) => item.disposition === "accepted").canonical_acceptance_invariant_passed, true);
+});
+
+test("corporate-action diagnostics distinguish announcement, authorization, scheduled, trading, effective, and completion dates", () => {
+  const cases = [
+    ["The Company announced on January 2, 2025 a proposed 1-for-10 reverse stock split.", "announcement_date", "2024-12-01T00:00:00Z"],
+    ["Stockholders approved on January 3, 2025 a 1-for-10 reverse stock split.", "authorization_date", "2025-01-04T00:00:00Z"],
+    ["The 1-for-10 reverse stock split will become effective on January 6, 2025.", "scheduled_effective_date", "2025-01-04T00:00:00Z"],
+    ["The Company effected a 1-for-10 reverse stock split effective January 6, 2025.", "effective_date", "2025-01-07T00:00:00Z"],
+    ["The Company completed a 1-for-10 reverse stock split on January 6, 2025.", "completion_date", "2025-01-07T00:00:00Z"],
+    ["The Company completed a 1-for-10 reverse stock split; split-adjusted trading began on January 6, 2025.", "trading_effective_date", "2025-01-07T00:00:00Z"]
+  ];
+  for (const [html, role, evaluatedAt] of cases) {
+    const result = extractSecFilingEvidenceWithDiagnostics({ html, form: "8-K", filed: "2025-01-07", evaluatedAt, accession: role, documentUrl: `https://www.sec.gov/${role}`, documentName: `${role}.htm` });
+    assert.equal(result.corporate_action_diagnostics[0].date_role, role, JSON.stringify(result.corporate_action_diagnostics[0]));
+  }
+});
+
+test("Verification-5 certificate date reconciles to the later effective action", async () => {
+  const filingReference = "On August 1, 2025, the Company filed a Certificate of Amendment to its Second Amended and Restated Certificate of Incorporation with the Secretary of State of the State of Delaware to effect a one-for-two hundred fifty (1-for-250) reverse stock split.";
+  const effectiveReference = "Effective August 4, 2025, the Company implemented a reverse stock split at a ratio of 1-for-250 shares.";
+  const result = await researchFixture({ ticker: "MULN", filings: [
+    { accessionNumber: "000143774925027016", form: "10-Q", filingDate: "2025-08-14", reportDate: "2025-06-30", primaryDocument: "muln-verification-5.htm", primaryDocDescription: "Quarterly report" }
+  ], documents: { "muln-verification-5.htm": `${filingReference} ${effectiveReference}` } });
+  const events = result.report.sections.reverse_splits.items;
+  assert.deepEqual(events.map((item) => [item.title.match(/1-for-\d+/)?.[0], item.event_date, item.corporate_action_state]), [["1-for-250", "2025-08-04", "completed"]]);
+  assert.equal(events[0].claim_ids.length, 2, JSON.stringify(result.evidence_packet.corporate_action_diagnostics));
+  const diagnostic = result.evidence_packet.corporate_action_diagnostics.find((item) => item.extracted_date === "2025-08-01");
+  assert.equal(diagnostic.date_role, "filing_date");
+  assert.equal(diagnostic.canonical_chosen_event_date, "2025-08-04");
+  assert.equal(diagnostic.filing_vs_effective_reconciliation, "merged_to_effective_event");
+  assert.equal(diagnostic.merge_reason, "same_ratio_filing_reference_reconciled_to_effective_event");
+  assert.equal(diagnostic.disposition, "merged");
+  assert.equal(diagnostic.merge_target, events[0].id);
+  assert.equal(JSON.stringify(result.report).includes("corporate_action_diagnostics"), false);
+});
+
+test("same-ratio effective actions outside the filing reconciliation window remain distinct", async () => {
+  const result = await researchFixture({ ticker: "MULN", filings: [{ accessionNumber: "separate-actions", form: "10-K", filingDate: "2026-01-15", reportDate: "2025-12-31", primaryDocument: "separate-actions.htm", primaryDocDescription: "Annual report" }], documents: {
+    "separate-actions.htm": "The Company completed a 1-for-250 reverse stock split effective August 4, 2025. The Company completed a separate 1-for-250 reverse stock split effective September 22, 2025."
+  } });
+  assert.deepEqual(result.report.sections.reverse_splits.items.map((item) => item.event_date), ["2025-08-04", "2025-09-22"]);
+});
+
 test("completed action with an intervening competing ratio is withheld", () => {
   const html = "The Company effected a 1-for-100 reverse stock split and a 1-for-250 transaction effective August 4, 2025.";
   const result = extractSecFilingEvidenceWithDiagnostics({ html, form: "10-Q", filed: "2025-08-14", evaluatedAt: "2026-08-27T12:00:00Z", accession: "ambiguous", documentUrl: "https://www.sec.gov/ambiguous", documentName: "ambiguous.htm" });
@@ -249,6 +312,29 @@ test("Verification-4 stored evidence replays nine supported MULN actions without
   const expected = [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"], ["1-for-100", "2024-09-17"], ["1-for-60", "2025-02-18"], ["1-for-100", "2025-04-11"], ["1-for-100", "2025-06-02"], ["1-for-250", "2025-08-04"], ["1-for-250", "2025-09-22"]];
   for (const event of expected) assert.ok(events.some((candidate) => candidate[0] === event[0] && candidate[1] === event[1]), JSON.stringify(events));
   for (const forbidden of [["1-for-100", "2024-01-24"], ["1-for-100", "2024-10-16"], ["1-for-2", "2025-08-01"], ["1-for-100", "2025-08-04"]]) assert.equal(events.some((candidate) => candidate[0] === forbidden[0] && candidate[1] === forbidden[1]), false, JSON.stringify(events));
+});
+
+test("Verification-5 stored-live shape preserves nine actions and merges the August 1 filing reference", async () => {
+  const history = [
+    "A 1-for-25 reverse stock split was completed on May 4, 2023; a 1-for-9 reverse stock split was completed on August 11, 2023; and a 1-for-100 reverse stock split was completed on December 21, 2023.",
+    "The Company implemented a 1-for-100 reverse stock split on September 17, 2024.",
+    "The Company completed a 1-for-60 reverse stock split on February 18, 2025 and a 1-for-100 reverse stock split on April 11, 2025.",
+    "On June 2, 2025, the Company effected a 1-for-100 reverse stock split, and on August 4, 2025, the Company effected a 1-for-250 reverse stock split.",
+    "The Company completed a 1-for-250 reverse stock split effective September 22, 2025."
+  ].join(" ");
+  const certificate = "On August 1, 2025, the Company filed a Certificate of Amendment to its Second Amended and Restated Certificate of Incorporation with the Secretary of State of the State of Delaware to effect a one-for-two hundred fifty (1-for-250) reverse stock split.";
+  const result = await researchFixture({ ticker: "MULN", filings: [
+    { accessionNumber: "000143774925027016", form: "10-Q", filingDate: "2025-08-14", reportDate: "2025-06-30", primaryDocument: "verification-5-certificate.htm", primaryDocDescription: "Quarterly report" },
+    { accessionNumber: "000182912625007546", form: "S-1/A", filingDate: "2025-09-19", reportDate: "", primaryDocument: "verification-5-history.htm", primaryDocDescription: "Registration statement" }
+  ], documents: { "verification-5-certificate.htm": certificate, "verification-5-history.htm": history } });
+  const actual = result.report.sections.reverse_splits.items.map((item) => [item.title.match(/1-for-\d+/)?.[0], item.event_date]);
+  assert.deepEqual(actual, [["1-for-25", "2023-05-04"], ["1-for-9", "2023-08-11"], ["1-for-100", "2023-12-21"], ["1-for-100", "2024-09-17"], ["1-for-60", "2025-02-18"], ["1-for-100", "2025-04-11"], ["1-for-100", "2025-06-02"], ["1-for-250", "2025-08-04"], ["1-for-250", "2025-09-22"]]);
+  assert.equal(actual.some(([ratio, date]) => ratio === "1-for-250" && date === "2025-08-01"), false);
+  const filingDiagnostic = result.evidence_packet.corporate_action_diagnostics.find((item) => item.extracted_date === "2025-08-01");
+  assert.equal(filingDiagnostic.canonical_chosen_event_date, "2025-08-04");
+  assert.equal(filingDiagnostic.filing_vs_effective_reconciliation, "merged_to_effective_event");
+  const finalized = finalizeResearchReport(result.report, { reportValidator, requestedTicker: "MULN" });
+  assert.equal(finalized.valid, true, JSON.stringify(finalized.validation.errors));
 });
 
 test("stored-live MULN shape yields canonical history without the false August 2025 1-for-100", async () => {
