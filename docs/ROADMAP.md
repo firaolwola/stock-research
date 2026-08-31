@@ -170,6 +170,11 @@ verdict.
     authorized-share counts cannot become split numerators. A deterministic
     regression covers the confirmation-7 filing shape. A fresh live check,
     if desired, still requires separate owner approval.
+19. [x] **Complete — confirm AMC verbose-ratio correction live:** the approved
+    one-run check produced exactly the expected completed 2023-08-24 `1-for-10`
+    event and eliminated the false `550000000-for-10` event. The targeted live
+    blocker is resolved; Issue #55 remains active for broader reliability and
+    sample-size gates.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

@@ -1513,3 +1513,14 @@ from being paired with a later “for every” denominator and promoted as a
 completed split. The correction preserves the legitimate AMC “ratio of one
 share ... for every ten shares” form and adds a regression for the false
 `550000000-for-10` event. No live call or frozen baseline changed.
+
+## 2026-08-31 — AMC verbose-ratio confirmation 8 passes
+
+**Status:** Targeted live blocker resolved; Issue #55 remains open
+
+The fresh one-run confirmation produced exactly the expected completed
+2023-08-24 `1-for-10` event and no `550000000-for-10` false event. SEC access
+and report validation succeeded, while synthesis was cost-blocked before any
+OpenAI request. Mark the known AMC verbose-ratio parser blocker resolved for
+this filing shape, preserve the frozen artifacts, and do not rerun AMC
+automatically. The broader Issue #55 reliability/sampling gate is unchanged.

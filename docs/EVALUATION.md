@@ -817,6 +817,19 @@ web-search calls, estimated cost, per-case latency, app failures, and the full
 rubric results. The evaluator rejects missing approval or measurement fields.
 Redact credentials and do not commit sensitive provider payloads.
 
+### AMC verbose-ratio confirmation 8 (2026-08-31)
+
+The fresh approved one-run confirmation passed the SEC preflight and produced a
+valid report in 2,982 ms. The canonical history contained exactly the expected
+completed `1-for-10` reverse split effective 2023-08-24; the prior false
+`550000000-for-10` event was absent. SEC retrieval completed with 14 requests,
+Alpha Vantage used two requests (market completed, news quota-limited), and
+OpenAI synthesis was cost-blocked before request. Targeted recall and
+precision were 1/1 with safe partial settlement. The known AMC verbose-ratio
+blocker is resolved for this shape; Issue #55 remains open for its broader
+reliability and sampling gates. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-VERBOSE-RATIO-CONFIRMATION-8.md`.
+
 ### AMC verbose-ratio confirmation 7 (2026-08-31)
 
 The approved one-run confirmation passed the SEC connectivity preflight and
