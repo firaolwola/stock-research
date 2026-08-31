@@ -14,6 +14,8 @@ test("Issue 78 adjudication preserves frozen cohorts without pooling them", asyn
   assert.deepEqual(result.gate.coverage_limited_categories, ["free_cash_flow_trend"]);
   assert.equal(result.gate.fcf_numeric_coverage_proven, false);
   assert.equal(result.gate.fcf_safe_unresolved_settlement_passed, true);
+  assert.equal(result.sample_size_map.find((item) => item.category === "free_cash_flow_trend").status, "coverage_limited_safe_settlement_separate");
+  assert.match(result.miss_classifications.find((item) => item.id === "batch-3-score-calibration").detail, /current offline matrix pass rate is 2\/2/);
 });
 
 test("Issue 78 separates unavailable authoritative evidence from system misses", async () => {
