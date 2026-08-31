@@ -962,6 +962,18 @@ Creating this backlog does not authorize live or paid evaluation. NIO's
 `unavailable_authoritative_evidence` classification remains prospective and is
 not a system miss; all prior measured batches and answer keys remain frozen.
 
+## Issue #78 final adjudication (2026-08-31)
+
+The reproducible adjudicator reads frozen cohort summaries and the offline
+score-calibration diagnostic, hash-audits the source artifacts, and refuses to
+pool overlapping rubrics. It records the descriptive Batch 1/2/3 and final-
+five recall values, category/sample-size results, cause classifications, and
+the NIO unavailable-authoritative-evidence treatment. The closure gate remains
+failed: frozen same-five FCF is 3/5, reverse-split coverage is not an
+adequately sampled pass, and broad score/explanation calibration is not a
+milestone claim. The next scoped work is tracked in Issue #81; no live run is
+authorized by this adjudication.
+
 ## Issue #77 offline score calibration
 
 `evaluation/plans/fast-score-calibration-2026-08-31.json` and its diagnostic

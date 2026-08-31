@@ -1642,6 +1642,19 @@ into a system miss. Issue #78 may close #55 only when the existing reliability
 gates, sample-size disclosure, zero-severe-miss rule, and Definition of Done
 all pass.
 
+## 2026-08-31 — Freeze the final #55 adjudication boundary (Issue #78)
+
+**Status:** Completed offline; #55 remains open
+
+The final adjudicator treats each frozen cohort as its own rubric, records
+cause classifications for remaining misses, and hash-audits historical plans
+and summaries without rewriting them. The overall gate is not claimed: FCF is
+3/5 in the frozen same-five denominator, overlapping cohorts cannot be pooled,
+and the broad score/explanation gate is not established. NIO's
+`unavailable_authoritative_evidence` outcome remains outside system-miss
+counts. Issue #81 is the smallest next scope for resolving the FCF denominator
+and any separately approved remeasurement plan.
+
 ## 2026-08-31 — Add offline Fast score calibration gate (Issue #77)
 
 **Status:** Implemented offline; no live run authorized
