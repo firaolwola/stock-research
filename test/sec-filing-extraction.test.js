@@ -72,6 +72,18 @@ test("SEC filing-table capex extraction binds flattened segmented annual tables 
   assert.equal(result.diagnostics[0].disposition, "accepted");
 });
 
+test("SEC filing-table capex extraction binds values split across live-style rows", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><tr><th>Year Ended</th></tr><tr><th>December 31, 2025</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td></tr><tr><td>174.2</td><td>71.9</td><td>246.1</td></tr></table>`,
+    form: "10-K", filed: "2026-02-23", reportDate: "2025-12-31", accession: "amc-row-split-capex", currencyHint: "USD", documentUrl: "https://www.sec.gov/Archives/amc-row-split-capex.htm", documentName: "amc-row-split-capex.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, start, end, unit }) => ({ val, start, end, unit })), [
+    { val: 246_100_000, start: "2025-01-01", end: "2025-12-31", unit: "USD" }
+  ]);
+  assert.equal(result.diagnostics[0].column_selection, "flattened_consolidated");
+  assert.equal(result.diagnostics[0].disposition, "accepted");
+});
+
 test("SEC filing-table capex extraction binds a single flattened Consolidated value", () => {
   const result = extractFilingCapitalExpenditureFacts({
     html: `<table><tr><td><div>Year Ended</div><div>June 30, 2026</div><div>(In millions)</div><div>Consolidated Capital expenditures 246.1</div></td></tr></table>`,

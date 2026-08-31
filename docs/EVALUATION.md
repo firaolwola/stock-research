@@ -1078,6 +1078,20 @@ offline fallback is not yet live-validated; next work is offline inspection of
 the captured live table shape, not another blind run. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-CONFIRMATION-4.md`.
 
+### AMC FCF offline correction 3 (2026-08-31)
+
+Inspection of the captured live diagnostic identified the bypass: the capex
+label occupied a row with no value cells, while the explicit segment headers and
+values were in sibling rows. Header detection therefore set
+`consolidated_column_unavailable` before the flattened fallback could run. The
+extractor now allows that bounded fallback for an empty value row and scans only
+the current table text after the capex label, still requiring explicit U.S.
+Markets, International Markets, and Consolidated labels and at least three
+values. New extraction and application regressions pass. No live call was made;
+the prior confirmation remains unchanged and a separate live confirmation would
+be required to establish production applicability. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-OFFLINE-CORRECTION-3.md`.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency
