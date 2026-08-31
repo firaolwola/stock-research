@@ -1642,6 +1642,18 @@ into a system miss. Issue #78 may close #55 only when the existing reliability
 gates, sample-size disclosure, zero-severe-miss rule, and Definition of Done
 all pass.
 
+## 2026-08-31 — Keep FCF cohorts non-overlapping (Issue #81)
+
+**Status:** Offline adjudication complete; live remeasurement requires approval
+
+The frozen same-five FCF result remains the historical gate denominator at
+3/5 (60%). The independent MSFT/RIVN aligned SEC-pair remeasurement is a
+separate two-case control cohort and must not be pooled with the frozen cases.
+Issue #81 records this distinction, classifies the two frozen misses as
+unavailable authoritative capex evidence, and prepares—but does not authorize—
+a bounded five-case remeasurement using the #49/#75 limits. Missing or invalid
+capex remains Limited/Unscored and never favorable.
+
 ## 2026-08-31 — Freeze the final #55 adjudication boundary (Issue #78)
 
 **Status:** Completed offline; #55 remains open
