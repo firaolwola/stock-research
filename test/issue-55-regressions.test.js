@@ -872,6 +872,26 @@ test("SEC filing-table capex fallback supplies identity-gated FCF when Company F
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
 
+test("latest OCF currency hint survives older alternate-unit facts for a currency-less capex table", async () => {
+  const result = await researchFixture({
+    ticker: "AMC",
+    filings: [{ accessionNumber: "0000000001-26-000016", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "amc-capex.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: {
+      "amc-capex.htm": `<table><caption>Years ended June 30 (in millions)</caption><tr><th>Years ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(20)</td><td>(10)</td></tr></table>`
+    },
+    companyFacts: { cik: 1, entityName: "AMC Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: { label: "Operating cash flow", units: {
+        USD: [fact(100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-amc-current" })],
+        CAD: [fact(80_000_000, { start: "2025-01-01", end: "2025-06-30", form: "10-K", accn: "ocf-amc-prior", filed: "2025-08-01" })]
+      } }
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.equal(fcf.value, 80_000_000);
+  assert.ok(result.evidence_packet.normalization_diagnostics.some((item) => item.accession === "0000000001-26-000016" && item.disposition === "accepted" && item.currency_source === "caller_hint"));
+});
+
 test("SEC filing-table FCF includes explicit patent and trademark cash purchases", async () => {
   const result = await researchFixture({
     ticker: "NXL",
