@@ -8,6 +8,9 @@ the running product-vision source of truth.
 
 ## Current state
 
+Issue #76 is complete. The active implementation priority is now #77, followed
+by #78; the #55 reliability gate remains open and PR #74 is not merge-ready.
+
 The application has a strong deterministic foundation: a versioned report
 contract, semantic validation, claim-linked sources, distinct evidence states,
 deterministic score calculation, a responsive dashboard, token-free mock mode,
@@ -81,9 +84,9 @@ verdict.
 
 ### Next scoped priorities after the #55 review
 
-1. [ ] **Active priority — [#76 — Restore bounded SEC filing-table coverage for Fast free cash flow](https://github.com/firaolwola/stock-research/issues/76).** Add an offline-first, identity-gated filing-table fallback for capex so FCF can be derived from authoritative comparable OCF/capex pairs when Company Facts is incomplete. Preserve Limited/Unscored for missing, stale, conflicting, mismatched, or accounting-invalid inputs. No live run or paid provider is part of this issue.
-2. [ ] **Planned after #76 — [#77 — Calibrate Fast score ranges, explanations, and relative ordering](https://github.com/firaolwola/stock-research/issues/77).** Use deterministic fixtures and untouched holdouts to make component direction, acceptable ranges, evidence-linked explanations, and relative ordering measurable without silently changing Methodology 2.1.0.
-3. [ ] **Planned after #76 and #77 — [#78 — Complete final Issue #55 reliability adjudication and closure gate](https://github.com/firaolwola/stock-research/issues/78).** Recalculate frozen cohorts without pooling incompatible rubrics, separate unavailable authoritative evidence from system misses, and close/merge only if the documented reliability gates and Definition of Done pass.
+1. [x] **Complete — [#76 — Restore bounded SEC filing-table coverage for Fast free cash flow](https://github.com/firaolwola/stock-research/issues/76).** Fast now inspects a bounded set of already-retrieved SEC 10-K/10-Q/20-F/40-F tables for explicit, unit- and period-aligned capex when Company Facts is incomplete. Accepted facts retain accession/date provenance; ambiguous, stale, conflicting, unsupported, or accounting-invalid inputs remain Limited/Unscored. No live run or paid provider was used.
+2. [ ] **Active priority — [#77 — Calibrate Fast score ranges, explanations, and relative ordering](https://github.com/firaolwola/stock-research/issues/77).** Use deterministic fixtures and untouched holdouts to make component direction, acceptable ranges, evidence-linked explanations, and relative ordering measurable without silently changing Methodology 2.1.0.
+3. [ ] **Planned after #77 — [#78 — Complete final Issue #55 reliability adjudication and closure gate](https://github.com/firaolwola/stock-research/issues/78).** Recalculate frozen cohorts without pooling incompatible rubrics, separate unavailable authoritative evidence from system misses, and close/merge only if the documented reliability gates and Definition of Done pass.
 
 ### Issue #55 corrective roadmap
 

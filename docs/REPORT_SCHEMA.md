@@ -360,3 +360,16 @@ quarterly metric value and are kept out of the provider-facing Fast schema.
 When present, confirmed shares-outstanding observations must be unique,
 chronological point-in-time values using the literal `shares` unit. Unresolved
 series cannot carry observations.
+
+## Filing-table financial provenance
+
+FCF observations may be derived from an aligned Company Facts operating-cash-flow
+fact and an explicit capital-expenditure row extracted from a selected SEC
+10-K/10-Q/20-F/40-F filing table. The resulting claim cites both dated source
+records; the filing-table source is represented as `source_type: "sec_filing"`
+and retains its official SEC URL and accession in the source title/identifier.
+Internal normalization diagnostics may record accepted or withheld table
+extractions, but diagnostics are not report claims or user-facing evidence.
+Ambiguous currency, scale, cadence, period columns, unsupported filing forms,
+or accounting-invalid inputs produce no capex fact, so OCF-only reports remain
+Limited/Unscored rather than manufacturing FCF.
