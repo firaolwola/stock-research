@@ -76,8 +76,14 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — final reliability/sample-size adjudication:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The offline adversarial/property loop passes; AMC, NCPL, ONFO, and STN targeted corrections are confirmed for their covered shapes; and practical samples reach 5 completed splits, 3 active deficiencies, 4 going-concern/bankruptcy cases, 3 foreign/ADR/IFRS cases, and 5 OTC/delisted cases. The final review still cannot close the milestone: frozen same-five FCF remains 3/5 (60%), although the independent MSFT/RIVN remeasurement now passes clean positive/negative aligned SEC pairs; score-range calibration was 30/57 (52.63%) in Batch 3, and overlapping rubrics do not support a single pooled recall number. NIO attributable annual net loss remains `unavailable_authoritative_evidence`, not a system miss. The next evidence decision is authoritative filing-table coverage or a justified FCF baseline for the remaining unavailable shapes; PR #74 remains not merge-ready. See `docs/results/FAST_RELIABILITY_2026-08-31-FINAL-ADJUDICATION.md`.
+8. [ ] **Active — final reliability/sample-size adjudication:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The offline adversarial/property loop passes; AMC, NCPL, ONFO, and STN targeted corrections are confirmed for their covered shapes; and practical samples reach 5 completed splits, 3 active deficiencies, 4 going-concern/bankruptcy cases, 3 foreign/ADR/IFRS cases, and 5 OTC/delisted cases. The final review still cannot close the milestone: frozen same-five FCF remains 3/5 (60%), although the independent MSFT/RIVN remeasurement now passes clean positive/negative aligned SEC pairs; score-range calibration was 30/57 (52.63%) in Batch 3, and overlapping rubrics do not support a single pooled recall number. NIO attributable annual net loss remains `unavailable_authoritative_evidence`, not a system miss. The active implementation dependency is #76 (bounded SEC filing-table FCF coverage), followed by #77 (score/explanation calibration) and #78 (final adjudication); PR #74 remains not merge-ready. See `docs/results/FAST_RELIABILITY_2026-08-31-FINAL-ADJUDICATION.md`.
 9. [x] **Complete — zero-token SEC connectivity gate:** [#75 — Add zero-token SEC connectivity preflight before live verification](https://github.com/firaolwola/stock-research/issues/75). All approved live-verification runners now perform one bounded SEC ticker-map check before constructing research clients. HTTP, timeout, and network-denial failures stop before Fast/provider/OpenAI work and report only safe diagnostics. This prerequisite is complete; any future Issue #55 FCF-focused live remeasurement must pass it, and no live batch is implied by this item.
+
+### Next scoped priorities after the #55 review
+
+1. [ ] **Active priority — [#76 — Restore bounded SEC filing-table coverage for Fast free cash flow](https://github.com/firaolwola/stock-research/issues/76).** Add an offline-first, identity-gated filing-table fallback for capex so FCF can be derived from authoritative comparable OCF/capex pairs when Company Facts is incomplete. Preserve Limited/Unscored for missing, stale, conflicting, mismatched, or accounting-invalid inputs. No live run or paid provider is part of this issue.
+2. [ ] **Planned after #76 — [#77 — Calibrate Fast score ranges, explanations, and relative ordering](https://github.com/firaolwola/stock-research/issues/77).** Use deterministic fixtures and untouched holdouts to make component direction, acceptable ranges, evidence-linked explanations, and relative ordering measurable without silently changing Methodology 2.1.0.
+3. [ ] **Planned after #76 and #77 — [#78 — Complete final Issue #55 reliability adjudication and closure gate](https://github.com/firaolwola/stock-research/issues/78).** Recalculate frozen cohorts without pooling incompatible rubrics, separate unavailable authoritative evidence from system misses, and close/merge only if the documented reliability gates and Definition of Done pass.
 
 ### Issue #55 corrective roadmap
 
@@ -179,10 +185,11 @@ verdict.
     confirmation remains unchanged at 3/5. FCF now selects the newest aligned
     SEC OCF/capex pair when independently selected facts have different latest
     durations (for example, quarterly OCF beside YTD capex), while preserving
-    Limited/Unknown for missing or mismatched capex. The next dependency is a
-    separately approved live remeasurement. AMC/NXL remeasurement completed with
-    no aligned authoritative capex; the next dependency is aggregate adjudication
-    against the reliability and sample-size gates.
+    Limited/Unknown for missing or mismatched capex. The approved MSFT/RIVN
+    remeasurement then confirmed clean positive/negative aligned pairs, while
+    AMC/NXL remained unavailable-authoritative-evidence shapes. The resulting
+    aggregate review is recorded in #78's dependency chain; no frozen result
+    changed.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
@@ -226,10 +233,17 @@ authorized by that approval. The offline correction now inspects a bounded set
 of SEC-hosted 99.x exhibits linked from annual 20-F/40-F filings, including the
 STN audited exhibit, and has deterministic regression coverage. The fresh
 confirmation then passed both ONFO and STN with 7/7 targeted claims and zero
-severe misses. The next dependency is independent sample-size/reliability
-review; no further live run is authorized automatically. A paid data
+severe misses. The independent sample-size/reliability review is now recorded
+in the #76 → #77 → #78 dependency chain; no further live run is authorized
+automatically. A paid data
 subscription remains neither selected nor required and would need separate
 owner approval.
+
+The final review now has an explicit offline-first dependency chain: #76 (FCF
+evidence coverage), then #77 (score/explanation calibration), then #78 (final
+adjudication). No additional live calibration is implied by creating these
+issues; any paid or provider-backed run still requires a separate bounded owner
+approval.
 
 ### Milestone acceptance criteria
 

@@ -938,3 +938,26 @@ positive/negative shapes but does not rewrite the frozen same-five 3/5 FCF
 denominator; AMC, NCPL, and NXL remain Limited/Unscored where authoritative
 capex is unavailable or invalidated. See
 `docs/results/FAST_RELIABILITY_2026-08-31-FCF-REMEASUREMENT-2.md`.
+
+### Post-review prioritized backlog (2026-08-31)
+
+The final #55 adjudication remains open. The next work is deliberately
+offline-first and is tracked as a dependency chain rather than another blind
+live batch:
+
+1. [Issue #76](https://github.com/firaolwola/stock-research/issues/76) adds
+   bounded SEC filing-table capex coverage for FCF. It must preserve strict
+   issuer/accession/period/currency/unit/cadence/accounting-validity gates and
+   leave unavailable shapes Limited/Unscored.
+2. [Issue #77](https://github.com/firaolwola/stock-research/issues/77) calibrates
+   score ranges, explanation fidelity, and relative ordering with deterministic
+   fixtures and untouched holdouts, without silently changing Methodology
+   2.1.0.
+3. [Issue #78](https://github.com/firaolwola/stock-research/issues/78) performs
+   the final frozen-artifact adjudication and can close #55 only if the 95%
+   overall, 90% adequately sampled category, zero-severe-miss, and Definition
+   of Done gates are actually satisfied.
+
+Creating this backlog does not authorize live or paid evaluation. NIO's
+`unavailable_authoritative_evidence` classification remains prospective and is
+not a system miss; all prior measured batches and answer keys remain frozen.

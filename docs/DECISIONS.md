@@ -1620,3 +1620,24 @@ five FCF result of 3/5. AMC, NCPL, and NXL remain Limited/Unscored where
 authoritative capex is unavailable or invalidated; the FCF category therefore
 still fails the reliability gate. Further live work requires a separate
 decision about authoritative filing-table coverage or a justified FCF baseline.
+
+## 2026-08-31 — Prioritize offline FCF coverage, score calibration, then final #55 adjudication
+
+**Status:** Accepted backlog ordering; Issue #55 remains open
+
+**Decision:** After the final milestone review and the clean MSFT/RIVN FCF
+remeasurement, work proceeds in three bounded issues: #76 adds authoritative
+SEC filing-table capex coverage; #77 calibrates score ranges, evidence-linked
+explanations, and relative ordering on deterministic holdouts; #78 performs
+the final frozen-artifact reliability adjudication. No new provider, paid
+subscription, live run, or methodology rewrite is implied by this ordering.
+
+**Why:** The clean two-case remeasurement shows aligned SEC derivation works,
+but the frozen same-five FCF category remains 3/5 and Batch 3 score-range
+calibration remains 30/57. Offline coverage and measurement must therefore be
+strengthened before another live run can produce useful milestone evidence.
+Missing or unavailable authoritative evidence remains Limited/Unscored, and
+NIO's documented `unavailable_authoritative_evidence` result is not converted
+into a system miss. Issue #78 may close #55 only when the existing reliability
+gates, sample-size disclosure, zero-severe-miss rule, and Definition of Done
+all pass.
