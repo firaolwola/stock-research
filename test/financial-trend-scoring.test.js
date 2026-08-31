@@ -78,6 +78,20 @@ test("FCF remains Limited when only interim observations are available", async (
   assert.equal(score.value, null);
 });
 
+test("annual FCF accepts normal fiscal-year duration variation", async () => {
+  const report = await load();
+  report.financial_assessment.as_of = "2026-08-31";
+  report.financial_assessment.metrics.free_cash_flow.annual_observations = [
+    { value: -600, unit: "USD millions", period_start: "2022-10-01", period_end: "2023-09-28", claim_ids: ["claim-financial"] },
+    { value: -390, unit: "USD millions", period_start: "2023-09-29", period_end: "2024-09-26", claim_ids: ["claim-financial"] },
+    { value: -180, unit: "USD millions", period_start: "2024-09-27", period_end: "2025-09-25", claim_ids: ["claim-financial"] }
+  ];
+  report.financial_assessment.metrics.free_cash_flow.observations = [];
+  const score = calibrateReportScores(report).scores.financial_free_cash_flow_trend;
+  assert.equal(score.state, "confirmed");
+  assert.ok(score.value > 5);
+});
+
 test("cash rewards growth and penalizes depletion only when fresh", async () => {
   const growth = await trend("cash", [20, 30, 45], { pointInTime: true });
   const depletion = await trend("cash", [45, 30, 15], { pointInTime: true });
