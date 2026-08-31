@@ -51,7 +51,8 @@ if (JSON.stringify(batchPlan.provider_policy.provider_order) !== JSON.stringify(
 for (const preserved of batchPlan.preserve_prior_batches) {
   for (const [name, expected] of [["summary.json", preserved.summary_sha256], ["run-summary.json", preserved.run_summary_sha256]]) {
     const original = await readFile(path.join(root, ...preserved.directory.split("/"), name));
-    if (createHash("sha256").update(original).digest("hex") !== expected) throw new Error(`Refusing to run because ${preserved.directory}/${name} changed.`);
+    const canonicalOriginal = original.toString().replace(/\r\n/g, "\n");
+    if (createHash("sha256").update(canonicalOriginal).digest("hex") !== expected) throw new Error(`Refusing to run because ${preserved.directory}/${name} changed.`);
   }
 }
 
