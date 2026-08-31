@@ -1540,3 +1540,20 @@ approximately 90% category gate. Since batches overlap and no single aggregate
 answer key exists, an overall pooled recall would be misleading. Keep #55 open;
 the next step is offline FCF comparability/retrieval correction followed by any
 separately approved remeasurement.
+
+## 2026-08-31 — Select aligned SEC periods before deriving FCF
+
+**Status:** Implemented offline; live remeasurement remains separately gated
+
+**Decision:** Derive free cash flow from the newest aligned SEC Company Facts
+operating-cash-flow and capital-expenditure pair. At a shared end date, select
+the shortest valid duration deterministically and preserve cadence consistency
+for comparable observations. Do not require the independently selected visible
+OCF metric to have the same duration as capex. Continue to leave FCF
+Limited/Unknown when capex is absent, conflicting, stale, or mismatched in
+unit/period; OCF alone is never FCF.
+
+**Why:** SEC facts can expose quarterly OCF and YTD capex together. Requiring
+independent selections to match discarded a valid aligned YTD pair and created
+an avoidable FCF Unknown state. The correction is covered by a deterministic
+quarter-vs-YTD regression and does not alter frozen calibration results.

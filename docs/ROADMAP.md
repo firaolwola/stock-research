@@ -175,10 +175,13 @@ verdict.
     event and eliminated the false `550000000-for-10` event. The targeted live
     blocker is resolved; Issue #55 remains active for broader reliability and
     sample-size gates.
-20. [ ] **Active — correct remaining FCF reliability gap offline:** the frozen
-    same-five confirmation detected only 3/5 expected free-cash-flow cases.
-    Investigate SEC-authoritative comparability/retrieval before proposing any
-    separately approved live remeasurement.
+20. [x] **Complete — correct FCF period selection offline:** the frozen same-five
+    confirmation remains unchanged at 3/5. FCF now selects the newest aligned
+    SEC OCF/capex pair when independently selected facts have different latest
+    durations (for example, quarterly OCF beside YTD capex), while preserving
+    Limited/Unknown for missing or mismatched capex. The next dependency is a
+    separately approved live remeasurement to determine whether the affected
+    tickers expose aligned authoritative capex.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

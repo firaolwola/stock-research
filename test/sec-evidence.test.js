@@ -231,6 +231,26 @@ test("aligned OCF and capital expenditures produce FCF while currency mismatch d
   assert.equal(mismatch.report.financial_assessment.metrics.free_cash_flow.state, "unknown");
 });
 
+test("FCF uses the newest aligned cadence when OCF and capex have different latest durations", async () => {
+  const result = await reportForFacts(factsWith({
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("Operating cash flow", [
+      edgeFact(9_000_000, { start: "2026-04-01", end: "2026-06-30" }),
+      edgeFact(12_000_000, { start: "2026-01-01", end: "2026-06-30", accn: "current-ytd" }),
+      edgeFact(10_000_000, { start: "2025-01-01", end: "2025-06-30", filed: "2025-08-15", accn: "prior-ytd" })
+    ]),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Capital expenditures", [
+      edgeFact(2_000_000, { start: "2026-01-01", end: "2026-06-30", accn: "current-capex-ytd" }),
+      edgeFact(3_000_000, { start: "2025-01-01", end: "2025-06-30", filed: "2025-08-15", accn: "prior-capex-ytd" })
+    ])
+  }));
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.equal(fcf.value, 10_000_000);
+  assert.equal(fcf.period_start, "2026-01-01");
+  assert.equal(fcf.period_end, "2026-06-30");
+  assert.deepEqual(fcf.observations.map((item) => item.value), [7_000_000, 10_000_000]);
+});
+
 test("SEC financial observations retain only aligned comparable periods in chronological order", async () => {
   const result = await reportForFacts(factsWith({
     CashAndCashEquivalentsAtCarryingValue: edgeConcept("Cash", [edgeFact(5_000_000), edgeFact(4_000_000, { end: "2026-03-31", filed: "2026-05-10", accn: "0000123456-26-000000" })]),

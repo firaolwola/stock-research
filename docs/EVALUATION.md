@@ -164,6 +164,20 @@ active Nasdaq-notice controls remain detected. These corrections do not change
 the measured Batch 3 result and are not another calibration run. AMC/NXL FCF
 remains honestly Limited because the stored evidence has no aligned capex fact.
 
+### FCF comparability correction (2026-08-31)
+
+The frozen 3/5 FCF result remains unchanged. Offline review found that the
+normalizer selected OCF and capital expenditures independently, then required
+those selections to share a period. A shorter quarterly OCF could therefore
+hide a valid aligned YTD pair. FCF now selects the newest aligned SEC pair,
+with deterministic duration ordering at a shared end date; it still requires
+matching unit/period, never infers FCF from OCF alone, and leaves missing or
+conflicting capex Limited/Unknown. A regression covers the quarter-vs-YTD
+collision. No live or paid request was made; a separately approved
+remeasurement is needed to determine whether this improves the affected
+tickers' live coverage. See
+`docs/results/FAST_RELIABILITY_2026-08-31-FCF-OFFLINE-CORRECTION.md`.
+
 The subsequently approved four-ticker sparse batch is recorded in
 `docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-1.md`. It produced four valid
 reports but only 3/16 material checks (18.75%). BIOR, former ticker MULN, and
