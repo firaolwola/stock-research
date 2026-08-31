@@ -893,3 +893,21 @@ cases. The frozen same-five FCF result remains 3/5 (60%), below the approximatel
 overlap across batches and FCF remains below gate, Issue #55 stays open and PR
 #74 is not merge-ready. See
 `docs/results/FAST_RELIABILITY_2026-08-31-MILESTONE-REVIEW.md`.
+
+### Zero-token SEC connectivity preflight (#75, 2026-08-31)
+
+Before any approved live Fast verification runner constructs an OpenAI or
+bounded-provider client, it performs exactly one bounded GET of the SEC
+ticker-map endpoint using the configured server-side User-Agent. The response
+body is never read or logged. HTTP 200 is the only success state; non-200,
+timeout, and network-denial outcomes stop the run before research, provider
+quota, or OpenAI budget work begins. Diagnostics include only the endpoint
+category, elapsed time, status when available, response-received flag, cache
+state, request count, and sanitized error names/codes. This gate is now wired
+into every approved live-calibration runner and is covered by deterministic
+HTTP, timeout, and network-denial tests. It does not alter historical
+calibration artifacts or authorize a new live batch; the next active step is
+the Issue #55 aggregate reliability decision. When the execution environment
+denies outbound access (for example, a sandbox EACCES), the runner must be
+restarted with the required network permission before requesting or executing
+another AMC/ticker confirmation.

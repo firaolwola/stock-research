@@ -1569,3 +1569,22 @@ period-selection correction was not contradicted, no OpenAI synthesis request
 was made, and the frozen 3/5 FCF category result remains unchanged. Treat this
 as unavailable authoritative evidence for these live shapes; any filing-table
 extraction expansion or additional calibration requires a new owner decision.
+
+## 2026-08-31 — Gate approved live verification on SEC connectivity (Issue #75)
+
+**Status:** Implemented
+
+Every approved live-calibration runner must first execute one bounded SEC
+ticker-map connectivity check through the same server-side fetch path used by
+SEC retrieval. The check sends the configured User-Agent but never exposes it,
+reads a response body, or logs headers/content. Only HTTP 200 permits runner
+setup; non-200, timeout, and network failures terminate before OpenAI, SEC
+evidence, Alpha Vantage, Twelve Data, Deep, or hosted-search work. Safe
+diagnostics retain endpoint category, status, elapsed time, response-received
+state, cache state, request count, and sanitized error metadata. This protects
+approved budgets and makes network-permission failures distinguishable from
+research defects. It is an operational prerequisite, not a change to frozen
+Issue #55 measurements or its reliability gate.
+If the environment denies outbound SEC access, grant the required environment
+network permission and rerun the preflight before requesting or executing any
+new AMC/ticker confirmation.

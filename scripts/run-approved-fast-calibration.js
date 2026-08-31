@@ -13,6 +13,7 @@ import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { evaluateCalibrationProviderAvailability } from "../lib/calibration-provider-policy.js";
 import { resolveEvaluationPlan } from "../lib/evaluation-plan.js";
 import { loadRealAppConfig } from "../startup-config.js";
+import { formatSecPreflightFailure, runSecConnectivityPreflight } from "../lib/sec-connectivity-preflight.js";
 
 dotenv.config({ quiet: true });
 
@@ -64,6 +65,11 @@ await mkdir(path.join(outputRoot, "raw"), { recursive: true });
 await mkdir(path.join(outputRoot, "review"), { recursive: true });
 
 const config = loadRealAppConfig();
+const secPreflight = await runSecConnectivityPreflight({ userAgent: config.secUserAgent });
+if (!secPreflight.ok) {
+  console.error(`SEC preflight failed before live research: ${formatSecPreflightFailure(secPreflight)}`);
+  throw new Error("SEC connectivity preflight failed; no live research was started.");
+}
 if (!config.alphaVantageApiKey && !config.twelveDataApiKey) console.warn("No optional market/news provider is configured; calibration will preserve SEC/Nasdaq evidence and settle optional context Limited.");
 const schema = JSON.parse(await readFile(path.join(root, "schema", "stock-report.schema.json"), "utf8"));
 const reportValidator = createReportValidator(schema);

@@ -178,6 +178,25 @@ test("the established multi-case runner uses the same recursive pre-runtime reso
   assert.ok(source.indexOf("for (const scenario of plan.cases)") > resolveAt);
 });
 
+test("every approved live runner gates client construction on zero-token SEC connectivity", async () => {
+  const runners = [
+    "run-approved-fast-calibration.js",
+    "run-approved-sparse-calibration.js",
+    "run-approved-sparse-expansion.js",
+    "run-approved-final-sparse-proof.js",
+    "run-approved-muln-verification-implementation.js"
+  ];
+  for (const runner of runners) {
+    const source = await readFile(new URL(`../scripts/${runner}`, import.meta.url), "utf8");
+    const preflightAt = source.indexOf("runSecConnectivityPreflight");
+    const openAiAt = source.indexOf("new OpenAI(");
+    const sourceClientAt = source.indexOf("createSecEvidenceClient(");
+    assert.ok(preflightAt > 0, `${runner} must call the SEC preflight`);
+    assert.ok(openAiAt > preflightAt, `${runner} must preflight before OpenAI construction`);
+    assert.ok(sourceClientAt > preflightAt, `${runner} must preflight before SEC client construction`);
+  }
+});
+
 test("AMC and NCPL correction confirmation resolves two declared cases with bounded overrides", async () => {
   const root = path.resolve(".");
   const planPath = path.join(root, "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json");
