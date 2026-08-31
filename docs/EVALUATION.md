@@ -971,8 +971,8 @@ five recall values, category/sample-size results, cause classifications, and
 the NIO unavailable-authoritative-evidence treatment. The closure gate remains
 failed: frozen same-five FCF is 3/5, reverse-split coverage is not an
 adequately sampled pass, and broad score/explanation calibration is not a
-milestone claim. The next scoped work is tracked in Issue #81; no live run is
-authorized by this adjudication.
+milestone claim. The next scoped work is tracked in Issue #81; its separately
+approved confirmation is recorded below and does not change this adjudication.
 
 ## Issue #77 offline score calibration
 
@@ -990,8 +990,25 @@ frozen #55 measurements or claim live reliability. Run with
 60%) separate from the independent MSFT/RIVN clean-control cohort (2/2,
 informational only). The evaluator hash-audits the source plans and summaries,
 classifies the two frozen misses as unavailable authoritative capex evidence,
-and records an approval-gated five-case remeasurement proposal. No live or
-paid call is performed by this command, and the #55 closure gate remains open.
+and records an approval-gated five-case remeasurement proposal. The separately
+approved five-case remeasurement is recorded below; this command itself remains
+offline and the #55 closure gate remains open.
+
+### Issue #81 FCF gate confirmation (2026-08-31)
+
+The owner-approved confirmation ran exactly once for AAPL, AMC, NCPL, NXL, and
+SMCI. All five reports were valid safe-partial reports. AAPL and SMCI retained
+comparable SEC-derived FCF observations (2/5 strict usable coverage); AMC and
+NXL had no aligned authoritative capex pair, while NCPL's affected flow history
+was invalidated by the recent non-reliance event. Those three cases remained
+Limited/Unscored, with no favorable inference. Safe settlement was 5/5.
+
+The run used 10 Alpha Vantage requests, no Twelve Data requests, no retries,
+Deep, hosted search, or OpenAI request; measured OpenAI cost was $0. Aggregate
+elapsed time was 10,507 ms (maximum ticker 2,350 ms). This descriptive result
+does not rewrite the frozen same-five 3/5 FCF denominator, so the category gate
+and Issue #55 remain open. See
+`evaluation/live/2026-08-31-fcf-gate-confirmation-1/summary.json`.
 
 ### Issue #76 offline implementation (2026-08-31)
 

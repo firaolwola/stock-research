@@ -1644,14 +1644,16 @@ all pass.
 
 ## 2026-08-31 — Keep FCF cohorts non-overlapping (Issue #81)
 
-**Status:** Offline adjudication complete; live remeasurement requires approval
+**Status:** Frozen-boundary adjudication and approved confirmation complete; #55 remains open
 
 The frozen same-five FCF result remains the historical gate denominator at
 3/5 (60%). The independent MSFT/RIVN aligned SEC-pair remeasurement is a
 separate two-case control cohort and must not be pooled with the frozen cases.
 Issue #81 records this distinction, classifies the two frozen misses as
-unavailable authoritative capex evidence, and prepares—but does not authorize—
-a bounded five-case remeasurement using the #49/#75 limits. Missing or invalid
+unavailable authoritative capex evidence, and executed one bounded five-case
+remeasurement under the #49/#75 limits after owner approval. The confirmation
+produced two usable comparable SEC FCF pairs and three honest Limited/Unscored
+settlements; it did not replace the frozen denominator. Missing or invalid
 capex remains Limited/Unscored and never favorable.
 
 ## 2026-08-31 — Freeze the final #55 adjudication boundary (Issue #78)
