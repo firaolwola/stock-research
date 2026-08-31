@@ -72,6 +72,18 @@ test("SEC filing-table capex extraction binds flattened segmented annual tables 
   assert.equal(result.diagnostics[0].disposition, "accepted");
 });
 
+test("SEC filing-table capex extraction binds a single flattened Consolidated value", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><tr><td><div>Year Ended</div><div>June 30, 2026</div><div>(In millions)</div><div>Consolidated Capital expenditures 246.1</div></td></tr></table>`,
+    form: "10-K", filed: "2026-08-01", reportDate: "2026-06-30", accession: "amc-flattened-consolidated-capex", currencyHint: "USD", documentUrl: "https://www.sec.gov/Archives/amc-flattened-consolidated-capex.htm", documentName: "amc-flattened-consolidated-capex.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, start, end, unit }) => ({ val, start, end, unit })), [
+    { val: 246_100_000, start: "2026-01-01", end: "2026-06-30", unit: "USD" }
+  ]);
+  assert.equal(result.diagnostics[0].column_selection, "flattened_consolidated_single");
+  assert.equal(result.diagnostics[0].disposition, "accepted");
+});
+
 test("SEC filing-table capex extraction supports comparable quarterly and YTD columns", () => {
   const result = extractFilingCapitalExpenditureFacts({
     html: `<table><tr><th>Six months ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Payments to acquire property, plant and equipment (USD in thousands)</td><td>(12)</td><td>(10)</td></tr></table>`,

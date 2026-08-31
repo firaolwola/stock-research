@@ -1078,12 +1078,15 @@ still requires separate confirmation. See
 
 ### Flattened AMC capex-table correction (offline, 2026-08-31)
 
-The extractor now recognizes a tightly bounded one-period table whose segment
-headers and capex values are flattened into one cell. It requires explicit U.S.
-Markets, International Markets, and Consolidated labels plus at least three
-numeric segment values, and accepts only the final Consolidated value. Generic
-or ambiguous flattened text remains withheld. Extraction and application
-regressions cover the shape; no live or paid call was made for this correction.
+The extractor now recognizes tightly bounded one-period tables whose segment
+headers and capex values are flattened into one cell. A segmented form requires
+explicit U.S. Markets, International Markets, and Consolidated labels plus at
+least three numeric segment values, and accepts only the final Consolidated
+value. A single-value form requires an explicit Consolidated label immediately
+before the capex label and exactly one numeric value. Generic or ambiguous
+flattened text remains withheld. Extraction and application regressions cover
+both shapes; no live or paid call was made for this correction. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-FLATTENED-OFFLINE-CORRECTION-2.md`.
 
 ### Qualifying intangible-asset capex coverage (offline, 2026-08-31)
 
