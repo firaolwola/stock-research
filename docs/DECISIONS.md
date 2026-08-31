@@ -1470,3 +1470,7 @@ received. The report safely settled Limited, with no provider or OpenAI work
 performed. This is not a parser pass or failure; no retry is authorized by the
 frozen one-run bound. A later confirmation requires separate approval after
 network access is restored.
+
+This failure establishes Issue #75 as the operational prerequisite for future
+live confirmations: a zero-token SEC connectivity check must pass before an
+approved runner can begin research or consume its bounded authorization.
