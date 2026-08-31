@@ -187,7 +187,7 @@ test("Issue 55 sparse batch freezes independent baselines and strict live bounds
 test("sparse-batch corrections stay separate from the frozen answer key", async () => {
   const planBytes = await readFile(new URL("../evaluation/plans/fast-reliability-2026-08-27-sparse.json", import.meta.url));
   const corrections = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-corrections.json");
-  assert.equal(createHash("sha256").update(planBytes).digest("hex"), corrections.frozen_plan_sha256);
+  assert.equal(createHash("sha256").update(planBytes.toString().replace(/\r\n/g, "\n")).digest("hex"), corrections.frozen_plan_sha256);
   assert.equal(corrections.changes_frozen_plan, false);
   assert.deepEqual(corrections.corrections.map((item) => item.ticker), ["BIOR", "MULN"]);
   assert.ok(corrections.corrections.every((item) => item.frozen_text_is_stale && item.source.startsWith("https://www.sec.gov/")));
