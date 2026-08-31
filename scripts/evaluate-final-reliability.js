@@ -29,7 +29,7 @@ const cohortDefinitions = [
 ];
 
 const sampleSizeMap = [
-  { category: "completed_reverse_splits", independent_positive_cases: 5, status: "practical_minimum_but_small" },
+  { category: "completed_reverse_splits", independent_positive_cases: 5, status: "practical_minimum_but_small_audit_passed" },
   { category: "active_listing_deficiency", independent_positive_cases: 3, status: "practical_minimum_but_small" },
   { category: "going_concern_bankruptcy", independent_positive_cases: 4, status: "practical_minimum_but_small" },
   { category: "foreign_issuer_adr_ifrs", independent_positive_cases: 3, status: "practical_minimum_but_small" },
@@ -76,6 +76,10 @@ export async function buildFinalAdjudication() {
   const cohortSummaries = await Promise.all(cohortDefinitions.map(async ([id, relative]) => cohortRecord(id, await load(relative))));
   const calibration = await load("evaluation/diagnostics/fast-score-calibration-2026-08-31.json");
   const fcfCoverage = await load("evaluation/diagnostics/fast-fcf-coverage-audit-2026-08-31.json");
+  const reverseSplit = await load("evaluation/diagnostics/fast-reverse-split-adjudication-2026-08-31.json");
+  const reverseSplitAuditPassed = reverseSplit.denominator?.recall === 1
+    && reverseSplit.denominator?.precision === 1
+    && reverseSplit.safe_settlement?.severe_misses === 0;
   const currentMisses = missClassifications.map((item) => item.id === "batch-3-score-calibration"
     ? { ...item, detail: `Historical Batch 3 score-range results remain frozen; current offline matrix pass rate is ${calibration.summary?.passed ?? 0}/${calibration.summary?.total ?? 0}.` }
     : item);
@@ -87,8 +91,9 @@ export async function buildFinalAdjudication() {
     overall_recall_reason: "Overlapping same-five cohorts use different rubrics; descriptive recall is reported per cohort and is not pooled.",
     adequately_sampled_category_target: 0.9,
     adequately_sampled_categories_pass: false,
-    failing_categories: ["reverse_splits"],
+    failing_categories: [],
     coverage_limited_categories: ["free_cash_flow_trend"],
+    reverse_split_audit_passed: reverseSplitAuditPassed,
     fcf_numeric_coverage_proven: false,
     fcf_safe_unresolved_settlement_passed: fcfCoverage.denominator_views.safe_settlement.rate === 1,
     score_range_target: 0.9,
@@ -122,7 +127,8 @@ export async function buildFinalAdjudication() {
       safe_unresolved_settlement: fcfCoverage.denominator_views.safe_settlement,
       pooled_with_frozen_same_five: false
     },
-    required_next_step: "Keep #55 and PR #74 open. Treat numeric FCF coverage as unproven, safe unresolved settlement as a separate passed safety gate, and resolve remaining reliability/sample-size and score/explanation gaps before closure review."
+    reverse_split_adjudication: reverseSplit,
+    required_next_step: "Keep #55 and PR #74 open. The offline reverse-split audit passes five practical independent cases (15/15 canonical events) but remains a small, non-statistical sample. Treat numeric FCF coverage as unproven, safe unresolved settlement as a separate passed safety gate, and resolve remaining overall recall and score/explanation gaps before closure review."
   };
 }
 

@@ -1716,3 +1716,22 @@ Unscored.
 This expands evidence coverage without changing Methodology 2.1.0 or rewriting
 historical #55 artifacts. Filing-table coverage is deliberately bounded; more
 complex table layouts may justify a separately approved parser dependency later.
+
+## 2026-08-31 — Offline reverse-split category adjudication
+
+**Status:** Complete offline audit; Issue #55 remains open
+
+**Decision:** Treat reverse-split category coverage as practically passing for
+the current targeted audit: five independent positive cases (BIOR, MULN,
+ZAPPF, GMBL, and ONFO) contain 15 expected canonical completed events, all
+retrieved with 100% event recall and 100% canonical precision, five valid safe
+settlements, and zero severe misses. Keep this denominator separate from the
+historical overlapping same-five measurements and do not claim broad statistical
+reliability from the small sample.
+
+**Why:** The latest MULN live-shaped artifact now reconciles effective dates,
+ratios, lifecycle, and corroborating filings without the known false duplicate;
+the other four independent artifacts provide non-overlapping corroboration.
+Removing reverse splits as a failing category reflects the targeted evidence,
+not a rewrite of frozen results. Overall #55 closure remains blocked by pooled
+recall uncertainty, unproven numeric FCF coverage, and score/explanation gates.

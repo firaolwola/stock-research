@@ -969,10 +969,13 @@ score-calibration diagnostic, hash-audits the source artifacts, and refuses to
 pool overlapping rubrics. It records the descriptive Batch 1/2/3 and final-
 five recall values, category/sample-size results, cause classifications, and
 the NIO unavailable-authoritative-evidence treatment. The closure gate remains
-failed: frozen same-five FCF is 3/5, reverse-split coverage is not an
-adequately sampled pass, and broad score/explanation calibration is not a
-milestone claim. The next scoped work is tracked in Issue #81; its separately
-approved confirmation is recorded below and does not change this adjudication.
+failed: frozen same-five FCF is 3/5, broad score/explanation calibration is not
+a milestone claim, and overlapping cohorts do not establish an overall recall
+denominator. A separate offline audit now passes five practical independent
+reverse-split cases (15/15 canonical events) with no severe misses; it does not
+rewrite the frozen same-five result or claim statistical reliability. The next
+scoped work is tracked in Issue #81; its separately approved confirmation is
+recorded below and does not change this adjudication.
 
 ## Issue #77 offline score calibration
 
@@ -1032,3 +1035,17 @@ currency/column ambiguity, unsupported forms, source provenance, and
 non-reliance invalidation. No live calibration or paid provider call was made;
 the frozen same-five FCF result (3/5) is unchanged and still requires later
 remeasurement after #77/#78.
+
+### Offline reverse-split adjudication (2026-08-31)
+
+`npm run evaluate:reverse-split` audits the latest frozen authoritative-shaped
+artifacts without network, provider, or OpenAI access. Five independent positive
+cases (BIOR, MULN, ZAPPF, GMBL, and ONFO) contain 15 expected canonical
+completed reverse-split events. All 15 were present with no false completed
+events (100% event recall and 100% canonical precision); all five reports were
+valid and safely settled, with zero severe misses. This is a practical
+minimum-sized category audit, not a pooled or broad statistical reliability
+claim. The historical same-five denominator and every prior measured artifact
+remain unchanged. Reverse-split failure is therefore removed from the current
+final gate, while Issue #55 remains open for independent overall recall, FCF
+numeric coverage, and score/explanation gates.

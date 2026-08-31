@@ -28,6 +28,7 @@ different batches do not share one defensible pooled denominator.
 | AMC verbose-ratio confirmation 8 | 1/1 targeted | Exact completed 1-for-10 and no false ratio |
 | AMC/NXL FCF remeasurement | No aligned capex in either case | Correct Limited/Unscored; does not change frozen 3/5 |
 | MSFT/RIVN FCF remeasurement 2 | 2/2 aligned SEC OCF/capex pairs | Correct positive and negative FCF derivation; does not rewrite frozen 3/5 |
+| Offline reverse-split adjudication (five independent cases) | 15/15 canonical events, 100% precision | Practical category audit pass; historical denominators unchanged |
 
 The same-five batches overlap and use a richer 86-check rubric than the sparse
 cohorts. They therefore must not be concatenated into a single claimed overall
@@ -39,10 +40,10 @@ replacement denominator for the core calibration.
 | Requirement | Finding | Status |
 | --- | --- | --- |
 | Overall material-risk recall ≈95%+ | Batch 3 was 96.51% and the final same-five descriptive run was 95.35%, but no single pooled denominator is defensible | Not established as a milestone result |
-| Every adequately sampled critical category ≈90%+ | Frozen FCF is 3/5 (60%); reverse splits were 2/3 in the final same-five denominator | Fail |
+| Every adequately sampled critical category ≈90%+ | Frozen FCF is 3/5 (60%); the separate reverse-split audit is 15/15 across five practical cases | Fail because of FCF; reverse-split audit passes |
 | No unresolved severe misleading miss | AMC, NCPL, AAPL, NXL, SMCI, ONFO, and STN mechanisms were corrected or confirmed in targeted follow-up; historical misses remain frozen for audit | No currently known unresolved covered-shape blocker |
 | Explanations accurately reflect evidence | Latest targeted cohorts passed, but Batch 3 was 1/5 and final same-five was 3/5; Sparse Expansion Verification-2 was 2/3 | Not demonstrated broadly |
-| Scores within owner-reviewed ranges | Batch 3 score-range pass rate was 30/57 (52.63%) | Fail |
+| Scores within owner-reviewed ranges | Frozen Batch 3 score-range result was 30/57 (52.63%); current offline 2.1.0 matrix is 2/2, but it is not a live reliability denominator | Historical fail; current matrix passes |
 | Relative-risk ordering | No complete, non-overlapping adjudication supports a milestone claim | Unproven |
 | Time/cost ceilings | Approved runs stayed within their declared limits; no paid OpenAI request was needed for the latest checks | Pass |
 | Sparse categories honestly reported | Practical counts are shown below; three-case categories remain small and are not called statistically reliable | Pass |
@@ -51,7 +52,7 @@ replacement denominator for the core calibration.
 
 | Category | Practical independent positive cases | Latest evidence | Status |
 | --- | ---: | --- | --- |
-| Completed reverse splits | 5 | Sparse Expansion Verification-2 was 3/3; AMC targeted confirmation was 1/1 | Practical minimum met; still small |
+| Completed reverse splits | 5 | Five-case offline audit is 15/15 canonical events with no false completed events | Practical minimum met; audit passes, still small |
 | Active listing deficiency | 3 | ONFO, REKR, and the existing core cases are covered | Practical minimum met; still small |
 | Going concern / bankruptcy | 4 | Independent sparse cohorts passed their covered claims | Practical minimum met; still small |
 | Foreign issuer / ADR / IFRS | 3 | ZAPPF, NIO, and STN coverage; STN passed after correction | Practical minimum met; still small |

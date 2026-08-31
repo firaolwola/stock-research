@@ -12,6 +12,7 @@
     "evaluate:reliability": "node scripts/evaluate-final-reliability.js",
     "evaluate:fcf-gate": "node scripts/evaluate-fcf-gate.js",
     "evaluate:fcf-coverage": "node scripts/evaluate-fcf-coverage.js",
+    "evaluate:reverse-split": "node scripts/evaluate-reverse-split-adjudication.js",
     "validate:reports": "node scripts/validate-report-fixtures.js",
     "test": "node --test \"test/*.test.js\""
   },

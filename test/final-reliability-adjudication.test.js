@@ -10,12 +10,17 @@ test("Issue 78 adjudication preserves frozen cohorts without pooling them", asyn
   assert.equal(result.descriptive_comparison.pooling_allowed, false);
   assert.equal(result.gate.passed, false);
   assert.equal(result.gate.issue_55_must_remain_open, true);
-  assert.deepEqual(result.gate.failing_categories, ["reverse_splits"]);
+  assert.deepEqual(result.gate.failing_categories, []);
+  assert.equal(result.gate.reverse_split_audit_passed, true);
   assert.deepEqual(result.gate.coverage_limited_categories, ["free_cash_flow_trend"]);
   assert.equal(result.gate.fcf_numeric_coverage_proven, false);
   assert.equal(result.gate.fcf_safe_unresolved_settlement_passed, true);
+  assert.equal(result.sample_size_map.find((item) => item.category === "completed_reverse_splits").status, "practical_minimum_but_small_audit_passed");
   assert.equal(result.sample_size_map.find((item) => item.category === "free_cash_flow_trend").status, "coverage_limited_safe_settlement_separate");
   assert.match(result.miss_classifications.find((item) => item.id === "batch-3-score-calibration").detail, /current offline matrix pass rate is 2\/2/);
+  assert.equal(result.reverse_split_adjudication.denominator.expected_completed_events, 15);
+  assert.equal(result.reverse_split_adjudication.denominator.recall, 1);
+  assert.equal(result.reverse_split_adjudication.denominator.precision, 1);
 });
 
 test("Issue 78 separates unavailable authoritative evidence from system misses", async () => {

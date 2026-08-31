@@ -1,0 +1,292 @@
+{
+  "adjudication_id": "fast-reverse-split-adjudication-2026-08-31",
+  "issue": 55,
+  "offline": true,
+  "network_calls": false,
+  "frozen_artifacts_modified": false,
+  "independent_positive_cases": 5,
+  "cases": [
+    {
+      "ticker": "BIOR",
+      "artifact": "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json",
+      "expected_events": [
+        [
+          "1-for-25",
+          "2023-01-03"
+        ],
+        [
+          "1-for-10",
+          "2024-10-18"
+        ]
+      ],
+      "reported_events": [
+        [
+          "1-for-25",
+          "2023-01-03"
+        ],
+        [
+          "1-for-10",
+          "2024-10-18"
+        ]
+      ],
+      "true_positive_events": [
+        [
+          "1-for-25",
+          "2023-01-03"
+        ],
+        [
+          "1-for-10",
+          "2024-10-18"
+        ]
+      ],
+      "false_positive_events": [],
+      "missing_events": [],
+      "completed_split_recall": 1,
+      "canonical_precision": 1,
+      "report_valid": true,
+      "explanation_fidelity": true,
+      "severe_miss": false
+    },
+    {
+      "ticker": "MULN",
+      "artifact": "evaluation/live/2026-08-28-muln-verification-7/raw/MULN.json",
+      "expected_events": [
+        [
+          "1-for-25",
+          "2023-05-04"
+        ],
+        [
+          "1-for-9",
+          "2023-08-11"
+        ],
+        [
+          "1-for-100",
+          "2023-12-21"
+        ],
+        [
+          "1-for-100",
+          "2024-09-17"
+        ],
+        [
+          "1-for-60",
+          "2025-02-18"
+        ],
+        [
+          "1-for-100",
+          "2025-04-11"
+        ],
+        [
+          "1-for-100",
+          "2025-06-02"
+        ],
+        [
+          "1-for-250",
+          "2025-08-04"
+        ],
+        [
+          "1-for-250",
+          "2025-09-22"
+        ]
+      ],
+      "reported_events": [
+        [
+          "1-for-25",
+          "2023-05-04"
+        ],
+        [
+          "1-for-9",
+          "2023-08-11"
+        ],
+        [
+          "1-for-100",
+          "2023-12-21"
+        ],
+        [
+          "1-for-100",
+          "2024-09-17"
+        ],
+        [
+          "1-for-60",
+          "2025-02-18"
+        ],
+        [
+          "1-for-100",
+          "2025-04-11"
+        ],
+        [
+          "1-for-100",
+          "2025-06-02"
+        ],
+        [
+          "1-for-250",
+          "2025-08-04"
+        ],
+        [
+          "1-for-250",
+          "2025-09-22"
+        ]
+      ],
+      "true_positive_events": [
+        [
+          "1-for-25",
+          "2023-05-04"
+        ],
+        [
+          "1-for-9",
+          "2023-08-11"
+        ],
+        [
+          "1-for-100",
+          "2023-12-21"
+        ],
+        [
+          "1-for-100",
+          "2024-09-17"
+        ],
+        [
+          "1-for-60",
+          "2025-02-18"
+        ],
+        [
+          "1-for-100",
+          "2025-04-11"
+        ],
+        [
+          "1-for-100",
+          "2025-06-02"
+        ],
+        [
+          "1-for-250",
+          "2025-08-04"
+        ],
+        [
+          "1-for-250",
+          "2025-09-22"
+        ]
+      ],
+      "false_positive_events": [],
+      "missing_events": [],
+      "completed_split_recall": 1,
+      "canonical_precision": 1,
+      "report_valid": true,
+      "explanation_fidelity": true,
+      "severe_miss": false
+    },
+    {
+      "ticker": "ZAPPF",
+      "artifact": "evaluation/live/2026-08-28-sparse-expansion-1-verification-2/raw/ZAPPF.json",
+      "expected_events": [
+        [
+          "1-for-20",
+          "2024-04-22"
+        ]
+      ],
+      "reported_events": [
+        [
+          "1-for-20",
+          "2024-04-22"
+        ]
+      ],
+      "true_positive_events": [
+        [
+          "1-for-20",
+          "2024-04-22"
+        ]
+      ],
+      "false_positive_events": [],
+      "missing_events": [],
+      "completed_split_recall": 1,
+      "canonical_precision": 1,
+      "report_valid": true,
+      "explanation_fidelity": true,
+      "severe_miss": false
+    },
+    {
+      "ticker": "GMBL",
+      "artifact": "evaluation/live/2026-08-28-sparse-expansion-1-verification-2/raw/GMBL.json",
+      "expected_events": [
+        [
+          "1-for-100",
+          "2023-02-22"
+        ],
+        [
+          "1-for-400",
+          "2023-12-22"
+        ]
+      ],
+      "reported_events": [
+        [
+          "1-for-100",
+          "2023-02-22"
+        ],
+        [
+          "1-for-400",
+          "2023-12-22"
+        ]
+      ],
+      "true_positive_events": [
+        [
+          "1-for-100",
+          "2023-02-22"
+        ],
+        [
+          "1-for-400",
+          "2023-12-22"
+        ]
+      ],
+      "false_positive_events": [],
+      "missing_events": [],
+      "completed_split_recall": 1,
+      "canonical_precision": 1,
+      "report_valid": true,
+      "explanation_fidelity": true,
+      "severe_miss": false
+    },
+    {
+      "ticker": "ONFO",
+      "artifact": "evaluation/live/2026-08-28-final-sparse-proof-verification-3/raw/ONFO.json",
+      "expected_events": [
+        [
+          "1-for-50",
+          "2026-08-10"
+        ]
+      ],
+      "reported_events": [
+        [
+          "1-for-50",
+          "2026-08-10"
+        ]
+      ],
+      "true_positive_events": [
+        [
+          "1-for-50",
+          "2026-08-10"
+        ]
+      ],
+      "false_positive_events": [],
+      "missing_events": [],
+      "completed_split_recall": 1,
+      "canonical_precision": 1,
+      "report_valid": true,
+      "explanation_fidelity": true,
+      "severe_miss": false
+    }
+  ],
+  "denominator": {
+    "expected_completed_events": 15,
+    "true_positive_completed_events": 15,
+    "reported_completed_events": 15,
+    "false_positive_completed_events": 0,
+    "recall": 1,
+    "precision": 1,
+    "sample_size": 5,
+    "status": "practical_minimum_but_small"
+  },
+  "safe_settlement": {
+    "valid_reports": 5,
+    "evaluated_reports": 5,
+    "rate": 1,
+    "severe_misses": 0
+  },
+  "conclusion": "All five independent positive cases have complete canonical completed-split recall and precision in their latest authoritative artifacts. This is practical coverage, not a broad statistical reliability claim; the historical same-five denominator remains unchanged."
+}
