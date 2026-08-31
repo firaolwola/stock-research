@@ -1656,6 +1656,19 @@ produced two usable comparable SEC FCF pairs and three honest Limited/Unscored
 settlements; it did not replace the frozen denominator. Missing or invalid
 capex remains Limited/Unscored and never favorable.
 
+## 2026-08-31 — Separate FCF usability from safe settlement (Issue #81)
+
+**Status:** Implemented offline; reliability gate remains open
+
+**Decision:** Evaluate FCF in two explicit views. “Usable FCF” requires at
+least two comparable SEC-derived OCF/capex observations suitable for a numeric
+trend score. “Safe settlement” counts a report as correct when missing,
+conflicting, stale, or accounting-invalid inputs remain Limited/Unscored and
+cannot become favorable evidence. These denominators must never be pooled into
+the frozen Issue #55 result. The offline audit found no captured filing-table
+record that was dropped by binding, so the remaining same-five gaps are not a
+demonstrated parser defect.
+
 ## 2026-08-31 — Freeze the final #55 adjudication boundary (Issue #78)
 
 **Status:** Completed offline; #55 remains open

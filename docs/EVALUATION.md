@@ -1010,6 +1010,17 @@ does not rewrite the frozen same-five 3/5 FCF denominator, so the category gate
 and Issue #55 remain open. See
 `evaluation/live/2026-08-31-fcf-gate-confirmation-1/summary.json`.
 
+### Offline FCF coverage audit (2026-08-31)
+
+`npm run evaluate:fcf-coverage` inspects the captured confirmation packets
+without network or provider calls. It separates a confirmed comparable SEC
+OCF/capex pair from an honest Limited/Unscored settlement and classifies
+remaining cases as parser/binding gaps, accounting-invalidated evidence, or
+unavailable authoritative evidence. The audit found two usable pairs, one
+non-reliance-invalidated case, and two unavailable capex cases; no captured
+filing-table capex record was discarded after retrieval. A further same-five
+paid run is therefore not justified by a known parser defect.
+
 ### Issue #76 offline implementation (2026-08-31)
 
 Fast now has a bounded SEC filing-table capex fallback for already retrieved

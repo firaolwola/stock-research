@@ -1,0 +1,91 @@
+{
+  "audit_id": "fast-fcf-coverage-2026-08-31",
+  "issue": 81,
+  "reliability_issue": 55,
+  "input_directory": "evaluation/live/2026-08-31-fcf-gate-confirmation-1",
+  "network_calls": false,
+  "frozen_artifacts_modified": false,
+  "cases": [
+    {
+      "ticker": "AAPL",
+      "report_valid": true,
+      "metric_state": "confirmed",
+      "score_state": "confirmed",
+      "score": 8.7,
+      "comparable_observation_count": 2,
+      "filing_table_capex_records": 1,
+      "cause": "usable_authoritative_pair",
+      "safe_settlement": true,
+      "evidence_summary": "Free cash flow of 110197000000 USD is calculated as operating cash flow 116996000000 less capital expenditures 6799000000 for 2025-09-28 through 2026-06-27."
+    },
+    {
+      "ticker": "AMC",
+      "report_valid": true,
+      "metric_state": "unknown",
+      "score_state": "limited_coverage",
+      "score": null,
+      "comparable_observation_count": 0,
+      "filing_table_capex_records": 0,
+      "cause": "unavailable_authoritative_evidence",
+      "safe_settlement": true,
+      "evidence_summary": "Operating cash flow is available, but aligned capital expenditures are not; free cash flow is not inferred."
+    },
+    {
+      "ticker": "NCPL",
+      "report_valid": true,
+      "metric_state": "limited_coverage",
+      "score_state": "limited_coverage",
+      "score": null,
+      "comparable_observation_count": 0,
+      "filing_table_capex_records": 0,
+      "cause": "invalidated_accounting_evidence",
+      "safe_settlement": true,
+      "evidence_summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods."
+    },
+    {
+      "ticker": "NXL",
+      "report_valid": true,
+      "metric_state": "unknown",
+      "score_state": "limited_coverage",
+      "score": null,
+      "comparable_observation_count": 0,
+      "filing_table_capex_records": 0,
+      "cause": "unavailable_authoritative_evidence",
+      "safe_settlement": true,
+      "evidence_summary": "Operating cash flow is available, but aligned capital expenditures are not; free cash flow is not inferred."
+    },
+    {
+      "ticker": "SMCI",
+      "report_valid": true,
+      "metric_state": "confirmed",
+      "score_state": "confirmed",
+      "score": 0,
+      "comparable_observation_count": 2,
+      "filing_table_capex_records": 1,
+      "cause": "usable_authoritative_pair",
+      "safe_settlement": true,
+      "evidence_summary": "Free cash flow of -7690616000 USD is calculated as operating cash flow -7556847000 less capital expenditures 133769000 for 2025-07-01 through 2026-03-31."
+    }
+  ],
+  "denominator_views": {
+    "strict_usable_fcf": {
+      "detected": 2,
+      "expected": 5,
+      "recall": 0.4,
+      "meaning": "Comparable SEC OCF/capex pair sufficient for a numeric FCF trend score."
+    },
+    "safe_settlement": {
+      "settled": 5,
+      "evaluated": 5,
+      "rate": 1,
+      "meaning": "Missing or invalid FCF remains explicitly Limited/Unscored without favorable inference."
+    }
+  },
+  "cause_counts": {
+    "usable_authoritative_pair": 2,
+    "parser_or_binding_gap": 0,
+    "invalidated_accounting_evidence": 1,
+    "unavailable_authoritative_evidence": 2
+  },
+  "conclusion": "No captured case shows a filing-table capex record that was discarded by binding. Remaining non-usable cases are unavailable authoritative evidence or accounting-invalidated evidence in this packet; no additional same-five live run is justified by this audit alone."
+}
