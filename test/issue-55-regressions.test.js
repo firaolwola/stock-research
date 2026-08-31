@@ -961,6 +961,21 @@ test("AMC date-before-effective-date filing wording binds the completed split", 
   assert.equal(diagnostic?.disposition, "accepted");
 });
 
+test("AMC verbose share-for-every ratio binds the authoritative effective date", () => {
+  const html = "The Company will effectuate a reverse stock split at a ratio of one share of Class A common stock for every ten shares of Class A common stock, in each case, effective as of August 24, 2023.";
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html, form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-31T00:00:00Z",
+    accession: "amc-verbose-ratio", documentUrl: "https://www.sec.gov/amc-verbose-ratio", documentName: "amc-verbose-ratio.htm"
+  });
+  const split = result.findings.find((item) => item.kind === "reverse_split");
+  const diagnostic = result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10");
+  assert.equal(split?.event_date, "2023-08-24");
+  assert.equal(split?.action_state, "completed");
+  assert.equal(diagnostic?.complete_ratio_token_text, "ratio of one share of Class A common stock for every ten shares");
+  assert.equal(diagnostic?.date_role, "effective_date");
+  assert.equal(diagnostic?.disposition, "accepted");
+});
+
 test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted and invalidates affected metrics", async () => {
   const result = await researchFixture({
     ticker: "NCPL",

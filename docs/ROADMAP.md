@@ -154,6 +154,11 @@ verdict.
    ticker-map request before retrieval. The safe partial report and diagnostics
    are frozen; the parser target remains unevaluated and any retry requires
    separate approval after network access is restored.
+16. [x] **Complete — inspect AMC confirmation 6 and correct verbose SEC ratios:**
+   SEC access succeeded, but the authoritative filing used “one share ... for
+   every ten shares,” which was not recognized by the compact-ratio parser. A
+   bounded verbose-ratio rule and regression now cover the shape; the live
+   result remains frozen and another confirmation requires separate approval.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

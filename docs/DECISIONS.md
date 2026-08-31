@@ -1474,3 +1474,17 @@ network access is restored.
 This failure establishes Issue #75 as the operational prerequisite for future
 live confirmations: a zero-token SEC connectivity check must pass before an
 approved runner can begin research or consume its bounded authorization.
+
+## 2026-08-31 — AMC verbose ratio correction after confirmation 6
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** Accept a bounded ratio written as “N share(s) ... for every M
+share(s)” when it remains in the same sentence-local reverse-split action
+context as an explicit effective date.
+
+**Why:** The network-enabled confirmation reached SEC successfully but missed
+the target because the filing used a verbose share-for-every ratio. The compact
+hyphenated form was only an unrelated table mention. The correction preserves
+truncation, competing-action, filing-date, and authorization safeguards; the
+live result and frozen baselines remain unchanged.

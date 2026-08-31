@@ -616,6 +616,17 @@ The parser target was not evaluated; the result remains an infrastructure
 failure, not evidence that the offline correction passed live. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-DATE-FIRST-CONFIRMATION-5.md`.
 
+### AMC date-first confirmation 6 (2026-08-31)
+
+With network access restored, the approved AMC run completed SEC retrieval but
+still missed the target split. Direct inspection found that the authoritative
+filing spells the ratio as “one share ... for every ten shares”; the parser
+only accepted hyphenated ratios and instead saw an unrelated table mention
+with no date role. The run remains a valid, safe partial baseline (0/1 target
+recall). A bounded verbose-ratio grammar and deterministic regression now cover
+the filing shape; no live result or historical measurement changed. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-DATE-FIRST-CONFIRMATION-6.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary
