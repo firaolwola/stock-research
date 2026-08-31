@@ -851,3 +851,18 @@ distractor by requiring an explicit `ratio of` cue for verbose share-for-every
 ratios. The legitimate AMC phrase remains covered by regression. This is a
 prospective parser correction only; the failed live result and all historical
 measurements remain frozen. Any live confirmation requires separate approval.
+
+### Issue #55 milestone review (2026-08-31)
+
+The frozen calibration record was reviewed after AMC confirmation 8. The latest
+targeted AMC result is 1/1 with exact `1-for-10` canonical history and no false
+`550000000-for-10` event. This resolves that targeted parser blocker but does not
+rewrite the 82/86 same-five confirmation or other historical denominators.
+Practical positive-case counts now reach 5 completed reverse-split, 3 active
+deficiency, 4 going-concern/bankruptcy, 3 foreign/ADR/IFRS, and 5 OTC/delisted
+cases. The frozen same-five FCF result remains 3/5 (60%), below the approximately
+90% category gate. NIO attributable annual net loss remains
+`unavailable_authoritative_evidence`, not a system miss. Because denominators
+overlap across batches and FCF remains below gate, Issue #55 stays open and PR
+#74 is not merge-ready. See
+`docs/results/FAST_RELIABILITY_2026-08-31-MILESTONE-REVIEW.md`.

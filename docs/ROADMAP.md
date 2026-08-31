@@ -76,7 +76,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims with zero severe misses. A same-five confirmation measured 82/86 (95.35%), but AMC's completed split and NCPL's non-reliance event remained severe live misses and FCF remained below target. The targeted offline correction was confirmed for NCPL (Item 4.02 surfaced and affected metrics stayed Limited) but not for AMC: the completed 2023-08-24 1-for-10 split remains absent from the live bounded packet. The two-case confirmation measured 1/2 with valid, safe partial reports. A subsequent AMC confirmation was blocked before SEC retrieval by environment-level network `EACCES`; the result is frozen and not a parser evaluation. Issue #55 remains open until the AMC retrieval defect and the severe-miss/category gate pass.
+8. [ ] **Active — reliability/sample-size milestone review:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The offline adversarial/property loop passes, ONFO/STN targeted confirmation passed 7/7, and AMC confirmation 8 now passes the verbose-ratio blocker with exact `1-for-10` canonical history and no false `550000000-for-10`. Practical samples reach 5 completed splits, 3 active deficiencies, 4 going-concern/bankruptcy cases, 3 foreign/ADR/IFRS cases, and 5 OTC/delisted cases. The frozen same-five FCF result remains 3/5 (60%), below the approximately 90% category gate; overlapping batches do not support a single pooled recall number. NIO attributable annual net loss remains `unavailable_authoritative_evidence`, not a system miss. Issue #55 stays open pending offline FCF correction and a defensible aggregate adjudication; PR #74 is not merge-ready.
 9. [ ] **Next prerequisite — zero-token SEC connectivity gate:** [#75 — Add zero-token SEC connectivity preflight before live verification](https://github.com/firaolwola/stock-research/issues/75). Before any future approved live ticker run, perform one bounded SEC ticker-map check and stop without consuming provider/OpenAI budget when network access is unavailable.
 
 ### Issue #55 corrective roadmap
@@ -175,6 +175,10 @@ verdict.
     event and eliminated the false `550000000-for-10` event. The targeted live
     blocker is resolved; Issue #55 remains active for broader reliability and
     sample-size gates.
+20. [ ] **Active — correct remaining FCF reliability gap offline:** the frozen
+    same-five confirmation detected only 3/5 expected free-cash-flow cases.
+    Investigate SEC-authoritative comparability/retrieval before proposing any
+    separately approved live remeasurement.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

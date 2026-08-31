@@ -1524,3 +1524,19 @@ and report validation succeeded, while synthesis was cost-blocked before any
 OpenAI request. Mark the known AMC verbose-ratio parser blocker resolved for
 this filing shape, preserve the frozen artifacts, and do not rerun AMC
 automatically. The broader Issue #55 reliability/sampling gate is unchanged.
+
+## 2026-08-31 — Issue #55 milestone review remains open
+
+**Status:** Gate not met; PR #74 is not merge-ready
+
+The frozen calibration artifacts and subsequent targeted confirmations were
+reviewed without rewriting historical denominators. AMC's verbose-ratio blocker
+is resolved, NCPL/ONFO/STN targeted corrections are confirmed, and NIO remains a
+documented unavailable-authoritative-evidence case. Practical category samples
+now meet the three-case milestone minimum for active deficiency and foreign/
+IFRS, while completed splits, going concern, and OTC/delisted have larger small
+samples. The frozen same-five FCF result remains 3/5 (60%), below the
+approximately 90% category gate. Since batches overlap and no single aggregate
+answer key exists, an overall pooled recall would be misleading. Keep #55 open;
+the next step is offline FCF comparability/retrieval correction followed by any
+separately approved remeasurement.
