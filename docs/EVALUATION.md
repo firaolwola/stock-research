@@ -1118,6 +1118,21 @@ extraction/application regressions pass. Historical live measurements remain
 unchanged; another live confirmation is separately gated. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-OFFLINE-CORRECTION-5.md`.
 
+### AMC FCF confirmation 6 (2026-08-31)
+
+The approved single AMC run live-validated the late inline-XBRL correction in
+2,784 ms. SEC extraction accepted the 2025 10-K capex tables at indices 300,
+301, and 302 using the explicit Consolidated segmented-column path. The live
+packet now contains annual 2023/2024 filing-table FCF claims plus a current
+2026 six-month calculation (OCF USD 106.9M less capex USD 20.4M = FCF USD
+86.5M). FCF remains `limited_coverage` for scoring because its comparable trend
+observation is stale, while OCF is confirmed at 8.8/10 from two interim
+periods. The report was valid and partial; synthesis was cost-blocked at USD 0,
+Alpha Vantage used two requests (market completed, news quota-limited), and
+Twelve Data was not configured. This confirms production applicability of the
+offline parser fix without changing historical measurements. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-CONFIRMATION-6.md`.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency
