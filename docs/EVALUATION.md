@@ -1062,6 +1062,19 @@ covered by a segmented AMC fixture and an application-level FCF regression.
 Historical #55 measurements remain unchanged; any live remeasurement must be
 separately approved.
 
+### AMC FCF confirmation 2 (2026-08-31)
+
+The approved single AMC confirmation validated the new period-scoped currency
+hint but did not produce numeric FCF. The 10-K capex candidate received a USD
+caller hint from the newest OCF period, then remained withheld with one detected
+period and zero values because of `period_value_column_mismatch`; the 10-Q
+candidate remained withheld for `comparable_periods_not_explicit`. OCF was
+confirmed, the report was valid and safely partial, OpenAI cost was $0, and no
+historical denominator changed. This is a remaining offline parser/column
+binding gap, not evidence that AMC lacks capex; do not rerun live until the shape
+is covered deterministically. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-CONFIRMATION-2.md`.
+
 ### Qualifying intangible-asset capex coverage (offline, 2026-08-31)
 
 The bounded SEC filing-table and Company Facts paths now recognize explicit
