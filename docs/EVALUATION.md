@@ -1143,6 +1143,18 @@ and interim observations are never mixed, and missing or stale annual history
 remains Limited/Unscored. This is a 2.1.0 evidence-selection clarification;
 frozen #55 measurements and answer keys are unchanged.
 
+### Prospective annual-primary FCF audit (2026-08-31)
+
+`npm run evaluate:fcf-annual-policy` recomputes the current scorer against
+stored raw reports without network, provider, or OpenAI access. Four of five
+stored cases (AAPL, SMCI, MSFT, and RIVN) produce numeric scores from at least
+two comparable annual FCF observations; AMC remains Limited because its stored
+annual series is insufficient/currently stale for a score. All five cases
+settle safely, and interim observations remain context-only. This prospective
+4/5 result does not rewrite the frozen 2/5 same-five measurement or establish
+the broader #55 reliability gate. See
+`evaluation/diagnostics/fast-fcf-annual-policy-2026-08-31.json`.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency

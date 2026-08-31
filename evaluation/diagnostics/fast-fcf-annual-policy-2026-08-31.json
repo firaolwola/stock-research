@@ -1,0 +1,228 @@
+{
+  "audit_id": "fast-fcf-annual-policy-2026-08-31",
+  "issue": 81,
+  "reliability_issue": 55,
+  "live_execution": false,
+  "network_calls": false,
+  "frozen_artifacts_modified": false,
+  "policy": {
+    "primary_fcf_trend": "comparable annual SEC observations only",
+    "interim_fcf": "separate dated freshness context; never mixed into the primary score",
+    "insufficient_annual_history": "Limited/Unscored"
+  },
+  "cases": [
+    {
+      "ticker": "AAPL",
+      "input": "evaluation/live/2026-08-31-fcf-gate-confirmation-1/raw/AAPL.json",
+      "report_valid_after_rescoring": true,
+      "annual_observation_count": 4,
+      "annual_periods": [
+        {
+          "period_start": "2021-09-26",
+          "period_end": "2022-09-24"
+        },
+        {
+          "period_start": "2022-09-25",
+          "period_end": "2023-09-30"
+        },
+        {
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-28"
+        },
+        {
+          "period_start": "2024-09-29",
+          "period_end": "2025-09-27"
+        }
+      ],
+      "interim_observation_count": 2,
+      "interim_periods": [
+        {
+          "period_start": "2024-09-29",
+          "period_end": "2025-06-28"
+        },
+        {
+          "period_start": "2025-09-28",
+          "period_end": "2026-06-27"
+        }
+      ],
+      "interim_context": null,
+      "recomputed_score_state": "confirmed",
+      "recomputed_score": 6.5,
+      "score_explanation": "Company-relative trend only; raw company size is not scored. Observed normalized SEC values: 2022-09-24: 111443000000 USD; 2023-09-30: 99584000000 USD; 2024-09-28: 108807000000 USD; 2025-09-27: 98767000000 USD. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+      "score_uses_annual_primary": true,
+      "safe_settlement": true,
+      "frozen_saved_score": 8.7
+    },
+    {
+      "ticker": "SMCI",
+      "input": "evaluation/live/2026-08-31-fcf-gate-confirmation-1/raw/SMCI.json",
+      "report_valid_after_rescoring": true,
+      "annual_observation_count": 4,
+      "annual_periods": [
+        {
+          "period_start": "2021-07-01",
+          "period_end": "2022-06-30"
+        },
+        {
+          "period_start": "2022-07-01",
+          "period_end": "2023-06-30"
+        },
+        {
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30"
+        },
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30"
+        }
+      ],
+      "interim_observation_count": 2,
+      "interim_periods": [
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-03-31"
+        },
+        {
+          "period_start": "2025-07-01",
+          "period_end": "2026-03-31"
+        }
+      ],
+      "interim_context": null,
+      "recomputed_score_state": "confirmed",
+      "recomputed_score": 8.1,
+      "score_explanation": "Company-relative trend only; raw company size is not scored. Observed normalized SEC values: 2022-06-30: -485983000 USD; 2023-06-30: 626787000 USD; 2024-06-30: -2610251000 USD; 2025-06-30: 1532310000 USD. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+      "score_uses_annual_primary": true,
+      "safe_settlement": true,
+      "frozen_saved_score": 0
+    },
+    {
+      "ticker": "MSFT",
+      "input": "evaluation/live/2026-08-31-fcf-remeasurement-2/raw/MSFT.json",
+      "report_valid_after_rescoring": true,
+      "annual_observation_count": 4,
+      "annual_periods": [
+        {
+          "period_start": "2022-07-01",
+          "period_end": "2023-06-30"
+        },
+        {
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30"
+        },
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30"
+        },
+        {
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30"
+        }
+      ],
+      "interim_observation_count": 2,
+      "interim_periods": [
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30"
+        },
+        {
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30"
+        }
+      ],
+      "interim_context": null,
+      "recomputed_score_state": "confirmed",
+      "recomputed_score": 7,
+      "score_explanation": "Company-relative trend only; raw company size is not scored. Observed normalized SEC values: 2023-06-30: 59475000000 USD; 2024-06-30: 74071000000 USD; 2025-06-30: 71611000000 USD; 2026-06-30: 66987000000 USD. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+      "score_uses_annual_primary": true,
+      "safe_settlement": true,
+      "frozen_saved_score": 7
+    },
+    {
+      "ticker": "RIVN",
+      "input": "evaluation/live/2026-08-31-fcf-remeasurement-2/raw/RIVN.json",
+      "report_valid_after_rescoring": true,
+      "annual_observation_count": 4,
+      "annual_periods": [
+        {
+          "period_start": "2022-01-01",
+          "period_end": "2022-12-31"
+        },
+        {
+          "period_start": "2023-01-01",
+          "period_end": "2023-12-31"
+        },
+        {
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31"
+        },
+        {
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31"
+        }
+      ],
+      "interim_observation_count": 2,
+      "interim_periods": [
+        {
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30"
+        },
+        {
+          "period_start": "2026-01-01",
+          "period_end": "2026-06-30"
+        }
+      ],
+      "interim_context": null,
+      "recomputed_score_state": "confirmed",
+      "recomputed_score": 6.1,
+      "score_explanation": "Company-relative trend only; raw company size is not scored. Observed normalized SEC values: 2022-12-31: -6421000000 USD; 2023-12-31: -5892000000 USD; 2024-12-31: -2857000000 USD; 2025-12-31: -2489000000 USD. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+      "score_uses_annual_primary": true,
+      "safe_settlement": true,
+      "frozen_saved_score": 1
+    },
+    {
+      "ticker": "AMC",
+      "input": "evaluation/live/2026-08-31-amc-fcf-confirmation-6/raw/AMC.json",
+      "report_valid_after_rescoring": true,
+      "annual_observation_count": 2,
+      "annual_periods": [
+        {
+          "period_start": "2023-01-01",
+          "period_end": "2023-12-31"
+        },
+        {
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31"
+        }
+      ],
+      "interim_observation_count": 1,
+      "interim_periods": [
+        {
+          "period_start": "2026-01-01",
+          "period_end": "2026-06-30"
+        }
+      ],
+      "interim_context": null,
+      "recomputed_score_state": "limited_coverage",
+      "recomputed_score": null,
+      "score_explanation": "The latest comparable SEC observation is too stale for a Fast financial trend score.",
+      "score_uses_annual_primary": false,
+      "safe_settlement": true,
+      "frozen_saved_score": null
+    }
+  ],
+  "denominator_views": {
+    "annual_numeric_fcf": {
+      "detected": 4,
+      "evaluated": 5,
+      "recall": 0.8,
+      "meaning": "Current scorer produces a numeric FCF trend from at least two comparable annual observations."
+    },
+    "safe_settlement": {
+      "settled": 5,
+      "evaluated": 5,
+      "rate": 1,
+      "meaning": "Every stored case remains valid and unresolved evidence is not favorable evidence."
+    }
+  },
+  "conclusion": "Prospective offline recomputation only; historical calibration measurements and answer keys remain unchanged. A paid live remeasurement is not implied by this audit."
+}
