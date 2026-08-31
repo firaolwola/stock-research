@@ -4,6 +4,7 @@ import test from "node:test";
 import { extractFilingCapitalExpenditureFacts, extractSecFilingEvidence, filingHtmlToText, findMaterialExhibitUrl, findMaterialExhibitUrls } from "../lib/sec-filing-extraction.js";
 
 const samples = JSON.parse(await readFile(new URL("../fixtures/sec-filings/representative.json", import.meta.url), "utf8"));
+const amcInlineCapex = await readFile(new URL("../fixtures/sec-filings/amc-2025-capex-inline-xbrl.html", import.meta.url), "utf8");
 const evaluation = JSON.parse(await readFile(new URL("../evaluation/cases.json", import.meta.url), "utf8"));
 const extract = (html, form = "8-K") => extractSecFilingEvidence({ html: `<html><body>${html}</body></html>`, form, filed: "2026-08-24", accession: "0000000000-26-000001", documentUrl: "https://www.sec.gov/Archives/example.htm", documentName: "example.htm" });
 
@@ -81,6 +82,20 @@ test("SEC filing-table capex extraction binds values split across live-style row
     { val: 246_100_000, start: "2025-01-01", end: "2025-12-31", unit: "USD" }
   ]);
   assert.equal(result.diagnostics[0].column_selection, "flattened_consolidated");
+  assert.equal(result.diagnostics[0].disposition, "accepted");
+});
+
+test("SEC filing-table capex extraction reaches late inline-XBRL segment tables and selects Consolidated", () => {
+  const noise = Array.from({ length: 25 }, () => "<table><tr><td>Layout</td></tr></table>").join("");
+  const result = extractFilingCapitalExpenditureFacts({
+    html: noise + amcInlineCapex,
+    form: "10-K", filed: "2026-02-23", reportDate: "2025-12-31", accession: "amc-inline-xbrl-capex", currencyHint: "USD", documentUrl: "https://www.sec.gov/Archives/amc-inline-xbrl-capex.htm", documentName: "amc-inline-xbrl-capex.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, start, end, unit }) => ({ val, start, end, unit })), [
+    { val: 246_100_000, start: "2025-01-01", end: "2025-12-31", unit: "USD" }
+  ]);
+  assert.equal(result.diagnostics[0].table_index, 25);
+  assert.equal(result.diagnostics[0].column_selection, "explicit_consolidated_segmented");
   assert.equal(result.diagnostics[0].disposition, "accepted");
 });
 

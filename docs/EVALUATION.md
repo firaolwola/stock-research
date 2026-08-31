@@ -1104,6 +1104,20 @@ guards. Deterministic extraction and application fixtures pass; no additional
 live call was made. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-OFFLINE-CORRECTION-4.md`.
 
+### AMC FCF offline correction 5 (2026-08-31)
+
+Direct inspection of the public AMC 2025 10-K identified the actual shape: the
+capex table appears around table index 300 after many layout tables, uses
+colspan/spacer cells, and encodes values as inline-XBRL `ix:nonFraction` nodes.
+The prior first-24-table bound excluded it, and the apparent Consolidated
+header index pointed at an intermediate segment value. The extractor now
+selects a bounded set of capex-labelled tables at any filing position and, for
+expanded segment grids, binds the final numeric value to the explicit
+Consolidated header. A sanitized fixture preserves this structure and
+extraction/application regressions pass. Historical live measurements remain
+unchanged; another live confirmation is separately gated. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-OFFLINE-CORRECTION-5.md`.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency
