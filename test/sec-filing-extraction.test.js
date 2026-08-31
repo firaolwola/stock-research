@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { extractSecFilingEvidence, filingHtmlToText, findMaterialExhibitUrl, findMaterialExhibitUrls } from "../lib/sec-filing-extraction.js";
+import { extractFilingCapitalExpenditureFacts, extractSecFilingEvidence, filingHtmlToText, findMaterialExhibitUrl, findMaterialExhibitUrls } from "../lib/sec-filing-extraction.js";
 
 const samples = JSON.parse(await readFile(new URL("../fixtures/sec-filings/representative.json", import.meta.url), "utf8"));
 const evaluation = JSON.parse(await readFile(new URL("../evaluation/cases.json", import.meta.url), "utf8"));
@@ -29,6 +29,57 @@ test("HTML normalization removes code and resolves only SEC material exhibits", 
   ]);
   assert.equal(findMaterialExhibitUrl('<a href="https://example.com/ex99-1.htm">Outside</a>', "https://www.sec.gov/a.htm"), null);
 });
+
+test("SEC filing-table capex extraction normalizes explicit annual values and provenance", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><caption>Years ended December 31 (USD in millions)</caption><tr><th>Years ended December 31</th><th>2025</th><th>2024</th></tr><tr><td>Capital expenditures</td><td>(2,000)</td><td>(1,000)</td></tr></table>`,
+    form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "annual-capex", documentUrl: "https://www.sec.gov/Archives/annual-capex.htm", documentName: "annual-capex.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, start, end, unit, source_type }) => ({ val, start, end, unit, source_type })), [
+    { val: -2_000_000_000, start: "2025-01-01", end: "2025-12-31", unit: "USD", source_type: "sec_filing_table" },
+    { val: -1_000_000_000, start: "2024-01-01", end: "2024-12-31", unit: "USD", source_type: "sec_filing_table" }
+  ]);
+  assert.equal(result.diagnostics[0].disposition, "accepted");
+  assert.match(result.facts[0].source_url, /sec\.gov/);
+});
+
+test("SEC filing-table capex extraction supports comparable quarterly and YTD columns", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><tr><th>Six months ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Payments to acquire property, plant and equipment (USD in thousands)</td><td>(12)</td><td>(10)</td></tr></table>`,
+    form: "10-Q", filed: "2026-08-15", reportDate: "2026-06-30", accession: "ytd-capex", documentUrl: "https://www.sec.gov/Archives/ytd-capex.htm", documentName: "ytd-capex.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, start, end }) => ({ val, start, end })), [
+    { val: -12_000, start: "2026-01-01", end: "2026-06-30" },
+    { val: -10_000, start: "2025-01-01", end: "2025-06-30" }
+  ]);
+});
+
+test("SEC filing-table capex fallback withholds ambiguous currency or column alignment", () => {
+  const noCurrency = extractFilingCapitalExpenditureFacts({ html: "<table><tr><th>Years ended December 31</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(12)</td></tr></table>", form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "no-currency", documentUrl: "https://www.sec.gov/no-currency", documentName: "no-currency.htm" });
+  assert.deepEqual(noCurrency.facts, []); assert.equal(noCurrency.diagnostics[0].reason, "currency_not_explicit");
+  const mismatch = extractFilingCapitalExpenditureFacts({ html: "<table><tr><th>Years ended December 31 (USD in millions)</th><th>2025</th><th>2024</th></tr><tr><td>Capital expenditures</td><td>(12)</td></tr></table>", form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "mismatch", documentUrl: "https://www.sec.gov/mismatch", documentName: "mismatch.htm" });
+  assert.deepEqual(mismatch.facts, []); assert.equal(mismatch.diagnostics[0].reason, "period_value_column_mismatch");
+  const malformed = extractFilingCapitalExpenditureFacts({ html: "<div>Capital expenditures (USD in millions) 2025 (12)</div>", form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "malformed", documentUrl: "https://www.sec.gov/malformed", documentName: "malformed.htm" });
+  assert.deepEqual(malformed.facts, []); assert.deepEqual(malformed.diagnostics, []);
+  const unsupportedForm = extractFilingCapitalExpenditureFacts({ html: "<table><tr><th>Years ended December 31 (USD in millions)</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(12)</td></tr></table>", form: "8-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "unsupported", documentUrl: "https://www.sec.gov/unsupported", documentName: "unsupported.htm" });
+  assert.deepEqual(unsupportedForm.facts, []); assert.equal(unsupportedForm.diagnostics[0].reason, "form_not_supported");
+});
+
+for (const [ticker, label] of [
+  ["AMC", "Payments to acquire property and equipment"],
+  ["NCPL", "Capital additions"],
+  ["NXL", "Purchase of property, plant and equipment"]
+]) {
+  test(`${ticker}-style filing-table capex shape is bounded and authoritative`, () => {
+    const result = extractFilingCapitalExpenditureFacts({
+      html: `<table><tr><th>Years ended December 31 (USD in millions)</th><th>2025</th><th>2024</th></tr><tr><td>${label}</td><td>(8)</td><td>(5)</td></tr></table>`,
+      form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: `${ticker.toLowerCase()}-capex`, documentUrl: `https://www.sec.gov/Archives/${ticker.toLowerCase()}-capex.htm`, documentName: `${ticker.toLowerCase()}-capex.htm`
+    });
+    assert.equal(result.facts.length, 2);
+    assert.ok(result.facts.every((fact) => fact.source_type === "sec_filing_table" && fact.unit === "USD"));
+    assert.ok(result.facts.every((fact) => fact.form === "10-K"));
+  });
+}
 
 test("bounded extraction targets material-risk categories represented in the evaluation set", () => {
   const expected = new Set(evaluation.cases.flatMap((scenario) => scenario.known_material_facts ?? []).map((fact) => fact.category));

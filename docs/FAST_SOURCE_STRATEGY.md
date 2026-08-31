@@ -294,7 +294,10 @@ a newer closure supersedes only the matching deficiency.
 
 SEC Company Facts and SEC-filed 10-K, 10-Q, 20-F, 40-F, 8-K, 6-K, and relevant
 exhibits are the only authoritative inputs to a Fast financial score. Comparable
-trend series prefer Company Facts and periodic reports. Later 8-K/6-K evidence
+trend series prefer Company Facts and periodic reports. When Company Facts lacks
+capex, a bounded extractor may use an explicit currency/scale/period-aligned
+capital-expenditure row from an already retrieved 10-K, 10-Q, 20-F, or 40-F
+table; ambiguous or unsupported tables remain Limited. Later 8-K/6-K evidence
 may prevent a stale periodic picture from becoming reassuring, but an isolated
 event value enters a trend only when it states a standardized comparable period.
 Explicit non-reliance/restatement evidence invalidates affected historical flow

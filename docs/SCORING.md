@@ -254,3 +254,16 @@ component is unresolved. Token-free fixtures prove deterministic gates and
 ordering; they do not establish predictive validity or the 95% material-risk
 recall target. Issue #55 remains responsible for real-ticker calibration with
 sample sizes and uncertainty disclosed.
+
+### SEC filing-table FCF fallback (Issue #76)
+
+When Company Facts does not expose a usable capital-expenditure concept, Fast
+may inspect a bounded set of already-retrieved issuer 10-K, 10-Q, 20-F, or 40-F
+HTML/iXBRL documents. The fallback accepts only an isolated capital-expenditure
+row with explicit currency, scale, comparable period labels, and aligned values.
+The filing is already identity/accession-gated by SEC retrieval; accounting
+invalidity, non-reliance, stale periods, conflicting facts, unsupported forms,
+or unit/cadence mismatches with operating cash flow keep FCF Limited/Unscored.
+Operating cash flow alone is never treated as free cash flow. Accepted table
+facts remain SEC-authoritative, dated, and source-linked to the FCF claim; the
+fallback is intentionally bounded and does not add a parser dependency.

@@ -1641,3 +1641,20 @@ NIO's documented `unavailable_authoritative_evidence` result is not converted
 into a system miss. Issue #78 may close #55 only when the existing reliability
 gates, sample-size disclosure, zero-severe-miss rule, and Definition of Done
 all pass.
+
+## 2026-08-31 — Restore bounded SEC filing-table FCF coverage (Issue #76)
+
+**Status:** Implemented offline; no live run authorized
+
+**Decision:** Fast may derive FCF from explicit capex rows in a bounded set of
+already retrieved SEC 10-K, 10-Q, 20-F, and 40-F filing tables when Company
+Facts lacks a comparable capex concept. The extraction is provider-neutral and
+uses no new production dependency. It requires explicit currency/scale,
+period/cadence and value-column alignment, and preserves accession/source
+provenance. OCF alone, unsupported forms, stale or conflicting periods,
+unit/currency mismatches, and accounting-invalid evidence remain Limited or
+Unscored.
+
+This expands evidence coverage without changing Methodology 2.1.0 or rewriting
+historical #55 artifacts. Filing-table coverage is deliberately bounded; more
+complex table layouts may justify a separately approved parser dependency later.

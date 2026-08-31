@@ -847,6 +847,91 @@ test("AMC and NXL OCF without aligned SEC capex remain honestly Limited FCF", as
   }
 });
 
+test("SEC filing-table capex fallback supplies identity-gated FCF when Company Facts is incomplete", async () => {
+  const result = await researchFixture({
+    ticker: "ACME",
+    filings: [{ accessionNumber: "0000000001-26-000010", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "annual.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: {
+      "annual.htm": `<table><caption>Years ended June 30 (USD in thousands)</caption><tr><th>Years ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(20)</td><td>(10)</td></tr></table>`
+    },
+    companyFacts: { cik: 1, entityName: "ACME Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [fact(100_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-2026" }), fact(80_000, { start: "2025-01-01", end: "2025-06-30", form: "10-K", accn: "ocf-2025", filed: "2025-08-01" })]
+      )
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.equal(fcf.value, 80_000);
+  assert.deepEqual(fcf.observations.map((item) => item.value), [70_000, 80_000]);
+  const claim = result.report.claims.find((item) => item.id === "claim-financial-free_cash_flow");
+  assert.ok(claim.source_ids.some((id) => id.includes("filing-capex")));
+  const capexSource = result.report.sources.find((source) => source.id.includes("filing-capex"));
+  assert.equal(capexSource.source_type, "sec_filing");
+  assert.match(capexSource.url, /sec\.gov/);
+  assert.ok(result.evidence_packet.normalization_diagnostics.some((item) => item.accession === "0000000001-26-000010" && item.disposition === "accepted"));
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
+test("filing-table FCF fallback preserves negative direction and rejects currency mismatch", async () => {
+  const filing = `<table><tr><th>Years ended June 30 (USD in millions)</th><th>2026</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(20)</td><td>(10)</td></tr></table>`;
+  const negative = await researchFixture({
+    ticker: "RIVN",
+    filings: [{ accessionNumber: "0000000001-26-000011", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "negative.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: { "negative.htm": filing },
+    companyFacts: { cik: 1, entityName: "RIVN Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [fact(-100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-negative" })])
+    } } }
+  });
+  assert.equal(negative.report.financial_assessment.metrics.free_cash_flow.state, "confirmed");
+  assert.equal(negative.report.financial_assessment.metrics.free_cash_flow.value, -120_000_000);
+  assert.equal(calibrateReportScores(negative.report).scores.financial_free_cash_flow_trend.value, null, "one observation cannot produce a trend score");
+
+  const matching = await researchFixture({
+    ticker: "ACME",
+    filings: [{ accessionNumber: "0000000001-26-000012", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "matching.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: { "matching.htm": filing },
+    companyFacts: { cik: 1, entityName: "ACME Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [fact(100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-matching" })]
+      )
+    } } }
+  });
+  assert.equal(matching.report.financial_assessment.metrics.free_cash_flow.state, "confirmed", "matching USD units permit the filing-table fallback");
+
+  const currencyMismatch = await researchFixture({
+    ticker: "ACME",
+    filings: [{ accessionNumber: "0000000001-26-000013", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "eur-mismatch.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: { "eur-mismatch.htm": filing.replace("USD in millions", "EUR in millions") },
+    companyFacts: { cik: 1, entityName: "ACME Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [fact(100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-eur-mismatch" })])
+    } } }
+  });
+  assert.equal(currencyMismatch.report.financial_assessment.metrics.free_cash_flow.state, "unknown", "currency-mismatched OCF and filing capex cannot form FCF");
+});
+
+test("non-reliance invalidates filing-table FCF instead of preserving a reassuring value", async () => {
+  const result = await researchFixture({
+    ticker: "NCPL",
+    filings: [
+      { accessionNumber: "0000000001-26-000020", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "annual.htm", items: "", primaryDocDescription: "Annual report" },
+      { accessionNumber: "0000000001-26-000021", form: "8-K", filingDate: "2026-08-18", reportDate: "2026-08-18", primaryDocument: "nonreliance.htm", items: "4.02", primaryDocDescription: "Non-Reliance" }
+    ],
+    documents: {
+      "annual.htm": `<table><tr><th>Years ended June 30 (USD in thousands)</th><th>2026</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(20)</td><td>(10)</td></tr></table>`,
+      "nonreliance.htm": "Item 4.02 Non-Reliance on Previously Issued Financial Statements. The Audit Committee concluded that previously issued financial statements should no longer be relied upon and require restatement."
+    },
+    companyFacts: { cik: 1, entityName: "NCPL Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [
+        fact(-100_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-current" }),
+        fact(-80_000, { start: "2025-01-01", end: "2025-06-30", form: "10-K", accn: "ocf-prior", filed: "2025-08-01" })
+      ])
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "limited_coverage");
+  assert.equal(fcf.value, null);
+  assert.ok(result.report.financial_assessment.material_warnings.some((item) => item.kind === "non_reliance" || item.title.toLowerCase().includes("non-reliance")));
+});
+
 test("AMC issuance growth survives reverse-split adjustment", async () => {
   const result = await researchFixture({ ticker: "AMC", filings: [
     { accessionNumber: "0000000001-26-000001", form: "10-Q", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "quarter.htm", items: "" },

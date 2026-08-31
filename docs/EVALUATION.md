@@ -961,3 +961,13 @@ live batch:
 Creating this backlog does not authorize live or paid evaluation. NIO's
 `unavailable_authoritative_evidence` classification remains prospective and is
 not a system miss; all prior measured batches and answer keys remain frozen.
+
+### Issue #76 offline implementation (2026-08-31)
+
+Fast now has a bounded SEC filing-table capex fallback for already retrieved
+10-K/10-Q/20-F/40-F documents. Deterministic fixtures cover annual, YTD, and
+quarter-style tables, explicit unit/scale normalization, negative FCF,
+currency/column ambiguity, unsupported forms, source provenance, and
+non-reliance invalidation. No live calibration or paid provider call was made;
+the frozen same-five FCF result (3/5) is unchanged and still requires later
+remeasurement after #77/#78.
