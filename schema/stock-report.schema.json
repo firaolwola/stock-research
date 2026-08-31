@@ -159,6 +159,7 @@
         "comparison_period_end": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
         "observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
         "annual_observations": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/financialObservation" } },
+        "interim_context": { "$ref": "#/$defs/interimFinancialContext" },
         "summary": { "$ref": "#/$defs/nonEmptyString" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
@@ -172,6 +173,19 @@
         "period_start": { "$ref": "#/$defs/date" },
         "period_end": { "$ref": "#/$defs/date" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
+      }
+    },
+    "interimFinancialContext": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "trend", "latest_value", "comparison_value", "unit", "latest_period_start", "latest_period_end", "comparison_period_start", "comparison_period_end", "summary", "claim_ids"],
+      "properties": {
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "trend": { "enum": ["improving", "stable", "deteriorating", "mixed", "unknown", "not_applicable"] },
+        "latest_value": { "type": "number" }, "comparison_value": { "type": "number" },
+        "unit": { "$ref": "#/$defs/nonEmptyString" },
+        "latest_period_start": { "$ref": "#/$defs/date" }, "latest_period_end": { "$ref": "#/$defs/date" },
+        "comparison_period_start": { "$ref": "#/$defs/date" }, "comparison_period_end": { "$ref": "#/$defs/date" },
+        "summary": { "$ref": "#/$defs/nonEmptyString" }, "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
     },
     "financialWarning": {

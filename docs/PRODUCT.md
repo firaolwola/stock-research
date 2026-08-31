@@ -161,8 +161,10 @@ such and never presented as a trend.
 
 The financial chart area groups comparable primary-filing history into Income
 statement, Balance sheet, Cash flow, and Capital structure blocks. Annual and
-interim periods are never mixed in one series. Newer comparable interim evidence
-takes precedence when older annual history would hide a material current change.
+interim periods are never mixed in one series. FCF primary trend scoring uses
+annual periods only; newer comparable interim FCF is shown separately as
+freshness context so a current change is visible without changing the annual
+trend score.
 
 The same chart area may show SEC-reported shares outstanding as capital-structure
 context. It uses point-in-time reported observations and may summarize the

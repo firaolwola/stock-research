@@ -299,6 +299,27 @@ test("FCF uses the newest aligned cadence when OCF and capex have different late
   assert.deepEqual(fcf.observations.map((item) => item.value), [7_000_000, 10_000_000]);
 });
 
+test("FCF retains interim freshness context separately from the annual primary trend", async () => {
+  const annual = (value, year) => edgeFact(value, { start: `${year}-01-01`, end: `${year}-12-31`, filed: `${year + 1}-02-15`, accn: `annual-${year}`, form: "10-K" });
+  const result = await reportForFacts(factsWith({
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("Operating cash flow", [
+      edgeFact(-1_900, { start: "2026-01-01", end: "2026-06-30" }), edgeFact(-900, { start: "2025-01-01", end: "2025-06-30", filed: "2026-08-15", accn: "prior-ytd" }), annual(-500, 2022), annual(-300, 2023), annual(-100, 2024), annual(-50, 2025)
+    ]),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Capital expenditures", [
+      edgeFact(500, { start: "2026-01-01", end: "2026-06-30" }), edgeFact(400, { start: "2025-01-01", end: "2025-06-30", filed: "2026-08-15", accn: "prior-capex-ytd" }), annual(100, 2022), annual(90, 2023), annual(80, 2024), annual(40, 2025)
+    ])
+  }));
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.deepEqual(fcf.annual_observations.map((item) => item.value), [-600, -390, -180, -90]);
+  assert.deepEqual(fcf.observations.map((item) => item.value), [-1_300, -2_400]);
+  assert.equal(fcf.interim_context.latest_value, -2_400);
+  assert.equal(fcf.interim_context.comparison_value, -1_300);
+  assert.match(fcf.interim_context.summary, /remains negative/);
+  assert.match(fcf.interim_context.summary, /deteriorating/);
+  const score = calibrateReportScores(result.report).scores.financial_free_cash_flow_trend;
+  assert.match(score.explanation, /annual periods/);
+});
+
 test("SEC financial observations retain only aligned comparable periods in chronological order", async () => {
   const result = await reportForFacts(factsWith({
     CashAndCashEquivalentsAtCarryingValue: edgeConcept("Cash", [edgeFact(5_000_000), edgeFact(4_000_000, { end: "2026-03-31", filed: "2026-05-10", accn: "0000123456-26-000000" })]),

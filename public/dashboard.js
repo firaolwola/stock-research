@@ -494,6 +494,7 @@ function renderScoreDetails(view) {
     const title = element("div", "section-title"); title.append(element("h4", "", financialMetricLabels[key]), badge(metric.state)); item.append(title);
     if (metric.state === "confirmed") item.append(element("p", "", `${metric.value.toLocaleString()} ${metric.unit} · ${metric.observations?.length > 1 ? formatLabel(metric.trend) : "one period; no trend inferred"}`));
     item.append(element("p", "", metric.summary));
+    if (metric.interim_context) item.append(element("p", "coverage-note", `Interim freshness context: ${metric.interim_context.summary}`));
     item.append(element("p", "coverage-note", `Independent trend: ${trendScore.presentation.stateLabel}. ${trendScore.explanation}`));
     appendSourceLinks(item, view.sourcesForClaims(metric.claim_ids)); inputs.append(item);
   });

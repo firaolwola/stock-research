@@ -1834,3 +1834,19 @@ answer key is changed.
 **Next step:** Correct the AMC currency-context binding offline (or document a
 defensible absence of currency evidence) before treating the coverage-limited
 FCF acceptance gate as passed. No live run is authorized by this audit.
+
+## 2026-08-31 — Use annual FCF for the primary trend and interim data as context
+
+**Status:** Implemented owner-approved policy clarification
+
+**Decision:** Primary Fast FCF trend scoring uses only comparable annual SEC
+observations. Comparable interim FCF is retained in an optional, dated
+`interim_context` record and may be displayed as a freshness signal (for
+example, a latest H1 result versus prior-year H1), but it never replaces or
+mixes into the annual score.
+
+**Why:** Annual periods provide the stable, comparable primary trend while
+interim results reveal current deterioration or improvement. Separating the two
+prevents a short, partial period from silently changing the long-term trend and
+keeps missing annual evidence Limited/Unscored. Methodology 2.1.0 formulas and
+historical calibration artifacts remain unchanged.

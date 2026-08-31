@@ -1204,7 +1204,7 @@ test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted an
   assert.equal(calibrateReportScores(result.report).scores.financial_operating_cash_flow_trend.value, null);
 });
 
-test("SMCI material weakness is retained and recent OCF/FCF deterioration outranks older annual history", async () => {
+test("SMCI material weakness is retained while interim cash-flow deterioration remains FCF freshness context", async () => {
   const annual = (value, year) => fact(value, { start: `${year}-07-01`, end: `${year + 1}-06-30`, filed: `${year + 1}-08-28`, form: "10-K", accn: `annual-${year}` });
   const result = await researchFixture({ ticker: "SMCI", filings: [{ accessionNumber: "0000000001-26-000001", form: "10-Q", filingDate: "2026-05-11", reportDate: "2026-03-31", primaryDocument: "quarter.htm", items: "" }], documents: { "quarter.htm": "Management concluded that internal control over financial reporting was not effective because material weaknesses remained unremediated." }, companyFacts: { cik: 1, entityName: "SMCI Corp.", facts: { "us-gaap": {
     NetCashProvidedByUsedInOperatingActivities: concept("OCF", [fact(-7_556, { start: "2025-07-01", end: "2026-03-31", filed: "2026-05-11" }), fact(796, { start: "2024-07-01", end: "2025-03-31", filed: "2025-05-11", accn: "prior" }), annual(-441, 2021), annual(664, 2022), annual(-2486, 2023), annual(1660, 2024)]),
@@ -1213,7 +1213,9 @@ test("SMCI material weakness is retained and recent OCF/FCF deterioration outran
   const report = calibrateReportScores(result.report);
   assert.ok(result.report.financial_assessment.material_warnings.some((item) => /Material weakness|ineffective controls/i.test(item.title)));
   assert.ok(report.scores.financial_operating_cash_flow_trend.value <= 2);
-  assert.ok(report.scores.financial_free_cash_flow_trend.value <= 2);
+  assert.ok(result.report.financial_assessment.metrics.free_cash_flow.interim_context);
+  assert.equal(result.report.financial_assessment.metrics.free_cash_flow.interim_context.trend, "deteriorating");
+  assert.match(report.scores.financial_free_cash_flow_trend.explanation, /annual periods/);
   assert.match(report.scores.financial_operating_cash_flow_trend.explanation, /interim periods/);
 });
 

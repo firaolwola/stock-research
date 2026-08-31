@@ -55,6 +55,29 @@ test("cash-flow scores distinguish positive improvement from negative deteriorat
   }
 });
 
+test("FCF primary trend prefers annual history while interim data remains context-only", async () => {
+  const report = await load();
+  const metric = report.financial_assessment.metrics.free_cash_flow;
+  metric.annual_observations = annual([-500, -300, -100]);
+  metric.observations = [
+    { value: -900, unit: "USD millions", period_start: "2025-01-01", period_end: "2025-06-30", claim_ids: ["claim-financial"] },
+    { value: -1_900, unit: "USD millions", period_start: "2026-01-01", period_end: "2026-06-30", claim_ids: ["claim-financial"] }
+  ];
+  const score = calibrateReportScores(report).scores.financial_free_cash_flow_trend;
+  assert.match(score.explanation, /annual periods/);
+  assert.doesNotMatch(score.explanation, /interim periods/);
+});
+
+test("FCF remains Limited when only interim observations are available", async () => {
+  const report = await load();
+  const metric = report.financial_assessment.metrics.free_cash_flow;
+  metric.annual_observations = [];
+  metric.observations = [-900, -1_900].map((value, index) => ({ value, unit: "USD millions", period_start: `${2025 + index}-01-01`, period_end: `${2025 + index}-06-30`, claim_ids: ["claim-financial"] }));
+  const score = calibrateReportScores(report).scores.financial_free_cash_flow_trend;
+  assert.equal(score.state, "limited_coverage");
+  assert.equal(score.value, null);
+});
+
 test("cash rewards growth and penalizes depletion only when fresh", async () => {
   const growth = await trend("cash", [20, 30, 45], { pointInTime: true });
   const depletion = await trend("cash", [45, 30, 15], { pointInTime: true });

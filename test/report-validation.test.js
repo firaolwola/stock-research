@@ -275,6 +275,22 @@ test("annual financial chart observations reject quarterly periods and mixed uni
   }
 });
 
+test("interim FCF context is dated, linked, and cannot masquerade as a primary score", async () => {
+  const report = await loadReportFixture("complete");
+  const metric = report.financial_assessment.metrics.free_cash_flow;
+  metric.interim_context = {
+    state: "confirmed", trend: "deteriorating", latest_value: -12, comparison_value: -4, unit: metric.unit,
+    latest_period_start: "2026-01-01", latest_period_end: "2026-06-30",
+    comparison_period_start: "2025-01-01", comparison_period_end: "2025-06-30",
+    summary: "Latest comparable interim free cash flow remains negative and deteriorated versus the prior-year period.", claim_ids: metric.claim_ids.slice(0, 1)
+  };
+  assert.equal(validateReport(report).valid, true);
+  metric.interim_context.latest_period_end = "2025-06-30";
+  const invalid = validateReport(report);
+  assert.equal(invalid.valid, false);
+  assert.ok(invalid.errors.some((error) => /interim context must be chronological/.test(error.message)));
+});
+
 test("shares outstanding stays distinct from float and potential dilution", async () => {
   const report = await loadReportFixture("complete");
   assert.equal(validateReport(report).valid, true);

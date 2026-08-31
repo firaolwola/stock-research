@@ -116,6 +116,11 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   liquidity, burn, leverage, profitability, accounting, or going-concern
   warnings carry severity and dates for priority ranking. Operating-company
   metrics may be `not_applicable` for securities such as ETFs.
+  FCF may include an optional `interim_context` object containing a dated,
+  source-linked comparison of the latest comparable interim periods. This is a
+  freshness signal only; annual observations remain the sole primary FCF trend
+  series and the context cannot create a numeric score when annual evidence is
+  insufficient.
 - `financial_assessment.shares_outstanding` is an optional display-support
   series of source-linked, chronological point-in-time observations measured in
   `shares`. It is not float or potential dilution and does not participate in

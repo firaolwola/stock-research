@@ -1133,6 +1133,16 @@ Twelve Data was not configured. This confirms production applicability of the
 offline parser fix without changing historical measurements. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-CONFIRMATION-6.md`.
 
+### FCF annual-primary policy clarification (2026-08-31)
+
+The approved policy now keeps annual SEC FCF observations as the sole primary
+trend series. Comparable interim FCF remains available as a dated freshness
+context record and may state that the latest interim period remains
+negative/improved/deteriorated versus its comparable prior-year period. Annual
+and interim observations are never mixed, and missing or stale annual history
+remains Limited/Unscored. This is a 2.1.0 evidence-selection clarification;
+frozen #55 measurements and answer keys are unchanged.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency

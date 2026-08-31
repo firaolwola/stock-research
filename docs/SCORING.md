@@ -123,9 +123,13 @@ SEC-only source gate.
 ## Six supporting financial trend constructs added in 2.1.0
 
 All six are higher-is-stronger, company-relative 0–10 scores. Raw company size
-does not score. For revenue, net income/loss, FCF, and OCF, a newer pair of
+does not score. For revenue, net income/loss, and OCF, a newer pair of
 same-length comparable interim periods takes precedence over an older annual
-series; otherwise the server uses compatible annual history. Cash and debt
+series; otherwise the server uses compatible annual history. FCF primary trend
+scoring uses annual SEC periods only. Comparable interim FCF is retained as
+separate freshness context (for example, “Latest H1 2026 FCF remains negative
+and deteriorated versus H1 2025”) and never replaces or mixes into the annual
+score. Cash and debt
 prefer fresh consecutive quarter-end balances, then compatible annual period
 ends. Annual and interim observations never mix in one calculation.
 

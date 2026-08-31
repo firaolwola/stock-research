@@ -301,8 +301,10 @@ table; ambiguous or unsupported tables remain Limited. Later 8-K/6-K evidence
 may prevent a stale periodic picture from becoming reassuring, but an isolated
 event value enters a trend only when it states a standardized comparable period.
 Explicit non-reliance/restatement evidence invalidates affected historical flow
-scores until corrected comparable statements are available. Current comparable
-interim flows take precedence over an older annual trend without mixing cadences.
+scores until corrected comparable statements are available. FCF primary trend
+scoring uses annual SEC periods only; comparable interim FCF is retained as a
+separate freshness/context signal and never mixed into the annual score. Other
+flow trends may prefer newer comparable interim periods without mixing cadences.
 Nasdaq supplies listing/exchange context. Approved market-provider adapters
 supply discovery and EOD price/volume context only; they never fill a
 financial-statement gap. OpenAI
