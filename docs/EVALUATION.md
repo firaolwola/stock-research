@@ -962,6 +962,16 @@ Creating this backlog does not authorize live or paid evaluation. NIO's
 `unavailable_authoritative_evidence` classification remains prospective and is
 not a system miss; all prior measured batches and answer keys remain frozen.
 
+## Issue #77 offline score calibration
+
+`evaluation/plans/fast-score-calibration-2026-08-31.json` and its diagnostic
+output run the same production scoring path used by Express without network,
+provider, or OpenAI access. The matrix covers every 2.1.0 score direction,
+range, dated evidence link, explanation fidelity, and honest unresolved state;
+holdouts check company-relative trends and risk ordering. It does not alter
+frozen #55 measurements or claim live reliability. Run with
+`npm run evaluate:calibration` before any separately approved live work.
+
 ### Issue #76 offline implementation (2026-08-31)
 
 Fast now has a bounded SEC filing-table capex fallback for already retrieved

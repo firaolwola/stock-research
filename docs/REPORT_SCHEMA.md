@@ -373,3 +373,12 @@ extractions, but diagnostics are not report claims or user-facing evidence.
 Ambiguous currency, scale, cadence, period columns, unsupported filing forms,
 or accounting-invalid inputs produce no capex fact, so OCF-only reports remain
 Limited/Unscored rather than manufacturing FCF.
+
+## Score calibration and explanation fidelity (Issue #77)
+
+No report-contract fields were added. Existing score objects remain the source
+of truth for `direction`, `time_horizon`, `state`, `value`, `components`, and
+`claim_ids`. The offline harness checks every 2.1.0 score for those semantics,
+dated source links, and the rule that unresolved states carry no numeric value.
+Confirmed financial trend explanations identify the normalized SEC observations
+and period ends used by the score while details remain collapsible in the UI.
