@@ -686,9 +686,13 @@
     "adequately_sampled_category_target": 0.9,
     "adequately_sampled_categories_pass": false,
     "failing_categories": [
-      "free_cash_flow_trend",
       "reverse_splits"
     ],
+    "coverage_limited_categories": [
+      "free_cash_flow_trend"
+    ],
+    "fcf_numeric_coverage_proven": false,
+    "fcf_safe_unresolved_settlement_passed": true,
     "score_range_target": 0.9,
     "score_range_pass_rate": 1,
     "zero_unresolved_severe_misses_in_latest_targeted_shapes": true,
@@ -696,5 +700,20 @@
     "issue_55_must_remain_open": true,
     "pr_74_ready_to_merge": false
   },
-  "required_next_step": "Keep #55 and PR #74 open. Resolve the frozen FCF coverage/denominator question and any remaining score/explanation calibration gaps before requesting closure review."
+  "fcf_semantics": {
+    "numeric_coverage": {
+      "detected": 2,
+      "expected": 5,
+      "recall": 0.4,
+      "meaning": "Comparable SEC OCF/capex pair sufficient for a numeric FCF trend score."
+    },
+    "safe_unresolved_settlement": {
+      "settled": 5,
+      "evaluated": 5,
+      "rate": 1,
+      "meaning": "Missing or invalid FCF remains explicitly Limited/Unscored without favorable inference."
+    },
+    "pooled_with_frozen_same_five": false
+  },
+  "required_next_step": "Keep #55 and PR #74 open. Treat numeric FCF coverage as unproven, safe unresolved settlement as a separate passed safety gate, and resolve remaining reliability/sample-size and score/explanation gaps before closure review."
 }

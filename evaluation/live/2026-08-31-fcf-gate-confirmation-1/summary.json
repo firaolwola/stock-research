@@ -1,0 +1,77 @@
+{
+  "issue": 81,
+  "reliability_issue": 55,
+  "batch": "fcf-gate-confirmation-1",
+  "live_calls": true,
+  "approved_run_count": 5,
+  "completed_run_count": 5,
+  "frozen_inputs_unchanged": true,
+  "adjudication": {
+    "scope": "FCF evidence availability and safe settlement only; this does not rewrite the frozen same-five reliability denominator.",
+    "frozen_same_five_expected": 5,
+    "usable_confirmed": 2,
+    "strict_usable_recall": 0.4,
+    "safe_settled": 5,
+    "safe_settlement_rate": 1,
+    "note": "AAPL and SMCI retained comparable SEC-derived FCF observations. AMC, NCPL, and NXL remained Limited/Unscored because a trustworthy comparable capex pair was unavailable or invalidated. Missing evidence was not treated as favorable."
+  },
+  "cases": [
+    {
+      "ticker": "AAPL",
+      "result": "aligned_sec_pair",
+      "score_state": "confirmed",
+      "score": 8.7,
+      "observations": ["2025-06-28: 72281000000 USD", "2026-06-27: 110197000000 USD"],
+      "settlement": "valid_report"
+    },
+    {
+      "ticker": "AMC",
+      "result": "unavailable_authoritative_capex",
+      "score_state": "limited_coverage",
+      "score": null,
+      "settlement": "valid_report"
+    },
+    {
+      "ticker": "NCPL",
+      "result": "invalidated_by_non_reliance",
+      "score_state": "limited_coverage",
+      "score": null,
+      "settlement": "valid_report"
+    },
+    {
+      "ticker": "NXL",
+      "result": "unavailable_authoritative_capex",
+      "score_state": "limited_coverage",
+      "score": null,
+      "settlement": "valid_report"
+    },
+    {
+      "ticker": "SMCI",
+      "result": "aligned_sec_pair",
+      "score_state": "confirmed",
+      "score": 0,
+      "observations": ["2025-03-31: 691375000 USD", "2026-03-31: -7690616000 USD"],
+      "settlement": "valid_report"
+    }
+  ],
+  "operations": {
+    "aggregate_elapsed_ms": 10507,
+    "average_elapsed_ms": 2101.4,
+    "max_elapsed_ms": 2350,
+    "openai_cost_usd": 0,
+    "openai_requests": 0,
+    "alpha_vantage_requests": 10,
+    "twelve_data_requests": 0,
+    "combined_optional_provider_attempts": 10,
+    "retries": 0,
+    "deep_runs": 0,
+    "hosted_web_search_calls": 0,
+    "approval_violation": false
+  },
+  "gate": {
+    "passed": false,
+    "reason": "The frozen same-five FCF denominator remains below the category target; the two confirmed live pairs are descriptive evidence coverage, not a replacement denominator.",
+    "issue_55_must_remain_open": true,
+    "pr_74_ready_to_merge": false
+  }
+}
