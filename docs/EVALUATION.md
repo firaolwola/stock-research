@@ -594,6 +594,18 @@ and historical measurements remain unchanged. Another live confirmation still
 requires separate approval. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-5.md`.
 
+### AMC split offline inspection 6 (2026-08-31)
+
+Inspection of the frozen confirmation-4 diagnostics narrowed the remaining
+live gap to a date-first effective-date relationship. The SEC span extracted
+`one-for-ten` / `2023-08-24`, with the date preceding the ratio, but the role
+classifier returned `unknown_date_role` and the canonical invariant withheld
+the event. The shared extractor/classifier now accept only a bounded form in
+which that date is explicitly identified as the effective date of the nearby
+reverse split. A deterministic HTML regression passes; the live result and
+historical measurements remain unchanged. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-SPLIT-OFFLINE-INSPECTION-6.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

@@ -1444,3 +1444,18 @@ live parser still extracted the ratio/date but classified the date role as
 **Why:** This confirms the prior direct effective-date grammar was still not
 the exact live normalized shape. The new offline correction is bounded and
 covered by regression; any further live confirmation requires separate approval.
+
+## 2026-08-31 — AMC date-first effective-date relationship correction
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+**Decision:** Accept a date-first clause only when the date is explicitly
+identified as the effective date of the adjacent reverse split (for example,
+“DATE was the effective date of the … reverse stock split”).
+
+**Why:** Confirmation-4 diagnostics showed that ratio and effective date were
+both extracted from the same SEC span, but the date preceded the ratio and no
+supported date-role grammar matched. The bounded rule aligns extraction and
+classification without treating filing, authorization, or unrelated dates as
+completed actions. The captured live result and all frozen baselines remain
+unchanged.

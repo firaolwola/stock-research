@@ -947,6 +947,20 @@ test("AMC explicit effective date recovered from a live-shaped clause is not wit
   assert.equal(diagnostic?.canonical_validation_reason, "ratio_date_lifecycle_bound_within_action_segment");
 });
 
+test("AMC date-before-effective-date filing wording binds the completed split", () => {
+  const html = "<p>August 24, 2023 was the effective date of the one-for-ten reverse stock split.</p>";
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html, form: "8-K", filed: "2023-08-14", evaluatedAt: "2026-08-31T00:00:00Z",
+    accession: "amc-date-before-effective", documentUrl: "https://www.sec.gov/amc-date-before-effective", documentName: "amc-date-before-effective.htm"
+  });
+  const split = result.findings.find((item) => item.kind === "reverse_split");
+  const diagnostic = result.corporate_action_diagnostics.find((item) => item.extracted_ratio === "1-for-10");
+  assert.equal(split?.event_date, "2023-08-24");
+  assert.equal(split?.action_state, "completed");
+  assert.equal(diagnostic?.date_role, "effective_date");
+  assert.equal(diagnostic?.disposition, "accepted");
+});
+
 test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted and invalidates affected metrics", async () => {
   const result = await researchFixture({
     ticker: "NCPL",

@@ -142,6 +142,12 @@ verdict.
    valid and safely Limited but still missed the completed split. The result is
    frozen; no retry was made and the offline direct-form correction is now the
    next gated step.
+14. [x] **Complete — inspect AMC confirmation-4 span and correct date-first
+   effective wording:** captured diagnostics showed the date preceding the
+   written ratio with an explicit effective-date relationship that was not in
+   the role grammar. A bounded date-first rule and HTML regression now cover
+   this shape; the live result remains frozen and another confirmation still
+   requires separate approval.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
