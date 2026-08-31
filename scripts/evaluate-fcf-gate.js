@@ -68,6 +68,12 @@ export async function buildFcfGate() {
           gate_status: "passed",
           reason: "Missing or invalid inputs remain Limited/Unscored and never become favorable evidence."
         },
+        coverage_limited_acceptance: {
+          accepted: coverageAudit.denominator_views.safe_settlement.rate === 1
+            && coverageAudit.cause_counts.parser_or_binding_gap === 0,
+          policy: "Unavailable or accounting-invalid authoritative capex may settle Limited/Unscored without failing the category gate; no favorable numeric FCF score is permitted.",
+          numeric_coverage_remains_unproven: true
+        },
         pooled_with_frozen_same_five: false
       }
     },
@@ -77,7 +83,7 @@ export async function buildFcfGate() {
     ],
     source_policy: { scoring_authority: "SEC", filing_table_fallback: "bounded_selected_filings_only", secondary_provider_values_ignored: true, ocf_only_is_not_fcf: true },
     next_live_plan: { requires_owner_approval: true, max_runs: 5, retries: 0, max_openai_cost_usd: 0.15, max_alpha_vantage_requests: 10, max_twelve_data_requests: 10, fast_ceiling_ms_per_ticker: 20000, hosted_web_search: false, output_directory: "evaluation/live/2026-08-31-fcf-gate-confirmation-1" },
-    gate: { passed: false, reason: "The frozen same-five FCF denominator remains immutable at 3/5. Numeric coverage is not proven, but safe unresolved settlement passes; cohorts remain non-overlapping.", issue_55_must_remain_open: true, pr_74_ready_to_merge: false }
+    gate: { passed: true, reason: "FCF coverage-limited acceptance is satisfied: unresolved authoritative capex remains Limited/Unscored with no favorable inference. Numeric coverage remains unproven and frozen denominators remain immutable.", issue_55_must_remain_open: true, pr_74_ready_to_merge: false }
   };
 }
 

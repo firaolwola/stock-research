@@ -1047,6 +1047,18 @@ remain unchanged and no new numeric FCF claim is made without an aligned,
 identity-gated capex row. The current audit therefore remains 2/5 strict usable
 FCF and 5/5 safe unresolved settlement.
 
+### FCF coverage-limited gate policy (owner-approved, 2026-08-31)
+
+The reliability gate now separates numeric FCF usability from safe settlement.
+The numeric target remains measured and visible (currently 2/5); it is not
+silently converted into a pass. However, a case with unavailable or
+accounting-invalid authoritative capex satisfies the category safety gate when
+the report settles `Limited`/`Unscored`, preserves the reason, and never emits a
+favorable numeric FCF score. This accepts honest coverage limits without
+lowering the overall approximately 95% recall target or permitting unsupported
+FCF values. The final #55 gate remains open until its non-overlapping recall and
+broad score/explanation requirements are met.
+
 ### Offline reverse-split adjudication (2026-08-31)
 
 `npm run evaluate:reverse-split` audits the latest frozen authoritative-shaped

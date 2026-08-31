@@ -81,6 +81,11 @@
         "gate_status": "passed",
         "reason": "Missing or invalid inputs remain Limited/Unscored and never become favorable evidence."
       },
+      "coverage_limited_acceptance": {
+        "accepted": true,
+        "policy": "Unavailable or accounting-invalid authoritative capex may settle Limited/Unscored without failing the category gate; no favorable numeric FCF score is permitted.",
+        "numeric_coverage_remains_unproven": true
+      },
       "pooled_with_frozen_same_five": false
     }
   },
@@ -116,8 +121,8 @@
     "output_directory": "evaluation/live/2026-08-31-fcf-gate-confirmation-1"
   },
   "gate": {
-    "passed": false,
-    "reason": "The frozen same-five FCF denominator remains immutable at 3/5. Numeric coverage is not proven, but safe unresolved settlement passes; cohorts remain non-overlapping.",
+    "passed": true,
+    "reason": "FCF coverage-limited acceptance is satisfied: unresolved authoritative capex remains Limited/Unscored with no favorable inference. Numeric coverage remains unproven and frozen denominators remain immutable.",
     "issue_55_must_remain_open": true,
     "pr_74_ready_to_merge": false
   }

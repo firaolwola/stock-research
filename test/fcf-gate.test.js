@@ -13,7 +13,9 @@ test("Issue 81 keeps frozen FCF and independent controls in separate denominator
   assert.equal(result.denominators.fcf_semantics.numeric_coverage.gate_status, "coverage_not_proven");
   assert.equal(result.denominators.fcf_semantics.safe_unresolved_settlement.rate, 1);
   assert.equal(result.denominators.fcf_semantics.safe_unresolved_settlement.gate_status, "passed");
-  assert.equal(result.gate.passed, false);
+  assert.equal(result.denominators.fcf_semantics.coverage_limited_acceptance.accepted, true);
+  assert.equal(result.denominators.fcf_semantics.coverage_limited_acceptance.numeric_coverage_remains_unproven, true);
+  assert.equal(result.gate.passed, true);
   assert.equal(result.gate.issue_55_must_remain_open, true);
 });
 

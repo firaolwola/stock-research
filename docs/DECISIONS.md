@@ -1717,6 +1717,24 @@ This expands evidence coverage without changing Methodology 2.1.0 or rewriting
 historical #55 artifacts. Filing-table coverage is deliberately bounded; more
 complex table layouts may justify a separately approved parser dependency later.
 
+## 2026-08-31 — Accept safe FCF coverage limits in the reliability gate
+
+**Status:** Owner-approved and implemented
+
+**Decision:** Separate numeric FCF usability from safe unresolved settlement in
+the Issue #55 reliability gate. Unavailable or accounting-invalid authoritative
+capex may satisfy the FCF category safety gate when the report remains
+`Limited`/`Unscored`, preserves the reason, and never emits a favorable numeric
+FCF score. Numeric coverage remains measured independently and is not relabeled
+as proven.
+
+**Why:** The current frozen cohort has 3/5 historical FCF detections and the
+latest bounded audit has 2/5 strictly usable numeric pairs, but all five cases
+settle safely. Treating honest absence as a category failure would incentivize
+unsupported inference. This policy does not lower the approximately 95% overall
+recall target, change Methodology 2.1.0, rewrite frozen artifacts, or close #55
+while pooled recall and broad score/explanation gates remain unresolved.
+
 ## 2026-08-31 — Offline reverse-split category adjudication
 
 **Status:** Complete offline audit; Issue #55 remains open
@@ -1734,7 +1752,9 @@ ratios, lifecycle, and corroborating filings without the known false duplicate;
 the other four independent artifacts provide non-overlapping corroboration.
 Removing reverse splits as a failing category reflects the targeted evidence,
 not a rewrite of frozen results. Overall #55 closure remains blocked by pooled
-recall uncertainty, unproven numeric FCF coverage, and score/explanation gates.
+recall uncertainty and score/explanation gates; the owner-approved FCF policy
+accepts safely unresolved coverage while keeping numeric coverage separately
+visible and unproven.
 
 ## 2026-08-31 — Keep FCF table-unit fallback bounded
 

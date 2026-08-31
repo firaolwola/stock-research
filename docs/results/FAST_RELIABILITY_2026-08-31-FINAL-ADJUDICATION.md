@@ -40,7 +40,7 @@ replacement denominator for the core calibration.
 | Requirement | Finding | Status |
 | --- | --- | --- |
 | Overall material-risk recall ≈95%+ | Batch 3 was 96.51% and the final same-five descriptive run was 95.35%, but no single pooled denominator is defensible | Not established as a milestone result |
-| Every adequately sampled critical category ≈90%+ | Frozen FCF is 3/5 (60%); the separate reverse-split audit is 15/15 across five practical cases | Fail because of FCF; reverse-split audit passes |
+| Every adequately sampled critical category ≈90%+ | Frozen FCF is 3/5 (60%), but all unresolved FCF cases settle safely Limited/Unscored under the owner-approved coverage-limited policy; the separate reverse-split audit is 15/15 | Category safety accepted; numeric FCF coverage remains unproven |
 | No unresolved severe misleading miss | AMC, NCPL, AAPL, NXL, SMCI, ONFO, and STN mechanisms were corrected or confirmed in targeted follow-up; historical misses remain frozen for audit | No currently known unresolved covered-shape blocker |
 | Explanations accurately reflect evidence | Latest targeted cohorts passed, but Batch 3 was 1/5 and final same-five was 3/5; Sparse Expansion Verification-2 was 2/3 | Not demonstrated broadly |
 | Scores within owner-reviewed ranges | Frozen Batch 3 score-range result was 30/57 (52.63%); current offline 2.1.0 matrix is 2/2, but it is not a live reliability denominator | Historical fail; current matrix passes |
@@ -57,7 +57,7 @@ replacement denominator for the core calibration.
 | Going concern / bankruptcy | 4 | Independent sparse cohorts passed their covered claims | Practical minimum met; still small |
 | Foreign issuer / ADR / IFRS | 3 | ZAPPF, NIO, and STN coverage; STN passed after correction | Practical minimum met; still small |
 | OTC / delisted | 5 | Sparse Expansion Verification-2 covered REKR/ZAPPF/GMBL; prior cases retained | Practical minimum met |
-| Free cash flow trend | Frozen 5 expected, 3 detected (60%); independent MSFT/RIVN controls 2/2 | Clean positive/negative pairs now pass; three frozen misses remain unavailable or invalidated evidence | **Frozen gate remains failed** |
+| Free cash flow trend | Frozen 5 expected, 3 detected (60%); independent MSFT/RIVN controls 2/2 | Three frozen misses remain unavailable or invalidated evidence and settle Limited/Unscored; no favorable inference | **Coverage-limited safety accepted; numeric coverage unproven** |
 
 Three practical cases are a milestone minimum for the sparse listing and
 foreign/IFRS categories, not broad statistical reliability. No category should
@@ -85,13 +85,11 @@ the FCF and broader calibration gates.
 
 ## Required next step
 
-Keep #55 and PR #74 open. The independent MSFT/RIVN remeasurement validates the
-corrected FCF path on clean positive and negative SEC shapes, but does not
-rewrite the frozen 3/5 denominator. The next evidence decision is either a
-separately approved authoritative filing-table extraction for the remaining
-unavailable shapes or a newly justified FCF baseline; it must use the zero-token
-SEC preflight. Do not claim an overall reliability pass, merge PR #74, or close
-#55 until FCF and the remaining score/explanation/denominator evidence are
-defensibly satisfied.
+Keep #55 and PR #74 open. The owner-approved coverage-limited policy accepts
+the safe Limited/Unscored FCF settlements while preserving the frozen 3/5 and
+numeric 2/5 measurements. Do not claim an overall reliability pass, merge PR
+#74, or close #55 until the non-overlapping recall and broad
+score/explanation/denominator evidence are defensibly satisfied. Any future
+FCF evidence expansion must use the zero-token SEC preflight.
 
 No live run is authorized by this adjudication.

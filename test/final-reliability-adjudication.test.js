@@ -12,8 +12,11 @@ test("Issue 78 adjudication preserves frozen cohorts without pooling them", asyn
   assert.equal(result.gate.issue_55_must_remain_open, true);
   assert.deepEqual(result.gate.failing_categories, []);
   assert.equal(result.gate.reverse_split_audit_passed, true);
-  assert.deepEqual(result.gate.coverage_limited_categories, ["free_cash_flow_trend"]);
+  assert.deepEqual(result.gate.coverage_limited_categories, []);
+  assert.deepEqual(result.gate.accepted_coverage_limited_categories, ["free_cash_flow_trend"]);
+  assert.equal(result.gate.adequately_sampled_categories_pass, true);
   assert.equal(result.gate.fcf_numeric_coverage_proven, false);
+  assert.equal(result.gate.fcf_coverage_limited_acceptance_passed, true);
   assert.equal(result.gate.fcf_safe_unresolved_settlement_passed, true);
   assert.equal(result.sample_size_map.find((item) => item.category === "completed_reverse_splits").status, "practical_minimum_but_small_audit_passed");
   assert.equal(result.sample_size_map.find((item) => item.category === "free_cash_flow_trend").status, "coverage_limited_safe_settlement_separate");
