@@ -911,3 +911,18 @@ the Issue #55 aggregate reliability decision. When the execution environment
 denies outbound access (for example, a sandbox EACCES), the runner must be
 restarted with the required network permission before requesting or executing
 another AMC/ticker confirmation.
+
+### Final Issue #55 milestone adjudication (2026-08-31)
+
+The frozen results and later targeted confirmations were reviewed without
+rewriting historical denominators. Known AMC, NCPL, AAPL, NXL, SMCI, ONFO, and
+STN binding mechanisms are corrected or confirmed for their covered shapes, and
+the latest independent sparse cohorts passed their targeted claims. The
+milestone nevertheless remains open: the frozen same-five FCF category is
+3/5 (60%), Batch 3 score-range calibration is 30/57 (52.63%), and overlapping
+rubrics do not yield one defensible pooled recall number. NIO attributable
+annual net loss remains `unavailable_authoritative_evidence` and is excluded
+from system-miss counts because the bounded authoritative path correctly could
+not establish a safe concept. Practical sparse-category counts are reported
+without claiming statistical reliability. See
+`docs/results/FAST_RELIABILITY_2026-08-31-FINAL-ADJUDICATION.md`.

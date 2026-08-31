@@ -1588,3 +1588,21 @@ Issue #55 measurements or its reliability gate.
 If the environment denies outbound SEC access, grant the required environment
 network permission and rerun the preflight before requesting or executing any
 new AMC/ticker confirmation.
+
+## 2026-08-31 — Final Issue #55 milestone adjudication remains open
+
+**Status:** Gate not met; PR #74 is not merge-ready
+
+Review the frozen Batch 1–3, final same-five, sparse, sparse-expansion, and
+final sparse-proof records independently; do not pool overlapping rubrics into
+a fabricated overall recall. The latest targeted confirmations resolve the
+known AMC, NCPL, AAPL, NXL, SMCI, ONFO, and STN mechanisms for their covered
+shapes. The close gate still fails because frozen same-five FCF is 3/5 (60%),
+Batch 3 score-range calibration is 30/57 (52.63%), and explanation/relative-
+risk evidence is not broadly demonstrated. NIO's attributable annual net-loss
+case is correctly classified `unavailable_authoritative_evidence` and is not a
+system miss. Practical sparse counts meet a three-case milestone minimum for
+active deficiency and foreign/IFRS, but remain small and are not statistical
+proof. A separately approved FCF-focused evidence remeasurement or filing-table
+coverage decision is required before any closure claim; this adjudication does
+not authorize live work.
