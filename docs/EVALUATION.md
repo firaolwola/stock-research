@@ -1063,6 +1063,21 @@ covered by a segmented AMC fixture and an application-level FCF regression.
 Historical #55 measurements remain unchanged; any live remeasurement must be
 separately approved.
 
+### AMC FCF confirmation 4 (2026-08-31)
+
+The approved single AMC run completed in 2,801 ms with a valid partial report
+and successful SEC retrieval (14 requests). OCF remained confirmed at USD
+106.9M for the six months ended 2026-06-30, while FCF remained safely
+`limited_coverage`/unknown. The live 10-K capex candidate still reported one
+period, zero values, caller-supplied USD, and
+`period_value_column_mismatch`; neither bounded flattened-table fallback matched
+the live HTML shape. OpenAI synthesis was cost-blocked at $0, Alpha Vantage
+used two requests (market completed, news quota-limited), and no retry or extra
+research was performed. The historical measurements remain unchanged. The
+offline fallback is not yet live-validated; next work is offline inspection of
+the captured live table shape, not another blind run. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-CONFIRMATION-4.md`.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency
