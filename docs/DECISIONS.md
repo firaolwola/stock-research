@@ -1488,3 +1488,17 @@ the target because the filing used a verbose share-for-every ratio. The compact
 hyphenated form was only an unrelated table mention. The correction preserves
 truncation, competing-action, filing-date, and authorization safeguards; the
 live result and frozen baselines remain unchanged.
+
+## 2026-08-31 — AMC verbose-ratio confirmation 7 false-positive gate
+
+**Status:** Live confirmation failed; Issue #55 remains open
+
+The approved single AMC run completed SEC retrieval and produced a valid safe
+partial report, but canonicalization emitted both the expected `1-for-10`
+reverse split and a false `550000000-for-10` completed event on 2023-08-24.
+The false ratio came from combining an authorized-share count with the later
+verbose “one share ... for every ten shares” phrase. Preserve this result and
+the frozen baselines unchanged. Do not retry automatically. The next required
+step is an offline tightening of verbose ratio binding plus a deterministic
+regression for this distractor; a new live confirmation requires separate
+owner approval.

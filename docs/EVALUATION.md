@@ -816,3 +816,17 @@ budget, and output location. After an approved run, record input/output tokens,
 web-search calls, estimated cost, per-case latency, app failures, and the full
 rubric results. The evaluator rejects missing approval or measurement fields.
 Redact credentials and do not commit sensitive provider payloads.
+
+### AMC verbose-ratio confirmation 7 (2026-08-31)
+
+The approved one-run confirmation passed the SEC connectivity preflight and
+completed SEC retrieval in 10,319 ms. The expected completed `1-for-10` split
+effective 2023-08-24 was found, but the verbose matcher also promoted a false
+`550000000-for-10` completed event from an authorized-share count followed by
+the real “one share ... for every ten shares” wording. The report remained
+schema-valid and safely partial; OpenAI synthesis was cost-blocked before any
+request. Target recall was 1/1, but canonical precision was 1/2 and explanation
+fidelity failed. This severe precision result is frozen; no retry or additional
+live run is authorized. The next step is an offline ratio-binding correction
+and regression for authorized-share-count distractors. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-VERBOSE-RATIO-CONFIRMATION-7.md`.

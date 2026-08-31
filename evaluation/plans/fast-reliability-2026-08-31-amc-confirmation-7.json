@@ -1,0 +1,40 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "amc-verbose-ratio-confirmation-7",
+  "approved_at": "2026-08-31",
+  "purpose": "Single live AMC confirmation after verbose SEC ratio correction. Historical artifacts remain frozen.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-31-amc-confirmation-6.json",
+  "parent_plan_sha256": "2d82d533d53e3eb08703001cb35b2e9f24f3d7174d7008bb1c4e3d600460f96c",
+  "output_directory": "2026-08-31-amc-verbose-ratio-confirmation-7",
+  "approval_token": "issue-55-2026-08-31-approved-amc-confirmation-seven",
+  "approval": {
+    "approved": true,
+    "tickers": ["AMC"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 1,
+    "maximum_openai_cost_usd": 0.03,
+    "maximum_alpha_vantage_requests": 2,
+    "maximum_twelve_data_requests": 2,
+    "maximum_combined_optional_provider_attempts": 4,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "cases": [
+    {
+      "id": "amc-2026-live-confirmation-7",
+      "ticker": "AMC",
+      "why": "Confirm the completed 2023-08-24 1-for-10 reverse split reaches canonical evidence after the verbose SEC ratio correction.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1411579/000110465923090981/tm2323643d1_8k.htm"],
+      "known_baseline": [
+        "AMC completed a 1-for-10 reverse split effective 2023-08-24.",
+        "The completed split must be represented with its effective date and not inferred from filing date alone."
+      ],
+      "score_ranges": {"historical_dilution": [9, 10], "reverse_split": [2, 5]},
+      "limited_allowed": ["historical_dilution", "reverse_split"]
+    }
+  ]
+}

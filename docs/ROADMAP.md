@@ -160,6 +160,13 @@ verdict.
    bounded verbose-ratio rule and regression now cover the shape; the live
    result remains frozen and another confirmation requires separate approval.
 
+17. [x] **Complete — record AMC verbose-ratio confirmation 7:** SEC access and
+    the expected `1-for-10` split succeeded, but the live report also promoted
+    a severe false `550000000-for-10` completed event by joining an authorized
+    share count to the later verbose ratio phrase. The result is frozen; the
+    next active step is an offline ratio-binding correction and regression
+    before any further live confirmation.
+
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
