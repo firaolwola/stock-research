@@ -976,6 +976,18 @@ test("AMC verbose share-for-every ratio binds the authoritative effective date",
   assert.equal(diagnostic?.disposition, "accepted");
 });
 
+test("AMC authorized-share count cannot become a verbose reverse-split ratio", () => {
+  const html = "The Company increased the total number of authorized shares of common stock from 524,173,073 to 550,000,000 shares of common stock and effectuated a reverse stock split at a ratio of one share of Class A common stock for every ten shares of Class A common stock, effective as of August 24, 2023.";
+  const result = extractSecFilingEvidenceWithDiagnostics({
+    html, form: "8-K", filed: "2026-06-23", evaluatedAt: "2026-08-31T00:00:00Z",
+    accession: "amc-authorized-share-distractor", documentUrl: "https://www.sec.gov/amc-authorized-share-distractor", documentName: "amc-authorized-share-distractor.htm"
+  });
+  const splits = result.findings.filter((item) => item.kind === "reverse_split");
+  assert.equal(splits.some((item) => item.ratio === "550000000-for-10"), false);
+  assert.equal(splits.filter((item) => item.ratio === "1-for-10").length, 1);
+  assert.equal(result.corporate_action_diagnostics.some((item) => item.extracted_ratio === "550000000-for-10"), false);
+});
+
 test("NCPL live-shaped Item 4.02 prevention-of-reliance language is extracted and invalidates affected metrics", async () => {
   const result = await researchFixture({
     ticker: "NCPL",

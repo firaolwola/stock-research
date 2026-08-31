@@ -163,9 +163,13 @@ verdict.
 17. [x] **Complete — record AMC verbose-ratio confirmation 7:** SEC access and
     the expected `1-for-10` split succeeded, but the live report also promoted
     a severe false `550000000-for-10` completed event by joining an authorized
-    share count to the later verbose ratio phrase. The result is frozen; the
-    next active step is an offline ratio-binding correction and regression
-    before any further live confirmation.
+    share count to the later verbose ratio phrase. The result is frozen and
+    remains a severe precision miss.
+18. [x] **Complete — correct AMC verbose-ratio binding offline:** verbose
+    share-for-every extraction now requires an explicit `ratio of` cue, so
+    authorized-share counts cannot become split numerators. A deterministic
+    regression covers the confirmation-7 filing shape. A fresh live check,
+    if desired, still requires separate owner approval.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

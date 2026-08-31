@@ -830,3 +830,11 @@ fidelity failed. This severe precision result is frozen; no retry or additional
 live run is authorized. The next step is an offline ratio-binding correction
 and regression for authorized-share-count distractors. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-VERBOSE-RATIO-CONFIRMATION-7.md`.
+
+### AMC verbose-ratio binding correction (2026-08-31)
+
+Offline replay of confirmation 7 now rejects the authorized-share-count
+distractor by requiring an explicit `ratio of` cue for verbose share-for-every
+ratios. The legitimate AMC phrase remains covered by regression. This is a
+prospective parser correction only; the failed live result and all historical
+measurements remain frozen. Any live confirmation requires separate approval.

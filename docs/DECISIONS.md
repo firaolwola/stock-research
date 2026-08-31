@@ -1502,3 +1502,14 @@ the frozen baselines unchanged. Do not retry automatically. The next required
 step is an offline tightening of verbose ratio binding plus a deterministic
 regression for this distractor; a new live confirmation requires separate
 owner approval.
+
+## 2026-08-31 — Tighten AMC verbose-ratio binding
+
+**Status:** Implemented offline; live confirmation remains separately gated
+
+The verbose SEC ratio extractor now requires an explicit `ratio of` cue before
+the numerator. This prevents an authorized-share count in the same sentence
+from being paired with a later “for every” denominator and promoted as a
+completed split. The correction preserves the legitimate AMC “ratio of one
+share ... for every ten shares” form and adds a regression for the false
+`550000000-for-10` event. No live call or frozen baseline changed.
