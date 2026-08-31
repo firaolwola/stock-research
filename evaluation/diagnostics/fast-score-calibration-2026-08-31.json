@@ -1,0 +1,222 @@
+{
+  "plan_id": "fast-score-calibration-2026-08-31",
+  "issue": 77,
+  "methodology_version": "2.1.0",
+  "live_execution": false,
+  "plan_component_errors": [],
+  "cases": [
+    {
+      "id": "complete-control",
+      "valid": true,
+      "errors": [],
+      "components": {
+        "dilution_historical_severity": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "dilution_future_likelihood": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "dilution_potential_impact": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "reverse_split_risk": {
+          "state": "confirmed",
+          "value": 0,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "financial_health": {
+          "state": "confirmed",
+          "value": 7.4,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_revenue_trend": {
+          "state": "confirmed",
+          "value": 8.1,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_net_income_trend": {
+          "state": "confirmed",
+          "value": 9.4,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_debt_trend": {
+          "state": "confirmed",
+          "value": 4,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_free_cash_flow_trend": {
+          "state": "confirmed",
+          "value": 9.7,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_cash_trend": {
+          "state": "confirmed",
+          "value": 9.2,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_operating_cash_flow_trend": {
+          "state": "confirmed",
+          "value": 10,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "long_term_company_quality": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "catalyst_strength": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "near_term_setup_quality": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        }
+      }
+    },
+    {
+      "id": "partial-evidence",
+      "valid": true,
+      "errors": [],
+      "components": {
+        "dilution_historical_severity": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "dilution_future_likelihood": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "dilution_potential_impact": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "reverse_split_risk": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_more_risk",
+          "fidelity_errors": []
+        },
+        "financial_health": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_revenue_trend": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_net_income_trend": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_debt_trend": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_free_cash_flow_trend": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_cash_trend": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "financial_operating_cash_flow_trend": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "long_term_company_quality": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "catalyst_strength": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        },
+        "near_term_setup_quality": {
+          "state": "limited_coverage",
+          "value": null,
+          "direction": "higher_is_better",
+          "fidelity_errors": []
+        }
+      }
+    }
+  ],
+  "relative_ordering": [
+    {
+      "id": "revenue-growth-over-decline",
+      "valid": true,
+      "direction": "higher_is_better",
+      "left": 9.7,
+      "right": 1.2
+    },
+    {
+      "id": "debt-control-over-growth",
+      "valid": true,
+      "direction": "higher_is_better",
+      "left": 8.8,
+      "right": 0
+    },
+    {
+      "id": "risk-severity-over-clean",
+      "valid": true,
+      "direction": "higher_is_more_risk",
+      "left": 7.7,
+      "right": 0
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "pass_rate": 1,
+    "ordering_passed": 3,
+    "ordering_total": 3
+  }
+}

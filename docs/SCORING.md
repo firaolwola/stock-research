@@ -267,3 +267,14 @@ or unit/cadence mismatches with operating cash flow keep FCF Limited/Unscored.
 Operating cash flow alone is never treated as free cash flow. Accepted table
 facts remain SEC-authoritative, dated, and source-linked to the FCF claim; the
 fallback is intentionally bounded and does not add a parser dependency.
+
+### Fast calibration contract (Issue #77)
+
+The deterministic matrix in `evaluation/plans/fast-score-calibration-2026-08-31.json`
+exercises every Methodology 2.1.0 component. It checks direction, horizon,
+0–10 range, dated claim/source links, and that Limited, Unscored,
+Researching, and not-applicable states never carry fake numbers. Confirmed
+financial trend explanations name the normalized SEC values and period ends
+used by the formula. Synthetic holdouts check company-relative trajectories
+and risk ordering; this is a consistency gate, not a predictive-accuracy claim
+or a replacement for frozen Issue #55 results.

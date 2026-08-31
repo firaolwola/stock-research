@@ -1642,6 +1642,21 @@ into a system miss. Issue #78 may close #55 only when the existing reliability
 gates, sample-size disclosure, zero-severe-miss rule, and Definition of Done
 all pass.
 
+## 2026-08-31 — Add offline Fast score calibration gate (Issue #77)
+
+**Status:** Implemented offline; no live run authorized
+
+**Decision:** Keep Methodology 2.1.0 formulas and directions unchanged while
+adding a deterministic matrix for every exposed score component. It checks
+direction, range, dated evidence references, explanation fidelity, honest
+unresolved states, and company-relative ordering. Financial trend explanations
+now include the normalized SEC values and period ends actually used.
+
+This is a consistency control, not a new reliability claim and not a rewrite of
+frozen Issue #55 artifacts. Issue #78 remains responsible for final frozen
+cohort adjudication; NIO's unavailable-authoritative-evidence result is not a
+system miss.
+
 ## 2026-08-31 — Restore bounded SEC filing-table FCF coverage (Issue #76)
 
 **Status:** Implemented offline; no live run authorized
