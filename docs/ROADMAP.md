@@ -148,6 +148,11 @@ verdict.
    the role grammar. A bounded date-first rule and HTML regression now cover
    this shape; the live result remains frozen and another confirmation still
    requires separate approval.
+15. [x] **Complete — record AMC date-first confirmation 5 attempt:** the
+   approved single run was blocked by environment `EACCES` on the SEC
+   ticker-map request before retrieval. The safe partial report and diagnostics
+   are frozen; the parser target remains unevaluated and any retry requires
+   separate approval after network access is restored.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.

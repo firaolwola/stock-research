@@ -1,0 +1,29 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-31-amc-confirmation-5.json",
+  "live_calls": true,
+  "approved_run_count": 1,
+  "completed_run_count": 1,
+  "known_openai_cost_usd": 0,
+  "maximum_approved_openai_cost_usd": 0.03,
+  "alpha_vantage_requests": 0,
+  "maximum_approved_alpha_vantage_requests": 2,
+  "twelve_data_requests": 0,
+  "maximum_approved_twelve_data_requests": 2,
+  "combined_optional_provider_attempts": 0,
+  "maximum_approved_combined_optional_provider_attempts": 4,
+  "runs": [
+    {
+      "case_id": "amc-2026-live-confirmation-5",
+      "ticker": "AMC",
+      "result": "report",
+      "elapsed_ms": 97,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": null,
+      "provider_usage": null,
+      "completion_status": "partial",
+      "termination_reason": "partial_coverage"
+    }
+  ]
+}

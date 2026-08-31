@@ -606,6 +606,16 @@ reverse split. A deterministic HTML regression passes; the live result and
 historical measurements remain unchanged. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-SPLIT-OFFLINE-INSPECTION-6.md`.
 
+### AMC date-first confirmation 5 (2026-08-31)
+
+The one approved live attempt was blocked by the execution environment on the
+initial SEC ticker-map request (`EACCES` nested in `AggregateError`; no
+response received). It produced a valid safe-partial report with all
+dependent areas Limited, zero OpenAI/optional-provider requests, and no retry.
+The parser target was not evaluated; the result remains an infrastructure
+failure, not evidence that the offline correction passed live. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-DATE-FIRST-CONFIRMATION-5.md`.
+
 ## Offline adversarial and property evaluation roadmap
 
 ### Purpose and boundary

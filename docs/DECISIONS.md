@@ -1459,3 +1459,14 @@ supported date-role grammar matched. The bounded rule aligns extraction and
 classification without treating filing, authorization, or unrelated dates as
 completed actions. The captured live result and all frozen baselines remain
 unchanged.
+
+## 2026-08-31 — AMC date-first confirmation 5 blocked before retrieval
+
+**Status:** Attempt recorded; live parser blocker remains open
+
+The approved one-run confirmation reached the SEC ticker-map request but the
+execution environment returned a nested `EACCES` before a response was
+received. The report safely settled Limited, with no provider or OpenAI work
+performed. This is not a parser pass or failure; no retry is authorized by the
+frozen one-run bound. A later confirmation requires separate approval after
+network access is restored.
