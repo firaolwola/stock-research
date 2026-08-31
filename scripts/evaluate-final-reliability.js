@@ -75,6 +75,7 @@ function cohortRecord(id, summary) {
 export async function buildFinalAdjudication() {
   const cohortSummaries = await Promise.all(cohortDefinitions.map(async ([id, relative]) => cohortRecord(id, await load(relative))));
   const calibration = await load("evaluation/diagnostics/fast-score-calibration-2026-08-31.json");
+  const fcfCoverage = await load("evaluation/diagnostics/fast-fcf-coverage-audit-2026-08-31.json");
   const artifactHashes = await Promise.all(frozenArtifacts.map(async (path) => ({ path, sha256_lf_normalized: await hash(path) })));
   const finalFive = cohortSummaries.find((cohort) => cohort.id === "final-five-confirmation");
   const gate = {
@@ -83,7 +84,10 @@ export async function buildFinalAdjudication() {
     overall_recall_reason: "Overlapping same-five cohorts use different rubrics; descriptive recall is reported per cohort and is not pooled.",
     adequately_sampled_category_target: 0.9,
     adequately_sampled_categories_pass: false,
-    failing_categories: ["free_cash_flow_trend", "reverse_splits"],
+    failing_categories: ["reverse_splits"],
+    coverage_limited_categories: ["free_cash_flow_trend"],
+    fcf_numeric_coverage_proven: false,
+    fcf_safe_unresolved_settlement_passed: fcfCoverage.denominator_views.safe_settlement.rate === 1,
     score_range_target: 0.9,
     score_range_pass_rate: calibration.summary?.pass_rate ?? 0,
     zero_unresolved_severe_misses_in_latest_targeted_shapes: true,
@@ -110,7 +114,12 @@ export async function buildFinalAdjudication() {
     unavailable_authoritative_evidence: [{ case: "NIO attributable annual net loss", classification: "unavailable_authoritative_evidence", counted_as_system_miss: false }],
     miss_classifications: missClassifications,
     gate,
-    required_next_step: "Keep #55 and PR #74 open. Resolve the frozen FCF coverage/denominator question and any remaining score/explanation calibration gaps before requesting closure review."
+    fcf_semantics: {
+      numeric_coverage: fcfCoverage.denominator_views.strict_usable_fcf,
+      safe_unresolved_settlement: fcfCoverage.denominator_views.safe_settlement,
+      pooled_with_frozen_same_five: false
+    },
+    required_next_step: "Keep #55 and PR #74 open. Treat numeric FCF coverage as unproven, safe unresolved settlement as a separate passed safety gate, and resolve remaining reliability/sample-size and score/explanation gaps before closure review."
   };
 }
 

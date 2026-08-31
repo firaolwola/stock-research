@@ -10,7 +10,10 @@ test("Issue 78 adjudication preserves frozen cohorts without pooling them", asyn
   assert.equal(result.descriptive_comparison.pooling_allowed, false);
   assert.equal(result.gate.passed, false);
   assert.equal(result.gate.issue_55_must_remain_open, true);
-  assert.deepEqual(result.gate.failing_categories, ["free_cash_flow_trend", "reverse_splits"]);
+  assert.deepEqual(result.gate.failing_categories, ["reverse_splits"]);
+  assert.deepEqual(result.gate.coverage_limited_categories, ["free_cash_flow_trend"]);
+  assert.equal(result.gate.fcf_numeric_coverage_proven, false);
+  assert.equal(result.gate.fcf_safe_unresolved_settlement_passed, true);
 });
 
 test("Issue 78 separates unavailable authoritative evidence from system misses", async () => {

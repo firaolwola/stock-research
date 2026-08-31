@@ -9,6 +9,10 @@ test("Issue 81 keeps frozen FCF and independent controls in separate denominator
   assert.equal(result.denominators.frozen_same_five.immutable, true);
   assert.equal(result.denominators.independent_clean_controls.recall, 1);
   assert.equal(result.denominators.independent_clean_controls.pooled_with_frozen_same_five, false);
+  assert.equal(result.denominators.fcf_semantics.numeric_coverage.recall, .4);
+  assert.equal(result.denominators.fcf_semantics.numeric_coverage.gate_status, "coverage_not_proven");
+  assert.equal(result.denominators.fcf_semantics.safe_unresolved_settlement.rate, 1);
+  assert.equal(result.denominators.fcf_semantics.safe_unresolved_settlement.gate_status, "passed");
   assert.equal(result.gate.passed, false);
   assert.equal(result.gate.issue_55_must_remain_open, true);
 });

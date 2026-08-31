@@ -1646,9 +1646,12 @@ all pass.
 
 **Status:** Frozen-boundary adjudication and approved confirmation complete; #55 remains open
 
-The frozen same-five FCF result remains the historical gate denominator at
-3/5 (60%). The independent MSFT/RIVN aligned SEC-pair remeasurement is a
-separate two-case control cohort and must not be pooled with the frozen cases.
+The frozen same-five FCF result remains the historical evidence-coverage
+denominator at 3/5 (60%). The independent MSFT/RIVN aligned SEC-pair
+remeasurement is a separate two-case control cohort and must not be pooled with
+the frozen cases. Numeric FCF coverage is reported separately from the
+safe-unresolved-settlement gate: unavailable or invalid capex can pass safety
+only when it remains Limited/Unscored.
 Issue #81 records this distinction, classifies the two frozen misses as
 unavailable authoritative capex evidence, and executed one bounded five-case
 remeasurement under the #49/#75 limits after owner approval. The confirmation

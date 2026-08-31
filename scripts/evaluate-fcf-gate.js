@@ -17,6 +17,7 @@ const hash = async (path) => createHash("sha256").update((await readFile(new URL
 export async function buildFcfGate() {
   const frozenSummary = await load("evaluation/live/2026-08-28-final-five-confirmation-1/summary.json");
   const remeasurement = await load("evaluation/live/2026-08-31-fcf-remeasurement-2/run-summary.json");
+  const coverageAudit = await load("evaluation/diagnostics/fast-fcf-coverage-audit-2026-08-31.json");
   const artifacts = await Promise.all(frozenInputs.map(async (path) => ({ path, sha256_lf_normalized: await hash(path) })));
   const frozen = frozenSummary.category_recall.free_cash_flow;
   const independentControls = remeasurement.runs.map((run) => ({
@@ -51,6 +52,23 @@ export async function buildFcfGate() {
         gate_status: "informational_only",
         pooled_with_frozen_same_five: false,
         cases: independentControls
+      },
+      fcf_semantics: {
+        numeric_coverage: {
+          detected: coverageAudit.denominator_views.strict_usable_fcf.detected,
+          expected: coverageAudit.denominator_views.strict_usable_fcf.expected,
+          recall: coverageAudit.denominator_views.strict_usable_fcf.recall,
+          gate_status: "coverage_not_proven",
+          reason: "Unavailable or accounting-invalid authoritative capex is not converted into a numeric FCF score."
+        },
+        safe_unresolved_settlement: {
+          settled: coverageAudit.denominator_views.safe_settlement.settled,
+          evaluated: coverageAudit.denominator_views.safe_settlement.evaluated,
+          rate: coverageAudit.denominator_views.safe_settlement.rate,
+          gate_status: "passed",
+          reason: "Missing or invalid inputs remain Limited/Unscored and never become favorable evidence."
+        },
+        pooled_with_frozen_same_five: false
       }
     },
     miss_classifications: [
@@ -59,7 +77,7 @@ export async function buildFcfGate() {
     ],
     source_policy: { scoring_authority: "SEC", filing_table_fallback: "bounded_selected_filings_only", secondary_provider_values_ignored: true, ocf_only_is_not_fcf: true },
     next_live_plan: { requires_owner_approval: true, max_runs: 5, retries: 0, max_openai_cost_usd: 0.15, max_alpha_vantage_requests: 10, max_twelve_data_requests: 10, fast_ceiling_ms_per_ticker: 20000, hosted_web_search: false, output_directory: "evaluation/live/2026-08-31-fcf-gate-confirmation-1" },
-    gate: { passed: false, reason: "Frozen same-five FCF remains 3/5; independent MSFT/RIVN controls are a separate non-overlapping cohort and cannot repair the frozen denominator.", issue_55_must_remain_open: true, pr_74_ready_to_merge: false }
+    gate: { passed: false, reason: "The frozen same-five FCF denominator remains immutable at 3/5. Numeric coverage is not proven, but safe unresolved settlement passes; cohorts remain non-overlapping.", issue_55_must_remain_open: true, pr_74_ready_to_merge: false }
   };
 }
 

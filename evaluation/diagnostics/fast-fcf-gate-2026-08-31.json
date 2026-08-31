@@ -65,6 +65,23 @@
           "openai_cost_usd": 0
         }
       ]
+    },
+    "fcf_semantics": {
+      "numeric_coverage": {
+        "detected": 2,
+        "expected": 5,
+        "recall": 0.4,
+        "gate_status": "coverage_not_proven",
+        "reason": "Unavailable or accounting-invalid authoritative capex is not converted into a numeric FCF score."
+      },
+      "safe_unresolved_settlement": {
+        "settled": 5,
+        "evaluated": 5,
+        "rate": 1,
+        "gate_status": "passed",
+        "reason": "Missing or invalid inputs remain Limited/Unscored and never become favorable evidence."
+      },
+      "pooled_with_frozen_same_five": false
     }
   },
   "miss_classifications": [
@@ -100,7 +117,7 @@
   },
   "gate": {
     "passed": false,
-    "reason": "Frozen same-five FCF remains 3/5; independent MSFT/RIVN controls are a separate non-overlapping cohort and cannot repair the frozen denominator.",
+    "reason": "The frozen same-five FCF denominator remains immutable at 3/5. Numeric coverage is not proven, but safe unresolved settlement passes; cohorts remain non-overlapping.",
     "issue_55_must_remain_open": true,
     "pr_74_ready_to_merge": false
   }

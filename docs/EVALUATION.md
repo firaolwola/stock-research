@@ -1006,8 +1006,9 @@ Limited/Unscored, with no favorable inference. Safe settlement was 5/5.
 The run used 10 Alpha Vantage requests, no Twelve Data requests, no retries,
 Deep, hosted search, or OpenAI request; measured OpenAI cost was $0. Aggregate
 elapsed time was 10,507 ms (maximum ticker 2,350 ms). This descriptive result
-does not rewrite the frozen same-five 3/5 FCF denominator, so the category gate
-and Issue #55 remain open. See
+does not rewrite the frozen same-five 3/5 FCF denominator. Numeric FCF coverage
+remains unproven, while safe unresolved settlement passed 5/5; Issue #55
+remains open for its other reliability and sample-size gates. See
 `evaluation/live/2026-08-31-fcf-gate-confirmation-1/summary.json`.
 
 ### Offline FCF coverage audit (2026-08-31)
@@ -1019,7 +1020,8 @@ remaining cases as parser/binding gaps, accounting-invalidated evidence, or
 unavailable authoritative evidence. The audit found two usable pairs, one
 non-reliance-invalidated case, and two unavailable capex cases; no captured
 filing-table capex record was discarded after retrieval. A further same-five
-paid run is therefore not justified by a known parser defect.
+paid run is therefore not justified by a known parser defect. Numeric coverage
+and safe settlement are tracked as separate FCF gate dimensions.
 
 ### Issue #76 offline implementation (2026-08-31)
 
