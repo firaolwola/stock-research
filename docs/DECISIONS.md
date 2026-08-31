@@ -1735,3 +1735,20 @@ the other four independent artifacts provide non-overlapping corroboration.
 Removing reverse splits as a failing category reflects the targeted evidence,
 not a rewrite of frozen results. Overall #55 closure remains blocked by pooled
 recall uncertainty, unproven numeric FCF coverage, and score/explanation gates.
+
+## 2026-08-31 — Keep FCF table-unit fallback bounded
+
+**Status:** Implemented offline; live remeasurement remains separately gated
+
+**Decision:** When a selected SEC 10-K/10-Q/20-F/40-F table has an isolated
+capital-expenditure row but places its explicit currency/scale note immediately
+outside the table, the bounded extractor may use that adjacent note. It must
+stop at neighboring table boundaries and still require aligned periods, values,
+and accounting-valid evidence.
+
+**Why:** SEC filing presentation varies: notes such as `US$ in millions` are
+often rendered immediately before a table rather than in its caption. Accepting
+this narrow, identity-gated context can recover a valid capex fact without
+introducing a parser dependency or allowing unrelated tables to donate units.
+OCF alone, ambiguous rows, stale/conflicting periods, and non-reliance-affected
+evidence remain Limited/Unscored; frozen #55 FCF measurements are unchanged.

@@ -268,6 +268,13 @@ Operating cash flow alone is never treated as free cash flow. Accepted table
 facts remain SEC-authoritative, dated, and source-linked to the FCF claim; the
 fallback is intentionally bounded and does not add a parser dependency.
 
+The bounded extractor also accepts unit and scale notes immediately adjacent to
+the selected table (including `US$ in millions`) while stopping at neighboring
+table boundaries. This addresses common SEC presentation variation without
+borrowing units, periods, or values from unrelated tables. A table still must
+provide an isolated capex row and aligned comparable periods; otherwise FCF
+remains Limited/Unscored.
+
 ### Fast calibration contract (Issue #77)
 
 The deterministic matrix in `evaluation/plans/fast-score-calibration-2026-08-31.json`

@@ -1036,6 +1036,17 @@ non-reliance invalidation. No live calibration or paid provider call was made;
 the frozen same-five FCF result (3/5) is unchanged and still requires later
 remeasurement after #77/#78.
 
+### FCF evidence-coverage refinement (offline, 2026-08-31)
+
+The bounded filing-table extractor now accepts an explicit currency/scale note
+immediately adjacent to a selected SEC table, including `US$ in millions`,
+while preventing context from crossing a neighboring table boundary. Added
+fixtures cover payment/addition label variants and boundary isolation. This is
+an offline parser-coverage improvement only; the frozen AMC/NCPL/NXL results
+remain unchanged and no new numeric FCF claim is made without an aligned,
+identity-gated capex row. The current audit therefore remains 2/5 strict usable
+FCF and 5/5 safe unresolved settlement.
+
 ### Offline reverse-split adjudication (2026-08-31)
 
 `npm run evaluate:reverse-split` audits the latest frozen authoritative-shaped

@@ -54,6 +54,31 @@ test("SEC filing-table capex extraction supports comparable quarterly and YTD co
   ]);
 });
 
+test("SEC filing-table capex extraction accepts a bounded adjacent unit note", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<p>Cash flow amounts are presented in USD in millions.</p><table><tr><th>Years ended December 31</th><th>2025</th><th>2024</th></tr><tr><td>Payments for property, plant and equipment</td><td>(12)</td><td>(10)</td></tr></table>`,
+    form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "adjacent-unit", documentUrl: "https://www.sec.gov/Archives/adjacent-unit.htm", documentName: "adjacent-unit.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, unit }) => ({ val, unit })), [{ val: -12_000_000, unit: "USD" }, { val: -10_000_000, unit: "USD" }]);
+  assert.equal(result.diagnostics[0].disposition, "accepted");
+});
+
+test("adjacent capex units cannot cross a neighboring table boundary", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><tr><th>Revenue</th><th>2025</th></tr><tr><td>Revenue</td><td>100</td></tr></table><p>Revenue amounts are in EUR millions.</p><table><tr><th>Years ended December 31</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(12)</td></tr></table>`,
+    form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "boundary-unit", documentUrl: "https://www.sec.gov/Archives/boundary-unit.htm", documentName: "boundary-unit.htm"
+  });
+  assert.equal(result.facts[0].unit, "EUR");
+});
+
+test("filing-table capex extraction handles US-dollar scale notation", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<p>(US$ in millions)</p><table><tr><th>Year ended December 31</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(3.5)</td></tr></table>`,
+    form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "us-dollar-scale", documentUrl: "https://www.sec.gov/Archives/us-dollar-scale.htm", documentName: "us-dollar-scale.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, unit }) => ({ val, unit })), [{ val: -3_500_000, unit: "USD" }]);
+});
+
 test("SEC filing-table capex fallback withholds ambiguous currency or column alignment", () => {
   const noCurrency = extractFilingCapitalExpenditureFacts({ html: "<table><tr><th>Years ended December 31</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(12)</td></tr></table>", form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "no-currency", documentUrl: "https://www.sec.gov/no-currency", documentName: "no-currency.htm" });
   assert.deepEqual(noCurrency.facts, []); assert.equal(noCurrency.diagnostics[0].reason, "currency_not_explicit");

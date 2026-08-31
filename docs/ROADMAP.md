@@ -9,8 +9,9 @@ the running product-vision source of truth.
 ## Current state
 
 Issues #76, #77, and #78 are complete as bounded offline milestones. The active
-implementation priority is now #81; the #55 reliability gate remains open and
-PR #74 is not merge-ready.
+implementation priority is now a narrowly scoped offline FCF evidence-coverage
+refinement following #76/#81; the #55 reliability gate remains open and PR #74
+is not merge-ready.
 
 The application has a strong deterministic foundation: a versioned report
 contract, semantic validation, claim-linked sources, distinct evidence states,
@@ -89,6 +90,7 @@ verdict.
 2. [x] **Complete — [#77 — Calibrate Fast score ranges, explanations, and relative ordering](https://github.com/firaolwola/stock-research/issues/77).** A deterministic offline matrix now checks Methodology 2.1.0 score direction/ranges, evidence-linked explanations, honest unresolved states, and company-relative ordering without changing frozen #55 measurements.
 3. [x] **Complete — [#78 — Complete final Issue #55 reliability adjudication and closure gate](https://github.com/firaolwola/stock-research/issues/78).** The reproducible frozen-artifact review keeps #55 open because FCF remains 3/5, pooled recall is not defensible, and the broad score/explanation gate is not established; NIO remains correctly classified as unavailable authoritative evidence.
 4. [x] **Complete — [#81 — Resolve final Fast FCF reliability gate and non-overlapping denominator](https://github.com/firaolwola/stock-research/issues/81).** The approved five-case confirmation and offline coverage audit now report separate dimensions: strict usable FCF coverage 2/5 (coverage unproven) and safe unresolved settlement 5/5 (safety gate passed). No captured filing-table capex record was discarded, frozen artifacts remain unchanged, and unavailable/invalid evidence remains Limited/Unscored. Issue #55 remains open for its broader reliability gate.
+5. [ ] **Active — bounded FCF evidence-coverage refinement (offline).** Extend the existing SEC filing-table fallback only for safely bounded presentation variants, such as explicit unit/scale notes immediately adjacent to a selected table. Preserve identity, cadence, currency, and accounting-validity gates; do not rewrite frozen #55 results or authorize a live run. Re-run the FCF coverage audit afterward and propose live remeasurement only if a captured parser gap is demonstrated.
 
 ### Issue #55 corrective roadmap
 
