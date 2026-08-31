@@ -178,6 +178,19 @@ remeasurement is needed to determine whether this improves the affected
 tickers' live coverage. See
 `docs/results/FAST_RELIABILITY_2026-08-31-FCF-OFFLINE-CORRECTION.md`.
 
+### FCF remeasurement 1 (2026-08-31)
+
+The owner-approved AMC/NXL remeasurement ran exactly two Fast cases within the
+20-second per-ticker and $0.06 aggregate bounds. Both reports were valid
+safe-partial results: OCF was confirmed through 2026-06-30, but neither case
+returned an aligned authoritative SEC capital-expenditure fact. FCF therefore
+remained Unknown and its trend score remained Limited/Unscored. Alpha Vantage
+used four requests; synthesis was cost-blocked before any OpenAI request, so
+measured OpenAI cost was $0. The frozen same-five 3/5 FCF measurement is not
+rewritten. This confirms an unavailable-authoritative-evidence gap for these
+two live shapes rather than another period-selection defect. See
+`docs/results/FAST_RELIABILITY_2026-08-31-FCF-REMEASUREMENT-1.md`.
+
 The subsequently approved four-ticker sparse batch is recorded in
 `docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-1.md`. It produced four valid
 reports but only 3/16 material checks (18.75%). BIOR, former ticker MULN, and

@@ -1,0 +1,15 @@
+{
+  "ticker": "AMC",
+  "result": "fcf_authoritative_input_unavailable",
+  "valid_report": true,
+  "ocf_state": "confirmed",
+  "fcf_state": "unknown",
+  "fcf_score_state": "limited_coverage",
+  "finding": "No aligned SEC capital-expenditure fact was returned; OCF was not used as FCF.",
+  "settlement": "Limited/Unscored",
+  "severe_miss": false,
+  "elapsed_ms": 2505,
+  "openai_cost_usd": 0,
+  "alpha_vantage_requests": 2,
+  "twelve_data_requests": 0
+}

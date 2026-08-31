@@ -1557,3 +1557,15 @@ unit/period; OCF alone is never FCF.
 independent selections to match discarded a valid aligned YTD pair and created
 an avoidable FCF Unknown state. The correction is covered by a deterministic
 quarter-vs-YTD regression and does not alter frozen calibration results.
+
+## 2026-08-31 — FCF remeasurement confirms live evidence gap
+
+**Status:** Two-case live check complete; Issue #55 remains open
+
+The approved AMC/NXL remeasurement produced valid safe-partial reports within
+the declared bounds. Both had confirmed OCF but no aligned authoritative SEC
+capital-expenditure fact, so FCF correctly settled Unknown/Unscored. The
+period-selection correction was not contradicted, no OpenAI synthesis request
+was made, and the frozen 3/5 FCF category result remains unchanged. Treat this
+as unavailable authoritative evidence for these live shapes; any filing-table
+extraction expansion or additional calibration requires a new owner decision.
