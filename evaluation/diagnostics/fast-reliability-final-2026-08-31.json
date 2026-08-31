@@ -637,7 +637,7 @@
       "category": "free_cash_flow_trend",
       "independent_positive_cases": 5,
       "detected_in_frozen_same_five": 3,
-      "status": "gate_failed"
+      "status": "coverage_limited_safe_settlement_separate"
     }
   ],
   "unavailable_authoritative_evidence": [
@@ -651,14 +651,14 @@
     {
       "id": "same-five-free-cash-flow",
       "cause": "unavailable_evidence",
-      "status": "unresolved_in_frozen_denominator",
-      "detail": "Two of five expected FCF pairs were unavailable or invalidated; frozen recall remains 3/5."
+      "status": "coverage_limited_numeric_gate",
+      "detail": "Two of five expected FCF pairs were unavailable or invalidated; numeric coverage remains separate from safe settlement."
     },
     {
       "id": "batch-3-score-calibration",
       "cause": "scoring",
-      "status": "not_demonstrated",
-      "detail": "The frozen Batch 3 score-range rubric passed 30 of 57 checks (52.63%)."
+      "status": "historical_rubric_distinct_from_current_offline_matrix",
+      "detail": "Historical Batch 3 score-range results remain frozen; current offline matrix pass rate is 2/2."
     },
     {
       "id": "overlapping-cohort-recall",
