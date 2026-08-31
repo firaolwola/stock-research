@@ -43,6 +43,22 @@ test("SEC filing-table capex extraction normalizes explicit annual values and pr
   assert.match(result.facts[0].source_url, /sec\.gov/);
 });
 
+test("SEC filing-table capex extraction selects an explicit Consolidated value from segmented annual tables", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: [
+      `<table><tr><th>Year Ended</th></tr><tr><th>December 31, 2025</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td><td>174.2</td><td>71.9</td><td>246.1</td></tr></table>`,
+      `<table><tr><th>Year Ended</th></tr><tr><th>December 31, 2024</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td><td>171.4</td><td>74.1</td><td>245.5</td></tr></table>`
+    ].join(""),
+    form: "10-K", filed: "2026-02-23", reportDate: "2025-12-31", accession: "amc-segmented-capex", currencyHint: "USD", documentUrl: "https://www.sec.gov/Archives/amc-segmented-capex.htm", documentName: "amc-segmented-capex.htm"
+  });
+  assert.deepEqual(result.facts.map(({ val, start, end, unit }) => ({ val, start, end, unit })), [
+    { val: 246_100_000, start: "2025-01-01", end: "2025-12-31", unit: "USD" },
+    { val: 245_500_000, start: "2024-01-01", end: "2024-12-31", unit: "USD" }
+  ]);
+  assert.ok(result.diagnostics.every((item) => item.disposition === "accepted" && item.column_selection === "explicit_consolidated"));
+  assert.ok(result.diagnostics.every((item) => item.currency_source === "caller_hint"));
+});
+
 test("SEC filing-table capex extraction supports comparable quarterly and YTD columns", () => {
   const result = extractFilingCapitalExpenditureFacts({
     html: `<table><tr><th>Six months ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Payments to acquire property, plant and equipment (USD in thousands)</td><td>(12)</td><td>(10)</td></tr></table>`,

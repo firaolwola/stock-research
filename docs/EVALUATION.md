@@ -1047,6 +1047,18 @@ remain unchanged and no new numeric FCF claim is made without an aligned,
 identity-gated capex row. The current audit therefore remains 2/5 strict usable
 FCF and 5/5 safe unresolved settlement.
 
+### Segmented annual capex table correction (offline, 2026-08-31)
+
+AMC's 10-K uses separate one-year tables with U.S. Markets, International
+Markets, and an explicit Consolidated column. The extractor now recognizes the
+standalone year header, selects only the Consolidated value, and preserves the
+table's scale. When a domestic filing table says only `In millions`, the caller
+may supply a single identity-gated flow currency from SEC Company Facts; an
+ambiguous or conflicting currency still remains withheld. This correction is
+covered by a segmented AMC fixture and an application-level FCF regression.
+Historical #55 measurements remain unchanged; any live remeasurement must be
+separately approved.
+
 ### FCF coverage-limited gate policy (owner-approved, 2026-08-31)
 
 The reliability gate now separates numeric FCF usability from safe settlement.

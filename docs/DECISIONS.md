@@ -1735,6 +1735,25 @@ unsupported inference. This policy does not lower the approximately 95% overall
 recall target, change Methodology 2.1.0, rewrite frozen artifacts, or close #55
 while pooled recall and broad score/explanation gates remain unresolved.
 
+## 2026-08-31 — Select Consolidated values from segmented capex tables
+
+**Status:** Implemented offline; historical calibration artifacts unchanged
+
+**Decision:** Bounded SEC filing-table extraction may accept a one-period annual
+capex table when the row contains multiple segment values and the table has an
+explicit `Consolidated` header. The extractor selects only the value in that
+column, resolves standalone year headers, and may use a single SEC Company
+Facts operating-flow currency as a caller hint when the table supplies only an
+`In millions` scale note. Conflicting currencies, missing consolidated values,
+or unsupported multi-period layouts remain withheld.
+
+**Why:** AMC's 10-K presented valid consolidated capex values alongside U.S.
+and international segment values. The prior column-count check rejected the
+entire row, creating a false unavailable-capex outcome even though an explicit
+consolidated value was present. The correction preserves the no-guessing rule,
+keeps period/unit/identity alignment mandatory, and does not rewrite frozen
+#55 measurements. Future live confirmation requires separate approval.
+
 ## 2026-08-31 — Offline reverse-split category adjudication
 
 **Status:** Complete offline audit; Issue #55 remains open

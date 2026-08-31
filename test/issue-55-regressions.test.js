@@ -872,6 +872,29 @@ test("SEC filing-table capex fallback supplies identity-gated FCF when Company F
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
 
+test("AMC-style segmented filing tables use the explicit Consolidated capex column", async () => {
+  const segmentedTables = [
+    `<table><tr><th>Six months ended June 30, 2026</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td><td>174.2</td><td>71.9</td><td>246.1</td></tr></table>`,
+    `<table><tr><th>Six months ended June 30, 2025</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td><td>171.4</td><td>74.1</td><td>245.5</td></tr></table>`
+  ].join("");
+  const result = await researchFixture({
+    ticker: "AMC",
+    filings: [{ accessionNumber: "0000000001-26-000030", form: "10-Q", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "segmented.htm", items: "", primaryDocDescription: "Quarterly report" }],
+    documents: { "segmented.htm": segmentedTables },
+    companyFacts: { cik: 1, entityName: "AMC Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [
+        fact(100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-Q", accn: "ocf-current" }),
+        fact(80_000_000, { start: "2025-01-01", end: "2025-06-30", form: "10-Q", accn: "ocf-prior", filed: "2025-08-01" })
+      ])
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.deepEqual(fcf.observations.map((item) => item.value), [-165_500_000, -146_100_000]);
+  assert.ok(result.evidence_packet.normalization_diagnostics.some((item) => item.accession === "0000000001-26-000030" && item.disposition === "accepted" && item.column_selection === "explicit_consolidated"));
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
 test("filing-table FCF fallback preserves negative direction and rejects currency mismatch", async () => {
   const filing = `<table><tr><th>Years ended June 30 (USD in millions)</th><th>2026</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(20)</td><td>(10)</td></tr></table>`;
   const negative = await researchFixture({
