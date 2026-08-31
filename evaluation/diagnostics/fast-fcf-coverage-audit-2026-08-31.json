@@ -14,6 +14,7 @@
       "score": 8.7,
       "comparable_observation_count": 2,
       "filing_table_capex_records": 1,
+      "filing_table_capex_diagnostics": [],
       "cause": "usable_authoritative_pair",
       "safe_settlement": true,
       "evidence_summary": "Free cash flow of 110197000000 USD is calculated as operating cash flow 116996000000 less capital expenditures 6799000000 for 2025-09-28 through 2026-06-27."
@@ -26,7 +27,27 @@
       "score": null,
       "comparable_observation_count": 0,
       "filing_table_capex_records": 0,
-      "cause": "unavailable_authoritative_evidence",
+      "filing_table_capex_diagnostics": [
+        {
+          "accession": "0001411579-26-000059",
+          "form": "10-Q",
+          "table_index": 9,
+          "periods_detected": 0,
+          "values_detected": 2,
+          "disposition": "withheld",
+          "reason": "comparable_periods_not_explicit"
+        },
+        {
+          "accession": "0001411579-26-000016",
+          "form": "10-K",
+          "table_index": 5,
+          "periods_detected": 1,
+          "values_detected": 0,
+          "disposition": "withheld",
+          "reason": "currency_not_explicit"
+        }
+      ],
+      "cause": "parser_or_binding_gap",
       "safe_settlement": true,
       "evidence_summary": "Operating cash flow is available, but aligned capital expenditures are not; free cash flow is not inferred."
     },
@@ -38,6 +59,7 @@
       "score": null,
       "comparable_observation_count": 0,
       "filing_table_capex_records": 0,
+      "filing_table_capex_diagnostics": [],
       "cause": "invalidated_accounting_evidence",
       "safe_settlement": true,
       "evidence_summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods."
@@ -50,6 +72,7 @@
       "score": null,
       "comparable_observation_count": 0,
       "filing_table_capex_records": 0,
+      "filing_table_capex_diagnostics": [],
       "cause": "unavailable_authoritative_evidence",
       "safe_settlement": true,
       "evidence_summary": "Operating cash flow is available, but aligned capital expenditures are not; free cash flow is not inferred."
@@ -62,6 +85,7 @@
       "score": 0,
       "comparable_observation_count": 2,
       "filing_table_capex_records": 1,
+      "filing_table_capex_diagnostics": [],
       "cause": "usable_authoritative_pair",
       "safe_settlement": true,
       "evidence_summary": "Free cash flow of -7690616000 USD is calculated as operating cash flow -7556847000 less capital expenditures 133769000 for 2025-07-01 through 2026-03-31."
@@ -83,9 +107,9 @@
   },
   "cause_counts": {
     "usable_authoritative_pair": 2,
-    "parser_or_binding_gap": 0,
+    "parser_or_binding_gap": 1,
     "invalidated_accounting_evidence": 1,
-    "unavailable_authoritative_evidence": 2
+    "unavailable_authoritative_evidence": 1
   },
-  "conclusion": "No captured case shows a filing-table capex record that was discarded by binding. Remaining non-usable cases are unavailable authoritative evidence or accounting-invalidated evidence in this packet; no additional same-five live run is justified by this audit alone."
+  "conclusion": "Captured filing-table candidates with explicit currency, period, or column-alignment rejection are reported as parser_or_binding_gap; accounting-invalidated and genuinely unavailable cases remain separate. This audit is offline and does not authorize another same-five live run."
 }

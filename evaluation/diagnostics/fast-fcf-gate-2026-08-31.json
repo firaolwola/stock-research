@@ -82,14 +82,21 @@
         "reason": "Missing or invalid inputs remain Limited/Unscored and never become favorable evidence."
       },
       "coverage_limited_acceptance": {
-        "accepted": true,
-        "policy": "Unavailable or accounting-invalid authoritative capex may settle Limited/Unscored without failing the category gate; no favorable numeric FCF score is permitted.",
+        "accepted": false,
+        "policy": "Unavailable or accounting-invalid authoritative capex may settle Limited/Unscored without failing the category gate only after bounded parser/binding gaps are resolved; no favorable numeric FCF score is permitted.",
+        "parser_binding_gap_count": 1,
         "numeric_coverage_remains_unproven": true
       },
       "pooled_with_frozen_same_five": false
     }
   },
   "miss_classifications": [
+    {
+      "id": "captured-filing-table-binding-gap",
+      "cause": "normalization",
+      "settlement": "Limited/Unscored",
+      "detail": "AMC has a captured capex table withheld for missing currency context; correct the bounded binding gap before accepting coverage-limited settlement."
+    },
     {
       "id": "frozen-fcf-unavailable-1",
       "cause": "unavailable_evidence",
@@ -121,8 +128,8 @@
     "output_directory": "evaluation/live/2026-08-31-fcf-gate-confirmation-1"
   },
   "gate": {
-    "passed": true,
-    "reason": "FCF coverage-limited acceptance is satisfied: unresolved authoritative capex remains Limited/Unscored with no favorable inference. Numeric coverage remains unproven and frozen denominators remain immutable.",
+    "passed": false,
+    "reason": "FCF coverage-limited acceptance remains open because a captured AMC filing-table candidate has an unresolved currency-context binding gap.",
     "issue_55_must_remain_open": true,
     "pr_74_ready_to_merge": false
   }

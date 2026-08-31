@@ -692,7 +692,7 @@
     ],
     "reverse_split_audit_passed": true,
     "fcf_numeric_coverage_proven": false,
-    "fcf_coverage_limited_acceptance_passed": true,
+    "fcf_coverage_limited_acceptance_passed": false,
     "fcf_safe_unresolved_settlement_passed": true,
     "score_range_target": 0.9,
     "score_range_pass_rate": 1,

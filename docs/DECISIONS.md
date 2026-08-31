@@ -1668,9 +1668,9 @@ least two comparable SEC-derived OCF/capex observations suitable for a numeric
 trend score. “Safe settlement” counts a report as correct when missing,
 conflicting, stale, or accounting-invalid inputs remain Limited/Unscored and
 cannot become favorable evidence. These denominators must never be pooled into
-the frozen Issue #55 result. The offline audit found no captured filing-table
-record that was dropped by binding, so the remaining same-five gaps are not a
-demonstrated parser defect.
+the frozen Issue #55 result. The refreshed audit found one captured AMC filing
+table candidate withheld for missing currency context; this is tracked as a bounded
+parser/binding gap rather than unavailable evidence.
 
 ## 2026-08-31 — Freeze the final #55 adjudication boundary (Issue #78)
 
@@ -1816,3 +1816,21 @@ operating intangibles instead of a row literally named “capital expenditures.�
 Ignoring those explicit outflows can overstate FCF, while treating every
 investing outflow as capex would create false precision. A typed, provenance-
 preserving SEC-only rule provides the narrowest safe treatment.
+
+## 2026-08-31 — Reclassify AMC FCF coverage audit finding
+
+**Status:** Offline audit correction; #55 remains open
+
+The refreshed FCF coverage audit inspects retained filing-table diagnostics,
+including withheld candidates. AMC has a captured 10-K capex table with one
+period and an identified capex table/row candidate, but extraction was withheld
+because no currency context was established in the stored packet. It is therefore classified as a
+`parser_or_binding_gap`, not `unavailable_authoritative_evidence`. NCPL remains
+`invalidated_accounting_evidence`, and NXL remains unavailable because no
+capex candidate was captured. Numeric FCF coverage remains 2/5 while safe
+unresolved settlement remains 5/5; no historical calibration artifact or
+answer key is changed.
+
+**Next step:** Correct the AMC currency-context binding offline (or document a
+defensible absence of currency evidence) before treating the coverage-limited
+FCF acceptance gate as passed. No live run is authorized by this audit.

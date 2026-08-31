@@ -1020,11 +1020,14 @@ remains open for its other reliability and sample-size gates. See
 without network or provider calls. It separates a confirmed comparable SEC
 OCF/capex pair from an honest Limited/Unscored settlement and classifies
 remaining cases as parser/binding gaps, accounting-invalidated evidence, or
-unavailable authoritative evidence. The audit found two usable pairs, one
-non-reliance-invalidated case, and two unavailable capex cases; no captured
-filing-table capex record was discarded after retrieval. A further same-five
-paid run is therefore not justified by a known parser defect. Numeric coverage
-and safe settlement are tracked as separate FCF gate dimensions.
+unavailable authoritative evidence. The audit found two usable pairs, one AMC
+filing-table parser/binding gap (a captured 10-K capex table withheld for
+missing currency context), one non-reliance-invalidated case, and one case
+without a captured capex candidate. Numeric coverage remains 2/5 and safe
+settlement remains 5/5, but the coverage-limited acceptance gate is not yet
+passed while the AMC gap is unresolved. No additional same-five paid run is
+justified by this audit alone; correct the bounded gap offline first. Numeric
+coverage and safe settlement are tracked as separate FCF gate dimensions.
 
 ### Issue #76 offline implementation (2026-08-31)
 

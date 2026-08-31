@@ -9,5 +9,7 @@ test("FCF coverage audit separates usable scores from safe unresolved settlement
   assert.match(source, /parser_or_binding_gap/);
   assert.match(source, /invalidated_accounting_evidence/);
   assert.match(source, /unavailable_authoritative_evidence/);
+  assert.match(source, /filing_table_capex_diagnostics/);
+  assert.match(source, /currency_not_explicit/);
   assert.match(source, /network_calls: false/);
 });
