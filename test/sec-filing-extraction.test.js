@@ -74,7 +74,7 @@ test("SEC filing-table capex extraction binds flattened segmented annual tables 
 
 test("SEC filing-table capex extraction binds values split across live-style rows", () => {
   const result = extractFilingCapitalExpenditureFacts({
-    html: `<table><tr><th>Year Ended</th></tr><tr><th>December 31, 2025</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td></tr><tr><td>174.2</td><td>71.9</td><td>246.1</td></tr></table>`,
+    html: `<table><tr><th>Year Ended</th></tr><tr><th>December 31, 2025</th></tr><tr><th>(In millions)</th><th>US Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td></tr><tr><td>174.2</td><td>71.9</td><td>246.1</td></tr></table>`,
     form: "10-K", filed: "2026-02-23", reportDate: "2025-12-31", accession: "amc-row-split-capex", currencyHint: "USD", documentUrl: "https://www.sec.gov/Archives/amc-row-split-capex.htm", documentName: "amc-row-split-capex.htm"
   });
   assert.deepEqual(result.facts.map(({ val, start, end, unit }) => ({ val, start, end, unit })), [

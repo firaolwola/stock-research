@@ -1092,6 +1092,18 @@ the prior confirmation remains unchanged and a separate live confirmation would
 be required to establish production applicability. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-OFFLINE-CORRECTION-3.md`.
 
+### AMC FCF offline correction 4 (2026-08-31)
+
+The next bounded confirmation still withheld the live capex row with no
+recognized Consolidated column and `period_value_column_mismatch`. Because the
+captured artifact contains diagnostics but not provider HTML, the live layout
+cannot be safely inferred further. The parser now also accepts the punctuation-
+free `US Markets` header variant when capex values are split across sibling
+rows, while retaining the explicit three-header, one-period, and three-value
+guards. Deterministic extraction and application fixtures pass; no additional
+live call was made. See
+`docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-OFFLINE-CORRECTION-4.md`.
+
 ### AMC FCF confirmation 2 (2026-08-31)
 
 The approved single AMC confirmation validated the new period-scoped currency
