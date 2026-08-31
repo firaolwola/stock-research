@@ -572,6 +572,16 @@ no live result or historical measurement changed. A new live confirmation still
 requires separate approval. See
 `docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-4.md`.
 
+### AMC effective-date confirmation 4 (2026-08-28)
+
+The next approved AMC run again produced a valid safe-partial report but
+withheld the extracted `1-for-10` / `2023-08-24` occurrence as
+`unknown_date_role` / `resolved_lifecycle_required` (0/1 targeted recall).
+OpenAI synthesis was cost-blocked before request and no retry was made. This
+result remains frozen; the direct effective-date relationship correction is
+covered offline and requires separate approval for any new live check. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-EFFECTIVE-DATE-CONFIRMATION-4.md`.
+
 ### AMC split offline correction 5 (2026-08-28)
 
 The next approved AMC confirmation still extracted the ratio/date but retained

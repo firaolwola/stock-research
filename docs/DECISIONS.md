@@ -1432,3 +1432,15 @@ safe-but-severe false suppression. The shared extractor/classifier grammar now
 handles these forms without accepting filing dates, authorization ranges,
 future dates, orphan dates, or competing-ratio spans. No additional live call
 or historical baseline change is implied.
+
+## 2026-08-28 — AMC confirmation 4 remains blocked
+
+**Status:** Live confirmation failed; issue remains open
+
+**Decision:** Preserve the one-run result and do not retry automatically. The
+live parser still extracted the ratio/date but classified the date role as
+`unknown_date_role`, so canonical acceptance withheld the completed event.
+
+**Why:** This confirms the prior direct effective-date grammar was still not
+the exact live normalized shape. The new offline correction is bounded and
+covered by regression; any further live confirmation requires separate approval.

@@ -138,6 +138,10 @@ verdict.
    `effective date of DATE` / `effective date thereof` forms after the second
    live confirmation still showed `unknown_date_role`. Offline regression
    passes; another live confirmation remains separately gated.
+13. [x] **Complete — record AMC confirmation 4:** the one approved run remained
+   valid and safely Limited but still missed the completed split. The result is
+   frozen; no retry was made and the offline direct-form correction is now the
+   next gated step.
 
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
