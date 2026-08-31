@@ -892,6 +892,23 @@ test("latest OCF currency hint survives older alternate-unit facts for a currenc
   assert.ok(result.evidence_packet.normalization_diagnostics.some((item) => item.accession === "0000000001-26-000016" && item.disposition === "accepted" && item.currency_source === "caller_hint"));
 });
 
+test("AMC flattened 10-K segmented capex shape produces identity-gated FCF", async () => {
+  const result = await researchFixture({
+    ticker: "AMC",
+    filings: [{ accessionNumber: "0000000001-26-000017", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "amc-flattened.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: {
+      "amc-flattened.htm": `<table><tr><td><div>Year Ended</div><div>June 30, 2026</div><div>(In millions)</div><div>U.S. Markets International Markets Consolidated</div><div>Capital expenditures 174.2 71.9 246.1</div></td></tr></table>`
+    },
+    companyFacts: { cik: 1, entityName: "AMC Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: { label: "Operating cash flow", units: { USD: [fact(500_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-amc-flattened" })] } }
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.equal(fcf.value, 253_900_000);
+  assert.ok(result.evidence_packet.normalization_diagnostics.some((item) => item.accession === "0000000001-26-000017" && item.column_selection === "flattened_consolidated" && item.disposition === "accepted"));
+});
+
 test("SEC filing-table FCF includes explicit patent and trademark cash purchases", async () => {
   const result = await researchFixture({
     ticker: "NXL",

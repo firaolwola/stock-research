@@ -1021,13 +1021,14 @@ without network or provider calls. It separates a confirmed comparable SEC
 OCF/capex pair from an honest Limited/Unscored settlement and classifies
 remaining cases as parser/binding gaps, accounting-invalidated evidence, or
 unavailable authoritative evidence. The audit found two usable pairs, one AMC
-filing-table parser/binding gap (a captured 10-K capex table withheld for
-missing currency context), one non-reliance-invalidated case, and one case
-without a captured capex candidate. Numeric coverage remains 2/5 and safe
-settlement remains 5/5, but the coverage-limited acceptance gate is not yet
-passed while the AMC gap is unresolved. No additional same-five paid run is
-justified by this audit alone; correct the bounded gap offline first. Numeric
-coverage and safe settlement are tracked as separate FCF gate dimensions.
+filing-table parser/binding gap (a captured 10-K capex table initially withheld
+for missing currency context), one non-reliance-invalidated case, and one case
+without a captured capex candidate. The currency issue is now corrected by a
+newest-period OCF hint, and a bounded flattened segmented-table fallback is
+covered offline; the live AMC packet still requires a future confirmation before
+applicability can be claimed. Numeric coverage remains 2/5 and safe settlement
+remains 5/5. Numeric coverage and safe settlement are tracked as separate FCF
+gate dimensions.
 
 ### Issue #76 offline implementation (2026-08-31)
 
@@ -1070,10 +1071,19 @@ caller hint from the newest OCF period, then remained withheld with one detected
 period and zero values because of `period_value_column_mismatch`; the 10-Q
 candidate remained withheld for `comparable_periods_not_explicit`. OCF was
 confirmed, the report was valid and safely partial, OpenAI cost was $0, and no
-historical denominator changed. This is a remaining offline parser/column
-binding gap, not evidence that AMC lacks capex; do not rerun live until the shape
-is covered deterministically. See
+historical denominator changed. A bounded flattened segmented-table correction
+and deterministic regression now cover the diagnosed shape; live applicability
+still requires separate confirmation. See
 `docs/results/FAST_RELIABILITY_2026-08-31-AMC-FCF-CONFIRMATION-2.md`.
+
+### Flattened AMC capex-table correction (offline, 2026-08-31)
+
+The extractor now recognizes a tightly bounded one-period table whose segment
+headers and capex values are flattened into one cell. It requires explicit U.S.
+Markets, International Markets, and Consolidated labels plus at least three
+numeric segment values, and accepts only the final Consolidated value. Generic
+or ambiguous flattened text remains withheld. Extraction and application
+regressions cover the shape; no live or paid call was made for this correction.
 
 ### Qualifying intangible-asset capex coverage (offline, 2026-08-31)
 
