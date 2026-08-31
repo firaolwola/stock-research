@@ -27,6 +27,7 @@ different batches do not share one defensible pooled denominator.
 | Final Sparse Proof Verification-3 (ONFO/STN) | 7/7 (100%) | Independent cohort; valid reports 2/2, zero severe misses |
 | AMC verbose-ratio confirmation 8 | 1/1 targeted | Exact completed 1-for-10 and no false ratio |
 | AMC/NXL FCF remeasurement | No aligned capex in either case | Correct Limited/Unscored; does not change frozen 3/5 |
+| MSFT/RIVN FCF remeasurement 2 | 2/2 aligned SEC OCF/capex pairs | Correct positive and negative FCF derivation; does not rewrite frozen 3/5 |
 
 The same-five batches overlap and use a richer 86-check rubric than the sparse
 cohorts. They therefore must not be concatenated into a single claimed overall
@@ -55,7 +56,7 @@ replacement denominator for the core calibration.
 | Going concern / bankruptcy | 4 | Independent sparse cohorts passed their covered claims | Practical minimum met; still small |
 | Foreign issuer / ADR / IFRS | 3 | ZAPPF, NIO, and STN coverage; STN passed after correction | Practical minimum met; still small |
 | OTC / delisted | 5 | Sparse Expansion Verification-2 covered REKR/ZAPPF/GMBL; prior cases retained | Practical minimum met |
-| Free cash flow trend | 5 expected, 3 detected (60%) | AMC/NXL remeasurement found no aligned authoritative capex | **Gate remains failed** |
+| Free cash flow trend | Frozen 5 expected, 3 detected (60%); independent MSFT/RIVN controls 2/2 | Clean positive/negative pairs now pass; three frozen misses remain unavailable or invalidated evidence | **Frozen gate remains failed** |
 
 Three practical cases are a milestone minimum for the sparse listing and
 foreign/IFRS categories, not broad statistical reliability. No category should
@@ -83,11 +84,13 @@ the FCF and broader calibration gates.
 
 ## Required next step
 
-Keep #55 and PR #74 open. The next evidence decision is a separately approved
-FCF-focused remeasurement or an approved expansion of authoritative filing
-table extraction that can produce comparable capex alongside OCF. It must use
-the zero-token SEC preflight and preserve the frozen 3/5 denominator. Do not
-claim an overall reliability pass, merge PR #74, or close #55 until FCF and the
-remaining score/explanation/denominator evidence are defensibly satisfied.
+Keep #55 and PR #74 open. The independent MSFT/RIVN remeasurement validates the
+corrected FCF path on clean positive and negative SEC shapes, but does not
+rewrite the frozen 3/5 denominator. The next evidence decision is either a
+separately approved authoritative filing-table extraction for the remaining
+unavailable shapes or a newly justified FCF baseline; it must use the zero-token
+SEC preflight. Do not claim an overall reliability pass, merge PR #74, or close
+#55 until FCF and the remaining score/explanation/denominator evidence are
+defensibly satisfied.
 
 No live run is authorized by this adjudication.

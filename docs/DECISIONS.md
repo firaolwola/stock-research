@@ -1606,3 +1606,17 @@ active deficiency and foreign/IFRS, but remain small and are not statistical
 proof. A separately approved FCF-focused evidence remeasurement or filing-table
 coverage decision is required before any closure claim; this adjudication does
 not authorize live work.
+## 2026-08-31 — Independent FCF remeasurement validates aligned SEC derivation
+
+**Status:** Completed targeted check; Issue #55 remains open
+
+The approved MSFT/RIVN two-case run exercised clean U.S.-GAAP cash-flow shapes
+with opposite directions. MSFT derived positive FCF ($66.987B) from aligned
+OCF and capex; RIVN derived negative FCF (-$1.924B) from an aligned six-month
+pair. Both reports were valid, stayed within the 20-second and provider bounds,
+and made no OpenAI request because synthesis was cost-blocked. This confirms
+the deterministic alignment correction and does not rewrite the frozen same-
+five FCF result of 3/5. AMC, NCPL, and NXL remain Limited/Unscored where
+authoritative capex is unavailable or invalidated; the FCF category therefore
+still fails the reliability gate. Further live work requires a separate
+decision about authoritative filing-table coverage or a justified FCF baseline.

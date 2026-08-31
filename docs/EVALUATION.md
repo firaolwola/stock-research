@@ -926,3 +926,15 @@ from system-miss counts because the bounded authoritative path correctly could
 not establish a safe concept. Practical sparse-category counts are reported
 without claiming statistical reliability. See
 `docs/results/FAST_RELIABILITY_2026-08-31-FINAL-ADJUDICATION.md`.
+
+### FCF remeasurement 2 (2026-08-31)
+
+The approved independent MSFT/RIVN run validated both directions of the
+corrected SEC FCF derivation: MSFT produced positive FCF from aligned annual
+OCF/capex ($66.987B), while RIVN produced negative FCF from an aligned
+six-month pair (-$1.924B). Both reports were valid and synthesis was
+cost-blocked before any OpenAI request. This confirms the parser on clean
+positive/negative shapes but does not rewrite the frozen same-five 3/5 FCF
+denominator; AMC, NCPL, and NXL remain Limited/Unscored where authoritative
+capex is unavailable or invalidated. See
+`docs/results/FAST_RELIABILITY_2026-08-31-FCF-REMEASUREMENT-2.md`.

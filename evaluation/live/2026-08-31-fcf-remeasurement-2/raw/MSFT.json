@@ -1,0 +1,4203 @@
+{
+  "case_id": "msft-2026-fcf-remeasurement",
+  "ticker": "MSFT",
+  "attempted_at": "2026-08-31T15:19:29.119Z",
+  "elapsed_ms": 2117,
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-MSFT-2026-08-31T15:19:27.003Z",
+    "metadata": {
+      "as_of": "2026-08-31T15:19:27.003Z",
+      "generated_at": "2026-08-31T15:19:27.003Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-31",
+          "end": "2026-08-31"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "provider-news-provider_quota",
+          "explanation": "Current news discovery is Limited; optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation - Common Stock",
+      "security_type": "common_stock",
+      "listing_venue": "Nasdaq",
+      "listing_status": "active",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-sec-reporting-security",
+        "claim-nasdaq-current-listing"
+      ],
+      "security_structure": "direct_share",
+      "depositary_ratio": null,
+      "additional_listing_venues": []
+    },
+    "issuer": {
+      "legal_name": "MICROSOFT CORP",
+      "cik": "0000789019",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [],
+      "claim_ids": [
+        "claim-sec-identity"
+      ],
+      "jurisdiction": null,
+      "foreign_private_issuer": false,
+      "filing_regime": "domestic_10-K_10-Q_8-K",
+      "accounting_basis": "unknown",
+      "accounting_authority": null,
+      "presentation_currency": "CAD"
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "SEC filing discovery completed, but split terms were not extracted in this bounded phase.",
+        "coverage_notes": [
+          "Filing-text and exchange corporate-action parsing remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "Large accelerated filer ☒ Accelerated filer ☐ Non-accelerated filer ☐ Smaller reporting company ☐ Emerging growth company ☐ If an emerging growth company, indicate by check mark if the Registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 7(a)(2)(B) of the Securities Act. ☐ Table of Contents PROSPECTUS Microsoft Corporation Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+            "event_date": "2024-12-12",
+            "claim_ids": [
+              "claim-extracted-000119312524277062-offering-1"
+            ]
+          },
+          {
+            "id": "dilution-extracted-2",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "OTHER INFOR MATION Insider Trading Arrangements Our Section 16 officers and directors, as defined in Rule 16a-1(f) of the Securities Exchange Act of 1934 (the “Exchange Act”), may from time to time enter into plans for the purchase or sale of our common stock that are intended to satisfy the affirmative defense conditions of Rule 10b5-1(c) of the Exchange Act.",
+            "event_date": "2026-04-29",
+            "claim_ids": [
+              "claim-extracted-000119312526191507-offering-2"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000119312524277062-offering-1",
+          "claim-extracted-000119312526191507-offering-2"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "SEC filing metadata does not safely establish current compliance or accounting warnings.",
+        "coverage_notes": [
+          "Item-level filing extraction and exchange lists remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2026-06-30; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+          "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+        ],
+        "items": [
+          {
+            "id": "financial-filing-warning-1",
+            "kind": "other",
+            "title": "Near-term debt or note maturity",
+            "state": "confirmed",
+            "summary": "Bank National Association, as Trustee, to the Indenture, dated as of May 18, 2009, between Microsoft Corporation and The Bank of New York Mellon Trust Company, N.A., as trustee 8-K 4.1 2/12/2015 4.11 Tenth Supplemental Indenture for 1.300% Notes due 2018, 2.000% Notes due 2020, 2.650% Notes due 2022, 3.125% Notes due 2025, 4.200% Notes due 2035, 4.450% Notes due 2045, and 4.750% Notes due 2055, dated as of November 3, 2015, between Microsoft Corporation and U.S.",
+            "event_date": "2026-07-29",
+            "claim_ids": [
+              "claim-extracted-000119312526323660-debt_maturity-1"
+            ]
+          },
+          {
+            "id": "alpha-eod-price-change",
+            "kind": "other",
+            "title": "End-of-day price change",
+            "state": "confirmed",
+            "summary": "Latest close compared with the immediately preceding daily close.",
+            "event_date": "2026-08-28",
+            "value": 1.6770284718647277,
+            "unit": "price_change_percent",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          },
+          {
+            "id": "alpha-eod-relative-volume",
+            "kind": "other",
+            "title": "End-of-day relative volume",
+            "state": "confirmed",
+            "summary": "Latest volume compared with a 20-session bounded baseline.",
+            "event_date": "2026-08-28",
+            "value": 0.9708777575657227,
+            "unit": "volume_ratio",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000119312526323660-debt_maturity-1",
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-revenue-observation-1",
+          "claim-financial-revenue",
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-revenue-annual-3",
+          "claim-financial-profitability-observation-1",
+          "claim-financial-profitability",
+          "claim-financial-profitability-annual-1",
+          "claim-financial-profitability-annual-2",
+          "claim-financial-profitability-annual-3",
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow",
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-free_cash_flow-observation-1",
+          "claim-financial-free_cash_flow",
+          "claim-financial-free_cash_flow-annual-1",
+          "claim-financial-free_cash_flow-annual-2",
+          "claim-financial-free_cash_flow-annual-3",
+          "claim-financial-cash_burn-observation-1",
+          "claim-financial-cash_burn",
+          "claim-financial-debt-observation-1",
+          "claim-financial-debt",
+          "claim-financial-debt-annual-1",
+          "claim-financial-debt-annual-2",
+          "claim-financial-debt-annual-3",
+          "claim-alpha-eod-market"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "Results of Operations and Financial Condition On July 29, 2026, Microsoft Corporation issued a press release announcing its financial results for the fiscal quarter and year ended June 30, 2026.",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "Results of Operations and Financial Condition On July 29, 2026, Microsoft Corporation issued a press release announcing its financial results for the fiscal quarter and year ended June 30, 2026.",
+            "event_date": "2026-07-29",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000119312526323632-catalyst-1"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-31",
+      "reporting_currency": "USD",
+      "summary": "Latest standardized SEC facts are shown through 2026-06-30; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+        "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "confirmed",
+          "label": "Cash and Cash Equivalents, at Carrying Value",
+          "value": 20935000000,
+          "unit": "USD",
+          "period_start": "2026-06-30",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2025-06-30",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 30242000000,
+              "unit": "USD",
+              "period_start": "2025-06-30",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-cash-observation-1"
+              ]
+            },
+            {
+              "value": 20935000000,
+              "unit": "USD",
+              "period_start": "2026-06-30",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-cash"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 34704000000,
+              "unit": "USD",
+              "period_start": "2023-06-30",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-1"
+              ]
+            },
+            {
+              "value": 18315000000,
+              "unit": "USD",
+              "period_start": "2024-06-30",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-2"
+              ]
+            },
+            {
+              "value": 30242000000,
+              "unit": "USD",
+              "period_start": "2025-06-30",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-3"
+              ]
+            },
+            {
+              "value": 20935000000,
+              "unit": "USD",
+              "period_start": "2026-06-30",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-cash"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 20935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3"
+          ]
+        },
+        "revenue": {
+          "state": "confirmed",
+          "label": "Revenue from Contract with Customer, Excluding Assessed Tax",
+          "value": 331839000000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 281724000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-revenue-observation-1"
+              ]
+            },
+            {
+              "value": 331839000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 211915000000,
+              "unit": "USD",
+              "period_start": "2022-07-01",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-revenue-annual-1"
+              ]
+            },
+            {
+              "value": 245122000000,
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-revenue-annual-2"
+              ]
+            },
+            {
+              "value": 281724000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-revenue-annual-3"
+              ]
+            },
+            {
+              "value": 331839000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 331839000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+          "claim_ids": [
+            "claim-financial-revenue-observation-1",
+            "claim-financial-revenue",
+            "claim-financial-revenue-annual-1",
+            "claim-financial-revenue-annual-2",
+            "claim-financial-revenue-annual-3"
+          ]
+        },
+        "profitability": {
+          "state": "confirmed",
+          "label": "Net Income (Loss) Attributable to Parent",
+          "value": 133749000000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 101832000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-profitability-observation-1"
+              ]
+            },
+            {
+              "value": 133749000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-profitability"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 72361000000,
+              "unit": "USD",
+              "period_start": "2022-07-01",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-profitability-annual-1"
+              ]
+            },
+            {
+              "value": 88136000000,
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-profitability-annual-2"
+              ]
+            },
+            {
+              "value": 101832000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-profitability-annual-3"
+              ]
+            },
+            {
+              "value": 133749000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-profitability"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 133749000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+          "claim_ids": [
+            "claim-financial-profitability-observation-1",
+            "claim-financial-profitability",
+            "claim-financial-profitability-annual-1",
+            "claim-financial-profitability-annual-2",
+            "claim-financial-profitability-annual-3"
+          ]
+        },
+        "operating_cash_flow": {
+          "state": "confirmed",
+          "label": "Operating cash flow",
+          "value": 182935000000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 136162000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": 182935000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 87582000000,
+              "unit": "USD",
+              "period_start": "2022-07-01",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 118548000000,
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": 136162000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 182935000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Operating cash flow of 182935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow",
+            "claim-financial-operating_cash_flow-annual-1",
+            "claim-financial-operating_cash_flow-annual-2",
+            "claim-financial-operating_cash_flow-annual-3"
+          ]
+        },
+        "free_cash_flow": {
+          "state": "confirmed",
+          "label": "Free cash flow",
+          "value": 66987000000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 71611000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": 66987000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 59475000000,
+              "unit": "USD",
+              "period_start": "2022-07-01",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 74071000000,
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": 71611000000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 66987000000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow"
+              ]
+            }
+          ],
+          "summary": "Free cash flow of 66987000000 USD is calculated as operating cash flow 182935000000 less capital expenditures 115948000000 for 2025-07-01 through 2026-06-30.",
+          "claim_ids": [
+            "claim-financial-free_cash_flow-observation-1",
+            "claim-financial-free_cash_flow",
+            "claim-financial-free_cash_flow-annual-1",
+            "claim-financial-free_cash_flow-annual-2",
+            "claim-financial-free_cash_flow-annual-3"
+          ]
+        },
+        "cash_burn": {
+          "state": "confirmed",
+          "label": "Cash burn based on free cash flow",
+          "value": 0,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 0,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-cash_burn-observation-1"
+              ]
+            },
+            {
+              "value": 0,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-cash_burn"
+              ]
+            }
+          ],
+          "annual_observations": [],
+          "summary": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-30, filed 2026-07-29.",
+          "claim_ids": [
+            "claim-financial-cash_burn-observation-1",
+            "claim-financial-cash_burn"
+          ]
+        },
+        "debt": {
+          "state": "confirmed",
+          "label": "Total debt (current plus non-current components)",
+          "value": 40294000000,
+          "unit": "USD",
+          "period_start": "2026-06-30",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2025-06-30",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 43151000000,
+              "unit": "USD",
+              "period_start": "2025-06-30",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-debt-observation-1"
+              ]
+            },
+            {
+              "value": 40294000000,
+              "unit": "USD",
+              "period_start": "2026-06-30",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-debt"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 47237000000,
+              "unit": "USD",
+              "period_start": "2023-06-30",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-debt-annual-1"
+              ]
+            },
+            {
+              "value": 44937000000,
+              "unit": "USD",
+              "period_start": "2024-06-30",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-debt-annual-2"
+              ]
+            },
+            {
+              "value": 43151000000,
+              "unit": "USD",
+              "period_start": "2025-06-30",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-debt-annual-3"
+              ]
+            },
+            {
+              "value": 40294000000,
+              "unit": "USD",
+              "period_start": "2026-06-30",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-debt"
+              ]
+            }
+          ],
+          "summary": "Total debt of 40294000000 USD is calculated from current debt 9227000000 plus non-current debt 31067000000 at 2026-06-30.",
+          "claim_ids": [
+            "claim-financial-debt-observation-1",
+            "claim-financial-debt",
+            "claim-financial-debt-annual-1",
+            "claim-financial-debt-annual-2",
+            "claim-financial-debt-annual-3"
+          ]
+        }
+      },
+      "shares_outstanding": {
+        "state": "confirmed",
+        "summary": "Reported shares outstanding decreased 0.1% over the displayed period from 2024-10-24 to 2026-07-23.",
+        "observations": [
+          {
+            "value": 7434880776,
+            "unit": "shares",
+            "period_start": "2024-10-24",
+            "period_end": "2024-10-24",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 7432377655,
+            "unit": "shares",
+            "period_start": "2025-10-23",
+            "period_end": "2025-10-23",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 7428434704,
+            "unit": "shares",
+            "period_start": "2026-04-23",
+            "period_end": "2026-04-23",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 7425545491,
+            "unit": "shares",
+            "period_start": "2026-07-23",
+            "period_end": "2026-07-23",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 7434880776,
+            "unit": "shares",
+            "period_start": "2024-10-24",
+            "period_end": "2024-10-24",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 7432377655,
+            "unit": "shares",
+            "period_start": "2025-10-23",
+            "period_end": "2025-10-23",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 7428434704,
+            "unit": "shares",
+            "period_start": "2026-04-23",
+            "period_end": "2026-04-23",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 7425545491,
+            "unit": "shares",
+            "period_start": "2026-07-23",
+            "period_end": "2026-07-23",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-shares-outstanding-1",
+          "claim-shares-outstanding-2",
+          "claim-shares-outstanding-3",
+          "claim-shares-outstanding-4"
+        ]
+      },
+      "going_concern": {
+        "state": "unknown",
+        "as_of": null,
+        "summary": "Going-concern language was not established from bounded filing extraction.",
+        "claim_ids": []
+      },
+      "material_warnings": [
+        {
+          "id": "financial-filing-warning-1",
+          "kind": "other",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Near-term debt or note maturity",
+          "as_of": "2026-07-29",
+          "summary": "Bank National Association, as Trustee, to the Indenture, dated as of May 18, 2009, between Microsoft Corporation and The Bank of New York Mellon Trust Company, N.A., as trustee 8-K 4.1 2/12/2015 4.11 Tenth Supplemental Indenture for 1.300% Notes due 2018, 2.000% Notes due 2020, 2.650% Notes due 2022, 3.125% Notes due 2025, 4.200% Notes due 2035, 4.450% Notes due 2045, and 4.750% Notes due 2055, dated as of November 3, 2015, between Microsoft Corporation and U.S.",
+          "claim_ids": [
+            "claim-extracted-000119312526323660-debt_maturity-1"
+          ]
+        }
+      ]
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "other",
+        "title": "Material filing event",
+        "event_date": "2026-07-29",
+        "summary": "Results of Operations and Financial Condition On July 29, 2026, Microsoft Corporation issued a press release announcing its financial results for the fiscal quarter and year ended June 30, 2026.",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000119312526323632-catalyst-1"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC associates MSFT with MICROSOFT CORP (CIK 0000789019) on Nasdaq.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-31T15:19:27.003Z",
+        "source_ids": [
+          "source-sec-ticker-map"
+        ]
+      },
+      {
+        "id": "claim-capital-000119312524277062",
+        "text": "MICROSOFT CORP filed Form S-3ASR on 2024-12-12; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2024-12-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-000119312524277062"
+        ]
+      },
+      {
+        "id": "claim-capital-000119312524131951",
+        "text": "MICROSOFT CORP filed Form 424B3 on 2024-05-06; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2024-05-06T00:00:00Z",
+        "source_ids": [
+          "source-sec-000119312524131951"
+        ]
+      },
+      {
+        "id": "claim-sec-reporting-security",
+        "text": "SEC-filed authoritative evidence identifies MICROSOFT CORP with direct common shares.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-reporting-security"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312524277062-offering-1",
+        "text": "Large accelerated filer ☒ Accelerated filer ☐ Non-accelerated filer ☐ Smaller reporting company ☐ Emerging growth company ☐ If an emerging growth company, indicate by check mark if the Registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 7(a)(2)(B) of the Securities Act. ☐ Table of Contents PROSPECTUS Microsoft Corporation Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2024-12-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000119312524277062-d901891ds3asrhtm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526191507-offering-2",
+        "text": "OTHER INFOR MATION Insider Trading Arrangements Our Section 16 officers and directors, as defined in Rule 16a-1(f) of the Securities Exchange Act of 1934 (the “Exchange Act”), may from time to time enter into plans for the purchase or sale of our common stock that are intended to satisfy the affirmative defense conditions of Rule 10b5-1(c) of the Exchange Act.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-04-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000119312526191507-msft20260331htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526323632-catalyst-1",
+        "text": "Results of Operations and Financial Condition On July 29, 2026, Microsoft Corporation issued a press release announcing its financial results for the fiscal quarter and year ended June 30, 2026.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000119312526323632-msft20260729htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 20935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 30242000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 34704000000 USD for the comparable period ending 2023-06-30, filed 2024-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 18315000000 USD for the comparable period ending 2024-06-30, filed 2025-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 30242000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 331839000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-observation-1",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 281724000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-1",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 211915000000 USD for the comparable period ending 2023-06-30, filed 2025-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-2",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 245122000000 USD for the comparable period ending 2024-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-3",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 281724000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 133749000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-observation-1",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 101832000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-1",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 72361000000 USD for the comparable period ending 2023-06-30, filed 2025-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-2",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 88136000000 USD for the comparable period ending 2024-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-3",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 101832000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-1",
+        "text": "SEC Company Facts reports 7434880776 common shares outstanding at 2024-10-24, filed 2024-10-30.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-10-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-2",
+        "text": "SEC Company Facts reports 7432377655 common shares outstanding at 2025-10-23, filed 2025-10-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2025-10-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-3",
+        "text": "SEC Company Facts reports 7428434704 common shares outstanding at 2026-04-23, filed 2026-04-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-04-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-4",
+        "text": "SEC Company Facts reports 7425545491 common shares outstanding at 2026-07-23, filed 2026-07-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow",
+        "text": "SEC Company Facts reports Operating cash flow of 182935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Operating cash flow of 136162000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Operating cash flow of 87582000000 USD for the comparable period ending 2023-06-30, filed 2025-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Operating cash flow of 118548000000 USD for the comparable period ending 2024-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Operating cash flow of 136162000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow",
+        "text": "Free cash flow of 66987000000 USD is calculated as operating cash flow 182935000000 less capital expenditures 115948000000 for 2025-07-01 through 2026-06-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Free cash flow of 71611000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Free cash flow of 59475000000 USD for the comparable period ending 2023-06-30, filed 2025-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Free cash flow of 74071000000 USD for the comparable period ending 2024-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Free cash flow of 71611000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-cash_burn",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash_burn"
+        ]
+      },
+      {
+        "id": "claim-financial-cash_burn-observation-1",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt",
+        "text": "Total debt of 40294000000 USD is calculated from current debt 9227000000 plus non-current debt 31067000000 at 2026-06-30.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-observation-1",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 43151000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-1",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 47237000000 USD for the comparable period ending 2023-06-30, filed 2024-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-2",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 44937000000 USD for the comparable period ending 2024-06-30, filed 2025-07-30.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-3",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 43151000000 USD for the comparable period ending 2025-06-30, filed 2026-07-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-3"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526323660-debt_maturity-1",
+        "text": "Bank National Association, as Trustee, to the Indenture, dated as of May 18, 2009, between Microsoft Corporation and The Bank of New York Mellon Trust Company, N.A., as trustee 8-K 4.1 2/12/2015 4.11 Tenth Supplemental Indenture for 1.300% Notes due 2018, 2.000% Notes due 2020, 2.650% Notes due 2022, 3.125% Notes due 2025, 4.200% Notes due 2035, 4.450% Notes due 2045, and 4.750% Notes due 2055, dated as of November 3, 2015, between Microsoft Corporation and U.S.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000119312526323660-msft20260630htm"
+        ]
+      },
+      {
+        "id": "claim-nasdaq-current-listing",
+        "text": "Nasdaq Trader's current symbol directory identifies MSFT as Microsoft Corporation - Common Stock; current status is active.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-31T15:19:29.100Z",
+        "source_ids": [
+          "source-nasdaq-symbol-directory"
+        ]
+      },
+      {
+        "id": "claim-alpha-eod-market",
+        "text": "MSFT's end-of-day close was 513.53 with volume 29207325 on 2026-08-28; this is market context, not evidence of an issuer event.",
+        "materiality": "low",
+        "state": "confirmed",
+        "as_of": "2026-08-28T00:00:00Z",
+        "source_ids": [
+          "source-alpha-eod-market"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000119312524277062",
+        "title": "S-3ASR filed 2024-12-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524277062/d901891ds3asr.htm",
+        "published_date": "2024-12-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312524277062"
+        ]
+      },
+      {
+        "id": "source-sec-000119312524131951",
+        "title": "424B3 filed 2024-05-06",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524131951/d671682d424b3.htm",
+        "published_date": "2024-05-06",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312524131951"
+        ]
+      },
+      {
+        "id": "source-sec-reporting-security",
+        "title": "10-K filed 2026-07-29 — direct common shares",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "published_date": "2026-07-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-sec-reporting-security"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312524277062-d901891ds3asrhtm",
+        "title": "S-3ASR filed 2024-12-12 — d901891ds3asr.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524277062/d901891ds3asr.htm",
+        "published_date": "2024-12-12",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312524277062-offering-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312526191507-msft20260331htm",
+        "title": "10-Q filed 2026-04-29 — msft-20260331.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+        "published_date": "2026-04-29",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526191507-offering-2"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000119312526323632-msft20260729htm",
+        "title": "8-K filed 2026-07-29 — msft-20260729.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-20260729.htm",
+        "published_date": "2026-07-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526323632-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2024-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2024-10-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-10-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-04-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow",
+        "title": "SEC Company Facts — Free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn",
+        "title": "SEC Company Facts — Cash burn based on free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn-observation-1",
+        "title": "SEC Company Facts — Cash burn based on free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt (current plus non-current components)",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-observation-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2024-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-2",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-3",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000119312526323660-msft20260630htm",
+        "title": "10-K filed 2026-07-29 — msft-20260630.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "published_date": "2026-07-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526323660-debt_maturity-1"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-31",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:29.100Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "alpha vantage end-of-day market data for MSFT",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-28",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-31T15:19:29.100Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ],
+        "provider_name": "alpha_vantage",
+        "data_type": "market_context",
+        "freshness": "current",
+        "evidence_role": "market_context"
+      }
+    ],
+    "scores": {
+      "dilution_historical_severity": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Past three years",
+        "explanation": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_future_likelihood": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_potential_impact": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "reverse_split_risk": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_health": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Latest reported period and next twelve months",
+        "explanation": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_revenue_trend": {
+        "state": "confirmed",
+        "value": 8.6,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-revenue-annual-3",
+          "claim-financial-revenue"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 8.6,
+            "weight": 1,
+            "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-revenue-annual-1",
+              "claim-financial-revenue-annual-2",
+              "claim-financial-revenue-annual-3",
+              "claim-financial-revenue"
+            ]
+          }
+        ]
+      },
+      "financial_net_income_trend": {
+        "state": "confirmed",
+        "value": 8.9,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-profitability-annual-1",
+          "claim-financial-profitability-annual-2",
+          "claim-financial-profitability-annual-3",
+          "claim-financial-profitability"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 8.9,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-profitability-annual-1",
+              "claim-financial-profitability-annual-2",
+              "claim-financial-profitability-annual-3",
+              "claim-financial-profitability"
+            ]
+          }
+        ]
+      },
+      "financial_debt_trend": {
+        "state": "confirmed",
+        "value": 6.9,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+        "claim_ids": [
+          "claim-financial-debt-observation-1",
+          "claim-financial-debt"
+        ],
+        "confidence": "low",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 6.9,
+            "weight": 1,
+            "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+            "claim_ids": [
+              "claim-financial-debt-observation-1",
+              "claim-financial-debt"
+            ]
+          }
+        ]
+      },
+      "financial_free_cash_flow_trend": {
+        "state": "confirmed",
+        "value": 7,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-free_cash_flow-annual-1",
+          "claim-financial-free_cash_flow-annual-2",
+          "claim-financial-free_cash_flow-annual-3",
+          "claim-financial-free_cash_flow"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 7,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-free_cash_flow-annual-1",
+              "claim-financial-free_cash_flow-annual-2",
+              "claim-financial-free_cash_flow-annual-3",
+              "claim-financial-free_cash_flow"
+            ]
+          }
+        ]
+      },
+      "financial_cash_trend": {
+        "state": "confirmed",
+        "value": 0,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+        "claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash"
+        ],
+        "confidence": "low",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 0,
+            "weight": 1,
+            "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+            "claim_ids": [
+              "claim-financial-cash-observation-1",
+              "claim-financial-cash"
+            ]
+          }
+        ]
+      },
+      "financial_operating_cash_flow_trend": {
+        "state": "confirmed",
+        "value": 9,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+        "claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-operating_cash_flow"
+        ],
+        "confidence": "high",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 4 annual periods.",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-annual-1",
+              "claim-financial-operating_cash_flow-annual-2",
+              "claim-financial-operating_cash_flow-annual-3",
+              "claim-financial-operating_cash_flow"
+            ]
+          }
+        ]
+      },
+      "long_term_company_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Multi-year (Deep only)",
+        "explanation": "Long-term company quality remains a Deep construct and is not deterministically scored from bounded Fast evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "catalyst_strength": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Current catalyst",
+        "explanation": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+        "claim_ids": [
+          "claim-extracted-000119312526323632-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          }
+        ]
+      },
+      "near_term_setup_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Next five trading days",
+        "explanation": "A supported current catalyst is required before market context can form a setup score.",
+        "claim_ids": [
+          "claim-extracted-000119312526323632-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000119312526323632-catalyst-1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-31",
+      "text": "SEC associates MSFT with MICROSOFT CORP (CIK 0000789019) on Nasdaq.",
+      "source_id": "source-sec-ticker-map",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-capital-0001193125-24-277062",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2024-12-12",
+      "text": "MICROSOFT CORP filed Form S-3ASR on 2024-12-12; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000119312524277062",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001193125-24-131951",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2024-05-06",
+      "text": "MICROSOFT CORP filed Form 424B3 on 2024-05-06; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000119312524131951",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 20935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-revenue",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 331839000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+      "source_id": "source-sec-companyfacts-revenue",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-profitability",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 133749000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+      "source_id": "source-sec-companyfacts-profitability",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2024-10-30",
+      "text": "SEC Company Facts reports 7434880776 common shares outstanding at 2024-10-24, filed 2024-10-30.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-1",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-2",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2025-10-29",
+      "text": "SEC Company Facts reports 7432377655 common shares outstanding at 2025-10-23, filed 2025-10-29.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-2",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-04-29",
+      "text": "SEC Company Facts reports 7428434704 common shares outstanding at 2026-04-23, filed 2026-04-29.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-3",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-4",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC Company Facts reports 7425545491 common shares outstanding at 2026-07-23, filed 2026-07-29.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-4",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-operating_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC Company Facts reports Operating cash flow of 182935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+      "source_id": "source-sec-companyfacts-operating_cash_flow",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-free_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "Free cash flow of 66987000000 USD is calculated as operating cash flow 182935000000 less capital expenditures 115948000000 for 2025-07-01 through 2026-06-30.",
+      "source_id": "source-sec-companyfacts-free_cash_flow",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-cash_burn",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-30, filed 2026-07-29.",
+      "source_id": "source-sec-companyfacts-cash_burn",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-debt",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "Total debt of 40294000000 USD is calculated from current debt 9227000000 plus non-current debt 31067000000 at 2026-06-30.",
+      "source_id": "source-sec-companyfacts-debt",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-reporting-security",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "SEC-filed authoritative evidence identifies MICROSOFT CORP with direct common shares.",
+      "source_id": "source-sec-reporting-security",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001193125-24-277062-offering-1",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2024-12-12",
+      "text": "Large accelerated filer ☒ Accelerated filer ☐ Non-accelerated filer ☐ Smaller reporting company ☐ Emerging growth company ☐ If an emerging growth company, indicate by check mark if the Registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 7(a)(2)(B) of the Securities Act. ☐ Table of Contents PROSPECTUS Microsoft Corporation Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+      "source_id": "source-sec-document-capital-000119312524277062-d901891ds3asrhtm",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-191507-offering-2",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-04-29",
+      "text": "OTHER INFOR MATION Insider Trading Arrangements Our Section 16 officers and directors, as defined in Rule 16a-1(f) of the Securities Exchange Act of 1934 (the “Exchange Act”), may from time to time enter into plans for the purchase or sale of our common stock that are intended to satisfy the affirmative defense conditions of Rule 10b5-1(c) of the Exchange Act.",
+      "source_id": "source-sec-document-capital-000119312526191507-msft20260331htm",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-323632-catalyst-1",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "Results of Operations and Financial Condition On July 29, 2026, Microsoft Corporation issued a press release announcing its financial results for the fiscal quarter and year ended June 30, 2026.",
+      "source_id": "source-sec-document-catalyst-000119312526323632-msft20260729htm",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-323660-debt_maturity-1",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2026-07-29",
+      "text": "Bank National Association, as Trustee, to the Indenture, dated as of May 18, 2009, between Microsoft Corporation and The Bank of New York Mellon Trust Company, N.A., as trustee 8-K 4.1 2/12/2015 4.11 Tenth Supplemental Indenture for 1.300% Notes due 2018, 2.000% Notes due 2020, 2.650% Notes due 2022, 3.125% Notes due 2025, 4.200% Notes due 2035, 4.450% Notes due 2045, and 4.750% Notes due 2055, dated as of November 3, 2015, between Microsoft Corporation and U.S.",
+      "source_id": "source-sec-document-financial-000119312526323660-msft20260630htm",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-nasdaq-current-listing",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-31",
+      "text": "Nasdaq Trader's current symbol directory identifies MSFT as Microsoft Corporation - Common Stock; current status is active.",
+      "source_id": "source-nasdaq-symbol-directory",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-alpha-eod-market",
+      "category": "market_context",
+      "state": "confirmed",
+      "event_date": "2026-08-28",
+      "text": "MSFT's end-of-day close was 513.53 with volume 29207325 on 2026-08-28; this is market context, not evidence of an issuer event.",
+      "source_id": "source-alpha-eod-market",
+      "issuer_cik": "0000789019",
+      "security_ticker": "MSFT",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "MSFT",
+    "identity": {
+      "ticker": "MSFT",
+      "issuer_legal_name": "MICROSOFT CORP",
+      "cik": "0000789019"
+    },
+    "identity_resolution": {
+      "requested_ticker": "MSFT",
+      "current_ticker": "MSFT",
+      "status": "current",
+      "current_ticker_effective_from": null,
+      "listing_effective_from": null,
+      "filer_jurisdiction": null,
+      "filer_regime": "domestic_10-K_10-Q_8-K",
+      "accounting_standard": "unknown",
+      "source_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+      "security_type_resolution": {
+        "status": "resolved",
+        "security_type": "foreign_ordinary_share",
+        "basis": "unresolved",
+        "source_accession": null,
+        "claim_id": null
+      }
+    },
+    "retrieved_at": "2026-08-31T15:19:27.003Z",
+    "records": [
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-31",
+        "text": "SEC associates MSFT with MICROSOFT CORP (CIK 0000789019) on Nasdaq.",
+        "source_id": "source-sec-ticker-map",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-capital-0001193125-24-277062",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2024-12-12",
+        "text": "MICROSOFT CORP filed Form S-3ASR on 2024-12-12; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000119312524277062",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001193125-24-131951",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2024-05-06",
+        "text": "MICROSOFT CORP filed Form 424B3 on 2024-05-06; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000119312524131951",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 20935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-revenue",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 331839000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "source_id": "source-sec-companyfacts-revenue",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-profitability",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 133749000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "source_id": "source-sec-companyfacts-profitability",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2024-10-30",
+        "text": "SEC Company Facts reports 7434880776 common shares outstanding at 2024-10-24, filed 2024-10-30.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-1",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-2",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2025-10-29",
+        "text": "SEC Company Facts reports 7432377655 common shares outstanding at 2025-10-23, filed 2025-10-29.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-2",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-04-29",
+        "text": "SEC Company Facts reports 7428434704 common shares outstanding at 2026-04-23, filed 2026-04-29.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-3",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-4",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC Company Facts reports 7425545491 common shares outstanding at 2026-07-23, filed 2026-07-29.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-4",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-operating_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC Company Facts reports Operating cash flow of 182935000000 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "source_id": "source-sec-companyfacts-operating_cash_flow",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-free_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "Free cash flow of 66987000000 USD is calculated as operating cash flow 182935000000 less capital expenditures 115948000000 for 2025-07-01 through 2026-06-30.",
+        "source_id": "source-sec-companyfacts-free_cash_flow",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-cash_burn",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-30, filed 2026-07-29.",
+        "source_id": "source-sec-companyfacts-cash_burn",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-debt",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "Total debt of 40294000000 USD is calculated from current debt 9227000000 plus non-current debt 31067000000 at 2026-06-30.",
+        "source_id": "source-sec-companyfacts-debt",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-reporting-security",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "SEC-filed authoritative evidence identifies MICROSOFT CORP with direct common shares.",
+        "source_id": "source-sec-reporting-security",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001193125-24-277062-offering-1",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2024-12-12",
+        "text": "Large accelerated filer ☒ Accelerated filer ☐ Non-accelerated filer ☐ Smaller reporting company ☐ Emerging growth company ☐ If an emerging growth company, indicate by check mark if the Registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 7(a)(2)(B) of the Securities Act. ☐ Table of Contents PROSPECTUS Microsoft Corporation Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+        "source_id": "source-sec-document-capital-000119312524277062-d901891ds3asrhtm",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-191507-offering-2",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-04-29",
+        "text": "OTHER INFOR MATION Insider Trading Arrangements Our Section 16 officers and directors, as defined in Rule 16a-1(f) of the Securities Exchange Act of 1934 (the “Exchange Act”), may from time to time enter into plans for the purchase or sale of our common stock that are intended to satisfy the affirmative defense conditions of Rule 10b5-1(c) of the Exchange Act.",
+        "source_id": "source-sec-document-capital-000119312526191507-msft20260331htm",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-323632-catalyst-1",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "Results of Operations and Financial Condition On July 29, 2026, Microsoft Corporation issued a press release announcing its financial results for the fiscal quarter and year ended June 30, 2026.",
+        "source_id": "source-sec-document-catalyst-000119312526323632-msft20260729htm",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-323660-debt_maturity-1",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2026-07-29",
+        "text": "Bank National Association, as Trustee, to the Indenture, dated as of May 18, 2009, between Microsoft Corporation and The Bank of New York Mellon Trust Company, N.A., as trustee 8-K 4.1 2/12/2015 4.11 Tenth Supplemental Indenture for 1.300% Notes due 2018, 2.000% Notes due 2020, 2.650% Notes due 2022, 3.125% Notes due 2025, 4.200% Notes due 2035, 4.450% Notes due 2045, and 4.750% Notes due 2055, dated as of November 3, 2015, between Microsoft Corporation and U.S.",
+        "source_id": "source-sec-document-financial-000119312526323660-msft20260630htm",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-nasdaq-current-listing",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-31",
+        "text": "Nasdaq Trader's current symbol directory identifies MSFT as Microsoft Corporation - Common Stock; current status is active.",
+        "source_id": "source-nasdaq-symbol-directory",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-alpha-eod-market",
+        "category": "market_context",
+        "state": "confirmed",
+        "event_date": "2026-08-28",
+        "text": "MSFT's end-of-day close was 513.53 with volume 29207325 on 2026-08-28; this is market context, not evidence of an issuer event.",
+        "source_id": "source-alpha-eod-market",
+        "issuer_cik": "0000789019",
+        "security_ticker": "MSFT",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000119312524277062",
+        "title": "S-3ASR filed 2024-12-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524277062/d901891ds3asr.htm",
+        "published_date": "2024-12-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312524277062"
+        ]
+      },
+      {
+        "id": "source-sec-000119312524131951",
+        "title": "424B3 filed 2024-05-06",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524131951/d671682d424b3.htm",
+        "published_date": "2024-05-06",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312524131951"
+        ]
+      },
+      {
+        "id": "source-sec-reporting-security",
+        "title": "10-K filed 2026-07-29 — direct common shares",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "published_date": "2026-07-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-sec-reporting-security"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312524277062-d901891ds3asrhtm",
+        "title": "S-3ASR filed 2024-12-12 — d901891ds3asr.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524277062/d901891ds3asr.htm",
+        "published_date": "2024-12-12",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312524277062-offering-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312526191507-msft20260331htm",
+        "title": "10-Q filed 2026-04-29 — msft-20260331.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+        "published_date": "2026-04-29",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526191507-offering-2"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000119312526323632-msft20260729htm",
+        "title": "8-K filed 2026-07-29 — msft-20260729.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-20260729.htm",
+        "published_date": "2026-07-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526323632-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2024-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2024-10-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-10-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-04-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow",
+        "title": "SEC Company Facts — Free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn",
+        "title": "SEC Company Facts — Cash burn based on free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn-observation-1",
+        "title": "SEC Company Facts — Cash burn based on free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt (current plus non-current components)",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-observation-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2024-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-2",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2025-07-30",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-3",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "published_date": "2026-07-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000119312526323660-msft20260630htm",
+        "title": "10-K filed 2026-07-29 — msft-20260630.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "published_date": "2026-07-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:27.003Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526323660-debt_maturity-1"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-31",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-31T15:19:29.100Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "alpha vantage end-of-day market data for MSFT",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-28",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-31T15:19:29.100Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ],
+        "provider_name": "alpha_vantage",
+        "data_type": "market_context",
+        "freshness": "current",
+        "evidence_role": "market_context"
+      }
+    ],
+    "normalization_diagnostics": [
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "ComprehensiveIncomeNetOfTax",
+        "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
+        "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "ComprehensiveIncomeNetOfTax",
+        "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-03-31",
+        "duration_days": 273,
+        "cadence": "year_to_date",
+        "accession": "0001193125-26-191507",
+        "form": "10-Q",
+        "rejection_reason": "non_annual_or_noncomparable_period",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "ComprehensiveIncomeNetOfTax",
+        "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2026-01-01",
+        "end_date": "2026-03-31",
+        "duration_days": 89,
+        "cadence": "quarter",
+        "accession": "0001193125-26-191507",
+        "form": "10-Q",
+        "rejection_reason": "non_annual_or_noncomparable_period",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
+        "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-03-31",
+        "duration_days": 273,
+        "cadence": "year_to_date",
+        "accession": "0001193125-26-191507",
+        "form": "10-Q",
+        "rejection_reason": "non_annual_or_noncomparable_period",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
+        "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2026-01-01",
+        "end_date": "2026-03-31",
+        "duration_days": 89,
+        "cadence": "quarter",
+        "accession": "0001193125-26-191507",
+        "form": "10-Q",
+        "rejection_reason": "non_annual_or_noncomparable_period",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "ComprehensiveIncomeNetOfTax",
+        "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-10-01",
+        "end_date": "2025-12-31",
+        "duration_days": 91,
+        "cadence": "quarter",
+        "accession": "0001193125-26-027207",
+        "form": "10-Q",
+        "rejection_reason": "non_annual_or_noncomparable_period",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
+        "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Parent",
+        "semantic_category": "comprehensive_income_not_net_income",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-10-01",
+        "end_date": "2025-12-31",
+        "duration_days": 91,
+        "cadence": "quarter",
+        "accession": "0001193125-26-027207",
+        "form": "10-Q",
+        "rejection_reason": "non_annual_or_noncomparable_period",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "CurrentIncomeTaxExpenseBenefit",
+        "label": "Current Income Tax Expense (Benefit)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "DebtSecuritiesAvailableForSaleRealizedLoss",
+        "label": "Debt Securities, Available-for-sale, Realized Loss",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "DeferredFederalIncomeTaxExpenseBenefit",
+        "label": "Deferred Federal Income Tax Expense (Benefit)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "DeferredForeignIncomeTaxExpenseBenefit",
+        "label": "Deferred Foreign Income Tax Expense (Benefit)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "DeferredIncomeTaxExpenseBenefit",
+        "label": "Deferred Income Tax Expense (Benefit)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "DeferredIncomeTaxesAndTaxCredits",
+        "label": "Deferred Income Taxes and Tax Credits",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "DeferredStateAndLocalIncomeTaxExpenseBenefit",
+        "label": "Deferred State and Local Income Tax Expense (Benefit)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EffectiveIncomeTaxRateContinuingOperations",
+        "label": "Effective Income Tax Rate Reconciliation, Percent",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "pure",
+        "currency": null,
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
+        "label": "Effective Income Tax Rate Reconciliation, at Federal Statutory Income Tax Rate, Percent",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "pure",
+        "currency": null,
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EffectiveIncomeTaxRateReconciliationOtherAdjustments",
+        "label": "Effective Income Tax Rate Reconciliation, Other Adjustments, Percent",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "pure",
+        "currency": null,
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EffectiveIncomeTaxRateReconciliationStateAndLocalIncomeTaxes",
+        "label": "Effective Income Tax Rate Reconciliation, State and Local Income Taxes, Percent",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "pure",
+        "currency": null,
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EffectiveIncomeTaxRateReconciliationTaxCreditsResearch",
+        "label": "Effective Income Tax Rate Reconciliation, Tax Credit, Research, Percent",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "pure",
+        "currency": null,
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EquitySecuritiesFvNiRealizedGainLoss",
+        "label": "Equity Securities, FV-NI, Realized Gain (Loss)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "EquitySecuritiesFvNiUnrealizedGainLoss",
+        "label": "Equity Securities, FV-NI, Unrealized Gain (Loss)",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "ForeignCurrencyTransactionGainLossBeforeTax",
+        "label": "Foreign Currency Transaction Gain (Loss), before Tax",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      },
+      {
+        "taxonomy_namespace": "us-gaap",
+        "concept_tag": "GainLossOnDerivativeInstrumentsNetPretax",
+        "label": "Gain (Loss) on Derivative Instruments, Net, Pretax",
+        "semantic_category": "non_equivalent_or_unestablished",
+        "unit": "USD",
+        "currency": "USD",
+        "start_date": "2025-07-01",
+        "end_date": "2026-06-30",
+        "duration_days": 364,
+        "cadence": "annual",
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "rejection_reason": "concept_not_in_accepted_financial_taxonomy",
+        "issuer_cik": "0000789019"
+      }
+    ],
+    "reporting_identity_diagnostics": [
+      {
+        "foreign_filer_source": null,
+        "filing_regime_source": "0001193125-26-323660",
+        "accounting_framework_source": null,
+        "accounting_framework_text_range": null,
+        "accounting_framework": "unknown",
+        "accounting_framework_state": "unresolved",
+        "security_structure_source": "0001193125-26-323660",
+        "security_structure_state": "confirmed",
+        "primary_venue": "Nasdaq",
+        "additional_venues": [],
+        "candidates": [
+          {
+            "property": "security_structure",
+            "value": "direct_share",
+            "issuer_cik": "0000789019",
+            "security_ticker": "MSFT",
+            "accession": "0001193125-26-323660",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "section_or_block": "sentence",
+            "source_span": {
+              "start": 173925,
+              "end": 174137
+            },
+            "authority": 100,
+            "date_role": "filing_date",
+            "lifecycle": "current_reported_property",
+            "rule_id": null,
+            "contextual_qualifiers": {
+              "declaration": "listed_security_description"
+            }
+          }
+        ],
+        "promoted_properties": {
+          "foreign_private_issuer": false,
+          "filing_regime": "domestic_10-K_10-Q_8-K",
+          "accounting_basis": "unknown",
+          "accounting_authority": null,
+          "presentation_currency": "CAD",
+          "security_structure": "direct_share",
+          "depositary_ratio": null
+        }
+      }
+    ],
+    "listing_compliance_diagnostics": [],
+    "corporate_action_diagnostics": [],
+    "nt_filing_diagnostics": [],
+    "cache": {
+      "tickers": "miss",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0001193125-26-323632",
+          "document": "msft-20260729.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-24-277062",
+          "document": "d901891ds3asr.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-26-191507",
+          "document": "msft-20260331.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-26-323660",
+          "document": "msft-20260630.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-25-154103",
+          "document": "d84624d8k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-23-181341",
+          "document": "d288670d8k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-25-154103",
+          "document": "d84624dex32.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-23-181341",
+          "document": "d288670dex32.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 11
+  },
+  "synthesis": {
+    "status": "skipped",
+    "reason": "cost_ceiling"
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 1557,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "web_search_calls": 0,
+    "estimated_cost_usd": null,
+    "pricing_version": null,
+    "within_latency_target": true,
+    "first_useful_latency_ms": 232,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 11,
+      "cache": {
+        "tickers": "miss",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0001193125-26-323632",
+            "document": "msft-20260729.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-24-277062",
+            "document": "d901891ds3asr.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-26-191507",
+            "document": "msft-20260331.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-26-323660",
+            "document": "msft-20260630.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-25-154103",
+            "document": "d84624d8k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-23-181341",
+            "document": "d288670d8k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-25-154103",
+            "document": "d84624dex32.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-23-181341",
+            "document": "d288670dex32.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 2099,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 17901,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.03,
+      "termination_reason": "cost_ceiling",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0000789019": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0000789019": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-26-323632:msft-20260729.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-24-277062:d901891ds3asr.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-26-191507:msft-20260331.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-26-323660:msft-20260630.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-25-154103:d84624d8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-23-181341:d288670d8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-25-154103:d84624dex32.htm": {
+          "endpoint_category": "filing_exhibit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-23-181341:d288670dex32.htm": {
+          "endpoint_category": "filing_exhibit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "miss",
+          "request_count": 5,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:news": {
+          "cache_state": "miss",
+          "request_count": 5,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:news": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "maximum_cost_usd": 0.037436,
+          "status": "cost_blocked"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 5,
+      "nasdaq": "completed",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "completed",
+      "market_reason": null,
+      "provider_order": [
+        "alpha_vantage",
+        "twelve_data"
+      ],
+      "configured_providers": [
+        "alpha_vantage"
+      ],
+      "providers": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 2,
+            "daily_limit": 25,
+            "minute_used": 2,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "alpha_vantage_requests_today": 2,
+      "alpha_vantage_free_daily_limit": 25
+    }
+  },
+  "evaluation_plan_provenance": {
+    "run_date": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "approval.case_ids": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.model": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.reasoning_effort": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.tools": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.tool_choice": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.maximum_output_tokens": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.maximum_synthesis_timeout_ms": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.sdk_retries": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "model_configuration.budget_class": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "sources.fast": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "sources.hosted_web_search": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "sources.adjudication": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "output_locations.raw": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "output_locations.review": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "output_locations.summary": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "output_locations.report": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "relative_ordering": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "sparse_categories": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "completion_rule": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "plan_version": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "issue": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "batch": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approved_at": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "purpose": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "base_plan": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "output_directory": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval_token": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.approved": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.tickers": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.runs_per_ticker": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.automatic_retries": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.maximum_runs": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.maximum_openai_cost_usd": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.maximum_alpha_vantage_requests": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.maximum_twelve_data_requests": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.maximum_combined_optional_provider_attempts": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.difficult_budget_approved": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.fast_ceiling_ms_per_ticker": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.maximum_aggregate_fast_runtime_ms": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.deep_runs": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "approval.hosted_web_search": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "required_ancestor": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.change_from_batch_2": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.model": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.reasoning_effort": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.tools": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.maximum_output_tokens": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.maximum_synthesis_timeout_ms": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.sdk_retries": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "configuration.budget_class": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "provider_policy.approved_providers": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "provider_policy.provider_order": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "provider_policy.optional_context_may_settle_limited": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "provider_policy.requires_owner_review_after_architecture_change": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "provider_policy.approved_at": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "provider_policy.note": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "alpha_vantage_preflight.free_daily_limit": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "alpha_vantage_preflight.usage_day": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "alpha_vantage_preflight.recorded_batch_requests": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "alpha_vantage_preflight.inferred_remaining_on_approval_day": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "alpha_vantage_preflight.approved_requests": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "alpha_vantage_preflight.status": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "preserve_prior_batches": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+    "cases": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json"
+  }
+}
