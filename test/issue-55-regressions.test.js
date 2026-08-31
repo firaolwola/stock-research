@@ -872,6 +872,43 @@ test("SEC filing-table capex fallback supplies identity-gated FCF when Company F
   assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
 });
 
+test("SEC filing-table FCF includes explicit patent and trademark cash purchases", async () => {
+  const result = await researchFixture({
+    ticker: "NXL",
+    filings: [{ accessionNumber: "0000000001-26-000014", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "intangibles.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: {
+      "intangibles.htm": `<table><caption>Years ended June 30 (USD in millions)</caption><tr><th>Years ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Cash purchases of patents</td><td>(5)</td><td>(4)</td></tr><tr><td>Cash purchases of trademarks</td><td>(2)</td><td>(1)</td></tr></table>`
+    },
+    companyFacts: { cik: 1, entityName: "NXL Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [fact(100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-intangible-2026" }), fact(80_000_000, { start: "2025-01-01", end: "2025-06-30", form: "10-K", accn: "ocf-intangible-2025", filed: "2025-08-01" })])
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.deepEqual(fcf.observations.map((item) => item.value), [75_000_000, 93_000_000]);
+  assert.match(fcf.summary, /qualifying intangible-asset purchases/);
+  const claim = result.report.claims.find((item) => item.id === "claim-financial-free_cash_flow");
+  assert.ok(claim.source_ids.filter((id) => id.includes("filing-capex")).length >= 2, "both capex rows remain traceable");
+  assert.equal(reportValidator(calibrateReportScores(result.report)).valid, true);
+});
+
+test("generic filing-table capex total is not double-counted with component rows", async () => {
+  const result = await researchFixture({
+    ticker: "ACME",
+    filings: [{ accessionNumber: "0000000001-26-000015", form: "10-K", filingDate: "2026-08-01", reportDate: "2026-06-30", primaryDocument: "total-and-component.htm", items: "", primaryDocDescription: "Annual report" }],
+    documents: {
+      "total-and-component.htm": `<table><caption>Years ended June 30 (USD in millions)</caption><tr><th>Years ended June 30</th><th>2026</th><th>2025</th></tr><tr><td>Capital expenditures</td><td>(10)</td><td>(9)</td></tr><tr><td>Cash purchases of patents</td><td>(2)</td><td>(1)</td></tr></table>`
+    },
+    companyFacts: { cik: 1, entityName: "ACME Corp.", facts: { "us-gaap": {
+      NetCashProvidedByUsedInOperatingActivities: concept("Operating cash flow", [fact(100_000_000, { start: "2026-01-01", end: "2026-06-30", form: "10-K", accn: "ocf-total-2026" }), fact(80_000_000, { start: "2025-01-01", end: "2025-06-30", form: "10-K", accn: "ocf-total-2025", filed: "2025-08-01" })])
+    } } }
+  });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.deepEqual(fcf.observations.map((item) => item.value), [71_000_000, 90_000_000]);
+  assert.doesNotMatch(fcf.summary, /qualifying intangible/);
+});
+
 test("AMC-style segmented filing tables use the explicit Consolidated capex column", async () => {
   const segmentedTables = [
     `<table><tr><th>Six months ended June 30, 2026</th></tr><tr><th>(In millions)</th><th>U.S. Markets</th><th>International Markets</th><th>Consolidated</th></tr><tr><td>Capital expenditures</td><td>174.2</td><td>71.9</td><td>246.1</td></tr></table>`,

@@ -268,12 +268,23 @@ Operating cash flow alone is never treated as free cash flow. Accepted table
 facts remain SEC-authoritative, dated, and source-linked to the FCF claim; the
 fallback is intentionally bounded and does not add a parser dependency.
 
-The bounded extractor also accepts unit and scale notes immediately adjacent to
-the selected table (including `US$ in millions`) while stopping at neighboring
+Qualifying explicit cash purchases of long-lived operating intangible assets
+(for example, patents, trademarks, or other separately identified intangible
+assets) may be included alongside property/equipment capex. The normalizer
+preserves the asset subtype and source provenance, aggregates distinct
+qualifying rows for the same comparable period, and computes
+`FCF = OCF − |property/equipment capex| − |qualifying intangible purchases|`.
+Business acquisitions, non-cash transactions, vague investing outflows, and
+rows whose units, periods, currency, or accounting validity cannot be aligned
+remain excluded and settle Limited/Unscored.
+
+The bounded extractor also accepts multiple qualifying rows plus unit and scale
+notes immediately adjacent to the selected table (including `US$ in millions`)
+while stopping at neighboring
 table boundaries. This addresses common SEC presentation variation without
 borrowing units, periods, or values from unrelated tables. A table still must
-provide an isolated capex row and aligned comparable periods; otherwise FCF
-remains Limited/Unscored.
+provide one or more isolated qualifying capex rows and aligned comparable
+periods; otherwise FCF remains Limited/Unscored.
 
 ### Fast calibration contract (Issue #77)
 

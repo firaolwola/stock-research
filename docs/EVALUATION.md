@@ -1059,6 +1059,19 @@ covered by a segmented AMC fixture and an application-level FCF regression.
 Historical #55 measurements remain unchanged; any live remeasurement must be
 separately approved.
 
+### Qualifying intangible-asset capex coverage (offline, 2026-08-31)
+
+The bounded SEC filing-table and Company Facts paths now recognize explicit
+cash purchases of long-lived operating intangible assets (such as patents and
+trademarks) as a capital-expenditure subtype. Distinct property/equipment and
+intangible rows for the same SEC-comparable period are aggregated with their
+individual provenance; duplicate same-type facts are de-duplicated, while
+conflicting values remain unresolved. Non-cash rows, acquisitions, vague
+investing outflows, and unaligned units or periods remain excluded. Deterministic
+fixtures cover multi-row extraction, subtype provenance, sign normalization,
+and conflict safety. Historical #55 measurements are unchanged and no live or
+paid-provider call was made.
+
 ### FCF coverage-limited gate policy (owner-approved, 2026-08-31)
 
 The reliability gate now separates numeric FCF usability from safe settlement.

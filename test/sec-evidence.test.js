@@ -231,6 +231,54 @@ test("aligned OCF and capital expenditures produce FCF while currency mismatch d
   assert.equal(mismatch.report.financial_assessment.metrics.free_cash_flow.state, "unknown");
 });
 
+test("FCF aggregates distinct SEC qualifying intangible purchases with property capex", async () => {
+  const result = await reportForFacts(factsWith({
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(10_000_000, { start: "2026-01-01" })]),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Property and equipment purchases", [edgeFact(2_000_000, { start: "2026-01-01" })]),
+    PaymentsToAcquireIntangibleAssets: edgeConcept("Patent and trademark purchases", [edgeFact(1_500_000, { start: "2026-01-01" })])
+  }));
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "confirmed");
+  assert.equal(fcf.value, 6_500_000);
+  assert.match(fcf.summary, /property\/equipment and qualifying intangible-asset purchases/);
+  assert.ok(fcf.claim_ids.length >= 1);
+  assert.ok(result.report.financial_assessment.metrics.free_cash_flow.observations.length >= 1);
+  assert.equal(validate(calibrateReportScores(result.report)).valid, true);
+});
+
+test("same-type capex values with only a sign difference deduplicate, while conflicting values remain unresolved", async () => {
+  const deduped = await reportForFacts(factsWith({
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(10_000_000, { start: "2026-01-01" })]),
+    PaymentsToAcquireIntangibleAssets: edgeConcept("Intangible purchases", [
+      edgeFact(-1_500_000, { start: "2026-01-01", accn: "intangible-negative" }),
+      edgeFact(1_500_000, { start: "2026-01-01", accn: "intangible-positive" })
+    ])
+  }));
+  assert.equal(deduped.report.financial_assessment.metrics.free_cash_flow.value, 8_500_000);
+
+  const conflicting = await reportForFacts(factsWith({
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(10_000_000, { start: "2026-01-01" })]),
+    PaymentsToAcquireIntangibleAssets: edgeConcept("Intangible purchases", [
+      edgeFact(1_500_000, { start: "2026-01-01", accn: "intangible-a" }),
+      edgeFact(2_500_000, { start: "2026-01-01", accn: "intangible-b" })
+    ])
+  }));
+  assert.equal(conflicting.report.financial_assessment.metrics.free_cash_flow.state, "unknown");
+  assert.equal(conflicting.report.financial_assessment.metrics.free_cash_flow.value, null);
+});
+
+test("capex rows in mixed currencies cannot produce a reassuring partial FCF", async () => {
+  const result = await reportForFacts({ facts: { "us-gaap": {
+    NetCashProvidedByUsedInOperatingActivities: edgeConcept("OCF", [edgeFact(10_000_000, { start: "2026-01-01" })], "USD"),
+    PaymentsToAcquirePropertyPlantAndEquipment: edgeConcept("Property purchases", [edgeFact(2_000_000, { start: "2026-01-01" })], "USD"),
+    PaymentsToAcquireIntangibleAssets: edgeConcept("Patent purchases", [edgeFact(1_000_000, { start: "2026-01-01" })], "EUR")
+  } } });
+  const fcf = result.report.financial_assessment.metrics.free_cash_flow;
+  assert.equal(fcf.state, "unknown");
+  assert.equal(fcf.value, null);
+  assert.match(fcf.summary, /aligned capital expenditures are not/);
+});
+
 test("FCF uses the newest aligned cadence when OCF and capex have different latest durations", async () => {
   const result = await reportForFacts(factsWith({
     NetCashProvidedByUsedInOperatingActivities: edgeConcept("Operating cash flow", [

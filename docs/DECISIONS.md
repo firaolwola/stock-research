@@ -1791,3 +1791,28 @@ this narrow, identity-gated context can recover a valid capex fact without
 introducing a parser dependency or allowing unrelated tables to donate units.
 OCF alone, ambiguous rows, stale/conflicting periods, and non-reliance-affected
 evidence remain Limited/Unscored; frozen #55 FCF measurements are unchanged.
+
+## 2026-08-31 — Include qualifying intangible purchases in SEC-derived FCF
+
+**Status:** Implemented offline; live remeasurement remains separately gated
+
+**Decision:** An explicit cash purchase of a long-lived operating intangible
+asset (for example, a patent or trademark) may serve as a capital-expenditure
+component when it is reported in an identity-gated SEC Company Facts concept or
+bounded 10-K/10-Q/20-F/40-F table. The normalizer keeps the subtype and source
+IDs, aggregates distinct qualifying asset rows for an aligned period, and
+derives `FCF = OCF − |PP&E capex| − |qualifying intangible purchases|`.
+
+**Guardrails:** Business acquisitions, non-cash transactions, vague investing
+outflows, and incompatible or conflicting units/periods remain excluded and
+settle Limited/Unscored. Same-type duplicates with only a sign convention
+difference are de-duplicated; differing absolute values are treated as a
+conflict. This extends evidence coverage without changing Methodology 2.1.0,
+rewriting frozen calibration artifacts, or allowing secondary-provider values
+to affect financial scoring.
+
+**Why:** Issuers may present cash investment in patents, trademarks, or other
+operating intangibles instead of a row literally named “capital expenditures.”
+Ignoring those explicit outflows can overstate FCF, while treating every
+investing outflow as capex would create false precision. A typed, provenance-
+preserving SEC-only rule provides the narrowest safe treatment.

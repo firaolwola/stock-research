@@ -55,6 +55,7 @@ test("SEC filing-table capex extraction selects an explicit Consolidated value f
     { val: 246_100_000, start: "2025-01-01", end: "2025-12-31", unit: "USD" },
     { val: 245_500_000, start: "2024-01-01", end: "2024-12-31", unit: "USD" }
   ]);
+  assert.equal(result.facts[0].capital_expenditure_type, "total_capital_expenditure");
   assert.ok(result.diagnostics.every((item) => item.disposition === "accepted" && item.column_selection === "explicit_consolidated"));
   assert.ok(result.diagnostics.every((item) => item.currency_source === "caller_hint"));
 });
@@ -68,6 +69,30 @@ test("SEC filing-table capex extraction supports comparable quarterly and YTD co
     { val: -12_000, start: "2026-01-01", end: "2026-06-30" },
     { val: -10_000, start: "2025-01-01", end: "2025-06-30" }
   ]);
+});
+
+test("SEC filing-table capex extraction keeps separate qualifying intangible rows", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><caption>Years ended December 31 (USD in millions)</caption><tr><th>Years ended December 31</th><th>2025</th><th>2024</th></tr><tr><td>Purchases of patents</td><td>(4)</td><td>(3)</td></tr><tr><td>Purchases of trademarks</td><td>(2)</td><td>(1)</td></tr></table>`,
+    form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "intangible-capex", documentUrl: "https://www.sec.gov/Archives/intangible-capex.htm", documentName: "intangible-capex.htm"
+  });
+  assert.equal(result.facts.length, 4);
+  assert.ok(result.facts.every((fact) => fact.capital_expenditure_type === "intangible_assets"));
+  assert.deepEqual(result.facts.map(({ val, end }) => ({ val, end })), [
+    { val: -4_000_000, end: "2025-12-31" }, { val: -3_000_000, end: "2024-12-31" },
+    { val: -2_000_000, end: "2025-12-31" }, { val: -1_000_000, end: "2024-12-31" }
+  ]);
+  assert.notEqual(result.facts[0].source_id, result.facts[2].source_id, "each row retains distinct provenance");
+  assert.ok(result.diagnostics.filter((item) => item.disposition === "accepted").every((item) => item.row_index !== null));
+});
+
+test("non-cash intangible disclosures are withheld from FCF extraction", () => {
+  const result = extractFilingCapitalExpenditureFacts({
+    html: `<table><caption>Years ended December 31 (USD in millions)</caption><tr><th>Years ended December 31</th><th>2025</th></tr><tr><td>Non-cash purchases of patents</td><td>(4)</td></tr></table>`,
+    form: "10-K", filed: "2026-02-15", reportDate: "2025-12-31", accession: "noncash-intangible", documentUrl: "https://www.sec.gov/Archives/noncash-intangible.htm", documentName: "noncash-intangible.htm"
+  });
+  assert.deepEqual(result.facts, []);
+  assert.equal(result.diagnostics[0].reason, "non_cash_capex");
 });
 
 test("SEC filing-table capex extraction accepts a bounded adjacent unit note", () => {
