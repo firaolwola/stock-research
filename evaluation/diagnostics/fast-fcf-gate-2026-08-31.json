@@ -1,0 +1,107 @@
+{
+  "adjudication_id": "fast-fcf-gate-2026-08-31",
+  "issue": 81,
+  "reliability_issue": 55,
+  "live_execution": false,
+  "frozen_inputs": [
+    {
+      "path": "evaluation/live/2026-08-28-final-five-confirmation-1/summary.json",
+      "sha256_lf_normalized": "07724bfde543a6edc02e8659f1efc66529837195fe0a14f6d407221ef8668436"
+    },
+    {
+      "path": "evaluation/live/2026-08-31-fcf-remeasurement-1/run-summary.json",
+      "sha256_lf_normalized": "294f42417affd08bde733161e3aa8abb5d75866bf1ea61697e95270b20f8e3b9"
+    },
+    {
+      "path": "evaluation/live/2026-08-31-fcf-remeasurement-2/run-summary.json",
+      "sha256_lf_normalized": "efe31ba8fed41f2a7f1c358ffebfa7998cd5704db0bc30cd9d2714ae54f823c0"
+    },
+    {
+      "path": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-1.json",
+      "sha256_lf_normalized": "0f424676c2aeda4810935b354c1b3575957db68401bea838e9963eebc52ae769"
+    },
+    {
+      "path": "evaluation/plans/fast-reliability-2026-08-31-fcf-remeasurement-2.json",
+      "sha256_lf_normalized": "dff4dcc9959e593cccd3ffbcf100df193d428d2ad8dfd0d98078b4a2c51c19dc"
+    },
+    {
+      "path": "evaluation/plans/fast-reliability-2026-08-27.json",
+      "sha256_lf_normalized": "eb0156e63ba63db4f840589b6e0ad46f41dea17f88f4eea2ba88ada5e020754c"
+    }
+  ],
+  "denominators": {
+    "frozen_same_five": {
+      "cohort": "2026-08-28-final-five-confirmation-1",
+      "expected": 5,
+      "detected": 3,
+      "recall": 0.6,
+      "gate_status": "failed",
+      "immutable": true
+    },
+    "independent_clean_controls": {
+      "cohort": "2026-08-31-fcf-remeasurement-2",
+      "expected": 2,
+      "detected": 2,
+      "recall": 1,
+      "gate_status": "informational_only",
+      "pooled_with_frozen_same_five": false,
+      "cases": [
+        {
+          "case_id": "msft-2026-fcf-remeasurement",
+          "ticker": "MSFT",
+          "result": "aligned_sec_pair",
+          "settlement": "valid_report",
+          "termination_reason": "cost_ceiling",
+          "elapsed_ms": 2117,
+          "openai_cost_usd": 0
+        },
+        {
+          "case_id": "rivn-2026-fcf-remeasurement",
+          "ticker": "RIVN",
+          "result": "aligned_sec_pair",
+          "settlement": "valid_report",
+          "termination_reason": "cost_ceiling",
+          "elapsed_ms": 1891,
+          "openai_cost_usd": 0
+        }
+      ]
+    }
+  },
+  "miss_classifications": [
+    {
+      "id": "frozen-fcf-unavailable-1",
+      "cause": "unavailable_evidence",
+      "settlement": "Limited/Unscored",
+      "detail": "No aligned authoritative capex pair was available in the frozen packet."
+    },
+    {
+      "id": "frozen-fcf-unavailable-2",
+      "cause": "unavailable_evidence",
+      "settlement": "Limited/Unscored",
+      "detail": "No aligned authoritative capex pair was available in the frozen packet."
+    }
+  ],
+  "source_policy": {
+    "scoring_authority": "SEC",
+    "filing_table_fallback": "bounded_selected_filings_only",
+    "secondary_provider_values_ignored": true,
+    "ocf_only_is_not_fcf": true
+  },
+  "next_live_plan": {
+    "requires_owner_approval": true,
+    "max_runs": 5,
+    "retries": 0,
+    "max_openai_cost_usd": 0.15,
+    "max_alpha_vantage_requests": 10,
+    "max_twelve_data_requests": 10,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "hosted_web_search": false,
+    "output_directory": "evaluation/live/2026-08-31-fcf-gate-confirmation-1"
+  },
+  "gate": {
+    "passed": false,
+    "reason": "Frozen same-five FCF remains 3/5; independent MSFT/RIVN controls are a separate non-overlapping cohort and cannot repair the frozen denominator.",
+    "issue_55_must_remain_open": true,
+    "pr_74_ready_to_merge": false
+  }
+}

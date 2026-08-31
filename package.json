@@ -10,6 +10,7 @@
     "evaluate:adversarial": "node scripts/evaluate-adversarial.js",
     "evaluate:calibration": "node scripts/evaluate-fast-calibration.js",
     "evaluate:reliability": "node scripts/evaluate-final-reliability.js",
+    "evaluate:fcf-gate": "node scripts/evaluate-fcf-gate.js",
     "validate:reports": "node scripts/validate-report-fixtures.js",
     "test": "node --test \"test/*.test.js\""
   },

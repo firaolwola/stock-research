@@ -984,6 +984,15 @@ holdouts check company-relative trends and risk ordering. It does not alter
 frozen #55 measurements or claim live reliability. Run with
 `npm run evaluate:calibration` before any separately approved live work.
 
+## Issue #81 FCF denominator adjudication
+
+`npm run evaluate:fcf-gate` keeps the frozen same-five FCF denominator (3/5,
+60%) separate from the independent MSFT/RIVN clean-control cohort (2/2,
+informational only). The evaluator hash-audits the source plans and summaries,
+classifies the two frozen misses as unavailable authoritative capex evidence,
+and records an approval-gated five-case remeasurement proposal. No live or
+paid call is performed by this command, and the #55 closure gate remains open.
+
 ### Issue #76 offline implementation (2026-08-31)
 
 Fast now has a bounded SEC filing-table capex fallback for already retrieved
