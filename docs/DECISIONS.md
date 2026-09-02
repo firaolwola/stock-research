@@ -1444,3 +1444,15 @@ live parser still extracted the ratio/date but classified the date role as
 **Why:** This confirms the prior direct effective-date grammar was still not
 the exact live normalized shape. The new offline correction is bounded and
 covered by regression; any further live confirmation requires separate approval.
+
+## 2026-09-02 — Align #55 operational completion with broad reliability status
+
+**Decision:** Treat the bounded practical-small #55 milestone as operationally
+complete when the non-overlapping denominator, quality, severe-miss, FCF-safety,
+and frozen-artifact checks pass. Keep broad statistical reliability explicitly
+`unproven` because historical cohorts are not safely poolable.
+
+**Consequence:** Closure metadata must carry both outcomes. This does not invent
+a broad recall pass, change historical measurements, or require numeric FCF
+coverage. The remaining operational-close step is documentation alignment and
+the authenticated PR/issue workflow.

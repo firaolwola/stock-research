@@ -178,6 +178,25 @@ test("the established multi-case runner uses the same recursive pre-runtime reso
   assert.ok(source.indexOf("for (const scenario of plan.cases)") > resolveAt);
 });
 
+test("every approved live runner gates client construction on zero-token SEC connectivity", async () => {
+  const runners = [
+    "run-approved-fast-calibration.js",
+    "run-approved-sparse-calibration.js",
+    "run-approved-sparse-expansion.js",
+    "run-approved-final-sparse-proof.js",
+    "run-approved-muln-verification-implementation.js"
+  ];
+  for (const runner of runners) {
+    const source = await readFile(new URL(`../scripts/${runner}`, import.meta.url), "utf8");
+    const preflightAt = source.indexOf("runSecConnectivityPreflight");
+    const openAiAt = source.indexOf("new OpenAI(");
+    const sourceClientAt = source.indexOf("createSecEvidenceClient(");
+    assert.ok(preflightAt > 0, `${runner} must call the SEC preflight`);
+    assert.ok(openAiAt > preflightAt, `${runner} must preflight before OpenAI construction`);
+    assert.ok(sourceClientAt > preflightAt, `${runner} must preflight before SEC client construction`);
+  }
+});
+
 test("AMC and NCPL correction confirmation resolves two declared cases with bounded overrides", async () => {
   const root = path.resolve(".");
   const planPath = path.join(root, "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json");
@@ -193,4 +212,27 @@ test("AMC and NCPL correction confirmation resolves two declared cases with boun
   assert.deepEqual(plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
   assert.equal(provenance["approval.maximum_runs"], "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json");
   assert.equal(chain.length, 4);
+});
+
+test("Issue 81 FCF gate confirmation plan resolves frozen five-ticker bounds", async () => {
+  const root = path.resolve(".");
+  const planPath = path.join(root, "evaluation/plans/fast-reliability-2026-08-31-fcf-gate-confirmation-1.json");
+  const { plan, chain } = await resolveEvaluationPlan({ root, planPath, requiredFields: [
+    { path: "base_plan", type: "string" }, { path: "cases", type: "array" },
+    { path: "approval.tickers", type: "array" }, { path: "approval.maximum_runs", type: "number" },
+    { path: "approval.maximum_openai_cost_usd", type: "number" },
+    { path: "approval.maximum_alpha_vantage_requests", type: "number" },
+    { path: "approval.maximum_twelve_data_requests", type: "number" },
+    { path: "approval.fast_ceiling_ms_per_ticker", type: "number" },
+    { path: "provider_policy.provider_order", type: "array" }
+  ] });
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.deepEqual(plan.cases.map((item) => item.ticker), plan.approval.tickers);
+  assert.equal(plan.approval.maximum_runs, 5);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .15);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 10);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 10);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.deepEqual(plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
+  assert.ok(chain.length >= 2);
 });

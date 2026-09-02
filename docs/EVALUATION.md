@@ -783,3 +783,17 @@ budget, and output location. After an approved run, record input/output tokens,
 web-search calls, estimated cost, per-case latency, app failures, and the full
 rubric results. The evaluator rejects missing approval or measurement fields.
 Redact credentials and do not commit sensitive provider payloads.
+
+## Issue #55 two-tier closure status (2026-09-02)
+
+The bounded practical-small milestone is operationally complete: the selected
+14-claim denominator is 14/14 supported, quality/traceability/settlement/
+explanation checks are 14/14, current severe misses are zero, and FCF safety
+passes with unresolved cases remaining Limited/Unscored. Numeric FCF coverage
+is informational only.
+
+Broad statistical reliability remains `unproven`; historical cohorts are not
+safely poolable and the targeted denominator is not representative evidence for
+a broad 95% claim. This distinction is encoded by the closure diagnostic's
+`operational_completion` and `broad_reliability` outcomes. The current next
+step is `55-OPERATIONAL-CLOSE`; no live run is implied.

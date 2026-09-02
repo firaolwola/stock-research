@@ -1,0 +1,36 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "sec-only-confirmation-1",
+  "approved_at": "2026-09-01",
+  "purpose": "Bounded deterministic SEC-path confirmation of the offline selection and binding correction; no optional providers or OpenAI synthesis.",
+  "output_directory": "2026-09-01-sec-only-confirmation-1",
+  "approval": {
+    "approved": true,
+    "tickers": ["AMC", "MULN", "SMCI"],
+    "runs_per_ticker": 1,
+    "maximum_runs": 3,
+    "automatic_retries": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "maximum_aggregate_runtime_ms": 60000,
+    "maximum_openai_cost_usd": 0,
+    "maximum_alpha_vantage_requests": 0,
+    "maximum_twelve_data_requests": 0,
+    "maximum_optional_provider_attempts": 0,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "configuration": {
+    "mode": "deterministic_sec_only",
+    "synthesis": "disabled",
+    "optional_providers": "disabled",
+    "budget_class": "normal",
+    "retry_policy": "none"
+  },
+  "cases": [
+    { "ticker": "AMC", "claim_ids": ["amc-debt-equity-exchange", "amc-refinancing-2024"] },
+    { "ticker": "MULN", "claim_ids": ["muln-notes-warrants"] },
+    { "ticker": "SMCI", "claim_ids": ["smci-auditor-uncertainty"] }
+  ],
+  "preserve_historical_artifacts": true
+}

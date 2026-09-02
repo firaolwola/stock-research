@@ -11,6 +11,7 @@ import { createBoundedFastSourceClient } from "../lib/bounded-fast-sources.js";
 import { createReportValidator } from "../lib/report-validation.js";
 import { finalizeResearchReport } from "../lib/finalize-research-report.js";
 import { loadRealAppConfig } from "../startup-config.js";
+import { formatSecPreflightFailure, runSecConnectivityPreflight } from "../lib/sec-connectivity-preflight.js";
 
 dotenv.config({ quiet: true });
 
@@ -45,6 +46,11 @@ await mkdir(path.join(outputRoot, "raw"), { recursive: true });
 await mkdir(path.join(outputRoot, "review"), { recursive: true });
 
 const config = loadRealAppConfig();
+const secPreflight = await runSecConnectivityPreflight({ userAgent: config.secUserAgent });
+if (!secPreflight.ok) {
+  console.error(`SEC preflight failed before live research: ${formatSecPreflightFailure(secPreflight)}`);
+  throw new Error("SEC connectivity preflight failed; no live research was started.");
+}
 const configuredProviders = [config.alphaVantageApiKey ? "alpha_vantage" : null, config.twelveDataApiKey ? "twelve_data" : null].filter(Boolean);
 const schema = JSON.parse(await readFile(path.join(root, "schema", "stock-report.schema.json"), "utf8"));
 const reportValidator = createReportValidator(schema);

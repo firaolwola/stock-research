@@ -1,0 +1,469 @@
+{
+  "adjudication_id": "fast-reliability-quality-adjudication-2026-09-02",
+  "issue": 55,
+  "live_execution": false,
+  "network_calls": false,
+  "source": "evaluation/diagnostics/fast-reliability-quality-dimension-bindings-2026-09-01.json",
+  "policy": {
+    "row_level_only": true,
+    "missing_is_not_observed": true,
+    "historical_artifacts_immutable": true,
+    "no_favorable_inference": true
+  },
+  "summary": {
+    "claims": 14,
+    "valid_reports": {
+      "pass": 14,
+      "fail": 0
+    },
+    "evidence_traceability": {
+      "pass": 14,
+      "not_observed": 0
+    },
+    "settlement": {
+      "pass": 14,
+      "fail": 0,
+      "not_observed": 0
+    },
+    "explanation_fidelity": {
+      "pass": 14,
+      "fail": 0,
+      "not_observed": 0
+    },
+    "severe_misses": {
+      "zero": 14,
+      "nonzero": 0,
+      "not_observed": 0
+    }
+  },
+  "rows": [
+    {
+      "claim_id": "AMC:amc-debt-equity-exchange",
+      "ticker": "AMC",
+      "category": "dilution_offerings",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Exact SEC evidence record, validated report, and deterministic offering finding reviewed in the SEC-only confirmation.",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-capital-000110465926076650",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-capital-000110465926033441",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-capital-000110465926028573",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-capital-000110465926011770",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-shares-outstanding-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-shares-outstanding-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-shares-outstanding-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-shares-outstanding-4",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-free_cash_flow",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-extracted-000141157926000059-working_capital_deficit-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-extracted-000141157926000059-debt_maturity-3",
+        "evaluation/live/2026-09-01-denominator-gap-confirmation-2/raw/AMC.json#/report/claims",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#/evidence_records/evidence-extracted-0001104659-24-061550-offering-1"
+      ],
+      "source_report_artifact": "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json",
+      "historical_quality_preserved": null
+    },
+    {
+      "claim_id": "AMC:amc-refinancing-2024",
+      "ticker": "AMC",
+      "category": "financial_context",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Exact SEC evidence record, validated report, and deterministic refinancing finding reviewed in the SEC-only confirmation.",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-extracted-000110465924081453-catalyst-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash-observation-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash-annual-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash-annual-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash-annual-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash-annual-4",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-revenue",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-revenue-observation-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-revenue-annual-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-revenue-annual-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-revenue-annual-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-revenue-annual-4",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-profitability",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-profitability-observation-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-profitability-annual-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-profitability-annual-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-profitability-annual-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-profitability-annual-4",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-operating_cash_flow",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-operating_cash_flow-observation-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-operating_cash_flow-annual-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-operating_cash_flow-annual-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-operating_cash_flow-annual-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-operating_cash_flow-annual-4",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-free_cash_flow-annual-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-free_cash_flow-annual-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-free_cash_flow-annual-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-cash_burn",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-debt",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-debt-observation-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-debt-annual-1",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-debt-annual-2",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-debt-annual-3",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-financial-debt-annual-4",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#claim-extracted-000110465924081453-debt_refinancing-1",
+        "AMC:amc-refinancing-2024:review:1",
+        "evaluation/live/2026-09-01-denominator-gap-confirmation-2/raw/AMC.json#/report/claims",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json#/evidence_records/evidence-extracted-0001104659-24-081453-debt_refinancing-1"
+      ],
+      "source_report_artifact": "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/AMC.json",
+      "historical_quality_preserved": null
+    },
+    {
+      "claim_id": "BIOR:bior-progenity-lineage",
+      "ticker": "BIOR",
+      "category": "issuer_lineage",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "BIOR stored review identity_result and passed report",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-sec-lineage-1",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-sec-lineage-2",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-sec-lineage-1",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-sec-lineage-2",
+        "evaluation/live/2026-08-27-sparse-5/review/BIOR.json#/identity_result"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/BIOR.json",
+      "source_report_artifact": "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "BIOR:bior-reverse-splits",
+      "ticker": "BIOR",
+      "category": "reverse_splits",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "BIOR stored review adjudication items 0/1 explicitly detected",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000119312524246212-reverse_split-1",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000095017024127060-reverse_split-5",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000095017024127060-reverse_split-6",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000095017024127060-reverse_split-7",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000095017024039423-reverse_split-11",
+        "BIOR:bior-reverse-splits:review:1",
+        "BIOR:bior-reverse-splits:review:2",
+        "BIOR:bior-reverse-splits:review:3",
+        "evaluation/live/2026-08-27-sparse-5/review/BIOR.json#/adjudication/0",
+        "evaluation/live/2026-08-27-sparse-5/review/BIOR.json#/adjudication/1",
+        "evaluation/live/2026-08-27-sparse-5/review/BIOR.json#/adjudication/2",
+        "evaluation/live/2026-08-27-sparse-5/review/BIOR.json#/adjudication/3"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/BIOR.json",
+      "source_report_artifact": "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "BIOR:bior-offering-warrants",
+      "ticker": "BIOR",
+      "category": "warrants_convertibles",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "BIOR stored review adjudication item 2 explicitly detected",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000095017024127060-convertible-9",
+        "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json#claim-extracted-000095017024127060-warrant-10",
+        "BIOR:bior-offering-warrants:review:1",
+        "evaluation/live/2026-08-27-sparse-5/review/BIOR.json#/adjudication/2"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/BIOR.json",
+      "source_report_artifact": "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "MULN:muln-reverse-split-2025",
+      "ticker": "MULN",
+      "category": "reverse_splits",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Verification-7 row-level review: 9/9 canonical events, precision 1, settlement pass",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-5",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-7",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-8",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-9",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-10",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-11",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-12",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625007546-reverse_split-13",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000143774925027016-reverse_split-17",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000143774925027016-reverse_split-18",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000143774925027016-reverse_split-19",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000143774925027016-reverse_split-20",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000143774925027016-reverse_split-21",
+        "MULN:muln-reverse-split-2025:review:1",
+        "MULN:muln-reverse-split-2025:review:2",
+        "evaluation/live/2026-08-28-muln-verification-7/review/MULN.json#canonical_events",
+        "evaluation/live/2026-08-28-muln-verification-7/raw/MULN.json#/report/sections/reverse_splits/items/6"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/MULN.json",
+      "source_report_artifact": "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": false,
+        "severe_misses": [
+          "The completed reverse-split history remains materially incomplete and contains false corporate-action occurrences."
+        ],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "MULN:muln-listing-compliance",
+      "ticker": "MULN",
+      "category": "compliance",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Stored review adjudication items 1/2 detected; current-vs-historical listing state explicit",
+      "evidence_reference_ids": [
+        "MULN:muln-listing-compliance:review:1",
+        "MULN:muln-listing-compliance:review:2",
+        "evaluation/live/2026-08-27-sparse-4/review/MULN.json#/adjudication/1",
+        "evaluation/live/2026-08-27-sparse-4/review/MULN.json#/adjudication/2",
+        "evaluation/live/2026-08-27-sparse-4/review/MULN.json#/identity_result"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-4/review/MULN.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": false,
+        "severe_misses": [
+          "Required 2023 completed split history remains incomplete and partly misattributed."
+        ],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "MULN:muln-notes-warrants",
+      "ticker": "MULN",
+      "category": "warrants_convertibles",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Exact SEC evidence record, validated report, and deterministic convertible/warrant finding reviewed in the SEC-only confirmation.",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#claim-extracted-000182912625004199-catalyst-1",
+        "evaluation/live/2026-09-01-denominator-gap-confirmation-2/raw/MULN.json#/report/claims",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json#/evidence_records/evidence-extracted-0001829126-25-004199-warrant-2"
+      ],
+      "source_report_artifact": "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/MULN.json",
+      "historical_quality_preserved": null
+    },
+    {
+      "claim_id": "NIO:nio-adr-context",
+      "ticker": "NIO",
+      "category": "security_and_listing",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "NIO stored review adjudication item 0 explicitly detects ADR/foreign identity",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-08-27-sparse-5/raw/NIO.json#claim-sec-identity",
+        "evaluation/live/2026-08-27-sparse-5/raw/NIO.json#claim-extracted-000110465925089270-offering-1",
+        "evaluation/live/2026-08-27-sparse-5/raw/NIO.json#claim-extracted-000110465925089270-convertible-2",
+        "evaluation/live/2026-08-27-sparse-5/raw/NIO.json#claim-extracted-000110465926041765-offering-3",
+        "evaluation/live/2026-08-27-sparse-5/raw/NIO.json#claim-nasdaq-current-listing",
+        "NIO:nio-adr-context:review:1",
+        "NIO:nio-adr-context:review:2",
+        "evaluation/live/2026-08-27-sparse-5/review/NIO.json#/adjudication/0",
+        "evaluation/live/2026-08-27-sparse-5/review/NIO.json#/identity_result"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/NIO.json",
+      "source_report_artifact": "evaluation/live/2026-08-27-sparse-5/raw/NIO.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [
+          "Comparable attributable annual net loss remains absent from the report."
+        ],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "TUPBQ:tup-tupbq-lineage",
+      "ticker": "TUPBQ",
+      "category": "issuer_lineage",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "TUPBQ stored review adjudication item 0 explicitly detected",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json#claim-sec-lineage-1",
+        "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json#claim-sec-lineage-2",
+        "TUPBQ:tup-tupbq-lineage:review:1",
+        "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json#/adjudication/0"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json",
+      "source_report_artifact": "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "TUPBQ:tup-delisting",
+      "ticker": "TUPBQ",
+      "category": "compliance",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "TUPBQ stored review adjudication item 3 explicitly detected",
+      "evidence_reference_ids": [
+        "TUPBQ:tup-delisting:review:1",
+        "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json#/adjudication/3"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "TUPBQ:tup-going-concern-bankruptcy",
+      "ticker": "TUPBQ",
+      "category": "going_concern_accounting",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "TUPBQ stored review adjudication items 1/2 explicitly detected",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json#claim-extracted-000100865423000022-catalyst-3",
+        "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json#claim-extracted-000100865424000035-going_concern-1",
+        "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json#claim-extracted-000100865424000035-non_reliance-2",
+        "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json#claim-extracted-000100865424000035-accounting_warning-3",
+        "TUPBQ:tup-going-concern-bankruptcy:review:1",
+        "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json#/adjudication/1",
+        "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json#/adjudication/2"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-sparse-5/review/TUPBQ.json",
+      "source_report_artifact": "evaluation/live/2026-08-27-sparse-5/raw/TUPBQ.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": true,
+        "explanation_fidelity": true,
+        "severe_misses": [],
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "SMCI:smci-delinquent-reports",
+      "ticker": "SMCI",
+      "category": "compliance",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Offline extractor regression excludes financing-covenant language from exchange compliance; only explicit Nasdaq notice is projected.",
+      "evidence_reference_ids": [
+        "SMCI:smci-delinquent-reports:review:1",
+        "evaluation/live/2026-08-28-final-five-confirmation-1/raw/SMCI.json#claim-extracted-000137536525000007-exchange_compliance-2"
+      ],
+      "source_review_artifact": "evaluation/live/2026-08-27-batch-3/review/SMCI.json",
+      "source_report_artifact": "evaluation/live/2026-08-28-final-five-confirmation-1/raw/SMCI.json",
+      "historical_quality_preserved": {
+        "settlement_accurate": null,
+        "explanation_fidelity": null,
+        "severe_misses": null,
+        "scope": "historical_attempt_only"
+      }
+    },
+    {
+      "claim_id": "SMCI:smci-auditor-uncertainty",
+      "ticker": "SMCI",
+      "category": "going_concern_accounting",
+      "outcome": "supported",
+      "valid_report": "pass",
+      "evidence_traceability": "pass",
+      "settlement": "pass",
+      "explanation_fidelity": "pass",
+      "severe_misses": [],
+      "decision_basis": "Exact SEC evidence record, validated report, and deterministic Item 4.01 accounting-warning finding reviewed in the SEC-only confirmation.",
+      "evidence_reference_ids": [
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/SMCI.json#claim-extracted-000137536524000036-accounting_warning-1",
+        "SMCI:smci-auditor-uncertainty:review:1",
+        "evaluation/live/2026-09-01-denominator-gap-confirmation-2/raw/SMCI.json#/report/claims",
+        "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/SMCI.json#/evidence_records/evidence-extracted-0001375365-24-000036-accounting_warning-1"
+      ],
+      "source_report_artifact": "evaluation/live/2026-09-01-sec-only-confirmation-1/raw/SMCI.json",
+      "historical_quality_preserved": null
+    }
+  ],
+  "gate": {
+    "all_rows_valid": true,
+    "all_rows_traceable": true,
+    "settlement_gate": true,
+    "explanation_gate": true,
+    "severe_miss_gate": true,
+    "passed": true,
+    "issue_55_must_remain_open": true
+  },
+  "next_step": "Quality dimensions are complete for the canonical 14-row review; keep Issue #55 open for the broader non-pooled recall, sparse-category, and numeric-FCF reliability gates.",
+  "input_hash": {
+    "path": "evaluation/diagnostics/fast-reliability-quality-dimension-bindings-2026-09-01.json",
+    "sha256_lf_normalized": "cad16d90ec8ea6903a4f98d36f4c4548b86e3638514fb8e6c164565c28359a15"
+  }
+}

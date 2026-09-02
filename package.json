@@ -8,6 +8,8 @@
     "dev-test": "node dev-test-server.js",
     "evaluate:dry": "node scripts/evaluate-sample.js",
     "evaluate:adversarial": "node scripts/evaluate-adversarial.js",
+    "evaluate:denominator-decision": "node scripts/decide-reliability-denominator.js",
+    "evaluate:final-closure-review": "node scripts/evaluate-final-closure-review.js",
     "validate:reports": "node scripts/validate-report-fixtures.js",
     "test": "node --test \"test/*.test.js\""
   },

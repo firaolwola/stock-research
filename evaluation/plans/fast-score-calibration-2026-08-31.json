@@ -1,0 +1,74 @@
+{
+  "plan_id": "fast-score-calibration-2026-08-31",
+  "issue": 77,
+  "methodology_version": "2.1.0",
+  "live_execution": false,
+  "score_components": [
+    {"key": "financial_health", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "financial_revenue_trend", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "financial_net_income_trend", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "financial_debt_trend", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "financial_free_cash_flow_trend", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "financial_cash_trend", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "financial_operating_cash_flow_trend", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "dilution_historical_severity", "direction": "higher_is_more_risk", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "dilution_future_likelihood", "direction": "higher_is_more_risk", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "dilution_potential_impact", "direction": "higher_is_more_risk", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "reverse_split_risk", "direction": "higher_is_more_risk", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "catalyst_strength", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "near_term_setup_quality", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]},
+    {"key": "long_term_company_quality", "direction": "higher_is_better", "unresolved": ["limited_coverage", "unscored"]}
+  ],
+  "frozen_artifacts": [
+    "evaluation/live",
+    "evaluation/diagnostics",
+    "evaluation/plans/fast-reliability-2026-08-27.json"
+  ],
+  "cases": [
+    {
+      "id": "complete-control",
+      "fixture": "fixtures/reports/complete.json",
+      "expected": {
+        "financial_health": {"state": "confirmed", "min": 6, "max": 9},
+        "financial_revenue_trend": {"state": "confirmed", "min": 7, "max": 9},
+        "financial_net_income_trend": {"state": "confirmed", "min": 8, "max": 10},
+        "financial_debt_trend": {"state": "confirmed", "min": 3, "max": 5},
+        "financial_free_cash_flow_trend": {"state": "confirmed", "min": 8, "max": 10},
+        "financial_cash_trend": {"state": "confirmed", "min": 8, "max": 10},
+        "financial_operating_cash_flow_trend": {"state": "confirmed", "min": 9, "max": 10},
+        "reverse_split_risk": {"state": "confirmed", "min": 0, "max": 2},
+        "dilution_historical_severity": {"state": "limited_coverage"},
+        "dilution_future_likelihood": {"state": "limited_coverage"},
+        "dilution_potential_impact": {"state": "limited_coverage"},
+        "long_term_company_quality": {"state": "limited_coverage"},
+        "catalyst_strength": {"state": "limited_coverage"},
+        "near_term_setup_quality": {"state": "limited_coverage"}
+      }
+    },
+    {
+      "id": "partial-evidence",
+      "fixture": "fixtures/reports/partial.json",
+      "expected": {
+        "financial_health": {"state": "limited_coverage"},
+        "financial_revenue_trend": {"state": "limited_coverage"},
+        "financial_net_income_trend": {"state": "limited_coverage"},
+        "financial_debt_trend": {"state": "limited_coverage"},
+        "financial_free_cash_flow_trend": {"state": "limited_coverage"},
+        "financial_cash_trend": {"state": "limited_coverage"},
+        "financial_operating_cash_flow_trend": {"state": "limited_coverage"},
+        "dilution_historical_severity": {"state": "limited_coverage"},
+        "dilution_future_likelihood": {"state": "limited_coverage"},
+        "dilution_potential_impact": {"state": "limited_coverage"},
+        "reverse_split_risk": {"state": "limited_coverage"},
+        "long_term_company_quality": {"state": "limited_coverage"},
+        "catalyst_strength": {"state": "limited_coverage"},
+        "near_term_setup_quality": {"state": "limited_coverage"}
+      }
+    }
+  ],
+  "relative_ordering": [
+    {"id": "revenue-growth-over-decline", "score_key": "financial_revenue_trend", "higher_report": "growth", "lower_report": "decline"},
+    {"id": "debt-control-over-growth", "score_key": "financial_debt_trend", "higher_report": "declining-debt", "lower_report": "growing-debt"},
+    {"id": "risk-severity-over-clean", "score_key": "reverse_split_risk", "higher_report": "listing-pressure", "lower_report": "clean-listing"}
+  ]
+}

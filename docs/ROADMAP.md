@@ -8,6 +8,17 @@ the running product-vision source of truth.
 
 ## Current state
 
+### Current #55 closure status (2026-09-02)
+
+The bounded practical-small milestone is operationally complete under the
+owner-accepted scope: 14 unique quality-reviewed claims are supported, with
+zero current severe misses and safe unresolved FCF settlement. Broad
+statistical reliability remains explicitly unproven because historical cohorts
+are not safely poolable. The closure artifact reports these as separate
+outcomes; numeric FCF coverage is informational, not a closure requirement.
+The active follow-up is `55-OPERATIONAL-CLOSE` in `docs/ISSUE_PLAN.md`, which
+covers metadata alignment and the final authenticated merge/close workflow.
+
 The application has a strong deterministic foundation: a versioned report
 contract, semantic validation, claim-linked sources, distinct evidence states,
 deterministic score calculation, a responsive dashboard, token-free mock mode,
@@ -76,7 +87,7 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — reliability/sample-size review after live confirmation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The minimum offline adversarial/property loop and linked-annual-exhibit regression suite pass. The fresh approved ONFO/STN confirmation passed 7/7 targeted claims with zero severe misses. A same-five confirmation measured 82/86 (95.35%), but AMC's completed split and NCPL's non-reliance event remained severe live misses and FCF remained below target. The targeted offline correction was confirmed for NCPL (Item 4.02 surfaced and affected metrics stayed Limited) but not for AMC: the completed 2023-08-24 1-for-10 split remains absent from the live bounded packet. The two-case confirmation measured 1/2 with valid, safe partial reports. Issue #55 remains open until the AMC retrieval defect and the severe-miss/category gate pass.
+8. [ ] **Active — bounded operational close preparation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The accepted practical-small scope has 14 unique quality-reviewed claims with 14 supported, zero current severe misses, and safe unresolved FCF settlement. Broad statistical reliability remains explicitly unproven because historical cohorts are not safely poolable. NIO attributable annual net loss remains `unavailable_authoritative_evidence`, not a system miss. The next work item is `55-OPERATIONAL-CLOSE` in `docs/ISSUE_PLAN.md`: align metadata, then perform the authenticated PR #74 merge and Issue #55 close with this qualification preserved. No additional sparse expansion is authorized by the current scope decision.
 
 ### Issue #55 corrective roadmap
 
