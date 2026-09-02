@@ -1,0 +1,17 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "result": "runner_failure",
+  "failure_phase": "live_runner_lifecycle",
+  "error": {
+    "constructor": "Warning",
+    "name": "UnsettledTopLevelAwait",
+    "code": "NODE_EXIT_13",
+    "message": "Redacted: the one approved process ended while awaiting researchTicker because the dedicated runner did not keep the event loop alive."
+  },
+  "report_received": false,
+  "corporate_action_diagnostics_received": false,
+  "provider_usage": "unknown",
+  "openai_cost_usd": 0,
+  "retry_performed": false
+}

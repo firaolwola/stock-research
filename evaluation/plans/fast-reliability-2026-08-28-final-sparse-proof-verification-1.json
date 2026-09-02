@@ -1,0 +1,10 @@
+{
+  "plan_version":"1.0.0","issue":55,"batch":"final-sparse-proof-verification-1","approved_at":"2026-08-28",
+  "proposal":"evaluation/plans/fast-reliability-final-sparse-proof-proposal.json","proposal_sha256":"7cdc2e431e8de399526c80c5484b35fdbc296d39005e6ba241a87e7ce088523a",
+  "baseline":"evaluation/baselines/final-sparse-proof-baseline-confirmation-2026-08-28.json","baseline_sha256":"b1ea0ff6da7f91abecaaa6570905c76f783758ec703c041cd87af3e3ba7bbd7e",
+  "preserved_measurement":"evaluation/live/2026-08-28-final-sparse-proof-1/summary.json","preserved_measurement_sha256":"9147c3ebe5b0f3f0e0b3b925d98556c38349537e5c01a85c980205cf0a48520b",
+  "output_directory":"2026-08-28-final-sparse-proof-verification-1","approval_token":"issue-55-2026-08-28-approved-final-sparse-proof-verification-two-runs","required_ancestor":"86ad1a3",
+  "approval":{"approved":true,"tickers":["ONFO","STN"],"runs_per_ticker":1,"automatic_retries":false,"maximum_runs":2,"maximum_openai_cost_usd":0.06,"maximum_alpha_vantage_requests":4,"maximum_twelve_data_requests":4,"maximum_combined_optional_provider_attempts":8,"difficult_budget_approved":false,"fast_ceiling_ms_per_ticker":20000,"maximum_aggregate_fast_runtime_ms":40000,"deep_runs":0,"hosted_web_search":false},
+  "configuration":{"model":"gpt-5.1","reasoning_effort":"none","tools":[],"maximum_output_tokens":900,"maximum_synthesis_timeout_ms":8000,"sdk_retries":0,"budget_class":"normal"},
+  "provider_policy":{"provider_order":["alpha_vantage","twelve_data"],"alpha_vantage_is_hard_gate":false,"optional_context_may_settle_limited":true,"twelve_data_financials_for_scoring":false,"twelve_data_release_bodies_to_openai":false}
+}

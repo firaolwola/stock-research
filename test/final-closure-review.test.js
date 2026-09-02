@@ -1,0 +1,30 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { buildFinalClosureReview } from "../scripts/evaluate-final-closure-review.js";
+
+test("final closure review applies the chosen denominator and owner-approved FCF policy", async () => {
+  const result = await buildFinalClosureReview();
+  assert.equal(result.denominator.claims, 14);
+  assert.equal(result.denominator.supported, 14);
+  assert.equal(result.denominator.missed, 0);
+  assert.equal(result.denominator.exact_unique_claim_ids, true);
+  assert.equal(result.gates.quality_gate_established, true);
+  assert.equal(result.gates.severe_miss_gate_established, true);
+  assert.equal(result.gates.fcf_safety_gate_established, true);
+  assert.equal(result.gates.numeric_fcf_coverage_required, false);
+  assert.equal(result.gates.overall_recall_established, false);
+  assert.equal(result.gates.sparse_category_gate_established, true);
+  assert.equal(result.gates.sparse_category_scope_accepted, true);
+  assert.equal(result.gates.broad_statistical_reliability_established, false);
+  assert.equal(result.operational_completion.status, "operationally_complete");
+  assert.equal(result.operational_completion.passed, true);
+  assert.equal(result.operational_completion.criteria.numeric_fcf_required, false);
+  assert.equal(result.operational_completion.criteria.frozen_artifact_manifest_valid, true);
+  assert.equal(result.broad_reliability.status, "unproven");
+  assert.equal(result.broad_reliability.passed, false);
+  assert.equal(result.gates.operational_completion_passed, true);
+  assert.equal(result.gates.broad_statistical_reliability_passed, false);
+  assert.equal(result.gates.milestone_operationally_complete, true);
+  assert.equal(result.gates.passed, false);
+  assert.equal(result.gates.issue_55_must_remain_open, true);
+});

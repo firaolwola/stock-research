@@ -78,6 +78,9 @@ Fast must resolve the current security and issuer correctly and capture obvious
 recent name or ticker changes when reliable evidence is available. Exhaustive
 predecessor and issuer-history reconstruction belongs primarily in Deep.
 Uncertain identity relationships must not be treated as confirmed.
+Fast may resolve an exact historical, renamed, OTC, or delisted ticker through a
+small reviewed SEC-backed CIK registry. It never fuzzy-matches identity; an
+unmapped or conflicting lineage settles Limited and cannot merge issuer evidence.
 
 ### Make evidence inspectable
 
@@ -156,14 +159,14 @@ use only source-linked observations with matching definitions, units,
 currencies, and comparable period lengths. A single observation is labeled as
 such and never presented as a trend.
 
-The financial chart area groups annual history from primary filings into Income
+The financial chart area groups comparable primary-filing history into Income
 statement, Balance sheet, Cash flow, and Capital structure blocks. Annual and
-quarterly periods are never mixed in one series; annual history is preferred
-when available.
+interim periods are never mixed in one series. Newer comparable interim evidence
+takes precedence when older annual history would hide a material current change.
 
 The same chart area may show SEC-reported shares outstanding as capital-structure
 context. It uses point-in-time reported observations and may summarize the
-visible-window change, but it must remain distinct from float, authorized shares,
+visible-window split-adjusted change, but it must remain distinct from float, authorized shares,
 registered capacity, warrants, convertibles, and potential dilution. This display
 context does not create or modify a methodology 2.1.0 score.
 
@@ -190,9 +193,11 @@ source is better for current news or market context.
 
 The approved source-responsibility map and score-level evidence contracts are
 maintained in `FAST_SOURCE_STRATEGY.md`. The implemented free-first stack uses
-SEC and Nasdaq Trader as authoritative public sources and Alpha Vantage's free
-tier for discovery and end-of-day market context. No paid subscription is
-approved.
+SEC and Nasdaq Trader as authoritative public sources and an interchangeable
+free-tier adapter layer for discovery and end-of-day market context. Alpha
+Vantage and Twelve Data Basic are approved for this narrow internal/personal
+role. Neither provider supplies authoritative financial facts or material-score
+evidence, and no paid subscription is approved.
 
 Use sources in this order when available:
 

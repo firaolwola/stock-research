@@ -1,0 +1,3353 @@
+{
+  "case_id": "tupbq-2026-sparse",
+  "ticker": "TUPBQ",
+  "attempted_at": "2026-08-27T23:31:28.128Z",
+  "elapsed_ms": 8162,
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-TUPBQ-2026-08-27T23:31:19.965Z",
+    "metadata": {
+      "as_of": "2026-08-27T23:31:19.965Z",
+      "generated_at": "2026-08-27T23:31:19.965Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-27",
+          "end": "2026-08-27"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "nasdaq-symbol-unresolved",
+          "explanation": "The security was not confirmed in the bounded Nasdaq directories.",
+          "affected_sections": [
+            "issuer",
+            "compliance_and_warnings"
+          ]
+        },
+        {
+          "code": "provider-news-provider_quota",
+          "explanation": "Current news discovery is Limited; optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "provider-market-provider_quota",
+          "explanation": "End-of-day price and volume context is Limited (provider quota); optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "TUPBQ",
+      "name": "TUPPERWARE BRANDS CORP",
+      "security_type": "common_stock",
+      "listing_venue": "OTC Expert Market",
+      "listing_status": "delisted",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-sec-lineage-1",
+        "claim-sec-lineage-2"
+      ]
+    },
+    "issuer": {
+      "legal_name": "TUPPERWARE BRANDS CORP",
+      "cik": "0001008654",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [
+        {
+          "name": "TUPPERWARE CORP",
+          "ticker": null,
+          "effective_from": "1996-03-04",
+          "effective_to": "2005-12-05",
+          "linkage_state": "confirmed",
+          "linkage_confidence": "high",
+          "claim_ids": [
+            "claim-sec-lineage-1"
+          ]
+        },
+        {
+          "name": "Tupperware Brands Corporation",
+          "ticker": "TUP",
+          "effective_from": "1996-05-31",
+          "effective_to": "2024-09-18",
+          "linkage_state": "confirmed",
+          "linkage_confidence": "high",
+          "claim_ids": [
+            "claim-sec-lineage-2"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-sec-lineage-1",
+        "claim-sec-lineage-2"
+      ]
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "SEC filing discovery completed, but split terms were not extracted in this bounded phase.",
+        "coverage_notes": [
+          "Filing-text and exchange corporate-action parsing remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "warrant",
+            "title": "Warrant financing instrument",
+            "state": "confirmed",
+            "summary": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the DRA or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+            "event_date": "2024-03-29",
+            "claim_ids": [
+              "claim-extracted-000100865424000035-warrant-1",
+              "claim-sec-lineage-2"
+            ]
+          },
+          {
+            "id": "dilution-extracted-2",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "Investors should also be aware that while the Company does, from time to time, communicate with securities analysts, it is against the Company’s policy to disclose to them any material non-public information or other confidential commercial information.",
+            "event_date": "2023-10-13",
+            "claim_ids": [
+              "claim-extracted-000100865423000079-offering-2",
+              "claim-sec-lineage-2"
+            ]
+          },
+          {
+            "id": "dilution-extracted-3",
+            "kind": "warrant",
+            "title": "Warrant financing instrument",
+            "state": "confirmed",
+            "summary": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the Debt Restructuring Agreement (as defined below) or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+            "event_date": "2023-10-13",
+            "claim_ids": [
+              "claim-extracted-000100865423000079-warrant-3",
+              "claim-sec-lineage-2"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000100865424000035-warrant-1",
+          "claim-sec-lineage-2",
+          "claim-extracted-000100865423000079-offering-2",
+          "claim-extracted-000100865423000079-warrant-3"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "Selected filings contain an active exchange-compliance condition.",
+        "coverage_notes": [
+          "Fast does not exhaustively search exchange notices or older filings."
+        ],
+        "items": [
+          {
+            "id": "compliance-1",
+            "kind": "exchange_compliance",
+            "title": "Active exchange compliance warning",
+            "state": "confirmed",
+            "summary": "n the NYSE may commence suspension and delisting procedures. Further, on April 7, 2023, the Company received written notice from the NYSE indicating that the Company was not in compliance with Section 802.01E of the NYSE Manual, as a result of its failure to timely file this Report with the SEC. In connection with the April notice, the Company notified the NYSE that it intended to file this Report and its Form 10-Q for the first fiscal quarter of 2023 (the “Q1 Form 10-Q”) within the six-month cure period, which ended on September 30, 2023. The Company previously disclosed on Current Reports on Form 8-K dated March 16, 2023, April 7, 2023, May 8, 2023, May 30, 2023, July 7, 2023,",
+            "event_date": "2023-10-13",
+            "resolution_state": "active",
+            "claim_ids": [
+              "claim-extracted-000100865423000079-exchange_compliance-1",
+              "claim-sec-lineage-2"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000100865423000079-exchange_compliance-1",
+          "claim-sec-lineage-2"
+        ]
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2023-09-30; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+          "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+          "Runway is not calculated because current, comparable cash and positive burn inputs are not both available.",
+          "A recent SEC non-reliance/restatement event invalidates affected historical flow scoring until corrected comparable statements are available."
+        ],
+        "items": [
+          {
+            "id": "financial-stale-period",
+            "kind": "other",
+            "title": "Financial evidence is stale",
+            "state": "confirmed",
+            "summary": "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+            "event_date": "2023-09-30",
+            "claim_ids": [
+              "claim-financial-stale"
+            ]
+          },
+          {
+            "id": "financial-filing-warning-1",
+            "kind": "going_concern",
+            "title": "Going-concern warning",
+            "state": "confirmed",
+            "summary": "Going Concern and Liquidity In accordance with Accounting Standards Codification (“ASC”) Topic 205-40, Going Concern , the Company evaluates whether there are certain conditions and events, considered in the aggregate, that raise substantial doubt about the Company’s ability to continue as a going concern.",
+            "event_date": "2024-03-29",
+            "claim_ids": [
+              "claim-extracted-000100865424000035-going_concern-1"
+            ]
+          },
+          {
+            "id": "financial-filing-warning-2",
+            "kind": "accounting_warning",
+            "title": "Non-reliance or restatement warning",
+            "state": "confirmed",
+            "summary": "year 2023 and 2022 ended on September 30, 2023 and September 24, 2022, respectively. Restatement of Previously Issued Financial Statements As previously disclosed in the Company's 2022 10-K filed with the SEC on October 16, 2023, the Company restated its previously issued unaudited interim Condensed Consolidated Financial Information for the first three quarters of 2022 and all quarters of 2021 and its 2021 and 2020 annual Consolidated Financial Statements due to multiple prior period misstatements. The accompanying 2022 Condensed Consolidated Interim Financial Statements have been restated in this Quarterly Report on Form 10-Q. In addition, the Company has corrected the accompanying footnotes in connection with the restatement see Note 21: Restated Previously Issued 2022 Financial Statements. Reclassifications Certain prior period amounts in the Condensed Consolidated Financial Statements and accompanying notes have been reclassified to conform with the current period presentation and are not the result of an error in classification, but are separately presented on the face of th",
+            "event_date": "2024-03-29",
+            "claim_ids": [
+              "claim-extracted-000100865424000035-non_reliance-2"
+            ]
+          },
+          {
+            "id": "financial-filing-warning-3",
+            "kind": "accounting_warning",
+            "title": "Material weakness or ineffective controls",
+            "state": "confirmed",
+            "summary": "In connection with the restatement, the Audit Committee concluded, with concurrence of management, that there were deficiencies in the Company’s internal control over financial reporting that constituted material weaknesses as of December 31, 2022.",
+            "event_date": "2023-10-13",
+            "claim_ids": [
+              "claim-extracted-000100865423000079-accounting_warning-3"
+            ]
+          },
+          {
+            "id": "financial-filing-warning-4",
+            "kind": "other",
+            "title": "Bankruptcy or restructuring proceeding",
+            "state": "confirmed",
+            "summary": "NYSE Regulation reached its decision that the Corporation is no longer suitable for listing pursuant to NYSE Listed Company Manual Section 802.01D after the Corporation and certain of its direct and indirect subsidiaries filed voluntary petitions to commence proceedings under Chapter 11 (the “Chapter 11 Cases”) of title 11 of the United States Bankruptcy Code in the United States Bankruptcy Court for the District of Delaware (the “Bankruptcy Court”).",
+            "event_date": "2024-09-23",
+            "claim_ids": [
+              "claim-extracted-000100865424000073-bankruptcy-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-financial-stale",
+          "claim-extracted-000100865424000035-going_concern-1",
+          "claim-extracted-000100865424000035-non_reliance-2",
+          "claim-extracted-000100865423000079-accounting_warning-3",
+          "claim-extracted-000100865424000073-bankruptcy-4",
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-cash-annual-4",
+          "claim-financial-revenue-observation-1",
+          "claim-financial-revenue",
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-revenue-annual-3",
+          "claim-financial-revenue-annual-4",
+          "claim-financial-profitability-observation-1",
+          "claim-financial-profitability",
+          "claim-financial-profitability-annual-1",
+          "claim-financial-profitability-annual-2",
+          "claim-financial-profitability-annual-3",
+          "claim-financial-profitability-annual-4",
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow",
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-operating_cash_flow-annual-4",
+          "claim-financial-debt"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "pursuant to Section 13(a) of the Exchange Act. ☐ Item 4.02 Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review During the financial year-end close process of Tupperware Brands Corporation (the “Company” or the “Registrant”), management, with assistance from its tax and accounting advisors, identified several adjustments related to prior and current periods that have given rise to a restatement of previously issued financial statements. The Company believes that the adjustments identified to date are primarily non-cash corrections related to income taxes and lease accounting treatment. As a result, the Company expects to delay the filing of its 2022 Annual Return on Form 10-K, as further discussed below. On March 12, 2023, the Audit and Finance Committee of the Company’s Board of Directors, based on the recommendation of management of the Company and after consultation with PricewaterhouseCoopers LLP, the Company’s independent registered public accounting firm, concluded that the Company’s previously issued consolidated financial statements as of and for the years ended December 26, 2020 and December 25, 2021, and the previously issued unaudited interim condensed consolidated financial statements in 2021 and the first three quarters of 2022 (collectively, the “Relevant Periods”), as well as the associated earnings press releases, were materially misstated and therefore the financial statements should be restated and the financial statements and earnings press releases should no longer be relied upon. While preparing the consolidated financial statements for the year ended December 31, 2022, the Company identified multiple prior Relevant Period misstatements, the most material of which identified to date relate to the Company’s accounting for income taxes and leases. These",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "pursuant to Section 13(a) of the Exchange Act. ☐ Item 4.02 Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review During the financial year-end close process of Tupperware Brands Corporation (the “Company” or the “Registrant”), management, with assistance from its tax and accounting advisors, identified several adjustments related to prior and current periods that have given rise to a restatement of previously issued financial statements. The Company believes that the adjustments identified to date are primarily non-cash corrections related to income taxes and lease accounting treatment. As a result, the Company expects to delay the filing of its 2022 Annual Return on Form 10-K, as further discussed below. On March 12, 2023, the Audit and Finance Committee of the Company’s Board of Directors, based on the recommendation of management of the Company and after consultation with PricewaterhouseCoopers LLP, the Company’s independent registered public accounting firm, concluded that the Company’s previously issued consolidated financial statements as of and for the years ended December 26, 2020 and December 25, 2021, and the previously issued unaudited interim condensed consolidated financial statements in 2021 and the first three quarters of 2022 (collectively, the “Relevant Periods”), as well as the associated earnings press releases, were materially misstated and therefore the financial statements should be restated and the financial statements and earnings press releases should no longer be relied upon. While preparing the consolidated financial statements for the year ended December 31, 2022, the Company identified multiple prior Relevant Period misstatements, the most material of which identified to date relate to the Company’s accounting for income taxes and leases. These",
+            "event_date": "2023-03-16",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000100865423000022-catalyst-2"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-27",
+      "reporting_currency": "USD",
+      "summary": "Latest standardized SEC facts are shown through 2023-09-30; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+        "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+        "Runway is not calculated because current, comparable cash and positive burn inputs are not both available.",
+        "A recent SEC non-reliance/restatement event invalidates affected historical flow scoring until corrected comparable statements are available."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "limited_coverage",
+          "label": "Cash and Cash Equivalents, at Carrying Value",
+          "value": null,
+          "unit": null,
+          "period_start": "2023-09-30",
+          "period_end": "2023-09-30",
+          "trend": "unknown",
+          "comparison_period_start": "2023-07-01",
+          "comparison_period_end": "2023-07-01",
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Cash and Cash Equivalents, at Carrying Value is 1062 days old and is not used as current decision evidence.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3",
+            "claim-financial-cash-annual-4"
+          ]
+        },
+        "revenue": {
+          "state": "limited_coverage",
+          "label": "Revenue from Contract with Customer, Excluding Assessed Tax",
+          "value": null,
+          "unit": null,
+          "period_start": "2023-07-02",
+          "period_end": "2023-09-30",
+          "trend": "unknown",
+          "comparison_period_start": "2023-01-01",
+          "comparison_period_end": "2023-04-01",
+          "observations": [],
+          "annual_observations": [],
+          "summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods.",
+          "claim_ids": [
+            "claim-financial-revenue-observation-1",
+            "claim-financial-revenue",
+            "claim-financial-revenue-annual-1",
+            "claim-financial-revenue-annual-2",
+            "claim-financial-revenue-annual-3",
+            "claim-financial-revenue-annual-4",
+            "claim-extracted-000100865424000035-non_reliance-2"
+          ]
+        },
+        "profitability": {
+          "state": "limited_coverage",
+          "label": "Net Income (Loss) Attributable to Parent",
+          "value": null,
+          "unit": null,
+          "period_start": "2023-07-02",
+          "period_end": "2023-09-30",
+          "trend": "unknown",
+          "comparison_period_start": "2022-03-27",
+          "comparison_period_end": "2022-06-25",
+          "observations": [],
+          "annual_observations": [],
+          "summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods.",
+          "claim_ids": [
+            "claim-financial-profitability-observation-1",
+            "claim-financial-profitability",
+            "claim-financial-profitability-annual-1",
+            "claim-financial-profitability-annual-2",
+            "claim-financial-profitability-annual-3",
+            "claim-financial-profitability-annual-4",
+            "claim-extracted-000100865424000035-non_reliance-2"
+          ]
+        },
+        "operating_cash_flow": {
+          "state": "limited_coverage",
+          "label": "Operating cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": "2020-12-27",
+          "period_end": "2021-06-26",
+          "trend": "unknown",
+          "comparison_period_start": "2019-12-29",
+          "comparison_period_end": "2020-06-27",
+          "observations": [],
+          "annual_observations": [],
+          "summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow",
+            "claim-financial-operating_cash_flow-annual-1",
+            "claim-financial-operating_cash_flow-annual-2",
+            "claim-financial-operating_cash_flow-annual-3",
+            "claim-financial-operating_cash_flow-annual-4",
+            "claim-extracted-000100865424000035-non_reliance-2"
+          ]
+        },
+        "free_cash_flow": {
+          "state": "limited_coverage",
+          "label": "Free cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods.",
+          "claim_ids": [
+            "claim-extracted-000100865424000035-non_reliance-2"
+          ]
+        },
+        "cash_burn": {
+          "state": "limited_coverage",
+          "label": "Cash burn",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "This historical flow metric is not scored because a newer SEC non-reliance or restatement event may affect the reported periods.",
+          "claim_ids": [
+            "claim-extracted-000100865424000035-non_reliance-2"
+          ]
+        },
+        "debt": {
+          "state": "limited_coverage",
+          "label": "Total debt",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Short-term Debt of 0 USD is available at 2021-12-25, but total debt cannot be established without aligned current and non-current components.",
+          "claim_ids": [
+            "claim-financial-debt"
+          ]
+        }
+      },
+      "shares_outstanding": {
+        "state": "confirmed",
+        "summary": "Reported shares outstanding decreased 4.8% over the displayed period from 2021-11-01 to 2024-03-21.",
+        "observations": [
+          {
+            "value": 48880241,
+            "unit": "shares",
+            "period_start": "2021-11-01",
+            "period_end": "2021-11-01",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 45845271,
+            "unit": "shares",
+            "period_start": "2022-05-02",
+            "period_end": "2022-05-02",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 46269320,
+            "unit": "shares",
+            "period_start": "2023-10-05",
+            "period_end": "2023-10-05",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 46530613,
+            "unit": "shares",
+            "period_start": "2024-03-21",
+            "period_end": "2024-03-21",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 48880241,
+            "unit": "shares",
+            "period_start": "2021-11-01",
+            "period_end": "2021-11-01",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 45845271,
+            "unit": "shares",
+            "period_start": "2022-05-02",
+            "period_end": "2022-05-02",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 46269320,
+            "unit": "shares",
+            "period_start": "2023-10-05",
+            "period_end": "2023-10-05",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 46530613,
+            "unit": "shares",
+            "period_start": "2024-03-21",
+            "period_end": "2024-03-21",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-shares-outstanding-1",
+          "claim-shares-outstanding-2",
+          "claim-shares-outstanding-3",
+          "claim-shares-outstanding-4"
+        ]
+      },
+      "going_concern": {
+        "state": "confirmed",
+        "as_of": "2024-03-29",
+        "summary": "Going Concern and Liquidity In accordance with Accounting Standards Codification (“ASC”) Topic 205-40, Going Concern , the Company evaluates whether there are certain conditions and events, considered in the aggregate, that raise substantial doubt about the Company’s ability to continue as a going concern.",
+        "claim_ids": [
+          "claim-extracted-000100865424000035-going_concern-1"
+        ]
+      },
+      "material_warnings": [
+        {
+          "id": "financial-stale-period",
+          "kind": "other",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Financial evidence is stale",
+          "as_of": "2023-09-30",
+          "summary": "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+          "claim_ids": [
+            "claim-financial-stale"
+          ]
+        },
+        {
+          "id": "financial-filing-warning-1",
+          "kind": "going_concern",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Going-concern warning",
+          "as_of": "2024-03-29",
+          "summary": "Going Concern and Liquidity In accordance with Accounting Standards Codification (“ASC”) Topic 205-40, Going Concern , the Company evaluates whether there are certain conditions and events, considered in the aggregate, that raise substantial doubt about the Company’s ability to continue as a going concern.",
+          "claim_ids": [
+            "claim-extracted-000100865424000035-going_concern-1"
+          ]
+        },
+        {
+          "id": "financial-filing-warning-2",
+          "kind": "accounting",
+          "state": "confirmed",
+          "severity": "critical",
+          "title": "Non-reliance or restatement warning",
+          "as_of": "2024-03-29",
+          "summary": "year 2023 and 2022 ended on September 30, 2023 and September 24, 2022, respectively. Restatement of Previously Issued Financial Statements As previously disclosed in the Company's 2022 10-K filed with the SEC on October 16, 2023, the Company restated its previously issued unaudited interim Condensed Consolidated Financial Information for the first three quarters of 2022 and all quarters of 2021 and its 2021 and 2020 annual Consolidated Financial Statements due to multiple prior period misstatements. The accompanying 2022 Condensed Consolidated Interim Financial Statements have been restated in this Quarterly Report on Form 10-Q. In addition, the Company has corrected the accompanying footnotes in connection with the restatement see Note 21: Restated Previously Issued 2022 Financial Statements. Reclassifications Certain prior period amounts in the Condensed Consolidated Financial Statements and accompanying notes have been reclassified to conform with the current period presentation and are not the result of an error in classification, but are separately presented on the face of th",
+          "claim_ids": [
+            "claim-extracted-000100865424000035-non_reliance-2"
+          ]
+        },
+        {
+          "id": "financial-filing-warning-3",
+          "kind": "accounting",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Material weakness or ineffective controls",
+          "as_of": "2023-10-13",
+          "summary": "In connection with the restatement, the Audit Committee concluded, with concurrence of management, that there were deficiencies in the Company’s internal control over financial reporting that constituted material weaknesses as of December 31, 2022.",
+          "claim_ids": [
+            "claim-extracted-000100865423000079-accounting_warning-3"
+          ]
+        },
+        {
+          "id": "financial-filing-warning-4",
+          "kind": "other",
+          "state": "confirmed",
+          "severity": "critical",
+          "title": "Bankruptcy or restructuring proceeding",
+          "as_of": "2024-09-23",
+          "summary": "NYSE Regulation reached its decision that the Corporation is no longer suitable for listing pursuant to NYSE Listed Company Manual Section 802.01D after the Corporation and certain of its direct and indirect subsidiaries filed voluntary petitions to commence proceedings under Chapter 11 (the “Chapter 11 Cases”) of title 11 of the United States Bankruptcy Code in the United States Bankruptcy Court for the District of Delaware (the “Bankruptcy Court”).",
+          "claim_ids": [
+            "claim-extracted-000100865424000073-bankruptcy-4"
+          ]
+        }
+      ]
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "legal",
+        "title": "Material filing event",
+        "event_date": "2023-03-16",
+        "summary": "pursuant to Section 13(a) of the Exchange Act. ☐ Item 4.02 Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review During the financial year-end close process of Tupperware Brands Corporation (the “Company” or the “Registrant”), management, with assistance from its tax and accounting advisors, identified several adjustments related to prior and current periods that have given rise to a restatement of previously issued financial statements. The Company believes that the adjustments identified to date are primarily non-cash corrections related to income taxes and lease accounting treatment. As a result, the Company expects to delay the filing of its 2022 Annual Return on Form 10-K, as further discussed below. On March 12, 2023, the Audit and Finance Committee of the Company’s Board of Directors, based on the recommendation of management of the Company and after consultation with PricewaterhouseCoopers LLP, the Company’s independent registered public accounting firm, concluded that the Company’s previously issued consolidated financial statements as of and for the years ended December 26, 2020 and December 25, 2021, and the previously issued unaudited interim condensed consolidated financial statements in 2021 and the first three quarters of 2022 (collectively, the “Relevant Periods”), as well as the associated earnings press releases, were materially misstated and therefore the financial statements should be restated and the financial statements and earnings press releases should no longer be relied upon. While preparing the consolidated financial statements for the year ended December 31, 2022, the Company identified multiple prior Relevant Period misstatements, the most material of which identified to date relate to the Company’s accounting for income taxes and leases. These",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000100865423000022-catalyst-2"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC-backed historical identity resolution associates requested ticker TUPBQ with TUPPERWARE BRANDS CORP (CIK 0001008654); current ticker is TUPBQ and venue context is OTC Expert Market.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-09-18T00:00:00Z",
+        "source_ids": [
+          "source-sec-historical-identity"
+        ]
+      },
+      {
+        "id": "claim-sec-lineage-1",
+        "text": "SEC submissions metadata identifies TUPPERWARE CORP as a former name of CIK 0001008654 from 1996-03-04 through 2005-12-05.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-27T23:31:19.965Z",
+        "source_ids": [
+          "source-sec-submissions"
+        ]
+      },
+      {
+        "id": "claim-sec-lineage-2",
+        "text": "An SEC filing links historical ticker TUP to Tupperware Brands Corporation, current ticker TUPBQ, under CIK 0001008654.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-09-18T00:00:00Z",
+        "source_ids": [
+          "source-sec-historical-identity"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865424000035-warrant-1",
+        "text": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the DRA or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000100865424000035-tup20230930htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865423000079-offering-2",
+        "text": "Investors should also be aware that while the Company does, from time to time, communicate with securities analysts, it is against the Company’s policy to disclose to them any material non-public information or other confidential commercial information.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000100865423000079-tup20221231htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865423000079-warrant-3",
+        "text": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the Debt Restructuring Agreement (as defined below) or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000100865423000079-tup20221231htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865423000079-exchange_compliance-1",
+        "text": "n the NYSE may commence suspension and delisting procedures. Further, on April 7, 2023, the Company received written notice from the NYSE indicating that the Company was not in compliance with Section 802.01E of the NYSE Manual, as a result of its failure to timely file this Report with the SEC. In connection with the April notice, the Company notified the NYSE that it intended to file this Report and its Form 10-Q for the first fiscal quarter of 2023 (the “Q1 Form 10-Q”) within the six-month cure period, which ended on September 30, 2023. The Company previously disclosed on Current Reports on Form 8-K dated March 16, 2023, April 7, 2023, May 8, 2023, May 30, 2023, July 7, 2023,",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000100865423000079-tup20221231htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865423000022-catalyst-2",
+        "text": "pursuant to Section 13(a) of the Exchange Act. ☐ Item 4.02 Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review During the financial year-end close process of Tupperware Brands Corporation (the “Company” or the “Registrant”), management, with assistance from its tax and accounting advisors, identified several adjustments related to prior and current periods that have given rise to a restatement of previously issued financial statements. The Company believes that the adjustments identified to date are primarily non-cash corrections related to income taxes and lease accounting treatment. As a result, the Company expects to delay the filing of its 2022 Annual Return on Form 10-K, as further discussed below. On March 12, 2023, the Audit and Finance Committee of the Company’s Board of Directors, based on the recommendation of management of the Company and after consultation with PricewaterhouseCoopers LLP, the Company’s independent registered public accounting firm, concluded that the Company’s previously issued consolidated financial statements as of and for the years ended December 26, 2020 and December 25, 2021, and the previously issued unaudited interim condensed consolidated financial statements in 2021 and the first three quarters of 2022 (collectively, the “Relevant Periods”), as well as the associated earnings press releases, were materially misstated and therefore the financial statements should be restated and the financial statements and earnings press releases should no longer be relied upon. While preparing the consolidated financial statements for the year ended December 31, 2022, the Company identified multiple prior Relevant Period misstatements, the most material of which identified to date relate to the Company’s accounting for income taxes and leases. These",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-03-16T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000100865423000022-tup20230312htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 122700000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 118000000 USD for the comparable period ending 2023-07-01, filed 2024-03-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 247000000 USD for the comparable period ending 2022-03-26, filed 2023-10-13.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 120800000 USD for the comparable period ending 2022-06-25, filed 2023-10-13.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 102900000 USD for the comparable period ending 2022-09-24, filed 2023-10-13.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-4",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 110100000 USD for the comparable period ending 2022-12-31, filed 2023-10-13.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 259600000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-observation-1",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 292400000 USD for the comparable period ending 2023-04-01, filed 2024-03-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-1",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 2069700000 USD for the comparable period ending 2018-12-29, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-2",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 1797900000 USD for the comparable period ending 2019-12-28, filed 2020-03-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2020-03-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-3",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 1740100000 USD for the comparable period ending 2020-12-26, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-4",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 1304000000 USD for the comparable period ending 2022-12-31, filed 2023-10-13.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -55800000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-observation-1",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 1200000 USD for the comparable period ending 2022-06-25, filed 2022-08-04.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2022-08-04T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-1",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 155900000 USD for the comparable period ending 2018-12-29, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-2",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 12400000 USD for the comparable period ending 2019-12-28, filed 2022-02-23.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2022-02-23T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-3",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of 112200000 USD for the comparable period ending 2020-12-26, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-4",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -232500000 USD for the comparable period ending 2022-12-31, filed 2023-10-13.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-4"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-1",
+        "text": "SEC Company Facts reports 48880241 common shares outstanding at 2021-11-01, filed 2021-11-04.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2021-11-04T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-2",
+        "text": "SEC Company Facts reports 45845271 common shares outstanding at 2022-05-02, filed 2022-05-05.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2022-05-05T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-3",
+        "text": "SEC Company Facts reports 46269320 common shares outstanding at 2023-10-05, filed 2023-10-13.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-4",
+        "text": "SEC Company Facts reports 46530613 common shares outstanding at 2024-03-21, filed 2024-03-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow",
+        "text": "SEC Company Facts reports Operating cash flow of 1400000 USD for the period ending 2021-06-26, filed 2021-08-05.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-08-05T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Operating cash flow of 45300000 USD for the comparable period ending 2020-06-27, filed 2021-08-05.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-08-05T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Operating cash flow of 238600000 USD for the comparable period ending 2016-12-31, filed 2017-02-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2017-02-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Operating cash flow of 132000000 USD for the comparable period ending 2018-12-29, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Operating cash flow of 87400000 USD for the comparable period ending 2019-12-28, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-4",
+        "text": "SEC Company Facts reports Operating cash flow of 166100000 USD for the comparable period ending 2020-12-26, filed 2021-03-10.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2021-03-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-debt",
+        "text": "Short-term Debt of 0 USD is available at 2021-12-25, but total debt cannot be established without aligned current and non-current components.",
+        "materiality": "high",
+        "state": "limited_coverage",
+        "as_of": "2022-02-23T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt"
+        ]
+      },
+      {
+        "id": "claim-financial-stale",
+        "text": "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T23:31:19.965Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1",
+          "source-sec-companyfacts-cash",
+          "source-sec-companyfacts-cash-annual-1",
+          "source-sec-companyfacts-cash-annual-2",
+          "source-sec-companyfacts-cash-annual-3",
+          "source-sec-companyfacts-cash-annual-4",
+          "source-sec-companyfacts-revenue-observation-1",
+          "source-sec-companyfacts-revenue",
+          "source-sec-companyfacts-revenue-annual-1",
+          "source-sec-companyfacts-revenue-annual-2",
+          "source-sec-companyfacts-revenue-annual-3",
+          "source-sec-companyfacts-revenue-annual-4",
+          "source-sec-companyfacts-profitability-observation-1",
+          "source-sec-companyfacts-profitability",
+          "source-sec-companyfacts-profitability-annual-1",
+          "source-sec-companyfacts-profitability-annual-2",
+          "source-sec-companyfacts-profitability-annual-3",
+          "source-sec-companyfacts-profitability-annual-4"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865424000035-going_concern-1",
+        "text": "Going Concern and Liquidity In accordance with Accounting Standards Codification (“ASC”) Topic 205-40, Going Concern , the Company evaluates whether there are certain conditions and events, considered in the aggregate, that raise substantial doubt about the Company’s ability to continue as a going concern.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000100865424000035-tup20230930htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865424000035-non_reliance-2",
+        "text": "year 2023 and 2022 ended on September 30, 2023 and September 24, 2022, respectively. Restatement of Previously Issued Financial Statements As previously disclosed in the Company's 2022 10-K filed with the SEC on October 16, 2023, the Company restated its previously issued unaudited interim Condensed Consolidated Financial Information for the first three quarters of 2022 and all quarters of 2021 and its 2021 and 2020 annual Consolidated Financial Statements due to multiple prior period misstatements. The accompanying 2022 Condensed Consolidated Interim Financial Statements have been restated in this Quarterly Report on Form 10-Q. In addition, the Company has corrected the accompanying footnotes in connection with the restatement see Note 21: Restated Previously Issued 2022 Financial Statements. Reclassifications Certain prior period amounts in the Condensed Consolidated Financial Statements and accompanying notes have been reclassified to conform with the current period presentation and are not the result of an error in classification, but are separately presented on the face of th",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-03-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000100865424000035-tup20230930htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865423000079-accounting_warning-3",
+        "text": "In connection with the restatement, the Audit Committee concluded, with concurrence of management, that there were deficiencies in the Company’s internal control over financial reporting that constituted material weaknesses as of December 31, 2022.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2023-10-13T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000100865423000079-tup20221231htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000100865424000073-bankruptcy-4",
+        "text": "NYSE Regulation reached its decision that the Corporation is no longer suitable for listing pursuant to NYSE Listed Company Manual Section 802.01D after the Corporation and certain of its direct and indirect subsidiaries filed voluntary petitions to commence proceedings under Chapter 11 (the “Chapter 11 Cases”) of title 11 of the United States Bankruptcy Code in the United States Bankruptcy Court for the District of Delaware (the “Bankruptcy Court”).",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-09-23T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000100865424000073-tup20240918htm"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-historical-identity",
+        "title": "SEC-filed ticker and listing lineage",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000068/tup-20240917.htm",
+        "published_date": "2024-09-18",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-sec-identity",
+          "claim-sec-lineage-2"
+        ]
+      },
+      {
+        "id": "source-sec-submissions",
+        "title": "SEC submissions metadata",
+        "url": "https://data.sec.gov/submissions/CIK0001008654.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-sec-lineage-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000100865424000035-tup20230930htm",
+        "title": "10-Q filed 2024-03-29 — tup-20230930.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000035/tup-20230930.htm",
+        "published_date": "2024-03-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865424000035-warrant-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000100865423000079-tup20221231htm",
+        "title": "10-K filed 2023-10-13 — tup-20221231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000079/tup-20221231.htm",
+        "published_date": "2023-10-13",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000079-offering-2",
+          "claim-extracted-000100865423000079-warrant-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000100865423000079-tup20221231htm",
+        "title": "10-K filed 2023-10-13 — tup-20221231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000079/tup-20221231.htm",
+        "published_date": "2023-10-13",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000079-exchange_compliance-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000100865423000022-tup20230312htm",
+        "title": "8-K filed 2023-03-16 — tup-20230312.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000022/tup-20230312.htm",
+        "published_date": "2023-03-16",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000022-catalyst-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2020-03-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-4",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-4",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-08-04",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-02-23",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-4",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-4",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-11-04",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-05-05",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-08-05",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-08-05",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2017-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-02-23",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000100865424000035-tup20230930htm",
+        "title": "10-Q filed 2024-03-29 — tup-20230930.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000035/tup-20230930.htm",
+        "published_date": "2024-03-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865424000035-going_concern-1",
+          "claim-extracted-000100865424000035-non_reliance-2"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000100865423000079-tup20221231htm",
+        "title": "10-K filed 2023-10-13 — tup-20221231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000079/tup-20221231.htm",
+        "published_date": "2023-10-13",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000079-accounting_warning-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000100865424000073-tup20240918htm",
+        "title": "8-K filed 2024-09-23 — tup-20240918.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000073/tup-20240918.htm",
+        "published_date": "2024-09-23",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865424000073-bankruptcy-4"
+        ]
+      }
+    ],
+    "scores": {
+      "dilution_historical_severity": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Past three years",
+        "explanation": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_future_likelihood": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_potential_impact": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "reverse_split_risk": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_health": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Latest reported period and next twelve months",
+        "explanation": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_revenue_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_net_income_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_debt_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_free_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_cash_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_operating_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "long_term_company_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Multi-year (Deep only)",
+        "explanation": "Long-term company quality remains a Deep construct and is not deterministically scored from bounded Fast evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "catalyst_strength": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Current catalyst",
+        "explanation": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+        "claim_ids": [
+          "claim-extracted-000100865423000022-catalyst-2"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          }
+        ]
+      },
+      "near_term_setup_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Next five trading days",
+        "explanation": "A supported current catalyst is required before market context can form a setup score.",
+        "claim_ids": [
+          "claim-extracted-000100865423000022-catalyst-2"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000100865423000022-catalyst-2"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-lineage-1",
+      "category": "issuer_lineage",
+      "state": "confirmed",
+      "event_date": "2005-12-05",
+      "text": "SEC submissions metadata identifies TUPPERWARE CORP as a former name of CIK 0001008654 from 1996-03-04 through 2005-12-05.",
+      "source_id": "source-sec-submissions",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-lineage-2",
+      "category": "issuer_lineage",
+      "state": "confirmed",
+      "event_date": "2024-09-18",
+      "text": "An SEC filing links historical ticker TUP to Tupperware Brands Corporation, current ticker TUPBQ, under CIK 0001008654.",
+      "source_id": "source-sec-historical-identity",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2024-09-18",
+      "text": "SEC-backed historical identity resolution associates requested ticker TUPBQ with TUPPERWARE BRANDS CORP (CIK 0001008654); current ticker is TUPBQ and venue context is OTC Expert Market.",
+      "source_id": "source-sec-historical-identity",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 122700000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-revenue",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 259600000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+      "source_id": "source-sec-companyfacts-revenue",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-profitability",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -55800000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+      "source_id": "source-sec-companyfacts-profitability",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2021-11-04",
+      "text": "SEC Company Facts reports 48880241 common shares outstanding at 2021-11-01, filed 2021-11-04.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-1",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-2",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2022-05-05",
+      "text": "SEC Company Facts reports 45845271 common shares outstanding at 2022-05-02, filed 2022-05-05.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-2",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2023-10-13",
+      "text": "SEC Company Facts reports 46269320 common shares outstanding at 2023-10-05, filed 2023-10-13.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-3",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-4",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "SEC Company Facts reports 46530613 common shares outstanding at 2024-03-21, filed 2024-03-29.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-4",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-operating_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2021-08-05",
+      "text": "SEC Company Facts reports Operating cash flow of 1400000 USD for the period ending 2021-06-26, filed 2021-08-05.",
+      "source_id": "source-sec-companyfacts-operating_cash_flow",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-debt",
+      "category": "financial_context",
+      "state": "limited_coverage",
+      "event_date": "2022-02-23",
+      "text": "Short-term Debt of 0 USD is available at 2021-12-25, but total debt cannot be established without aligned current and non-current components.",
+      "source_id": "source-sec-companyfacts-debt",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-stale",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2023-09-30",
+      "text": "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+      "source_id": "source-sec-companyfacts-cash-observation-1",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-24-000035-warrant-1",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the DRA or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+      "source_id": "source-sec-document-capital-000100865424000035-tup20230930htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-23-000079-offering-2",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2023-10-13",
+      "text": "Investors should also be aware that while the Company does, from time to time, communicate with securities analysts, it is against the Company’s policy to disclose to them any material non-public information or other confidential commercial information.",
+      "source_id": "source-sec-document-capital-000100865423000079-tup20221231htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001008654-23-000079-warrant-3",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2023-10-13",
+      "text": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the Debt Restructuring Agreement (as defined below) or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+      "source_id": "source-sec-document-capital-000100865423000079-tup20221231htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-23-000079-exchange_compliance-1",
+      "category": "compliance",
+      "state": "confirmed",
+      "event_date": "2023-10-13",
+      "text": "n the NYSE may commence suspension and delisting procedures. Further, on April 7, 2023, the Company received written notice from the NYSE indicating that the Company was not in compliance with Section 802.01E of the NYSE Manual, as a result of its failure to timely file this Report with the SEC. In connection with the April notice, the Company notified the NYSE that it intended to file this Report and its Form 10-Q for the first fiscal quarter of 2023 (the “Q1 Form 10-Q”) within the six-month cure period, which ended on September 30, 2023. The Company previously disclosed on Current Reports on Form 8-K dated March 16, 2023, April 7, 2023, May 8, 2023, May 30, 2023, July 7, 2023,",
+      "source_id": "source-sec-document-catalyst-000100865423000079-tup20221231htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-23-000022-catalyst-2",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2023-03-16",
+      "text": "pursuant to Section 13(a) of the Exchange Act. ☐ Item 4.02 Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review During the financial year-end close process of Tupperware Brands Corporation (the “Company” or the “Registrant”), management, with assistance from its tax and accounting advisors, identified several adjustments related to prior and current periods that have given rise to a restatement of previously issued financial statements. The Company believes that the adjustments identified to date are primarily non-cash corrections related to income taxes and lease accounting treatment. As a result, the Company expects to delay the filing of its 2022 Annual Return on Form 10-K, as further discussed below. On March 12, 2023, the Audit and Finance Committee of the Company’s Board of Directors, based on the recommendation of management of the Company and after consultation with PricewaterhouseCoopers LLP, the Company’s independent registered public accounting firm, concluded that the Company’s previously issued consolidated financial statements as of and for the years ended December 26, 2020 and December 25, 2021, and the previously issued unaudited interim condensed consolidated financial statements in 2021 and the first three quarters of 2022 (collectively, the “Relevant Periods”), as well as the associated earnings press releases, were materially misstated and therefore the financial statements should be restated and the financial statements and earnings press releases should no longer be relied upon. While preparing the consolidated financial statements for the year ended December 31, 2022, the Company identified multiple prior Relevant Period misstatements, the most material of which identified to date relate to the Company’s accounting for income taxes and leases. These",
+      "source_id": "source-sec-document-catalyst-000100865423000022-tup20230312htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-24-000035-going_concern-1",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "Going Concern and Liquidity In accordance with Accounting Standards Codification (“ASC”) Topic 205-40, Going Concern , the Company evaluates whether there are certain conditions and events, considered in the aggregate, that raise substantial doubt about the Company’s ability to continue as a going concern.",
+      "source_id": "source-sec-document-financial-000100865424000035-tup20230930htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-24-000035-non_reliance-2",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2024-03-29",
+      "text": "year 2023 and 2022 ended on September 30, 2023 and September 24, 2022, respectively. Restatement of Previously Issued Financial Statements As previously disclosed in the Company's 2022 10-K filed with the SEC on October 16, 2023, the Company restated its previously issued unaudited interim Condensed Consolidated Financial Information for the first three quarters of 2022 and all quarters of 2021 and its 2021 and 2020 annual Consolidated Financial Statements due to multiple prior period misstatements. The accompanying 2022 Condensed Consolidated Interim Financial Statements have been restated in this Quarterly Report on Form 10-Q. In addition, the Company has corrected the accompanying footnotes in connection with the restatement see Note 21: Restated Previously Issued 2022 Financial Statements. Reclassifications Certain prior period amounts in the Condensed Consolidated Financial Statements and accompanying notes have been reclassified to conform with the current period presentation and are not the result of an error in classification, but are separately presented on the face of th",
+      "source_id": "source-sec-document-financial-000100865424000035-tup20230930htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-23-000079-accounting_warning-3",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2023-10-13",
+      "text": "In connection with the restatement, the Audit Committee concluded, with concurrence of management, that there were deficiencies in the Company’s internal control over financial reporting that constituted material weaknesses as of December 31, 2022.",
+      "source_id": "source-sec-document-financial-000100865423000079-tup20221231htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001008654-24-000073-bankruptcy-4",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2024-09-23",
+      "text": "NYSE Regulation reached its decision that the Corporation is no longer suitable for listing pursuant to NYSE Listed Company Manual Section 802.01D after the Corporation and certain of its direct and indirect subsidiaries filed voluntary petitions to commence proceedings under Chapter 11 (the “Chapter 11 Cases”) of title 11 of the United States Bankruptcy Code in the United States Bankruptcy Court for the District of Delaware (the “Bankruptcy Court”).",
+      "source_id": "source-sec-document-financial-000100865424000073-tup20240918htm",
+      "issuer_cik": "0001008654",
+      "security_ticker": "TUPBQ",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "TUPBQ",
+    "identity": {
+      "ticker": "TUPBQ",
+      "issuer_legal_name": "TUPPERWARE BRANDS CORP",
+      "cik": "0001008654"
+    },
+    "identity_resolution": {
+      "requested_ticker": "TUPBQ",
+      "current_ticker": "TUPBQ",
+      "status": "otc",
+      "current_ticker_effective_from": "2024-09-19",
+      "listing_effective_from": "2024-09-19",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000068/tup-20240917.htm"
+    },
+    "retrieved_at": "2026-08-27T23:31:19.965Z",
+    "records": [
+      {
+        "id": "evidence-sec-lineage-1",
+        "category": "issuer_lineage",
+        "state": "confirmed",
+        "event_date": "2005-12-05",
+        "text": "SEC submissions metadata identifies TUPPERWARE CORP as a former name of CIK 0001008654 from 1996-03-04 through 2005-12-05.",
+        "source_id": "source-sec-submissions",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-lineage-2",
+        "category": "issuer_lineage",
+        "state": "confirmed",
+        "event_date": "2024-09-18",
+        "text": "An SEC filing links historical ticker TUP to Tupperware Brands Corporation, current ticker TUPBQ, under CIK 0001008654.",
+        "source_id": "source-sec-historical-identity",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2024-09-18",
+        "text": "SEC-backed historical identity resolution associates requested ticker TUPBQ with TUPPERWARE BRANDS CORP (CIK 0001008654); current ticker is TUPBQ and venue context is OTC Expert Market.",
+        "source_id": "source-sec-historical-identity",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 122700000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-revenue",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "SEC Company Facts reports Revenue from Contract with Customer, Excluding Assessed Tax of 259600000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+        "source_id": "source-sec-companyfacts-revenue",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-profitability",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -55800000 USD for the period ending 2023-09-30, filed 2024-03-29.",
+        "source_id": "source-sec-companyfacts-profitability",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2021-11-04",
+        "text": "SEC Company Facts reports 48880241 common shares outstanding at 2021-11-01, filed 2021-11-04.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-1",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-2",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2022-05-05",
+        "text": "SEC Company Facts reports 45845271 common shares outstanding at 2022-05-02, filed 2022-05-05.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-2",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2023-10-13",
+        "text": "SEC Company Facts reports 46269320 common shares outstanding at 2023-10-05, filed 2023-10-13.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-3",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-4",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "SEC Company Facts reports 46530613 common shares outstanding at 2024-03-21, filed 2024-03-29.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-4",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-operating_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2021-08-05",
+        "text": "SEC Company Facts reports Operating cash flow of 1400000 USD for the period ending 2021-06-26, filed 2021-08-05.",
+        "source_id": "source-sec-companyfacts-operating_cash_flow",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-debt",
+        "category": "financial_context",
+        "state": "limited_coverage",
+        "event_date": "2022-02-23",
+        "text": "Short-term Debt of 0 USD is available at 2021-12-25, but total debt cannot be established without aligned current and non-current components.",
+        "source_id": "source-sec-companyfacts-debt",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-stale",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2023-09-30",
+        "text": "The newest standardized SEC financial period ended 2023-09-30, 1062 days before this Fast report.",
+        "source_id": "source-sec-companyfacts-cash-observation-1",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-24-000035-warrant-1",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the DRA or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+        "source_id": "source-sec-document-capital-000100865424000035-tup20230930htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-23-000079-offering-2",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2023-10-13",
+        "text": "Investors should also be aware that while the Company does, from time to time, communicate with securities analysts, it is against the Company’s policy to disclose to them any material non-public information or other confidential commercial information.",
+        "source_id": "source-sec-document-capital-000100865423000079-tup20221231htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001008654-23-000079-warrant-3",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2023-10-13",
+        "text": "If the Company raises funds in the future by issuing equity securities, such as warrants issued under the Debt Restructuring Agreement (as defined below) or through the future sale of the Company’s common stock, it is highly likely that existing stockholders will be diluted.",
+        "source_id": "source-sec-document-capital-000100865423000079-tup20221231htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-23-000079-exchange_compliance-1",
+        "category": "compliance",
+        "state": "confirmed",
+        "event_date": "2023-10-13",
+        "text": "n the NYSE may commence suspension and delisting procedures. Further, on April 7, 2023, the Company received written notice from the NYSE indicating that the Company was not in compliance with Section 802.01E of the NYSE Manual, as a result of its failure to timely file this Report with the SEC. In connection with the April notice, the Company notified the NYSE that it intended to file this Report and its Form 10-Q for the first fiscal quarter of 2023 (the “Q1 Form 10-Q”) within the six-month cure period, which ended on September 30, 2023. The Company previously disclosed on Current Reports on Form 8-K dated March 16, 2023, April 7, 2023, May 8, 2023, May 30, 2023, July 7, 2023,",
+        "source_id": "source-sec-document-catalyst-000100865423000079-tup20221231htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-23-000022-catalyst-2",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2023-03-16",
+        "text": "pursuant to Section 13(a) of the Exchange Act. ☐ Item 4.02 Non-Reliance on Previously Issued Financial Statements or a Related Audit Report or Completed Interim Review During the financial year-end close process of Tupperware Brands Corporation (the “Company” or the “Registrant”), management, with assistance from its tax and accounting advisors, identified several adjustments related to prior and current periods that have given rise to a restatement of previously issued financial statements. The Company believes that the adjustments identified to date are primarily non-cash corrections related to income taxes and lease accounting treatment. As a result, the Company expects to delay the filing of its 2022 Annual Return on Form 10-K, as further discussed below. On March 12, 2023, the Audit and Finance Committee of the Company’s Board of Directors, based on the recommendation of management of the Company and after consultation with PricewaterhouseCoopers LLP, the Company’s independent registered public accounting firm, concluded that the Company’s previously issued consolidated financial statements as of and for the years ended December 26, 2020 and December 25, 2021, and the previously issued unaudited interim condensed consolidated financial statements in 2021 and the first three quarters of 2022 (collectively, the “Relevant Periods”), as well as the associated earnings press releases, were materially misstated and therefore the financial statements should be restated and the financial statements and earnings press releases should no longer be relied upon. While preparing the consolidated financial statements for the year ended December 31, 2022, the Company identified multiple prior Relevant Period misstatements, the most material of which identified to date relate to the Company’s accounting for income taxes and leases. These",
+        "source_id": "source-sec-document-catalyst-000100865423000022-tup20230312htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-24-000035-going_concern-1",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "Going Concern and Liquidity In accordance with Accounting Standards Codification (“ASC”) Topic 205-40, Going Concern , the Company evaluates whether there are certain conditions and events, considered in the aggregate, that raise substantial doubt about the Company’s ability to continue as a going concern.",
+        "source_id": "source-sec-document-financial-000100865424000035-tup20230930htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-24-000035-non_reliance-2",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2024-03-29",
+        "text": "year 2023 and 2022 ended on September 30, 2023 and September 24, 2022, respectively. Restatement of Previously Issued Financial Statements As previously disclosed in the Company's 2022 10-K filed with the SEC on October 16, 2023, the Company restated its previously issued unaudited interim Condensed Consolidated Financial Information for the first three quarters of 2022 and all quarters of 2021 and its 2021 and 2020 annual Consolidated Financial Statements due to multiple prior period misstatements. The accompanying 2022 Condensed Consolidated Interim Financial Statements have been restated in this Quarterly Report on Form 10-Q. In addition, the Company has corrected the accompanying footnotes in connection with the restatement see Note 21: Restated Previously Issued 2022 Financial Statements. Reclassifications Certain prior period amounts in the Condensed Consolidated Financial Statements and accompanying notes have been reclassified to conform with the current period presentation and are not the result of an error in classification, but are separately presented on the face of th",
+        "source_id": "source-sec-document-financial-000100865424000035-tup20230930htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-23-000079-accounting_warning-3",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2023-10-13",
+        "text": "In connection with the restatement, the Audit Committee concluded, with concurrence of management, that there were deficiencies in the Company’s internal control over financial reporting that constituted material weaknesses as of December 31, 2022.",
+        "source_id": "source-sec-document-financial-000100865423000079-tup20221231htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001008654-24-000073-bankruptcy-4",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2024-09-23",
+        "text": "NYSE Regulation reached its decision that the Corporation is no longer suitable for listing pursuant to NYSE Listed Company Manual Section 802.01D after the Corporation and certain of its direct and indirect subsidiaries filed voluntary petitions to commence proceedings under Chapter 11 (the “Chapter 11 Cases”) of title 11 of the United States Bankruptcy Code in the United States Bankruptcy Court for the District of Delaware (the “Bankruptcy Court”).",
+        "source_id": "source-sec-document-financial-000100865424000073-tup20240918htm",
+        "issuer_cik": "0001008654",
+        "security_ticker": "TUPBQ",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-historical-identity",
+        "title": "SEC-filed ticker and listing lineage",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000068/tup-20240917.htm",
+        "published_date": "2024-09-18",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-sec-identity",
+          "claim-sec-lineage-2"
+        ]
+      },
+      {
+        "id": "source-sec-submissions",
+        "title": "SEC submissions metadata",
+        "url": "https://data.sec.gov/submissions/CIK0001008654.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-sec-lineage-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000100865424000035-tup20230930htm",
+        "title": "10-Q filed 2024-03-29 — tup-20230930.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000035/tup-20230930.htm",
+        "published_date": "2024-03-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865424000035-warrant-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000100865423000079-tup20221231htm",
+        "title": "10-K filed 2023-10-13 — tup-20221231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000079/tup-20221231.htm",
+        "published_date": "2023-10-13",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000079-offering-2",
+          "claim-extracted-000100865423000079-warrant-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000100865423000079-tup20221231htm",
+        "title": "10-K filed 2023-10-13 — tup-20221231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000079/tup-20221231.htm",
+        "published_date": "2023-10-13",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000079-exchange_compliance-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000100865423000022-tup20230312htm",
+        "title": "8-K filed 2023-03-16 — tup-20230312.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000022/tup-20230312.htm",
+        "published_date": "2023-03-16",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000022-catalyst-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2020-03-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-4",
+        "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-4",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-08-04",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-02-23",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-4",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-4",
+          "claim-financial-stale"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-11-04",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-05-05",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2023-10-13",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2024-03-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-08-05",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-08-05",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2017-02-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2021-03-10",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001008654.json",
+        "published_date": "2022-02-23",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000100865424000035-tup20230930htm",
+        "title": "10-Q filed 2024-03-29 — tup-20230930.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000035/tup-20230930.htm",
+        "published_date": "2024-03-29",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865424000035-going_concern-1",
+          "claim-extracted-000100865424000035-non_reliance-2"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000100865423000079-tup20221231htm",
+        "title": "10-K filed 2023-10-13 — tup-20221231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865423000079/tup-20221231.htm",
+        "published_date": "2023-10-13",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865423000079-accounting_warning-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000100865424000073-tup20240918htm",
+        "title": "8-K filed 2024-09-23 — tup-20240918.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000073/tup-20240918.htm",
+        "published_date": "2024-09-23",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T23:31:19.965Z",
+        "supported_claim_ids": [
+          "claim-extracted-000100865424000073-bankruptcy-4"
+        ]
+      }
+    ],
+    "cache": {
+      "tickers": "hit",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0001008654-24-000035",
+          "document": "tup-20230930.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001008654-23-000079",
+          "document": "tup-20221231.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001008654-23-000022",
+          "document": "tup-20230312.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001008654-24-000073",
+          "document": "tup-20240918.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001008654-24-000068",
+          "document": "tup-20240917.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 7
+  },
+  "synthesis": {
+    "status": "completed",
+    "latency_ms": 6183,
+    "priority_evidence_ids": [
+      "evidence-extracted-0001008654-24-000073-bankruptcy-4",
+      "evidence-extracted-0001008654-24-000035-going_concern-1",
+      "evidence-extracted-0001008654-23-000079-accounting_warning-3",
+      "evidence-extracted-0001008654-23-000079-exchange_compliance-1",
+      "evidence-extracted-0001008654-23-000022-catalyst-2",
+      "evidence-extracted-0001008654-24-000035-warrant-1",
+      "evidence-extracted-0001008654-23-000079-warrant-3",
+      "evidence-financial-profitability"
+    ],
+    "category_assessments": [
+      {
+        "category": "security_and_listing",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-sec-identity"
+        ]
+      },
+      {
+        "category": "issuer_lineage",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-sec-lineage-1",
+          "evidence-sec-lineage-2"
+        ]
+      },
+      {
+        "category": "reverse_splits",
+        "classification": "unresolved",
+        "evidence_ids": []
+      },
+      {
+        "category": "dilution_offerings",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-shares-outstanding-1",
+          "evidence-shares-outstanding-2",
+          "evidence-shares-outstanding-3",
+          "evidence-shares-outstanding-4",
+          "evidence-extracted-0001008654-23-000079-offering-2"
+        ]
+      },
+      {
+        "category": "warrants_convertibles",
+        "classification": "material_risk",
+        "evidence_ids": [
+          "evidence-extracted-0001008654-24-000035-warrant-1",
+          "evidence-extracted-0001008654-23-000079-warrant-3"
+        ]
+      },
+      {
+        "category": "compliance",
+        "classification": "material_risk",
+        "evidence_ids": [
+          "evidence-extracted-0001008654-23-000079-exchange_compliance-1"
+        ]
+      },
+      {
+        "category": "going_concern_accounting",
+        "classification": "material_risk",
+        "evidence_ids": [
+          "evidence-extracted-0001008654-24-000035-going_concern-1",
+          "evidence-extracted-0001008654-24-000035-non_reliance-2",
+          "evidence-extracted-0001008654-23-000079-accounting_warning-3",
+          "evidence-extracted-0001008654-24-000073-bankruptcy-4"
+        ]
+      },
+      {
+        "category": "financial_context",
+        "classification": "context",
+        "evidence_ids": [
+          "evidence-financial-cash",
+          "evidence-financial-revenue",
+          "evidence-financial-profitability",
+          "evidence-shares-outstanding-1",
+          "evidence-shares-outstanding-2",
+          "evidence-shares-outstanding-3",
+          "evidence-shares-outstanding-4",
+          "evidence-financial-operating_cash_flow",
+          "evidence-financial-debt",
+          "evidence-financial-stale"
+        ]
+      },
+      {
+        "category": "catalysts_news",
+        "classification": "material_risk",
+        "evidence_ids": [
+          "evidence-extracted-0001008654-23-000022-catalyst-2"
+        ]
+      }
+    ]
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 8160,
+    "input_tokens": 8001,
+    "output_tokens": 642,
+    "total_tokens": 8643,
+    "web_search_calls": 0,
+    "estimated_cost_usd": 0.016421,
+    "pricing_version": "2026-08-25",
+    "within_latency_target": true,
+    "first_useful_latency_ms": 162,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 7,
+      "cache": {
+        "tickers": "hit",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0001008654-24-000035",
+            "document": "tup-20230930.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001008654-23-000079",
+            "document": "tup-20221231.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001008654-23-000022",
+            "document": "tup-20230312.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001008654-24-000073",
+            "document": "tup-20240918.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001008654-24-000068",
+            "document": "tup-20240917.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 8160,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 11840,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0.016421,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.013579,
+      "termination_reason": "partial_coverage",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0001008654": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0001008654": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001008654-24-000035:tup-20230930.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001008654-23-000079:tup-20221231.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001008654-23-000022:tup-20230312.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001008654-24-000073:tup-20240918.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001008654-24-000068:tup-20240917.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 1,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:market": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "alpha_vantage:news": {
+          "cache_state": "miss",
+          "request_count": 2,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:news": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "cost_usd": 0.016421,
+          "status": "completed"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 2,
+      "nasdaq": "limited",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "limited",
+      "market_reason": "provider_quota",
+      "provider_order": [
+        "alpha_vantage",
+        "twelve_data"
+      ],
+      "configured_providers": [
+        "alpha_vantage"
+      ],
+      "providers": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 8,
+            "daily_limit": 25,
+            "minute_used": 8,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "alpha_vantage_requests_today": 8,
+      "alpha_vantage_free_daily_limit": 25
+    },
+    "synthesis": {
+      "status": "completed",
+      "latency_ms": 6183,
+      "priority_evidence_ids": [
+        "evidence-extracted-0001008654-24-000073-bankruptcy-4",
+        "evidence-extracted-0001008654-24-000035-going_concern-1",
+        "evidence-extracted-0001008654-23-000079-accounting_warning-3",
+        "evidence-extracted-0001008654-23-000079-exchange_compliance-1",
+        "evidence-extracted-0001008654-23-000022-catalyst-2",
+        "evidence-extracted-0001008654-24-000035-warrant-1",
+        "evidence-extracted-0001008654-23-000079-warrant-3",
+        "evidence-financial-profitability"
+      ],
+      "category_assessments": [
+        {
+          "category": "security_and_listing",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-sec-identity"
+          ]
+        },
+        {
+          "category": "issuer_lineage",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-sec-lineage-1",
+            "evidence-sec-lineage-2"
+          ]
+        },
+        {
+          "category": "reverse_splits",
+          "classification": "unresolved",
+          "evidence_ids": []
+        },
+        {
+          "category": "dilution_offerings",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-shares-outstanding-1",
+            "evidence-shares-outstanding-2",
+            "evidence-shares-outstanding-3",
+            "evidence-shares-outstanding-4",
+            "evidence-extracted-0001008654-23-000079-offering-2"
+          ]
+        },
+        {
+          "category": "warrants_convertibles",
+          "classification": "material_risk",
+          "evidence_ids": [
+            "evidence-extracted-0001008654-24-000035-warrant-1",
+            "evidence-extracted-0001008654-23-000079-warrant-3"
+          ]
+        },
+        {
+          "category": "compliance",
+          "classification": "material_risk",
+          "evidence_ids": [
+            "evidence-extracted-0001008654-23-000079-exchange_compliance-1"
+          ]
+        },
+        {
+          "category": "going_concern_accounting",
+          "classification": "material_risk",
+          "evidence_ids": [
+            "evidence-extracted-0001008654-24-000035-going_concern-1",
+            "evidence-extracted-0001008654-24-000035-non_reliance-2",
+            "evidence-extracted-0001008654-23-000079-accounting_warning-3",
+            "evidence-extracted-0001008654-24-000073-bankruptcy-4"
+          ]
+        },
+        {
+          "category": "financial_context",
+          "classification": "context",
+          "evidence_ids": [
+            "evidence-financial-cash",
+            "evidence-financial-revenue",
+            "evidence-financial-profitability",
+            "evidence-shares-outstanding-1",
+            "evidence-shares-outstanding-2",
+            "evidence-shares-outstanding-3",
+            "evidence-shares-outstanding-4",
+            "evidence-financial-operating_cash_flow",
+            "evidence-financial-debt",
+            "evidence-financial-stale"
+          ]
+        },
+        {
+          "category": "catalysts_news",
+          "classification": "material_risk",
+          "evidence_ids": [
+            "evidence-extracted-0001008654-23-000022-catalyst-2"
+          ]
+        }
+      ]
+    }
+  }
+}

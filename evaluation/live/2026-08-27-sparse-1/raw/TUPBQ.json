@@ -1,0 +1,570 @@
+{
+  "case_id": "tupbq-2026-sparse",
+  "ticker": "TUPBQ",
+  "attempted_at": "2026-08-27T22:31:28.526Z",
+  "elapsed_ms": 6,
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-TUPBQ-2026-08-27T22:31:28.526Z",
+    "metadata": {
+      "as_of": "2026-08-27T22:31:28.526Z",
+      "generated_at": "2026-08-27T22:31:28.526Z",
+      "stage": "fast",
+      "completion_status": "pending",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-27",
+          "end": "2026-08-27"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-capital-pending",
+          "explanation": "The capital Fast domain did not complete and remains pending.",
+          "affected_sections": [
+            "issuer",
+            "reverse_splits",
+            "dilution"
+          ]
+        },
+        {
+          "code": "fast-catalyst-pending",
+          "explanation": "The catalyst Fast domain did not complete and remains pending.",
+          "affected_sections": [
+            "compliance_and_warnings",
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "fast-financial-pending",
+          "explanation": "The financial Fast domain did not complete and remains pending.",
+          "affected_sections": [
+            "dividends",
+            "financial_context",
+            "financial_assessment"
+          ]
+        },
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "TUPBQ",
+      "name": "TUPBQ security identity pending",
+      "security_type": "unknown",
+      "listing_venue": "Unknown",
+      "listing_status": "unknown",
+      "evidence_state": "unknown",
+      "claim_ids": []
+    },
+    "issuer": {
+      "legal_name": "Issuer identity pending",
+      "cik": null,
+      "identity_state": "unknown",
+      "identity_confidence": "unknown",
+      "prior_identities": [],
+      "claim_ids": []
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "unknown",
+        "summary": "Reverse-split research is pending.",
+        "coverage_notes": [
+          "This Fast domain did not complete."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "unknown",
+        "summary": "Dilution and offering research is pending.",
+        "coverage_notes": [
+          "This Fast domain did not complete."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dividends": {
+        "state": "unknown",
+        "summary": "Dividend applicability and status are pending.",
+        "coverage_notes": [
+          "This Fast domain did not complete."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "unknown",
+        "summary": "Compliance and accounting-warning research is pending.",
+        "coverage_notes": [
+          "This Fast domain did not complete."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "financial_context": {
+        "state": "unknown",
+        "summary": "Immediate financial-risk context is pending.",
+        "coverage_notes": [
+          "This Fast domain did not complete."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "catalysts_and_news": {
+        "state": "unknown",
+        "summary": "Current catalyst research is pending.",
+        "coverage_notes": [
+          "This Fast domain did not complete."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "financial_assessment": {
+      "state": "unknown",
+      "as_of": null,
+      "reporting_currency": null,
+      "summary": "Immediate financial-risk research is pending.",
+      "coverage_notes": [
+        "The financial Fast domain did not complete."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "unknown",
+          "label": "cash",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "cash was not established by completed Fast evidence.",
+          "claim_ids": []
+        },
+        "cash_burn": {
+          "state": "unknown",
+          "label": "cash burn",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "cash burn was not established by completed Fast evidence.",
+          "claim_ids": []
+        },
+        "revenue": {
+          "state": "unknown",
+          "label": "revenue",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "revenue was not established by completed Fast evidence.",
+          "claim_ids": []
+        },
+        "profitability": {
+          "state": "unknown",
+          "label": "profitability",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "profitability was not established by completed Fast evidence.",
+          "claim_ids": []
+        },
+        "operating_cash_flow": {
+          "state": "unknown",
+          "label": "operating cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "operating cash flow was not established by completed Fast evidence.",
+          "claim_ids": []
+        },
+        "free_cash_flow": {
+          "state": "unknown",
+          "label": "free cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "free cash flow was not established by completed Fast evidence.",
+          "claim_ids": []
+        },
+        "debt": {
+          "state": "unknown",
+          "label": "debt",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "debt was not established by completed Fast evidence.",
+          "claim_ids": []
+        }
+      },
+      "shares_outstanding": {
+        "state": "unknown",
+        "summary": "Reported shares outstanding are pending.",
+        "observations": [],
+        "claim_ids": []
+      },
+      "going_concern": {
+        "state": "unknown",
+        "as_of": null,
+        "summary": "Going-concern evidence is pending.",
+        "claim_ids": []
+      },
+      "material_warnings": []
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "unknown",
+        "classification": "unknown",
+        "title": "Current catalyst pending",
+        "event_date": null,
+        "summary": "The catalyst Fast domain did not complete.",
+        "confidence": "unknown",
+        "claim_ids": [],
+        "factors": {
+          "recency": {
+            "rating": "unknown",
+            "explanation": "recency is pending completed catalyst evidence.",
+            "claim_ids": []
+          },
+          "specificity": {
+            "rating": "unknown",
+            "explanation": "specificity is pending completed catalyst evidence.",
+            "claim_ids": []
+          },
+          "credibility": {
+            "rating": "unknown",
+            "explanation": "credibility is pending completed catalyst evidence.",
+            "claim_ids": []
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "novelty is pending completed catalyst evidence.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "potential significance is pending completed catalyst evidence.",
+            "claim_ids": []
+          }
+        }
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Current catalyst evidence is pending."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred without completed catalyst evidence.",
+        "confidence": "unknown",
+        "claim_ids": []
+      }
+    },
+    "claims": [],
+    "sources": [],
+    "scores": {
+      "dilution_historical_severity": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Past three years",
+        "explanation": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_future_likelihood": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_potential_impact": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "reverse_split_risk": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_health": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Latest reported period and next twelve months",
+        "explanation": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_revenue_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_net_income_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_debt_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_free_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_cash_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_operating_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "long_term_company_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Multi-year (Deep only)",
+        "explanation": "Long-term company quality remains a Deep construct and is not deterministically scored from bounded Fast evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "catalyst_strength": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Current catalyst",
+        "explanation": "A current identity-gated SEC, exchange, issuer, or attributable original source is required; discovery-only items cannot score.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "near_term_setup_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Next five trading days",
+        "explanation": "A supported current catalyst is required before market context can form a setup score.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      }
+    }
+  },
+  "evidence_records": [],
+  "evidence_packet": null,
+  "synthesis": {
+    "status": "unavailable",
+    "reason": "in_progress"
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 6,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "web_search_calls": 0,
+    "estimated_cost_usd": null,
+    "pricing_version": null,
+    "within_latency_target": true,
+    "first_useful_latency_ms": null,
+    "within_first_useful_target": null,
+    "domains": {
+      "capital": {
+        "status": "pending"
+      },
+      "catalyst": {
+        "status": "pending"
+      },
+      "financial": {
+        "status": "pending"
+      }
+    },
+    "within_cost_target": null,
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 5,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 19995,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.03,
+      "termination_reason": "partial_coverage",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "openai_synthesis": {
+          "reason": "in_progress",
+          "status": "unavailable"
+        }
+      }
+    }
+  }
+}

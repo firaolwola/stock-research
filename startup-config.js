@@ -28,5 +28,9 @@ export function loadRealAppConfig(env = process.env) {
 
   const secUserAgent = typeof env.SEC_USER_AGENT === "string" && env.SEC_USER_AGENT.trim() ? env.SEC_USER_AGENT.trim() : undefined;
   const alphaVantageApiKey = typeof env.ALPHA_VANTAGE_API_KEY === "string" ? env.ALPHA_VANTAGE_API_KEY.trim() : "";
-  return Object.freeze({ apiKey, port: parsePort(env.PORT), secUserAgent, alphaVantageApiKey });
+  const twelveDataApiKey = typeof env.TWELVE_DATA_API_KEY === "string" ? env.TWELVE_DATA_API_KEY.trim() : "";
+  const marketProviderOrder = String(env.MARKET_PROVIDER_ORDER ?? "alpha_vantage,twelve_data").split(",").map((value) => value.trim().toLowerCase()).filter(Boolean);
+  const unsupported = marketProviderOrder.filter((value) => !["alpha_vantage", "twelve_data"].includes(value));
+  if (!marketProviderOrder.length || unsupported.length) throw new StartupConfigurationError("MARKET_PROVIDER_ORDER must contain alpha_vantage and/or twelve_data.");
+  return Object.freeze({ apiKey, port: parsePort(env.PORT), secUserAgent, alphaVantageApiKey, twelveDataApiKey, marketProviderOrder: Object.freeze([...new Set(marketProviderOrder)]) });
 }

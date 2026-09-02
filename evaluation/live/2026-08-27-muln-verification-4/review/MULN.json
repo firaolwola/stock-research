@@ -1,0 +1,20 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "report_produced": true,
+  "report_valid": true,
+  "completion_status": "partial",
+  "expected_completed_splits": 5,
+  "retrieved_completed_splits": 5,
+  "completed_split_recall": 1,
+  "known_false_positive_events": [
+    {"ratio":"1-for-100","effective_date":"2025-08-04","reason":"ratio borrowed from the June action inside a disclosure that also states the August 1-for-250 action"},
+    {"ratio":"1-for-2","effective_date":"2025-08-01","reason":"word-ratio parsing truncated one-for-two-hundred-fifty to 1-for-2"}
+  ],
+  "explanation_fidelity": "fail",
+  "settlement_accuracy": "fail",
+  "severe_misleading_misses": 2,
+  "identity_context": "pass",
+  "muln_live_parser_blocker_resolved": false,
+  "retry_performed": false
+}

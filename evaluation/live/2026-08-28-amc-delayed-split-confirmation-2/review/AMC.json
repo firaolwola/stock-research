@@ -1,0 +1,18 @@
+{
+  "ticker": "AMC",
+  "expected": ["Completed 2023-08-24 1-for-10 reverse split"],
+  "detected": [],
+  "report_valid": true,
+  "settlement": "safe_limited",
+  "classification": "canonical_lifecycle_acceptance_gap",
+  "severe_miss": true,
+  "diagnostic": {
+    "extracted_ratio": "1-for-10",
+    "extracted_effective_date": "2023-08-24",
+    "disposition": "withheld",
+    "reason": "resolved_lifecycle_required",
+    "response_received": true,
+    "report_status": "partial"
+  },
+  "notes": "The live run predates the current offline lifecycle fallback. The report stayed valid and safe, but no completed reverse-split evidence reached the user-facing report."
+}

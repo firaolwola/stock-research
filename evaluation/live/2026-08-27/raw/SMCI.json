@@ -1,0 +1,2796 @@
+{
+  "case_id": "smci-2026-live",
+  "ticker": "SMCI",
+  "attempted_at": "2026-08-27T19:59:41.180Z",
+  "elapsed_ms": 5796,
+  "validation": {
+    "valid": false,
+    "errors": [
+      {
+        "type": "schema",
+        "path": "",
+        "keyword": "required",
+        "message": "must have required property 'scores'"
+      }
+    ]
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-SMCI-2026-08-27T19:59:35.384Z",
+    "metadata": {
+      "as_of": "2026-08-27T19:59:35.384Z",
+      "generated_at": "2026-08-27T19:59:35.384Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-27",
+          "end": "2026-08-27"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "alpha-news-provider_quota",
+          "explanation": "Current news discovery is Limited; an absent result is not favorable evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "SMCI",
+      "name": "Super Micro Computer, Inc. - Common Stock",
+      "security_type": "common_stock",
+      "listing_venue": "Nasdaq",
+      "listing_status": "active",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-nasdaq-current-listing"
+      ]
+    },
+    "issuer": {
+      "legal_name": "Super Micro Computer, Inc.",
+      "cik": "0001375365",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [],
+      "claim_ids": [
+        "claim-sec-identity"
+      ]
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "SEC filing discovery completed, but split terms were not extracted in this bounded phase.",
+        "coverage_notes": [
+          "Filing-text and exchange corporate-action parsing remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "offering",
+            "title": "Actual offering or issuance",
+            "state": "confirmed",
+            "summary": "This excludes the up to $1.25 billion of shares of common stock that may be issued and sold pursuant to the ATM Program from time to time.",
+            "event_date": "2026-06-12",
+            "value": 1250000000,
+            "unit": "USD",
+            "claim_ids": [
+              "claim-extracted-000119312526268520-offering-1"
+            ]
+          },
+          {
+            "id": "dilution-extracted-2",
+            "kind": "convertible",
+            "title": "Convertible financing instrument",
+            "state": "confirmed",
+            "summary": "333-296641 PROSPECTUS SUPPLEMENT (To Prospectus dated June 9, 2026) 75,000,000 Depositary Shares Each Representing a 1/20th Interest in a Share of 7.00% Series A Mandatory Convertible Preferred Stock Super Micro Computer, Inc.",
+            "event_date": "2026-06-12",
+            "claim_ids": [
+              "claim-extracted-000119312526268520-convertible-2"
+            ]
+          },
+          {
+            "id": "dilution-extracted-3",
+            "kind": "warrant",
+            "title": "Warrant financing instrument",
+            "state": "confirmed",
+            "summary": "In the event that such rights or warrants described in this clause (2) are not so issued, each fixed conversion rate shall be decreased, effective as of the date our board of directors, or an authorized committee thereof, publicly announces its decision not to issue such rights or warrants, to such fixed conversion rate that would then be in effect if such issuance had not been declared.",
+            "event_date": "2026-06-12",
+            "claim_ids": [
+              "claim-extracted-000119312526268520-warrant-3"
+            ]
+          },
+          {
+            "id": "dilution-extracted-4",
+            "kind": "convertible",
+            "title": "Convertible financing instrument",
+            "state": "confirmed",
+            "summary": "We estimate the fair value of outstanding debt, including our 3.50 % Convertible Senior Notes due 2029 (“2029 Convertible Notes”), 2.25 % Convertible Senior Notes due 2028 (“2028 Convertible Notes”), and 0.00 % Convertible Senior Notes due 2030 (“2030 Convertible Notes”), for disclosure purposes on a recurring basis.",
+            "event_date": "2026-05-11",
+            "claim_ids": [
+              "claim-extracted-000137536526000014-convertible-4"
+            ]
+          },
+          {
+            "id": "dilution-extracted-5",
+            "kind": "offering",
+            "title": "Actual offering or issuance",
+            "state": "confirmed",
+            "summary": "LLC, as representatives of the several underwriters named therein, pursuant to which the Company agreed to issue and sell 75,000,000 depositary shares (the “Depositary Shares”), each representing a 1/20 th interest in a share of the Company’s 7.00% Series A Mandatory Convertible Preferred Stock, liquidation preference $1,000 per share, par value $0.001 per share (the “Mandatory Convertible Preferred Stock” and such offering, the “Depositary Shares Offering”).",
+            "event_date": "2026-06-15",
+            "value": 1000,
+            "unit": "USD",
+            "claim_ids": [
+              "claim-extracted-000119312526270430-offering-5"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000119312526268520-offering-1",
+          "claim-extracted-000119312526268520-convertible-2",
+          "claim-extracted-000119312526268520-warrant-3",
+          "claim-extracted-000137536526000014-convertible-4",
+          "claim-extracted-000119312526270430-offering-5"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "SEC filing metadata does not safely establish current compliance or accounting warnings.",
+        "coverage_notes": [
+          "Item-level filing extraction and exchange lists remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2026-03-31; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded."
+        ],
+        "items": [
+          {
+            "id": "alpha-eod-price-change",
+            "kind": "other",
+            "title": "End-of-day price change",
+            "state": "confirmed",
+            "summary": "Latest close compared with the immediately preceding daily close.",
+            "event_date": "2026-08-26",
+            "value": -2.782111284451383,
+            "unit": "price_change_percent",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          },
+          {
+            "id": "alpha-eod-relative-volume",
+            "kind": "other",
+            "title": "End-of-day relative volume",
+            "state": "confirmed",
+            "summary": "Latest volume compared with a 20-session bounded baseline.",
+            "event_date": "2026-08-26",
+            "value": 0.6071694323263234,
+            "unit": "volume_ratio",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-cash-annual-4",
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow",
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-operating_cash_flow-annual-4",
+          "claim-financial-free_cash_flow-observation-1",
+          "claim-financial-free_cash_flow",
+          "claim-financial-free_cash_flow-annual-1",
+          "claim-financial-free_cash_flow-annual-2",
+          "claim-financial-free_cash_flow-annual-3",
+          "claim-financial-free_cash_flow-annual-4",
+          "claim-financial-cash_burn-observation-1",
+          "claim-financial-cash_burn",
+          "claim-financial-debt",
+          "claim-alpha-eod-market"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "Emerging growth company ☐ If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ¨ Item 2.02 Results of Operations and Financial Condition On August 11, 2026, Super Micro Computer, Inc. (the “Company”) issued a press release (the “Press Release”) announcing unaudited financial results for the quarter and full fiscal year ended June 30, 2026.",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "Emerging growth company ☐ If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ¨ Item 2.02 Results of Operations and Financial Condition On August 11, 2026, Super Micro Computer, Inc. (the “Company”) issued a press release (the “Press Release”) announcing unaudited financial results for the quarter and full fiscal year ended June 30, 2026.",
+            "event_date": "2026-08-11",
+            "claim_ids": [
+              "claim-extracted-000137536526000021-catalyst-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000137536526000021-catalyst-1"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-27",
+      "reporting_currency": "USD",
+      "summary": "Latest standardized SEC facts are shown through 2026-03-31; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "confirmed",
+          "label": "Cash and Cash Equivalents, at Carrying Value",
+          "value": 1290324000,
+          "unit": "USD",
+          "period_start": "2026-03-31",
+          "period_end": "2026-03-31",
+          "trend": "unknown",
+          "comparison_period_start": "2025-12-31",
+          "comparison_period_end": "2025-12-31",
+          "observations": [
+            {
+              "value": 4091083000,
+              "unit": "USD",
+              "period_start": "2025-12-31",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-cash-observation-1"
+              ]
+            },
+            {
+              "value": 1290324000,
+              "unit": "USD",
+              "period_start": "2026-03-31",
+              "period_end": "2026-03-31",
+              "claim_ids": [
+                "claim-financial-cash"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 267397000,
+              "unit": "USD",
+              "period_start": "2022-06-30",
+              "period_end": "2022-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-1"
+              ]
+            },
+            {
+              "value": 440459000,
+              "unit": "USD",
+              "period_start": "2023-06-30",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-2"
+              ]
+            },
+            {
+              "value": 1669766000,
+              "unit": "USD",
+              "period_start": "2024-06-30",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-3"
+              ]
+            },
+            {
+              "value": 5169911000,
+              "unit": "USD",
+              "period_start": "2025-06-30",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1290324000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3",
+            "claim-financial-cash-annual-4"
+          ]
+        },
+        "revenue": {
+          "state": "unknown",
+          "label": "revenue",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "revenue was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "profitability": {
+          "state": "unknown",
+          "label": "profitability",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "profitability was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "operating_cash_flow": {
+          "state": "confirmed",
+          "label": "Operating cash flow",
+          "value": -7556847000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-03-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-03-31",
+          "observations": [
+            {
+              "value": 795911000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-03-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": -7556847000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-03-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": -440801000,
+              "unit": "USD",
+              "period_start": "2021-07-01",
+              "period_end": "2022-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 663580000,
+              "unit": "USD",
+              "period_start": "2022-07-01",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": -2485972000,
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 1659524000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Operating cash flow of -7556847000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow",
+            "claim-financial-operating_cash_flow-annual-1",
+            "claim-financial-operating_cash_flow-annual-2",
+            "claim-financial-operating_cash_flow-annual-3",
+            "claim-financial-operating_cash_flow-annual-4"
+          ]
+        },
+        "free_cash_flow": {
+          "state": "confirmed",
+          "label": "Free cash flow",
+          "value": -7690616000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-03-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-03-31",
+          "observations": [
+            {
+              "value": 691375000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-03-31",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": -7690616000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-03-31",
+              "claim_ids": [
+                "claim-financial-free_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": -485983000,
+              "unit": "USD",
+              "period_start": "2021-07-01",
+              "period_end": "2022-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 626787000,
+              "unit": "USD",
+              "period_start": "2022-07-01",
+              "period_end": "2023-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": -2610251000,
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 1532310000,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-4"
+              ]
+            }
+          ],
+          "summary": "Free cash flow of -7690616000 USD is calculated as operating cash flow -7556847000 less capital expenditures 133769000 for 2025-07-01 through 2026-03-31.",
+          "claim_ids": [
+            "claim-financial-free_cash_flow-observation-1",
+            "claim-financial-free_cash_flow",
+            "claim-financial-free_cash_flow-annual-1",
+            "claim-financial-free_cash_flow-annual-2",
+            "claim-financial-free_cash_flow-annual-3",
+            "claim-financial-free_cash_flow-annual-4"
+          ]
+        },
+        "cash_burn": {
+          "state": "confirmed",
+          "label": "Cash burn based on free cash flow",
+          "value": 7690616000,
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-03-31",
+          "trend": "unknown",
+          "comparison_period_start": "2024-07-01",
+          "comparison_period_end": "2025-03-31",
+          "observations": [
+            {
+              "value": 0,
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-03-31",
+              "claim_ids": [
+                "claim-financial-cash_burn-observation-1"
+              ]
+            },
+            {
+              "value": 7690616000,
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-03-31",
+              "claim_ids": [
+                "claim-financial-cash_burn"
+              ]
+            }
+          ],
+          "annual_observations": [],
+          "summary": "SEC Company Facts reports Cash burn based on free cash flow of 7690616000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+          "claim_ids": [
+            "claim-financial-cash_burn-observation-1",
+            "claim-financial-cash_burn"
+          ]
+        },
+        "debt": {
+          "state": "limited_coverage",
+          "label": "Total debt",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Short-term Debt of 170123000 USD is available at 2023-06-30, but total debt cannot be established without aligned current and non-current components.",
+          "claim_ids": [
+            "claim-financial-debt"
+          ]
+        }
+      },
+      "shares_outstanding": {
+        "state": "confirmed",
+        "summary": "Reported shares outstanding increased 1035.3% over the displayed period from 2022-07-31 to 2025-07-31.",
+        "observations": [
+          {
+            "value": 52347039,
+            "unit": "shares",
+            "period_start": "2022-07-31",
+            "period_end": "2022-07-31",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 52905947,
+            "unit": "shares",
+            "period_start": "2023-07-31",
+            "period_end": "2023-07-31",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 593481352,
+            "unit": "shares",
+            "period_start": "2025-01-31",
+            "period_end": "2025-01-31",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 594273308,
+            "unit": "shares",
+            "period_start": "2025-07-31",
+            "period_end": "2025-07-31",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 52347039,
+            "unit": "shares",
+            "period_start": "2022-07-31",
+            "period_end": "2022-07-31",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 52905947,
+            "unit": "shares",
+            "period_start": "2023-07-31",
+            "period_end": "2023-07-31",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 593481352,
+            "unit": "shares",
+            "period_start": "2025-01-31",
+            "period_end": "2025-01-31",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 594273308,
+            "unit": "shares",
+            "period_start": "2025-07-31",
+            "period_end": "2025-07-31",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-shares-outstanding-1",
+          "claim-shares-outstanding-2",
+          "claim-shares-outstanding-3",
+          "claim-shares-outstanding-4"
+        ]
+      },
+      "going_concern": {
+        "state": "unknown",
+        "as_of": null,
+        "summary": "Going-concern language was not established from bounded filing extraction.",
+        "claim_ids": []
+      },
+      "material_warnings": []
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "other",
+        "title": "Material filing event",
+        "event_date": "2026-08-11",
+        "summary": "Emerging growth company ☐ If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ¨ Item 2.02 Results of Operations and Financial Condition On August 11, 2026, Super Micro Computer, Inc. (the “Company”) issued a press release (the “Press Release”) announcing unaudited financial results for the quarter and full fiscal year ended June 30, 2026.",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000137536526000021-catalyst-1"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000137536526000021-catalyst-1"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000137536526000021-catalyst-1"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000137536526000021-catalyst-1"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC associates SMCI with Super Micro Computer, Inc. (CIK 0001375365) on Nasdaq.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:35.384Z",
+        "source_ids": [
+          "source-sec-ticker-map"
+        ]
+      },
+      {
+        "id": "claim-capital-000119312526268520",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-06-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-000119312526268520"
+        ]
+      },
+      {
+        "id": "claim-capital-000119312526268058",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-06-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-000119312526268058"
+        ]
+      },
+      {
+        "id": "claim-capital-000119312526267973",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-06-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-000119312526267973"
+        ]
+      },
+      {
+        "id": "claim-capital-000119312526265112",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-10; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-06-10T00:00:00Z",
+        "source_ids": [
+          "source-sec-000119312526265112"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526268520-offering-1",
+        "text": "This excludes the up to $1.25 billion of shares of common stock that may be issued and sold pursuant to the ATM Program from time to time.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-06-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000119312526268520-d44171d424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526268520-convertible-2",
+        "text": "333-296641 PROSPECTUS SUPPLEMENT (To Prospectus dated June 9, 2026) 75,000,000 Depositary Shares Each Representing a 1/20th Interest in a Share of 7.00% Series A Mandatory Convertible Preferred Stock Super Micro Computer, Inc.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-06-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000119312526268520-d44171d424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526268520-warrant-3",
+        "text": "In the event that such rights or warrants described in this clause (2) are not so issued, each fixed conversion rate shall be decreased, effective as of the date our board of directors, or an authorized committee thereof, publicly announces its decision not to issue such rights or warrants, to such fixed conversion rate that would then be in effect if such issuance had not been declared.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-06-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000119312526268520-d44171d424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000137536526000014-convertible-4",
+        "text": "We estimate the fair value of outstanding debt, including our 3.50 % Convertible Senior Notes due 2029 (“2029 Convertible Notes”), 2.25 % Convertible Senior Notes due 2028 (“2028 Convertible Notes”), and 0.00 % Convertible Senior Notes due 2030 (“2030 Convertible Notes”), for disclosure purposes on a recurring basis.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000137536526000014-smci20260331htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000119312526270430-offering-5",
+        "text": "LLC, as representatives of the several underwriters named therein, pursuant to which the Company agreed to issue and sell 75,000,000 depositary shares (the “Depositary Shares”), each representing a 1/20 th interest in a share of the Company’s 7.00% Series A Mandatory Convertible Preferred Stock, liquidation preference $1,000 per share, par value $0.001 per share (the “Mandatory Convertible Preferred Stock” and such offering, the “Depositary Shares Offering”).",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-06-15T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000119312526270430-d151436d8khtm"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000137536526000021",
+        "text": "Super Micro Computer, Inc. filed Form 8-K on 2026-08-11; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-000137536526000021"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000137536526000020",
+        "text": "Super Micro Computer, Inc. filed Form 8-K on 2026-08-05; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-05T00:00:00Z",
+        "source_ids": [
+          "source-sec-000137536526000020"
+        ]
+      },
+      {
+        "id": "claim-extracted-000137536526000021-catalyst-1",
+        "text": "Emerging growth company ☐ If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ¨ Item 2.02 Results of Operations and Financial Condition On August 11, 2026, Super Micro Computer, Inc. (the “Company”) issued a press release (the “Press Release”) announcing unaudited financial results for the quarter and full fiscal year ended June 30, 2026.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000137536526000021-smci20260811htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1290324000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 4091083000 USD for the comparable period ending 2025-12-31, filed 2026-02-06.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-02-06T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 267397000 USD for the comparable period ending 2022-06-30, filed 2023-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 440459000 USD for the comparable period ending 2023-06-30, filed 2025-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1669766000 USD for the comparable period ending 2024-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-4",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 5169911000 USD for the comparable period ending 2025-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-4"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-1",
+        "text": "SEC Company Facts reports 52347039 common shares outstanding at 2022-07-31, filed 2022-08-29.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2022-08-29T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-2",
+        "text": "SEC Company Facts reports 52905947 common shares outstanding at 2023-07-31, filed 2023-08-28.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2023-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-3",
+        "text": "SEC Company Facts reports 593481352 common shares outstanding at 2025-01-31, filed 2025-02-25.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2025-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-4",
+        "text": "SEC Company Facts reports 594273308 common shares outstanding at 2025-07-31, filed 2025-08-28.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow",
+        "text": "SEC Company Facts reports Operating cash flow of -7556847000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Operating cash flow of 795911000 USD for the comparable period ending 2025-03-31, filed 2026-05-11.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Operating cash flow of -440801000 USD for the comparable period ending 2022-06-30, filed 2025-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Operating cash flow of 663580000 USD for the comparable period ending 2023-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Operating cash flow of -2485972000 USD for the comparable period ending 2024-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-4",
+        "text": "SEC Company Facts reports Operating cash flow of 1659524000 USD for the comparable period ending 2025-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow",
+        "text": "Free cash flow of -7690616000 USD is calculated as operating cash flow -7556847000 less capital expenditures 133769000 for 2025-07-01 through 2026-03-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Free cash flow of 691375000 USD for the comparable period ending 2025-03-31, filed 2026-05-11.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Free cash flow of -485983000 USD for the comparable period ending 2022-06-30, filed 2025-02-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-02-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Free cash flow of 626787000 USD for the comparable period ending 2023-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Free cash flow of -2610251000 USD for the comparable period ending 2024-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-4",
+        "text": "SEC Company Facts reports Free cash flow of 1532310000 USD for the comparable period ending 2025-06-30, filed 2025-08-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-cash_burn",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 7690616000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash_burn"
+        ]
+      },
+      {
+        "id": "claim-financial-cash_burn-observation-1",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the comparable period ending 2025-03-31, filed 2026-05-11.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-11T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt",
+        "text": "Short-term Debt of 170123000 USD is available at 2023-06-30, but total debt cannot be established without aligned current and non-current components.",
+        "materiality": "high",
+        "state": "limited_coverage",
+        "as_of": "2023-08-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt"
+        ]
+      },
+      {
+        "id": "claim-nasdaq-current-listing",
+        "text": "Nasdaq Trader's current symbol directory identifies SMCI as Super Micro Computer, Inc. - Common Stock; current status is active.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:36.525Z",
+        "source_ids": [
+          "source-nasdaq-symbol-directory"
+        ]
+      },
+      {
+        "id": "claim-alpha-eod-market",
+        "text": "SMCI's end-of-day close was 37.39 with volume 33723170 on 2026-08-26; this is market context, not evidence of an issuer event.",
+        "materiality": "low",
+        "state": "confirmed",
+        "as_of": "2026-08-26T00:00:00Z",
+        "source_ids": [
+          "source-alpha-eod-market"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526268520",
+        "title": "424B5 filed 2026-06-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526268520/d44171d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526268520"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526268058",
+        "title": "424B5 filed 2026-06-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526268058/d38067d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526268058"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526267973",
+        "title": "424B5 filed 2026-06-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526267973/d41737d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526267973"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526265112",
+        "title": "424B5 filed 2026-06-10",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526265112/d44171d424b5.htm",
+        "published_date": "2026-06-10",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526265112"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+        "title": "424B5 filed 2026-06-12 — d44171d424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526268520/d44171d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526268520-offering-1",
+          "claim-extracted-000119312526268520-convertible-2",
+          "claim-extracted-000119312526268520-warrant-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000137536526000014-smci20260331htm",
+        "title": "10-Q filed 2026-05-11 — smci-20260331.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000014/smci-20260331.htm",
+        "published_date": "2026-05-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000137536526000014-convertible-4"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312526270430-d151436d8khtm",
+        "title": "8-K filed 2026-06-15 — d151436d8k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526270430/d151436d8k.htm",
+        "published_date": "2026-06-15",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526270430-offering-5"
+        ]
+      },
+      {
+        "id": "source-sec-000137536526000021",
+        "title": "8-K filed 2026-08-11",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000021/smci-20260811.htm",
+        "published_date": "2026-08-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000137536526000021"
+        ]
+      },
+      {
+        "id": "source-sec-000137536526000020",
+        "title": "8-K filed 2026-08-05",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000020/smci-20260805.htm",
+        "published_date": "2026-08-05",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000137536526000020"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000137536526000021-smci20260811htm",
+        "title": "8-K filed 2026-08-11 — smci-20260811.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000021/smci-20260811.htm",
+        "published_date": "2026-08-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000137536526000021-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-02-06",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2023-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2022-08-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2023-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow",
+        "title": "SEC Company Facts — Free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-4",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn",
+        "title": "SEC Company Facts — Cash burn based on free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn-observation-1",
+        "title": "SEC Company Facts — Cash burn based on free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2023-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:36.525Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "Alpha Vantage end-of-day market data for SMCI",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-26",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T19:59:36.525Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ]
+      }
+    ]
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "SEC associates SMCI with Super Micro Computer, Inc. (CIK 0001375365) on Nasdaq.",
+      "source_id": "source-sec-ticker-map",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-capital-0001193125-26-268520",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-06-12",
+      "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000119312526268520",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001193125-26-268058",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-06-12",
+      "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000119312526268058",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001193125-26-267973",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-06-12",
+      "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000119312526267973",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001193125-26-265112",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-06-10",
+      "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-10; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000119312526265112",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001375365-26-000021",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-11",
+      "text": "Super Micro Computer, Inc. filed Form 8-K on 2026-08-11; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000137536526000021",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001375365-26-000020",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-05",
+      "text": "Super Micro Computer, Inc. filed Form 8-K on 2026-08-05; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000137536526000020",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-05-11",
+      "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1290324000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2022-08-29",
+      "text": "SEC Company Facts reports 52347039 common shares outstanding at 2022-07-31, filed 2022-08-29.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-1",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-2",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2023-08-28",
+      "text": "SEC Company Facts reports 52905947 common shares outstanding at 2023-07-31, filed 2023-08-28.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-2",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2025-02-25",
+      "text": "SEC Company Facts reports 593481352 common shares outstanding at 2025-01-31, filed 2025-02-25.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-3",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-4",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2025-08-28",
+      "text": "SEC Company Facts reports 594273308 common shares outstanding at 2025-07-31, filed 2025-08-28.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-4",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-operating_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-05-11",
+      "text": "SEC Company Facts reports Operating cash flow of -7556847000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+      "source_id": "source-sec-companyfacts-operating_cash_flow",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-free_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-05-11",
+      "text": "Free cash flow of -7690616000 USD is calculated as operating cash flow -7556847000 less capital expenditures 133769000 for 2025-07-01 through 2026-03-31.",
+      "source_id": "source-sec-companyfacts-free_cash_flow",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-cash_burn",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-05-11",
+      "text": "SEC Company Facts reports Cash burn based on free cash flow of 7690616000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+      "source_id": "source-sec-companyfacts-cash_burn",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-debt",
+      "category": "financial_context",
+      "state": "limited_coverage",
+      "event_date": "2023-08-28",
+      "text": "Short-term Debt of 170123000 USD is available at 2023-06-30, but total debt cannot be established without aligned current and non-current components.",
+      "source_id": "source-sec-companyfacts-debt",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-268520-offering-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-06-12",
+      "text": "This excludes the up to $1.25 billion of shares of common stock that may be issued and sold pursuant to the ATM Program from time to time.",
+      "source_id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-268520-convertible-2",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-06-12",
+      "text": "333-296641 PROSPECTUS SUPPLEMENT (To Prospectus dated June 9, 2026) 75,000,000 Depositary Shares Each Representing a 1/20th Interest in a Share of 7.00% Series A Mandatory Convertible Preferred Stock Super Micro Computer, Inc.",
+      "source_id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-268520-warrant-3",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-06-12",
+      "text": "In the event that such rights or warrants described in this clause (2) are not so issued, each fixed conversion rate shall be decreased, effective as of the date our board of directors, or an authorized committee thereof, publicly announces its decision not to issue such rights or warrants, to such fixed conversion rate that would then be in effect if such issuance had not been declared.",
+      "source_id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001375365-26-000014-convertible-4",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-05-11",
+      "text": "We estimate the fair value of outstanding debt, including our 3.50 % Convertible Senior Notes due 2029 (“2029 Convertible Notes”), 2.25 % Convertible Senior Notes due 2028 (“2028 Convertible Notes”), and 0.00 % Convertible Senior Notes due 2030 (“2030 Convertible Notes”), for disclosure purposes on a recurring basis.",
+      "source_id": "source-sec-document-capital-000137536526000014-smci20260331htm",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001193125-26-270430-offering-5",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-06-15",
+      "text": "LLC, as representatives of the several underwriters named therein, pursuant to which the Company agreed to issue and sell 75,000,000 depositary shares (the “Depositary Shares”), each representing a 1/20 th interest in a share of the Company’s 7.00% Series A Mandatory Convertible Preferred Stock, liquidation preference $1,000 per share, par value $0.001 per share (the “Mandatory Convertible Preferred Stock” and such offering, the “Depositary Shares Offering”).",
+      "source_id": "source-sec-document-capital-000119312526270430-d151436d8khtm",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001375365-26-000021-catalyst-1",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2026-08-11",
+      "text": "Emerging growth company ☐ If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ¨ Item 2.02 Results of Operations and Financial Condition On August 11, 2026, Super Micro Computer, Inc. (the “Company”) issued a press release (the “Press Release”) announcing unaudited financial results for the quarter and full fiscal year ended June 30, 2026.",
+      "source_id": "source-sec-document-catalyst-000137536526000021-smci20260811htm",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-nasdaq-current-listing",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "Nasdaq Trader's current symbol directory identifies SMCI as Super Micro Computer, Inc. - Common Stock; current status is active.",
+      "source_id": "source-nasdaq-symbol-directory",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-alpha-eod-market",
+      "category": "market_context",
+      "state": "confirmed",
+      "event_date": "2026-08-26",
+      "text": "SMCI's end-of-day close was 37.39 with volume 33723170 on 2026-08-26; this is market context, not evidence of an issuer event.",
+      "source_id": "source-alpha-eod-market",
+      "issuer_cik": "0001375365",
+      "security_ticker": "SMCI",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "SMCI",
+    "identity": {
+      "ticker": "SMCI",
+      "issuer_legal_name": "Super Micro Computer, Inc.",
+      "cik": "0001375365"
+    },
+    "retrieved_at": "2026-08-27T19:59:35.384Z",
+    "records": [
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "SEC associates SMCI with Super Micro Computer, Inc. (CIK 0001375365) on Nasdaq.",
+        "source_id": "source-sec-ticker-map",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-capital-0001193125-26-268520",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-06-12",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000119312526268520",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001193125-26-268058",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-06-12",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000119312526268058",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001193125-26-267973",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-06-12",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-12; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000119312526267973",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001193125-26-265112",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-06-10",
+        "text": "Super Micro Computer, Inc. filed Form 424B5 on 2026-06-10; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000119312526265112",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001375365-26-000021",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-11",
+        "text": "Super Micro Computer, Inc. filed Form 8-K on 2026-08-11; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000137536526000021",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001375365-26-000020",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-05",
+        "text": "Super Micro Computer, Inc. filed Form 8-K on 2026-08-05; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000137536526000020",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-05-11",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1290324000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2022-08-29",
+        "text": "SEC Company Facts reports 52347039 common shares outstanding at 2022-07-31, filed 2022-08-29.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-1",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-2",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2023-08-28",
+        "text": "SEC Company Facts reports 52905947 common shares outstanding at 2023-07-31, filed 2023-08-28.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-2",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2025-02-25",
+        "text": "SEC Company Facts reports 593481352 common shares outstanding at 2025-01-31, filed 2025-02-25.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-3",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-4",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2025-08-28",
+        "text": "SEC Company Facts reports 594273308 common shares outstanding at 2025-07-31, filed 2025-08-28.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-4",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-operating_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-05-11",
+        "text": "SEC Company Facts reports Operating cash flow of -7556847000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+        "source_id": "source-sec-companyfacts-operating_cash_flow",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-free_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-05-11",
+        "text": "Free cash flow of -7690616000 USD is calculated as operating cash flow -7556847000 less capital expenditures 133769000 for 2025-07-01 through 2026-03-31.",
+        "source_id": "source-sec-companyfacts-free_cash_flow",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-cash_burn",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-05-11",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 7690616000 USD for the period ending 2026-03-31, filed 2026-05-11.",
+        "source_id": "source-sec-companyfacts-cash_burn",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-debt",
+        "category": "financial_context",
+        "state": "limited_coverage",
+        "event_date": "2023-08-28",
+        "text": "Short-term Debt of 170123000 USD is available at 2023-06-30, but total debt cannot be established without aligned current and non-current components.",
+        "source_id": "source-sec-companyfacts-debt",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-268520-offering-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-06-12",
+        "text": "This excludes the up to $1.25 billion of shares of common stock that may be issued and sold pursuant to the ATM Program from time to time.",
+        "source_id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-268520-convertible-2",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-06-12",
+        "text": "333-296641 PROSPECTUS SUPPLEMENT (To Prospectus dated June 9, 2026) 75,000,000 Depositary Shares Each Representing a 1/20th Interest in a Share of 7.00% Series A Mandatory Convertible Preferred Stock Super Micro Computer, Inc.",
+        "source_id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-268520-warrant-3",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-06-12",
+        "text": "In the event that such rights or warrants described in this clause (2) are not so issued, each fixed conversion rate shall be decreased, effective as of the date our board of directors, or an authorized committee thereof, publicly announces its decision not to issue such rights or warrants, to such fixed conversion rate that would then be in effect if such issuance had not been declared.",
+        "source_id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001375365-26-000014-convertible-4",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-05-11",
+        "text": "We estimate the fair value of outstanding debt, including our 3.50 % Convertible Senior Notes due 2029 (“2029 Convertible Notes”), 2.25 % Convertible Senior Notes due 2028 (“2028 Convertible Notes”), and 0.00 % Convertible Senior Notes due 2030 (“2030 Convertible Notes”), for disclosure purposes on a recurring basis.",
+        "source_id": "source-sec-document-capital-000137536526000014-smci20260331htm",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001193125-26-270430-offering-5",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-06-15",
+        "text": "LLC, as representatives of the several underwriters named therein, pursuant to which the Company agreed to issue and sell 75,000,000 depositary shares (the “Depositary Shares”), each representing a 1/20 th interest in a share of the Company’s 7.00% Series A Mandatory Convertible Preferred Stock, liquidation preference $1,000 per share, par value $0.001 per share (the “Mandatory Convertible Preferred Stock” and such offering, the “Depositary Shares Offering”).",
+        "source_id": "source-sec-document-capital-000119312526270430-d151436d8khtm",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001375365-26-000021-catalyst-1",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2026-08-11",
+        "text": "Emerging growth company ☐ If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ¨ Item 2.02 Results of Operations and Financial Condition On August 11, 2026, Super Micro Computer, Inc. (the “Company”) issued a press release (the “Press Release”) announcing unaudited financial results for the quarter and full fiscal year ended June 30, 2026.",
+        "source_id": "source-sec-document-catalyst-000137536526000021-smci20260811htm",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-nasdaq-current-listing",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "Nasdaq Trader's current symbol directory identifies SMCI as Super Micro Computer, Inc. - Common Stock; current status is active.",
+        "source_id": "source-nasdaq-symbol-directory",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-alpha-eod-market",
+        "category": "market_context",
+        "state": "confirmed",
+        "event_date": "2026-08-26",
+        "text": "SMCI's end-of-day close was 37.39 with volume 33723170 on 2026-08-26; this is market context, not evidence of an issuer event.",
+        "source_id": "source-alpha-eod-market",
+        "issuer_cik": "0001375365",
+        "security_ticker": "SMCI",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526268520",
+        "title": "424B5 filed 2026-06-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526268520/d44171d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526268520"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526268058",
+        "title": "424B5 filed 2026-06-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526268058/d38067d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526268058"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526267973",
+        "title": "424B5 filed 2026-06-12",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526267973/d41737d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526267973"
+        ]
+      },
+      {
+        "id": "source-sec-000119312526265112",
+        "title": "424B5 filed 2026-06-10",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526265112/d44171d424b5.htm",
+        "published_date": "2026-06-10",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-capital-000119312526265112"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312526268520-d44171d424b5htm",
+        "title": "424B5 filed 2026-06-12 — d44171d424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526268520/d44171d424b5.htm",
+        "published_date": "2026-06-12",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526268520-offering-1",
+          "claim-extracted-000119312526268520-convertible-2",
+          "claim-extracted-000119312526268520-warrant-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000137536526000014-smci20260331htm",
+        "title": "10-Q filed 2026-05-11 — smci-20260331.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000014/smci-20260331.htm",
+        "published_date": "2026-05-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000137536526000014-convertible-4"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000119312526270430-d151436d8khtm",
+        "title": "8-K filed 2026-06-15 — d151436d8k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000119312526270430/d151436d8k.htm",
+        "published_date": "2026-06-15",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000119312526270430-offering-5"
+        ]
+      },
+      {
+        "id": "source-sec-000137536526000021",
+        "title": "8-K filed 2026-08-11",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000021/smci-20260811.htm",
+        "published_date": "2026-08-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000137536526000021"
+        ]
+      },
+      {
+        "id": "source-sec-000137536526000020",
+        "title": "8-K filed 2026-08-05",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000020/smci-20260805.htm",
+        "published_date": "2026-08-05",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000137536526000020"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000137536526000021-smci20260811htm",
+        "title": "8-K filed 2026-08-11 — smci-20260811.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000021/smci-20260811.htm",
+        "published_date": "2026-08-11",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-extracted-000137536526000021-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-02-06",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2023-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2022-08-29",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2023-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow",
+        "title": "SEC Company Facts — Free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-02-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-4",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2025-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn",
+        "title": "SEC Company Facts — Cash burn based on free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn-observation-1",
+        "title": "SEC Company Facts — Cash burn based on free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2026-05-11",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json",
+        "published_date": "2023-08-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:35.384Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:36.525Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "Alpha Vantage end-of-day market data for SMCI",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-26",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T19:59:36.525Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ]
+      }
+    ],
+    "cache": {
+      "tickers": "hit",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0001375365-26-000021",
+          "document": "smci-20260811.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-26-268520",
+          "document": "d44171d424b5.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001375365-26-000014",
+          "document": "smci-20260331.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001193125-26-270430",
+          "document": "d151436d8k.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 6
+  },
+  "synthesis": {
+    "status": "unavailable"
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 711,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "web_search_calls": 0,
+    "estimated_cost_usd": null,
+    "pricing_version": null,
+    "within_latency_target": true,
+    "first_useful_latency_ms": 142,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 6,
+      "cache": {
+        "tickers": "hit",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0001375365-26-000021",
+            "document": "smci-20260811.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-26-268520",
+            "document": "d44171d424b5.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001375365-26-000014",
+            "document": "smci-20260331.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001193125-26-270430",
+            "document": "d151436d8k.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 5792,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 14208,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.03,
+      "termination_reason": "partial_coverage",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0001375365": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0001375365": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001375365-26-000021:smci-20260811.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-26-268520:d44171d424b5.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001375365-26-000014:smci-20260331.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001193125-26-270430:d151436d8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 1,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:news": {
+          "reason": "provider_quota",
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "status": "unavailable"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 2,
+      "alpha_vantage_requests_today": 10,
+      "alpha_vantage_free_daily_limit": 25,
+      "nasdaq": "completed",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "completed",
+      "market_reason": null
+    },
+    "synthesis": {
+      "status": "unavailable"
+    }
+  }
+}

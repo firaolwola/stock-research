@@ -1,0 +1,3742 @@
+{
+  "case_id": "nxl-2026-live",
+  "ticker": "NXL",
+  "attempted_at": "2026-08-27T21:54:31.835Z",
+  "elapsed_ms": 1744,
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-NXL-2026-08-27T21:54:30.090Z",
+    "metadata": {
+      "as_of": "2026-08-27T21:54:30.090Z",
+      "generated_at": "2026-08-27T21:54:30.090Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-27",
+          "end": "2026-08-27"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "provider-news-provider_quota",
+          "explanation": "Current news discovery is Limited; optional provider failure does not affect completed SEC evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "NXL",
+      "name": "Nexalin Technology, Inc. - Common Stock",
+      "security_type": "common_stock",
+      "listing_venue": "Nasdaq",
+      "listing_status": "active",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-nasdaq-current-listing"
+      ]
+    },
+    "issuer": {
+      "legal_name": "Nexalin Technology, Inc.",
+      "cik": "0001527352",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [],
+      "claim_ids": [
+        "claim-sec-identity"
+      ]
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "Authoritative filings distinguish completed reverse splits from proposed or authorized actions.",
+        "coverage_notes": [
+          "Fast opens a bounded set of corporate-action filings and does not prove a complete five-year history."
+        ],
+        "items": [
+          {
+            "id": "reverse-split-1",
+            "kind": "reverse_split",
+            "title": "Completed 1-for-30 reverse split",
+            "state": "confirmed",
+            "summary": "to Articles of Incorporation or Bylaws; Change in Fiscal Year. On August 26, 2026, Nexalin Technology, Inc. (the “Company”) filed a certificate of amendment to the Company’s Certificate of Incorporation (the “Amendment”) with the Secretary of State of the State of Delaware to effectuate a 1-for-30 reverse stock split (the “Reverse Stock Split”) of the outstanding shares of the Company’s common stock, par value $0.001 per share (“Common Stock”). The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits. The Reverse Stock Split will become effective on August 28, 2026, at 5:00 p.m., Eastern Time (the “Effective Time”) and the Common Stock is expected to begin trading on The Nasdaq Capital Market on a Reverse Stock Split-adjusted basis on August 31, 2026, at market open under the existing ticker symbol, “NXL.” As of the Effective Time, every thirty shares of the Company’s issued and outstanding Common Stock will be combined into one share of Common Stock. The par value and other terms of the Common Stock will not be affected by the Reverse Stock Sp",
+            "event_date": "2026-08-27",
+            "corporate_action_state": "completed",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-reverse_split-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000182912626009387-reverse_split-1"
+        ]
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "On August 19, 2026, concurrently with the Securities Purchase Agreement relating to this offering, we entered into the Any Market Purchase Agreement ( AMPA ) with the Investor, pursuant to which we have the right, but not the obligation, to direct the Investor to purchase up to $15,000,000 of shares of our common stock from time to time until the earlier of (i) the date on which the Investor has received such number of shares pursuant to the AMPA for aggregate consideration equal to the $15,000,000 commitment amount, (ii) the date our common stock ceases to trade on a Principal Market (as defined in the AMPA), and (iii) December 31, 2027.",
+            "event_date": "2026-08-20",
+            "value": 15000000,
+            "unit": "USD",
+            "claim_ids": [
+              "claim-extracted-000182912626009171-offering-2"
+            ]
+          },
+          {
+            "id": "dilution-extracted-2",
+            "kind": "warrant",
+            "title": "Warrant financing instrument",
+            "state": "confirmed",
+            "summary": "In a concurrent private placement, we are also issuing to the Investor warrants (the “PIPE Warrants” and, together with the Shares, the “Securities”) to purchase up to 1,209,677 shares of our common stock, representing 50% of the number of shares of common stock purchased by the Investor in this offering.",
+            "event_date": "2026-08-20",
+            "claim_ids": [
+              "claim-extracted-000182912626009171-warrant-3"
+            ]
+          },
+          {
+            "id": "dilution-extracted-3",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "28 “At-the-Market” Offering On October 15, 2025, we entered into the Second Amendment to the Original Agreement with Maxim, pursuant to which we were authorized to offer and sell shares of our common stock from time to time through Maxim for an aggregate offering amount of up to approximately $4,273,000, subject to applicable securities laws and stock exchange requirements.",
+            "event_date": "2026-08-12",
+            "value": 4273000,
+            "unit": "USD",
+            "claim_ids": [
+              "claim-extracted-000182912626008709-offering-4"
+            ]
+          },
+          {
+            "id": "dilution-extracted-4",
+            "kind": "convertible",
+            "title": "Convertible financing instrument",
+            "state": "confirmed",
+            "summary": "67 (2) A person is deemed to be a beneficial owner of securities that can be acquired by such person within 60 days from the date of this Report, upon the exercise of options and warrants or conversion of convertible securities as applicable.",
+            "event_date": "2026-03-25",
+            "claim_ids": [
+              "claim-extracted-000182912626002673-convertible-5"
+            ]
+          },
+          {
+            "id": "dilution-extracted-5",
+            "kind": "warrant",
+            "title": "Warrant financing instrument",
+            "state": "confirmed",
+            "summary": "Plan category Number of securities to be issued upon exercise of outstanding options, warrants and rights (a) Weighted average exercise price of outstanding options, warrants and rights Number of securities remaining available for future issuance under equity compensation plans (excluding securities reflected in column (a)) Plans approved by our shareholders 4,113,617 $ 1.12 761,405 Plans not approved by shareholders - - - On December 19, 2025, the Board and the Compensation Committee approved the grant of stock options to certain employees and Board members, subject to shareholder approval of an amendment to the 2023 Plan to increase the number of shares available for issuance.",
+            "event_date": "2026-03-25",
+            "claim_ids": [
+              "claim-extracted-000182912626002673-warrant-6"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000182912626009171-offering-2",
+          "claim-extracted-000182912626009171-warrant-3",
+          "claim-extracted-000182912626008709-offering-4",
+          "claim-extracted-000182912626002673-convertible-5",
+          "claim-extracted-000182912626002673-warrant-6"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "Selected filings contain an active exchange-compliance condition.",
+        "coverage_notes": [
+          "Fast does not exhaustively search exchange notices or older filings."
+        ],
+        "items": [
+          {
+            "id": "compliance-1",
+            "kind": "exchange_compliance",
+            "title": "Active exchange compliance warning",
+            "state": "confirmed",
+            "summary": "advancement of our technologies and our products and product candidates, the outcome of the pending Nasdaq delisting proceeding, our ability to regain and maintain compliance with the Nasdaq continued listing requirements, including the minimum bid price and minimum stockholders’ equity requirements, the determination of the Nasdaq Hearings Panel with respect to our continued listing, whether and at what ratio we effect a reverse stock split, our ability to continue as a going concern, and other statements that are not historical facts. You can identify forward-looking statements by words such as “anticipate,” “believe,” “could,” “expect,” “intend,” “may,” “planned,” “potential,” “should,” “will,” “would” or the negative of those terms or other words of similar meaning. Such forward-looking statements are inherently subject to known and unknown risks and uncertainties. You should read statements that contain these words carefully because th",
+            "event_date": "2026-08-20",
+            "resolution_state": "active",
+            "claim_ids": [
+              "claim-extracted-000182912626009171-exchange_compliance-2"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000182912626009171-exchange_compliance-2"
+        ]
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2026-06-30; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+          "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+        ],
+        "items": [
+          {
+            "id": "financial-filing-warning-1",
+            "kind": "going_concern",
+            "title": "Going-concern warning",
+            "state": "confirmed",
+            "summary": "In that event, we would need to seek alternative sources of financing, which may not be available on acceptable terms or at all, particularly in light of the substantial doubt about our ability to continue as a going concern.",
+            "event_date": "2026-08-20",
+            "claim_ids": [
+              "claim-extracted-000182912626009171-going_concern-1"
+            ]
+          },
+          {
+            "id": "financial-filing-warning-2",
+            "kind": "accounting_warning",
+            "title": "Material weakness or ineffective controls",
+            "state": "confirmed",
+            "summary": "ommon stock is delisted from The Nasdaq Capital Market. Our consolidated financial statements do not include any adjustments that might result from the outcome of this uncertainty. We have identified material weaknesses in our internal control over financial reporting, and our disclosure controls and procedures were not effective as of June 30, 2026. Our management concluded that our disclosure controls and procedures and our internal control over financial reporting were not effective as of June 30, 2026, due to material weaknesses consisting of a lack of sufficient resources necessary to provide adequate segregation of duties related to the preparation and review of financial information used in financial reporting, and insufficient information technology controls relating to user and superuser access to our financial reporting system. If not remediated, these deficiencies could result in a misstatement of one or more account balances or disclosures in our annual or interim consolidated financial state",
+            "event_date": "2026-08-20",
+            "claim_ids": [
+              "claim-extracted-000182912626009171-accounting_warning-2"
+            ]
+          },
+          {
+            "id": "alpha-eod-price-change",
+            "kind": "other",
+            "title": "End-of-day price change",
+            "state": "confirmed",
+            "summary": "Latest close compared with the immediately preceding daily close.",
+            "event_date": "2026-08-27",
+            "value": -13.627118644067782,
+            "unit": "price_change_percent",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          },
+          {
+            "id": "alpha-eod-relative-volume",
+            "kind": "other",
+            "title": "End-of-day relative volume",
+            "state": "confirmed",
+            "summary": "Latest volume compared with a 20-session bounded baseline.",
+            "event_date": "2026-08-27",
+            "value": 9.85014198002248,
+            "unit": "volume_ratio",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000182912626009171-going_concern-1",
+          "claim-extracted-000182912626009171-accounting_warning-2",
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-cash-annual-4",
+          "claim-financial-revenue-observation-1",
+          "claim-financial-revenue",
+          "claim-financial-revenue-annual-1",
+          "claim-financial-revenue-annual-2",
+          "claim-financial-revenue-annual-3",
+          "claim-financial-revenue-annual-4",
+          "claim-financial-profitability-observation-1",
+          "claim-financial-profitability",
+          "claim-financial-profitability-annual-1",
+          "claim-financial-profitability-annual-2",
+          "claim-financial-profitability-annual-3",
+          "claim-financial-profitability-annual-4",
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow",
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-operating_cash_flow-annual-4",
+          "claim-alpha-eod-market"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits.",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits.",
+            "event_date": "2026-08-27",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000182912626009387-catalyst-1"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-27",
+      "reporting_currency": "USD",
+      "summary": "Latest standardized SEC facts are shown through 2026-06-30; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+        "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "confirmed",
+          "label": "Cash and Cash Equivalents, at Carrying Value",
+          "value": 1004958,
+          "unit": "USD",
+          "period_start": "2026-06-30",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2026-03-31",
+          "comparison_period_end": "2026-03-31",
+          "observations": [
+            {
+              "value": 1207895,
+              "unit": "USD",
+              "period_start": "2026-03-31",
+              "period_end": "2026-03-31",
+              "claim_ids": [
+                "claim-financial-cash-observation-1"
+              ]
+            },
+            {
+              "value": 1004958,
+              "unit": "USD",
+              "period_start": "2026-06-30",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-cash"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 162743,
+              "unit": "USD",
+              "period_start": "2022-12-31",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-cash-annual-1"
+              ]
+            },
+            {
+              "value": 580230,
+              "unit": "USD",
+              "period_start": "2023-12-31",
+              "period_end": "2023-12-31",
+              "claim_ids": [
+                "claim-financial-cash-annual-2"
+              ]
+            },
+            {
+              "value": 574485,
+              "unit": "USD",
+              "period_start": "2024-12-31",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-cash-annual-3"
+              ]
+            },
+            {
+              "value": 654783,
+              "unit": "USD",
+              "period_start": "2025-12-31",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-cash-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1004958 USD for the period ending 2026-06-30, filed 2026-08-12.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3",
+            "claim-financial-cash-annual-4"
+          ]
+        },
+        "revenue": {
+          "state": "confirmed",
+          "label": "Revenues",
+          "value": 12161,
+          "unit": "USD",
+          "period_start": "2026-04-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2025-04-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": 70588,
+              "unit": "USD",
+              "period_start": "2025-04-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-revenue-observation-1"
+              ]
+            },
+            {
+              "value": 12161,
+              "unit": "USD",
+              "period_start": "2026-04-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-revenue"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 1321357,
+              "unit": "USD",
+              "period_start": "2022-01-01",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-1"
+              ]
+            },
+            {
+              "value": 110748,
+              "unit": "USD",
+              "period_start": "2023-01-01",
+              "period_end": "2023-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-2"
+              ]
+            },
+            {
+              "value": 168721,
+              "unit": "USD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-3"
+              ]
+            },
+            {
+              "value": 301647,
+              "unit": "USD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-revenue-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Revenues of 12161 USD for the period ending 2026-06-30, filed 2026-08-12.",
+          "claim_ids": [
+            "claim-financial-revenue-observation-1",
+            "claim-financial-revenue",
+            "claim-financial-revenue-annual-1",
+            "claim-financial-revenue-annual-2",
+            "claim-financial-revenue-annual-3",
+            "claim-financial-revenue-annual-4"
+          ]
+        },
+        "profitability": {
+          "state": "confirmed",
+          "label": "Net Income (Loss) Attributable to Parent",
+          "value": -2239170,
+          "unit": "USD",
+          "period_start": "2026-04-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2025-04-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": -1580987,
+              "unit": "USD",
+              "period_start": "2025-04-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-profitability-observation-1"
+              ]
+            },
+            {
+              "value": -2239170,
+              "unit": "USD",
+              "period_start": "2026-04-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-profitability"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": -1697816,
+              "unit": "USD",
+              "period_start": "2022-01-01",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-1"
+              ]
+            },
+            {
+              "value": -4648709,
+              "unit": "USD",
+              "period_start": "2023-01-01",
+              "period_end": "2023-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-2"
+              ]
+            },
+            {
+              "value": -7607182,
+              "unit": "USD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-3"
+              ]
+            },
+            {
+              "value": -8222181,
+              "unit": "USD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-profitability-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -2239170 USD for the period ending 2026-06-30, filed 2026-08-12.",
+          "claim_ids": [
+            "claim-financial-profitability-observation-1",
+            "claim-financial-profitability",
+            "claim-financial-profitability-annual-1",
+            "claim-financial-profitability-annual-2",
+            "claim-financial-profitability-annual-3",
+            "claim-financial-profitability-annual-4"
+          ]
+        },
+        "operating_cash_flow": {
+          "state": "confirmed",
+          "label": "Operating cash flow",
+          "value": -3514616,
+          "unit": "USD",
+          "period_start": "2026-01-01",
+          "period_end": "2026-06-30",
+          "trend": "unknown",
+          "comparison_period_start": "2025-01-01",
+          "comparison_period_end": "2025-06-30",
+          "observations": [
+            {
+              "value": -2343379,
+              "unit": "USD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": -3514616,
+              "unit": "USD",
+              "period_start": "2026-01-01",
+              "period_end": "2026-06-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": -2215699,
+              "unit": "USD",
+              "period_start": "2022-01-01",
+              "period_end": "2022-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": -3835384,
+              "unit": "USD",
+              "period_start": "2023-01-01",
+              "period_end": "2023-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": -3944390,
+              "unit": "USD",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": -4957658,
+              "unit": "USD",
+              "period_start": "2025-01-01",
+              "period_end": "2025-12-31",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Operating cash flow of -3514616 USD for the period ending 2026-06-30, filed 2026-08-12.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow",
+            "claim-financial-operating_cash_flow-annual-1",
+            "claim-financial-operating_cash_flow-annual-2",
+            "claim-financial-operating_cash_flow-annual-3",
+            "claim-financial-operating_cash_flow-annual-4"
+          ]
+        },
+        "free_cash_flow": {
+          "state": "unknown",
+          "label": "Free cash flow",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Operating cash flow is available, but aligned capital expenditures are not; free cash flow is not inferred.",
+          "claim_ids": []
+        },
+        "cash_burn": {
+          "state": "unknown",
+          "label": "Cash burn",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Cash burn and runway remain unknown without a valid aligned cash-flow measure.",
+          "claim_ids": []
+        },
+        "debt": {
+          "state": "unknown",
+          "label": "Total debt",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "Neither an aligned total nor sufficient current and non-current debt components were established.",
+          "claim_ids": []
+        }
+      },
+      "shares_outstanding": {
+        "state": "confirmed",
+        "summary": "Split-adjusted reported shares outstanding increased 71.3% over the displayed period from 2024-11-06 to 2026-08-10.",
+        "observations": [
+          {
+            "value": 428720,
+            "unit": "shares",
+            "period_start": "2024-11-06",
+            "period_end": "2024-11-06",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 621731,
+            "unit": "shares",
+            "period_start": "2025-11-13",
+            "period_end": "2025-11-13",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 686055,
+            "unit": "shares",
+            "period_start": "2026-05-07",
+            "period_end": "2026-05-07",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 734547,
+            "unit": "shares",
+            "period_start": "2026-08-10",
+            "period_end": "2026-08-10",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 428720,
+            "unit": "shares",
+            "period_start": "2024-11-06",
+            "period_end": "2024-11-06",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 621731,
+            "unit": "shares",
+            "period_start": "2025-11-13",
+            "period_end": "2025-11-13",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 686055,
+            "unit": "shares",
+            "period_start": "2026-05-07",
+            "period_end": "2026-05-07",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 734547,
+            "unit": "shares",
+            "period_start": "2026-08-10",
+            "period_end": "2026-08-10",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-shares-outstanding-1",
+          "claim-shares-outstanding-2",
+          "claim-shares-outstanding-3",
+          "claim-shares-outstanding-4"
+        ]
+      },
+      "going_concern": {
+        "state": "confirmed",
+        "as_of": "2026-08-20",
+        "summary": "In that event, we would need to seek alternative sources of financing, which may not be available on acceptable terms or at all, particularly in light of the substantial doubt about our ability to continue as a going concern.",
+        "claim_ids": [
+          "claim-extracted-000182912626009171-going_concern-1"
+        ]
+      },
+      "material_warnings": [
+        {
+          "id": "financial-filing-warning-1",
+          "kind": "going_concern",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Going-concern warning",
+          "as_of": "2026-08-20",
+          "summary": "In that event, we would need to seek alternative sources of financing, which may not be available on acceptable terms or at all, particularly in light of the substantial doubt about our ability to continue as a going concern.",
+          "claim_ids": [
+            "claim-extracted-000182912626009171-going_concern-1"
+          ]
+        },
+        {
+          "id": "financial-filing-warning-2",
+          "kind": "accounting",
+          "state": "confirmed",
+          "severity": "high",
+          "title": "Material weakness or ineffective controls",
+          "as_of": "2026-08-20",
+          "summary": "ommon stock is delisted from The Nasdaq Capital Market. Our consolidated financial statements do not include any adjustments that might result from the outcome of this uncertainty. We have identified material weaknesses in our internal control over financial reporting, and our disclosure controls and procedures were not effective as of June 30, 2026. Our management concluded that our disclosure controls and procedures and our internal control over financial reporting were not effective as of June 30, 2026, due to material weaknesses consisting of a lack of sufficient resources necessary to provide adequate segregation of duties related to the preparation and review of financial information used in financial reporting, and insufficient information technology controls relating to user and superuser access to our financial reporting system. If not remediated, these deficiencies could result in a misstatement of one or more account balances or disclosures in our annual or interim consolidated financial state",
+          "claim_ids": [
+            "claim-extracted-000182912626009171-accounting_warning-2"
+          ]
+        }
+      ]
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "other",
+        "title": "Material filing event",
+        "event_date": "2026-08-27",
+        "summary": "The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits.",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000182912626009387-catalyst-1"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC associates NXL with Nexalin Technology, Inc. (CIK 0001527352) on Nasdaq.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T21:54:30.090Z",
+        "source_ids": [
+          "source-sec-ticker-map"
+        ]
+      },
+      {
+        "id": "claim-capital-000182912626009171",
+        "text": "Nexalin Technology, Inc. filed Form 424B5 on 2026-08-20; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912626009171"
+        ]
+      },
+      {
+        "id": "claim-capital-000182912625008139",
+        "text": "Nexalin Technology, Inc. filed Form 424B5 on 2025-10-15; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-10-15T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912625008139"
+        ]
+      },
+      {
+        "id": "claim-capital-000182912625003425",
+        "text": "Nexalin Technology, Inc. filed Form 424B4 on 2025-05-06; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-05-06T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912625003425"
+        ]
+      },
+      {
+        "id": "claim-capital-000182912625003351",
+        "text": "Nexalin Technology, Inc. filed Form 424B5 on 2025-05-05; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-05-05T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912625003351"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009387-reverse_split-1",
+        "text": "to Articles of Incorporation or Bylaws; Change in Fiscal Year. On August 26, 2026, Nexalin Technology, Inc. (the “Company”) filed a certificate of amendment to the Company’s Certificate of Incorporation (the “Amendment”) with the Secretary of State of the State of Delaware to effectuate a 1-for-30 reverse stock split (the “Reverse Stock Split”) of the outstanding shares of the Company’s common stock, par value $0.001 per share (“Common Stock”). The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits. The Reverse Stock Split will become effective on August 28, 2026, at 5:00 p.m., Eastern Time (the “Effective Time”) and the Common Stock is expected to begin trading on The Nasdaq Capital Market on a Reverse Stock Split-adjusted basis on August 31, 2026, at market open under the existing ticker symbol, “NXL.” As of the Effective Time, every thirty shares of the Company’s issued and outstanding Common Stock will be combined into one share of Common Stock. The par value and other terms of the Common Stock will not be affected by the Reverse Stock Sp",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000182912626009387-nexalintec8khtm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009171-offering-2",
+        "text": "On August 19, 2026, concurrently with the Securities Purchase Agreement relating to this offering, we entered into the Any Market Purchase Agreement ( AMPA ) with the Investor, pursuant to which we have the right, but not the obligation, to direct the Investor to purchase up to $15,000,000 of shares of our common stock from time to time until the earlier of (i) the date on which the Investor has received such number of shares pursuant to the AMPA for aggregate consideration equal to the $15,000,000 commitment amount, (ii) the date our common stock ceases to trade on a Principal Market (as defined in the AMPA), and (iii) December 31, 2027.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000182912626009171-nexalintech424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009171-warrant-3",
+        "text": "In a concurrent private placement, we are also issuing to the Investor warrants (the “PIPE Warrants” and, together with the Shares, the “Securities”) to purchase up to 1,209,677 shares of our common stock, representing 50% of the number of shares of common stock purchased by the Investor in this offering.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000182912626009171-nexalintech424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626008709-offering-4",
+        "text": "28 “At-the-Market” Offering On October 15, 2025, we entered into the Second Amendment to the Original Agreement with Maxim, pursuant to which we were authorized to offer and sell shares of our common stock from time to time through Maxim for an aggregate offering amount of up to approximately $4,273,000, subject to applicable securities laws and stock exchange requirements.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000182912626008709-nexalintechno10qhtm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626002673-convertible-5",
+        "text": "67 (2) A person is deemed to be a beneficial owner of securities that can be acquired by such person within 60 days from the date of this Report, upon the exercise of options and warrants or conversion of convertible securities as applicable.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000182912626002673-nexalintech10khtm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626002673-warrant-6",
+        "text": "Plan category Number of securities to be issued upon exercise of outstanding options, warrants and rights (a) Weighted average exercise price of outstanding options, warrants and rights Number of securities remaining available for future issuance under equity compensation plans (excluding securities reflected in column (a)) Plans approved by our shareholders 4,113,617 $ 1.12 761,405 Plans not approved by shareholders - - - On December 19, 2025, the Board and the Compensation Committee approved the grant of stock options to certain employees and Board members, subject to shareholder approval of an amendment to the 2023 Plan to increase the number of shares available for issuance.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000182912626002673-nexalintech10khtm"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000182912626009387",
+        "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-27; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912626009387"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000182912626009226",
+        "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-21; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-21T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912626009226"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000182912626009173",
+        "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-20; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-000182912626009173"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009387-catalyst-1",
+        "text": "The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000182912626009387-nexalintec8khtm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009171-exchange_compliance-2",
+        "text": "advancement of our technologies and our products and product candidates, the outcome of the pending Nasdaq delisting proceeding, our ability to regain and maintain compliance with the Nasdaq continued listing requirements, including the minimum bid price and minimum stockholders’ equity requirements, the determination of the Nasdaq Hearings Panel with respect to our continued listing, whether and at what ratio we effect a reverse stock split, our ability to continue as a going concern, and other statements that are not historical facts. You can identify forward-looking statements by words such as “anticipate,” “believe,” “could,” “expect,” “intend,” “may,” “planned,” “potential,” “should,” “will,” “would” or the negative of those terms or other words of similar meaning. Such forward-looking statements are inherently subject to known and unknown risks and uncertainties. You should read statements that contain these words carefully because th",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000182912626009171-nexalintech424b5htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1004958 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1207895 USD for the comparable period ending 2026-03-31, filed 2026-05-08.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-08T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 162743 USD for the comparable period ending 2022-12-31, filed 2024-03-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 580230 USD for the comparable period ending 2023-12-31, filed 2025-03-14.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-03-14T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 574485 USD for the comparable period ending 2024-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-4",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 654783 USD for the comparable period ending 2025-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue",
+        "text": "SEC Company Facts reports Revenues of 12161 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-observation-1",
+        "text": "SEC Company Facts reports Revenues of 70588 USD for the comparable period ending 2025-06-30, filed 2026-08-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-1",
+        "text": "SEC Company Facts reports Revenues of 1321357 USD for the comparable period ending 2022-12-31, filed 2024-03-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-2",
+        "text": "SEC Company Facts reports Revenues of 110748 USD for the comparable period ending 2023-12-31, filed 2025-03-14.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-03-14T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-3",
+        "text": "SEC Company Facts reports Revenues of 168721 USD for the comparable period ending 2024-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-revenue-annual-4",
+        "text": "SEC Company Facts reports Revenues of 301647 USD for the comparable period ending 2025-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-revenue-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -2239170 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-observation-1",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -1580987 USD for the comparable period ending 2025-06-30, filed 2026-08-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-1",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -1697816 USD for the comparable period ending 2022-12-31, filed 2024-03-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-2",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -4648709 USD for the comparable period ending 2023-12-31, filed 2025-03-14.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-03-14T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-3",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -7607182 USD for the comparable period ending 2024-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-profitability-annual-4",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -8222181 USD for the comparable period ending 2025-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-profitability-annual-4"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-1",
+        "text": "SEC Company Facts reports 12861605 common shares outstanding at 2024-11-06, filed 2024-11-08.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-11-08T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-2",
+        "text": "SEC Company Facts reports 18651939 common shares outstanding at 2025-11-13, filed 2025-11-14.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2025-11-14T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-3",
+        "text": "SEC Company Facts reports 20581646 common shares outstanding at 2026-05-07, filed 2026-05-08.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-05-08T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-4",
+        "text": "SEC Company Facts reports 22036402 common shares outstanding at 2026-08-10, filed 2026-08-12.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow",
+        "text": "SEC Company Facts reports Operating cash flow of -3514616 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Operating cash flow of -2343379 USD for the comparable period ending 2025-06-30, filed 2026-08-12.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-12T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Operating cash flow of -2215699 USD for the comparable period ending 2022-12-31, filed 2024-03-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-03-27T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Operating cash flow of -3835384 USD for the comparable period ending 2023-12-31, filed 2025-03-14.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-03-14T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Operating cash flow of -3944390 USD for the comparable period ending 2024-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-4",
+        "text": "SEC Company Facts reports Operating cash flow of -4957658 USD for the comparable period ending 2025-12-31, filed 2026-03-25.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-03-25T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009171-going_concern-1",
+        "text": "In that event, we would need to seek alternative sources of financing, which may not be available on acceptable terms or at all, particularly in light of the substantial doubt about our ability to continue as a going concern.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000182912626009171-nexalintech424b5htm"
+        ]
+      },
+      {
+        "id": "claim-extracted-000182912626009171-accounting_warning-2",
+        "text": "ommon stock is delisted from The Nasdaq Capital Market. Our consolidated financial statements do not include any adjustments that might result from the outcome of this uncertainty. We have identified material weaknesses in our internal control over financial reporting, and our disclosure controls and procedures were not effective as of June 30, 2026. Our management concluded that our disclosure controls and procedures and our internal control over financial reporting were not effective as of June 30, 2026, due to material weaknesses consisting of a lack of sufficient resources necessary to provide adequate segregation of duties related to the preparation and review of financial information used in financial reporting, and insufficient information technology controls relating to user and superuser access to our financial reporting system. If not remediated, these deficiencies could result in a misstatement of one or more account balances or disclosures in our annual or interim consolidated financial state",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-20T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-financial-000182912626009171-nexalintech424b5htm"
+        ]
+      },
+      {
+        "id": "claim-nasdaq-current-listing",
+        "text": "Nasdaq Trader's current symbol directory identifies NXL as Nexalin Technology, Inc. - Common Stock; current status is active.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T21:54:31.829Z",
+        "source_ids": [
+          "source-nasdaq-symbol-directory"
+        ]
+      },
+      {
+        "id": "claim-alpha-eod-market",
+        "text": "NXL's end-of-day close was 0.2548 with volume 1202823 on 2026-08-27; this is market context, not evidence of an issuer event.",
+        "materiality": "low",
+        "state": "confirmed",
+        "as_of": "2026-08-27T00:00:00Z",
+        "source_ids": [
+          "source-alpha-eod-market"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009171",
+        "title": "424B5 filed 2026-08-20",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912626009171"
+        ]
+      },
+      {
+        "id": "source-sec-000182912625008139",
+        "title": "424B5 filed 2025-10-15",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912625008139/nexalintech_424b5.htm",
+        "published_date": "2025-10-15",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912625008139"
+        ]
+      },
+      {
+        "id": "source-sec-000182912625003425",
+        "title": "424B4 filed 2025-05-06",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912625003425/nexalintech_424b4.htm",
+        "published_date": "2025-05-06",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912625003425"
+        ]
+      },
+      {
+        "id": "source-sec-000182912625003351",
+        "title": "424B5 filed 2025-05-05",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912625003351/nexalintech_424b5.htm",
+        "published_date": "2025-05-05",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912625003351"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626009387-nexalintec8khtm",
+        "title": "8-K filed 2026-08-27 — nexalintec_8k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009387/nexalintec_8k.htm",
+        "published_date": "2026-08-27",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009387-reverse_split-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626009171-nexalintech424b5htm",
+        "title": "424B5 filed 2026-08-20 — nexalintech_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009171-offering-2",
+          "claim-extracted-000182912626009171-warrant-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626008709-nexalintechno10qhtm",
+        "title": "10-Q filed 2026-08-12 — nexalintechno_10q.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626008709/nexalintechno_10q.htm",
+        "published_date": "2026-08-12",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626008709-offering-4"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626002673-nexalintech10khtm",
+        "title": "10-K filed 2026-03-25 — nexalintech_10k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626002673/nexalintech_10k.htm",
+        "published_date": "2026-03-25",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626002673-convertible-5",
+          "claim-extracted-000182912626002673-warrant-6"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009387",
+        "title": "8-K filed 2026-08-27",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009387/nexalintec_8k.htm",
+        "published_date": "2026-08-27",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000182912626009387"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009226",
+        "title": "8-K filed 2026-08-21",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009226/nexalintec_8k.htm",
+        "published_date": "2026-08-21",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000182912626009226"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009173",
+        "title": "8-K filed 2026-08-20",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009173/nexalintec_8k.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000182912626009173"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000182912626009387-nexalintec8khtm",
+        "title": "8-K filed 2026-08-27 — nexalintec_8k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009387/nexalintec_8k.htm",
+        "published_date": "2026-08-27",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009387-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000182912626009171-nexalintech424b5htm",
+        "title": "424B5 filed 2026-08-20 — nexalintech_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009171-exchange_compliance-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-05-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenues",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-4",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-4",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-11-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-11-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-05-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000182912626009171-nexalintech424b5htm",
+        "title": "424B5 filed 2026-08-20 — nexalintech_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009171-going_concern-1",
+          "claim-extracted-000182912626009171-accounting_warning-2"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:31.830Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "alpha vantage end-of-day market data for NXL",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-27",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T21:54:31.830Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ],
+        "provider_name": "alpha_vantage",
+        "data_type": "market_context",
+        "freshness": "current",
+        "evidence_role": "market_context"
+      }
+    ],
+    "scores": {
+      "dilution_historical_severity": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Past three years",
+        "explanation": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_future_likelihood": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "dilution_potential_impact": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "reverse_split_risk": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_more_risk",
+        "time_horizon": "Next twelve months",
+        "explanation": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_health": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Latest reported period and next twelve months",
+        "explanation": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_revenue_trend": {
+        "state": "confirmed",
+        "value": 0,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 2 interim periods.",
+        "claim_ids": [
+          "claim-financial-revenue-observation-1",
+          "claim-financial-revenue"
+        ],
+        "confidence": "low",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 0,
+            "weight": 1,
+            "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 2 interim periods.",
+            "claim_ids": [
+              "claim-financial-revenue-observation-1",
+              "claim-financial-revenue"
+            ]
+          }
+        ]
+      },
+      "financial_net_income_trend": {
+        "state": "confirmed",
+        "value": 1.4,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+        "claim_ids": [
+          "claim-financial-profitability-observation-1",
+          "claim-financial-profitability"
+        ],
+        "confidence": "low",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 1.4,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+            "claim_ids": [
+              "claim-financial-profitability-observation-1",
+              "claim-financial-profitability"
+            ]
+          }
+        ]
+      },
+      "financial_debt_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_free_cash_flow_trend": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "financial_cash_trend": {
+        "state": "confirmed",
+        "value": 1.4,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported period ends",
+        "explanation": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+        "claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash"
+        ],
+        "confidence": "low",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 1.4,
+            "weight": 1,
+            "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+            "claim_ids": [
+              "claim-financial-cash-observation-1",
+              "claim-financial-cash"
+            ]
+          }
+        ]
+      },
+      "financial_operating_cash_flow_trend": {
+        "state": "confirmed",
+        "value": 1.3,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Comparable SEC-reported periods",
+        "explanation": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+        "claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow"
+        ],
+        "confidence": "low",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "comparable_sec_history",
+            "state": "confirmed",
+            "value": 1.3,
+            "weight": 1,
+            "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-observation-1",
+              "claim-financial-operating_cash_flow"
+            ]
+          }
+        ]
+      },
+      "long_term_company_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Multi-year (Deep only)",
+        "explanation": "Long-term company quality remains a Deep construct and is not deterministically scored from bounded Fast evidence.",
+        "claim_ids": [],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": []
+      },
+      "catalyst_strength": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Current catalyst",
+        "explanation": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+        "claim_ids": [
+          "claim-extracted-000182912626009387-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          }
+        ]
+      },
+      "near_term_setup_quality": {
+        "state": "limited_coverage",
+        "value": null,
+        "scale_min": 0,
+        "scale_max": 10,
+        "direction": "higher_is_better",
+        "time_horizon": "Next five trading days",
+        "explanation": "A supported current catalyst is required before market context can form a setup score.",
+        "claim_ids": [
+          "claim-extracted-000182912626009387-catalyst-1"
+        ],
+        "confidence": "unknown",
+        "methodology_version": "2.1.0",
+        "components": [
+          {
+            "key": "potential_significance",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.3,
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "specificity",
+            "state": "confirmed",
+            "value": 6,
+            "weight": 0.25,
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          {
+            "key": "credibility",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.2,
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          },
+          {
+            "key": "novelty",
+            "state": "limited_coverage",
+            "value": null,
+            "weight": 0.15,
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          {
+            "key": "recency",
+            "state": "confirmed",
+            "value": 9,
+            "weight": 0.1,
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000182912626009387-catalyst-1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "SEC associates NXL with Nexalin Technology, Inc. (CIK 0001527352) on Nasdaq.",
+      "source_id": "source-sec-ticker-map",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-capital-0001829126-26-009171",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-08-20",
+      "text": "Nexalin Technology, Inc. filed Form 424B5 on 2026-08-20; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000182912626009171",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001829126-25-008139",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-10-15",
+      "text": "Nexalin Technology, Inc. filed Form 424B5 on 2025-10-15; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000182912625008139",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001829126-25-003425",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-05-06",
+      "text": "Nexalin Technology, Inc. filed Form 424B4 on 2025-05-06; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000182912625003425",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001829126-25-003351",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-05-05",
+      "text": "Nexalin Technology, Inc. filed Form 424B5 on 2025-05-05; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000182912625003351",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001829126-26-009387",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-27",
+      "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-27; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000182912626009387",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001829126-26-009226",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-21",
+      "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-21; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000182912626009226",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0001829126-26-009173",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-08-20",
+      "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-20; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000182912626009173",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-08-12",
+      "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1004958 USD for the period ending 2026-06-30, filed 2026-08-12.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-revenue",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-08-12",
+      "text": "SEC Company Facts reports Revenues of 12161 USD for the period ending 2026-06-30, filed 2026-08-12.",
+      "source_id": "source-sec-companyfacts-revenue",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-profitability",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-08-12",
+      "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -2239170 USD for the period ending 2026-06-30, filed 2026-08-12.",
+      "source_id": "source-sec-companyfacts-profitability",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2024-11-08",
+      "text": "SEC Company Facts reports 12861605 common shares outstanding at 2024-11-06, filed 2024-11-08.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-1",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-2",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2025-11-14",
+      "text": "SEC Company Facts reports 18651939 common shares outstanding at 2025-11-13, filed 2025-11-14.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-2",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-05-08",
+      "text": "SEC Company Facts reports 20581646 common shares outstanding at 2026-05-07, filed 2026-05-08.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-3",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-4",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2026-08-12",
+      "text": "SEC Company Facts reports 22036402 common shares outstanding at 2026-08-10, filed 2026-08-12.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-4",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-operating_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-08-12",
+      "text": "SEC Company Facts reports Operating cash flow of -3514616 USD for the period ending 2026-06-30, filed 2026-08-12.",
+      "source_id": "source-sec-companyfacts-operating_cash_flow",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009387-reverse_split-1",
+      "category": "reverse_splits",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "to Articles of Incorporation or Bylaws; Change in Fiscal Year. On August 26, 2026, Nexalin Technology, Inc. (the “Company”) filed a certificate of amendment to the Company’s Certificate of Incorporation (the “Amendment”) with the Secretary of State of the State of Delaware to effectuate a 1-for-30 reverse stock split (the “Reverse Stock Split”) of the outstanding shares of the Company’s common stock, par value $0.001 per share (“Common Stock”). The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits. The Reverse Stock Split will become effective on August 28, 2026, at 5:00 p.m., Eastern Time (the “Effective Time”) and the Common Stock is expected to begin trading on The Nasdaq Capital Market on a Reverse Stock Split-adjusted basis on August 31, 2026, at market open under the existing ticker symbol, “NXL.” As of the Effective Time, every thirty shares of the Company’s issued and outstanding Common Stock will be combined into one share of Common Stock. The par value and other terms of the Common Stock will not be affected by the Reverse Stock Sp",
+      "source_id": "source-sec-document-capital-000182912626009387-nexalintec8khtm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009171-offering-2",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-08-20",
+      "text": "On August 19, 2026, concurrently with the Securities Purchase Agreement relating to this offering, we entered into the Any Market Purchase Agreement ( AMPA ) with the Investor, pursuant to which we have the right, but not the obligation, to direct the Investor to purchase up to $15,000,000 of shares of our common stock from time to time until the earlier of (i) the date on which the Investor has received such number of shares pursuant to the AMPA for aggregate consideration equal to the $15,000,000 commitment amount, (ii) the date our common stock ceases to trade on a Principal Market (as defined in the AMPA), and (iii) December 31, 2027.",
+      "source_id": "source-sec-document-capital-000182912626009171-nexalintech424b5htm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009171-warrant-3",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-08-20",
+      "text": "In a concurrent private placement, we are also issuing to the Investor warrants (the “PIPE Warrants” and, together with the Shares, the “Securities”) to purchase up to 1,209,677 shares of our common stock, representing 50% of the number of shares of common stock purchased by the Investor in this offering.",
+      "source_id": "source-sec-document-capital-000182912626009171-nexalintech424b5htm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-008709-offering-4",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2026-08-12",
+      "text": "28 “At-the-Market” Offering On October 15, 2025, we entered into the Second Amendment to the Original Agreement with Maxim, pursuant to which we were authorized to offer and sell shares of our common stock from time to time through Maxim for an aggregate offering amount of up to approximately $4,273,000, subject to applicable securities laws and stock exchange requirements.",
+      "source_id": "source-sec-document-capital-000182912626008709-nexalintechno10qhtm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-002673-convertible-5",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-03-25",
+      "text": "67 (2) A person is deemed to be a beneficial owner of securities that can be acquired by such person within 60 days from the date of this Report, upon the exercise of options and warrants or conversion of convertible securities as applicable.",
+      "source_id": "source-sec-document-capital-000182912626002673-nexalintech10khtm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-002673-warrant-6",
+      "category": "warrants_convertibles",
+      "state": "confirmed",
+      "event_date": "2026-03-25",
+      "text": "Plan category Number of securities to be issued upon exercise of outstanding options, warrants and rights (a) Weighted average exercise price of outstanding options, warrants and rights Number of securities remaining available for future issuance under equity compensation plans (excluding securities reflected in column (a)) Plans approved by our shareholders 4,113,617 $ 1.12 761,405 Plans not approved by shareholders - - - On December 19, 2025, the Board and the Compensation Committee approved the grant of stock options to certain employees and Board members, subject to shareholder approval of an amendment to the 2023 Plan to increase the number of shares available for issuance.",
+      "source_id": "source-sec-document-capital-000182912626002673-nexalintech10khtm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009387-catalyst-1",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits.",
+      "source_id": "source-sec-document-catalyst-000182912626009387-nexalintec8khtm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009171-exchange_compliance-2",
+      "category": "compliance",
+      "state": "confirmed",
+      "event_date": "2026-08-20",
+      "text": "advancement of our technologies and our products and product candidates, the outcome of the pending Nasdaq delisting proceeding, our ability to regain and maintain compliance with the Nasdaq continued listing requirements, including the minimum bid price and minimum stockholders’ equity requirements, the determination of the Nasdaq Hearings Panel with respect to our continued listing, whether and at what ratio we effect a reverse stock split, our ability to continue as a going concern, and other statements that are not historical facts. You can identify forward-looking statements by words such as “anticipate,” “believe,” “could,” “expect,” “intend,” “may,” “planned,” “potential,” “should,” “will,” “would” or the negative of those terms or other words of similar meaning. Such forward-looking statements are inherently subject to known and unknown risks and uncertainties. You should read statements that contain these words carefully because th",
+      "source_id": "source-sec-document-catalyst-000182912626009171-nexalintech424b5htm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009171-going_concern-1",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2026-08-20",
+      "text": "In that event, we would need to seek alternative sources of financing, which may not be available on acceptable terms or at all, particularly in light of the substantial doubt about our ability to continue as a going concern.",
+      "source_id": "source-sec-document-financial-000182912626009171-nexalintech424b5htm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001829126-26-009171-accounting_warning-2",
+      "category": "going_concern_accounting",
+      "state": "confirmed",
+      "event_date": "2026-08-20",
+      "text": "ommon stock is delisted from The Nasdaq Capital Market. Our consolidated financial statements do not include any adjustments that might result from the outcome of this uncertainty. We have identified material weaknesses in our internal control over financial reporting, and our disclosure controls and procedures were not effective as of June 30, 2026. Our management concluded that our disclosure controls and procedures and our internal control over financial reporting were not effective as of June 30, 2026, due to material weaknesses consisting of a lack of sufficient resources necessary to provide adequate segregation of duties related to the preparation and review of financial information used in financial reporting, and insufficient information technology controls relating to user and superuser access to our financial reporting system. If not remediated, these deficiencies could result in a misstatement of one or more account balances or disclosures in our annual or interim consolidated financial state",
+      "source_id": "source-sec-document-financial-000182912626009171-nexalintech424b5htm",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-nasdaq-current-listing",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "Nasdaq Trader's current symbol directory identifies NXL as Nexalin Technology, Inc. - Common Stock; current status is active.",
+      "source_id": "source-nasdaq-symbol-directory",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-alpha-eod-market",
+      "category": "market_context",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "NXL's end-of-day close was 0.2548 with volume 1202823 on 2026-08-27; this is market context, not evidence of an issuer event.",
+      "source_id": "source-alpha-eod-market",
+      "issuer_cik": "0001527352",
+      "security_ticker": "NXL",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "NXL",
+    "identity": {
+      "ticker": "NXL",
+      "issuer_legal_name": "Nexalin Technology, Inc.",
+      "cik": "0001527352"
+    },
+    "retrieved_at": "2026-08-27T21:54:30.090Z",
+    "records": [
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "SEC associates NXL with Nexalin Technology, Inc. (CIK 0001527352) on Nasdaq.",
+        "source_id": "source-sec-ticker-map",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-capital-0001829126-26-009171",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-08-20",
+        "text": "Nexalin Technology, Inc. filed Form 424B5 on 2026-08-20; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000182912626009171",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001829126-25-008139",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-10-15",
+        "text": "Nexalin Technology, Inc. filed Form 424B5 on 2025-10-15; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000182912625008139",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001829126-25-003425",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-05-06",
+        "text": "Nexalin Technology, Inc. filed Form 424B4 on 2025-05-06; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000182912625003425",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001829126-25-003351",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-05-05",
+        "text": "Nexalin Technology, Inc. filed Form 424B5 on 2025-05-05; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000182912625003351",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001829126-26-009387",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-27",
+        "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-27; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000182912626009387",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001829126-26-009226",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-21",
+        "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-21; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000182912626009226",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0001829126-26-009173",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-08-20",
+        "text": "Nexalin Technology, Inc. filed Form 8-K on 2026-08-20; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000182912626009173",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-08-12",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 1004958 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-revenue",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-08-12",
+        "text": "SEC Company Facts reports Revenues of 12161 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "source_id": "source-sec-companyfacts-revenue",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-profitability",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-08-12",
+        "text": "SEC Company Facts reports Net Income (Loss) Attributable to Parent of -2239170 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "source_id": "source-sec-companyfacts-profitability",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2024-11-08",
+        "text": "SEC Company Facts reports 12861605 common shares outstanding at 2024-11-06, filed 2024-11-08.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-1",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-2",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2025-11-14",
+        "text": "SEC Company Facts reports 18651939 common shares outstanding at 2025-11-13, filed 2025-11-14.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-2",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-05-08",
+        "text": "SEC Company Facts reports 20581646 common shares outstanding at 2026-05-07, filed 2026-05-08.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-3",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-4",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2026-08-12",
+        "text": "SEC Company Facts reports 22036402 common shares outstanding at 2026-08-10, filed 2026-08-12.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-4",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-operating_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-08-12",
+        "text": "SEC Company Facts reports Operating cash flow of -3514616 USD for the period ending 2026-06-30, filed 2026-08-12.",
+        "source_id": "source-sec-companyfacts-operating_cash_flow",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009387-reverse_split-1",
+        "category": "reverse_splits",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "to Articles of Incorporation or Bylaws; Change in Fiscal Year. On August 26, 2026, Nexalin Technology, Inc. (the “Company”) filed a certificate of amendment to the Company’s Certificate of Incorporation (the “Amendment”) with the Secretary of State of the State of Delaware to effectuate a 1-for-30 reverse stock split (the “Reverse Stock Split”) of the outstanding shares of the Company’s common stock, par value $0.001 per share (“Common Stock”). The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits. The Reverse Stock Split will become effective on August 28, 2026, at 5:00 p.m., Eastern Time (the “Effective Time”) and the Common Stock is expected to begin trading on The Nasdaq Capital Market on a Reverse Stock Split-adjusted basis on August 31, 2026, at market open under the existing ticker symbol, “NXL.” As of the Effective Time, every thirty shares of the Company’s issued and outstanding Common Stock will be combined into one share of Common Stock. The par value and other terms of the Common Stock will not be affected by the Reverse Stock Sp",
+        "source_id": "source-sec-document-capital-000182912626009387-nexalintec8khtm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009171-offering-2",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-08-20",
+        "text": "On August 19, 2026, concurrently with the Securities Purchase Agreement relating to this offering, we entered into the Any Market Purchase Agreement ( AMPA ) with the Investor, pursuant to which we have the right, but not the obligation, to direct the Investor to purchase up to $15,000,000 of shares of our common stock from time to time until the earlier of (i) the date on which the Investor has received such number of shares pursuant to the AMPA for aggregate consideration equal to the $15,000,000 commitment amount, (ii) the date our common stock ceases to trade on a Principal Market (as defined in the AMPA), and (iii) December 31, 2027.",
+        "source_id": "source-sec-document-capital-000182912626009171-nexalintech424b5htm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009171-warrant-3",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-08-20",
+        "text": "In a concurrent private placement, we are also issuing to the Investor warrants (the “PIPE Warrants” and, together with the Shares, the “Securities”) to purchase up to 1,209,677 shares of our common stock, representing 50% of the number of shares of common stock purchased by the Investor in this offering.",
+        "source_id": "source-sec-document-capital-000182912626009171-nexalintech424b5htm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-008709-offering-4",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2026-08-12",
+        "text": "28 “At-the-Market” Offering On October 15, 2025, we entered into the Second Amendment to the Original Agreement with Maxim, pursuant to which we were authorized to offer and sell shares of our common stock from time to time through Maxim for an aggregate offering amount of up to approximately $4,273,000, subject to applicable securities laws and stock exchange requirements.",
+        "source_id": "source-sec-document-capital-000182912626008709-nexalintechno10qhtm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-002673-convertible-5",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-03-25",
+        "text": "67 (2) A person is deemed to be a beneficial owner of securities that can be acquired by such person within 60 days from the date of this Report, upon the exercise of options and warrants or conversion of convertible securities as applicable.",
+        "source_id": "source-sec-document-capital-000182912626002673-nexalintech10khtm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-002673-warrant-6",
+        "category": "warrants_convertibles",
+        "state": "confirmed",
+        "event_date": "2026-03-25",
+        "text": "Plan category Number of securities to be issued upon exercise of outstanding options, warrants and rights (a) Weighted average exercise price of outstanding options, warrants and rights Number of securities remaining available for future issuance under equity compensation plans (excluding securities reflected in column (a)) Plans approved by our shareholders 4,113,617 $ 1.12 761,405 Plans not approved by shareholders - - - On December 19, 2025, the Board and the Compensation Committee approved the grant of stock options to certain employees and Board members, subject to shareholder approval of an amendment to the 2023 Plan to increase the number of shares available for issuance.",
+        "source_id": "source-sec-document-capital-000182912626002673-nexalintech10khtm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009387-catalyst-1",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "The Company’s stockholders previously approved future reverse stock splits and granted the board of directors the authority to determine the exact split ratios and when to proceed with any such reverse stock splits.",
+        "source_id": "source-sec-document-catalyst-000182912626009387-nexalintec8khtm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009171-exchange_compliance-2",
+        "category": "compliance",
+        "state": "confirmed",
+        "event_date": "2026-08-20",
+        "text": "advancement of our technologies and our products and product candidates, the outcome of the pending Nasdaq delisting proceeding, our ability to regain and maintain compliance with the Nasdaq continued listing requirements, including the minimum bid price and minimum stockholders’ equity requirements, the determination of the Nasdaq Hearings Panel with respect to our continued listing, whether and at what ratio we effect a reverse stock split, our ability to continue as a going concern, and other statements that are not historical facts. You can identify forward-looking statements by words such as “anticipate,” “believe,” “could,” “expect,” “intend,” “may,” “planned,” “potential,” “should,” “will,” “would” or the negative of those terms or other words of similar meaning. Such forward-looking statements are inherently subject to known and unknown risks and uncertainties. You should read statements that contain these words carefully because th",
+        "source_id": "source-sec-document-catalyst-000182912626009171-nexalintech424b5htm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009171-going_concern-1",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2026-08-20",
+        "text": "In that event, we would need to seek alternative sources of financing, which may not be available on acceptable terms or at all, particularly in light of the substantial doubt about our ability to continue as a going concern.",
+        "source_id": "source-sec-document-financial-000182912626009171-nexalintech424b5htm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001829126-26-009171-accounting_warning-2",
+        "category": "going_concern_accounting",
+        "state": "confirmed",
+        "event_date": "2026-08-20",
+        "text": "ommon stock is delisted from The Nasdaq Capital Market. Our consolidated financial statements do not include any adjustments that might result from the outcome of this uncertainty. We have identified material weaknesses in our internal control over financial reporting, and our disclosure controls and procedures were not effective as of June 30, 2026. Our management concluded that our disclosure controls and procedures and our internal control over financial reporting were not effective as of June 30, 2026, due to material weaknesses consisting of a lack of sufficient resources necessary to provide adequate segregation of duties related to the preparation and review of financial information used in financial reporting, and insufficient information technology controls relating to user and superuser access to our financial reporting system. If not remediated, these deficiencies could result in a misstatement of one or more account balances or disclosures in our annual or interim consolidated financial state",
+        "source_id": "source-sec-document-financial-000182912626009171-nexalintech424b5htm",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-nasdaq-current-listing",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "Nasdaq Trader's current symbol directory identifies NXL as Nexalin Technology, Inc. - Common Stock; current status is active.",
+        "source_id": "source-nasdaq-symbol-directory",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-alpha-eod-market",
+        "category": "market_context",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "NXL's end-of-day close was 0.2548 with volume 1202823 on 2026-08-27; this is market context, not evidence of an issuer event.",
+        "source_id": "source-alpha-eod-market",
+        "issuer_cik": "0001527352",
+        "security_ticker": "NXL",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009171",
+        "title": "424B5 filed 2026-08-20",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912626009171"
+        ]
+      },
+      {
+        "id": "source-sec-000182912625008139",
+        "title": "424B5 filed 2025-10-15",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912625008139/nexalintech_424b5.htm",
+        "published_date": "2025-10-15",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912625008139"
+        ]
+      },
+      {
+        "id": "source-sec-000182912625003425",
+        "title": "424B4 filed 2025-05-06",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912625003425/nexalintech_424b4.htm",
+        "published_date": "2025-05-06",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912625003425"
+        ]
+      },
+      {
+        "id": "source-sec-000182912625003351",
+        "title": "424B5 filed 2025-05-05",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912625003351/nexalintech_424b5.htm",
+        "published_date": "2025-05-05",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-capital-000182912625003351"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626009387-nexalintec8khtm",
+        "title": "8-K filed 2026-08-27 — nexalintec_8k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009387/nexalintec_8k.htm",
+        "published_date": "2026-08-27",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009387-reverse_split-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626009171-nexalintech424b5htm",
+        "title": "424B5 filed 2026-08-20 — nexalintech_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009171-offering-2",
+          "claim-extracted-000182912626009171-warrant-3"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626008709-nexalintechno10qhtm",
+        "title": "10-Q filed 2026-08-12 — nexalintechno_10q.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626008709/nexalintechno_10q.htm",
+        "published_date": "2026-08-12",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626008709-offering-4"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000182912626002673-nexalintech10khtm",
+        "title": "10-K filed 2026-03-25 — nexalintech_10k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626002673/nexalintech_10k.htm",
+        "published_date": "2026-03-25",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626002673-convertible-5",
+          "claim-extracted-000182912626002673-warrant-6"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009387",
+        "title": "8-K filed 2026-08-27",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009387/nexalintec_8k.htm",
+        "published_date": "2026-08-27",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000182912626009387"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009226",
+        "title": "8-K filed 2026-08-21",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009226/nexalintec_8k.htm",
+        "published_date": "2026-08-21",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000182912626009226"
+        ]
+      },
+      {
+        "id": "source-sec-000182912626009173",
+        "title": "8-K filed 2026-08-20",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009173/nexalintec_8k.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000182912626009173"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000182912626009387-nexalintec8khtm",
+        "title": "8-K filed 2026-08-27 — nexalintec_8k.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009387/nexalintec_8k.htm",
+        "published_date": "2026-08-27",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009387-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000182912626009171-nexalintech424b5htm",
+        "title": "424B5 filed 2026-08-20 — nexalintech_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009171-exchange_compliance-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-05-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue",
+        "title": "SEC Company Facts — Revenues",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-observation-1",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-1",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-2",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-3",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-revenue-annual-4",
+        "title": "SEC Company Facts — Revenues comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-revenue-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-observation-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-1",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-2",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-3",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-profitability-annual-4",
+        "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-profitability-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-11-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-11-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-05-08",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-08-12",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2024-03-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2025-03-14",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001527352.json",
+        "published_date": "2026-03-25",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-document-financial-000182912626009171-nexalintech424b5htm",
+        "title": "424B5 filed 2026-08-20 — nexalintech_424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1527352/000182912626009171/nexalintech_424b5.htm",
+        "published_date": "2026-08-20",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:30.090Z",
+        "supported_claim_ids": [
+          "claim-extracted-000182912626009171-going_concern-1",
+          "claim-extracted-000182912626009171-accounting_warning-2"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T21:54:31.830Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "alpha vantage end-of-day market data for NXL",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-27",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T21:54:31.830Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ],
+        "provider_name": "alpha_vantage",
+        "data_type": "market_context",
+        "freshness": "current",
+        "evidence_role": "market_context"
+      }
+    ],
+    "cache": {
+      "tickers": "hit",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0001829126-26-009387",
+          "document": "nexalintec_8k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-009171",
+          "document": "nexalintech_424b5.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-008709",
+          "document": "nexalintechno_10q.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-002673",
+          "document": "nexalintech_10k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-006624",
+          "document": "nexalintec_8k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-008934",
+          "document": "nexalintec_8k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-007891",
+          "document": "nexalintec_8k.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-009387",
+          "document": "nexalintec_ex3-1.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001829126-26-006624",
+          "document": "nexalintec_ex3-1.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 11
+  },
+  "synthesis": {
+    "status": "skipped",
+    "reason": "cost_ceiling"
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 1286,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "web_search_calls": 0,
+    "estimated_cost_usd": null,
+    "pricing_version": null,
+    "within_latency_target": true,
+    "first_useful_latency_ms": 109,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 11,
+      "cache": {
+        "tickers": "hit",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0001829126-26-009387",
+            "document": "nexalintec_8k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-009171",
+            "document": "nexalintech_424b5.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-008709",
+            "document": "nexalintechno_10q.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-002673",
+            "document": "nexalintech_10k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-006624",
+            "document": "nexalintec_8k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-008934",
+            "document": "nexalintec_8k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-007891",
+            "document": "nexalintec_8k.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-009387",
+            "document": "nexalintec_ex3-1.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001829126-26-006624",
+            "document": "nexalintec_ex3-1.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 1740,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 18260,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.03,
+      "termination_reason": "cost_ceiling",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0001527352": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0001527352": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-009387:nexalintec_8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-009171:nexalintech_424b5.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-008709:nexalintechno_10q.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-002673:nexalintech_10k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-006624:nexalintec_8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-008934:nexalintec_8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-007891:nexalintec_8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-009387:nexalintec_ex3-1.htm": {
+          "endpoint_category": "filing_exhibit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001829126-26-006624:nexalintec_ex3-1.htm": {
+          "endpoint_category": "filing_exhibit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "hit",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 1,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:news": {
+          "cache_state": "miss",
+          "request_count": 2,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "twelve_data:news": {
+          "cache_state": "miss",
+          "request_count": 0,
+          "reason": "not_configured",
+          "cost_usd": 0,
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "maximum_cost_usd": 0.032371,
+          "status": "cost_blocked"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 2,
+      "nasdaq": "completed",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "completed",
+      "market_reason": null,
+      "provider_order": [
+        "alpha_vantage",
+        "twelve_data"
+      ],
+      "configured_providers": [
+        "alpha_vantage"
+      ],
+      "providers": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 8,
+            "daily_limit": 25,
+            "minute_used": 8,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "alpha_vantage_requests_today": 8,
+      "alpha_vantage_free_daily_limit": 25
+    }
+  }
+}

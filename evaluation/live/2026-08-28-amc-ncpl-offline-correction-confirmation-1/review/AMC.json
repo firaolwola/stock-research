@@ -1,0 +1,10 @@
+{
+  "ticker": "AMC",
+  "expected": ["Completed 2023-08-24 1-for-10 reverse split"],
+  "detected": [],
+  "report_valid": true,
+  "settlement": "safe_limited",
+  "classification": "retrieval_or_filing-selection_gap",
+  "severe_miss": true,
+  "notes": "Live SEC discovery opened bounded recent and historical documents, but the final report contained no reverse-split item and explicitly retained Limited coverage."
+}

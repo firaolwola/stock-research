@@ -1,0 +1,14 @@
+{
+  "case_id":"tupbq-2026-sparse","ticker":"TUPBQ","material_checks":{"detected":3,"expected":4},
+  "adjudication":[
+    {"expectation":"September 2024 Chapter 11 filing","detected":true,"cause":null},
+    {"expectation":"NYSE suspension/delisting and OTC Expert Market TUPBQ status","detected":false,"cause":"retrieval","note":"The header represented the status, but the seeded delisting filing request returned HTTP 404, so the authoritative support was not usable."},
+    {"expectation":"Substantial doubt about going concern","detected":true,"cause":null},
+    {"expectation":"Stale/missing reporting cannot score favorably","detected":true,"cause":null}
+  ],
+  "identity_result":"TUP/TUPBQ resolved to CIK 0001008654 and the lineage appeared, but direct authoritative delisting support failed retrieval.",
+  "validation":{"valid":false,"cause":"interpretation","summary":"Deterministic catalyst classification emitted accounting, which is not an allowed catalyst classification."},
+  "score_range":{"passed":6,"evaluated":6,"note":"All required financial trend states remained safely Limited."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "severe_misses":["The delisting seed URL returned 404.","The report was invalid because accounting was emitted as a catalyst classification."],"result":"failed"
+}

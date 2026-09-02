@@ -1,0 +1,64 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "offline-correction-confirmation-1",
+  "approved_at": "2026-08-28",
+  "purpose": "Two-case live confirmation of the bounded AMC reverse-split and NCPL non-reliance corrections. Historical calibration artifacts remain frozen.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-28-final-five-confirmation-1.json",
+  "parent_plan_sha256": "421c279920ccd64a191c3f1148d330278a6e615c57cf45eb535f74f5372c75dd",
+  "output_directory": "2026-08-28-amc-ncpl-offline-correction-confirmation-1",
+  "approval_token": "issue-55-2026-08-28-approved-amc-ncpl-confirmation-one",
+  "approval": {
+    "approved": true,
+    "tickers": ["AMC", "NCPL"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 2,
+    "maximum_openai_cost_usd": 0.06,
+    "maximum_alpha_vantage_requests": 4,
+    "maximum_twelve_data_requests": 4,
+    "maximum_combined_optional_provider_attempts": 8,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "cases": [
+    {
+      "id": "amc-2026-live",
+      "ticker": "AMC",
+      "why": "Compound capital-structure case with issuance, exchangeable notes, debt, liquidity pressure, and a completed reverse split.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1411579/000141157926000059/amc-20260630x10q.htm"],
+      "known_baseline": [
+        "Revenue improved on quarterly and six-month comparisons.",
+        "Quarterly loss worsened while the six-month loss improved; the periods must remain distinct.",
+        "Six-month operating cash flow turned positive and aligned simple free cash flow is positive.",
+        "Recent issuance and note exchanges materially increased shares outstanding.",
+        "The issuer completed a 1-for-10 reverse split and retains material future financing and dilution risk."
+      ],
+      "score_ranges": {"financial_health":[3,6],"revenue":[7,10],"net_income":[5,8],"debt":[3,7],"free_cash_flow":[5,9],"cash":[6,10],"operating_cash_flow":[7,10],"historical_dilution":[9,10],"future_dilution":[7,10],"potential_dilution":[7,10],"reverse_split":[2,5],"catalyst":[5,9],"near_term_setup":[4,9]},
+      "limited_allowed": ["potential_dilution", "near_term_setup"]
+    },
+    {
+      "id": "ncpl-2026-live",
+      "ticker": "NCPL",
+      "why": "Small-cap reporting-conflict, going-concern, convertible-financing, and active-listing-pressure case.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1414767/000149315226011686/form10-q.htm",
+        "https://www.sec.gov/Archives/edgar/data/1414767/000164117225023248/form10-k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1414767/000149315226036916/form8-k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1414767/000149315226038853/0001493152-26-038853-index.htm"
+      ],
+      "known_baseline": [
+        "Revenue declined and shares outstanding increased materially.",
+        "Annual evidence disclosed losses, negative operating cash flow, negative working capital, and going-concern uncertainty.",
+        "Nasdaq minimum-bid compliance remains unresolved.",
+        "Recent non-reliance evidence makes affected historical financial values conflicting; they must not produce favorable scores.",
+        "Convertible-note activity supports material future-dilution risk."
+      ],
+      "score_ranges": {"historical_dilution":[8,10],"future_dilution":[8,10],"potential_dilution":[6,10],"reverse_split":[7,10],"catalyst":[7,10],"near_term_setup":[2,8]},
+      "limited_required": ["revenue", "net_income", "debt", "free_cash_flow", "cash", "operating_cash_flow"],
+      "limited_allowed": ["financial_health", "potential_dilution", "near_term_setup"]
+    }
+  ]
+}

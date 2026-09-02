@@ -1,0 +1,132 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "sparse-1",
+  "approved_at": "2026-08-27",
+  "purpose": "Bounded expansion of the Issue 55 reliability sample across completed splits, active listing pressure, going concern, foreign-filer/ADR, and OTC/delisted behavior.",
+  "output_directory": "2026-08-27-sparse-1",
+  "approval_token": "issue-55-2026-08-27-approved-sparse-four-runs",
+  "approval": {
+    "approved": true,
+    "tickers": ["BIOR", "MULN", "NIO", "TUPBQ"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 4,
+    "maximum_openai_cost_usd": 0.12,
+    "maximum_alpha_vantage_requests": 8,
+    "maximum_twelve_data_requests": 8,
+    "maximum_combined_optional_provider_attempts": 16,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "required_ancestor": "81ec4d2",
+  "configuration": {
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 8000,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "provider_policy": {
+    "approved_providers": ["alpha_vantage", "twelve_data"],
+    "provider_order": ["alpha_vantage", "twelve_data"],
+    "alpha_vantage_is_hard_gate": false,
+    "optional_context_may_settle_limited": true,
+    "twelve_data_financials_for_scoring": false,
+    "twelve_data_release_bodies_to_openai": false,
+    "note": "Alpha Vantage is first; configured Twelve Data is bounded fallback. SEC/Nasdaq evidence survives optional-provider failure. No paid provider is authorized."
+  },
+  "preserve_prior_batches": [
+    {"directory":"evaluation/live/2026-08-27","summary_sha256":"21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56","run_summary_sha256":"6151f8ba50008576180df0b804270e22ddd33da5239c8885067635d210d3fa84"},
+    {"directory":"evaluation/live/2026-08-27-batch-2","summary_sha256":"d1cbd2e894d5c0274e73f0f1c9f80c412271fd931699516689370d0a1071b12a","run_summary_sha256":"1198624d72addaee682d38c080b5803f3f148fa4b6a81a472f5e545bb74d8e4e"},
+    {"directory":"evaluation/live/2026-08-27-batch-3","summary_sha256":"59dd8f608016fb07a88478e8d1fccc2b813090853256421035961d0159f0add0","run_summary_sha256":"2bc9ecc59228989b1d46450c7535741133799e7d873990bb372e15335d1e9806"}
+  ],
+  "cases": [
+    {
+      "id": "bior-2026-sparse",
+      "ticker": "BIOR",
+      "filing_regime": "domestic 10-K/10-Q/8-K",
+      "identity": "Biora Therapeutics, Inc. common stock, Nasdaq Global Market, ticker BIOR, CIK 1580063; formerly Progenity, Inc.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1580063/000095017024114214/bior-20241009.htm",
+        "https://www.sec.gov/Archives/edgar/data/1580063/000119312524246602/d899591d8k.htm",
+        "https://www.sec.gov/Archives/edgar/data/1580063/000119312523122388/d463897dars.pdf"
+      ],
+      "known_baseline": [
+        "Completed 1-for-25 reverse split effective January 3, 2023.",
+        "Completed 1-for-10 reverse split effective October 18, 2024; proposal/authorization and completion must not be double-counted.",
+        "October 2024 registered direct issuance and concurrent warrants are material capital-structure evidence.",
+        "Current prospective reverse-split risk must be distinct from completed historical actions."
+      ],
+      "limited_allowed": ["revenue", "net_income", "debt", "free_cash_flow", "cash", "operating_cash_flow", "catalyst", "near_term_setup"],
+      "score_ranges": {"historical_dilution":[6,10],"future_dilution":[6,10],"potential_dilution":[5,10],"reverse_split":[5,10]},
+      "severe_miss_conditions": ["Either completed reverse split is omitted or presented only as prospective.", "Wrong issuer/security evidence is merged.", "Missing financial evidence becomes favorable."]
+    },
+    {
+      "id": "muln-2026-sparse",
+      "ticker": "MULN",
+      "filing_regime": "domestic 10-K/10-Q/8-K",
+      "identity": "Mullen Automotive Inc. common stock, Nasdaq Capital Market, ticker MULN, CIK 1499961; formerly Net Element, Inc.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1499961/000143774924026065/muln20240630c_10q.htm",
+        "https://www.sec.gov/Archives/edgar/data/1499961/000182912625004146/mullenautomotive_ex99-1.htm",
+        "https://www.sec.gov/Archives/edgar/data/1499961/000143774925027016/muln20250630_10q.htm"
+      ],
+      "known_baseline": [
+        "Completed reverse splits include 1-for-25 in May 2023, 1-for-9 in August 2023, 1-for-100 in December 2023, 1-for-100 in September 2024, and 1-for-100 effective June 2, 2025.",
+        "The repeated splits were undertaken in substantial part to address Nasdaq minimum-bid compliance.",
+        "The June 2025 quarterly filing disclosed then-current Market Value of Listed Securities listing pressure; historical regained-compliance language must not erase an active notice.",
+        "Repeated financing and extreme split history support material capital-structure risk."
+      ],
+      "limited_allowed": ["revenue", "net_income", "debt", "free_cash_flow", "cash", "operating_cash_flow", "catalyst", "near_term_setup"],
+      "score_ranges": {"financial_health":[0,4],"historical_dilution":[8,10],"future_dilution":[8,10],"potential_dilution":[7,10],"reverse_split":[9,10]},
+      "severe_miss_conditions": ["Repeated completed split history is materially omitted.", "Active listing pressure is described as resolved solely from older language.", "Missing or stale financial evidence becomes favorable."]
+    },
+    {
+      "id": "nio-2026-sparse",
+      "ticker": "NIO",
+      "filing_regime": "foreign private issuer using 20-F/6-K and IFRS as issued by IASB",
+      "identity": "NIO Inc. NYSE-listed American depositary shares, ticker NIO, CIK 1736541; each ADS represents one Class A ordinary share; Cayman Islands issuer.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1736541/000141057825000661/nio-20241231x20f.htm",
+        "https://ir.nio.com/static-files/9bf72e9a-52fc-4ff2-817e-051b1c098463"
+      ],
+      "known_baseline": [
+        "The security is an NYSE-listed ADS/ADR interest, not domestic common stock.",
+        "The issuer files annual 20-F and current 6-K reports rather than domestic 10-K/10-Q reports.",
+        "2024 revenue increased 18.2% to RMB65,731.6 million while net loss widened 8.1% to RMB22,401.7 million.",
+        "RMB, IFRS concepts, ADS ratio, and annual/6-K cadence must remain explicit and comparable; unavailable domestic-style trends must remain Limited."
+      ],
+      "limited_allowed": ["debt", "free_cash_flow", "cash", "operating_cash_flow", "historical_dilution", "future_dilution", "potential_dilution", "reverse_split", "catalyst", "near_term_setup"],
+      "score_ranges": {"financial_health":[2,6],"revenue":[6,9],"net_income":[0,4]},
+      "severe_miss_conditions": ["NIO is represented as domestic common stock or wrong issuer evidence is merged.", "RMB/IFRS/cadence mismatch produces a favorable score.", "The widening loss is described as improving."]
+    },
+    {
+      "id": "tupbq-2026-sparse",
+      "ticker": "TUPBQ",
+      "filing_regime": "domestic SEC reporting lineage; NYSE security suspended/delisted and moved to OTC Expert Market after Chapter 11",
+      "identity": "Tupperware Brands Corporation common stock, former NYSE ticker TUP, OTC Expert Market ticker TUPBQ, CIK 1008654.",
+      "authoritative_sources": [
+        "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000068/tup-20240917.htm",
+        "https://www.sec.gov/Archives/edgar/data/1008654/000100865424000036/tupform12b-25202310k.htm",
+        "https://s2.q4cdn.com/154085107/files/doc_news/NYSE-to-Commence-Delisting-Proceedings-Against-Tupperware-Brands-Corporation-TUP-2024.pdf"
+      ],
+      "known_baseline": [
+        "Tupperware and subsidiaries filed voluntary Chapter 11 petitions on September 17, 2024.",
+        "NYSE suspended the former TUP security and commenced delisting; the security moved to the OTC Expert Market as TUPBQ.",
+        "The 2022 auditor report contained substantial doubt about ability to continue as a going concern.",
+        "Late/missing periodic reporting and bankruptcy make stale financial trends unsafe for favorable scoring."
+      ],
+      "limited_required": ["revenue", "net_income", "debt", "free_cash_flow", "cash", "operating_cash_flow"],
+      "limited_allowed": ["financial_health", "historical_dilution", "future_dilution", "potential_dilution", "reverse_split", "catalyst", "near_term_setup"],
+      "score_ranges": {},
+      "severe_miss_conditions": ["The security is shown as ordinarily active on NYSE or Nasdaq.", "Chapter 11 or going-concern distress is omitted.", "Stale financial history becomes favorable.", "TUP/TUPBQ lineage or issuer identity is wrong."]
+    }
+  ],
+  "category_targets": ["completed_reverse_split_history", "active_listing_deficiency", "going_concern", "foreign_issuer_adr_ifrs", "otc_or_delisted"],
+  "completion_rule": "Do not close Issue 55 unless the aggregate reliability gates pass, no severe misleading miss remains, and remaining sparse categories are adequately demonstrated or owner-accepted outside milestone scope."
+}

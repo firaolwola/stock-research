@@ -1,0 +1,53 @@
+{
+  "exam_id": "fast-reliability-final-exam-2026-09-01",
+  "issue": 55,
+  "mode": "offline_only",
+  "purpose": "Freeze the claim-level denominator and closure gates before any further live calibration.",
+  "denominator": {
+    "source": "evaluation/diagnostics/fast-claim-denominator-2026-08-31.json",
+    "adjudication_source": "evaluation/diagnostics/fast-sec-confirmation-adjudications-2026-09-01.json",
+    "unit": "unique_frozen_claim_id",
+    "include": ["approved_live_run", "denominator_eligible=true", "outcome=supported|missed"],
+    "exclude": ["fixtures", "not_executed", "not_observed", "unavailable_authoritative_evidence", "duplicate_run_or_rubric"],
+    "historical_artifacts_immutable": true,
+    "pool_overlapping_cohorts": false
+  },
+  "required_sections": [
+    "issuer_security_identity",
+    "listing_compliance",
+    "completed_reverse_splits",
+    "dilution_financing",
+    "going_concern_accounting",
+    "foreign_adr_ifrs",
+    "otc_delisted",
+    "financial_trends_fcf",
+    "explanation_fidelity",
+    "settlement_safety",
+    "operational_bounds"
+  ],
+  "gates": {
+    "overall_material_risk_recall_target": 0.95,
+    "adequately_sampled_category_recall_target": 0.9,
+    "minimum_independent_positive_cases": 3,
+    "zero_unresolved_severe_misleading_misses": true,
+    "valid_report_rate_target": 1,
+    "settlement_accuracy_target": 1,
+    "evidence_traceability_required": true,
+    "numeric_fcf_coverage_must_be_separate_from_safe_settlement": true
+  },
+  "classification": [
+    "retrieval",
+    "normalization",
+    "interpretation",
+    "scoring",
+    "unavailable_authoritative_evidence",
+    "not_observed"
+  ],
+  "execution": {
+    "live_runs": 0,
+    "openai_calls": 0,
+    "provider_calls": 0,
+    "network_calls": 0,
+    "requires_owner_approval_for_future_live_work": true
+  }
+}

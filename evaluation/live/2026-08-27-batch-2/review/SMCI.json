@@ -1,0 +1,17 @@
+{
+  "ticker": "SMCI",
+  "post_scoring_validation": "invalid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "strong comparable revenue", "strong comparable net income", "current negative nine-month operating cash flow", "current negative aligned free cash flow", "cash depletion", "current preliminary earnings catalyst", "mandatory convertible preferred offering", "convertible debt context", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"accounting_material_weakness","cause":"retrieval_interpretation","severity":"severe","finding":"Known unresolved material weaknesses were still not surfaced."},
+    {"category":"shares_outstanding","cause":"corporate_action_retrieval","severity":"severe","finding":"The stock split was not retrieved; the series correctly became Limited rather than claiming 1035.3% dilution, but remained unresolved."},
+    {"category":"report_validation","cause":"normalization","severity":"severe","finding":"A Limited shares series retained chart observations and failed semantic validation, so the application could not use the report."},
+    {"category":"exchange_compliance","cause":"interpretation","finding":"A filing saying Nasdaq compliance had been restored was presented as a compliance warning."}
+  ],
+  "corrected_from_batch_1": ["OCF used the current comparable nine-month series and scored 0 instead of 8.4", "FCF used the current comparable nine-month series and scored 0 instead of 8.1", "the unexplained share discontinuity was no longer called 1035.3% dilution"],
+  "score_range_result": {"passed":0,"evaluated":12,"reason":"Application-invalid reports receive no score-range credit."},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "application_failure",
+  "safe_settlement": "The raw report failed closed, but validation failure and the missing material weakness are milestone blockers."
+}

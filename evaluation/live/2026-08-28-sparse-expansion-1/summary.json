@@ -1,0 +1,26 @@
+{
+  "batch": "sparse-expansion-1",
+  "material_risk_recall": { "detected": 10, "expected": 20, "recall": 0.5 },
+  "recall_by_category": {
+    "issuer_security_identity": {"detected":1,"expected":3,"recall":0.3333},
+    "completed_reverse_split_history": {"detected":1,"expected":3,"recall":0.3333},
+    "active_listing_deficiency": {"detected":1,"expected":1,"recall":1},
+    "going_concern_or_bankruptcy": {"detected":2,"expected":3,"recall":0.6667},
+    "foreign_issuer_adr_ifrs": {"detected":0,"expected":1,"recall":0},
+    "otc_or_delisted": {"detected":1,"expected":2,"recall":0.5},
+    "liquidity_freshness_context": {"detected":1,"expected":4,"recall":0.25},
+    "prospective_action_uncertainty": {"detected":1,"expected":1,"recall":1}
+  },
+  "valid_report_rate": {"valid":2,"evaluated":3,"rate":0.6667},
+  "explanation_fidelity": {"passed":0,"evaluated":3,"rate":0},
+  "settlement_accuracy": {"passed":2,"evaluated":3,"rate":0.6667},
+  "score_state_safety": {"passed":3,"evaluated":3,"rate":1,"note":"No missing evidence became a favorable score; GMBL nevertheless failed final report validation."},
+  "severe_misleading_misses": 2,
+  "severe_blockers": [
+    {"ticker":"ZAPPF","class":"identity_retrieval","summary":"Current OTC ticker did not resolve to Zapp, former ZAPP, or CIK 1955104, so every known material fact was missed."},
+    {"ticker":"GMBL","class":"normalization_and_validation","summary":"Confirmed terminal OTC evidence retained unknown security type and failed validation; the completed 1-for-400 split was also presented as 1-for-4."}
+  ],
+  "gate": {"overall_recall_target":0.95,"adequately_sampled_category_target":0.9,"maximum_severe_misses":0,"passed":false},
+  "issue_must_remain_open": true,
+  "next_step": "Offline fixtures and corrections for ZAPPF historical OTC identity resolution, GMBL terminal security-type settlement, and complete 1-for-400 ratio preservation. Do not run more tickers until these defects pass deterministic regression tests."
+}

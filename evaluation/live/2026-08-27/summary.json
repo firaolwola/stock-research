@@ -1,0 +1,66 @@
+{
+  "issue": 55,
+  "status": "failed_reliability_gate",
+  "issue_must_remain_open": true,
+  "approved_runs": 5,
+  "completed_runs": 5,
+  "automatic_retries": 0,
+  "additional_tickers": 0,
+  "operations": {
+    "elapsed_ms": {"AAPL":7986,"AMC":7525,"NCPL":9322,"NXL":7949,"SMCI":5796},
+    "all_within_20_second_ceiling": true,
+    "measured_openai_cost_usd": 0.027985,
+    "unmeasured_failed_synthesis_attempts": 3,
+    "conservative_maximum_possible_cost_usd": 0.117985,
+    "approved_maximum_cost_usd": 0.15,
+    "alpha_vantage_requests": 10,
+    "approved_alpha_vantage_maximum": 10,
+    "alpha_vantage_market_successes": 5,
+    "alpha_vantage_news_result": "provider_quota on every case; discovery remained Limited"
+  },
+  "validation": {
+    "retrieval_outputs_before_application_scoring": "missing required scores object",
+    "cause": "The first version of the standalone runner validated the evidence-first assembly before applying the deterministic scoring boundary used by Express.",
+    "post_scoring_reports_valid": 5,
+    "application_regression": false
+  },
+  "category_recall": {
+    "issuer_security_identity":{"detected":5,"expected":5,"recall":1.0},
+    "historical_dilution_issuance":{"detected":3,"expected":3,"recall":1.0},
+    "future_dilution":{"detected":4,"expected":4,"recall":1.0},
+    "warrants_convertibles":{"detected":2,"expected":4,"recall":0.5},
+    "reverse_splits":{"detected":2,"expected":3,"recall":0.6667},
+    "active_listing_deficiency":{"detected":2,"expected":2,"recall":1.0,"sparse":true},
+    "going_concern":{"detected":2,"expected":2,"recall":1.0,"sparse":true},
+    "accounting_restatement_non_reliance":{"detected":1,"expected":3,"recall":0.3333},
+    "financial_health_liquidity":{"detected":2,"expected":5,"recall":0.4},
+    "revenue":{"detected":0,"expected":5,"recall":0.0},
+    "net_income_loss":{"detected":0,"expected":5,"recall":0.0},
+    "debt":{"detected":5,"expected":5,"recall":1.0},
+    "free_cash_flow":{"detected":3,"expected":5,"recall":0.6},
+    "cash":{"detected":5,"expected":5,"recall":1.0},
+    "operating_cash_flow":{"detected":3,"expected":5,"recall":0.6},
+    "shares_history":{"detected":1,"expected":5,"recall":0.2},
+    "catalyst_news":{"detected":4,"expected":5,"recall":0.8},
+    "discovery_only_behavior":{"detected":5,"expected":5,"recall":1.0},
+    "end_of_day_price_volume":{"detected":5,"expected":5,"recall":1.0},
+    "missing_stale_conflicting_handling":{"detected":3,"expected":5,"recall":0.6}
+  },
+  "overall_material_checks": {"detected":57,"expected":86,"recall":0.6628,"target":0.95,"passes":false},
+  "severe_misleading_misses": [
+    "AMC completed reverse split omitted and split/issuance-affected shares history materially understated dilution.",
+    "NCPL current non-reliance event omitted and affected OCF still received a numeric score.",
+    "SMCI material weaknesses omitted; stale annual OCF/FCF produced strong scores despite sharply negative current comparable flows.",
+    "SMCI shares history failed to normalize a stock split and falsely described a 1035.3% increase."
+  ],
+  "required_corrective_work": [
+    "Disambiguate Company Facts duration facts by start/end/frame so quarterly and year-to-date revenue and net income do not conflict merely because they share a filing and end date.",
+    "Extract explicit non-reliance/restatement language from selected 8-K/6-K filings and propagate it into financial score evidence gates.",
+    "Make completed reverse-split history retrieval independent of the single bounded recent corporate-action filing slot.",
+    "Normalize shares history for stock splits and reject stale series that end before a material issuance.",
+    "Require current comparable flow observations to constrain or invalidate annual OCF/FCF trend scores.",
+    "Recalibrate only after deterministic regression coverage; any new live batch requires separate owner approval."
+  ],
+  "sparse_or_unproven": ["completed reverse-split history", "active listing deficiency", "going concern", "foreign issuers/ADRs/IFRS", "OTC/delisted securities"],
+  "relative_ordering_result": "Not passed. Capital-risk numeric scores remained Limited across the batch, and severe share-history normalization errors prevent trustworthy ordering."
+}

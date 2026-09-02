@@ -1,0 +1,16 @@
+{
+  "ticker": "SMCI",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "current preliminary earnings catalyst", "mandatory convertible preferred offering", "convertible debt context", "cash", "operating and free cash flow observations", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"accounting_material_weakness","cause":"retrieval_interpretation","severity":"severe","finding":"The known unresolved material weaknesses were not surfaced from the selected periodic filing."},
+    {"category":"operating_cash_flow_score","cause":"freshness_and_calibration","severity":"severe","finding":"OCF scored 8.4 from older annual history despite current nine-month operating cash flow of approximately -$7.56B."},
+    {"category":"free_cash_flow_score","cause":"freshness_and_calibration","severity":"severe","finding":"FCF scored 8.1 from older annual history despite current aligned nine-month FCF of approximately -$7.69B."},
+    {"category":"shares_outstanding","cause":"corporate_action_normalization","severity":"severe","finding":"The chart described a 1035.3% increase without adjusting for the 2024 stock split, falsely implying dilution."},
+    {"category":"revenue","cause":"normalization","finding":"Strong comparable revenue growth settled Unknown."},
+    {"category":"net_income_loss","cause":"normalization","finding":"Strong comparable net-income growth settled Unknown."},
+    {"category":"preliminary_evidence","cause":"none","finding":"The newer preliminary release was correctly retained as current context rather than silently inserted into the standardized trend series."}
+  ],
+  "safe_settlement": "Several missing components stayed Limited, but the favorable stale cash-flow scores and unadjusted share series are severe misleading failures."
+}

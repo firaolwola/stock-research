@@ -1,0 +1,51 @@
+{
+  "issue": 55,
+  "batch": "amc-delayed-split-confirmation-2",
+  "live_calls": true,
+  "approved_run_count": 1,
+  "completed_run_count": 1,
+  "adjudication": {
+    "baseline": "evaluation/plans/fast-reliability-2026-08-28-amc-confirmation-2.json",
+    "purpose": "Single approved AMC confirmation after the bounded delayed-clause correction; historical baselines remain unchanged.",
+    "expected_targeted_checks": 1,
+    "detected_targeted_checks": 0,
+    "recall": 0
+  },
+  "results": {
+    "AMC": {
+      "report_valid": true,
+      "completed_reverse_split_detected": false,
+      "expected_reverse_split": "2023-08-24 1-for-10",
+      "observed": "The report retained Limited reverse-split coverage. The live diagnostic extracted 1-for-10 and 2023-08-24 but withheld the occurrence as resolved_lifecycle_required.",
+      "classification": "canonical_lifecycle_acceptance_gap",
+      "settlement_safe": true,
+      "explanation_fidelity": false,
+      "severe_miss": true
+    }
+  },
+  "valid_report_rate": {"valid": 1, "evaluated": 1, "rate": 1},
+  "explanation_fidelity": {"passed": 0, "evaluated": 1, "rate": 0},
+  "settlement_accuracy": {"passed": 1, "evaluated": 1, "rate": 1},
+  "score_state_safety": {"passed": 1, "evaluated": 1, "rate": 1},
+  "severe_misleading_misses": [
+    {"ticker": "AMC", "class": "completed_reverse_split_canonicalization", "detail": "The expected completed split remained absent, but the report did not convert missing evidence into a favorable score."}
+  ],
+  "operations": {
+    "aggregate_elapsed_ms": 2953,
+    "max_ticker_elapsed_ms": 2953,
+    "known_openai_cost_usd": 0,
+    "alpha_vantage_requests": 2,
+    "twelve_data_requests": 0,
+    "combined_optional_provider_attempts": 2,
+    "retries": 0,
+    "hosted_web_search_calls": 0,
+    "openai_synthesis": "cost_blocked_before_request"
+  },
+  "gate": {
+    "passed": false,
+    "reason": "The approved AMC confirmation still missed the completed split; the Issue 55 severe-miss and reliability gates remain open."
+  },
+  "issue_must_remain_open": true,
+  "pr_ready_to_merge": false,
+  "next_step": "Apply the offline lifecycle-role correction and request separate owner approval before any further AMC live confirmation."
+}

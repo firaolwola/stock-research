@@ -1,0 +1,158 @@
+{
+  "review_id": "fast-reliability-final-closure-review-2026-09-02",
+  "issue": 55,
+  "live_execution": false,
+  "network_calls": false,
+  "openai_calls": false,
+  "historical_measurements_unchanged": true,
+  "denominator": {
+    "source": "evaluation/diagnostics/fast-reliability-denominator-decision-2026-09-02.json",
+    "claims": 14,
+    "supported": 14,
+    "missed": 0,
+    "recall": 1,
+    "exact_unique_claim_ids": true,
+    "quality_complete": true
+  },
+  "quality": {
+    "source": "evaluation/diagnostics/fast-reliability-quality-adjudication-2026-09-02.json",
+    "valid_reports": {
+      "pass": 14,
+      "fail": 0
+    },
+    "evidence_traceability": {
+      "pass": 14,
+      "not_observed": 0
+    },
+    "settlement": {
+      "pass": 14,
+      "fail": 0,
+      "not_observed": 0
+    },
+    "explanation_fidelity": {
+      "pass": 14,
+      "fail": 0,
+      "not_observed": 0
+    },
+    "severe_misses": {
+      "zero": 14,
+      "nonzero": 0,
+      "not_observed": 0
+    },
+    "gate_passed": true
+  },
+  "sparse_category_review": [
+    {
+      "category": "completed_reverse_splits",
+      "independent_positive_cases": 5,
+      "status": "practical_minimum_but_small_audit_passed",
+      "adequately_sampled": false,
+      "reason": "practical-small sample; no broad statistical adequacy claim",
+      "scope_accepted": true
+    },
+    {
+      "category": "active_listing_deficiency",
+      "independent_positive_cases": 3,
+      "status": "practical_minimum_but_small",
+      "adequately_sampled": false,
+      "reason": "practical-small sample; no broad statistical adequacy claim",
+      "scope_accepted": true
+    },
+    {
+      "category": "going_concern_bankruptcy",
+      "independent_positive_cases": 4,
+      "status": "practical_minimum_but_small",
+      "adequately_sampled": false,
+      "reason": "practical-small sample; no broad statistical adequacy claim",
+      "scope_accepted": true
+    },
+    {
+      "category": "foreign_issuer_adr_ifrs",
+      "independent_positive_cases": 3,
+      "status": "practical_minimum_but_small",
+      "adequately_sampled": false,
+      "reason": "practical-small sample; no broad statistical adequacy claim",
+      "scope_accepted": true
+    },
+    {
+      "category": "otc_delisted",
+      "independent_positive_cases": 5,
+      "status": "practical_minimum_but_small",
+      "adequately_sampled": false,
+      "reason": "practical-small sample; no broad statistical adequacy claim",
+      "scope_accepted": true
+    },
+    {
+      "category": "free_cash_flow_trend",
+      "independent_positive_cases": 5,
+      "status": "coverage_limited_safe_settlement_separate",
+      "adequately_sampled": false,
+      "reason": "practical-small sample; no broad statistical adequacy claim",
+      "scope_accepted": true
+    }
+  ],
+  "fcf_policy": {
+    "numeric_coverage_required_for_closure": false,
+    "numeric_coverage_proven": false,
+    "safe_unresolved_settlement_passed": true,
+    "no_favorable_numeric_inference_required": true
+  },
+  "operational_completion": {
+    "status": "operationally_complete",
+    "passed": true,
+    "scope": "bounded_practical_small",
+    "criteria": {
+      "non_overlapping_denominator_complete": true,
+      "quality_gate": true,
+      "zero_current_severe_misses": true,
+      "fcf_safe_unresolved_settlement": true,
+      "sparse_scope_accepted": true,
+      "frozen_artifact_manifest_valid": true,
+      "numeric_fcf_required": false
+    },
+    "reason": "The bounded milestone criteria pass without claiming broad statistical reliability or requiring numeric FCF coverage."
+  },
+  "broad_reliability": {
+    "status": "unproven",
+    "passed": false,
+    "overall_recall_target": 0.95,
+    "overall_recall_established": false,
+    "reason": "Historical cohorts are non-poolable and the targeted 14-claim denominator is not representative evidence for a broad statistical claim."
+  },
+  "gates": {
+    "overall_recall_target": 0.95,
+    "overall_recall_established": false,
+    "overall_recall_reason": "The 14-claim prospective denominator is targeted correction evidence, not a representative pooled cohort; overlapping historical rubrics remain non-poolable.",
+    "adequately_sampled_category_target": 0.9,
+    "sparse_category_gate_established": true,
+    "sparse_category_scope_accepted": true,
+    "sparse_category_reason": "Owner accepted the practical-small scope for this milestone; it is not a broad statistical reliability claim.",
+    "broad_statistical_reliability_established": false,
+    "quality_gate_established": true,
+    "severe_miss_gate_established": true,
+    "fcf_safety_gate_established": true,
+    "numeric_fcf_coverage_required": false,
+    "operational_completion_passed": true,
+    "broad_statistical_reliability_passed": false,
+    "passed": false,
+    "milestone_operationally_complete": true,
+    "issue_55_must_remain_open": true,
+    "pr_74_ready_to_merge": false
+  },
+  "conclusion": "The bounded practical-small milestone is operationally complete: denominator, quality, severe-miss, FCF safety, and accepted scope criteria pass. Broad statistical reliability remains unproven and is tracked separately; no live or sparse-expansion run is implied.",
+  "next_step": "Align documentation and PR/issue metadata, then perform the authenticated merge/close sequence; keep broad statistical reliability explicitly unclaimed.",
+  "input_hashes": [
+    {
+      "path": "evaluation/diagnostics/fast-reliability-final-2026-08-31.json",
+      "sha256_lf_normalized": "ee573e43d2fe8acbe7fd91532f85e9cea858db4077b8c851bf280d89f6ff1420"
+    },
+    {
+      "path": "evaluation/diagnostics/fast-reliability-quality-adjudication-2026-09-02.json",
+      "sha256_lf_normalized": "da999917e78526108dd3a984de8d67c43aad0a02275d3f30b275af8811590162"
+    },
+    {
+      "path": "evaluation/diagnostics/fast-reliability-denominator-decision-2026-09-02.json",
+      "sha256_lf_normalized": "0d6f8a2a8e54a5ae0b97ab7338fa556fb6f519e5060cc7c0edf2765e2e7385c6"
+    }
+  ]
+}

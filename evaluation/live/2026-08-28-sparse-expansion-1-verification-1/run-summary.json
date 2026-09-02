@@ -1,0 +1,206 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-28-sparse-expansion-1-verification-1.json",
+  "live_calls": true,
+  "configured_optional_providers": [
+    "alpha_vantage"
+  ],
+  "approved_run_count": 3,
+  "completed_run_count": 3,
+  "aggregate_elapsed_ms": 9750,
+  "known_openai_cost_usd": 0,
+  "maximum_approved_openai_cost_usd": 0.09,
+  "alpha_vantage_requests": 6,
+  "maximum_approved_alpha_vantage_requests": 6,
+  "twelve_data_requests": 0,
+  "maximum_approved_twelve_data_requests": 6,
+  "combined_optional_provider_attempts": 6,
+  "maximum_approved_combined_optional_provider_attempts": 12,
+  "runs": [
+    {
+      "case_id": "rekr-2026-independent-sparse",
+      "ticker": "REKR",
+      "result": "report",
+      "elapsed_ms": 4311,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "provider_usage": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 2,
+            "daily_limit": 25,
+            "minute_used": 2,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "optional_provider_attempts": 2,
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    },
+    {
+      "case_id": "zappf-2026-independent-sparse",
+      "ticker": "ZAPPF",
+      "result": "report",
+      "elapsed_ms": 2473,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "provider_usage": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 4,
+            "daily_limit": 25,
+            "minute_used": 4,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "optional_provider_attempts": 2,
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    },
+    {
+      "case_id": "gmbl-2026-independent-sparse",
+      "ticker": "GMBL",
+      "result": "report",
+      "elapsed_ms": 2955,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "provider_usage": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 6,
+            "daily_limit": 25,
+            "minute_used": 6,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "optional_provider_attempts": 2,
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    }
+  ]
+}

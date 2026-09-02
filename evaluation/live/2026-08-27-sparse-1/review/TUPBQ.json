@@ -1,0 +1,17 @@
+{
+  "case_id": "tupbq-2026-sparse",
+  "ticker": "TUPBQ",
+  "material_checks": {"detected": 0, "expected": 4},
+  "adjudication": [
+    {"expectation":"September 2024 Chapter 11 filing","detected":false,"cause":"retrieval"},
+    {"expectation":"NYSE suspension/delisting and OTC Expert Market TUPBQ status","detected":false,"cause":"retrieval"},
+    {"expectation":"Substantial doubt about going concern","detected":false,"cause":"retrieval"},
+    {"expectation":"Stale/missing reporting cannot score favorably","detected":false,"cause":"retrieval"}
+  ],
+  "identity_result": "The current SEC ticker map did not contain the OTC ticker, and Fast had no TUP-to-TUPBQ/CIK fallback.",
+  "score_range": {"passed":6,"evaluated":6,"note":"All six financial trend scores safely remained Limited as required, but no material distress evidence was retrieved."},
+  "explanation_fidelity": false,
+  "settlement_accurate": false,
+  "severe_misses": ["Chapter 11, delisting/OTC lineage, and going-concern evidence were all omitted.", "Completed work was labeled Pending/in progress instead of terminal Limited/Unavailable."],
+  "result": "failed"
+}

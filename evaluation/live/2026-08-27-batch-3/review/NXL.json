@@ -1,0 +1,14 @@
+{
+  "ticker": "NXL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "active Nasdaq pressure", "going concern", "material weaknesses", "revenue, loss, cash, and OCF deterioration", "offering and warrant evidence", "shares history", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"reverse_splits","cause":"temporal_interpretation","severity":"severe","finding":"The August 27 filing said the 1-for-30 split would become effective August 28, but Fast classified it as completed on August 27 instead of prospective/authorized."},
+    {"category":"free_cash_flow","cause":"unavailable_evidence","finding":"FCF remained Limited because an aligned capital-expenditure input was unavailable."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Strong capital, split-pressure, and compliance evidence did not settle corresponding numeric risk scores."}
+  ],
+  "score_range_result": {"passed":7,"evaluated":13},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "fail_future_action_confirmed_as_completed"
+}

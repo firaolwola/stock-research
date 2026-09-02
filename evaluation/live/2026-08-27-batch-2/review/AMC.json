@@ -1,0 +1,16 @@
+{
+  "ticker": "AMC",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "current actual issuance", "convertible and warrant evidence", "137.6% post-split-window shares growth", "cash", "total debt", "current earnings catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"reverse_splits","cause":"retrieval_selection","severity":"severe","finding":"The completed 1-for-10 historical reverse split was still not retrieved."},
+    {"category":"accounting_non_reliance","cause":"interpretation","finding":"Offering-document representation boilerplate was falsely classified as accounting non-reliance."},
+    {"category":"revenue_net_income_cash_flow","cause":"false_invalidation","finding":"The false non-reliance finding erased otherwise comparable revenue, net income, OCF, and FCF evidence."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Strong issuance evidence did not settle historical or future dilution scores."}
+  ],
+  "score_range_result": {"passed":4,"evaluated":13},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "fail_closed_but_inaccurate",
+  "safe_settlement": "Missing evidence did not become favorable, but the completed split miss remains severe and the false accounting classification materially over-limited valid financial evidence."
+}

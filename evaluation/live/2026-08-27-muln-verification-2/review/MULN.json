@@ -1,0 +1,26 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "result": "failed",
+  "report_produced": true,
+  "validation": { "valid": true },
+  "completed_split_recall": { "detected": 1, "expected": 3, "recall": 0.3333 },
+  "ratio_date_retrieval": { "detected": 3, "expected": 3, "recall": 1.0 },
+  "expected_actions": [
+    { "ratio": "1-for-25", "effective_date": "2023-05-04", "expected_state": "completed", "actual_state": "completed", "passed": true },
+    { "ratio": "1-for-9", "effective_date": "2023-08-11", "expected_state": "completed", "actual_state": "unknown", "passed": false },
+    { "ratio": "1-for-100", "effective_date": "2023-12-21", "expected_state": "completed", "actual_state": "unknown", "passed": false }
+  ],
+  "false_or_misleading_occurrences": [
+    { "ratio": "1-for-100", "effective_date": "2025-08-04", "actual_state": "completed", "reason": "The local span borrowed the next action's August 4 effective date; the same source correctly identifies the August action as 1-for-250." }
+  ],
+  "identity_and_listing": "Historical MULN/Nasdaq context remained distinct from current BINI/OTCID delisted status.",
+  "explanation_fidelity": false,
+  "settlement_accurate": true,
+  "severe_misleading_misses": [
+    "Two confirmed 2023 completed actions are presented as unresolved.",
+    "A false completed 1-for-100 action is presented on August 4, 2025."
+  ],
+  "diagnostics": { "total": 160, "accepted": 10, "merged": 10, "withheld": 31, "rejected": 109 },
+  "retry_performed": false
+}

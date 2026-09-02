@@ -1,0 +1,12 @@
+{
+  "ticker": "AAPL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": false,
+  "detected": ["issuer and security identity", "cash", "total debt", "operating cash flow", "free cash flow", "shares history", "current earnings catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"revenue","cause":"normalization","finding":"Comparable revenue was present in Company Facts but settled Unknown."},
+    {"category":"net_income_loss","cause":"normalization","finding":"Comparable net income was present in Company Facts but settled Unknown."},
+    {"category":"score_range","cause":"calibration","finding":"Cash trend scored 2.0, outside the owner-reviewed 5-9 range; the latest quarter-end decline drove the score."}
+  ],
+  "safe_settlement": "Unresolved capital-risk components remained Limited and were not converted into favorable scores."
+}

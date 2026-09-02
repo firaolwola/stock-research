@@ -18,7 +18,7 @@ try {
 
     const openai = new OpenAI({ apiKey: config.apiKey });
     const deepClient = createOpenAIResearchClient(openai, { schema });
-    const boundedSourceClient = createBoundedFastSourceClient({ alphaVantageApiKey: config.alphaVantageApiKey });
+    const boundedSourceClient = createBoundedFastSourceClient({ alphaVantageApiKey: config.alphaVantageApiKey, twelveDataApiKey: config.twelveDataApiKey, providerOrder: config.marketProviderOrder });
     const researchClient = createEvidenceFirstResearchClient({ secClient: createSecEvidenceClient({ userAgent: config.secUserAgent }), boundedSourceClient, openai, deepClient, reportValidator });
     const app = createApp({ researchClient, reportValidator });
 

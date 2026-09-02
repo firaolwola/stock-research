@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
@@ -88,4 +89,661 @@ test("live samples require bounded approval and complete operational measurement
   sample.runs[0] = { ...sample.runs[0], estimated_cost_usd: 0.08, input_tokens: 10000, output_tokens: 4000, web_search_calls: 2 };
   sample.approval_record = { approved: true, run_date: "2026-08-25", model_configuration: "gpt-5.1 / no reasoning / fast", max_budget_usd: 0.10, output_location: "evaluation/results/example.json", case_ids: ["mock-acme-complete"] };
   assert.deepEqual(validateEvaluationSample(evaluationSet, sample), { valid: true, errors: [] });
+});
+
+test("Issue 55 artifacts preserve the approved bound and failed reliability gate", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27.json");
+  const result = await loadJson("../evaluation/live/2026-08-27/summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.approval.maximum_runs, 5);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.difficult_budget_approved, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.15);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 10);
+  assert.equal(result.completed_runs, 5);
+  assert.equal(result.operations.alpha_vantage_requests, 10);
+  assert.ok(result.operations.conservative_maximum_possible_cost_usd <= plan.approval.maximum_openai_cost_usd);
+  assert.equal(result.overall_material_checks.passes, false);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
+test("Issue 55 batch 2 remains separately bounded and records improvement without claiming reliability", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-batch-2.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-batch-2/summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.approval.maximum_runs, 5);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(result.completed_runs, 5);
+  assert.equal(result.operations.alpha_vantage_requests, 10);
+  assert.ok(result.operations.conservative_maximum_possible_cost_usd <= plan.approval.maximum_openai_cost_usd);
+  assert.ok(result.overall_material_checks.recall > result.overall_material_checks.batch_1_recall);
+  assert.equal(result.overall_material_checks.passes, false);
+  assert.equal(result.validation.post_scoring_reports_valid, 4);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
+test("Issue 55 batch 3 freezes the same five cases and approved provider bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-batch-3.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-batch-3/summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.required_ancestor, "3aa5a79"); assert.equal(plan.configuration.change_from_batch_2, "none");
+  assert.equal(plan.approval.maximum_runs, 5); assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.deep_runs, 0); assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.alpha_vantage_preflight.inferred_remaining_on_approval_day, 5);
+  assert.equal(plan.alpha_vantage_preflight.approved_batch_3_requests, 10);
+  assert.equal(plan.alpha_vantage_preflight.status, "blocked_until_daily_reset");
+  assert.equal(plan.provider_policy.requires_owner_review_after_architecture_change, false);
+  assert.deepEqual(plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 10);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 20);
+  assert.equal(plan.preserve_prior_batches.length, 2);
+  assert.equal(result.completed_runs, 5);
+  assert.equal(result.validation.post_scoring_reports_valid, 5);
+  assert.equal(result.overall_material_checks.recall, 0.9651);
+  assert.equal(result.overall_material_checks.passes_recall_only, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
+test("Issue 55 sparse batch freezes independent baselines and strict live bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-1/summary.json");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.required_ancestor, "81ec4d2");
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.deepEqual(plan.provider_policy.provider_order, ["alpha_vantage", "twelve_data"]);
+  assert.equal(plan.provider_policy.alpha_vantage_is_hard_gate, false);
+  assert.equal(plan.preserve_prior_batches.length, 3);
+  assert.deepEqual(plan.cases.map((item) => item.ticker), plan.approval.tickers);
+  for (const scenario of plan.cases) {
+    assert.ok(scenario.authoritative_sources.length > 0);
+    assert.ok(scenario.known_baseline.length > 0);
+    assert.ok(scenario.severe_miss_conditions.length > 0);
+  }
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.valid_report_rate.valid, 4);
+  assert.equal(result.overall_material_checks.recall, 0.1875);
+  assert.equal(result.operations.alpha_vantage_requests, 2);
+  assert.equal(result.operations.twelve_data_requests, 0);
+  assert.ok(result.operations.measured_openai_cost_usd <= plan.approval.maximum_openai_cost_usd);
+  assert.ok(result.severe_misleading_misses.length > 0);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
+test("sparse-batch corrections stay separate from the frozen answer key", async () => {
+  const planBytes = await readFile(new URL("../evaluation/plans/fast-reliability-2026-08-27-sparse.json", import.meta.url));
+  const corrections = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-corrections.json");
+  assert.equal(createHash("sha256").update(planBytes.toString().replace(/\r\n/g, "\n")).digest("hex"), corrections.frozen_plan_sha256);
+  assert.equal(corrections.changes_frozen_plan, false);
+  assert.deepEqual(corrections.corrections.map((item) => item.ticker), ["BIOR", "MULN"]);
+  assert.ok(corrections.corrections.every((item) => item.frozen_text_is_stale && item.source.startsWith("https://www.sec.gov/")));
+});
+
+test("Issue 55 sparse batch 2 reuses the frozen cases under new strict bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-2.json");
+  assert.equal(plan.required_ancestor, "27ee9aa");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-2");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 4);
+});
+
+test("Issue 55 sparse batch 2 records improvement without passing reliability", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-2/summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.8125);
+  assert.equal(result.valid_report_rate.rate, 0.25);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.operations.alpha_vantage_requests, 8);
+  assert.equal(result.operations.twelve_data_requests, 0);
+  assert.ok(result.operations.measured_openai_cost_usd <= 0.12);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+});
+
+test("Issue 55 sparse batch 3 preserves the frozen cases and approved bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-3.json");
+  assert.equal(plan.required_ancestor, "08b7f50");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-3");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 5);
+});
+
+test("Issue 55 sparse batch 3 restores validity but still fails reliability", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-3/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-sparse-3/run-summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.875);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.explanation_fidelity.pass_rate, 0);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.score_calibration.pass_rate, 0.3889);
+  assert.equal(run.completed_run_count, 4);
+  assert.equal(run.alpha_vantage_requests, 8);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 8);
+  assert.ok(run.known_openai_cost_usd <= 0.12);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.equal(result.issue_must_remain_open, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+});
+
+test("Issue 55 sparse batch 4 freezes the post-Sparse-3 verification bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-4.json");
+  assert.equal(plan.required_ancestor, "7614589");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-4");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 6);
+});
+
+test("Issue 55 sparse batch 4 remains below the reliability gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-4/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-sparse-4/run-summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.875);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.explanation_fidelity.pass_rate, 0.25);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.score_calibration.pass_rate, 0.3889);
+  assert.equal(run.completed_run_count, 4);
+  assert.equal(run.alpha_vantage_requests, 8);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 8);
+  assert.ok(run.known_openai_cost_usd <= 0.12);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.equal(result.issue_must_remain_open, true);
+  assert.ok(result.severe_misleading_misses.length > 0);
+});
+
+test("Issue 55 sparse batch 5 freezes canonical-action verification bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-sparse-5.json");
+  assert.equal(plan.required_ancestor, "fa4e565");
+  assert.equal(plan.output_directory, "2026-08-27-sparse-5");
+  assert.deepEqual(plan.approval.tickers, ["BIOR", "MULN", "NIO", "TUPBQ"]);
+  assert.equal(plan.approval.maximum_runs, 4);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.12);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 8);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 8);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 16);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 7);
+});
+
+test("Issue 55 sparse batch 5 remains below the reliability gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-sparse-5/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-sparse-5/run-summary.json");
+  assert.equal(result.completed_runs, 4);
+  assert.equal(result.overall_material_checks.recall, 0.875);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.explanation_fidelity.pass_rate, 0.75);
+  assert.equal(result.settlement_accuracy.pass_rate, 1);
+  assert.equal(result.score_calibration.pass_rate, 0.3889);
+  assert.equal(run.completed_run_count, 4);
+  assert.equal(run.alpha_vantage_requests, 8);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 8);
+  assert.ok(run.known_openai_cost_usd <= 0.12);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(result.severe_misleading_misses.length, 2);
+});
+
+test("Issue 55 MULN-only verification freezes the approved one-run bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-muln-verification.json");
+  assert.equal(plan.required_ancestor, "85c2842");
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.03);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 2);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 2);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.equal(plan.preserve_prior_batches.length, 8);
+});
+
+test("MULN verification runner retains the event loop until its one research promise settles", async () => {
+  const source = await readFile(new URL("../scripts/run-approved-muln-verification-implementation.js", import.meta.url), "utf8");
+  assert.match(source, /const runnerKeepAlive = setInterval/);
+  assert.match(source, /finally \{ clearInterval\(runnerKeepAlive\); \}/);
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification/run-summary.json");
+  assert.equal(result.status, "runner_failure_no_result");
+  assert.equal(result.retry_performed, false);
+  assert.equal(result.approval_consumed, true);
+});
+
+test("corrected MULN verification freezes a new one-process authorization", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-muln-verification-2.json");
+  assert.equal(plan.required_ancestor, "e5833db");
+  assert.equal(plan.output_directory, "2026-08-27-muln-verification-2");
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.03);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 2);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 2);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+});
+
+test("corrected MULN live verification records the remaining severe parser failure", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-2/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-2/run-summary.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 0.3333);
+  assert.equal(result.ratio_date_retrieval.recall, 1);
+  assert.equal(result.explanation_fidelity.rate, 0);
+  assert.equal(result.settlement_accuracy.rate, 1);
+  assert.equal(result.severe_misleading_misses, 2);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
+test("final MULN verification freezes segment-binding approval and preserves the failed live baseline", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-muln-verification-3.json");
+  assert.equal(plan.required_ancestor, "536baea");
+  assert.equal(plan.output_directory, "2026-08-27-muln-verification-3");
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.03);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 2);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 2);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.match(plan.preserve_previous_verification.raw_muln_sha256, /^[a-f0-9]{64}$/);
+});
+
+test("final MULN verification attempt records the pre-network runner failure without adjudicating the parser", async () => {
+  const raw = await loadJson("../evaluation/live/2026-08-27-muln-verification-3/raw/MULN.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-3/run-summary.json");
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-3/summary.json");
+  assert.equal(raw.failure_phase, "plan_validation");
+  assert.equal(raw.network_clients_created, false);
+  assert.equal(run.completed_run_count, 0);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 0);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.retry_performed, false);
+  assert.equal(result.canonical_live_events, null);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(result.issue_must_remain_open, true);
+});
+
+test("fresh recursive-plan MULN verification freezes a new one-run authorization", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-27-muln-verification-4.json");
+  assert.equal(plan.required_ancestor, "16776e2");
+  assert.equal(plan.output_directory, "2026-08-27-muln-verification-4");
+  assert.deepEqual(plan.approval.tickers, ["MULN"]);
+  assert.equal(plan.approval.maximum_runs, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, 0.03);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 2);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 2);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 4);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+});
+
+test("recursive-plan MULN live result records target recall but fails the severe false-event gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-4/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-4/run-summary.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 1);
+  assert.equal(result.known_false_positive_split_events, 2);
+  assert.equal(result.explanation_fidelity.rate, 0);
+  assert.equal(result.settlement_accuracy.rate, 0);
+  assert.equal(result.severe_misleading_misses, 2);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
+test("Verification-4 extra-event adjudication preserves the frozen artifact and separates genuine from false actions", async () => {
+  const adjudication = await loadJson("../evaluation/diagnostics/muln-verification-4-extra-events.json");
+  assert.equal(adjudication.frozen_artifact_modified, false);
+  assert.equal(adjudication.prospective_supported_canonical_count, 9);
+  assert.deepEqual(adjudication.events.filter((item) => item.classification === "false").map((item) => [item.ratio, item.date]), [["1-for-100", "2024-01-24"], ["1-for-100", "2024-10-16"], ["1-for-2", "2025-08-01"], ["1-for-100", "2025-08-04"]]);
+  assert.deepEqual(adjudication.events.filter((item) => item.classification === "genuine").map((item) => item.date), ["2024-09-17", "2025-02-18", "2025-04-11", "2025-09-22"]);
+});
+
+test("Verification-5 preserves recall but records the remaining severe filing-date false positive", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-27-muln-verification-5/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-27-muln-verification-5/run-summary.json");
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.frozen_completed_split_recall.recall, 1);
+  assert.equal(result.additional_supported_events.recall, 1);
+  assert.equal(result.canonical_event_precision.precision, 0.9);
+  assert.equal(result.new_false_positive_events, 1);
+  assert.equal(result.severe_misleading_misses, 1);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
+test("Verification-6 freezes the approved date-role one-run bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-muln-verification-6.json");
+  assert.equal(plan.required_ancestor, "2092c1c");
+  assert.equal(plan.output_directory, "2026-08-28-muln-verification-6");
+  assert.deepEqual(plan.approval ?? {}, {});
+  assert.equal(plan.preserve_verification_5.directory, "evaluation/live/2026-08-27-muln-verification-5");
+  assert.match(plan.approval_token, /approved-muln-date-role-one-run/);
+});
+
+test("Verification-6 preserves recall but fails the overlapping-span precision gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-muln-verification-6/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-muln-verification-6/run-summary.json");
+  const review = await loadJson("../evaluation/live/2026-08-28-muln-verification-6/review/MULN.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 1);
+  assert.equal(result.canonical_event_precision.precision, .9);
+  assert.equal(result.august_1_duplicate_eliminated, false);
+  assert.equal(result.severe_misleading_misses, 1);
+  assert.equal(result.muln_live_parser_blocker_resolved, false);
+  assert.equal(review.canonical_events.length, 10);
+  assert.deepEqual(review.false_positive_events.map((item) => [item.event_date, item.ratio]), [["2025-08-01", "1-for-250"]]);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 2);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
+test("Verification-7 freezes the approved overlapping-span live confirmation bounds", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-muln-verification-7.json");
+  assert.equal(plan.required_ancestor, "8fd908e");
+  assert.equal(plan.output_directory, "2026-08-28-muln-verification-7");
+  assert.deepEqual(plan.approval ?? {}, {});
+  assert.equal(plan.preserve_verification_6.directory, "evaluation/live/2026-08-28-muln-verification-6");
+  assert.match(plan.approval_token, /approved-muln-overlap-precedence-one-run/);
+});
+
+test("Verification-7 resolves the live MULN overlap blocker without closing the sparse reliability gate", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-muln-verification-7/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-muln-verification-7/run-summary.json");
+  const review = await loadJson("../evaluation/live/2026-08-28-muln-verification-7/review/MULN.json");
+  assert.equal(result.report_produced, true);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.completed_split_recall.recall, 1);
+  assert.equal(result.canonical_event_precision.precision, 1);
+  assert.equal(result.august_1_duplicate_eliminated, true);
+  assert.equal(result.severe_misleading_misses, 0);
+  assert.equal(result.muln_live_parser_blocker_resolved, true);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.deepEqual(review.canonical_events, [["2023-05-04", "1-for-25"], ["2023-08-11", "1-for-9"], ["2023-12-21", "1-for-100"], ["2024-09-17", "1-for-100"], ["2025-02-18", "1-for-60"], ["2025-04-11", "1-for-100"], ["2025-06-02", "1-for-100"], ["2025-08-04", "1-for-250"], ["2025-09-22", "1-for-250"]]);
+  assert.deepEqual(review.false_positive_events, []);
+  assert.equal(review.targeted_diagnostics.find((item) => item.date_role_evidence === "authoritative_retrospective_history").retrospective_fallback_suppressed, true);
+  assert.equal(run.completed_run_count, 1);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 2);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 2);
+  assert.ok(run.runs[0].elapsed_ms <= 20000);
+});
+
+test("sparse expansion proposal is independent, bounded, and cannot authorize a live run", async () => {
+  const proposal = await loadJson("../evaluation/plans/fast-reliability-sparse-expansion-proposal.json");
+  assert.equal(proposal.execution_authorized, false);
+  assert.equal(Object.hasOwn(proposal, "approval_token"), false);
+  assert.deepEqual(proposal.proposed_bounds.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.equal(proposal.proposed_bounds.maximum_runs, 3);
+  assert.equal(proposal.proposed_bounds.runs_per_ticker, 1);
+  assert.equal(proposal.proposed_bounds.automatic_retries, false);
+  assert.equal(proposal.proposed_bounds.maximum_openai_cost_usd, .09);
+  assert.equal(proposal.proposed_bounds.maximum_alpha_vantage_requests, 6);
+  assert.equal(proposal.proposed_bounds.maximum_twelve_data_requests, 6);
+  assert.equal(proposal.proposed_bounds.maximum_combined_optional_provider_attempts, 12);
+  assert.equal(proposal.proposed_bounds.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(proposal.proposed_bounds.difficult_budget_approved, false);
+  assert.equal(proposal.proposed_bounds.deep_runs, 0);
+  assert.equal(proposal.proposed_bounds.hosted_web_search, false);
+  assert.equal(proposal.cases.length, 3);
+  assert.ok(proposal.cases.every((item) => item.authoritative_sources.length >= 3));
+  assert.ok(proposal.cases.every((item) => item.severe_miss_conditions.length >= 3));
+  assert.ok(proposal.sample_size_map.find((item) => item.category === "active_listing_deficiency").still_sparse);
+  assert.ok(proposal.sample_size_map.find((item) => item.category === "foreign_issuer_adr_ifrs").still_sparse);
+  assert.match(proposal.evaluation_rules.nio_clarification, /unavailable_authoritative_evidence/);
+});
+
+test("approved sparse expansion freezes exactly three independent bounded runs", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-sparse-expansion-1.json");
+  assert.equal(plan.required_ancestor, "e5a30c4");
+  assert.deepEqual(plan.approval.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.equal(plan.approval.maximum_runs, 3);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .09);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 6);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 6);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 12);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.maximum_aggregate_fast_runtime_ms, 60000);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.difficult_budget_approved, false);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.match(plan.approval_token, /approved-sparse-expansion-three-runs/);
+});
+
+test("sparse expansion records the deterministic blockers without passing Issue 55", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/run-summary.json");
+  const rekr = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/review/REKR.json");
+  const zappf = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/review/ZAPPF.json");
+  const gmbl = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1/review/GMBL.json");
+  assert.equal(result.material_risk_recall.recall, .5);
+  assert.equal(result.valid_report_rate.rate, .6667);
+  assert.equal(result.severe_misleading_misses, 2);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(rekr.material_checks.detected, 5);
+  assert.equal(zappf.material_checks.detected, 0);
+  assert.equal(zappf.blocker.includes("ZAPPF"), true);
+  assert.equal(gmbl.valid_report, false);
+  assert.ok(gmbl.blockers.some((item) => item.includes("1-for-400")));
+  assert.equal(run.completed_run_count, 3);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 4);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 4);
+  assert.ok(run.runs.every((item) => item.elapsed_ms <= 20000));
+  assert.ok(run.aggregate_elapsed_ms <= 60000);
+});
+
+test("Sparse Expansion 1 verification freezes the corrected same-three authorization", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-sparse-expansion-1-verification-1.json");
+  assert.equal(plan.required_ancestor, "6c5f9d3");
+  assert.deepEqual(plan.approval.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.equal(plan.approval.maximum_runs, 3);
+  assert.equal(plan.approval.runs_per_ticker, 1);
+  assert.equal(plan.approval.automatic_retries, false);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .09);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 6);
+  assert.equal(plan.approval.maximum_twelve_data_requests, 6);
+  assert.equal(plan.approval.maximum_combined_optional_provider_attempts, 12);
+  assert.equal(plan.approval.fast_ceiling_ms_per_ticker, 20000);
+  assert.equal(plan.approval.maximum_aggregate_fast_runtime_ms, 60000);
+  assert.equal(plan.approval.deep_runs, 0);
+  assert.equal(plan.approval.hosted_web_search, false);
+  assert.match(plan.approval_token, /verification-three-runs/);
+  assert.ok(plan.preserve_artifacts.some((item) => item.path.endsWith("2026-08-28-sparse-expansion-1/summary.json")));
+});
+
+test("Sparse Expansion 1 verification records improvement without passing Issue 55", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1-verification-1/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1-verification-1/run-summary.json");
+  assert.equal(result.material_risk_recall.recall, .85);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.corporate_actions.precision, 1);
+  assert.equal(result.corporate_actions.recall, .6667);
+  assert.equal(result.severe_misleading_misses, 1);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(run.completed_run_count, 3);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 6);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 6);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.ok(run.aggregate_elapsed_ms <= 60000);
+});
+
+test("Sparse Expansion Verification-2 freezes the owner-approved corrective run", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-sparse-expansion-1-verification-2.json");
+  assert.equal(plan.required_ancestor, "199d145");
+  assert.deepEqual(plan.approval.tickers, ["REKR", "ZAPPF", "GMBL"]);
+  assert.deepEqual({ runs: plan.approval.maximum_runs, retries: plan.approval.automatic_retries, deep: plan.approval.deep_runs, search: plan.approval.hosted_web_search }, { runs: 3, retries: false, deep: 0, search: false });
+  assert.deepEqual({ openai: plan.approval.maximum_openai_cost_usd, alpha: plan.approval.maximum_alpha_vantage_requests, twelve: plan.approval.maximum_twelve_data_requests, combined: plan.approval.maximum_combined_optional_provider_attempts }, { openai: .09, alpha: 6, twelve: 6, combined: 12 });
+  assert.deepEqual({ perTicker: plan.approval.fast_ceiling_ms_per_ticker, aggregate: plan.approval.maximum_aggregate_fast_runtime_ms }, { perTicker: 20000, aggregate: 60000 });
+  assert.ok(plan.preserve_artifacts.some((item) => item.path.endsWith("sparse-expansion-1-verification-1/summary.json")));
+  assert.match(plan.approval_token, /verification-two-three-runs/);
+});
+
+test("Sparse Expansion Verification-2 resolves prior defects but keeps Issue 55 open", async () => {
+  const result = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1-verification-2/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-sparse-expansion-1-verification-2/run-summary.json");
+  assert.equal(result.material_risk_recall.recall, 1);
+  assert.equal(result.valid_report_rate.rate, 1);
+  assert.equal(result.corporate_actions.recall, 1);
+  assert.equal(result.corporate_actions.precision, 1);
+  assert.equal(result.severe_misleading_misses, 0);
+  assert.equal(result.explanation_fidelity.rate, .6667);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(run.completed_run_count, 3);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 6);
+  assert.equal(run.twelve_data_requests, 0);
+  assert.equal(run.combined_optional_provider_attempts, 6);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+  assert.ok(run.aggregate_elapsed_ms <= 60000);
+});
+
+test("final sparse-proof proposal freezes ONFO and STN but remains non-executable", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-final-sparse-proof-proposal.json");
+  assert.equal(plan.execution_authorized, false);
+  assert.equal(plan.baseline_confirmation_complete, true);
+  assert.deepEqual(plan.candidate_adjudication.map((item) => [item.ticker, item.disposition]), [["HUBC", "rejected"], ["XPEV", "rejected_for_ifrs_proof"], ["ONFO", "accepted_replacement_for_active_deficiency"], ["STN", "accepted_foreign_IFRS_replacement"]]);
+  assert.deepEqual(plan.frozen_live_tickers, ["ONFO", "STN"]);
+  assert.equal(plan.candidate_adjudication.find((item) => item.ticker === "STN").authoritative_baseline.accounting_basis, "IFRS_as_issued_by_IASB");
+  assert.deepEqual({ runs: plan.reserved_two_case_bounds.maximum_runs, cost: plan.reserved_two_case_bounds.maximum_openai_cost_usd, alpha: plan.reserved_two_case_bounds.maximum_alpha_vantage_requests, twelve: plan.reserved_two_case_bounds.maximum_twelve_data_requests, combined: plan.reserved_two_case_bounds.maximum_combined_optional_provider_attempts }, { runs: 2, cost: .06, alpha: 4, twelve: 4, combined: 8 });
+  assert.equal(plan.reserved_two_case_bounds.hosted_web_search, false);
+  assert.equal(plan.reserved_two_case_bounds.deep_runs, 0);
+});
+
+test("final sparse-proof verification 3 records the bounded live correction pass", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-final-sparse-proof-verification-3.json");
+  const result = await loadJson("../evaluation/live/2026-08-28-final-sparse-proof-verification-3/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-final-sparse-proof-verification-3/run-summary.json");
+  assert.equal(plan.required_ancestor, "9cda659");
+  assert.equal(plan.approval.maximum_runs, 2);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .06);
+  assert.deepEqual(plan.approval.tickers, ["ONFO", "STN"]);
+  assert.equal(result.material_claim_recall.recall, 1);
+  assert.equal(result.severe_misleading_misses, 0);
+  assert.equal(result.gate.passed, true);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(run.completed_run_count, 2);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 4);
+  assert.equal(run.approval_violation, false);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+});
+
+test("final same-five confirmation preserves frozen baselines and severe-miss gate", async () => {
+  const plan = await loadJson("../evaluation/plans/fast-reliability-2026-08-28-final-five-confirmation-1.json");
+  const result = await loadJson("../evaluation/live/2026-08-28-final-five-confirmation-1/summary.json");
+  const run = await loadJson("../evaluation/live/2026-08-28-final-five-confirmation-1/run-summary.json");
+  assert.deepEqual(plan.approval.tickers, ["AAPL", "AMC", "NCPL", "NXL", "SMCI"]);
+  assert.equal(plan.approval.maximum_openai_cost_usd, .15);
+  assert.equal(plan.approval.maximum_alpha_vantage_requests, 10);
+  assert.equal(result.adjudication.expected_material_checks, 86);
+  assert.equal(result.adjudication.detected_material_checks, 82);
+  assert.equal(result.gate.passed, false);
+  assert.equal(result.issue_must_remain_open, true);
+  assert.equal(result.pr_ready_to_merge, false);
+  assert.equal(result.severe_misleading_misses.length, 2);
+  assert.equal(run.completed_run_count, 5);
+  assert.equal(run.known_openai_cost_usd, 0);
+  assert.equal(run.alpha_vantage_requests, 10);
+  assert.notEqual(run.approval_violation, true);
+  assert.ok(run.runs.every((item) => item.result === "report" && item.elapsed_ms <= 20000));
+});
+
+test("NIO Sparse-2 revenue diagnostic explains 9.6 without changing methodology", async () => {
+  const diagnostic = await loadJson("../evaluation/diagnostics/nio-revenue-sparse-2.json");
+  assert.equal(diagnostic.methodology_version, "2.1.0");
+  assert.deepEqual(diagnostic.observations_cny.map((item) => item.period), ["2022", "2023", "2024", "2025"]);
+  assert.ok(diagnostic.year_over_year_changes.every((value) => value > 0));
+  const calculated = diagnostic.weights.average_direction * diagnostic.average_direction_component
+    + diagnostic.weights.latest_change * diagnostic.latest_change_component
+    + diagnostic.weights.consistency * diagnostic.consistency_component;
+  assert.ok(Math.abs(calculated - diagnostic.unrounded_result) < 1e-9);
+  assert.equal(Number(diagnostic.unrounded_result.toFixed(1)), diagnostic.reported_result);
+  assert.match(diagnostic.conclusion, /range was too narrow.*methodology.*unchanged/i);
 });

@@ -1,0 +1,2853 @@
+{
+  "case_id": "aapl-2026-live",
+  "ticker": "AAPL",
+  "attempted_at": "2026-08-27T19:59:10.581Z",
+  "elapsed_ms": 7986,
+  "validation": {
+    "valid": false,
+    "errors": [
+      {
+        "type": "schema",
+        "path": "",
+        "keyword": "required",
+        "message": "must have required property 'scores'"
+      }
+    ]
+  },
+  "report": {
+    "schema_version": "4.0.0",
+    "report_id": "fast-AAPL-2026-08-27T19:59:02.596Z",
+    "metadata": {
+      "as_of": "2026-08-27T19:59:02.596Z",
+      "generated_at": "2026-08-27T19:59:02.596Z",
+      "stage": "fast",
+      "completion_status": "partial",
+      "research_windows": [
+        {
+          "topic": "fast_material_risk",
+          "start": "2021-08-27",
+          "end": "2026-08-27"
+        }
+      ],
+      "coverage_limitations": [
+        {
+          "code": "fast-deep-enrichment-deferred",
+          "explanation": "Exhaustive lineage, detailed financial history, secondary corroboration, catalyst analogues, reaction windows, and conflict resolution are deferred to Deep.",
+          "affected_sections": [
+            "issuer",
+            "financial_context",
+            "catalyst_assessment"
+          ]
+        },
+        {
+          "code": "alpha-news-provider_quota",
+          "explanation": "Current news discovery is Limited; an absent result is not favorable evidence.",
+          "affected_sections": [
+            "catalysts_and_news",
+            "catalyst_assessment"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "ticker": "AAPL",
+      "name": "Apple Inc. - Common Stock",
+      "security_type": "common_stock",
+      "listing_venue": "Nasdaq",
+      "listing_status": "active",
+      "evidence_state": "confirmed",
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-nasdaq-current-listing"
+      ]
+    },
+    "issuer": {
+      "legal_name": "Apple Inc.",
+      "cik": "0000320193",
+      "identity_state": "confirmed",
+      "identity_confidence": "high",
+      "prior_identities": [
+        {
+          "name": "APPLE INC",
+          "ticker": null,
+          "effective_from": "2007-01-10",
+          "effective_to": "2019-08-05",
+          "linkage_state": "confirmed",
+          "linkage_confidence": "high",
+          "claim_ids": [
+            "claim-sec-lineage-1"
+          ]
+        },
+        {
+          "name": "APPLE COMPUTER INC",
+          "ticker": null,
+          "effective_from": "1994-01-26",
+          "effective_to": "2007-01-04",
+          "linkage_state": "confirmed",
+          "linkage_confidence": "high",
+          "claim_ids": [
+            "claim-sec-lineage-2"
+          ]
+        },
+        {
+          "name": "APPLE COMPUTER INC/ FA",
+          "ticker": null,
+          "effective_from": "1997-07-28",
+          "effective_to": "1997-07-28",
+          "linkage_state": "confirmed",
+          "linkage_confidence": "high",
+          "claim_ids": [
+            "claim-sec-lineage-3"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "claim-sec-identity",
+        "claim-sec-lineage-1",
+        "claim-sec-lineage-2",
+        "claim-sec-lineage-3"
+      ]
+    },
+    "sections": {
+      "reverse_splits": {
+        "state": "limited_coverage",
+        "summary": "SEC filing discovery completed, but split terms were not extracted in this bounded phase.",
+        "coverage_notes": [
+          "Filing-text and exchange corporate-action parsing remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "dilution": {
+        "state": "limited_coverage",
+        "summary": "Bounded filing text identified financing instruments or capacity; only explicit completed or agreed issuances are labeled actual.",
+        "coverage_notes": [
+          "Unopened filings and unextracted share-count terms remain outside Fast coverage."
+        ],
+        "items": [
+          {
+            "id": "dilution-extracted-1",
+            "kind": "offering",
+            "title": "Registered financing capacity",
+            "state": "limited_coverage",
+            "summary": "Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+            "event_date": "2025-05-06",
+            "claim_ids": [
+              "claim-extracted-000114036125017543-offering-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000114036125017543-offering-1"
+        ]
+      },
+      "dividends": {
+        "state": "limited_coverage",
+        "summary": "Dividend status was not established from Company Facts.",
+        "coverage_notes": [
+          "Dividend and security-specific applicability retrieval remains deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "compliance_and_warnings": {
+        "state": "limited_coverage",
+        "summary": "SEC filing metadata does not safely establish current compliance or accounting warnings.",
+        "coverage_notes": [
+          "Item-level filing extraction and exchange lists remain deferred."
+        ],
+        "items": [],
+        "claim_ids": []
+      },
+      "financial_context": {
+        "state": "limited_coverage",
+        "summary": "Latest standardized SEC facts are shown through 2026-06-27; partial, stale, or conflicting facts remain unresolved.",
+        "coverage_notes": [
+          "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+          "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+        ],
+        "items": [
+          {
+            "id": "alpha-eod-price-change",
+            "kind": "other",
+            "title": "End-of-day price change",
+            "state": "confirmed",
+            "summary": "Latest close compared with the immediately preceding daily close.",
+            "event_date": "2026-08-26",
+            "value": 1.1455308163923927,
+            "unit": "price_change_percent",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          },
+          {
+            "id": "alpha-eod-relative-volume",
+            "kind": "other",
+            "title": "End-of-day relative volume",
+            "state": "confirmed",
+            "summary": "Latest volume compared with a 20-session bounded baseline.",
+            "event_date": "2026-08-26",
+            "value": 0.6674929271680147,
+            "unit": "volume_ratio",
+            "claim_ids": [
+              "claim-alpha-eod-market"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-financial-cash-observation-1",
+          "claim-financial-cash",
+          "claim-financial-cash-annual-1",
+          "claim-financial-cash-annual-2",
+          "claim-financial-cash-annual-3",
+          "claim-financial-cash-annual-4",
+          "claim-financial-operating_cash_flow-observation-1",
+          "claim-financial-operating_cash_flow",
+          "claim-financial-operating_cash_flow-annual-1",
+          "claim-financial-operating_cash_flow-annual-2",
+          "claim-financial-operating_cash_flow-annual-3",
+          "claim-financial-operating_cash_flow-annual-4",
+          "claim-financial-free_cash_flow-observation-1",
+          "claim-financial-free_cash_flow",
+          "claim-financial-free_cash_flow-annual-1",
+          "claim-financial-free_cash_flow-annual-2",
+          "claim-financial-free_cash_flow-annual-3",
+          "claim-financial-free_cash_flow-annual-4",
+          "claim-financial-cash_burn-observation-1",
+          "claim-financial-cash_burn",
+          "claim-financial-debt-observation-1",
+          "claim-financial-debt",
+          "claim-financial-debt-annual-1",
+          "claim-financial-debt-annual-2",
+          "claim-financial-debt-annual-3",
+          "claim-financial-debt-annual-4",
+          "claim-alpha-eod-market"
+        ]
+      },
+      "catalysts_and_news": {
+        "state": "confirmed",
+        "summary": "On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026.",
+        "coverage_notes": [
+          "Historical catalyst analogues and secondary corroboration are deferred to Deep."
+        ],
+        "items": [
+          {
+            "id": "fast-catalyst-current",
+            "kind": "catalyst",
+            "title": "Material filing event",
+            "state": "confirmed",
+            "summary": "On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026.",
+            "event_date": "2026-07-30",
+            "claim_ids": [
+              "claim-extracted-000032019326000018-catalyst-1"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-extracted-000032019326000018-catalyst-1"
+        ]
+      }
+    },
+    "financial_assessment": {
+      "state": "limited_coverage",
+      "as_of": "2026-08-27",
+      "reporting_currency": "USD",
+      "summary": "Latest standardized SEC facts are shown through 2026-06-27; partial, stale, or conflicting facts remain unresolved.",
+      "coverage_notes": [
+        "Custom XBRL tags, comparable periods, and filing-note extraction remain bounded.",
+        "Runway is not calculated because current, comparable cash and positive burn inputs are not both available."
+      ],
+      "metrics": {
+        "cash": {
+          "state": "confirmed",
+          "label": "Cash and Cash Equivalents, at Carrying Value",
+          "value": 39544000000,
+          "unit": "USD",
+          "period_start": "2026-06-27",
+          "period_end": "2026-06-27",
+          "trend": "unknown",
+          "comparison_period_start": "2026-03-28",
+          "comparison_period_end": "2026-03-28",
+          "observations": [
+            {
+              "value": 45572000000,
+              "unit": "USD",
+              "period_start": "2026-03-28",
+              "period_end": "2026-03-28",
+              "claim_ids": [
+                "claim-financial-cash-observation-1"
+              ]
+            },
+            {
+              "value": 39544000000,
+              "unit": "USD",
+              "period_start": "2026-06-27",
+              "period_end": "2026-06-27",
+              "claim_ids": [
+                "claim-financial-cash"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 23646000000,
+              "unit": "USD",
+              "period_start": "2022-09-24",
+              "period_end": "2022-09-24",
+              "claim_ids": [
+                "claim-financial-cash-annual-1"
+              ]
+            },
+            {
+              "value": 29965000000,
+              "unit": "USD",
+              "period_start": "2023-09-30",
+              "period_end": "2023-09-30",
+              "claim_ids": [
+                "claim-financial-cash-annual-2"
+              ]
+            },
+            {
+              "value": 29943000000,
+              "unit": "USD",
+              "period_start": "2024-09-28",
+              "period_end": "2024-09-28",
+              "claim_ids": [
+                "claim-financial-cash-annual-3"
+              ]
+            },
+            {
+              "value": 35934000000,
+              "unit": "USD",
+              "period_start": "2025-09-27",
+              "period_end": "2025-09-27",
+              "claim_ids": [
+                "claim-financial-cash-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 39544000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash",
+            "claim-financial-cash-annual-1",
+            "claim-financial-cash-annual-2",
+            "claim-financial-cash-annual-3",
+            "claim-financial-cash-annual-4"
+          ]
+        },
+        "revenue": {
+          "state": "unknown",
+          "label": "revenue",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "revenue was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "profitability": {
+          "state": "unknown",
+          "label": "profitability",
+          "value": null,
+          "unit": null,
+          "period_start": null,
+          "period_end": null,
+          "trend": "unknown",
+          "comparison_period_start": null,
+          "comparison_period_end": null,
+          "observations": [],
+          "annual_observations": [],
+          "summary": "profitability was not established by the available SEC Company Facts.",
+          "claim_ids": []
+        },
+        "operating_cash_flow": {
+          "state": "confirmed",
+          "label": "Operating cash flow",
+          "value": 116996000000,
+          "unit": "USD",
+          "period_start": "2025-09-28",
+          "period_end": "2026-06-27",
+          "trend": "unknown",
+          "comparison_period_start": "2024-09-29",
+          "comparison_period_end": "2025-06-28",
+          "observations": [
+            {
+              "value": 81754000000,
+              "unit": "USD",
+              "period_start": "2024-09-29",
+              "period_end": "2025-06-28",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": 116996000000,
+              "unit": "USD",
+              "period_start": "2025-09-28",
+              "period_end": "2026-06-27",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 122151000000,
+              "unit": "USD",
+              "period_start": "2021-09-26",
+              "period_end": "2022-09-24",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 110543000000,
+              "unit": "USD",
+              "period_start": "2022-09-25",
+              "period_end": "2023-09-30",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": 118254000000,
+              "unit": "USD",
+              "period_start": "2023-10-01",
+              "period_end": "2024-09-28",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 111482000000,
+              "unit": "USD",
+              "period_start": "2024-09-29",
+              "period_end": "2025-09-27",
+              "claim_ids": [
+                "claim-financial-operating_cash_flow-annual-4"
+              ]
+            }
+          ],
+          "summary": "SEC Company Facts reports Operating cash flow of 116996000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow",
+            "claim-financial-operating_cash_flow-annual-1",
+            "claim-financial-operating_cash_flow-annual-2",
+            "claim-financial-operating_cash_flow-annual-3",
+            "claim-financial-operating_cash_flow-annual-4"
+          ]
+        },
+        "free_cash_flow": {
+          "state": "confirmed",
+          "label": "Free cash flow",
+          "value": 110197000000,
+          "unit": "USD",
+          "period_start": "2025-09-28",
+          "period_end": "2026-06-27",
+          "trend": "unknown",
+          "comparison_period_start": "2024-09-29",
+          "comparison_period_end": "2025-06-28",
+          "observations": [
+            {
+              "value": 72281000000,
+              "unit": "USD",
+              "period_start": "2024-09-29",
+              "period_end": "2025-06-28",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-observation-1"
+              ]
+            },
+            {
+              "value": 110197000000,
+              "unit": "USD",
+              "period_start": "2025-09-28",
+              "period_end": "2026-06-27",
+              "claim_ids": [
+                "claim-financial-free_cash_flow"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 111443000000,
+              "unit": "USD",
+              "period_start": "2021-09-26",
+              "period_end": "2022-09-24",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-1"
+              ]
+            },
+            {
+              "value": 99584000000,
+              "unit": "USD",
+              "period_start": "2022-09-25",
+              "period_end": "2023-09-30",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-2"
+              ]
+            },
+            {
+              "value": 108807000000,
+              "unit": "USD",
+              "period_start": "2023-10-01",
+              "period_end": "2024-09-28",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-3"
+              ]
+            },
+            {
+              "value": 98767000000,
+              "unit": "USD",
+              "period_start": "2024-09-29",
+              "period_end": "2025-09-27",
+              "claim_ids": [
+                "claim-financial-free_cash_flow-annual-4"
+              ]
+            }
+          ],
+          "summary": "Free cash flow of 110197000000 USD is calculated as operating cash flow 116996000000 less capital expenditures 6799000000 for 2025-09-28 through 2026-06-27.",
+          "claim_ids": [
+            "claim-financial-free_cash_flow-observation-1",
+            "claim-financial-free_cash_flow",
+            "claim-financial-free_cash_flow-annual-1",
+            "claim-financial-free_cash_flow-annual-2",
+            "claim-financial-free_cash_flow-annual-3",
+            "claim-financial-free_cash_flow-annual-4"
+          ]
+        },
+        "cash_burn": {
+          "state": "confirmed",
+          "label": "Cash burn based on free cash flow",
+          "value": 0,
+          "unit": "USD",
+          "period_start": "2025-09-28",
+          "period_end": "2026-06-27",
+          "trend": "unknown",
+          "comparison_period_start": "2024-09-29",
+          "comparison_period_end": "2025-06-28",
+          "observations": [
+            {
+              "value": 0,
+              "unit": "USD",
+              "period_start": "2024-09-29",
+              "period_end": "2025-06-28",
+              "claim_ids": [
+                "claim-financial-cash_burn-observation-1"
+              ]
+            },
+            {
+              "value": 0,
+              "unit": "USD",
+              "period_start": "2025-09-28",
+              "period_end": "2026-06-27",
+              "claim_ids": [
+                "claim-financial-cash_burn"
+              ]
+            }
+          ],
+          "annual_observations": [],
+          "summary": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-27, filed 2026-07-31.",
+          "claim_ids": [
+            "claim-financial-cash_burn-observation-1",
+            "claim-financial-cash_burn"
+          ]
+        },
+        "debt": {
+          "state": "confirmed",
+          "label": "Total debt (current plus non-current components)",
+          "value": 82347000000,
+          "unit": "USD",
+          "period_start": "2026-06-27",
+          "period_end": "2026-06-27",
+          "trend": "unknown",
+          "comparison_period_start": "2025-06-28",
+          "comparison_period_end": "2025-06-28",
+          "observations": [
+            {
+              "value": 91775000000,
+              "unit": "USD",
+              "period_start": "2025-06-28",
+              "period_end": "2025-06-28",
+              "claim_ids": [
+                "claim-financial-debt-observation-1"
+              ]
+            },
+            {
+              "value": 82347000000,
+              "unit": "USD",
+              "period_start": "2026-06-27",
+              "period_end": "2026-06-27",
+              "claim_ids": [
+                "claim-financial-debt"
+              ]
+            }
+          ],
+          "annual_observations": [
+            {
+              "value": 110087000000,
+              "unit": "USD",
+              "period_start": "2022-09-24",
+              "period_end": "2022-09-24",
+              "claim_ids": [
+                "claim-financial-debt-annual-1"
+              ]
+            },
+            {
+              "value": 105103000000,
+              "unit": "USD",
+              "period_start": "2023-09-30",
+              "period_end": "2023-09-30",
+              "claim_ids": [
+                "claim-financial-debt-annual-2"
+              ]
+            },
+            {
+              "value": 96662000000,
+              "unit": "USD",
+              "period_start": "2024-09-28",
+              "period_end": "2024-09-28",
+              "claim_ids": [
+                "claim-financial-debt-annual-3"
+              ]
+            },
+            {
+              "value": 90678000000,
+              "unit": "USD",
+              "period_start": "2025-09-27",
+              "period_end": "2025-09-27",
+              "claim_ids": [
+                "claim-financial-debt-annual-4"
+              ]
+            }
+          ],
+          "summary": "Total debt of 82347000000 USD is calculated from current debt 11007000000 plus non-current debt 71340000000 at 2026-06-27.",
+          "claim_ids": [
+            "claim-financial-debt-observation-1",
+            "claim-financial-debt",
+            "claim-financial-debt-annual-1",
+            "claim-financial-debt-annual-2",
+            "claim-financial-debt-annual-3",
+            "claim-financial-debt-annual-4"
+          ]
+        }
+      },
+      "shares_outstanding": {
+        "state": "confirmed",
+        "summary": "Reported shares outstanding decreased 7.1% over the displayed period from 2022-10-14 to 2025-10-17.",
+        "observations": [
+          {
+            "value": 15908118000,
+            "unit": "shares",
+            "period_start": "2022-10-14",
+            "period_end": "2022-10-14",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 15552752000,
+            "unit": "shares",
+            "period_start": "2023-10-20",
+            "period_end": "2023-10-20",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 15115823000,
+            "unit": "shares",
+            "period_start": "2024-10-18",
+            "period_end": "2024-10-18",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 14776353000,
+            "unit": "shares",
+            "period_start": "2025-10-17",
+            "period_end": "2025-10-17",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 15908118000,
+            "unit": "shares",
+            "period_start": "2022-10-14",
+            "period_end": "2022-10-14",
+            "claim_ids": [
+              "claim-shares-outstanding-1"
+            ]
+          },
+          {
+            "value": 15552752000,
+            "unit": "shares",
+            "period_start": "2023-10-20",
+            "period_end": "2023-10-20",
+            "claim_ids": [
+              "claim-shares-outstanding-2"
+            ]
+          },
+          {
+            "value": 15115823000,
+            "unit": "shares",
+            "period_start": "2024-10-18",
+            "period_end": "2024-10-18",
+            "claim_ids": [
+              "claim-shares-outstanding-3"
+            ]
+          },
+          {
+            "value": 14776353000,
+            "unit": "shares",
+            "period_start": "2025-10-17",
+            "period_end": "2025-10-17",
+            "claim_ids": [
+              "claim-shares-outstanding-4"
+            ]
+          }
+        ],
+        "claim_ids": [
+          "claim-shares-outstanding-1",
+          "claim-shares-outstanding-2",
+          "claim-shares-outstanding-3",
+          "claim-shares-outstanding-4"
+        ]
+      },
+      "going_concern": {
+        "state": "unknown",
+        "as_of": null,
+        "summary": "Going-concern language was not established from bounded filing extraction.",
+        "claim_ids": []
+      },
+      "material_warnings": []
+    },
+    "catalyst_assessment": {
+      "current": {
+        "state": "confirmed",
+        "classification": "other",
+        "title": "Material filing event",
+        "event_date": "2026-07-30",
+        "summary": "On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026.",
+        "confidence": "high",
+        "claim_ids": [
+          "claim-extracted-000032019326000018-catalyst-1"
+        ],
+        "factors": {
+          "recency": {
+            "rating": "high",
+            "explanation": "The event appears in a filing within the bounded recent window.",
+            "claim_ids": [
+              "claim-extracted-000032019326000018-catalyst-1"
+            ]
+          },
+          "specificity": {
+            "rating": "medium",
+            "explanation": "The filing provides a specific material-event statement.",
+            "claim_ids": [
+              "claim-extracted-000032019326000018-catalyst-1"
+            ]
+          },
+          "credibility": {
+            "rating": "high",
+            "explanation": "The statement comes directly from an SEC filing.",
+            "claim_ids": [
+              "claim-extracted-000032019326000018-catalyst-1"
+            ]
+          },
+          "novelty": {
+            "rating": "unknown",
+            "explanation": "Novelty requires synthesis or broader research.",
+            "claim_ids": []
+          },
+          "potential_significance": {
+            "rating": "unknown",
+            "explanation": "Potential significance requires synthesis or broader research.",
+            "claim_ids": []
+          }
+        }
+      },
+      "favorable_evidence_claim_ids": [],
+      "unfavorable_evidence_claim_ids": [],
+      "uncertainty": [
+        "Fast does not add market context or secondary corroboration."
+      ],
+      "near_term_implication": {
+        "state": "unknown",
+        "direction": "unknown",
+        "summary": "No near-term implication is inferred from filing metadata.",
+        "confidence": "unknown",
+        "claim_ids": []
+      },
+      "historical_analogues": {
+        "state": "limited_coverage",
+        "summary": "Historical catalyst analogues are deferred to Deep.",
+        "coverage_notes": [
+          "Fast does not research reaction analogues."
+        ],
+        "items": [],
+        "claim_ids": []
+      }
+    },
+    "claims": [
+      {
+        "id": "claim-sec-identity",
+        "text": "SEC associates AAPL with Apple Inc. (CIK 0000320193) on Nasdaq.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:02.596Z",
+        "source_ids": [
+          "source-sec-ticker-map"
+        ]
+      },
+      {
+        "id": "claim-sec-lineage-1",
+        "text": "SEC submissions metadata identifies APPLE INC as a former name of CIK 0000320193 from 2007-01-10 through 2019-08-05.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:02.596Z",
+        "source_ids": [
+          "source-sec-submissions"
+        ]
+      },
+      {
+        "id": "claim-sec-lineage-2",
+        "text": "SEC submissions metadata identifies APPLE COMPUTER INC as a former name of CIK 0000320193 from 1994-01-26 through 2007-01-04.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:02.596Z",
+        "source_ids": [
+          "source-sec-submissions"
+        ]
+      },
+      {
+        "id": "claim-sec-lineage-3",
+        "text": "SEC submissions metadata identifies APPLE COMPUTER INC/ FA as a former name of CIK 0000320193 from 1997-07-28 through 1997-07-28.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:02.596Z",
+        "source_ids": [
+          "source-sec-submissions"
+        ]
+      },
+      {
+        "id": "claim-capital-000114036125017543",
+        "text": "Apple Inc. filed Form 424B2 on 2025-05-06; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-05-06T00:00:00Z",
+        "source_ids": [
+          "source-sec-000114036125017543"
+        ]
+      },
+      {
+        "id": "claim-capital-000114036125017233",
+        "text": "Apple Inc. filed Form 424B2 on 2025-05-05; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-05-05T00:00:00Z",
+        "source_ids": [
+          "source-sec-000114036125017233"
+        ]
+      },
+      {
+        "id": "claim-capital-000114036124044880",
+        "text": "Apple Inc. filed Form S-3ASR on 2024-11-01; this filing is a financing candidate requiring document-level review.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2024-11-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-000114036124044880"
+        ]
+      },
+      {
+        "id": "claim-extracted-000114036125017543-offering-1",
+        "text": "Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2025-05-06T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-capital-000114036125017543-ny20048442x3424b2htm"
+        ]
+      },
+      {
+        "id": "claim-catalyst-000032019326000018",
+        "text": "Apple Inc. filed Form 8-K on 2026-07-30; filing metadata alone does not establish the catalyst's substance.",
+        "materiality": "medium",
+        "state": "limited_coverage",
+        "as_of": "2026-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-000032019326000018"
+        ]
+      },
+      {
+        "id": "claim-extracted-000032019326000018-catalyst-1",
+        "text": "On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-30T00:00:00Z",
+        "source_ids": [
+          "source-sec-document-catalyst-000032019326000018-aapl20260730htm"
+        ]
+      },
+      {
+        "id": "claim-financial-cash",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 39544000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-observation-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 45572000000 USD for the comparable period ending 2026-03-28, filed 2026-05-01.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-05-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-1",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 23646000000 USD for the comparable period ending 2022-09-24, filed 2023-11-03.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-11-03T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-2",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 29965000000 USD for the comparable period ending 2023-09-30, filed 2024-11-01.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-11-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-3",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 29943000000 USD for the comparable period ending 2024-09-28, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-cash-annual-4",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 35934000000 USD for the comparable period ending 2025-09-27, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash-annual-4"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-1",
+        "text": "SEC Company Facts reports 15908118000 common shares outstanding at 2022-10-14, filed 2022-10-28.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2022-10-28T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-2",
+        "text": "SEC Company Facts reports 15552752000 common shares outstanding at 2023-10-20, filed 2023-11-03.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2023-11-03T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-3",
+        "text": "SEC Company Facts reports 15115823000 common shares outstanding at 2024-10-18, filed 2024-11-01.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2024-11-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "claim-shares-outstanding-4",
+        "text": "SEC Company Facts reports 14776353000 common shares outstanding at 2025-10-17, filed 2025-10-31.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow",
+        "text": "SEC Company Facts reports Operating cash flow of 116996000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Operating cash flow of 81754000000 USD for the comparable period ending 2025-06-28, filed 2026-07-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Operating cash flow of 122151000000 USD for the comparable period ending 2022-09-24, filed 2024-11-01.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-11-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Operating cash flow of 110543000000 USD for the comparable period ending 2023-09-30, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Operating cash flow of 118254000000 USD for the comparable period ending 2024-09-28, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-operating_cash_flow-annual-4",
+        "text": "SEC Company Facts reports Operating cash flow of 111482000000 USD for the comparable period ending 2025-09-27, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow",
+        "text": "Free cash flow of 110197000000 USD is calculated as operating cash flow 116996000000 less capital expenditures 6799000000 for 2025-09-28 through 2026-06-27.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-observation-1",
+        "text": "SEC Company Facts reports Free cash flow of 72281000000 USD for the comparable period ending 2025-06-28, filed 2026-07-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-1",
+        "text": "SEC Company Facts reports Free cash flow of 111443000000 USD for the comparable period ending 2022-09-24, filed 2024-11-01.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-11-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-2",
+        "text": "SEC Company Facts reports Free cash flow of 99584000000 USD for the comparable period ending 2023-09-30, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-3",
+        "text": "SEC Company Facts reports Free cash flow of 108807000000 USD for the comparable period ending 2024-09-28, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-free_cash_flow-annual-4",
+        "text": "SEC Company Facts reports Free cash flow of 98767000000 USD for the comparable period ending 2025-09-27, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-free_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "claim-financial-cash_burn",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-27, filed 2026-07-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash_burn"
+        ]
+      },
+      {
+        "id": "claim-financial-cash_burn-observation-1",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the comparable period ending 2025-06-28, filed 2026-07-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt",
+        "text": "Total debt of 82347000000 USD is calculated from current debt 11007000000 plus non-current debt 71340000000 at 2026-06-27.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-07-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-observation-1",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 91775000000 USD for the comparable period ending 2025-06-28, filed 2025-08-01.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-08-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-observation-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-1",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 110087000000 USD for the comparable period ending 2022-09-24, filed 2023-11-03.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2023-11-03T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-1"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-2",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 105103000000 USD for the comparable period ending 2023-09-30, filed 2024-11-01.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2024-11-01T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-2"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-3",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 96662000000 USD for the comparable period ending 2024-09-28, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-3"
+        ]
+      },
+      {
+        "id": "claim-financial-debt-annual-4",
+        "text": "SEC Company Facts reports Total debt (current plus non-current components) of 90678000000 USD for the comparable period ending 2025-09-27, filed 2025-10-31.",
+        "materiality": "medium",
+        "state": "confirmed",
+        "as_of": "2025-10-31T00:00:00Z",
+        "source_ids": [
+          "source-sec-companyfacts-debt-annual-4"
+        ]
+      },
+      {
+        "id": "claim-nasdaq-current-listing",
+        "text": "Nasdaq Trader's current symbol directory identifies AAPL as Apple Inc. - Common Stock; current status is active.",
+        "materiality": "high",
+        "state": "confirmed",
+        "as_of": "2026-08-27T19:59:03.939Z",
+        "source_ids": [
+          "source-nasdaq-symbol-directory"
+        ]
+      },
+      {
+        "id": "claim-alpha-eod-market",
+        "text": "AAPL's end-of-day close was 313.45 with volume 34024486 on 2026-08-26; this is market context, not evidence of an issuer event.",
+        "materiality": "low",
+        "state": "confirmed",
+        "as_of": "2026-08-26T00:00:00Z",
+        "source_ids": [
+          "source-alpha-eod-market"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-submissions",
+        "title": "SEC submissions metadata",
+        "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-sec-lineage-1",
+          "claim-sec-lineage-2",
+          "claim-sec-lineage-3"
+        ]
+      },
+      {
+        "id": "source-sec-000114036125017543",
+        "title": "424B2 filed 2025-05-06",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036125017543/ny20048442x3_424b2.htm",
+        "published_date": "2025-05-06",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-capital-000114036125017543"
+        ]
+      },
+      {
+        "id": "source-sec-000114036125017233",
+        "title": "424B2 filed 2025-05-05",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036125017233/ny20048442x1_424b2.htm",
+        "published_date": "2025-05-05",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-capital-000114036125017233"
+        ]
+      },
+      {
+        "id": "source-sec-000114036124044880",
+        "title": "S-3ASR filed 2024-11-01",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036124044880/ny20033611x4_s3asr.htm",
+        "published_date": "2024-11-01",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-capital-000114036124044880"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000114036125017543-ny20048442x3424b2htm",
+        "title": "424B2 filed 2025-05-06 — ny20048442x3_424b2.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036125017543/ny20048442x3_424b2.htm",
+        "published_date": "2025-05-06",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-extracted-000114036125017543-offering-1"
+        ]
+      },
+      {
+        "id": "source-sec-000032019326000018",
+        "title": "8-K filed 2026-07-30",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/aapl-20260730.htm",
+        "published_date": "2026-07-30",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000032019326000018"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000032019326000018-aapl20260730htm",
+        "title": "8-K filed 2026-07-30 — aapl-20260730.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/aapl-20260730.htm",
+        "published_date": "2026-07-30",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-extracted-000032019326000018-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-05-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2023-11-03",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2022-10-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2023-11-03",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow",
+        "title": "SEC Company Facts — Free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-4",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn",
+        "title": "SEC Company Facts — Cash burn based on free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn-observation-1",
+        "title": "SEC Company Facts — Cash burn based on free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt (current plus non-current components)",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-observation-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-08-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2023-11-03",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-2",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-3",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-4",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-4"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:03.939Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "Alpha Vantage end-of-day market data for AAPL",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-26",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T19:59:03.939Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ]
+      }
+    ]
+  },
+  "evidence_records": [
+    {
+      "id": "evidence-sec-lineage-1",
+      "category": "issuer_lineage",
+      "state": "confirmed",
+      "event_date": "2019-08-05",
+      "text": "SEC submissions metadata identifies APPLE INC as a former name of CIK 0000320193 from 2007-01-10 through 2019-08-05.",
+      "source_id": "source-sec-submissions",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-lineage-2",
+      "category": "issuer_lineage",
+      "state": "confirmed",
+      "event_date": "2007-01-04",
+      "text": "SEC submissions metadata identifies APPLE COMPUTER INC as a former name of CIK 0000320193 from 1994-01-26 through 2007-01-04.",
+      "source_id": "source-sec-submissions",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-lineage-3",
+      "category": "issuer_lineage",
+      "state": "confirmed",
+      "event_date": "1997-07-28",
+      "text": "SEC submissions metadata identifies APPLE COMPUTER INC/ FA as a former name of CIK 0000320193 from 1997-07-28 through 1997-07-28.",
+      "source_id": "source-sec-submissions",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-sec-identity",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "SEC associates AAPL with Apple Inc. (CIK 0000320193) on Nasdaq.",
+      "source_id": "source-sec-ticker-map",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-capital-0001140361-25-017543",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-05-06",
+      "text": "Apple Inc. filed Form 424B2 on 2025-05-06; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000114036125017543",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001140361-25-017233",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-05-05",
+      "text": "Apple Inc. filed Form 424B2 on 2025-05-05; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000114036125017233",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-capital-0001140361-24-044880",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2024-11-01",
+      "text": "Apple Inc. filed Form S-3ASR on 2024-11-01; this filing is a financing candidate requiring document-level review.",
+      "source_id": "source-sec-000114036124044880",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-catalyst-0000320193-26-000018",
+      "category": "catalysts_news",
+      "state": "limited_coverage",
+      "event_date": "2026-07-30",
+      "text": "Apple Inc. filed Form 8-K on 2026-07-30; filing metadata alone does not establish the catalyst's substance.",
+      "source_id": "source-sec-000032019326000018",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-financial-cash",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-31",
+      "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 39544000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+      "source_id": "source-sec-companyfacts-cash",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-1",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2022-10-28",
+      "text": "SEC Company Facts reports 15908118000 common shares outstanding at 2022-10-14, filed 2022-10-28.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-1",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-2",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2023-11-03",
+      "text": "SEC Company Facts reports 15552752000 common shares outstanding at 2023-10-20, filed 2023-11-03.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-2",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-3",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2024-11-01",
+      "text": "SEC Company Facts reports 15115823000 common shares outstanding at 2024-10-18, filed 2024-11-01.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-3",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-shares-outstanding-4",
+      "category": "dilution_offerings",
+      "state": "confirmed",
+      "event_date": "2025-10-31",
+      "text": "SEC Company Facts reports 14776353000 common shares outstanding at 2025-10-17, filed 2025-10-31.",
+      "source_id": "source-sec-companyfacts-shares-outstanding-4",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-operating_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-31",
+      "text": "SEC Company Facts reports Operating cash flow of 116996000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+      "source_id": "source-sec-companyfacts-operating_cash_flow",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-free_cash_flow",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-31",
+      "text": "Free cash flow of 110197000000 USD is calculated as operating cash flow 116996000000 less capital expenditures 6799000000 for 2025-09-28 through 2026-06-27.",
+      "source_id": "source-sec-companyfacts-free_cash_flow",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-cash_burn",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-31",
+      "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-27, filed 2026-07-31.",
+      "source_id": "source-sec-companyfacts-cash_burn",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-financial-debt",
+      "category": "financial_context",
+      "state": "confirmed",
+      "event_date": "2026-07-31",
+      "text": "Total debt of 82347000000 USD is calculated from current debt 11007000000 plus non-current debt 71340000000 at 2026-06-27.",
+      "source_id": "source-sec-companyfacts-debt",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-extracted-0001140361-25-017543-offering-1",
+      "category": "dilution_offerings",
+      "state": "limited_coverage",
+      "event_date": "2025-05-06",
+      "text": "Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+      "source_id": "source-sec-document-capital-000114036125017543-ny20048442x3424b2htm",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "medium"
+    },
+    {
+      "id": "evidence-extracted-0000320193-26-000018-catalyst-1",
+      "category": "catalysts_news",
+      "state": "confirmed",
+      "event_date": "2026-07-30",
+      "text": "On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026.",
+      "source_id": "source-sec-document-catalyst-000032019326000018-aapl20260730htm",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-nasdaq-current-listing",
+      "category": "security_and_listing",
+      "state": "confirmed",
+      "event_date": "2026-08-27",
+      "text": "Nasdaq Trader's current symbol directory identifies AAPL as Apple Inc. - Common Stock; current status is active.",
+      "source_id": "source-nasdaq-symbol-directory",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    },
+    {
+      "id": "evidence-alpha-eod-market",
+      "category": "market_context",
+      "state": "confirmed",
+      "event_date": "2026-08-26",
+      "text": "AAPL's end-of-day close was 313.45 with volume 34024486 on 2026-08-26; this is market context, not evidence of an issuer event.",
+      "source_id": "source-alpha-eod-market",
+      "issuer_cik": "0000320193",
+      "security_ticker": "AAPL",
+      "confidence": "high"
+    }
+  ],
+  "evidence_packet": {
+    "ticker": "AAPL",
+    "identity": {
+      "ticker": "AAPL",
+      "issuer_legal_name": "Apple Inc.",
+      "cik": "0000320193"
+    },
+    "retrieved_at": "2026-08-27T19:59:02.596Z",
+    "records": [
+      {
+        "id": "evidence-sec-lineage-1",
+        "category": "issuer_lineage",
+        "state": "confirmed",
+        "event_date": "2019-08-05",
+        "text": "SEC submissions metadata identifies APPLE INC as a former name of CIK 0000320193 from 2007-01-10 through 2019-08-05.",
+        "source_id": "source-sec-submissions",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-lineage-2",
+        "category": "issuer_lineage",
+        "state": "confirmed",
+        "event_date": "2007-01-04",
+        "text": "SEC submissions metadata identifies APPLE COMPUTER INC as a former name of CIK 0000320193 from 1994-01-26 through 2007-01-04.",
+        "source_id": "source-sec-submissions",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-lineage-3",
+        "category": "issuer_lineage",
+        "state": "confirmed",
+        "event_date": "1997-07-28",
+        "text": "SEC submissions metadata identifies APPLE COMPUTER INC/ FA as a former name of CIK 0000320193 from 1997-07-28 through 1997-07-28.",
+        "source_id": "source-sec-submissions",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-sec-identity",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "SEC associates AAPL with Apple Inc. (CIK 0000320193) on Nasdaq.",
+        "source_id": "source-sec-ticker-map",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-capital-0001140361-25-017543",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-05-06",
+        "text": "Apple Inc. filed Form 424B2 on 2025-05-06; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000114036125017543",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001140361-25-017233",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-05-05",
+        "text": "Apple Inc. filed Form 424B2 on 2025-05-05; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000114036125017233",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-capital-0001140361-24-044880",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2024-11-01",
+        "text": "Apple Inc. filed Form S-3ASR on 2024-11-01; this filing is a financing candidate requiring document-level review.",
+        "source_id": "source-sec-000114036124044880",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-catalyst-0000320193-26-000018",
+        "category": "catalysts_news",
+        "state": "limited_coverage",
+        "event_date": "2026-07-30",
+        "text": "Apple Inc. filed Form 8-K on 2026-07-30; filing metadata alone does not establish the catalyst's substance.",
+        "source_id": "source-sec-000032019326000018",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-financial-cash",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-31",
+        "text": "SEC Company Facts reports Cash and Cash Equivalents, at Carrying Value of 39544000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+        "source_id": "source-sec-companyfacts-cash",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-1",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2022-10-28",
+        "text": "SEC Company Facts reports 15908118000 common shares outstanding at 2022-10-14, filed 2022-10-28.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-1",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-2",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2023-11-03",
+        "text": "SEC Company Facts reports 15552752000 common shares outstanding at 2023-10-20, filed 2023-11-03.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-2",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-3",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2024-11-01",
+        "text": "SEC Company Facts reports 15115823000 common shares outstanding at 2024-10-18, filed 2024-11-01.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-3",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-shares-outstanding-4",
+        "category": "dilution_offerings",
+        "state": "confirmed",
+        "event_date": "2025-10-31",
+        "text": "SEC Company Facts reports 14776353000 common shares outstanding at 2025-10-17, filed 2025-10-31.",
+        "source_id": "source-sec-companyfacts-shares-outstanding-4",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-operating_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-31",
+        "text": "SEC Company Facts reports Operating cash flow of 116996000000 USD for the period ending 2026-06-27, filed 2026-07-31.",
+        "source_id": "source-sec-companyfacts-operating_cash_flow",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-free_cash_flow",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-31",
+        "text": "Free cash flow of 110197000000 USD is calculated as operating cash flow 116996000000 less capital expenditures 6799000000 for 2025-09-28 through 2026-06-27.",
+        "source_id": "source-sec-companyfacts-free_cash_flow",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-cash_burn",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-31",
+        "text": "SEC Company Facts reports Cash burn based on free cash flow of 0 USD for the period ending 2026-06-27, filed 2026-07-31.",
+        "source_id": "source-sec-companyfacts-cash_burn",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-financial-debt",
+        "category": "financial_context",
+        "state": "confirmed",
+        "event_date": "2026-07-31",
+        "text": "Total debt of 82347000000 USD is calculated from current debt 11007000000 plus non-current debt 71340000000 at 2026-06-27.",
+        "source_id": "source-sec-companyfacts-debt",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-extracted-0001140361-25-017543-offering-1",
+        "category": "dilution_offerings",
+        "state": "limited_coverage",
+        "event_date": "2025-05-06",
+        "text": "Debt Securities We may, from time to time, offer to sell debt securities in one or more offerings.",
+        "source_id": "source-sec-document-capital-000114036125017543-ny20048442x3424b2htm",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "medium"
+      },
+      {
+        "id": "evidence-extracted-0000320193-26-000018-catalyst-1",
+        "category": "catalysts_news",
+        "state": "confirmed",
+        "event_date": "2026-07-30",
+        "text": "On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026.",
+        "source_id": "source-sec-document-catalyst-000032019326000018-aapl20260730htm",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-nasdaq-current-listing",
+        "category": "security_and_listing",
+        "state": "confirmed",
+        "event_date": "2026-08-27",
+        "text": "Nasdaq Trader's current symbol directory identifies AAPL as Apple Inc. - Common Stock; current status is active.",
+        "source_id": "source-nasdaq-symbol-directory",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-alpha-eod-market",
+        "category": "market_context",
+        "state": "confirmed",
+        "event_date": "2026-08-26",
+        "text": "AAPL's end-of-day close was 313.45 with volume 34024486 on 2026-08-26; this is market context, not evidence of an issuer event.",
+        "source_id": "source-alpha-eod-market",
+        "issuer_cik": "0000320193",
+        "security_ticker": "AAPL",
+        "confidence": "high"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-sec-ticker-map",
+        "title": "SEC ticker, CIK, and exchange associations",
+        "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-sec-identity"
+        ]
+      },
+      {
+        "id": "source-sec-submissions",
+        "title": "SEC submissions metadata",
+        "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+        "published_date": "2026-08-27",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-sec-lineage-1",
+          "claim-sec-lineage-2",
+          "claim-sec-lineage-3"
+        ]
+      },
+      {
+        "id": "source-sec-000114036125017543",
+        "title": "424B2 filed 2025-05-06",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036125017543/ny20048442x3_424b2.htm",
+        "published_date": "2025-05-06",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-capital-000114036125017543"
+        ]
+      },
+      {
+        "id": "source-sec-000114036125017233",
+        "title": "424B2 filed 2025-05-05",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036125017233/ny20048442x1_424b2.htm",
+        "published_date": "2025-05-05",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-capital-000114036125017233"
+        ]
+      },
+      {
+        "id": "source-sec-000114036124044880",
+        "title": "S-3ASR filed 2024-11-01",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036124044880/ny20033611x4_s3asr.htm",
+        "published_date": "2024-11-01",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-capital-000114036124044880"
+        ]
+      },
+      {
+        "id": "source-sec-document-capital-000114036125017543-ny20048442x3424b2htm",
+        "title": "424B2 filed 2025-05-06 — ny20048442x3_424b2.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036125017543/ny20048442x3_424b2.htm",
+        "published_date": "2025-05-06",
+        "source_type": "sec_filing",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-extracted-000114036125017543-offering-1"
+        ]
+      },
+      {
+        "id": "source-sec-000032019326000018",
+        "title": "8-K filed 2026-07-30",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/aapl-20260730.htm",
+        "published_date": "2026-07-30",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-catalyst-000032019326000018"
+        ]
+      },
+      {
+        "id": "source-sec-document-catalyst-000032019326000018-aapl20260730htm",
+        "title": "8-K filed 2026-07-30 — aapl-20260730.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/aapl-20260730.htm",
+        "published_date": "2026-07-30",
+        "source_type": "sec_filing",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-extracted-000032019326000018-catalyst-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-observation-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-05-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-1",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2023-11-03",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-2",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-3",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash-annual-4",
+        "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-1",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2022-10-28",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-2",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2023-11-03",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-3",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-shares-outstanding-4",
+        "title": "SEC Company Facts — common shares outstanding",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-shares-outstanding-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow",
+        "title": "SEC Company Facts — Operating cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+        "title": "SEC Company Facts — Operating cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-operating_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow",
+        "title": "SEC Company Facts — Free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-free_cash_flow-annual-4",
+        "title": "SEC Company Facts — Free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-free_cash_flow-annual-4"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn",
+        "title": "SEC Company Facts — Cash burn based on free cash flow",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-cash_burn-observation-1",
+        "title": "SEC Company Facts — Cash burn based on free cash flow comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-cash_burn-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt",
+        "title": "SEC Company Facts — Total debt (current plus non-current components)",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2026-07-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-observation-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-08-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-observation-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-1",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2023-11-03",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-1"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-2",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2024-11-01",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-2"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-3",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-3"
+        ]
+      },
+      {
+        "id": "source-sec-companyfacts-debt-annual-4",
+        "title": "SEC Company Facts — Total debt (current plus non-current components) comparable period",
+        "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "published_date": "2025-10-31",
+        "source_type": "other_primary",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:02.596Z",
+        "supported_claim_ids": [
+          "claim-financial-debt-annual-4"
+        ]
+      },
+      {
+        "id": "source-nasdaq-symbol-directory",
+        "title": "Nasdaq Trader current symbol directory",
+        "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "published_date": "2026-08-27",
+        "source_type": "exchange_notice",
+        "confidence": "high",
+        "retrieved_at": "2026-08-27T19:59:03.939Z",
+        "supported_claim_ids": [
+          "claim-nasdaq-current-listing"
+        ]
+      },
+      {
+        "id": "source-alpha-eod-market",
+        "title": "Alpha Vantage end-of-day market data for AAPL",
+        "url": "https://www.alphavantage.co/documentation/#daily",
+        "published_date": "2026-08-26",
+        "source_type": "other_secondary",
+        "confidence": "medium",
+        "retrieved_at": "2026-08-27T19:59:03.939Z",
+        "supported_claim_ids": [
+          "claim-alpha-eod-market"
+        ]
+      }
+    ],
+    "cache": {
+      "tickers": "miss",
+      "submissions": "miss",
+      "documents": [
+        {
+          "accession": "0000320193-26-000018",
+          "document": "aapl-20260730.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001140361-25-017543",
+          "document": "ny20048442x3_424b2.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0000320193-26-000020",
+          "document": "aapl-20260627.htm",
+          "state": "miss"
+        },
+        {
+          "accession": "0001140361-24-038403",
+          "document": "ny20033611x2_8k.htm",
+          "state": "miss"
+        }
+      ],
+      "companyfacts": "miss"
+    },
+    "sec_request_count": 7
+  },
+  "synthesis": {
+    "status": "unavailable"
+  },
+  "operations": {
+    "stage": "fast",
+    "latency_ms": 865,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "web_search_calls": 0,
+    "estimated_cost_usd": null,
+    "pricing_version": null,
+    "within_latency_target": true,
+    "first_useful_latency_ms": 308,
+    "within_first_useful_target": true,
+    "domains": {
+      "capital": {
+        "status": "completed"
+      },
+      "catalyst": {
+        "status": "completed"
+      },
+      "financial": {
+        "status": "completed"
+      }
+    },
+    "within_cost_target": null,
+    "retrieval": {
+      "status": "completed",
+      "sec_request_count": 7,
+      "cache": {
+        "tickers": "miss",
+        "submissions": "miss",
+        "documents": [
+          {
+            "accession": "0000320193-26-000018",
+            "document": "aapl-20260730.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001140361-25-017543",
+            "document": "ny20048442x3_424b2.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0000320193-26-000020",
+            "document": "aapl-20260627.htm",
+            "state": "miss"
+          },
+          {
+            "accession": "0001140361-24-038403",
+            "document": "ny20033611x2_8k.htm",
+            "state": "miss"
+          }
+        ],
+        "companyfacts": "miss"
+      },
+      "failures": []
+    },
+    "budget": {
+      "budget_class": "normal",
+      "elapsed_ms": 7966,
+      "elapsed_limit_ms": 20000,
+      "work_limit_ms": 19500,
+      "finalization_reserve_ms": 500,
+      "time_remaining_ms": 12034,
+      "cost_limit_usd": 0.03,
+      "cost_consumed_usd": 0,
+      "cost_reserved_usd": 0,
+      "cost_remaining_usd": 0.03,
+      "termination_reason": "partial_coverage",
+      "completed_normally": false,
+      "partial_coverage": true,
+      "sources": {
+        "sec:tickers": {
+          "endpoint_category": "ticker_map",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:submissions:0000320193": {
+          "endpoint_category": "submissions",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:facts:0000320193": {
+          "endpoint_category": "companyfacts",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0000320193-26-000018:aapl-20260730.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001140361-25-017543:ny20048442x3_424b2.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0000320193-26-000020:aapl-20260627.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "sec:document:0001140361-24-038403:ny20033611x2_8k.htm": {
+          "endpoint_category": "filing_document",
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:listed": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:other": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "nasdaq:halts": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:market": {
+          "cache_state": "miss",
+          "request_count": 4,
+          "cost_usd": 0,
+          "status": "completed"
+        },
+        "alpha_vantage:news": {
+          "reason": "provider_quota",
+          "status": "limited"
+        },
+        "openai_synthesis": {
+          "status": "unavailable"
+        }
+      }
+    },
+    "bounded_sources": {
+      "status": "limited",
+      "request_count": 5,
+      "alpha_vantage_requests_today": 2,
+      "alpha_vantage_free_daily_limit": 25,
+      "nasdaq": "completed",
+      "news": "limited",
+      "news_reason": "provider_quota",
+      "market": "completed",
+      "market_reason": null
+    },
+    "synthesis": {
+      "status": "unavailable"
+    }
+  }
+}

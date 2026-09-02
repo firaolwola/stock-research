@@ -1,0 +1,75 @@
+{
+  "issue": 55,
+  "batch": "final-five-confirmation-1",
+  "live_calls": true,
+  "approved_run_count": 5,
+  "completed_run_count": 5,
+  "adjudication": {
+    "frozen_baseline": "evaluation/plans/fast-reliability-2026-08-27.json",
+    "frozen_as_of": "2026-08-27",
+    "run_as_of": "2026-08-28",
+    "post_cutoff_evidence_excluded": ["NXL scheduled 2026-08-28 effective split was evaluated as prospective against the frozen 2026-08-27 baseline."],
+    "expected_material_checks": 86,
+    "detected_material_checks": 82,
+    "recall": 0.9535,
+    "note": "Descriptive same-five confirmation against the unchanged Batch-3 denominator; this does not replace or rewrite Batch 3."
+  },
+  "category_recall": {
+    "issuer_security_identity": {"detected":5,"expected":5,"recall":1.0},
+    "historical_dilution_issuance": {"detected":3,"expected":3,"recall":1.0},
+    "future_dilution": {"detected":4,"expected":4,"recall":1.0},
+    "warrants_convertibles": {"detected":4,"expected":4,"recall":1.0},
+    "reverse_splits": {"detected":2,"expected":3,"recall":0.6667,"miss":"AMC completed reverse split remains absent."},
+    "active_listing_deficiency": {"detected":2,"expected":2,"recall":1.0},
+    "going_concern": {"detected":2,"expected":2,"recall":1.0},
+    "accounting_restatement_non_reliance": {"detected":2,"expected":3,"recall":0.6667,"miss":"NCPL Item 4.02/non-reliance evidence was not surfaced in this packet; financial inputs remained Limited."},
+    "financial_health_liquidity": {"detected":5,"expected":5,"recall":1.0},
+    "revenue": {"detected":5,"expected":5,"recall":1.0},
+    "net_income_loss": {"detected":5,"expected":5,"recall":1.0},
+    "debt": {"detected":5,"expected":5,"recall":1.0},
+    "free_cash_flow": {"detected":3,"expected":5,"recall":0.6},
+    "cash": {"detected":5,"expected":5,"recall":1.0},
+    "operating_cash_flow": {"detected":5,"expected":5,"recall":1.0},
+    "shares_history": {"detected":5,"expected":5,"recall":1.0},
+    "catalyst_news": {"detected":5,"expected":5,"recall":1.0},
+    "discovery_only_behavior": {"detected":5,"expected":5,"recall":1.0},
+    "end_of_day_price_volume": {"detected":5,"expected":5,"recall":1.0},
+    "missing_stale_conflicting_handling": {"detected":5,"expected":5,"recall":1.0}
+  },
+  "valid_report_rate": {"valid":5,"evaluated":5,"rate":1.0},
+  "explanation_fidelity": {"passed":3,"evaluated":5,"rate":0.6,"note":"AMC and NCPL omissions remain material explanation gaps; NXL was adjudicated at the frozen cutoff."},
+  "settlement_accuracy": {"passed":5,"evaluated":5,"rate":1.0,"note":"All reports remained valid partial/limited and did not convert missing evidence into favorable scores."},
+  "score_state_safety": {"passed":5,"evaluated":5,"rate":1.0},
+  "severe_misleading_misses": [
+    {"ticker":"AMC","class":"reverse_split_retrieval","detail":"Completed 1-for-10 history remains absent."},
+    {"ticker":"NCPL","class":"non_reliance_retrieval","detail":"The expected Item 4.02/non-reliance event was not surfaced; affected financial scores stayed Limited."}
+  ],
+  "corrected_from_batch_3": [
+    "AAPL clean-control language no longer produces a material-weakness warning.",
+    "SMCI material weakness remains surfaced while restored Nasdaq compliance is historical/resolved.",
+    "NXL future-effective split remains scheduled/prospective at the frozen cutoff.",
+    "SMCI current OCF/FCF deterioration and split normalization remain intact."
+  ],
+  "operations": {
+    "aggregate_elapsed_ms": 11220,
+    "max_ticker_elapsed_ms": 2417,
+    "known_openai_cost_usd": 0,
+    "alpha_vantage_requests": 10,
+    "twelve_data_requests": 0,
+    "combined_optional_provider_attempts": 10,
+    "retries": 0,
+    "hosted_web_search_calls": 0,
+    "approval_violation": false
+  },
+  "comparison": {"batch_1_recall":0.6628,"batch_2_recall":0.8256,"batch_3_recall":0.9651,"final_confirmation_recall":0.9535},
+  "gate": {
+    "overall_recall_target":0.95,
+    "adequately_sampled_category_target":0.9,
+    "maximum_severe_misses":0,
+    "passed":false,
+    "reason":"Numerical recall is just above target, but two severe live misses remain and the FCF category remains below target. NIO unavailable-authoritative-evidence remains separately classified."
+  },
+  "issue_must_remain_open":true,
+  "pr_ready_to_merge":false,
+  "next_step":"Do not close Issue #55. Correct/reconfirm AMC reverse-split and NCPL non-reliance retrieval, then reassess the frozen reliability gate without changing historical artifacts."
+}

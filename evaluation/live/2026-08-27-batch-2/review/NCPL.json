@@ -1,0 +1,15 @@
+{
+  "ticker": "NCPL",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "going-concern warning", "minimum-bid deficiency", "completed 1-for-70 reverse split", "offering, convertible, and warrant evidence", "material weakness", "stale cash limitation", "split-adjusted 5707.7% shares growth", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"accounting_non_reliance","cause":"interpretation","severity":"severe","finding":"Forward-looking-statement boilerplate was labeled non-reliance; the actual accounting non-reliance event was not specifically extracted."},
+    {"category":"financial_invalidation","cause":"false_positive_gating","finding":"The required Limited/Unscored outcome was reached, but for an unsupported reason, so explanation fidelity failed."},
+    {"category":"capital_risk_scores","cause":"scoring_coverage","finding":"Confirmed split, listing, going-concern, financing, and shares evidence did not settle corresponding numeric risk scores."}
+  ],
+  "score_range_result": {"passed":2,"evaluated":6},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "safe_result_wrong_reason",
+  "safe_settlement": "All affected financial scores were Limited/Unscored and no favorable OCF survived, but the actual non-reliance fact remains unproven by the extracted statement."
+}

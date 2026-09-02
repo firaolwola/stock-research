@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createReportValidator } from "../lib/report-validation.js";
+import { createReportValidator, validateFinalReportSettlement } from "../lib/report-validation.js";
 import { loadReportFixture, loadReportSchema } from "../support/report-fixtures.js";
 
 const validateReport = createReportValidator(await loadReportSchema());
@@ -10,6 +10,18 @@ test("shared complete and partial fixtures validate", async () => {
     const result = validateReport(await loadReportFixture(name));
     assert.deepEqual(result, { valid: true, errors: [] }, `${name} fixture should validate`);
   }
+});
+
+test("final settlement rejects Pending reports but accepts terminal partial coverage", async () => {
+  const pending = await loadReportFixture("partial");
+  pending.metadata.completion_status = "pending";
+  pending.metadata.coverage_limitations[0].code = "fast-capital-pending";
+  pending.metadata.coverage_limitations[0].explanation = "The capital research remains pending.";
+  const rejected = validateFinalReportSettlement(pending);
+  assert.equal(rejected.valid, false);
+  assert.ok(rejected.errors.every((error) => error.keyword === "terminalSettlement"));
+  const terminal = await loadReportFixture("partial");
+  assert.deepEqual(validateFinalReportSettlement(terminal), { valid: true, errors: [] });
 });
 
 test("invalid fixture data returns useful schema diagnostics", async () => {

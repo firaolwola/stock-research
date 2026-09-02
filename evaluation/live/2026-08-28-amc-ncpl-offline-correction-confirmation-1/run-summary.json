@@ -1,0 +1,140 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-28-amc-ncpl-confirmation-1.json",
+  "live_calls": true,
+  "approved_run_count": 2,
+  "completed_run_count": 2,
+  "known_openai_cost_usd": 0,
+  "maximum_approved_openai_cost_usd": 0.06,
+  "alpha_vantage_requests": 4,
+  "maximum_approved_alpha_vantage_requests": 4,
+  "twelve_data_requests": 0,
+  "maximum_approved_twelve_data_requests": 4,
+  "combined_optional_provider_attempts": 4,
+  "maximum_approved_combined_optional_provider_attempts": 8,
+  "runs": [
+    {
+      "case_id": "amc-2026-live",
+      "ticker": "AMC",
+      "result": "report",
+      "elapsed_ms": 2651,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": 2,
+      "provider_usage": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 2,
+            "daily_limit": 25,
+            "minute_used": 2,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    },
+    {
+      "case_id": "ncpl-2026-live",
+      "ticker": "NCPL",
+      "result": "report",
+      "elapsed_ms": 2513,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "alpha_vantage_requests_today": 4,
+      "provider_usage": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "completed",
+              "reason": null,
+              "request_count": 1
+            }
+          ],
+          "selected_provider": "alpha_vantage",
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 4,
+            "daily_limit": 25,
+            "minute_used": 4,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    }
+  ]
+}

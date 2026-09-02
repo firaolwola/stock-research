@@ -1,0 +1,2174 @@
+{
+  "diagnostic_version": "1.0.0",
+  "methodology_version": "2.1.0",
+  "source_batch": "2026-08-27-batch-2",
+  "measured_results_unchanged": true,
+  "failed_cases": [
+    {
+      "ticker": "AAPL",
+      "component": "financial_health",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "cash",
+      "expected_owner_range": [
+        5,
+        9
+      ],
+      "actual": {
+        "state": "confirmed",
+        "value": 2
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "confirmed",
+        "current_value": 39544000000,
+        "unit": "USD",
+        "observations": [
+          {
+            "value": 45572000000,
+            "unit": "USD",
+            "period_start": "2026-03-28",
+            "period_end": "2026-03-28",
+            "claim_ids": [
+              "claim-financial-cash-observation-1"
+            ]
+          },
+          {
+            "value": 39544000000,
+            "unit": "USD",
+            "period_start": "2026-06-27",
+            "period_end": "2026-06-27",
+            "claim_ids": [
+              "claim-financial-cash"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 23646000000,
+            "unit": "USD",
+            "period_start": "2022-09-24",
+            "period_end": "2022-09-24",
+            "claim_ids": [
+              "claim-financial-cash-annual-1"
+            ]
+          },
+          {
+            "value": 29965000000,
+            "unit": "USD",
+            "period_start": "2023-09-30",
+            "period_end": "2023-09-30",
+            "claim_ids": [
+              "claim-financial-cash-annual-2"
+            ]
+          },
+          {
+            "value": 29943000000,
+            "unit": "USD",
+            "period_start": "2024-09-28",
+            "period_end": "2024-09-28",
+            "claim_ids": [
+              "claim-financial-cash-annual-3"
+            ]
+          },
+          {
+            "value": 35934000000,
+            "unit": "USD",
+            "period_start": "2025-09-27",
+            "period_end": "2025-09-27",
+            "claim_ids": [
+              "claim-financial-cash-annual-4"
+            ]
+          }
+        ]
+      },
+      "selected_periods": [
+        {
+          "period_start": "2026-03-28",
+          "period_end": "2026-03-28",
+          "value": 45572000000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2026-06-27",
+          "period_end": "2026-06-27",
+          "value": 39544000000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2022-09-24",
+          "period_end": "2022-09-24",
+          "value": 23646000000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2023-09-30",
+          "period_end": "2023-09-30",
+          "value": 29965000000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2024-09-28",
+          "period_end": "2024-09-28",
+          "value": 29943000000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2025-09-27",
+          "period_end": "2025-09-27",
+          "value": 35934000000,
+          "unit": "USD"
+        }
+      ],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-cash-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "comparable_sec_history",
+          "state": "confirmed",
+          "value": 2,
+          "weight": 1,
+          "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash"
+          ]
+        }
+      ],
+      "confidence": "low",
+      "reason": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+      "classification": "scoring formula behavior"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "historical_dilution",
+      "expected_owner_range": [
+        0,
+        2
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "future_dilution",
+      "expected_owner_range": [
+        0,
+        3
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "potential_dilution",
+      "expected_owner_range": [
+        0,
+        2
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "reverse_split",
+      "expected_owner_range": [
+        0,
+        2
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "catalyst",
+      "expected_owner_range": [
+        6,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000032019326000018-aapl20260730htm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-07-30 — aapl-20260730.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000032019326000018-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000032019326000018-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000032019326000018-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AAPL",
+      "component": "near_term_setup",
+      "expected_owner_range": [
+        5,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000032019326000018-aapl20260730htm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-07-30 — aapl-20260730.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000032019326000018-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000032019326000018-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000032019326000018-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "A supported current catalyst is required before market context can form a setup score.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "financial_health",
+      "expected_owner_range": [
+        3,
+        6
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "revenue",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "limited_coverage",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-revenue-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-revenue",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax"
+        },
+        {
+          "id": "source-sec-companyfacts-revenue-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-revenue-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-revenue-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-revenue-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Revenue from Contract with Customer, Excluding Assessed Tax comparable period"
+        },
+        {
+          "id": "source-sec-document-financial-000110465926076650-tm26185441424b5htm",
+          "source_type": "sec_filing",
+          "title": "424B5 filed 2026-06-23 — tm2618544-1_424b5.htm"
+        }
+      ],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "net_income",
+      "expected_owner_range": [
+        5,
+        8
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "limited_coverage",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-profitability-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-profitability",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent"
+        },
+        {
+          "id": "source-sec-companyfacts-profitability-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-profitability-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-profitability-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-profitability-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Net Income (Loss) Attributable to Parent comparable period"
+        },
+        {
+          "id": "source-sec-document-financial-000110465926076650-tm26185441424b5htm",
+          "source_type": "sec_filing",
+          "title": "424B5 filed 2026-06-23 — tm2618544-1_424b5.htm"
+        }
+      ],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "free_cash_flow",
+      "expected_owner_range": [
+        5,
+        9
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "limited_coverage",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-financial-000110465926076650-tm26185441424b5htm",
+          "source_type": "sec_filing",
+          "title": "424B5 filed 2026-06-23 — tm2618544-1_424b5.htm"
+        }
+      ],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "operating_cash_flow",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "limited_coverage",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-document-financial-000110465926076650-tm26185441424b5htm",
+          "source_type": "sec_filing",
+          "title": "424B5 filed 2026-06-23 — tm2618544-1_424b5.htm"
+        }
+      ],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "historical_dilution",
+      "expected_owner_range": [
+        9,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "future_dilution",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "potential_dilution",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "reverse_split",
+      "expected_owner_range": [
+        2,
+        5
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "catalyst",
+      "expected_owner_range": [
+        5,
+        9
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000141157926000055-amc20260720x8khtm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-07-20 — amc-20260720x8k.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000141157926000055-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000141157926000055-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000141157926000055-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "AMC",
+      "component": "near_term_setup",
+      "expected_owner_range": [
+        4,
+        9
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000141157926000055-amc20260720x8khtm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-07-20 — amc-20260720x8k.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000141157926000055-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000141157926000055-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000141157926000055-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "A supported current catalyst is required before market context can form a setup score.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NCPL",
+      "component": "historical_dilution",
+      "expected_owner_range": [
+        8,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NCPL",
+      "component": "future_dilution",
+      "expected_owner_range": [
+        8,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NCPL",
+      "component": "potential_dilution",
+      "expected_owner_range": [
+        6,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NCPL",
+      "component": "reverse_split",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NCPL",
+      "component": "catalyst",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000149315226040042-form8khtm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-08-25 — form8-k.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000149315226040042-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000149315226040042-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000149315226040042-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NCPL",
+      "component": "near_term_setup",
+      "expected_owner_range": [
+        2,
+        8
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000149315226040042-form8khtm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-08-25 — form8-k.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000149315226040042-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000149315226040042-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000149315226040042-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "A supported current catalyst is required before market context can form a setup score.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "financial_health",
+      "expected_owner_range": [
+        0,
+        3
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "revenue",
+      "expected_owner_range": [
+        0,
+        4
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "unknown",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "debt",
+      "expected_owner_range": [
+        6,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": {
+        "state": "unknown",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "free_cash_flow",
+      "expected_owner_range": [
+        0,
+        3
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "unknown",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "historical_dilution",
+      "expected_owner_range": [
+        4,
+        8
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "future_dilution",
+      "expected_owner_range": [
+        8,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "potential_dilution",
+      "expected_owner_range": [
+        5,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A supported potential-share numerator and current share denominator, expressed as percent of shares, are required; proceeds versus cash is not ownership impact.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "reverse_split",
+      "expected_owner_range": [
+        8,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "catalyst",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000182912626009387-nexalintec8khtm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-08-27 — nexalintec_8k.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000182912626009387-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000182912626009387-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000182912626009387-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "NXL",
+      "component": "near_term_setup",
+      "expected_owner_range": [
+        1,
+        7
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000182912626009387-nexalintec8khtm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-08-27 — nexalintec_8k.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000182912626009387-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000182912626009387-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000182912626009387-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "A supported current catalyst is required before market context can form a setup score.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "financial_health",
+      "expected_owner_range": [
+        0,
+        3
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current comparable cash, burn, true free cash flow, total debt, profitability, and going-concern evidence are required. Stale, conflicting, partial, or mismatched evidence stays Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "debt",
+      "expected_owner_range": [
+        0,
+        5
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "limited_coverage",
+        "current_value": null,
+        "unit": null,
+        "observations": [],
+        "annual_observations": []
+      },
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-debt",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Total debt"
+        }
+      ],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "At least two comparable SEC-derived observations are required; one observation does not establish a trend.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "free_cash_flow",
+      "expected_owner_range": [
+        2,
+        8
+      ],
+      "actual": {
+        "state": "confirmed",
+        "value": 0
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "confirmed",
+        "current_value": -7690616000,
+        "unit": "USD",
+        "observations": [
+          {
+            "value": 691375000,
+            "unit": "USD",
+            "period_start": "2024-07-01",
+            "period_end": "2025-03-31",
+            "claim_ids": [
+              "claim-financial-free_cash_flow-observation-1"
+            ]
+          },
+          {
+            "value": -7690616000,
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-03-31",
+            "claim_ids": [
+              "claim-financial-free_cash_flow"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": -485983000,
+            "unit": "USD",
+            "period_start": "2021-07-01",
+            "period_end": "2022-06-30",
+            "claim_ids": [
+              "claim-financial-free_cash_flow-annual-1"
+            ]
+          },
+          {
+            "value": 626787000,
+            "unit": "USD",
+            "period_start": "2022-07-01",
+            "period_end": "2023-06-30",
+            "claim_ids": [
+              "claim-financial-free_cash_flow-annual-2"
+            ]
+          },
+          {
+            "value": -2610251000,
+            "unit": "USD",
+            "period_start": "2023-07-01",
+            "period_end": "2024-06-30",
+            "claim_ids": [
+              "claim-financial-free_cash_flow-annual-3"
+            ]
+          },
+          {
+            "value": 1532310000,
+            "unit": "USD",
+            "period_start": "2024-07-01",
+            "period_end": "2025-06-30",
+            "claim_ids": [
+              "claim-financial-free_cash_flow-annual-4"
+            ]
+          }
+        ]
+      },
+      "selected_periods": [
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-03-31",
+          "value": 691375000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2025-07-01",
+          "period_end": "2026-03-31",
+          "value": -7690616000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2021-07-01",
+          "period_end": "2022-06-30",
+          "value": -485983000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2022-07-01",
+          "period_end": "2023-06-30",
+          "value": 626787000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "value": -2610251000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "value": 1532310000,
+          "unit": "USD"
+        }
+      ],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-free_cash_flow-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Free cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-free_cash_flow",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Free cash flow"
+        },
+        {
+          "id": "source-sec-companyfacts-free_cash_flow-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Free cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-free_cash_flow-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Free cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-free_cash_flow-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Free cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-free_cash_flow-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Free cash flow comparable period"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "comparable_sec_history",
+          "state": "confirmed",
+          "value": 0,
+          "weight": 1,
+          "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+          "claim_ids": [
+            "claim-financial-free_cash_flow-observation-1",
+            "claim-financial-free_cash_flow"
+          ]
+        }
+      ],
+      "confidence": "low",
+      "reason": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+      "classification": "scoring formula behavior"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "cash",
+      "expected_owner_range": [
+        7,
+        10
+      ],
+      "actual": {
+        "state": "confirmed",
+        "value": 0
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "confirmed",
+        "current_value": 1290324000,
+        "unit": "USD",
+        "observations": [
+          {
+            "value": 4091083000,
+            "unit": "USD",
+            "period_start": "2025-12-31",
+            "period_end": "2025-12-31",
+            "claim_ids": [
+              "claim-financial-cash-observation-1"
+            ]
+          },
+          {
+            "value": 1290324000,
+            "unit": "USD",
+            "period_start": "2026-03-31",
+            "period_end": "2026-03-31",
+            "claim_ids": [
+              "claim-financial-cash"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": 267397000,
+            "unit": "USD",
+            "period_start": "2022-06-30",
+            "period_end": "2022-06-30",
+            "claim_ids": [
+              "claim-financial-cash-annual-1"
+            ]
+          },
+          {
+            "value": 440459000,
+            "unit": "USD",
+            "period_start": "2023-06-30",
+            "period_end": "2023-06-30",
+            "claim_ids": [
+              "claim-financial-cash-annual-2"
+            ]
+          },
+          {
+            "value": 1669766000,
+            "unit": "USD",
+            "period_start": "2024-06-30",
+            "period_end": "2024-06-30",
+            "claim_ids": [
+              "claim-financial-cash-annual-3"
+            ]
+          },
+          {
+            "value": 5169911000,
+            "unit": "USD",
+            "period_start": "2025-06-30",
+            "period_end": "2025-06-30",
+            "claim_ids": [
+              "claim-financial-cash-annual-4"
+            ]
+          }
+        ]
+      },
+      "selected_periods": [
+        {
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "value": 4091083000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2026-03-31",
+          "period_end": "2026-03-31",
+          "value": 1290324000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2022-06-30",
+          "period_end": "2022-06-30",
+          "value": 267397000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2023-06-30",
+          "period_end": "2023-06-30",
+          "value": 440459000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2024-06-30",
+          "period_end": "2024-06-30",
+          "value": 1669766000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2025-06-30",
+          "period_end": "2025-06-30",
+          "value": 5169911000,
+          "unit": "USD"
+        }
+      ],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-cash-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-cash-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Cash and Cash Equivalents, at Carrying Value comparable period"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "comparable_sec_history",
+          "state": "confirmed",
+          "value": 0,
+          "weight": 1,
+          "explanation": "55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+          "claim_ids": [
+            "claim-financial-cash-observation-1",
+            "claim-financial-cash"
+          ]
+        }
+      ],
+      "confidence": "low",
+      "reason": "Company-relative trend only; raw company size is not scored. 55% average direction, 30% latest comparable change, and 15% directional consistency across 2 quarter-end periods.",
+      "classification": "scoring formula behavior"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "operating_cash_flow",
+      "expected_owner_range": [
+        5,
+        10
+      ],
+      "actual": {
+        "state": "confirmed",
+        "value": 0
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": {
+        "state": "confirmed",
+        "current_value": -7556847000,
+        "unit": "USD",
+        "observations": [
+          {
+            "value": 795911000,
+            "unit": "USD",
+            "period_start": "2024-07-01",
+            "period_end": "2025-03-31",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-observation-1"
+            ]
+          },
+          {
+            "value": -7556847000,
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-03-31",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow"
+            ]
+          }
+        ],
+        "annual_observations": [
+          {
+            "value": -440801000,
+            "unit": "USD",
+            "period_start": "2021-07-01",
+            "period_end": "2022-06-30",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-annual-1"
+            ]
+          },
+          {
+            "value": 663580000,
+            "unit": "USD",
+            "period_start": "2022-07-01",
+            "period_end": "2023-06-30",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-annual-2"
+            ]
+          },
+          {
+            "value": -2485972000,
+            "unit": "USD",
+            "period_start": "2023-07-01",
+            "period_end": "2024-06-30",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-annual-3"
+            ]
+          },
+          {
+            "value": 1659524000,
+            "unit": "USD",
+            "period_start": "2024-07-01",
+            "period_end": "2025-06-30",
+            "claim_ids": [
+              "claim-financial-operating_cash_flow-annual-4"
+            ]
+          }
+        ]
+      },
+      "selected_periods": [
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-03-31",
+          "value": 795911000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2025-07-01",
+          "period_end": "2026-03-31",
+          "value": -7556847000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2021-07-01",
+          "period_end": "2022-06-30",
+          "value": -440801000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2022-07-01",
+          "period_end": "2023-06-30",
+          "value": 663580000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "value": -2485972000,
+          "unit": "USD"
+        },
+        {
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "value": 1659524000,
+          "unit": "USD"
+        }
+      ],
+      "source_filings": [
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-observation-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-1",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-2",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-3",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        },
+        {
+          "id": "source-sec-companyfacts-operating_cash_flow-annual-4",
+          "source_type": "other_primary",
+          "title": "SEC Company Facts — Operating cash flow comparable period"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "comparable_sec_history",
+          "state": "confirmed",
+          "value": 0,
+          "weight": 1,
+          "explanation": "45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+          "claim_ids": [
+            "claim-financial-operating_cash_flow-observation-1",
+            "claim-financial-operating_cash_flow"
+          ]
+        }
+      ],
+      "confidence": "low",
+      "reason": "Company-relative trend only; raw company size is not scored. 45% latest sign/level, 40% first-to-latest improvement, and 15% improving-transition consistency across 2 interim periods.",
+      "classification": "scoring formula behavior"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "historical_dilution",
+      "expected_owner_range": [
+        0,
+        4
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "A bounded authoritative three-year history is required; missing history is not favorable evidence.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "future_dilution",
+      "expected_owner_range": [
+        2,
+        6
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Current liquidity, true free cash flow, total debt, and resolved dilution history are required; gaps cannot lower financing risk.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "reverse_split",
+      "expected_owner_range": [
+        0,
+        2
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [],
+      "formula_components": [],
+      "confidence": "unknown",
+      "reason": "Resolved split history and current exchange/listing status are required; generic risk-factor text is not a listing deficiency.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "catalyst",
+      "expected_owner_range": [
+        8,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": false,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000137536526000021-smci20260811htm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-08-11 — smci-20260811.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000137536526000021-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000137536526000021-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000137536526000021-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "Every weighted factor needs authoritative evidence; unresolved significance remains Unscored.",
+      "classification": "bad evidence retrieval"
+    },
+    {
+      "ticker": "SMCI",
+      "component": "near_term_setup",
+      "expected_owner_range": [
+        6,
+        10
+      ],
+      "actual": {
+        "state": "limited_coverage",
+        "value": null
+      },
+      "limited_settlement_allowed_by_baseline": true,
+      "normalized_inputs": null,
+      "selected_periods": [],
+      "source_filings": [
+        {
+          "id": "source-sec-document-catalyst-000137536526000021-smci20260811htm",
+          "source_type": "sec_filing",
+          "title": "8-K filed 2026-08-11 — smci-20260811.htm"
+        }
+      ],
+      "formula_components": [
+        {
+          "key": "potential_significance",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.3,
+          "explanation": "Potential significance requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "specificity",
+          "state": "confirmed",
+          "value": 6,
+          "weight": 0.25,
+          "explanation": "The filing provides a specific material-event statement.",
+          "claim_ids": [
+            "claim-extracted-000137536526000021-catalyst-1"
+          ]
+        },
+        {
+          "key": "credibility",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.2,
+          "explanation": "The statement comes directly from an SEC filing.",
+          "claim_ids": [
+            "claim-extracted-000137536526000021-catalyst-1"
+          ]
+        },
+        {
+          "key": "novelty",
+          "state": "limited_coverage",
+          "value": null,
+          "weight": 0.15,
+          "explanation": "Novelty requires synthesis or broader research.",
+          "claim_ids": []
+        },
+        {
+          "key": "recency",
+          "state": "confirmed",
+          "value": 9,
+          "weight": 0.1,
+          "explanation": "The event appears in a filing within the bounded recent window.",
+          "claim_ids": [
+            "claim-extracted-000137536526000021-catalyst-1"
+          ]
+        }
+      ],
+      "confidence": "unknown",
+      "reason": "A supported current catalyst is required before market context can form a setup score.",
+      "classification": "bad evidence retrieval"
+    }
+  ]
+}

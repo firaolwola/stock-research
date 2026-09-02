@@ -1,0 +1,16 @@
+{
+  "report_produced": true,
+  "valid_report_rate": { "passed": 1, "evaluated": 1, "rate": 1 },
+  "completed_split_recall": { "retrieved": 9, "expected": 9, "recall": 1 },
+  "canonical_event_precision": { "supported": 9, "reported": 10, "precision": 0.9 },
+  "august_1_duplicate_eliminated": false,
+  "other_false_or_duplicate_events": 0,
+  "known_verification_4_false_events_absent": 4,
+  "explanation_fidelity": { "passed": 0, "evaluated": 1, "rate": 0 },
+  "settlement_accuracy": { "passed": 0, "evaluated": 1, "rate": 0 },
+  "severe_misleading_misses": 1,
+  "diagnostics": { "total": 160, "accepted": 10, "merged": 9, "withheld": 32, "rejected": 109 },
+  "muln_live_parser_blocker_resolved": false,
+  "issue_must_remain_open": true,
+  "retry_performed": false
+}

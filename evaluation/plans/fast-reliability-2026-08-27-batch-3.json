@@ -1,0 +1,65 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": 3,
+  "approved_at": "2026-08-27",
+  "purpose": "Repeat the original five Fast cases exactly once to verify the post-Batch-2 deterministic corrections against unchanged owner-reviewed baselines.",
+  "base_plan": "evaluation/plans/fast-reliability-2026-08-27.json",
+  "output_directory": "2026-08-27-batch-3",
+  "approval_token": "issue-55-2026-08-27-approved-third-five-runs",
+  "approval": {
+    "approved": true,
+    "tickers": ["AAPL", "AMC", "NCPL", "NXL", "SMCI"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 5,
+    "maximum_openai_cost_usd": 0.15,
+    "maximum_alpha_vantage_requests": 10,
+    "maximum_twelve_data_requests": 10,
+    "maximum_combined_optional_provider_attempts": 20,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "required_ancestor": "3aa5a79",
+  "configuration": {
+    "change_from_batch_2": "none",
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 8000,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "provider_policy": {
+    "approved_providers": ["alpha_vantage", "twelve_data"],
+    "provider_order": ["alpha_vantage", "twelve_data"],
+    "optional_context_may_settle_limited": true,
+    "requires_owner_review_after_architecture_change": false,
+    "approved_at": "2026-08-27",
+    "note": "The owner approved Alpha Vantage first with Twelve Data fallback, at most 10 requests per provider and 20 combined optional-provider attempts. Local provider rate limits still fail closed as Limited."
+  },
+  "alpha_vantage_preflight": {
+    "free_daily_limit": 25,
+    "usage_day": "2026-08-27",
+    "recorded_batch_1_requests": 10,
+    "recorded_batch_2_requests": 10,
+    "inferred_remaining_on_approval_day": 5,
+    "approved_batch_3_requests": 10,
+    "status": "blocked_until_daily_reset"
+  },
+  "preserve_prior_batches": [
+    {
+      "directory": "evaluation/live/2026-08-27",
+      "summary_sha256": "21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56",
+      "run_summary_sha256": "6151f8ba50008576180df0b804270e22ddd33da5239c8885067635d210d3fa84"
+    },
+    {
+      "directory": "evaluation/live/2026-08-27-batch-2",
+      "summary_sha256": "d1cbd2e894d5c0274e73f0f1c9f80c412271fd931699516689370d0a1071b12a",
+      "run_summary_sha256": "1198624d72addaee682d38c080b5803f3f148fa4b6a81a472f5e545bb74d8e4e"
+    }
+  ]
+}

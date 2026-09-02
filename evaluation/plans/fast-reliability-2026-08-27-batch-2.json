@@ -1,0 +1,44 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": 2,
+  "approved_at": "2026-08-27",
+  "purpose": "Repeat the original five Fast cases exactly once to verify deterministic corrections against the independently prepared batch-1 baselines.",
+  "base_plan": "evaluation/plans/fast-reliability-2026-08-27.json",
+  "output_directory": "2026-08-27-batch-2",
+  "approval_token": "issue-55-2026-08-27-approved-second-five-runs",
+  "approval": {
+    "approved": true,
+    "tickers": ["AAPL", "AMC", "NCPL", "NXL", "SMCI"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 5,
+    "maximum_openai_cost_usd": 0.15,
+    "maximum_alpha_vantage_requests": 10,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "configuration": {
+    "change_from_batch_1": "none",
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 8000,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "alpha_vantage_preflight": {
+    "free_daily_limit": 25,
+    "recorded_batch_1_requests_today": 10,
+    "inferred_remaining_before_batch_2": 15,
+    "approved_batch_2_requests": 10
+  },
+  "preserve_batch_1": {
+    "directory": "evaluation/live/2026-08-27",
+    "summary_sha256": "21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56",
+    "run_summary_sha256": "6151f8ba50008576180df0b804270e22ddd33da5239c8885067635d210d3fa84"
+  }
+}

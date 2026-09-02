@@ -130,7 +130,651 @@ recall target. The existing dry evaluator
 continues to measure its checked-in report samples. A future approved dated
 evaluation must measure the new retrieval path against real case facts.
 
+The deterministic regression suite also preserves the severe shapes discovered
+in the 2026-08-27 Issue #55 batch: same-end quarter/YTD Company Facts, AMC-style
+completed reverse splits and issuance growth, NCPL-style non-reliance
+invalidation, and SMCI-style material weaknesses, recent cash-flow deterioration,
+and forward-split share normalization. These tests correct known mechanisms but
+do not replace a separately approved live batch or prove recall targets.
+
+The approved same-five-ticker repeat on 2026-08-27 improved recall from 66.28%
+to 82.56% but still failed the milestone. Current-flow precedence and the worst
+split-as-dilution wording improved, while live evidence exposed overbroad
+non-reliance matching, persistent corporate-action selection gaps, an omitted
+SMCI material weakness, and an invalid Limited shares series. The independent
+result is in `docs/results/FAST_RELIABILITY_2026-08-27-BATCH-2.md`. The same-five
+Batch 3 plan was subsequently approved and frozen. The owner then approved the
+Alpha Vantage-first/Twelve Data-fallback policy with at most 10 requests per
+provider and 20 optional-provider attempts combined. Prior artifacts and the
+independent answer key remain unchanged.
+
+Batch 3 completed all five bounded runs and improved recall to 83/86 (96.51%),
+with five valid reports. It did not pass the milestone: reverse-split and FCF
+category recall remained below 90%; AAPL control language, AMC split history,
+NXL split timing, and SMCI listing context produced severe misses; and required
+sparse categories remain unproven. The independent result is recorded in
+`docs/results/FAST_RELIABILITY_2026-08-27-BATCH-3.md`.
+
+Post-Batch-3 offline regressions now cover the four reproduced severe mechanisms:
+positive-control language no longer becomes a weakness; historical submissions
+can supply AMC's authoritative completed split; NXL-style future-effective
+actions remain scheduled until their cutoff passes; and financing/listing
+covenants do not become active exchange deficiencies. True SMCI weakness and
+active Nasdaq-notice controls remain detected. These corrections do not change
+the measured Batch 3 result and are not another calibration run. AMC/NXL FCF
+remains honestly Limited because the stored evidence has no aligned capex fact.
+
+The subsequently approved four-ticker sparse batch is recorded in
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-1.md`. It produced four valid
+reports but only 3/16 material checks (18.75%). BIOR, former ticker MULN, and
+TUPBQ were absent from the current SEC ticker map and exposed the lack of a
+historical-ticker/OTC identity fallback; their finished work also remained
+incorrectly labeled Pending. NIO exercised the foreign 20-F/6-K path but exposed
+an effective-controls false positive and inconsistent foreign Company Facts
+selection. The batch therefore proves neither the sparse categories nor the
+milestone and authorizes no additional paid run.
+
+Offline corrective coverage now resolves those reproduced mechanisms without
+changing the measured 18.75% result. A bounded SEC-backed historical identity
+registry links BIOR, MULN/BINI, and TUP/TUPBQ to exact CIKs; it is never fuzzy,
+and unresolved symbols settle terminally Limited. Authoritative filing seeds
+retain completed splits, financing, bankruptcy, going-concern, and delisting
+evidence after lineage resolution. Foreign-filer normalization accepts
+compatible IFRS revenue and attributable-profit aliases, while positive 20-F
+control language is excluded from material-weakness findings. The frozen plan
+remains unchanged; stale identity facts are recorded separately in
+`evaluation/plans/fast-reliability-2026-08-27-sparse-corrections.json`.
+
+The separately approved same-four Sparse-2 verification then measured 13/16
+(81.25%) material checks, up from 3/16, and terminal settlement passed 4/4. It
+still failed: only NIO validated; BIOR/MULN had lineage source-link defects;
+MULN omitted older split history and retained stale listing semantics; NIO still
+missed annual net loss; and TUPBQ used a 404 delisting seed and an invalid
+catalyst classification. Explanation fidelity remained 0/4 and score/state
+checks remained 7/18. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-2.md`.
+
+The post-Batch-2 corrective branch now reproduces those mechanisms offline. It
+uses dedicated bounded filing slots for Item 4.02, Item 5.03, compliance, and
+control disclosures; requires event-specific non-reliance language; separates
+resolved exchange history from active deficiencies; clears scoreable
+observations when a share series is Limited by an unresolved split; and accepts
+additional SEC revenue taxonomy aliases without merging incompatible periods.
+The score-range diagnostic at
+`evaluation/diagnostics/fast-score-ranges-2026-08-27-batch-2.json` preserves the
+measured reports and records every failed owner range with normalized inputs,
+periods, sources, formula components, confidence, and a cause classification.
+These are regression fixes, not new calibration measurements; historical and
+later measured artifacts remain unchanged. Another live batch still requires
+owner approval.
+
+The post-Sparse-2 corrective pass now also covers the four invalid-report
+mechanisms without changing any measured artifact: reciprocal source links for
+former-name lineage, bounded extraction of multiple completed splits from one
+filing, dated terminal OTC/delisting identity precedence, and contract-safe
+catalyst classification. NIO-specific SEC attributable-net-loss aliases are
+accepted only for its exact CIK. The stored NIO revenue inputs reproduce the
+reported 9.6 score under methodology 2.1.0, so the owner range is recorded as
+too narrow rather than used to tune the method. Another live run remains a
+separately approved verification, not part of this offline correction.
+
+The separately approved Sparse-3 same-four verification restored final-report
+validity from 1/4 to 4/4 and improved material-check recall from 13/16 (81.25%)
+to 14/16 (87.5%). It did not pass the reliability gate. MULN still omitted the
+three required 2023 completed splits, NIO still lacked a safely normalized
+attributable annual net-loss series, and split extraction still duplicated or
+misdated some occurrences across filings. Explanation fidelity remained 0/4
+and score/state checks remained 7/18. Alpha Vantage exhausted or reported its
+provider quota on all eight bounded attempts; Twelve Data was unconfigured;
+completed SEC evidence survived. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-3.md`.
+
+The post-Sparse-3 offline correction preserves those measurements and adds
+regressions for the reproduced failure shapes. Filing HTML is normalized to
+visible text before the bounded evidence window is applied, so large inline-XBRL
+markup cannot hide a selected filing's later corporate-action disclosure.
+Reverse-split occurrences now retain separate filing, announcement, effective,
+and completion dates; event identity uses the action date and ratio, while
+corroborating filings contribute source links rather than duplicate events.
+Current OTC/delisted identity now makes earlier exchange deficiencies explicitly
+historical in the explanation. A NIO-only attributable-loss fallback requires
+the exact issuer CIK, an exact semantic label, CNY units, and otherwise comparable
+SEC periods. The frozen Sparse-3 payload did not retain the unmatched live
+Company Facts tag/label, so the exact live alias remains unverified until a
+separately approved run. Capital-score sufficiency diagnostics enumerate missing
+inputs and retain `Limited`; they do not force a numeric score. See
+`evaluation/diagnostics/capital-sufficiency-sparse-3.json` and
+`evaluation/diagnostics/nio-attributable-loss-sparse-3.json`.
+
+The separately approved Sparse-4 live verification remained at 14/16 material
+checks (87.5%) with 4/4 valid reports and 4/4 safe settlement. Current-versus-
+historical listing wording improved enough for TUPBQ to pass explanation review,
+but BIOR retained undated duplicate split occurrences, MULN still lacked a
+correct complete dated 2023 split series, and NIO still lacked attributable
+annual net loss. The NIO run artifact also did not preserve the rejected Company
+Facts concept metadata needed for exact alias diagnosis. Explanation fidelity
+therefore improved only to 1/4 and score/state checks remained 7/18. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-4.md`.
+
+The post-Sparse-4 offline correction does not change that measurement. Split
+regressions now bind ratios, lifecycle language, and dates inside one bounded
+local mention, then reconcile raw mentions into canonical events keyed by ratio
+and authoritative action date. Corroborating claims survive without creating
+extra user-facing occurrences; ambiguous undated mentions are withheld rather
+than assigned another action's date. BIOR fixtures settle to exactly two dated
+events, and a close-packed MULN fixture retains the May 4 1-for-25, August 11
+1-for-9, and December 21 1-for-100 actions without promoting an authorization
+range to a completed 1-for-60 event. Rejected Company Facts candidates now emit
+bounded, non-evidentiary structural diagnostics in the evaluation packet. These
+are deterministic readiness checks, not a new reliability result.
+
+The approved Sparse-5 verification remained at 14/16 material checks (87.5%)
+with 4/4 valid reports, 4/4 safe settlement, and 7/18 score/state checks. BIOR's
+canonical split reconciliation passed and explanation fidelity improved to 3/4.
+MULN's live filing shape still produced an incomplete and partly false corporate-
+action history. NIO's diagnostic now identifies the exact limitation: the live
+Company Facts candidates represent total, noncontrolling-interest, or
+comprehensive income/loss, not a safely established annual loss attributable to
+ordinary shareholders. The semantic gate was not broadened. See
+`docs/results/FAST_RELIABILITY_2026-08-27-SPARSE-5.md`.
+
+The post-Sparse-5 offline correction does not alter that frozen result. The
+MULN live-shaped regression now retains the May 4 1-for-25, August 11 1-for-9,
+and December 21 1-for-100 actions, while authorization ranges and undated orphan
+occurrences remain diagnostic-only. Internal corporate-action diagnostics record
+the accession, form, local span, ratio, lifecycle, effective and filing dates,
+canonical event ID, disposition, and reason without entering the report.
+
+The NIO review concluded that no safe Company Facts equivalent exists in the
+captured candidates. A bounded 20-F exact-table fallback is not supportable from
+the stored evidence with the current parser. Prospectively, a correctly settled
+`Limited` result after bounded candidate adjudication should be classified as
+`unavailable_authoritative_evidence`, separately from retrieval and normalization
+misses. This rule does not revise frozen answer keys or historical batch recall.
+See `evaluation/diagnostics/nio-attributable-loss-sparse-5-decision.json`.
+
+The approved MULN-only live process on 2026-08-27 produced no research result.
+The dedicated runner omitted the established event-loop keep-alive handle, so
+Node exited with an unsettled top-level await before report, diagnostics, or
+provider telemetry were persisted. The process was not retried; known OpenAI
+cost is zero and optional-provider usage is unknown. This is a runner failure,
+not evidence that the parser passed or failed. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION.md`.
+
+The separately approved corrected-runner MULN verification produced a valid
+partial report, but failed the corporate-action gate. It retrieved all three
+frozen ratio/date pairs, classified only the May 4 1-for-25 action completed,
+left the August 11 1-for-9 and December 21 1-for-100 actions unresolved, and
+created a false completed 1-for-100 action on August 4, 2025 beside the actual
+1-for-250 action. The captured diagnostics isolate lifecycle inference in dated
+history lists and cross-action date borrowing. No retry occurred. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-2.md`.
+
+The stored verification-2 shape now has deterministic regression coverage.
+Segment-local extraction completes the May 4, August 11, and December 21, 2023
+MULN actions from authoritative retrospective history, preserves the August 4,
+2025 1-for-250 action, and suppresses the false same-date 1-for-100 event. This
+is offline evidence only; another live verification requires separate owner
+approval and Issue #55 remains open.
+
+The subsequently approved final MULN process did not reach research. Its nested
+child plan inherited only one parent level, leaving the frozen baseline reference
+undefined during local plan validation. No network client was created, provider
+usage and OpenAI cost were zero, and no retry occurred. This is a runner
+composition failure, so the live parser remains unadjudicated. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-3.md`.
+
+The nested-plan defect now has prospective offline correction. Evaluation plans
+resolve recursively with descendant precedence, parent-integrity checks,
+cycle/missing-parent protection, required-field validation before runtime setup,
+and leaf-level source provenance. The exact Verification-3 chain now resolves
+its grandparent baseline, provider policy, approval bounds, and frozen MULN case
+ID deterministically. The failed artifact remains unchanged and its authorization
+is not reusable; a new live run still requires separate owner approval.
+
+The fresh recursive-plan MULN verification reached research and produced a valid
+partial report, but failed the severe canonical-action gate. It retrieved all
+five frozen completed splits, yet retained the false August 4, 2025 1-for-100
+event and added a false August 1, 2025 1-for-2 event by truncating written
+1-for-250 text. Both accepted occurrences had `competing_ratio_detected=true`.
+The parser blocker therefore remains open; no retry occurred. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-4.md`.
+
+The two false-positive mechanisms are now corrected offline against the frozen
+Verification-4 shape. Complete number-word ratios no longer truncate, action
+dates cannot cross an intervening ratio, and canonicalization independently
+enforces the extraction acceptance invariant. Stored evidence supports nine
+prospective canonical actions; restored-compliance dates and both Verification-4
+false actions are excluded. The live artifact and its five-event answer key were
+not changed. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-4-OFFLINE-CORRECTION.md`.
+
+The separately approved Verification-5 live process retrieved all five frozen
+events and all four post-freeze supported actions, and removed the four known
+false Verification-4 pairs. It still failed canonical precision: the August 1
+certificate-filing date was promoted as a separate completed 1-for-250 event
+beside the correct August 4 effective event. The complete word ratio was parsed
+correctly, but the truncated competing-ratio span passed the action-binding
+invariant. Recall was 5/5 plus 4/4; precision was 9/10. No retry occurred. See
+`docs/results/FAST_RELIABILITY_2026-08-27-MULN-VERIFICATION-5.md`.
+
+The Verification-5 filing-date defect now has deterministic offline correction.
+Corporate-action dates are classified as filing, announcement, authorization,
+scheduled-effective, effective, completion, trading-effective, or unknown.
+Certificate filing dates cannot establish Completed actions. One same-issuer,
+same-direction, same-ratio filing reference may corroborate exactly one
+effective/completion event within seven days; the action date wins and ambiguous
+or unmatched filing references remain withheld. The replay retains all nine
+supported MULN actions and removes the August 1 duplicate while preserving its
+claim/source as provenance. Frozen measurements and artifacts are unchanged.
+See `docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-5-OFFLINE-CORRECTION.md`
+and `evaluation/diagnostics/muln-verification-5-date-role-reconciliation.json`.
+
+The newly approved Verification-6 process produced one valid partial report and
+did not retry. Recall was 9/9, but canonical precision remained 9/10 because an
+overlapping 10-Q span still promoted August 1 as a completed 1-for-250 action.
+One occurrence correctly classified the date as filing provenance and withheld
+it; another used the retrospective-history fallback to classify the same date as
+completion, passed the invariant, and made reconciliation ambiguous. Explanation
+and settlement fidelity therefore failed with one severe misleading event. The
+run cost $0 in OpenAI usage, took 3,657 ms, used 18 SEC requests and two Alpha
+Vantage requests, and stayed inside all approved bounds. See
+`docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-6.md`.
+
+The subsequent offline correction resolves interpretations of the same dated
+source reference before canonical acceptance. Explicit effective/completion
+language outranks filing provenance, filing provenance outranks retrospective
+completion inference, and equal-strength role conflicts remain withheld. The
+exact stored Verification-6 shape now preserves the full nine-event MULN history
+while merging August 1 filing provenance into the August 4 effective event. See
+`docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-6-OFFLINE-CORRECTION.md`.
+
+Verification-7 then exercised that exact conflict against the live SEC path in
+one approved run. The report validated with all nine supported MULN actions,
+9/9 recall, 9/9 precision, and no severe misleading event. The August 1
+retrospective occurrence was suppressed by the stronger filing-date role, while
+August 4 remained the canonical effective action. The live MULN parser blocker
+is resolved and must not be rerun. Issue #55 remains open for NIO's unavailable
+authoritative evidence and independent sparse-category sample-size proof. See
+`docs/results/FAST_RELIABILITY_2026-08-28-MULN-VERIFICATION-7.md`.
+
+The smallest proposed independent expansion is now frozen as a planning-only
+three-ticker set in
+`evaluation/plans/fast-reliability-sparse-expansion-proposal.json`. REKR covers
+an active Nasdaq deficiency plus going concern; ZAPPF covers a Cayman foreign
+private issuer using IFRS, a completed reverse split, Nasdaq delisting, and OTC
+identity; GMBL independently covers completed splits, going concern, and a
+voluntary Nasdaq-to-OTC transition. The proposal has no approval token and is
+not executable. It would add only one new foreign/IFRS issuer and one new active
+deficiency issuer, leaving those categories explicitly sparse even if all three
+cases pass. No live execution is authorized.
+
+Prospectively, NIO attributable annual net loss is
+`unavailable_authoritative_evidence`, not a system miss, when bounded
+authoritative retrieval completes, no safe Company Facts concept or implemented
+SEC table fallback exists, and the score settles Limited/Unscored. This
+classification does not alter any frozen batch measurement, answer key, or
+reported recall.
+
+The subsequently approved three-ticker expansion ran REKR, ZAPPF, and GMBL once
+each and stopped on GMBL final validation failure. It measured 10/20 (50%)
+material-risk recall, 2/3 valid reports, 0/3 explanation fidelity, 2/3 settlement
+accuracy, and two severe blockers. REKR retrieved the active deficiency and
+going-concern warning but missed exact working-capital/note pressure. ZAPPF did
+not resolve to Zapp/CIK 1955104. GMBL retained an unknown security type despite
+confirmed terminal evidence and rendered its 1-for-400 action as 1-for-4. No
+missing evidence became favorable. Offline correction is required before any
+additional live sample. See
+`docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1.md`.
+
+Offline corrective work now reproduces all four failure shapes without network
+access: exact ZAPPF/ZAPP/CIK lineage reaches the foreign 20-F/6-K path; GMBL
+settles authoritative OTC common-stock identity and retains 1-for-100 plus
+1-for-400; and REKR preserves explicit working-capital-deficit and near-term
+note-maturity disclosures. The measured 10/20 result remains frozen. A fresh
+same-three verification is technically justified but is not authorized.
+
+That approved verification improved the frozen same-three result from 10/20 to
+17/20 (85%) with 3/3 valid reports. REKR passed all checks; ZAPPF identity and
+foreign/OTC routing plus GMBL's exact 1-for-400 normalization held live. The gate
+still failed because ZAPPF did not promote completed 1-for-20 evidence or the NT
+20-F lateness reason, generic prospectus text created a false non-reliance
+warning, and GMBL security type remained Limited despite authoritative
+common-stock evidence elsewhere in the packet. No additional live run is
+authorized. See
+`docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-1.md`.
+
+Offline stored-shape regression work now covers those four defects without
+changing the frozen 17/20 measurement: a reviewed retrospective 20-F record can
+promote ZAPPF's completed 1-for-20 action while its earlier authorization remains
+non-completed provenance; NT annual filings receive a bounded selection slot and
+an explicit delayed-filing warning; generic prospectus restatement risk language
+cannot create non-reliance without Item 4.02 or an issuer/auditor accounting
+determination; and identity-gated common-stock wording anywhere in the selected
+packet may settle GMBL's security type. Another same-three live verification is
+technically justified but requires fresh owner approval.
+
+Sparse Expansion Verification-2 then ran those three frozen cases once. It
+measured 20/20 recall, 3/3 valid reports, 3/3 settlement accuracy, 100% completed
+corporate-action precision/recall, and zero severe misleading misses. All four
+Verification-1 defects resolved live. The complete gate still failed: ZAPPF's NT
+20-F used a generic fallback instead of its filing-specific delay reason, and
+the NT selection slot surfaced irrelevant old NT forms for REKR and GMBL.
+Explanation fidelity was 2/3. Active-deficiency and foreign/IFRS proof also
+were sparse at two independent positive cases each at that time. No further live
+work was authorized from that batch. See
+`docs/results/FAST_RELIABILITY_2026-08-28-SPARSE-EXPANSION-1-VERIFICATION-2.md`.
+
+Offline regression now constrains NT selection by filer regime, report period,
+age, superseding periodic filings, and the current freshness gap. Stored ZAPPF
+text preserves a filing-specific issuer reason; missing reasons remain explicitly
+unavailable. Stored REKR and GMBL shapes no longer surface old cured NT forms.
+No same-three rerun is proposed. The authoritative baseline pass rejected HUBC
+because Nasdaq closed its MVLS deficiency and rejected XPEV as an IFRS proof case
+because its SEC financial statements use U.S. GAAP. The one permitted replacement,
+ONFO, is accepted for active-deficiency proof from its August 19, 2026 Form 10-Q.
+Stantec (STN) was accepted as the clean foreign/IFRS replacement: its direct
+common shares trade on NYSE and TSX, it files Form 40-F/6-K as a Canadian foreign
+private issuer, and its 2025 SEC-filed statements explicitly use IFRS Accounting
+Standards as issued by the IASB. The frozen ONFO/STN pair ran once on 2026-08-28.
+ONFO retrieved newer authoritative closure of its bid-price matter while its
+stockholders'-equity deficiency remained active; frozen historical baselines were
+not rewritten. STN validated but did not promote foreign-private-issuer, 40-F/6-K,
+direct-share/TSX, or IASB-IFRS semantics. The run measured 4/7 bundled material
+claims, 2/2 valid reports, and one severe miss. Offline deterministic correction
+then added bounded annual-exhibit retrieval. The subsequent confirmation passed
+ONFO and STN at 7/7 targeted claims with zero severe misses, bringing active-
+deficiency and foreign/IFRS coverage to three practical independent positive
+cases each. This satisfies the local milestone minimum but is not a broad
+statistical reliability claim. See
+`docs/results/FAST_RELIABILITY_2026-08-28-FINAL-SPARSE-PROOF-1.md`.
+
+The fresh same-five confirmation on 2026-08-28 replayed AAPL, AMC, NCPL, NXL,
+and SMCI once against the unchanged Batch-3 baseline. It measured 82/86
+(95.35%) with five valid reports and no favorable inference from missing data.
+AAPL's clean-control warning and SMCI's restored-compliance projection were
+corrected; NXL's August 28 split was excluded from the August 27 adjudication
+cutoff. AMC's completed 1-for-10 split remains absent and NCPL's Item 4.02 /
+non-reliance event was not surfaced, so two severe live misses remain. The
+free-cash-flow category also remains below target. This confirmation therefore
+does not satisfy the Issue #55 gate or authorize closure. See
+`docs/results/FAST_RELIABILITY_2026-08-28-FINAL-FIVE-CONFIRMATION-1.md`.
+
+### Targeted AMC/NCPL offline correction (2026-08-28)
+
+The two remaining severe mechanisms were reproduced without network or paid
+provider calls. AMC's stored live-shaped filing had a written ratio whose
+effective date and lifecycle wording were not bound strongly enough for
+canonical promotion; the parser now handles that bounded date/lifecycle shape
+and also accepts sentence punctuation while still rejecting alphanumeric/hyphen
+truncation. Explicit past effective dates are settled safely.
+NCPL's Item 4.02 used authoritative “prevent future reliance on affected
+previously issued financial statements” wording rather than the narrower
+“should no longer be relied upon” phrase; the Item 4.02 extractor now recognizes
+that bounded form and invalidates affected financial trend inputs. New
+integration regressions cover both report outcomes and retain the existing
+boilerplate negative controls. This is an offline correction only; a fresh live
+confirmation requires separate owner approval and historical measured artifacts
+remain unchanged.
+
+The separately approved two-case confirmation then ran exactly one Fast request
+for AMC and one for NCPL. NCPL's Item 4.02 prevention-of-reliance event was
+surfaced as a critical warning and affected financial inputs remained
+Limited/Unscored. AMC's completed 2023-08-24 1-for-10 split was still absent
+from the live bounded packet, whose reverse-split section correctly settled
+Limited rather than favorable. Both reports were valid and safely partial; the
+targeted result was 1/2 (50%), so the AMC retrieval/filing-selection defect
+remains open. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-NCPL-OFFLINE-CORRECTION-CONFIRMATION-1.md`.
+
+### AMC split offline correction 2 (2026-08-28)
+
+The live AMC diagnostics showed that the ratio/effective clause can occur more
+than 260 characters after the `reverse stock split` anchor in inline-XBRL or
+prospectus text. The bounded extractor now permits 900 characters after that
+anchor while still stopping at the next action. A deterministic delayed-clause
+fixture passes the completed 1-for-10/date binding and canonical invariant.
+This remains offline-only; no new live result is implied. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-2.md`.
+
+### AMC split offline correction 3 (2026-08-28)
+
+The fresh AMC confirmation reached the delayed 2023 filing and extracted the
+`1-for-10` ratio and `2023-08-24` effective date, but canonical acceptance
+withheld it because the past-effective-date fallback did not retain a lifecycle
+position. The parser now records an explicit effective-date fallback lifecycle
+source and binds that lifecycle proof to the selected effective-date position,
+without weakening date, issuer, competing-ratio, or authorization safeguards.
+A deterministic regression covers the no-nearby-lifecycle-verb shape. The
+live report and prior measurements remain unchanged; another AMC request still
+requires separate approval. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-3.md`.
+
+### AMC effective-date confirmation 3 (2026-08-28)
+
+The separately approved single AMC run produced a valid safe-partial report in
+about 2.6 seconds, but the live diagnostic still extracted `1-for-10` and
+`2023-08-24` as `unknown_date_role` and withheld the event with
+`resolved_lifecycle_required`. The targeted live check therefore measured 0/1
+and the severe AMC blocker remains open. OpenAI synthesis was cost-blocked
+before request; no retry was made. The next step is offline reproduction of the
+exact live normalized text shape, not another blind live run. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-EFFECTIVE-DATE-CONFIRMATION-3.md`.
+
+### AMC split offline correction 4 (2026-08-28)
+
+The failed confirmation's extracted date was recovered by nearby-date logic,
+but the live normalized relationship wording (“effective date of which was …”)
+was not recognized as an explicit effective-date role. The bounded grammar now
+accepts that relationship form and uses the same local date as the safe
+completed fallback lifecycle proof. An inline-XBRL-shaped regression passes;
+no live result or historical measurement changed. A new live confirmation still
+requires separate approval. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-4.md`.
+
+### AMC effective-date confirmation 4 (2026-08-28)
+
+The next approved AMC run again produced a valid safe-partial report but
+withheld the extracted `1-for-10` / `2023-08-24` occurrence as
+`unknown_date_role` / `resolved_lifecycle_required` (0/1 targeted recall).
+OpenAI synthesis was cost-blocked before request and no retry was made. This
+result remains frozen; the direct effective-date relationship correction is
+covered offline and requires separate approval for any new live check. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-EFFECTIVE-DATE-CONFIRMATION-4.md`.
+
+### AMC split offline correction 5 (2026-08-28)
+
+The next approved AMC confirmation still extracted the ratio/date but retained
+`unknown_date_role`. Offline replay identified the remaining common form as
+“with an effective date of DATE” (plus equivalent `thereof` wording). The
+bounded grammar now accepts direct `of`/`for` date relationships and keeps date
+extraction and role classification aligned. An inline-XBRL-shaped regression
+passes with a completed `1-for-10` event on `2023-08-24`; the failed live result
+and historical measurements remain unchanged. Another live confirmation still
+requires separate approval. See
+`docs/results/FAST_RELIABILITY_2026-08-28-AMC-SPLIT-OFFLINE-CORRECTION-5.md`.
+
+## Offline adversarial and property evaluation roadmap
+
+### Purpose and boundary
+
+Issue #55 will use a small automated offline suite as the immediate feedback
+mechanism for deterministic SEC interpretation work. Its purpose is to expose
+semantic variants and cross-property contamination before another live
+calibration, then guard the targeted evidence-binding rules used to correct those
+classes. It complements the dated report-level evaluation set; it does not replace
+live recall measurement or make a reliability claim about unseen issuers.
+
+The implemented core suite is deterministic, token-free, and runnable with no network,
+SEC, exchange, market-data, provider, or OpenAI access. An offline pass never
+authorizes a paid or live run. The intended developer command is
+`npm run evaluate:adversarial`. It emits machine-readable JSON and fails when a
+development mutation or untouched holdout violates its reviewed invariant.
+
+### Initial corpus
+
+The first corpus contains 12 high-value cases rather than a broad filing archive.
+It focuses on the final live ONFO/STN contamination classes, with XPEV-like and
+foreign-ordinary controls plus four untouched category holdouts. Existing exact
+Issue #55 tests continue to cover MULN, GMBL, NCPL, REKR, BIOR, ZAPPF, NIO, and
+TUPBQ retrieval and normalization shapes.
+
+Each fixture must retain:
+
+- ticker, CIK, current security identity, and any confirmed effective-dated
+  lineage needed by the case;
+- accession, form, filing date, report date, document name, and authoritative
+  source URL;
+- the exact stored parser input, including block or section boundaries when they
+  affect meaning;
+- manually reviewed expected typed candidates and settled facts where exact
+  outputs are appropriate;
+- named invariants and allowed semantic transformations; and
+- the failure taxonomy categories exercised by the fixture.
+
+Stored live result JSON is diagnostic evidence, not automatically a parser-input
+fixture. When an existing artifact lacks the exact contaminating source text, use
+an explicitly labeled semantically faithful negative-control or distractor case
+and improve prospective capture. Do not rewrite frozen live artifacts.
+
+### Initial properties and transformations
+
+The minimum suite should contain 12–20 explicit invariants covering at least:
+
+- complete ratio-token parsing and action-local ratio/date/lifecycle binding;
+- filing, announcement, authorization, scheduled-effective, effective,
+  completion, and trading-effective date roles;
+- duplicate and overlapping occurrence canonicalization;
+- accounting-framework evidence bound to an authoritative statement-basis
+  declaration;
+- security/depositary structure bound to the issuer's current listed security;
+- compliance lifecycle and explanation projection keyed by venue and rule;
+- current versus historical listing evidence;
+- Item 4.02 or actor/determination binding for non-reliance;
+- NT-form relevance and supersession by the expected periodic filing;
+- exact issuer/security lineage and filing-regime boundaries; and
+- correct Limited or withheld settlement when authoritative evidence is absent
+  or ambiguous.
+
+Reviewed semantic-preserving transformations may include whitespace,
+punctuation, harmless HTML or inline-XBRL wrappers, equivalent ratio/date forms,
+duplicate corroborating blocks, reordering independent explicitly dated blocks,
+and injection of unrelated ADS, ADR, IFRS, U.S.-GAAP, restatement, split, date,
+or listing-rule language. A transformation must not remove negation, move a date
+between dependent clauses, reorder a lifecycle whose order supplies meaning, or
+otherwise change semantics while expecting an invariant result.
+
+### Oracle hierarchy and failure classification
+
+Use the following oracle order:
+
+1. owner/reviewer-frozen structured facts from authoritative evidence;
+2. manually specified invariants and metamorphic relationships independent of
+   production parser implementation;
+3. simple rule-derived expectations from separately documented rules;
+4. old-versus-new output differences for triage only;
+5. human adjudication for ambiguous generated cases; and
+6. optional AI-generated test ideas or failure clustering, never normal CI truth.
+
+Production regexes or settlement functions must not generate their own expected
+answers. Do not build a second deterministic parser or make an LLM the offline
+oracle.
+
+Before changing production behavior, classify every failure as one of:
+
+- invalid transformation or incorrect oracle;
+- missing fixture or metadata coverage;
+- isolated parser defect;
+- recurring structural evidence-binding defect;
+- correct Limited, withheld, or unavailable-authoritative-evidence behavior; or
+- unresolved case requiring human adjudication.
+
+Only the isolated and recurring parser categories justify production correction.
+Recurring cross-property, issuer/security, date-role, section, evidence-precedence,
+or lifecycle failures should prefer typed candidate and settlement improvements
+over issuer-specific exceptions.
+
+### Reporting, holdouts, and success criteria
+
+Report fixture and transformation counts alongside:
+
+- invariant pass rate by transformation family;
+- canonical event precision and recall;
+- cross-property contamination rate;
+- false-promotion and false-suppression counts;
+- lifecycle reconciliation results; and
+- issuer and category holdout results.
+
+Do not collapse these into one mutation score. A high aggregate rate must not hide
+a complete failure in a critical category.
+
+Keep at least two or three issuer cases untouched while developing each shared
+binding correction, and use category holdouts where the corpus supports them.
+Mutation parameters and distractor combinations must not merely restate the
+production patterns under test. With a small deterministic corpus, this
+development/holdout discipline is useful; a machine-learning-style training
+program is not required.
+
+The minimum suite is useful when it:
+
+- represents every known severe Issue #55 parser bug class;
+- catches intentionally reintroduced historical defects;
+- exposes semantic variants not covered by exact regression fixtures;
+- demonstrates that unrelated property distractors cannot change settled facts;
+- preserves correct unknown, Limited, withheld, and unavailable outcomes;
+- produces identical results for the same seed and inputs;
+- runs offline within a practical CI budget, initially targeted below ten
+  seconds; and
+- passes together with the complete existing deterministic suite.
+
+These criteria establish prospective parser protection only. Issue #55 still
+requires its separately defined real-ticker reliability, sparse-category, severe
+miss, explanation-fidelity, settlement, budget, and approval gates.
+
+### Implemented offline result
+
+The 2026-08-28 run passed 36/36 transformations across 12 fixtures and 20 named
+invariants. Accounting binding passed 9/9, security binding 15/15, compliance
+projection 6/6, and uncertainty/withholding 6/6. The untouched holdout partition
+passed 12/12 and cross-property contamination was zero. The complete 340-test
+suite also passed, retaining historical corporate-action, non-reliance, lineage,
+NT-form, and runner-parity coverage. See
+`docs/results/FAST_RELIABILITY_2026-08-28-OFFLINE-ADVERSARIAL-1.md`.
+
+### Explicit non-goals
+
+The Issue #55 minimum does not include a generic random semantic fuzzer, mutation
+DSL, automatic minimizer, comprehensive full-filing corpus, independent second
+parser, LLM adjudication dependency, new provider, dashboard, or automatic live
+evaluation. Broader work requires evidence that the minimum suite produced useful
+new failures and a separately scoped follow-up issue.
+
 ## Paid live evaluation boundary
+
+Final Sparse Proof 1 remains frozen at 4/7. Offline stored-shape regressions now
+promote STN as a Canadian foreign private issuer under 40-F/6-K, IASB IFRS, CAD
+presentation, and direct common shares on NYSE plus TSX without inventing an ADS
+ratio. ONFO now reconciles its newer Rule 5550(a)(2) closure against the older bid
+warning while leaving Rule 5550(b)(1) active.
+
+The separately approved ONFO/STN confirmation ran exactly once per ticker on
+2026-08-28. It stayed within every bound and produced 2/2 valid partial reports.
+ONFO passed the targeted listing/split checks. STN passed identity, Canada,
+foreign-private-issuer, 40-F/6-K, CAD, and NYSE context, but the selected live
+filing text produced no typed IFRS/IASB or direct-common-share/TSX candidate. The
+targeted result was 5/7 material claims, explanation fidelity 1/2, settlement
+accuracy 1/2, score/state safety 2/2, and one severe false-suppression miss.
+This was an interpretation/normalization defect, not unavailable authoritative
+evidence; no false ADS or U.S.-GAAP promotion occurred.
+
+The offline correction now retrieves a bounded set of SEC-hosted 99.x exhibits
+linked from annual 20-F/40-F filings and includes a regression for the STN
+audited exhibit shape. A fresh approved confirmation then ran once per ticker
+and passed 7/7 targeted claims, 2/2 valid reports, 2/2 explanation fidelity,
+2/2 settlement accuracy, 2/2 score/state safety, and zero severe misses. The
+two-case confirmation does not establish broad reliability or close Issue #55;
+independent sample-size review remains required, and no further run is
+authorized automatically.
 
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,
@@ -139,3 +783,17 @@ budget, and output location. After an approved run, record input/output tokens,
 web-search calls, estimated cost, per-case latency, app failures, and the full
 rubric results. The evaluator rejects missing approval or measurement fields.
 Redact credentials and do not commit sensitive provider payloads.
+
+## Issue #55 two-tier closure status (2026-09-02)
+
+The bounded practical-small milestone is operationally complete: the selected
+14-claim denominator is 14/14 supported, quality/traceability/settlement/
+explanation checks are 14/14, current severe misses are zero, and FCF safety
+passes with unresolved cases remaining Limited/Unscored. Numeric FCF coverage
+is informational only.
+
+Broad statistical reliability remains `unproven`; historical cohorts are not
+safely poolable and the targeted denominator is not representative evidence for
+a broad 95% claim. This distinction is encoded by the closure diagnostic's
+`operational_completion` and `broad_reliability` outcomes. The current next
+step is `55-OPERATIONAL-CLOSE`; no live run is implied.

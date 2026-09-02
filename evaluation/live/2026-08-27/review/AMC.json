@@ -1,0 +1,15 @@
+{
+  "ticker": "AMC",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "current large share issuance", "financing candidates", "cash", "total debt", "operating cash flow", "current earnings catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"reverse_splits","cause":"retrieval_selection","severity":"severe","finding":"The completed 1-for-10 reverse split was not reported."},
+    {"category":"shares_outstanding","cause":"normalization","severity":"severe","finding":"The displayed series reported only 2.5% growth and ended before the latest material issuance, materially understating the known dilution window."},
+    {"category":"revenue","cause":"normalization","finding":"Comparable revenue settled Unknown."},
+    {"category":"net_income_loss","cause":"normalization","finding":"The distinct quarterly and six-month loss comparisons settled Unknown."},
+    {"category":"free_cash_flow","cause":"normalization","finding":"Aligned cash-flow evidence did not produce a usable FCF observation."},
+    {"category":"operating_cash_flow_score","cause":"calibration","finding":"Score 6.4 was below the owner-reviewed 7-10 range."}
+  ],
+  "safe_settlement": "Missing score components remained Limited, but the reverse-split and share-history omissions are milestone blockers."
+}

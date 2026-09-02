@@ -1,0 +1,75 @@
+{
+  "plan_version": "3.0.0",
+  "issue": 55,
+  "batch": "final-sparse-proof-proposal",
+  "prepared_at": "2026-08-28",
+  "execution_authorized": false,
+  "baseline_confirmation_complete": true,
+  "blocked_reason": "Execution remains unauthorized until the owner explicitly approves the frozen ONFO/STN live plan.",
+  "candidate_adjudication": [
+    {
+      "ticker": "HUBC",
+      "issuer": "HUB Cyber Security Ltd.",
+      "disposition": "rejected",
+      "reason": "Nasdaq confirmed on 2026-07-31 that the MVLS requirement had been regained and the matter was closed; the issuer disclosed that result on 2026-08-03.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1905660/000121390026007982/ea0274161-6k_hubcyber.htm", "https://investors.hubsecurity.com/node/8476/html"]
+    },
+    {
+      "ticker": "XPEV",
+      "issuer": "XPeng Inc.",
+      "disposition": "rejected_for_ifrs_proof",
+      "reason": "The issuer is a Cayman foreign private issuer and XPEV is an NYSE ADS representing two Class A ordinary shares, but the 2025 Form 20-F financial statements use U.S. GAAP rather than IFRS.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1810997/000119312526157849/d36361d20f.htm", "https://www.sec.gov/Archives/edgar/data/1810997/000119312526215961/d100580dex994.htm"]
+    },
+    {
+      "ticker": "ONFO",
+      "issuer": "Onfolio Holdings Inc.",
+      "disposition": "accepted_replacement_for_active_deficiency",
+      "categories": ["active_listing_deficiency"],
+      "authoritative_baseline": {
+        "cik": "0001825452",
+        "security": "Common Stock",
+        "venue": "Nasdaq Capital Market",
+        "filer_regime": "domestic_10-K_10-Q_8-K",
+        "accounting_basis": "US_GAAP",
+        "active_deficiencies": ["Nasdaq Rule 5550(b)(1) minimum stockholders' equity; notice 2026-05-26; compliance plan remained under Nasdaq review as of 2026-08-19.", "Nasdaq Rule 5550(a)(2) minimum bid price; notice 2026-07-02; compliance deadline 2026-12-29; a 1-for-50 reverse split completed 2026-08-10 but the filing did not state that Nasdaq had closed the matter."]
+      },
+      "expected_material_claims": ["Correct ONFO / Onfolio Holdings Inc. / CIK 0001825452 identity and Nasdaq common-stock security.", "Both active Nasdaq deficiencies and their distinct status/deadline.", "The completed 2026-08-10 1-for-50 reverse split is a completed action, not proof that Nasdaq closed either matter."],
+      "legitimately_limited": ["Outcome of Nasdaq's stockholders-equity compliance-plan review after the 2026-08-19 filing.", "Any compliance event occurring after the baseline as-of date."],
+      "severe_miss_conditions": ["Wrong issuer/security.", "Either active deficiency omitted or described as cured without authoritative closure.", "The completed reverse split is treated as proof of compliance.", "Missing later evidence becomes favorable."],
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1825452/000165495426007754/onfo_10q.htm", "https://www.sec.gov/Archives/edgar/data/1825452/000165495426007754/0001654954-26-007754-index.html"]
+    },
+    {
+      "ticker": "STN",
+      "issuer": "Stantec Inc.",
+      "disposition": "accepted_foreign_IFRS_replacement",
+      "categories": ["foreign_issuer_IFRS"],
+      "authoritative_baseline": {
+        "cik": "0001131383",
+        "security": "Common Shares",
+        "venue": "New York Stock Exchange",
+        "other_venue": "Toronto Stock Exchange",
+        "security_structure": "direct_common_shares_not_ADS",
+        "jurisdiction": "Canada",
+        "foreign_private_issuer": true,
+        "filer_regime": "40-F_6-K",
+        "accounting_basis": "IFRS_as_issued_by_IASB",
+        "accounting_form": "40-F",
+        "accounting_accession": "0001131383-26-000007",
+        "accounting_period": "2025-12-31",
+        "current_status_source": "6-K accession 0001131383-26-000017 filed 2026-08-12"
+      },
+      "expected_material_claims": ["Correct STN / Stantec Inc. / CIK 0001131383 identity.", "Canadian foreign-private-issuer regime using Form 40-F and 6-K.", "NYSE-listed direct common shares, not ADSs; TSX uses the same STN symbol.", "2025 audited consolidated financial statements use IFRS Accounting Standards as issued by the IASB and are presented in Canadian dollars."],
+      "legitimately_limited": ["SEC Company Facts coverage or taxonomy concepts that the bounded Fast implementation cannot normalize safely for a Form 40-F filer.", "Any financial component lacking two comparable authoritative periods under the existing methodology."],
+      "severe_miss_conditions": ["Wrong issuer or CIK.", "STN common shares are mislabeled as ADSs or linked to another security.", "Foreign-private-issuer or Form 40-F/6-K regime is missed.", "IASB IFRS is missed or treated as U.S. GAAP.", "NYSE identity is materially wrong.", "Missing evidence becomes favorable."],
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1131383/000113138326000007/stn-20251231.htm", "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000007/ex-992xmda2025.htm", "https://www.sec.gov/Archives/edgar/data/1131383/000113138326000017/a6kq22026.htm"]
+    }
+  ],
+  "prospective_sample_counts": {
+    "active_listing_deficiency": {"current": 2, "after_ONFO_if_live_passes": 3, "status": "minimum practical independent proof; not statistical reliability"},
+    "foreign_issuer_ADR_IFRS": {"current": 2, "after_STN_if_live_passes": 3, "status": "minimum practical independent proof; not statistical reliability"}
+  },
+  "frozen_live_tickers": ["ONFO", "STN"],
+  "reserved_two_case_bounds": {"maximum_runs": 2, "runs_per_ticker": 1, "automatic_retries": false, "maximum_openai_cost_usd": 0.06, "maximum_alpha_vantage_requests": 4, "maximum_twelve_data_requests": 4, "maximum_combined_optional_provider_attempts": 8, "fast_ceiling_ms_per_ticker": 20000, "maximum_aggregate_fast_runtime_ms": 40000, "deep_runs": 0, "hosted_web_search": false, "difficult_budget_approved": false},
+  "next_owner_decision": "Explicitly approve or reject the frozen ONFO/STN two-case live plan; do not execute before approval."
+}

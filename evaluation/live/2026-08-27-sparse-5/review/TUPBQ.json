@@ -1,0 +1,18 @@
+{
+  "case_id": "tupbq-2026-sparse",
+  "ticker": "TUPBQ",
+  "material_checks": { "detected": 4, "expected": 4 },
+  "adjudication": [
+    { "expectation": "TUP/TUPBQ lineage and current OTC Expert Market status", "detected": true, "cause": null },
+    { "expectation": "Chapter 11", "detected": true, "cause": null },
+    { "expectation": "Going-concern warning", "detected": true, "cause": null },
+    { "expectation": "Historical listing warnings distinguished from terminal current state", "detected": true, "cause": null }
+  ],
+  "validation": { "valid": true },
+  "score_range": { "passed": 3, "evaluated": 4, "note": "Limited states remained honest; the frozen numeric range was unavailable." },
+  "explanation_fidelity": true,
+  "settlement_accurate": true,
+  "remaining_misses": [],
+  "severe_misses": [],
+  "result": "passed"
+}

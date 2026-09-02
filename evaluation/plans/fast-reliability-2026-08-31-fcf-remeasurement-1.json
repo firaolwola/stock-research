@@ -1,0 +1,85 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "fcf-remeasurement-1",
+  "approved_at": "2026-08-31",
+  "purpose": "Bounded live remeasurement of the frozen AMC and NXL FCF cases after the offline aligned-period correction.",
+  "base_plan": "evaluation/plans/fast-reliability-2026-08-27.json",
+  "output_directory": "2026-08-31-fcf-remeasurement-1",
+  "approval_token": "issue-55-2026-08-31-approved-fcf-remeasurement-one",
+  "approval": {
+    "approved": true,
+    "tickers": ["AMC", "NXL"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 2,
+    "maximum_openai_cost_usd": 0.06,
+    "maximum_alpha_vantage_requests": 4,
+    "maximum_twelve_data_requests": 4,
+    "maximum_combined_optional_provider_attempts": 8,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "maximum_aggregate_fast_runtime_ms": 40000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "required_ancestor": "8a6c329",
+  "configuration": {
+    "change_from_batch_2": "none",
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 8000,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "provider_policy": {
+    "approved_providers": ["alpha_vantage", "twelve_data"],
+    "provider_order": ["alpha_vantage", "twelve_data"],
+    "optional_context_may_settle_limited": true,
+    "requires_owner_review_after_architecture_change": false,
+    "approved_at": "2026-08-31",
+    "note": "Two approved one-run FCF remeasurements; optional provider failures remain Limited and do not alter SEC evidence."
+  },
+  "alpha_vantage_preflight": {
+    "free_daily_limit": 25,
+    "usage_day": "2026-08-31",
+    "recorded_batch_requests": 0,
+    "inferred_remaining_on_approval_day": 25,
+    "approved_requests": 4,
+    "status": "ready"
+  },
+  "preserve_prior_batches": [
+    {
+      "directory": "evaluation/live/2026-08-27",
+      "summary_sha256": "21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56",
+      "run_summary_sha256": "6151f8ba50008576180df0b804270e22ddd33da5239c8885067635d210d3fa84"
+    },
+    {
+      "directory": "evaluation/live/2026-08-27-batch-2",
+      "summary_sha256": "d1cbd2e894d5c0274e73f0f1c9f80c412271fd931699516689370d0a1071b12a",
+      "run_summary_sha256": "1198624d72addaee682d38c080b5803f3f148fa4b6a81a472f5e545bb74d8e4e"
+    }
+  ],
+  "cases": [
+    {
+      "id": "amc-2026-fcf-remeasurement",
+      "ticker": "AMC",
+      "why": "Frozen positive six-month OCF/FCF baseline whose latest SEC facts previously lacked an independently aligned capex selection.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1411579/000141157926000059/amc-20260630x10q.htm"],
+      "known_baseline": ["Six-month operating cash flow and aligned simple free cash flow are positive; quarter and YTD periods must remain distinct."],
+      "score_ranges": {"free_cash_flow": [5, 9], "operating_cash_flow": [7, 10]},
+      "limited_allowed": ["financial_health", "revenue", "net_income", "debt", "cash", "historical_dilution", "future_dilution", "potential_dilution", "reverse_split", "catalyst", "near_term_setup"]
+    },
+    {
+      "id": "nxl-2026-fcf-remeasurement",
+      "ticker": "NXL",
+      "why": "Frozen negative-flow case whose SEC OCF previously lacked an independently aligned capex selection.",
+      "authoritative_sources": ["https://www.sec.gov/Archives/edgar/data/1527352/000182912626008709/nexalintechno_10q.htm"],
+      "known_baseline": ["Operating cash flow is negative and any free cash flow must use a same-cadence SEC capital-expenditure fact; missing capex remains Limited."],
+      "score_ranges": {"free_cash_flow": [0, 3], "operating_cash_flow": [0, 3]},
+      "limited_allowed": ["financial_health", "revenue", "net_income", "debt", "cash", "historical_dilution", "future_dilution", "potential_dilution", "reverse_split", "catalyst", "near_term_setup"]
+    }
+  ]
+}

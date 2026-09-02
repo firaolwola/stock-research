@@ -1,0 +1,30 @@
+{
+  "issue":55,"batch":"sparse-2","status":"failed_reliability_gate","issue_must_remain_open":true,
+  "approved_runs":4,"completed_runs":4,"automatic_retries":0,
+  "valid_report_rate":{"valid":1,"evaluated":4,"rate":0.25},
+  "overall_material_checks":{"detected":13,"expected":16,"recall":0.8125,"target":0.95,"passes":false},
+  "comparison":{"sparse_1":{"detected":3,"expected":16,"recall":0.1875},"sparse_2":{"detected":13,"expected":16,"recall":0.8125},"percentage_point_change":62.5},
+  "category_recall":{
+    "issuer_security_listing":{"detected":2,"expected":4,"recall":0.5,"note":"BIOR and NIO were supported; MULN current listing semantics were stale and TUPBQ delisting support returned 404."},
+    "completed_reverse_split_history":{"detected":1,"expected":2,"recall":0.5,"sample_size":2,"note":"BIOR passed; MULN still omitted the required 2023 actions."},
+    "active_or_terminal_listing_pressure":{"detected":1,"expected":2,"recall":0.5,"sample_size":2},
+    "going_concern":{"detected":1,"expected":1,"recall":1.0,"sample_size":1},
+    "foreign_issuer_adr_ifrs":{"detected":3,"expected":4,"recall":0.75,"sample_size":1},
+    "otc_or_delisted":{"detected":1,"expected":2,"recall":0.5,"sample_size":2},
+    "capital_structure_financing":{"detected":2,"expected":2,"recall":1.0,"sample_size":2}
+  },
+  "score_calibration":{"passed":7,"evaluated":18,"pass_rate":0.3889},
+  "explanation_fidelity":{"passed_tickers":0,"evaluated_tickers":4,"pass_rate":0.0},
+  "settlement_accuracy":{"passed_tickers":4,"evaluated_tickers":4,"pass_rate":1.0,"note":"Every run ended partial/terminal with no Pending or in_progress state; factual filing excerpts containing the word pending are not workflow state."},
+  "operations":{"elapsed_ms":{"BIOR":3271,"MULN":4119,"NIO":7925,"TUPBQ":2846},"average_elapsed_ms":4540.25,"maximum_elapsed_ms":7925,"all_within_20_second_ceiling":true,"measured_openai_cost_usd":0.011011,"approved_maximum_cost_usd":0.12,"alpha_vantage_requests":8,"twelve_data_requests":0,"combined_optional_provider_attempts":8,"hosted_web_search_calls":0},
+  "severe_misleading_misses":[
+    "BIOR and MULN reports failed lineage source/backlink validation.",
+    "MULN omitted material 2023 completed reverse splits and retained stale Nasdaq/unknown security status despite later OTCID evidence.",
+    "NIO still omitted comparable annual net loss.",
+    "TUPBQ's seeded delisting filing returned 404 and its report emitted an invalid catalyst classification.",
+    "Three of four final reports were invalid and therefore unusable by the application."
+  ],
+  "remaining_miss_causes":{"retrieval":2,"identity_lineage":2,"normalization":1,"interpretation":1,"scoring":1,"unavailable_evidence":0},
+  "sampling_conclusion":"The same-case verification improved retrieval but failed the reliability and valid-report gates. Sparse categories also remain too small to prove reliability. No expansion batch is justified until the reproduced invalid-report, lineage, MULN-history/status, NIO-loss, and TUPBQ-source defects are fixed offline.",
+  "next_step":"Fix the stored Sparse-2 failure shapes deterministically, without paid calls or new tickers; then request approval for another same-four verification before proposing expansion."
+}

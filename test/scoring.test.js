@@ -62,10 +62,22 @@ test("stale, conflicting, missing, and failed-provider evidence stays unscored",
 test("reverse-split risk uses corporate actions and specific listing pressure", async () => {
   assert.equal(calibrateReportScores(await load("complete")).scores.reverse_split_risk.value, 0);
   const r = await load("complete"); r.sections.reverse_splits.state = "confirmed";
-  r.sections.reverse_splits.items = [{ id: "split", kind: "reverse_split", title: "Reverse split", state: "confirmed", summary: "Confirmed corporate action.", event_date: "2025-01-01", claim_ids: ["claim-splits"] }];
+  r.sections.reverse_splits.items = [{ id: "split", kind: "reverse_split", title: "Reverse split", state: "confirmed", summary: "Confirmed corporate action.", event_date: "2025-01-01", corporate_action_state: "completed", claim_ids: ["claim-splits"] }];
   r.sections.compliance_and_warnings.state = "confirmed";
-  r.sections.compliance_and_warnings.items = [{ id: "notice", kind: "exchange_compliance", title: "Bid-price deficiency", state: "confirmed", summary: "Specific exchange notice.", event_date: "2026-08-01", claim_ids: ["claim-warnings"] }];
+  r.sections.compliance_and_warnings.items = [{ id: "notice", kind: "exchange_compliance", title: "Bid-price deficiency", state: "confirmed", summary: "Specific exchange notice.", event_date: "2026-08-01", resolution_state: "active", claim_ids: ["claim-warnings"] }];
   assert.ok(calibrateReportScores(r).scores.reverse_split_risk.value >= 7);
+});
+
+test("resolved, historical, and informational listing context do not become active pressure", async () => {
+  for (const resolution of ["resolved", "historical", "informational"]) {
+    const report = await load("complete");
+    report.sections.reverse_splits.state = "confirmed"; report.sections.reverse_splits.items = []; report.sections.reverse_splits.claim_ids = [];
+    report.sections.compliance_and_warnings.state = "confirmed";
+    report.sections.compliance_and_warnings.items = [{ id: `listing-${resolution}`, kind: "exchange_compliance", title: "Listing context", state: "confirmed", summary: "This is not an active deficiency.", event_date: "2026-08-20", resolution_state: resolution, claim_ids: ["claim-primary-catalyst"] }];
+    report.sections.compliance_and_warnings.claim_ids = ["claim-primary-catalyst"];
+    const score = calibrateReportScores(report).scores.reverse_split_risk;
+    assert.equal(score.value, 0);
+  }
 });
 
 test("financial health caps going-concern evidence and requires true FCF", async () => {

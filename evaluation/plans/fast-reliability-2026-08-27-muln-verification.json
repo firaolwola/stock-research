@@ -1,0 +1,44 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "muln-verification",
+  "approved_at": "2026-08-27",
+  "purpose": "Verify the post-Sparse-5 corporate-action correction against the live bounded MULN path once.",
+  "baseline_plan": "evaluation/plans/fast-reliability-2026-08-27-sparse.json",
+  "baseline_plan_sha256": "044a9d0f7491f31509f98acfd632094ea3f202963c8e88d838a038c501ce7d63",
+  "output_directory": "2026-08-27-muln-verification",
+  "approval_token": "issue-55-2026-08-27-approved-muln-one-run",
+  "required_ancestor": "85c2842",
+  "approval": {
+    "approved": true,
+    "tickers": ["MULN"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 1,
+    "maximum_openai_cost_usd": 0.03,
+    "maximum_alpha_vantage_requests": 2,
+    "maximum_twelve_data_requests": 2,
+    "maximum_combined_optional_provider_attempts": 4,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "provider_policy": {
+    "provider_order": ["alpha_vantage", "twelve_data"],
+    "alpha_vantage_is_hard_gate": false,
+    "optional_context_may_settle_limited": true,
+    "twelve_data_financials_for_scoring": false,
+    "twelve_data_release_bodies_to_openai": false
+  },
+  "preserve_prior_batches": [
+    {"directory":"evaluation/live/2026-08-27","summary_sha256":"21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56","run_summary_sha256":"6151f8ba50008576180df0b804270e22ddd33da5239c8885067635d210d3fa84"},
+    {"directory":"evaluation/live/2026-08-27-batch-2","summary_sha256":"d1cbd2e894d5c0274e73f0f1c9f80c412271fd931699516689370d0a1071b12a","run_summary_sha256":"1198624d72addaee682d38c080b5803f3f148fa4b6a81a472f5e545bb74d8e4e"},
+    {"directory":"evaluation/live/2026-08-27-batch-3","summary_sha256":"59dd8f608016fb07a88478e8d1fccc2b813090853256421035961d0159f0add0","run_summary_sha256":"2bc9ecc59228989b1d46450c7535741133799e7d873990bb372e15335d1e9806"},
+    {"directory":"evaluation/live/2026-08-27-sparse-1","summary_sha256":"b9c8589845c4f066ffad8ac21a4fa1bd92ca3e9ad063e6dff4a1504f1b9010aa","run_summary_sha256":"8c60fe3812a1167fe5563b151a7288dcea365b5f614ac7a299be8df7cf3302cf"},
+    {"directory":"evaluation/live/2026-08-27-sparse-2","summary_sha256":"fb216273599127c2dedc59ddfc6b8c28505a6cda2224c3eb83aa01a3bce0bea9","run_summary_sha256":"abb60e24952c6dcdfa7302719abfdbb46537789fbfc352eb3d482c62534d5b17"},
+    {"directory":"evaluation/live/2026-08-27-sparse-3","summary_sha256":"0a5d14c29cc950dd3a59d995e0be01b4a885c85fcb171ce8296f1f6de0496db5","run_summary_sha256":"c584b0c717800bf97b42ed5cf3341619c8162582e5d818e06b3352f28bf9d0ca"},
+    {"directory":"evaluation/live/2026-08-27-sparse-4","summary_sha256":"dda7bd706d94196ab23293a7933e47a6ab8aa15181b2e2dfffe3cec3a0fa7976","run_summary_sha256":"ad6278e9ebf9d8324a0c5b240e18425f5f5f9aaf2d81d27f81ee26a89ab5fe17"},
+    {"directory":"evaluation/live/2026-08-27-sparse-5","summary_sha256":"780ef36223a5f6f1f66645d12e447fc3e0afbd1466c5c06724c66057a46e3d88","run_summary_sha256":"17f50d7470221e3c614f47cc2b44a5bb8f177d0d586afa7dad780802c1450fa8"}
+  ]
+}

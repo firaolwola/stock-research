@@ -23,6 +23,14 @@ records stage, latency, tokens, web-search calls, estimated cost, pricing
 version, and fast-budget status. This keeps performance metadata from changing
 the meaning or validity of a stored report. See [PERFORMANCE.md](PERFORMANCE.md).
 
+The internal Fast evidence packet may additionally carry `identity_resolution`
+with requested ticker, current ticker, resolution status, and authoritative
+source URL. This is orchestration metadata, not a v4 report-contract field.
+Final live reports cannot retain `completion_status: pending` or Pending coverage
+limitations: exhausted, unavailable, or unresolved work settles as a valid
+partial report with Limited/Unscored evidence. Progressive intermediate events
+and the token-free `PENDING` demonstration may still use Researching/Pending.
+
 The live OpenAI request uses a derived provider schema that removes Structured
 Outputs composition keywords the Responses API does not support. The repository
 schema remains the authoritative contract: the server still applies its full
@@ -69,7 +77,10 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   record cannot leave security type or listing status `unknown`. The SEC ticker
   association may confirm issuer/ticker/CIK and venue while the overall security
   record remains `limited_coverage` until an authoritative source establishes
-  type and current listing state.
+  type and current listing state. Delisted or OTC is a listing state, not a
+  security type: authoritative common-stock language may settle
+  `common_stock`, while foreign ordinary shares remain
+  `foreign_ordinary_share`. Ticker suffixes do not establish either type.
 - `issuer` records legal identity, optional CIK, identity confidence, and prior
   names/tickers. Confirmed prior identities require both effective dates,
   `high` or `medium` linkage confidence, and sourced confirmed linkage claims.
@@ -80,7 +91,11 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   `kind` to distinguish offerings, warrants, convertibles, compliance and
   accounting warnings, financial measures, catalysts, and news. They provide
   dated event summaries and claim references, with optional periods and paired
-  numeric value/unit fields where those facts are useful.
+  numeric value/unit fields where those facts are useful. Reverse-split items
+  may carry `corporate_action_state` to distinguish completed, scheduled,
+  authorized, proposed, cancelled, and unresolved actions. Only actions whose
+  effective time has passed, or whose source explicitly confirms completion,
+  count as completed history; filing date alone is not completion.
 - `catalyst_assessment` identifies the current catalyst and classifies its
   recency, specificity, credibility, novelty, and potential significance. It
   keeps favorable evidence, unfavorable evidence, uncertainty, and a
@@ -107,6 +122,18 @@ omitted values. Arrays may be empty unless the schema specifies `minItems`.
   financial trend scoring. Its optional `annual_observations` drive the
   preferred multi-year capital-structure chart.
 
+Company Facts duration facts retain their full start/end identity. Quarter,
+year-to-date, and annual values ending on the same date are not conflicts unless
+two values disagree for the same exact period and unit. Shares observations are
+normalized across confirmed completed split factors; an unexplained large
+discontinuity stays Limited instead of being described as dilution.
+When that unresolved discontinuity prevents a trustworthy normalized share
+series, the scoreable `observations` and `annual_observations` arrays are empty.
+The raw filing evidence remains available through claims and sources; the
+contract does not expose unsafe observations as though they were valid score
+inputs. Compliance items may carry `resolution_state`; `resolved` history does
+not represent an active deficiency.
+
 Fast financial normalization uses conservative derived-value rules. Operating
 cash flow is not free cash flow: FCF is populated only when aligned operating
 cash flow and capital-expenditure facts share a period and unit. Total debt is
@@ -131,6 +158,17 @@ confirmed total debt.
   links back to every supported claim.
 
 ## Evidence states
+
+Issuer reporting and security structure are independently settled optional
+identity properties. They distinguish jurisdiction, foreign-private-issuer
+status, domestic/20-F/40-F filing regime, IFRS or U.S.-GAAP framework,
+presentation currency, direct shares versus depositary securities, and additional
+venues. Missing financial taxonomy does not erase an explicit SEC-filed
+accounting framework, and foreign-private-issuer status never implies ADS.
+
+Exchange-compliance items retain `active`, `resolved`, or `historical` state.
+Fast reconciles newer authoritative events within the same venue and listing
+rule; closure of one rule cannot close another deficiency.
 
 The following states apply to sections, items, claims, identity, and scores:
 
@@ -241,6 +279,10 @@ The isolated lineage fixtures and tests cover a ticker change, company rename,
 combined name/ticker rebrand, delisted common stock, and ambiguous predecessor.
 They verify both successful carried history and rejection when the linkage is
 missing or unresolved.
+Lineage provenance is reciprocal: a carried historical claim references a
+present source, that source lists the claim, and a historical event references
+the applicable dated lineage claim. SEC submissions former-name evidence is not
+silently reassigned to a separate historical filing source.
 
 An upstream Responses API result marked `incomplete` may still contain a safe,
 parseable partial report. Such output proceeds through the same full server
@@ -256,10 +298,14 @@ strict mode disabled because the contract uses Draft 2020-12 features beyond
 the API strict subset. Production Fast assembles the same v4 contract from
 server-retrieved evidence and validates every progressive and final report.
 Current Fast retrieval combines authoritative SEC evidence, bounded public
-Nasdaq Trader context, optional Alpha Vantage free-tier discovery/end-of-day
+Nasdaq Trader context, optional provider-neutral free-tier discovery/end-of-day
 context, original-source promotion, and optional tool-disabled classification.
 Provider formatting or discovery summaries are never treated as authoritative
 validation or sole material evidence.
+
+Optional source provenance fields identify `provider_name`, `data_type`,
+`freshness`, and `evidence_role`. They distinguish provider discovery, market
+observations, and promoted original evidence without changing claim authority.
 
 Catalyst validation additionally requires confirmed catalysts to have a date,
 classification, sourced claims, and meaningful confidence. Confirmed analogues
@@ -267,6 +313,38 @@ must include a date, comparison limitations, and valid reaction windows;
 unresolved reaction windows cannot contain a numeric price change. The server
 rejects unsupported numerical probability language and advisory wording in the
 catalyst assessment.
+Deterministic parser labels are normalized before validation into the v4
+classification enum; internal labels such as accounting, bankruptcy, or
+delisting never appear directly in a report.
+
+Corporate-action section items may carry `source_filing_date`, `announced_date`,
+`effective_date`, and `completed_date`. `event_date` represents the best supported
+action date, not the publication date of a corroborating filing. Optional action
+dates may be null when the filing does not support them. Multiple sources can
+link to one normalized event through its claim references; differing filing
+dates alone do not create duplicate corporate actions.
+An identity-gated retrospective periodic filing may confirm that an earlier
+authorized action completed and supply its effective date; the authorization
+remains provenance and does not independently establish completion.
+
+Raw split mentions are not separate corporate-action section items. Fast first
+reconciles them into canonical lifecycle events; their source-linked claims may
+remain as corroborating provenance, but ambiguous undated mentions cannot appear
+as extra completed actions. The internal Fast evidence packet may retain
+corporate-action diagnostics with raw span and logical segment IDs, candidate
+date/lifecycle source segments, inheritance attempt and rejection reason,
+competing-ratio flag, and final canonical disposition. These diagnostics never
+enter user-facing evidence. The packet may also carry
+`normalization_diagnostics` for rejected SEC
+Company Facts concepts. These bounded structural records are deliberately outside
+report v4 and cannot become claims, evidence, sources, or score inputs.
+Security type may be supported by direct authoritative wording in any selected,
+identity-gated filing record. A terminal listing excerpt need not repeat that
+wording, but an OTC venue or ticker suffix alone cannot settle security type.
+The internal evidence packet may also carry `nt_filing_diagnostics` describing
+form/period selection, expected periodic form, superseding filings, active-delay
+state, exclusion reason, and bounded reason-source ranges. These diagnostics are
+not report claims or user-facing evidence.
 
 Financial validation rejects confirmed metrics without values, units, periods,
 or sourced claims; invalid period ordering; unresolved metrics containing

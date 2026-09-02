@@ -1,0 +1,38 @@
+{
+  "diagnostic_version": "1.0.0",
+  "recorded_at": "2026-08-28",
+  "source_artifact": "evaluation/live/2026-08-27-muln-verification-5/raw/MULN.json",
+  "source_artifact_sha256": "22e951703dacf964c347930e3ae733125df24b3c1c89e24c841813bf26e48d05",
+  "frozen_measurement_changed": false,
+  "regression": {
+    "issuer_cik": "0001499961",
+    "ratio": "1-for-250",
+    "filing_reference_date": "2025-08-01",
+    "filing_date_role": "filing_date",
+    "effective_date": "2025-08-04",
+    "effective_date_role": "effective_date",
+    "canonical_event_date": "2025-08-04",
+    "reconciliation": "same_ratio_filing_reference_reconciled_to_effective_event",
+    "forbidden_user_facing_event": "2025-08-01 — 1-for-250"
+  },
+  "bounded_reconciliation": {
+    "maximum_calendar_distance_days": 7,
+    "requires_same_issuer": true,
+    "requires_same_direction": true,
+    "requires_same_ratio": true,
+    "requires_exactly_one_effective_or_completion_match": true,
+    "filing_reference_alone_can_complete_event": false
+  },
+  "expected_canonical_history": [
+    ["2023-05-04", "1-for-25"],
+    ["2023-08-11", "1-for-9"],
+    ["2023-12-21", "1-for-100"],
+    ["2024-09-17", "1-for-100"],
+    ["2025-02-18", "1-for-60"],
+    ["2025-04-11", "1-for-100"],
+    ["2025-06-02", "1-for-100"],
+    ["2025-08-04", "1-for-250"],
+    ["2025-09-22", "1-for-250"]
+  ],
+  "status": "offline_regression_passed_live_confirmation_not_run"
+}

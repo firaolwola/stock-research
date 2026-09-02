@@ -1,0 +1,24 @@
+{
+  "issue":55,"batch":"sparse-3","status":"failed_reliability_gate","issue_must_remain_open":true,
+  "approved_runs":4,"completed_runs":4,"automatic_retries":0,
+  "valid_report_rate":{"valid":4,"evaluated":4,"rate":1.0},
+  "overall_material_checks":{"detected":14,"expected":16,"recall":0.875,"target":0.95,"passes":false},
+  "comparison":{"sparse_1":{"detected":3,"expected":16,"recall":0.1875},"sparse_2":{"detected":13,"expected":16,"recall":0.8125},"sparse_3":{"detected":14,"expected":16,"recall":0.875},"sparse_2_to_3_percentage_point_change":6.25},
+  "category_recall":{
+    "issuer_security_listing":{"detected":4,"expected":4,"recall":1.0,"sample_size":4},
+    "completed_reverse_split_history":{"detected":1,"expected":2,"recall":0.5,"sample_size":2,"note":"BIOR retained both required ratios; MULN still omitted all three required 2023 actions."},
+    "active_or_terminal_listing_pressure":{"detected":2,"expected":2,"recall":1.0,"sample_size":2},
+    "going_concern":{"detected":1,"expected":1,"recall":1.0,"sample_size":1},
+    "foreign_issuer_adr_ifrs":{"detected":3,"expected":4,"recall":0.75,"sample_size":1,"note":"Identity/regime/revenue passed; attributable annual net loss remained unavailable."},
+    "otc_or_delisted":{"detected":2,"expected":2,"recall":1.0,"sample_size":2},
+    "capital_structure_financing":{"detected":2,"expected":2,"recall":1.0,"sample_size":2}
+  },
+  "score_calibration":{"passed":7,"evaluated":18,"pass_rate":0.3889},
+  "explanation_fidelity":{"passed_tickers":0,"evaluated_tickers":4,"pass_rate":0.0,"note":"Validity recovered, but duplicated/misdated split items, missing MULN history and NIO loss, and historical-versus-terminal compliance wording remain material explanation defects."},
+  "settlement_accuracy":{"passed_tickers":4,"evaluated_tickers":4,"pass_rate":1.0,"note":"Every report settled terminally partial with no Pending or in-progress state and no favorable inference from optional-provider failure."},
+  "operations":{"elapsed_ms":{"BIOR":3438,"MULN":2634,"NIO":6896,"TUPBQ":8162},"average_elapsed_ms":5282.5,"maximum_elapsed_ms":8162,"all_within_20_second_ceiling":true,"measured_openai_cost_usd":0.02721,"approved_maximum_cost_usd":0.12,"alpha_vantage_requests":8,"twelve_data_requests":0,"combined_optional_provider_attempts":8,"hosted_web_search_calls":0,"alpha_vantage_result":"provider_quota","twelve_data_result":"not_configured"},
+  "severe_misleading_misses":["MULN still omitted the May, August, and December 2023 completed reverse splits.","NIO still omitted comparable attributable annual net loss.","BIOR and MULN split items include duplicated/conflicting occurrences and filing dates presented as event dates."],
+  "remaining_miss_causes":{"retrieval":1,"identity_lineage":0,"normalization":1,"interpretation":2,"scoring":1,"unavailable_evidence":0},
+  "sampling_conclusion":"The corrective verification restored a 100% valid-report rate and improved recall to 87.5%, but it did not pass the 95% recall, category, explanation, score, or zero-severe-miss gates. No independent expansion batch is justified yet.",
+  "next_step":"Fix the stored Sparse-3 MULN historical-document selection, split event-date/deduplication semantics, NIO live taxonomy normalization, and terminal-versus-historical compliance explanation offline; then request approval for one more same-four verification."
+}

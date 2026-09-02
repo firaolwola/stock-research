@@ -1,0 +1,89 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification-2.json",
+  "live_calls": true,
+  "configured_optional_providers": [
+    "alpha_vantage"
+  ],
+  "approved_run_count": 1,
+  "completed_run_count": 1,
+  "known_openai_cost_usd": 0,
+  "maximum_approved_openai_cost_usd": 0.03,
+  "alpha_vantage_requests": 2,
+  "maximum_approved_alpha_vantage_requests": 2,
+  "twelve_data_requests": 0,
+  "maximum_approved_twelve_data_requests": 2,
+  "combined_optional_provider_attempts": 2,
+  "maximum_approved_combined_optional_provider_attempts": 4,
+  "runs": [
+    {
+      "case_id": "muln-2026-sparse",
+      "ticker": "MULN",
+      "result": "report",
+      "elapsed_ms": 3208,
+      "estimated_cost_usd": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "provider_usage": {
+        "market": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "news": {
+          "attempts": [
+            {
+              "provider": "alpha_vantage",
+              "state": "limited",
+              "reason": "provider_quota",
+              "request_count": 1
+            },
+            {
+              "provider": "twelve_data",
+              "state": "limited",
+              "reason": "not_configured",
+              "request_count": 0
+            }
+          ],
+          "selected_provider": null,
+          "fallback_succeeded": false
+        },
+        "quotas": [
+          {
+            "provider": "alpha_vantage",
+            "configured": true,
+            "daily_used": 2,
+            "daily_limit": 25,
+            "minute_used": 2,
+            "minute_limit": null
+          },
+          {
+            "provider": "twelve_data",
+            "configured": false,
+            "daily_used": 0,
+            "daily_limit": 800,
+            "minute_used": 0,
+            "minute_limit": 8
+          }
+        ]
+      },
+      "optional_provider_attempts": 2,
+      "alpha_vantage_requests": 2,
+      "twelve_data_requests": 0,
+      "completion_status": "partial",
+      "termination_reason": "cost_ceiling"
+    }
+  ]
+}

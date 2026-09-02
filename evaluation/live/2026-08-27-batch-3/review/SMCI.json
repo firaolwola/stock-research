@@ -1,0 +1,14 @@
+{
+  "ticker": "SMCI",
+  "post_scoring_validation": "valid",
+  "severe_misleading_miss": true,
+  "detected": ["issuer and security identity", "strong revenue and net income", "material weaknesses", "recent OCF and FCF deterioration", "completed ten-for-one forward split", "split-adjusted 2.7% share growth", "current earnings catalyst", "end-of-day price and volume"],
+  "missed_or_incorrect": [
+    {"category":"exchange_compliance","cause":"interpretation","severity":"severe","finding":"A credit-facility covenant requiring continuous Nasdaq listing was falsely presented as an active exchange-compliance warning."},
+    {"category":"cash_score","cause":"calibration","finding":"Cash scored 0 rather than the frozen 7-10 expectation; the retrieved period shows depletion and needs later methodology review rather than answer-key tuning."}
+  ],
+  "corrected_from_batch_2": ["material weakness surfaced", "recent OCF/FCF deterioration retained", "forward split normalized", "shares series valid and reports 2.7% growth rather than 1035.3% dilution"],
+  "score_range_result": {"passed":6,"evaluated":12},
+  "explanation_fidelity": "fail",
+  "settlement_behavior": "fail_false_confirmed_listing_warning"
+}

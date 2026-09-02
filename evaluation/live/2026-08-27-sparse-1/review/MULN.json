@@ -1,0 +1,18 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "material_checks": {"detected": 0, "expected": 4},
+  "adjudication": [
+    {"expectation":"Repeated completed reverse-split history","detected":false,"cause":"retrieval"},
+    {"expectation":"Splits linked to bid-price compliance","detected":false,"cause":"retrieval"},
+    {"expectation":"Current or terminal listing-pressure state","detected":false,"cause":"retrieval"},
+    {"expectation":"Material financing/capital-structure risk","detected":false,"cause":"retrieval"}
+  ],
+  "identity_result": "The current SEC ticker map did not contain the former MULN symbol, so Fast did not follow CIK 1499961 to the successor name/ticker.",
+  "baseline_correction": "The frozen plan's current MULN identity was stale. A July 28, 2025 SEC 8-K records the same CIK changing from Mullen Automotive/MULN to Bollinger Innovations/BINI. Current-map absence therefore required prior-ticker lineage resolution, not an assumption that MULN remained active.",
+  "score_range": {"passed":1,"evaluated":5,"note":"Only safely Limited Financial Health met an allowed state; every capital-risk range was missed."},
+  "explanation_fidelity": false,
+  "settlement_accurate": false,
+  "severe_misses": ["Repeated completed split history, financing risk, and security lineage were omitted.", "Completed work was labeled Pending/in progress instead of terminal Limited/Unavailable."],
+  "result": "failed"
+}

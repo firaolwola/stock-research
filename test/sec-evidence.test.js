@@ -85,14 +85,18 @@ test("stale Company Facts periods produce a prominent sourced warning", async ()
   assert.match(result.report.financial_assessment.coverage_notes.join(" "), /days before this Fast report/);
 });
 
-test("unresolved ticker stays Pending without favorable evidence", async () => {
+test("unresolved ticker settles terminally Limited without favorable evidence", async () => {
   const client = createSecEvidenceClient({ fetchImpl: async () => ({ ok: true, async json() { return { fields: tickerMap.fields, data: [] }; } }), now: () => Date.parse("2026-08-25T12:00:00Z"), minRequestIntervalMs: 0 });
   const result = await client.researchTicker("UNKNOWN"); const calibrated = calibrateReportScores(result.report);
-  assert.equal(calibrated.security.evidence_state, "unknown");
+  assert.equal(calibrated.security.evidence_state, "limited_coverage");
+  assert.equal(calibrated.metadata.completion_status, "partial");
+  assert.equal(result.operations.retrieval.reason, "identity_unresolved");
+  assert.equal(result.operations.domains.capital.status, "limited");
+  assert.equal(result.synthesis.reason, "identity_unresolved");
   assert.equal(calibrated.scores.dilution_historical_severity.value, null);
 });
 
-test("ticker-map HTTP failure logs safe lifecycle diagnostics and stays Pending", async () => {
+test("ticker-map HTTP failure logs safe lifecycle diagnostics and settles Limited", async () => {
   const messages = [];
   const client = createSecEvidenceClient({
     fetchImpl: async () => ({ ok: false, status: 403, async text() { throw new Error("response body must not be read"); } }),
@@ -103,7 +107,11 @@ test("ticker-map HTTP failure logs safe lifecycle diagnostics and stays Pending"
   const diagnostic = result.operations.retrieval.failures[0];
   assert.deepEqual(diagnostic, { phase: "sec_ticker_map_request", endpoint_category: "ticker_map", elapsed_ms: 25, status: 403, constructor: "SecRetrievalError", name: "SecRetrievalError", code: null, cause_constructor: null, cause_name: null, cause_code: null, response_received: true, cache_state: "miss", request_count: 1 });
   assert.equal(result.operations.retrieval.status, "unavailable");
-  assert.equal(result.report.security.evidence_state, "unknown");
+  assert.equal(result.report.metadata.completion_status, "partial");
+  assert.equal(result.report.security.evidence_state, "limited_coverage");
+  assert.equal(result.operations.domains.capital.status, "limited");
+  assert.equal(result.synthesis.reason, "sec_unavailable");
+  assert.doesNotMatch(JSON.stringify(result.report), /pending/i);
   assert.equal(messages.length, 1); assert.match(messages[0], /"status":403/); assert.doesNotMatch(messages[0], /response body|authorization|User-Agent/i);
 });
 
@@ -127,7 +135,7 @@ test("hanging SEC retrieval is aborted by the shared deadline and settles safely
   const started = performance.now();
   const result = await client.researchTicker("ACME", { budget });
   assert.ok(performance.now() - started < 250);
-  assert.equal(result.report.security.evidence_state, "unknown");
+  assert.equal(result.report.security.evidence_state, "limited_coverage");
   assert.equal(result.operations.retrieval.status, "unavailable");
   assert.equal(budget.finish({ partial: true }).termination_reason, "time_ceiling");
 });

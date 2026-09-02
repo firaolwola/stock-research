@@ -1,0 +1,17 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "muln-verification-5",
+  "approved_at": "2026-08-27",
+  "purpose": "Run one final bounded MULN Fast verification after the Verification-4 false-positive mechanisms were corrected offline.",
+  "parent_plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification-4.json",
+  "parent_plan_sha256": "3f359ca19f7e45ff2759b1140ae7a05f3b873b7bf991843135a93dde28015236",
+  "output_directory": "2026-08-27-muln-verification-5",
+  "approval_token": "issue-55-2026-08-27-approved-final-muln-false-positive-verification",
+  "required_ancestor": "dfae2a9",
+  "preserve_verification_4": {
+    "directory": "evaluation/live/2026-08-27-muln-verification-4",
+    "run_summary_sha256": "9c8d61d4e8d4b1603241fb02eef027617f6b39c09390e15b581c97d5d8683a96",
+    "raw_muln_sha256": "706e7bce2755ca14cc0458f1b2c707c1a379ebb0acd79ed2c2754d1f74be3e48"
+  }
+}

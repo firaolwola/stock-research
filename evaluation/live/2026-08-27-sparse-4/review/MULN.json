@@ -1,0 +1,22 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "material_checks": { "detected": 3, "expected": 4 },
+  "adjudication": [
+    { "expectation": "All required completed split history", "detected": false, "cause": "normalization" },
+    { "expectation": "Minimum-bid and listing-pressure context", "detected": true, "cause": null },
+    { "expectation": "Active/terminal listing state outranks stale restored-compliance language", "detected": true, "cause": null },
+    { "expectation": "Repeated financing and capital-structure risk", "detected": true, "cause": null }
+  ],
+  "identity_result": "Current BINI/OTCID terminal context remained distinct from historical MULN/Nasdaq evidence.",
+  "validation": { "valid": true },
+  "score_range": { "passed": 0, "evaluated": 5, "note": "All requested scores remained Limited; no score was forced." },
+  "explanation_fidelity": false,
+  "settlement_accurate": true,
+  "remaining_misses": [
+    { "cause": "normalization", "summary": "The filing exposed 1-for-25 and 1-for-9 occurrences, but without their May 4 and August 11, 2023 dates; the December 21, 2023 1-for-100 action was absent and an unsupported 1-for-60 occurrence appeared." },
+    { "cause": "normalization", "summary": "Many undated or incorrectly date-associated corroborating occurrences remained instead of one event per action." }
+  ],
+  "severe_misses": ["Required 2023 completed split history remains incomplete and partly misattributed."],
+  "result": "failed"
+}

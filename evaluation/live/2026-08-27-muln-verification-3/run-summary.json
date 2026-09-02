@@ -1,0 +1,20 @@
+{
+  "plan": "evaluation/plans/fast-reliability-2026-08-27-muln-verification-3.json",
+  "live_calls": false,
+  "approved_run_count": 1,
+  "started_process_count": 1,
+  "completed_run_count": 0,
+  "report_produced": false,
+  "failure_phase": "plan_validation",
+  "failure_reason": "child_plan_missing_inherited_baseline_plan",
+  "known_openai_cost_usd": 0,
+  "maximum_approved_openai_cost_usd": 0.03,
+  "alpha_vantage_requests": 0,
+  "maximum_approved_alpha_vantage_requests": 2,
+  "twelve_data_requests": 0,
+  "maximum_approved_twelve_data_requests": 2,
+  "combined_optional_provider_attempts": 0,
+  "maximum_approved_combined_optional_provider_attempts": 4,
+  "retry_performed": false,
+  "adjudication": "not_run"
+}

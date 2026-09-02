@@ -1,0 +1,16 @@
+{
+  "case_id":"nio-2026-sparse","ticker":"NIO","material_checks":{"detected":3,"expected":4},
+  "adjudication":[
+    {"expectation":"NYSE ADS identity and Cayman issuer","detected":true,"cause":null},
+    {"expectation":"Foreign 20-F/6-K filing regime","detected":true,"cause":null},
+    {"expectation":"Revenue growth in comparable RMB annual periods","detected":true,"cause":null},
+    {"expectation":"Widening net loss","detected":false,"cause":"normalization"}
+  ],
+  "identity_result":"Correct NIO issuer, CIK, NYSE ADR/ADS security, and foreign-filer path were retained.",
+  "controls_result":"Effective-control and hypothetical material-weakness wording no longer produced a false warning.",
+  "financial_result":"Revenue summary and score used the same 2022-2025 CNY annual series, but the live Company Facts net-loss concept still did not normalize.",
+  "validation":{"valid":true},
+  "score_range":{"passed":0,"evaluated":3,"note":"Revenue 9.6 remained above the frozen 6-9 range; Financial Health and net income remained Limited."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "severe_misses":["Comparable annual net-loss evidence remained unavailable after normalization."],"result":"failed"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id":"nio-2026-sparse","ticker":"NIO","material_checks":{"detected":3,"expected":4},
+  "adjudication":[
+    {"expectation":"NYSE ADS identity and Cayman issuer","detected":true,"cause":null},
+    {"expectation":"Foreign 20-F/6-K filing regime","detected":true,"cause":null},
+    {"expectation":"Revenue growth in comparable CNY annual periods","detected":true,"cause":null},
+    {"expectation":"Widening attributable annual net loss","detected":false,"cause":"normalization","note":"The live Company Facts shape still did not match a safely accepted attributable-profit/loss concept."}
+  ],
+  "identity_result":"Correct CIK, NYSE ADR/ADS security, Cayman issuer, and foreign-filer route were retained.",
+  "controls_result":"Effective-control language did not become a warning; deterministic controls still detect explicit ineffective-control language.",
+  "financial_result":"Revenue summary and score used the same 2022-2025 CNY annual series. Profitability remained Unknown rather than being backfilled or inferred.",
+  "validation":{"valid":true},
+  "score_range":{"passed":0,"evaluated":3,"note":"Revenue remained 9.6 above the frozen 6-9 diagnostic range; Financial Health and net income remained Limited. Methodology 2.1.0 and the answer key were not changed."},
+  "explanation_fidelity":false,"settlement_accurate":true,
+  "remaining_misses":[{"cause":"normalization","summary":"Comparable attributable annual net loss remained unavailable after the CIK-scoped alias correction."}],
+  "severe_misses":["Comparable annual net-loss evidence remains omitted."],"result":"failed"
+}

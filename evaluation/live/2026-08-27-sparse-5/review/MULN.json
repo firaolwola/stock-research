@@ -1,0 +1,20 @@
+{
+  "case_id": "muln-2026-sparse",
+  "ticker": "MULN",
+  "material_checks": { "detected": 3, "expected": 4 },
+  "adjudication": [
+    { "expectation": "May 4, August 11, and December 21, 2023 completed reverse splits", "detected": false, "cause": "normalization" },
+    { "expectation": "Current BINI/OTCID state distinct from historical MULN/Nasdaq history", "detected": true, "cause": null },
+    { "expectation": "Issuer/security lineage", "detected": true, "cause": null },
+    { "expectation": "Capital-structure risk remains Limited when evidence is incomplete", "detected": true, "cause": null }
+  ],
+  "validation": { "valid": true },
+  "score_range": { "passed": 1, "evaluated": 4, "note": "Only the frozen Limited-state expectation passed." },
+  "explanation_fidelity": false,
+  "settlement_accurate": true,
+  "remaining_misses": [
+    { "cause": "normalization", "summary": "Live filing extraction did not produce the three dated 2023 actions and emitted numerous undated or incorrect canonical occurrences, including 1-for-1 and 1-for-2 events." }
+  ],
+  "severe_misses": ["The completed reverse-split history remains materially incomplete and contains false corporate-action occurrences."],
+  "result": "failed"
+}

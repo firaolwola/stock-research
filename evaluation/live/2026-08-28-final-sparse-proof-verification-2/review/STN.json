@@ -1,0 +1,3 @@
+{
+  "ticker":"STN","result":"failed_authoritative_reporting_binding","identity":"passed","foreign_filer_regime":"passed","canada":"passed","cad":"passed","primary_nyse":"passed","accounting_ifrs_iasb":"failed_unresolved","direct_common_shares_tsx":"failed_unresolved","ads_false_promotion":"passed","explanation_fidelity":"failed_for_missing_properties","settlement":"failed_for_missing_properties","severe_miss":true,"failure_class":"interpretation_normalization","notes":["SEC retrieval completed, but the selected live filing text produced no bound reporting-property candidates. No U.S.-GAAP or ADS false promotion occurred; the issue is conservative false suppression of supported IFRS/direct-share evidence."]
+}

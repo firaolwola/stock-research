@@ -6,7 +6,7 @@ produce a fast, evidence-backed view of the catalyst, company context, and
 material risks before deeper research.
 
 The current application uses two research stages. Fast retrieves and validates
-bounded SEC and Nasdaq Trader evidence directly, adds optional Alpha Vantage
+bounded SEC and Nasdaq Trader evidence directly, adds optional provider-neutral
 free-tier news discovery and end-of-day market context, streams deterministic partial reports, and may
 run a small tool-disabled classification over supplied evidence IDs. Deep uses
 the OpenAI Responses API with broader web search after automatically building or
@@ -99,6 +99,8 @@ cost, and reliability remain uncalibrated. See
    PORT=3000
    SEC_USER_AGENT=stock-research your-name your-contact-email@example.com
    ALPHA_VANTAGE_API_KEY=your_free_key_here
+   TWELVE_DATA_API_KEY=your_free_key_here
+   MARKET_PROVIDER_ORDER=alpha_vantage,twelve_data
    ```
 
    `OPENAI_API_KEY` is required for the real application. Startup fails before
@@ -107,16 +109,21 @@ cost, and reliability remain uncalibrated. See
    app's listening port. Set `SEC_USER_AGENT` to an application name and a
    monitored contact address. The SEC may return HTTP 403 when it cannot
    identify or permit a client; Fast then keeps affected evidence
-   Pending/Unknown and logs only safe request metadata. `ALPHA_VANTAGE_API_KEY`
-   is optional. With a free key, Fast uses at most two uncached Alpha Vantage
-   requests per ticker for discovery and end-of-day context. Without a key, or
-   after quota exhaustion, those areas remain Limited while SEC/Nasdaq evidence survives.
+   Pending/Unknown and logs only safe request metadata. Both market-provider keys
+   are optional. `MARKET_PROVIDER_ORDER` selects approved adapters in order;
+   market and news fall back independently. Each adapter uses at most two
+   uncached requests per ticker for discovery and end-of-day context. Without a
+   key, or after all configured providers are unavailable, those areas remain
+   Limited while SEC/Nasdaq evidence survives.
    The two free Alpha Vantage calls are deliberately serialized because the
    provider can return HTTP 200 with an informational response when they are
    submitted concurrently. Operations telemetry distinguishes quota, premium
    entitlement, invalid request/symbol, missing series, invalid bar, stale bar,
    timeout, and other provider-information outcomes without logging the key or
-   provider message.
+   provider message. Twelve Data Basic is approved for the same internal,
+   personal discovery/EOD role. Its release body is discarded and never enters
+   OpenAI or scoring; its adapter enforces local 8/minute and 800/day allowances.
+   No paid plan is approved.
 
 3. Start the application:
 
@@ -189,6 +196,11 @@ for any bounded paid run are documented in
 [docs/EVALUATION.md](docs/EVALUATION.md). Routine tests and dry runs never make
 OpenAI calls.
 
+Run `npm run evaluate:adversarial` for the deterministic Issue #55 evidence-binding
+gate. It applies reviewed distractor and semantic-preserving variations to
+development and untouched holdout fixtures, emits machine-readable JSON, and
+uses no network, provider, or OpenAI client.
+
 Automatic SDK retries are disabled for research requests so a failed attempt
 cannot silently multiply paid web-search work or extend the defined deadline.
 Retry a failed search manually after the displayed error when appropriate.
@@ -201,9 +213,10 @@ events are extracted conservatively; unmatched content stays Limited/Unknown.
 Optional AI synthesis has hosted tools disabled and may reference only supplied
 evidence record IDs; its failure cannot remove deterministic evidence. Nasdaq
 Trader supplies identity-gated current symbol, security-type, listing-status,
-and halt context. Alpha Vantage supplies discovery-only news links and
-timestamped end-of-day price/volume; its summaries, sentiment, and article text
-are never sent to OpenAI and cannot independently support a material score.
+and halt context. Alpha Vantage and Twelve Data are interchangeable bounded
+adapters for discovery-only news metadata and timestamped end-of-day
+price/volume. Provider prose, summaries, sentiment, and article text are never
+sent to OpenAI and cannot independently support a material score.
 Original newswire links are promoted only after issuer identity agrees. All
 source work participates in the shared 20-second and cost ceilings. The next
 priority measures this evidence-first Fast behavior against the real-ticker

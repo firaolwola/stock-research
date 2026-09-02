@@ -1,0 +1,59 @@
+{
+  "plan_version": "1.0.0",
+  "issue": 55,
+  "batch": "denominator-gap-confirmation-1",
+  "approved_at": "2026-09-01",
+  "purpose": "Bounded live confirmation of four previously executed-but-unobserved frozen claims.",
+  "base_plan": "evaluation/plans/fast-reliability-2026-08-27.json",
+  "output_directory": "2026-09-01-denominator-gap-confirmation-2",
+  "approval_token": "issue-55-2026-09-01-approved-denominator-gap-confirmation-2",
+  "approval": {
+    "approved": true,
+    "tickers": ["AMC", "MULN", "SMCI"],
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "maximum_runs": 3,
+    "maximum_openai_cost_usd": 0,
+    "maximum_alpha_vantage_requests": 6,
+    "maximum_twelve_data_requests": 6,
+    "maximum_combined_optional_provider_attempts": 12,
+    "difficult_budget_approved": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "deep_runs": 0,
+    "hosted_web_search": false
+  },
+  "required_ancestor": "denominator-policy-2026-08-31",
+  "configuration": {
+    "change_from_batch_2": "none",
+    "model": "gpt-5.1",
+    "reasoning_effort": "none",
+    "tools": [],
+    "maximum_output_tokens": 900,
+    "maximum_synthesis_timeout_ms": 0,
+    "sdk_retries": 0,
+    "budget_class": "normal"
+  },
+  "provider_policy": {
+    "approved_providers": ["alpha_vantage", "twelve_data"],
+    "provider_order": ["alpha_vantage", "twelve_data"],
+    "optional_context_may_settle_limited": true,
+    "requires_owner_review_after_architecture_change": false,
+    "approved_at": "2026-09-01",
+    "note": "No paid synthesis is authorized. Optional provider calls are bounded and may settle Limited."
+  },
+  "alpha_vantage_preflight": {
+    "free_daily_limit": 25,
+    "usage_day": "2026-09-01",
+    "recorded_batch_1_requests": 0,
+    "recorded_batch_2_requests": 0,
+    "inferred_remaining_on_approval_day": 25,
+    "approved_batch_requests": 6,
+    "status": "owner-approved-bounded-confirmation"
+  },
+  "cases": [
+    { "id": "amc-denominator-gap", "ticker": "AMC" },
+    { "id": "muln-notes-warrants", "ticker": "MULN" },
+    { "id": "smci-auditor-uncertainty", "ticker": "SMCI" }
+  ],
+  "preserve_prior_batches": []
+}

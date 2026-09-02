@@ -86,6 +86,9 @@
         "ticker": { "type": "string", "pattern": "^[A-Z0-9.-]{1,15}$" }, "name": { "$ref": "#/$defs/nonEmptyString" },
         "security_type": { "enum": ["common_stock", "adr", "etf", "warrant", "preferred_stock", "foreign_ordinary_share", "other", "unknown"] },
         "listing_venue": { "$ref": "#/$defs/nonEmptyString" }, "listing_status": { "enum": ["active", "halted", "suspended", "delisted", "unknown"] },
+        "security_structure": { "enum": ["direct_share", "ads", "other_depositary", "unknown"] },
+        "depositary_ratio": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "additional_listing_venues": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" }, "uniqueItems": true },
         "evidence_state": { "$ref": "#/$defs/evidenceState" }, "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
     },
@@ -105,6 +108,12 @@
       "properties": {
         "legal_name": { "$ref": "#/$defs/nonEmptyString" }, "cik": { "type": ["string", "null"], "pattern": "^[0-9]{10}$" },
         "identity_state": { "$ref": "#/$defs/evidenceState" }, "identity_confidence": { "$ref": "#/$defs/confidence" },
+        "jurisdiction": { "type": ["string", "null"] },
+        "foreign_private_issuer": { "type": ["boolean", "null"] },
+        "filing_regime": { "enum": ["domestic_10-K_10-Q_8-K", "foreign_20-F_6-K", "foreign_40-F_6-K", "unknown"] },
+        "accounting_basis": { "enum": ["IFRS", "US_GAAP", "unknown"] },
+        "accounting_authority": { "type": ["string", "null"] },
+        "presentation_currency": { "type": ["string", "null"], "pattern": "^[A-Z]{3}$" },
         "prior_identities": { "type": "array", "items": { "$ref": "#/$defs/priorIdentity" } }, "claim_ids": { "$ref": "#/$defs/claimIds" }
       }
     },
@@ -117,8 +126,14 @@
         "kind": { "enum": ["reverse_split", "offering", "warrant", "convertible", "other_dilution", "dividend", "exchange_compliance", "going_concern", "sec_warning", "accounting_warning", "cash", "cash_burn", "revenue", "profitability", "free_cash_flow", "debt", "catalyst", "news", "other"] },
         "title": { "$ref": "#/$defs/nonEmptyString" }, "state": { "$ref": "#/$defs/evidenceState" }, "summary": { "$ref": "#/$defs/nonEmptyString" },
         "event_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+          "source_filing_date": { "$ref": "#/$defs/date" },
+          "announced_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+          "effective_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+          "completed_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
           "period_start": { "$ref": "#/$defs/date" }, "period_end": { "$ref": "#/$defs/date" },
           "evidence_role": { "enum": ["actual_issuance", "registration_capacity", "potential_issuance", "instrument_overhang", "context"] },
+          "corporate_action_state": { "enum": ["completed", "scheduled", "authorized", "proposed", "cancelled", "unknown"] },
+          "resolution_state": { "enum": ["active", "resolved", "historical", "informational"] },
           "value": { "type": "number" }, "unit": { "$ref": "#/$defs/nonEmptyString" },
         "claim_ids": { "$ref": "#/$defs/claimIds" }
       },
@@ -351,7 +366,9 @@
       "properties": {
         "id": { "$ref": "#/$defs/sourceId" }, "title": { "$ref": "#/$defs/nonEmptyString" }, "url": { "type": "string", "format": "uri", "pattern": "^https://" },
         "published_date": { "$ref": "#/$defs/date" }, "source_type": { "enum": ["sec_filing", "exchange_notice", "company_release", "company_filing", "original_news", "secondary_aggregator", "other_primary", "other_secondary"] },
-        "confidence": { "$ref": "#/$defs/confidence" }, "retrieved_at": { "$ref": "#/$defs/dateTime" }, "supported_claim_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/claimId" }, "uniqueItems": true }
+        "confidence": { "$ref": "#/$defs/confidence" }, "retrieved_at": { "$ref": "#/$defs/dateTime" }, "supported_claim_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/claimId" }, "uniqueItems": true },
+        "provider_name": { "type": "string", "minLength": 1 }, "data_type": { "enum": ["market_context", "news_discovery"] },
+        "freshness": { "enum": ["current", "stale", "unknown"] }, "evidence_role": { "enum": ["discovery_only", "market_context", "promoted_original"] }
       }
     }
   }

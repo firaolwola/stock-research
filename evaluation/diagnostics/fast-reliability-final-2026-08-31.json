@@ -1,0 +1,1012 @@
+{
+  "adjudication_id": "fast-reliability-final-2026-08-31",
+  "issue": 78,
+  "issue_55": 55,
+  "live_execution": false,
+  "generated_at": "2026-08-31",
+  "frozen_artifacts": [
+    {
+      "path": "evaluation/plans/fast-reliability-2026-08-27.json",
+      "sha256_lf_normalized": "eb0156e63ba63db4f840589b6e0ad46f41dea17f88f4eea2ba88ada5e020754c"
+    },
+    {
+      "path": "evaluation/live/2026-08-27/summary.json",
+      "sha256_lf_normalized": "21f8faa0d7ff7b14afee02dee3957806d5b61582201135555f68f1f8413efd56"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-batch-2/summary.json",
+      "sha256_lf_normalized": "d1cbd2e894d5c0274e73f0f1c9f80c412271fd931699516689370d0a1071b12a"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-batch-3/summary.json",
+      "sha256_lf_normalized": "59dd8f608016fb07a88478e8d1fccc2b813090853256421035961d0159f0add0"
+    },
+    {
+      "path": "evaluation/live/2026-08-28-final-five-confirmation-1/summary.json",
+      "sha256_lf_normalized": "07724bfde543a6edc02e8659f1efc66529837195fe0a14f6d407221ef8668436"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-sparse-1/summary.json",
+      "sha256_lf_normalized": "b9c8589845c4f066ffad8ac21a4fa1bd92ca3e9ad063e6dff4a1504f1b9010aa"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-sparse-2/summary.json",
+      "sha256_lf_normalized": "fb216273599127c2dedc59ddfc6b8c28505a6cda2224c3eb83aa01a3bce0bea9"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-sparse-3/summary.json",
+      "sha256_lf_normalized": "0a5d14c29cc950dd3a59d995e0be01b4a885c85fcb171ce8296f1f6de0496db5"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-sparse-4/summary.json",
+      "sha256_lf_normalized": "dda7bd706d94196ab23293a7933e47a6ab8aa15181b2e2dfffe3cec3a0fa7976"
+    },
+    {
+      "path": "evaluation/live/2026-08-27-sparse-5/summary.json",
+      "sha256_lf_normalized": "780ef36223a5f6f1f66645d12e447fc3e0afbd1466c5c06724c66057a46e3d88"
+    },
+    {
+      "path": "evaluation/live/2026-08-28-sparse-expansion-1-verification-2/summary.json",
+      "sha256_lf_normalized": "cca6465751a1de12f4e52a1fcabc2f421c236fc9c61029872c683fc98c1d923c"
+    },
+    {
+      "path": "evaluation/live/2026-08-28-final-sparse-proof-verification-3/summary.json",
+      "sha256_lf_normalized": "56a04c840b8bf4bd16fc7e266cb6036669b139e3e13d96456df77cdb91f17499"
+    },
+    {
+      "path": "evaluation/live/2026-08-31-fcf-remeasurement-2/run-summary.json",
+      "sha256_lf_normalized": "efe31ba8fed41f2a7f1c358ffebfa7998cd5704db0bc30cd9d2714ae54f823c0"
+    },
+    {
+      "path": "evaluation/plans/fast-score-calibration-2026-08-31.json",
+      "sha256_lf_normalized": "1d061115fa110934fe6334da38b3ef1d1fa7a2a822abb59a7f1e07fe6723e198"
+    },
+    {
+      "path": "evaluation/diagnostics/fast-score-calibration-2026-08-31.json",
+      "sha256_lf_normalized": "3badfb0761cadd17a5affffbb69df81e53ce561742c1600c7c26994facce7859"
+    }
+  ],
+  "cohorts": [
+    {
+      "id": "batch-1",
+      "source": "evaluation/live/2026-08-27/summary.json",
+      "expected_material_checks": 86,
+      "detected_material_checks": 57,
+      "recall": 0.6628,
+      "category_recall": {
+        "issuer_security_identity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "historical_dilution_issuance": {
+          "detected": 3,
+          "expected": 3,
+          "recall": 1
+        },
+        "future_dilution": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "warrants_convertibles": {
+          "detected": 2,
+          "expected": 4,
+          "recall": 0.5
+        },
+        "reverse_splits": {
+          "detected": 2,
+          "expected": 3,
+          "recall": 0.6667
+        },
+        "active_listing_deficiency": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1,
+          "sparse": true
+        },
+        "going_concern": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1,
+          "sparse": true
+        },
+        "accounting_restatement_non_reliance": {
+          "detected": 1,
+          "expected": 3,
+          "recall": 0.3333
+        },
+        "financial_health_liquidity": {
+          "detected": 2,
+          "expected": 5,
+          "recall": 0.4
+        },
+        "revenue": {
+          "detected": 0,
+          "expected": 5,
+          "recall": 0
+        },
+        "net_income_loss": {
+          "detected": 0,
+          "expected": 5,
+          "recall": 0
+        },
+        "debt": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "free_cash_flow": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        },
+        "cash": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "operating_cash_flow": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        },
+        "shares_history": {
+          "detected": 1,
+          "expected": 5,
+          "recall": 0.2
+        },
+        "catalyst_news": {
+          "detected": 4,
+          "expected": 5,
+          "recall": 0.8
+        },
+        "discovery_only_behavior": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "end_of_day_price_volume": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "missing_stale_conflicting_handling": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        }
+      },
+      "valid_report_rate": null,
+      "explanation_fidelity": null,
+      "settlement_accuracy": null,
+      "score_calibration": null,
+      "severe_misleading_misses": [
+        "AMC completed reverse split omitted and split/issuance-affected shares history materially understated dilution.",
+        "NCPL current non-reliance event omitted and affected OCF still received a numeric score.",
+        "SMCI material weaknesses omitted; stale annual OCF/FCF produced strong scores despite sharply negative current comparable flows.",
+        "SMCI shares history failed to normalize a stock split and falsely described a 1035.3% increase."
+      ]
+    },
+    {
+      "id": "batch-2",
+      "source": "evaluation/live/2026-08-27-batch-2/summary.json",
+      "expected_material_checks": 86,
+      "detected_material_checks": 71,
+      "recall": 0.8256,
+      "category_recall": {
+        "issuer_security_identity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "historical_dilution_issuance": {
+          "detected": 3,
+          "expected": 3,
+          "recall": 1
+        },
+        "future_dilution": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "warrants_convertibles": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "reverse_splits": {
+          "detected": 2,
+          "expected": 3,
+          "recall": 0.6667
+        },
+        "active_listing_deficiency": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1,
+          "sparse": true
+        },
+        "going_concern": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1,
+          "sparse": true
+        },
+        "accounting_restatement_non_reliance": {
+          "detected": 1,
+          "expected": 3,
+          "recall": 0.3333
+        },
+        "financial_health_liquidity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "revenue": {
+          "detected": 2,
+          "expected": 5,
+          "recall": 0.4
+        },
+        "net_income_loss": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        },
+        "debt": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "free_cash_flow": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        },
+        "cash": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "operating_cash_flow": {
+          "detected": 4,
+          "expected": 5,
+          "recall": 0.8
+        },
+        "shares_history": {
+          "detected": 4,
+          "expected": 5,
+          "recall": 0.8
+        },
+        "catalyst_news": {
+          "detected": 4,
+          "expected": 5,
+          "recall": 0.8
+        },
+        "discovery_only_behavior": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "end_of_day_price_volume": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "missing_stale_conflicting_handling": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        }
+      },
+      "valid_report_rate": null,
+      "explanation_fidelity": {
+        "passed_tickers": 2,
+        "evaluated_tickers": 5,
+        "pass_rate": 0.4
+      },
+      "settlement_accuracy": {
+        "passed_tickers": 3,
+        "evaluated_tickers": 5,
+        "pass_rate": 0.6,
+        "note": "NCPL reached a safe unresolved state for the wrong extracted reason; AMC was falsely over-limited; SMCI was invalid."
+      },
+      "score_calibration": {
+        "passed": 21,
+        "evaluated": 57,
+        "pass_rate": 0.3684,
+        "batch_1_result": "not passed; no defensible aggregate rate was reported",
+        "application_invalid_reports_receive_credit": false
+      },
+      "severe_misleading_misses": [
+        "AMC completed 1-for-10 reverse split remains omitted.",
+        "NCPL actual non-reliance event remains unspecific; disclaimer boilerplate triggered invalidation instead.",
+        "SMCI material weaknesses remain omitted.",
+        "SMCI application-equivalent report fails semantic validation because a Limited shares series retains observations."
+      ]
+    },
+    {
+      "id": "batch-3",
+      "source": "evaluation/live/2026-08-27-batch-3/summary.json",
+      "expected_material_checks": 86,
+      "detected_material_checks": 83,
+      "recall": 0.9651,
+      "category_recall": {
+        "issuer_security_identity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "historical_dilution_issuance": {
+          "detected": 3,
+          "expected": 3,
+          "recall": 1
+        },
+        "future_dilution": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "warrants_convertibles": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "reverse_splits": {
+          "detected": 2,
+          "expected": 3,
+          "recall": 0.6667
+        },
+        "active_listing_deficiency": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1,
+          "sparse": true
+        },
+        "going_concern": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1,
+          "sparse": true
+        },
+        "accounting_restatement_non_reliance": {
+          "detected": 3,
+          "expected": 3,
+          "recall": 1
+        },
+        "financial_health_liquidity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "revenue": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "net_income_loss": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "debt": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "free_cash_flow": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        },
+        "cash": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "operating_cash_flow": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "shares_history": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "catalyst_news": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "discovery_only_behavior": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "end_of_day_price_volume": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "missing_stale_conflicting_handling": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        }
+      },
+      "valid_report_rate": null,
+      "explanation_fidelity": {
+        "passed_tickers": 1,
+        "evaluated_tickers": 5,
+        "pass_rate": 0.2
+      },
+      "settlement_accuracy": {
+        "passed_tickers": 2,
+        "evaluated_tickers": 5,
+        "pass_rate": 0.4
+      },
+      "score_calibration": {
+        "passed": 30,
+        "evaluated": 57,
+        "pass_rate": 0.5263,
+        "batch_2_pass_rate": 0.3684
+      },
+      "severe_misleading_misses": [
+        "AAPL clean-control audit language was falsely labeled a material weakness.",
+        "AMC completed 1-for-10 reverse split remains omitted.",
+        "NXL future-effective reverse split was classified completed one day early.",
+        "SMCI loan listing covenant was falsely labeled an active exchange warning."
+      ]
+    },
+    {
+      "id": "final-five-confirmation",
+      "source": "evaluation/live/2026-08-28-final-five-confirmation-1/summary.json",
+      "expected_material_checks": null,
+      "detected_material_checks": null,
+      "recall": 0.9535,
+      "category_recall": {
+        "issuer_security_identity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "historical_dilution_issuance": {
+          "detected": 3,
+          "expected": 3,
+          "recall": 1
+        },
+        "future_dilution": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "warrants_convertibles": {
+          "detected": 4,
+          "expected": 4,
+          "recall": 1
+        },
+        "reverse_splits": {
+          "detected": 2,
+          "expected": 3,
+          "recall": 0.6667,
+          "miss": "AMC completed reverse split remains absent."
+        },
+        "active_listing_deficiency": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1
+        },
+        "going_concern": {
+          "detected": 2,
+          "expected": 2,
+          "recall": 1
+        },
+        "accounting_restatement_non_reliance": {
+          "detected": 2,
+          "expected": 3,
+          "recall": 0.6667,
+          "miss": "NCPL Item 4.02/non-reliance evidence was not surfaced in this packet; financial inputs remained Limited."
+        },
+        "financial_health_liquidity": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "revenue": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "net_income_loss": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "debt": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "free_cash_flow": {
+          "detected": 3,
+          "expected": 5,
+          "recall": 0.6
+        },
+        "cash": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "operating_cash_flow": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "shares_history": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "catalyst_news": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "discovery_only_behavior": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "end_of_day_price_volume": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        },
+        "missing_stale_conflicting_handling": {
+          "detected": 5,
+          "expected": 5,
+          "recall": 1
+        }
+      },
+      "valid_report_rate": {
+        "valid": 5,
+        "evaluated": 5,
+        "rate": 1
+      },
+      "explanation_fidelity": {
+        "passed": 3,
+        "evaluated": 5,
+        "rate": 0.6,
+        "note": "AMC and NCPL omissions remain material explanation gaps; NXL was adjudicated at the frozen cutoff."
+      },
+      "settlement_accuracy": {
+        "passed": 5,
+        "evaluated": 5,
+        "rate": 1,
+        "note": "All reports remained valid partial/limited and did not convert missing evidence into favorable scores."
+      },
+      "score_calibration": null,
+      "severe_misleading_misses": [
+        {
+          "ticker": "AMC",
+          "class": "reverse_split_retrieval",
+          "detail": "Completed 1-for-10 history remains absent."
+        },
+        {
+          "ticker": "NCPL",
+          "class": "non_reliance_retrieval",
+          "detail": "The expected Item 4.02/non-reliance event was not surfaced; affected financial scores stayed Limited."
+        }
+      ]
+    }
+  ],
+  "descriptive_comparison": {
+    "batch_1_recall": 0.6628,
+    "batch_2_recall": 0.8256,
+    "batch_3_recall": 0.9651,
+    "final_five_confirmation_recall": 0.9535,
+    "pooling_allowed": false
+  },
+  "sample_size_map": [
+    {
+      "category": "completed_reverse_splits",
+      "independent_positive_cases": 5,
+      "status": "practical_minimum_but_small_audit_passed"
+    },
+    {
+      "category": "active_listing_deficiency",
+      "independent_positive_cases": 3,
+      "status": "practical_minimum_but_small"
+    },
+    {
+      "category": "going_concern_bankruptcy",
+      "independent_positive_cases": 4,
+      "status": "practical_minimum_but_small"
+    },
+    {
+      "category": "foreign_issuer_adr_ifrs",
+      "independent_positive_cases": 3,
+      "status": "practical_minimum_but_small"
+    },
+    {
+      "category": "otc_delisted",
+      "independent_positive_cases": 5,
+      "status": "practical_minimum_but_small"
+    },
+    {
+      "category": "free_cash_flow_trend",
+      "independent_positive_cases": 5,
+      "detected_in_frozen_same_five": 3,
+      "status": "coverage_limited_safe_settlement_separate"
+    }
+  ],
+  "unavailable_authoritative_evidence": [
+    {
+      "case": "NIO attributable annual net loss",
+      "classification": "unavailable_authoritative_evidence",
+      "counted_as_system_miss": false
+    }
+  ],
+  "miss_classifications": [
+    {
+      "id": "same-five-free-cash-flow",
+      "cause": "unavailable_evidence",
+      "status": "coverage_limited_numeric_gate",
+      "detail": "Two of five expected FCF pairs were unavailable or invalidated; numeric coverage remains separate from safe settlement."
+    },
+    {
+      "id": "batch-3-score-calibration",
+      "cause": "scoring",
+      "status": "historical_rubric_distinct_from_current_offline_matrix",
+      "detail": "Historical Batch 3 score-range results remain frozen; current offline matrix pass rate is 2/2."
+    },
+    {
+      "id": "overlapping-cohort-recall",
+      "cause": "evaluation",
+      "status": "not_poolable",
+      "detail": "Same-five cohorts overlap and use different rubrics; no single pooled recall is defensible."
+    },
+    {
+      "id": "nio-attributable-annual-net-loss",
+      "cause": "unavailable_evidence",
+      "status": "correctly_limited",
+      "detail": "No safe authoritative attributable annual loss concept was available; this is excluded from system-miss counts."
+    },
+    {
+      "id": "historical-targeted-parser-misses",
+      "cause": "retrieval_or_normalization",
+      "status": "frozen_and_corrected_for_covered_shapes",
+      "detail": "AMC, NCPL, AAPL, NXL, SMCI, ONFO, and STN mechanisms were corrected or confirmed prospectively; historical misses remain unchanged."
+    }
+  ],
+  "gate": {
+    "overall_recall_target": 0.95,
+    "overall_recall_established": false,
+    "overall_recall_reason": "Overlapping same-five cohorts use different rubrics; descriptive recall is reported per cohort and is not pooled.",
+    "adequately_sampled_category_target": 0.9,
+    "adequately_sampled_categories_pass": true,
+    "failing_categories": [],
+    "coverage_limited_categories": [],
+    "accepted_coverage_limited_categories": [
+      "free_cash_flow_trend"
+    ],
+    "reverse_split_audit_passed": true,
+    "fcf_numeric_coverage_proven": false,
+    "fcf_coverage_limited_acceptance_passed": false,
+    "fcf_safe_unresolved_settlement_passed": true,
+    "score_range_target": 0.9,
+    "score_range_pass_rate": 1,
+    "zero_unresolved_severe_misses_in_latest_targeted_shapes": true,
+    "passed": false,
+    "issue_55_must_remain_open": true,
+    "pr_74_ready_to_merge": false
+  },
+  "fcf_semantics": {
+    "numeric_coverage": {
+      "detected": 2,
+      "expected": 5,
+      "recall": 0.4,
+      "meaning": "Comparable SEC OCF/capex pair sufficient for a numeric FCF trend score."
+    },
+    "safe_unresolved_settlement": {
+      "settled": 5,
+      "evaluated": 5,
+      "rate": 1,
+      "meaning": "Missing or invalid FCF remains explicitly Limited/Unscored without favorable inference."
+    },
+    "pooled_with_frozen_same_five": false
+  },
+  "reverse_split_adjudication": {
+    "adjudication_id": "fast-reverse-split-adjudication-2026-08-31",
+    "issue": 55,
+    "offline": true,
+    "network_calls": false,
+    "frozen_artifacts_modified": false,
+    "independent_positive_cases": 5,
+    "cases": [
+      {
+        "ticker": "BIOR",
+        "artifact": "evaluation/live/2026-08-27-sparse-5/raw/BIOR.json",
+        "expected_events": [
+          [
+            "1-for-25",
+            "2023-01-03"
+          ],
+          [
+            "1-for-10",
+            "2024-10-18"
+          ]
+        ],
+        "reported_events": [
+          [
+            "1-for-25",
+            "2023-01-03"
+          ],
+          [
+            "1-for-10",
+            "2024-10-18"
+          ]
+        ],
+        "true_positive_events": [
+          [
+            "1-for-25",
+            "2023-01-03"
+          ],
+          [
+            "1-for-10",
+            "2024-10-18"
+          ]
+        ],
+        "false_positive_events": [],
+        "missing_events": [],
+        "completed_split_recall": 1,
+        "canonical_precision": 1,
+        "report_valid": true,
+        "explanation_fidelity": true,
+        "severe_miss": false
+      },
+      {
+        "ticker": "MULN",
+        "artifact": "evaluation/live/2026-08-28-muln-verification-7/raw/MULN.json",
+        "expected_events": [
+          [
+            "1-for-25",
+            "2023-05-04"
+          ],
+          [
+            "1-for-9",
+            "2023-08-11"
+          ],
+          [
+            "1-for-100",
+            "2023-12-21"
+          ],
+          [
+            "1-for-100",
+            "2024-09-17"
+          ],
+          [
+            "1-for-60",
+            "2025-02-18"
+          ],
+          [
+            "1-for-100",
+            "2025-04-11"
+          ],
+          [
+            "1-for-100",
+            "2025-06-02"
+          ],
+          [
+            "1-for-250",
+            "2025-08-04"
+          ],
+          [
+            "1-for-250",
+            "2025-09-22"
+          ]
+        ],
+        "reported_events": [
+          [
+            "1-for-25",
+            "2023-05-04"
+          ],
+          [
+            "1-for-9",
+            "2023-08-11"
+          ],
+          [
+            "1-for-100",
+            "2023-12-21"
+          ],
+          [
+            "1-for-100",
+            "2024-09-17"
+          ],
+          [
+            "1-for-60",
+            "2025-02-18"
+          ],
+          [
+            "1-for-100",
+            "2025-04-11"
+          ],
+          [
+            "1-for-100",
+            "2025-06-02"
+          ],
+          [
+            "1-for-250",
+            "2025-08-04"
+          ],
+          [
+            "1-for-250",
+            "2025-09-22"
+          ]
+        ],
+        "true_positive_events": [
+          [
+            "1-for-25",
+            "2023-05-04"
+          ],
+          [
+            "1-for-9",
+            "2023-08-11"
+          ],
+          [
+            "1-for-100",
+            "2023-12-21"
+          ],
+          [
+            "1-for-100",
+            "2024-09-17"
+          ],
+          [
+            "1-for-60",
+            "2025-02-18"
+          ],
+          [
+            "1-for-100",
+            "2025-04-11"
+          ],
+          [
+            "1-for-100",
+            "2025-06-02"
+          ],
+          [
+            "1-for-250",
+            "2025-08-04"
+          ],
+          [
+            "1-for-250",
+            "2025-09-22"
+          ]
+        ],
+        "false_positive_events": [],
+        "missing_events": [],
+        "completed_split_recall": 1,
+        "canonical_precision": 1,
+        "report_valid": true,
+        "explanation_fidelity": true,
+        "severe_miss": false
+      },
+      {
+        "ticker": "ZAPPF",
+        "artifact": "evaluation/live/2026-08-28-sparse-expansion-1-verification-2/raw/ZAPPF.json",
+        "expected_events": [
+          [
+            "1-for-20",
+            "2024-04-22"
+          ]
+        ],
+        "reported_events": [
+          [
+            "1-for-20",
+            "2024-04-22"
+          ]
+        ],
+        "true_positive_events": [
+          [
+            "1-for-20",
+            "2024-04-22"
+          ]
+        ],
+        "false_positive_events": [],
+        "missing_events": [],
+        "completed_split_recall": 1,
+        "canonical_precision": 1,
+        "report_valid": true,
+        "explanation_fidelity": true,
+        "severe_miss": false
+      },
+      {
+        "ticker": "GMBL",
+        "artifact": "evaluation/live/2026-08-28-sparse-expansion-1-verification-2/raw/GMBL.json",
+        "expected_events": [
+          [
+            "1-for-100",
+            "2023-02-22"
+          ],
+          [
+            "1-for-400",
+            "2023-12-22"
+          ]
+        ],
+        "reported_events": [
+          [
+            "1-for-100",
+            "2023-02-22"
+          ],
+          [
+            "1-for-400",
+            "2023-12-22"
+          ]
+        ],
+        "true_positive_events": [
+          [
+            "1-for-100",
+            "2023-02-22"
+          ],
+          [
+            "1-for-400",
+            "2023-12-22"
+          ]
+        ],
+        "false_positive_events": [],
+        "missing_events": [],
+        "completed_split_recall": 1,
+        "canonical_precision": 1,
+        "report_valid": true,
+        "explanation_fidelity": true,
+        "severe_miss": false
+      },
+      {
+        "ticker": "ONFO",
+        "artifact": "evaluation/live/2026-08-28-final-sparse-proof-verification-3/raw/ONFO.json",
+        "expected_events": [
+          [
+            "1-for-50",
+            "2026-08-10"
+          ]
+        ],
+        "reported_events": [
+          [
+            "1-for-50",
+            "2026-08-10"
+          ]
+        ],
+        "true_positive_events": [
+          [
+            "1-for-50",
+            "2026-08-10"
+          ]
+        ],
+        "false_positive_events": [],
+        "missing_events": [],
+        "completed_split_recall": 1,
+        "canonical_precision": 1,
+        "report_valid": true,
+        "explanation_fidelity": true,
+        "severe_miss": false
+      }
+    ],
+    "denominator": {
+      "expected_completed_events": 15,
+      "true_positive_completed_events": 15,
+      "reported_completed_events": 15,
+      "false_positive_completed_events": 0,
+      "recall": 1,
+      "precision": 1,
+      "sample_size": 5,
+      "status": "practical_minimum_but_small"
+    },
+    "safe_settlement": {
+      "valid_reports": 5,
+      "evaluated_reports": 5,
+      "rate": 1,
+      "severe_misses": 0
+    },
+    "conclusion": "All five independent positive cases have complete canonical completed-split recall and precision in their latest authoritative artifacts. This is practical coverage, not a broad statistical reliability claim; the historical same-five denominator remains unchanged."
+  },
+  "required_next_step": "Keep #55 and PR #74 open. The offline reverse-split audit passes five practical independent cases (15/15 canonical events) but remains a small, non-statistical sample. FCF coverage-limited acceptance now passes because every unresolved case settles safely without favorable inference; numeric FCF coverage remains unproven. Resolve the non-overlapping overall recall and broad score/explanation gates before closure review."
+}

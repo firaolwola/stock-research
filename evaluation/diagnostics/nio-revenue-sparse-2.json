@@ -1,0 +1,21 @@
+{
+  "ticker": "NIO",
+  "source_artifact": "evaluation/live/2026-08-27-sparse-2/raw/NIO.json",
+  "methodology_version": "2.1.0",
+  "metric": "financial_revenue_trend",
+  "observations_cny": [
+    {"period":"2022","value":49268561000},
+    {"period":"2023","value":55617933000},
+    {"period":"2024","value":65731559000},
+    {"period":"2025","value":87487510000}
+  ],
+  "year_over_year_changes": [0.1288726902, 0.1818410979, 0.3309818196],
+  "average_change": 0.2138985359,
+  "average_direction_component": 9.277970718,
+  "latest_change_component": 10,
+  "consistency_component": 10,
+  "weights": {"average_direction":0.55,"latest_change":0.30,"consistency":0.15},
+  "unrounded_result": 9.6028838949,
+  "reported_result": 9.6,
+  "conclusion": "The formula behaves as documented: four consecutive increases, accelerating latest growth, and full consistency place the score near the top of the scale. The frozen 6-9 range was too narrow; no general methodology defect was demonstrated and Methodology 2.1.0 is unchanged."
+}

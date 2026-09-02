@@ -1,0 +1,32 @@
+{
+  "source_batch": "evaluation/live/2026-08-27-sparse-3",
+  "measured_results_changed": false,
+  "tickers": ["BIOR", "MULN", "TUPBQ"],
+  "shared_findings": {
+    "dilution_historical_severity": {
+      "required": ["bounded authoritative dilution history", "quantified actual share-base change"],
+      "available": ["authoritative financing instruments and selected completed corporate actions"],
+      "missing": ["resolved bounded dilution section", "percent-of-shares actual issuance"],
+      "settlement": "limited_coverage"
+    },
+    "dilution_future_likelihood": {
+      "required": ["resolved historical dilution", "current cash", "current cash burn", "true free cash flow", "total debt"],
+      "available": ["selected financing mechanisms"],
+      "missing": ["resolved history", "fresh aligned liquidity and debt inputs"],
+      "settlement": "limited_coverage"
+    },
+    "dilution_potential_impact": {
+      "required": ["supported potential-share numerator", "current class-consistent share denominator", "percent-of-shares calculation"],
+      "available": ["reported shares series where safely normalized"],
+      "missing": ["bounded potential-share numerator", "reproducible percent-of-shares impact"],
+      "settlement": "limited_coverage"
+    },
+    "reverse_split_risk": {
+      "required": ["resolved five-year split history", "current listing state", "current active listing-pressure state"],
+      "available": ["current terminal listing identity", "selected authoritative split events"],
+      "missing": ["complete resolved five-year split section", "current exchange-pressure state distinct from historical deficiencies"],
+      "settlement": "limited_coverage"
+    }
+  },
+  "conclusion": "Correcting split retrieval and deduplication improves evidence quality but does not by itself satisfy the existing numeric gates. Limited remains correct and no score is forced."
+}

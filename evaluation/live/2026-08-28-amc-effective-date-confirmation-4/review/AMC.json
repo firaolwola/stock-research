@@ -1,0 +1,19 @@
+{
+  "ticker": "AMC",
+  "expected": ["Completed 2023-08-24 1-for-10 reverse split"],
+  "detected": [],
+  "report_valid": true,
+  "settlement": "safe_limited",
+  "classification": "live_date_role_normalization_gap",
+  "severe_miss": true,
+  "diagnostic": {
+    "accession": "0001104659-23-090981",
+    "document": "tm2323643d1_8k.htm",
+    "extracted_ratio": "1-for-10",
+    "extracted_effective_date": "2023-08-24",
+    "date_role": "unknown_date_role",
+    "disposition": "withheld",
+    "reason": "resolved_lifecycle_required"
+  },
+  "notes": "One approved run; no retry. This result predates the direct effective-date relationship correction now covered offline."
+}
