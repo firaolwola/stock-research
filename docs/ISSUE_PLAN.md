@@ -24,6 +24,12 @@ authorized another expansion. Numeric FCF coverage is tracked as an
 informational capability metric, not a mandatory closure gate, provided
 unresolved cases remain safely Limited/Unscored.
 
+The first #78 deliverable is frozen as a planning-only three-slot holdout
+proposal in `evaluation/diagnostics/fast-broad-reliability-coverage-proposal-2026-09-02.json`
+with the companion review in
+`docs/results/FAST_BROAD_RELIABILITY_COVERAGE_PROPOSAL-2026-09-02.md`. It does
+not authorize live execution.
+
 No live run, provider call, or paid OpenAI call is implied by the current step.
 
 ## Ordered issue/dependency plan
@@ -39,7 +45,7 @@ No live run, provider call, or paid OpenAI call is implied by the current step.
 | 6 | `55-RECALL-PROOF-DECISION` — Independent reliability-proof decision | **Complete — scope accepted** | Owner accepts the practical-small sparse-category scope for this milestone; no additional sparse expansion is authorized now. The scope is not a broad statistical reliability claim. | `55-CLOSURE-DECISION` |
 | 7 | `55-CLOSURE-DECISION` — Owner closure decision | **Complete — practical scope accepted** | Owner accepted the bounded practical-small scope while broad statistical reliability remained unclaimed; the historical next step was the alignment work in `55-OPERATIONAL-CLOSE`. | `55-OPERATIONAL-CLOSE` |
 | 8 | `55-OPERATIONAL-CLOSE` — Bounded #55/PR #74 closure alignment | **Complete** | Closure metadata and docs aligned; focused commit `2a90b64` merged through PR #74; Issue #55 closed with broad reliability explicitly unproven. | `78-BROAD-RELIABILITY` |
-| 9 | `78-BROAD-RELIABILITY` — Independent broad-reliability proof | **Active — planning only** | Define a non-overlapping independent denominator and category sample plan; preserve #55 artifacts; stop for owner approval before any live batch. | Future approved calibration batch |
+| 9 | `78-BROAD-RELIABILITY` — Independent broad-reliability proof | **Active — planning only** | Three-slot holdout coverage proposal is prepared; freeze authoritative baselines and exact claim IDs, preserve #55 artifacts, and stop for owner approval before any live batch. | Future approved calibration batch |
 
 ## State transitions
 
