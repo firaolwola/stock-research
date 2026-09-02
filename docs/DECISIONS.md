@@ -1456,3 +1456,14 @@ and frozen-artifact checks pass. Keep broad statistical reliability explicitly
 a broad recall pass, change historical measurements, or require numeric FCF
 coverage. The remaining operational-close step is documentation alignment and
 the authenticated PR/issue workflow.
+
+## 2026-09-02 — Close #55 and separate broad-reliability proof
+
+**Decision:** Close Issue #55 after merging PR #74 under the owner-accepted
+bounded practical-small scope. Track broad statistical reliability as separate
+Issue #78 rather than leaving #55 open for a different objective.
+
+**Consequence:** #55's 14-claim operational result, frozen artifacts, and
+`unavailable_authoritative_evidence` classifications remain immutable. Issue
+#78 must define an independent denominator and obtain fresh owner approval
+before any live calibration; it cannot retroactively change #55 measurements.
