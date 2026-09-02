@@ -2,15 +2,18 @@
 
 **Last reviewed:** 2026-09-02
 
-This is the working map for the remaining Issue #55 reliability work. The
-roadmap records milestone history; this page makes the current issue, exit
-criteria, and next dependent issue explicit. Historical calibration measurements
-and answer keys are never rewritten by this plan.
+This page records the completed Issue #55 reliability milestone and its separate
+broad-reliability successor. The roadmap records milestone history; this page
+makes the current active follow-up, exit criteria, and dependencies explicit.
+Historical calibration measurements and answer keys are never rewritten by this
+plan.
 
 ## Current position
 
-**Current active step:** `55-OPERATIONAL-CLOSE` — prepare the bounded operational
-closure of #55 after the owner-approved practical-small scope decision.
+**Issue #55 status:** **Closed — bounded practical-small operational scope.**
+
+**Current active step:** `78-BROAD-RELIABILITY` — establish independent,
+defensible broad-reliability proof without reopening #55.
 
 The latest offline quality review passes 14/14 validity, evidence traceability,
 settlement, and explanation-fidelity rows with zero current severe misses. That
@@ -34,8 +37,9 @@ No live run, provider call, or paid OpenAI call is implied by the current step.
 | 4b | `55-SPARSE-EXPANSION` — Independent category proof | **Conditional** | If samples remain insufficient under the closure review, run the smallest approved non-overlapping ticker set and freeze its answer key before execution. | `55-CLOSURE-REVIEW` |
 | 5 | `55-CLOSURE-REVIEW` — Final #55 / PR #74 decision | **Complete — gate not passed** | Review under the accepted scope confirms denominator, quality, severe-miss, FCF safety, and practical-small category acceptance; overall recall generalization remains unestablished. | `55-CLOSURE-DECISION` |
 | 6 | `55-RECALL-PROOF-DECISION` — Independent reliability-proof decision | **Complete — scope accepted** | Owner accepts the practical-small sparse-category scope for this milestone; no additional sparse expansion is authorized now. The scope is not a broad statistical reliability claim. | `55-CLOSURE-DECISION` |
-| 7 | `55-CLOSURE-DECISION` — Owner closure decision | **Complete — practical scope accepted** | Owner accepts the bounded practical-small scope while broad statistical reliability remains unclaimed; operational closure still requires the alignment work in `55-OPERATIONAL-CLOSE`. | `55-OPERATIONAL-CLOSE` |
-| 8 | `55-OPERATIONAL-CLOSE` — Bounded #55/PR #74 closure alignment | **Active — metadata alignment** | Closure artifact/tests distinguish operational completion from unproven broad statistical reliability; align roadmap, decisions, evaluation, Issue #55, and PR #74 text; then commit, push, merge PR #74, and close #55 only after required checks pass and authenticated GitHub access is available. | Future independent calibration/reliability-proof issue |
+| 7 | `55-CLOSURE-DECISION` — Owner closure decision | **Complete — practical scope accepted** | Owner accepted the bounded practical-small scope while broad statistical reliability remained unclaimed; the historical next step was the alignment work in `55-OPERATIONAL-CLOSE`. | `55-OPERATIONAL-CLOSE` |
+| 8 | `55-OPERATIONAL-CLOSE` — Bounded #55/PR #74 closure alignment | **Complete** | Closure metadata and docs aligned; focused commit `2a90b64` merged through PR #74; Issue #55 closed with broad reliability explicitly unproven. | `78-BROAD-RELIABILITY` |
+| 9 | `78-BROAD-RELIABILITY` — Independent broad-reliability proof | **Active — planning only** | Define a non-overlapping independent denominator and category sample plan; preserve #55 artifacts; stop for owner approval before any live batch. | Future approved calibration batch |
 
 ## State transitions
 
@@ -44,10 +48,10 @@ No live run, provider call, or paid OpenAI call is implied by the current step.
 - The `55-GAP-DECISION` is complete: numeric FCF remeasurement is not required
   for #55 closure. It led to the closure review; sparse expansion was considered
   only if independent category samples were insufficient.
-- The owner-accepted practical-small scope does not authorize another sparse
+- The owner-accepted practical-small scope does not authorize another #55 sparse
   expansion. With the accepted-scope review complete, activate
-  `55-OPERATIONAL-CLOSE` for the bounded closure-alignment work, subject to
-  explicit owner authorization to treat the milestone as operationally complete.
+  `78-BROAD-RELIABILITY` for separate planning work; it must not rewrite or
+  reopen #55's bounded result.
 - A failed gate does not advance the plan; it records a blocker and creates a
   narrowly scoped offline correction or separately approved live evaluation.
 

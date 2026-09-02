@@ -1,6 +1,6 @@
 # Roadmap
 
-**Last reviewed:** 2026-08-27
+**Last reviewed:** 2026-09-02
 
 This roadmap records outcomes, dependencies, and milestone progress rather than
 fixed delivery dates. GitHub Issues are the executable backlog. `PRODUCT.md` is
@@ -16,8 +16,9 @@ zero current severe misses and safe unresolved FCF settlement. Broad
 statistical reliability remains explicitly unproven because historical cohorts
 are not safely poolable. The closure artifact reports these as separate
 outcomes; numeric FCF coverage is informational, not a closure requirement.
-The active follow-up is `55-OPERATIONAL-CLOSE` in `docs/ISSUE_PLAN.md`, which
-covers metadata alignment and the final authenticated merge/close workflow.
+Issue #55 is now closed and PR #74 is merged. The active follow-up is #78,
+which is intentionally separate broad-reliability proof rather than a reason
+to reopen the bounded operational milestone.
 
 The application has a strong deterministic foundation: a versioned report
 contract, semantic validation, claim-linked sources, distinct evidence states,
@@ -87,7 +88,8 @@ verdict.
    The subsequent methodology 2.1.0 refinement makes all six displayed financial
    trends independently scoreable from SEC evidence only.
 7. [x] **Complete:** [#54 — Make Deep build and extend the Fast evidence packet](https://github.com/firaolwola/stock-research/issues/54). Direct Deep now builds a validated identity-gated Fast foundation; recent Fast results are reused, stale source classes are refreshed, and conflicts retain evidence lineage.
-8. [ ] **Active — bounded operational close preparation:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The accepted practical-small scope has 14 unique quality-reviewed claims with 14 supported, zero current severe misses, and safe unresolved FCF settlement. Broad statistical reliability remains explicitly unproven because historical cohorts are not safely poolable. NIO attributable annual net loss remains `unavailable_authoritative_evidence`, not a system miss. The next work item is `55-OPERATIONAL-CLOSE` in `docs/ISSUE_PLAN.md`: align metadata, then perform the authenticated PR #74 merge and Issue #55 close with this qualification preserved. No additional sparse expansion is authorized by the current scope decision.
+8. [x] **Complete — bounded practical-small reliability milestone:** [#55 — Calibrate evidence-first Fast reliability on real tickers](https://github.com/firaolwola/stock-research/issues/55). The accepted scope has 14 unique quality-reviewed claims with 14 supported, zero current severe misses, and safe unresolved FCF settlement. PR #74 is merged and Issue #55 is closed. Broad statistical reliability remains explicitly unproven because historical cohorts are not safely poolable; NIO attributable annual net loss remains `unavailable_authoritative_evidence`, not a system miss.
+9. [ ] **Active — broad reliability proof:** [#78 — Establish broad statistical reliability for Fast](https://github.com/firaolwola/stock-research/issues/78). Define a defensible independent denominator, add only owner-approved holdouts, and measure broad recall/category gates without rewriting #55 artifacts or answer keys. No live calibration is authorized until its denominator and bounds are approved.
 
 ### Issue #55 corrective roadmap
 
@@ -157,7 +159,8 @@ verdict.
 [#56 — Retire or isolate obsolete hosted-search Fast code](https://github.com/firaolwola/stock-research/issues/56)
 remains optional technical cleanup when it will not conflict with milestone work.
 
-Issue #55 remains active. The approved second five-ticker batch improved recall
+Historical #55 calibration record (preserved; Issue #55 is closed under its
+bounded scope): the approved second five-ticker batch improved recall
 from 66.28% to 82.56% but did not pass. The reproduced overbroad non-reliance,
 AMC/SMCI split retrieval, omitted material-weakness, restored-compliance, and
 Limited-series defects now have deterministic regression fixes on PR #74.

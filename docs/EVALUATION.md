@@ -315,7 +315,7 @@ Segment-local extraction completes the May 4, August 11, and December 21, 2023
 MULN actions from authoritative retrospective history, preserves the August 4,
 2025 1-for-250 action, and suppresses the false same-date 1-for-100 event. This
 is offline evidence only; another live verification requires separate owner
-approval and Issue #55 remains open.
+approval; these historical records do not reopen the closed #55 milestone.
 
 The subsequently approved final MULN process did not reach research. Its nested
 child plan inherited only one parent level, leaving the frozen baseline reference
@@ -772,9 +772,10 @@ linked from annual 20-F/40-F filings and includes a regression for the STN
 audited exhibit shape. A fresh approved confirmation then ran once per ticker
 and passed 7/7 targeted claims, 2/2 valid reports, 2/2 explanation fidelity,
 2/2 settlement accuracy, 2/2 score/state safety, and zero severe misses. The
-two-case confirmation does not establish broad reliability or close Issue #55;
-independent sample-size review remains required, and no further run is
-authorized automatically.
+At that time, the two-case confirmation did not establish broad reliability or
+close Issue #55; independent sample-size review remained required, and no
+further run was authorized automatically. That historical state was superseded
+by the later bounded closure decision recorded below.
 
 A paid evaluation must never run automatically or as part of routine tests. It
 requires explicit owner approval for that run. Before requesting approval,
@@ -786,7 +787,8 @@ Redact credentials and do not commit sensitive provider payloads.
 
 ## Issue #55 two-tier closure status (2026-09-02)
 
-The bounded practical-small milestone is operationally complete: the selected
+The bounded practical-small milestone is operationally complete and Issue #55
+is closed: the selected
 14-claim denominator is 14/14 supported, quality/traceability/settlement/
 explanation checks are 14/14, current severe misses are zero, and FCF safety
 passes with unresolved cases remaining Limited/Unscored. Numeric FCF coverage
@@ -795,5 +797,6 @@ is informational only.
 Broad statistical reliability remains `unproven`; historical cohorts are not
 safely poolable and the targeted denominator is not representative evidence for
 a broad 95% claim. This distinction is encoded by the closure diagnostic's
-`operational_completion` and `broad_reliability` outcomes. The current next
-step is `55-OPERATIONAL-CLOSE`; no live run is implied.
+`operational_completion` and `broad_reliability` outcomes. PR #74 contains the
+focused closure artifacts and is merged. Broad-reliability proof is tracked
+separately in Issue #78; no live run is implied by either milestone document.
