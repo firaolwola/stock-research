@@ -1,0 +1,157 @@
+{
+  "proposal_id": "fast-broad-reliability-coverage-proposal-2026-09-02",
+  "issue": 78,
+  "status": "planning_only",
+  "network_calls": false,
+  "paid_calls": false,
+  "historical_source": "evaluation/diagnostics/fast-reliability-canonical-claim-matrix-2026-09-01.json",
+  "historical_denominator": {
+    "unique_claims": 14,
+    "supported": 14,
+    "missed": 0,
+    "recall": 1,
+    "pooling_policy": "non_overlapping_only",
+    "answer_keys_immutable": true
+  },
+  "eligibility_policy": {
+    "unit": "unique_claim_id_bound_to_one_independent_case",
+    "include": "approved, independently baselined, observed supported-or-missed claim with complete quality review",
+    "exclude": [
+      "fixtures",
+      "reruns_of_the_same_primary_case",
+      "not_observed",
+      "unavailable_authoritative_evidence",
+      "claims_without_an_independent_authoritative_baseline",
+      "duplicate_claim_ids",
+      "historical_cohorts_with_incompatible_rubrics"
+    ],
+    "precedence": "latest corrected adjudication within the same frozen case lineage; never overwrite historical artifacts",
+    "nio_rule": "unavailable_authoritative_evidence is not a system miss when bounded SEC retrieval completes and no safe authoritative concept or fallback exists"
+  },
+  "frozen_claim_ids": [
+    "AMC:amc-debt-equity-exchange",
+    "AMC:amc-refinancing-2024",
+    "BIOR:bior-progenity-lineage",
+    "BIOR:bior-reverse-splits",
+    "BIOR:bior-offering-warrants",
+    "MULN:muln-reverse-split-2025",
+    "MULN:muln-listing-compliance",
+    "MULN:muln-notes-warrants",
+    "NIO:nio-adr-context",
+    "TUPBQ:tup-tupbq-lineage",
+    "TUPBQ:tup-delisting",
+    "TUPBQ:tup-going-concern-bankruptcy",
+    "SMCI:smci-delinquent-reports",
+    "SMCI:smci-auditor-uncertainty"
+  ],
+  "category_coverage": [
+    {
+      "category": "completed_reverse_splits",
+      "current_positive_cases": 5,
+      "planning_minimum": 5,
+      "gap_to_planning_minimum": 0,
+      "status": "practical_small_only",
+      "note": "Counts are not broad proof; fresh holdouts are still needed to test generalization and avoid issuer-specific overfitting."
+    },
+    {
+      "category": "active_listing_deficiency",
+      "current_positive_cases": 3,
+      "planning_minimum": 5,
+      "gap_to_planning_minimum": 2,
+      "status": "under_sampled"
+    },
+    {
+      "category": "going_concern_bankruptcy",
+      "current_positive_cases": 4,
+      "planning_minimum": 5,
+      "gap_to_planning_minimum": 1,
+      "status": "under_sampled"
+    },
+    {
+      "category": "foreign_issuer_adr_ifrs",
+      "current_positive_cases": 3,
+      "planning_minimum": 5,
+      "gap_to_planning_minimum": 2,
+      "status": "under_sampled"
+    },
+    {
+      "category": "otc_delisted",
+      "current_positive_cases": 5,
+      "planning_minimum": 5,
+      "gap_to_planning_minimum": 0,
+      "status": "practical_small_only",
+      "note": "A minimum count does not establish population-level reliability or venue diversity."
+    },
+    {
+      "category": "free_cash_flow_trend",
+      "current_positive_cases": 5,
+      "detected_in_frozen_same_five": 3,
+      "planning_minimum": 5,
+      "gap_to_planning_minimum": 0,
+      "status": "coverage_limited_safe_settlement_separate",
+      "note": "Numeric FCF coverage is not required for #55 closure; unresolved or non-comparable FCF must remain Limited/Unscored."
+    }
+  ],
+  "proposed_holdout_design": {
+    "minimum_new_runs": 3,
+    "maximum_new_runs": 3,
+    "case_ids": [
+      "H78-H1:active_listing_deficiency+going_concern",
+      "H78-H2:foreign_issuer_adr_ifrs+otc_delisted",
+      "H78-H3:active_listing_deficiency+foreign_issuer_adr_ifrs"
+    ],
+    "candidate_selection_rule": "Select three previously untested primary cases only after SEC/exchange/issuer baseline confirmation. Each case must cover the named category combination where authoritative evidence supports it; if a slot cannot be baselined, leave it unobserved rather than substituting a convenient ticker.",
+    "baseline_required_before_freeze": [
+      "issuer identity and CIK",
+      "requested/current ticker and venue",
+      "security type and filer regime",
+      "category-specific authoritative fact and date",
+      "expected supported claims",
+      "legitimate Limited/unavailable claims",
+      "severe-miss conditions",
+      "independent evidence references"
+    ],
+    "negative_controls": "At least one non-positive or resolved-state control per category should be added in later batches; controls are not counted as positive cases."
+  },
+  "approval_bounds_template": {
+    "runs": 3,
+    "runs_per_ticker": 1,
+    "automatic_retries": false,
+    "deep_runs": 0,
+    "hosted_web_search": false,
+    "difficult_budget_escalation": false,
+    "fast_ceiling_ms_per_ticker": 20000,
+    "aggregate_fast_ceiling_ms": 60000,
+    "maximum_openai_cost_usd": 0.09,
+    "maximum_alpha_vantage_requests": 6,
+    "maximum_twelve_data_requests": 6,
+    "maximum_optional_provider_attempts": 12,
+    "output_location": "evaluation/live/YYYY-MM-DD-issue-78-broad-reliability-holdout-1"
+  },
+  "required_measures": [
+    "overall material-risk recall",
+    "recall by adequately sampled category",
+    "valid-report rate",
+    "explanation fidelity",
+    "settlement accuracy",
+    "score-range calibration",
+    "relative-risk ordering",
+    "severe misleading misses",
+    "latency and cost",
+    "provider usage and fallback",
+    "retrieval/normalization/interpretation/scoring/unavailable cause"
+  ],
+  "reliability_gate": {
+    "overall_recall_target": 0.95,
+    "adequately_sampled_category_target": 0.9,
+    "zero_unresolved_severe_misses": true,
+    "tiny_samples_not_statistical_proof": true,
+    "owner_approval_required_before_live": true
+  },
+  "stop_conditions": [
+    "No live execution occurs from this proposal alone.",
+    "Do not modify frozen #55 artifacts or answer keys.",
+    "If a baseline cannot establish a fact safely, classify it unavailable_authoritative_evidence or Limited and do not force a positive case.",
+    "If an offline adversarial test reveals a defect, fix and verify offline before requesting live approval."
+  ]
+}
